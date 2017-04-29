@@ -1,0 +1,49 @@
+page-home {
+    .index-row {
+        ion-col {
+            padding: 5px 12px;
+            font-size: 12px;
+            text-decoration: none;
+            div {
+                width: 82px;
+                height: 82px;
+                padding-top: 8px;
+                color: #fff;
+                font-size: 12px;
+                border-radius: 50%;
+                text-align: center;
+                text-decoration: none;
+                border-width: 4px;
+                border-style: double;
+                ion-icon {
+                    display: block;
+                    font-size: 32px;
+                }
+                &.royal {
+                    background-color: color($colors, royal);
+                    border-color: #ceb9f3;
+                }
+                &.energized {
+                    background-color: color($colors, energized);
+                    border-color: #f5e6af;
+                }
+                &.positive {
+                    background-color: color($colors, positive);
+                    border-color: #a0c0f5;
+                }
+                &.assertive {
+                    background-color: color($colors, assertive);
+                    border-color: #fdbbb6;
+                }
+                &.calm {
+                    background-color: color($colors, calm);
+                    border-color: #bbebf9;
+                }
+                &.balanced {
+                    background-color: color($colors, balanced);
+                    border-color: #b9fbcc;
+                }
+            }
+        }
+    }
+}

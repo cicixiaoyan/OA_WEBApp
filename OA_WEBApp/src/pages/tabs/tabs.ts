@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavParams } from 'ionic-angular';
 
 import { Home } from '../home/home';
 import { Mail } from '../mail/mail';
@@ -15,10 +16,12 @@ export class TabsPage {
   tab2Root = Mail;
   tab3Root = Notice;
   tab4Root = Account;
+  mySelectedIndex: number;
 
-  constructor() {
-
+  constructor(navParams: NavParams) {
+    this.mySelectedIndex = navParams.data.tabIndex || 0;
   }
+
 }
 
 

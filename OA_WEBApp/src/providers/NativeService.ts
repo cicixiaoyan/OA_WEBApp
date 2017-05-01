@@ -4,12 +4,10 @@
 import {Injectable} from '@angular/core';
 import {ToastController, LoadingController, Platform, Loading, AlertController} from 'ionic-angular';
 import {AppVersion} from '@ionic-native/app-version';
-import {Camera, CameraOptions} from '@ionic-native/camera';
 import {Toast} from '@ionic-native/toast';
 import {File} from '@ionic-native/file';
 import {Transfer, TransferObject} from '@ionic-native/transfer';
 import {InAppBrowser} from '@ionic-native/in-app-browser';
-import {ImagePicker} from '@ionic-native/image-picker';
 import {Network} from '@ionic-native/network';
 import {Position} from "../../typings/index";
 import {APP_DOWNLOAD, APK_DOWNLOAD} from "./Constants";
@@ -169,6 +167,39 @@ export class NativeService {
 
 
 
+
+
+  /**
+   * 根据图片绝对路径转化为base64字符串
+   * @param url 绝对路径
+   * @param callback 回调函数
+   */
+  convertImgToBase64(url, callback) {
+    this.getFileContentAsBase64(url, function (base64Image) {
+      callback.call(this, base64Image.substring(base64Image.indexOf(';base64,') + 8));
+    })
+  }
+
+  private getFileContentAsBase64(path, callback) {
+    function fail(err) {
+      console.log('Cannot found requested file' + err);
+    }
+
+    function gotFile(fileEntry) {
+      fileEntry.file(function (file) {
+        let reader = new FileReader();
+        reader.onloadend = function (e) {
+          let content = this.result;
+          callback(content);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    this.file.resolveLocalFilesystemUrl(path).then(fileEnter => gotFile(fileEnter)).catch(err => fail(err));
+    // window['resolveLocalFileSystemURL'](path, gotFile, fail);
+  }
+
   /**
    * 获取网络类型 如`unknown`, `ethernet`, `wifi`, `2g`, `3g`, `4g`, `cellular`, `none`
    */
@@ -231,6 +262,8 @@ export class NativeService {
       });
     });
   }
+
+
 
 
 }

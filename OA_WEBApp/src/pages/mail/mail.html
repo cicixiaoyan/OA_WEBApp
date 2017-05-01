@@ -6,9 +6,16 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>mail</ion-title>
-  </ion-navbar>
+    <ion-toolbar>
+        <ion-segment [(ngModel)]="box">
+            <ion-segment-button value="inbox">
+                收件箱
+            </ion-segment-button>
+            <ion-segment-button value="outbox">
+                发件箱
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
 
 </ion-header>
 

@@ -1,0 +1,61 @@
+ /*每个style前带当前页面css*/
+ 
+ .tab-index .index-tabs>.col {
+     padding: 5px 12px;
+     font-size: 12px;
+     text-decoration: none;
+ }
+ 
+ .tab-index .index-tabs>.col>div {
+     width: 82px;
+     height: 82px;
+     padding-top: 8px;
+     color: #fff;
+     font-size: 12px;
+     border-radius: 50%;
+     text-align: center;
+     text-decoration: none;
+     border-width: 4px;
+     border-style: double;
+ }
+ 
+ .tab-index .index-tabs>.col>div>i {
+     display: block;
+     font-size: 32px;
+ }
+ 
+ .tab-index .royal-bg-border {
+     border-color: #ceb9f3;
+ }
+ 
+ .tab-index .energized-bg-border {
+     border-color: #f5e6af;
+ }
+ 
+ .tab-index .positive-bg-border {
+     border-color: #a0c0f5;
+ }
+ 
+ .tab-index .assertive-bg-border {
+     border-color: #fdbbb6;
+ }
+ 
+ .tab-index .calm-bg-border {
+     border-color: #bbebf9;
+ }
+ 
+ .tab-index .balanced-bg-border {
+     border-color: #b9fbcc;
+ }
+ /*新建工作 start*/
+ 
+ .tab-index .addwork .input-label {
+     text-align: right;
+ }
+ /*新建工作 start*/
+ /*待办工作 start*/
+ 
+ .backlog .item-icon-right {
+     padding-right: 27px;
+ }
+ /*待办工作 start*/

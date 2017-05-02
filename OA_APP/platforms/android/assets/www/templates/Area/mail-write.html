@@ -1,0 +1,35 @@
+<ion-modal-view class="tab-mail"  hide-tabs="true">
+	<ion-header-bar class="bar bar-header bar-positive">
+		<button class="button button-clear button-primary" ng-click="modalClose('write')">返回</button>
+		<h1 class="title">写信</h1>
+		<button class="button button-clear button-primary" ng-click="">发送</button>
+	</ion-header-bar>
+	<ion-content ng-click="oModal2.hide()" overflow-scroll="true" style="">
+
+		<div class="list" style="position: absolute;top:0;width: 100%;z-index:999;">
+			<label class="item item-input">
+			    <span class="input-label">收信人</span>
+			    <input type="text"  ng-model="message.sender" ng-click="openPopover($event)" />
+			</label>
+
+			<label class="item item-input">
+			    <span class="input-label">信息主题</span>
+			    <input type="text" ng-model="message.carbonCopy" />
+			</label>
+
+		</div>
+
+		<div class="" style="padding-top:96px;">
+
+			<textarea rows="3" placeholder="信息内容" class="padding write"></textarea>
+
+		</div>
+
+		<!--<div class="padding"><button class="button button-block button-energized">发送</button></div>-->
+		
+
+
+	</ion-content>
+	
+
+</ion-modal-view>

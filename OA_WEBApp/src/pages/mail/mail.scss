@@ -1,3 +1,22 @@
 page-mail {
-
+    ion-item .ion-chevron-right {
+        color: #ddf;
+    }
+    .input-label {
+        display: table;
+        padding: 7px 10px 7px 0px;
+        max-width: 200px;
+        width: 82px;
+        color: #888;
+        font-size: 14px;
+        /*    text-align: right;*/
+    }
+    .ion-content {
+        position: relative;
+        background: #f4f4f4;
+        overflow: hidden;
+    }
+    .tab-mail .item-complex.item-icon-right .item-content {
+        padding-right: 40px;
+    }
 }

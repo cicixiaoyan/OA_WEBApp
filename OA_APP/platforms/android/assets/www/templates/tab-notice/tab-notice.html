@@ -1,0 +1,25 @@
+<ion-view view-title="公告通知" class="tab-notice">
+
+    <ion-content style="background: #f4f4f4;overflow: hidden;" overflow-scroll="true" class="has-header ">
+
+        <div class="bar bar-header item-input-inset">
+            <label class="item-input-wrapper">
+		    <i class="icon ion-ios-search placeholder-icon"></i>
+		    <input type="search" ng-model="searchKey" placeholder="请输入关键字（标题）">
+		  </label>
+            <button class="button button-assertive" ng-click="search(searchKey)">搜索</button>
+        </div>
+        <ion-scroll style="position: absolute;width: 100%;top: 44px;bottom: 0;">
+            <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+            <div class="list notice-list">
+                <div class="item item-icon-right" ng-repeat="notice in noticeList track by $index" ng-click="modalOpen(notice.ggid)">
+                    <span>[{{notice.gglb}}]{{notice.ggzt}}</span>
+                    <p>{{notice.lrr}}&emsp;{{notice.lrsj|date:"yyyy年MM月dd日 HH时mm分"}}</p>
+                    <i class="icon ion-ios-arrow-right Lavender"></i>
+                </div>
+            </div>
+            <ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
+        </ion-scroll>
+
+    </ion-content>
+</ion-view>

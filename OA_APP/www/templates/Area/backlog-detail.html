@@ -1,0 +1,53 @@
+<ion-modal-view class="tab-index">
+    <ion-header-bar class="bar bar-header bar-positive">
+        <button class="button button-clear button-primary" ng-click="modalClose('write')">返回</button>
+        <h1 class="title">详细信息</h1>
+    </ion-header-bar>
+    <ion-content style="background: #f4f4f4;" class="has-header ">
+        <div class="list card addwork">
+            <div class="item item-divider">
+                33ee
+            </div>
+
+            <label class="item item-input">
+			    <span class="input-label">当前步骤：</span>
+			    <input type="text" placeholder="暂无数据，供测试"  disabled="disabled"   ng-model="newwork.nowfnName" ng-click="openPopover($event)" />
+			</label>
+            <label class="item item-input">
+			    <span class="input-label">流水号：</span>
+			    <span>{{newwork.serid}}-</span>
+			    <input type="text" placeholder="请输入流水号" disabled="disabled"  ng-model="newwork.fileid" />
+			</label>
+            <label class="item item-input">
+			    <span class="input-label">审批状态：</span>
+			    <input type="text" placeholder="无" disabled="disabled"  ng-model="newwork.fileid" />
+			</label>
+            <div id="strhtm" style="min-height: 100px;;"></div>
+            <div class="item row">
+                <div class="col-33" style="padding-left:12px;padding-top:5px;text-align:right;">
+                    相关附件：
+                </div>
+                <div class="col-66" style="position: relative;padding-left: 40px;background-color: #d7eaf9;" id="fujian">
+                    <i class="icon ion-image energized" style="position:absolute;left:4px;display:inline-block;margin-top:4px;font-size:34px;"></i>
+                    <div>
+                        <span>text.png</span>
+                        <span ng-click="" style="position:absolute;right:10px;font-size:12px">下载</span>
+                        <p style="font-size:12px;">2.5M</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item item-divider">
+                <div class="button-bar">
+                    <a class="button button-small button-positive">审批通过</a>
+                    <a class="button button-small button-balanced">审批驳回</a>
+                    <a class="button button-small button-calm icon-left ion-ios-undo">返回</a>
+                </div>
+            </div>
+        </div>
+
+
+    </ion-content>
+
+
+</ion-modal-view>

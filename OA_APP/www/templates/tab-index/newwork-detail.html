@@ -1,0 +1,73 @@
+<ion-view view-title="{{title}}" class="tab-index" hide-tabs="true">
+    <ion-content style="background: #f4f4f4;" class="has-header ">
+        <div class="list addwork" ng-if="firstStep">
+            <label class="item item-input">
+			    <span class="input-label">当前步骤：</span>
+			    <input type="text" placeholder="暂无数据，贡测试" disabled="disabled"  ng-model="newwork.nowfnName" ng-click="openPopover($event)" />
+			</label>
+
+            <label class="item item-input">
+			    <span class="input-label">流水号：</span>
+			    <span>{{newwork.serid}}-</span>
+			    <input type="text" placeholder="请输入流水号"  ng-model="newwork.fileid" />
+			</label>
+
+            <label class="item item-input">
+			    <span class="input-label">工作标题：</span>
+			    <input type="text" placeholder="请输入工作标题"   ng-model="newwork.wTitle" />
+			</label>
+
+            <label class="item item-input">
+			    <span class="input-label">紧急程度：</span>
+			    <select name="" style="width: 60%;padding-left: 25%;border-radius: 10px;">
+			    	<option value="">高</option>
+			    	<option value="" selected="selected">中</option>
+			    	<option value="">低</option>
+			    </select>
+			</label>
+
+            <div id="strhtm" style="min-height: 100px;;"></div>
+        </div>
+
+        <div class="list addwork" ng-if="!firstStep">
+            <label class="item item-input">
+			    <span class="input-label">审批类型：</span>
+			    <select name="" style="width: 60%;padding-left: 20%;border-radius: 10px;">
+			    	<option value="">领带审批</option>
+			    	<option value="" selected="selected">上级审批</option>
+			    </select>
+			</label>
+
+            <label class="item item-input">
+			    <span class="input-label">经办人员：</span>
+			   <textarea name="" id=""  rows="3" style="padding-right:20px;" placeholder="请选择经办人员"  ng-click="checkManager($event)" ng-model="managers.ui_desc"></textarea>
+			   
+            </label>
+            <label class="item item-input">
+			    <span class="input-label">经办部门：</span>
+			   <textarea name="" id=""  rows="3" style="padding-right:20px;" placeholder="请选择经办部门" ng-click="checkDepartment($event)" ng-model="departments.bm_mc"></textarea>
+			</label>
+            <label class="item item-input">
+			    <span class="input-label">经办角色：</span>
+			   <textarea name="" id=""  rows="3" style="padding-right:20px;"  placeholder="请选择经办角色"  ng-click="checkRole($event)" ng-model="roles.zwmc"></textarea>
+			</label>
+            <label class="item item-input">
+			    <span class="input-label">已选&emsp;<br>审批人员：</span>
+			   <textarea name="" id=""  rows="3" style="padding-right:20px;"  placeholder="还未选经办人员"  ng-model="managers.ui_desc"></textarea>
+			</label>
+        </div>
+        <div ng-if="firstStep" class="padding"><button ng-click="showNext()" class="button button-block button-calm">下一步</button></div>
+
+        <div ng-if="!firstStep" class="padding">
+            <button ng-click="msgNotification('site')" class="button icon-left" ng-class="{'ion-android-checkbox-outline-blank':!siteNotification,'button-calm ion-android-checkbox-outline':siteNotification}">
+			 站内消息提醒</button>
+            <button ng-click="msgNotification('phone')" class="button icon-left" ng-class="{'ion-android-checkbox-outline-blank':!phoneNotification,'button-calm ion-android-checkbox-outline':phoneNotification}">
+			手机短信提醒</button>
+            <button ng-click="showFirst()" class="button button-block button-calm">上一步</button>
+            <button ng-click="submit()" class="button button-block button-assertive">提交</button>
+
+        </div>
+
+
+    </ion-content>
+</ion-view>

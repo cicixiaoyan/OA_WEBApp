@@ -1,0 +1,40 @@
+<ion-popover-view class="mail-checkpeople">
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">{{popoverTitle}}</h1>
+    </ion-header-bar>
+    <ion-content class="">
+        <!--经办人员-->
+        <ul class="list checkpeople" ng-if="approvalChoose.manager">
+            <li class="item " ng-class="{'active':manager.check}" ng-click="chooseManager($index)" ng-repeat="manager in managerList">
+                <input type="checkbox" name="checkbox1" class="hide" />
+                <span>{{manager.ui_id}}({{manager.ui_desc}})</span>
+            </li>
+        </ul>
+        <!--经办部门-->
+        <ul class="list checkpeople" ng-if="approvalChoose.department">
+            <li class="item " ng-class="{'active':department.check}" ng-click="chooseDepartment($index)" ng-repeat="department in departmentList">
+                <input type="checkbox" name="checkbox1" class="hide" />
+                <span>{{department.bm_mc}}({{department.bmid}})</span>
+            </li>
+        </ul>
+        <!--经办角色-->
+        <ul class="list checkpeople" ng-if="approvalChoose.role">
+            <li class="item " ng-class="{'active':role.check}" ng-click="chooseRole($index)" ng-repeat="role in roleList">
+                <input type="checkbox" name="checkbox1" class="hide" />
+                <span>{{role.zwmc}}</span>
+            </li>
+        </ul>
+        <!--审批人员-->
+        <!--<ul class="list checkpeople" ng-if="approvalChoose.auditor">
+            <li class="item " ng-class="{'active':auditor.check}" ng-click="chooseAuditor($index)" ng-repeat="auditor in auditorList">
+                <input type="checkbox" name="checkbox1" class="hide" />
+                <span>{{auditor.ui_id}}({{auditor.ui_desc}})</span>
+            </li>
+        </ul>-->
+        <div class="text-center padding-horizontal">
+            <button class="button button-small" ng-click="cancel()">取消</button>
+            <button class="button button-small button-assertive" ng-click="comfirm()">确定</button>
+        </div>
+
+    </ion-content>
+</ion-popover-view>

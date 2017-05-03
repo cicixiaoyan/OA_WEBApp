@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler, IonicPageModule } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 
@@ -21,6 +21,11 @@ import {File} from '@ionic-native/file';
 import {Transfer} from '@ionic-native/transfer';
 import {InAppBrowser} from '@ionic-native/in-app-browser';
 import {Network} from '@ionic-native/network';
+import {Camera} from '@ionic-native/camera';
+import {ImagePicker} from '@ionic-native/image-picker';
+import {PhotoViewer} from '@ionic-native/photo-viewer';
+
+
 
 import {NativeService} from "../providers/NativeService";
 import {HttpIntercept} from "../providers/HttpIntercept";
@@ -28,9 +33,13 @@ import {HttpService} from "../providers/HttpService";
 import {FileService} from "../providers/FileService";
 import {Helper} from "../providers/Helper";
 import {Utils} from "../providers/Utils";
-import {Http, XHRBackend, RequestOptions} from "@angular/http";
+import {Http, XHRBackend, RequestOptions, HttpModule} from "@angular/http";
 import {HttpInterceptHandle} from "../providers/HttpInterceptHandle";
 import {GlobalData} from "../providers/GlobalData";
+
+export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions, httpInterceptHandle: HttpInterceptHandle) {
+  return new HttpIntercept(backend, defaultOptions, httpInterceptHandle);
+}
 
 @NgModule({
   declarations: [
@@ -39,6 +48,7 @@ import {GlobalData} from "../providers/GlobalData";
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp,{
       backButtonText: '',  
       iconMode: 'ios',  
@@ -65,7 +75,11 @@ import {GlobalData} from "../providers/GlobalData";
     Transfer,
     InAppBrowser,
     Network,
+    Camera,
+    ImagePicker,
+    PhotoViewer,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    {provide: Http, useFactory: httpFactory, deps: [XHRBackend, RequestOptions, HttpInterceptHandle]},
     NativeService,
     HttpIntercept,
     HttpService,

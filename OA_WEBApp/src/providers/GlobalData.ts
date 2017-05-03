@@ -6,32 +6,32 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class GlobalData {
 
-  private _userId: string;
-  private _username: string;
-  private _token: string;
+  private _ui_id: string;
+  private _ui_desc: string;
+  // private _token: string;
 
 
-  get userId(): string {
-    return this._userId;
+  get ui_id(): string {
+    return this._ui_id;
   }
 
-  set userId(value: string) {
-    this._userId = value;
+  set ui_id(value: string) {
+    this._ui_id = value;
   }
 
-  get username(): string {
-    return this._username;
+  get ui_desc(): string {
+    return this._ui_desc;
   }
 
-  set username(value: string) {
-    this._username = value;
+  set ui_desc(value: string) {
+    this._ui_desc = value;
   }
 
-  get token(): string {
-    return this._token;
-  }
+  // get token(): string {
+  //   return this._token;
+  // }
 
-  set token(value: string) {
-    this._token = value;
-  }
+  // set token(value: string) {
+  //   this._token = value;
+  // }
 }

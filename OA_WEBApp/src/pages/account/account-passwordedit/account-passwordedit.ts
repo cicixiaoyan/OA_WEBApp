@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import {Component} from '@angular/core';
+import {IonicPage,NavController, ViewController} from 'ionic-angular';
+import {FormBuilder, Validators, FormGroup} from '@angular/forms';
+import {LoginPage} from './../../login/login';
 /**
  * Generated class for the AccountPasswordedit page.
  *
@@ -13,12 +14,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'account-passwordedit.html',
 })
 export class AccountPasswordedit {
+editPasswordForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private navCtrl: NavController,
+              private viewCtrl: ViewController,
+              private formBuilder: FormBuilder) {
+    this.editPasswordForm = this.formBuilder.group({
+      oldPassword: [, [Validators.required, Validators.minLength(3)]],
+      nwePassword: [, [Validators.required, Validators.minLength(3)]],
+      confirmPassword: [, [Validators.required, Validators.minLength(3)]]
+    });
+  };
+
+  confirm() {
+    this.navCtrl.setRoot(LoginPage)
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AccountPasswordedit');
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
+
 
 }

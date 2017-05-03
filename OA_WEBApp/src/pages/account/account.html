@@ -6,13 +6,72 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>account</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>个人中心</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">
+    <div class="top">
+        <div class="top-bg"></div>
+        <div>
+            <img src="../assets/img/ionic.png" alt="photo" height="60" />
+            <h5><span class="positive">♂</span>&nbsp;<span class="positive">{{userInfo.ui_desc}}</span></h5>
+            <div class="row row-no-padding">
+                <div class="col col-50" style="border-right: 1px solid;">
+                    职位：{{userInfo.ui_zw}}
+                </div>
+                <div class="col col-50">
+                    入职时间：{{userInfo.ui_rzrq|date:"yyyy-MM-dd"}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="imformation">
+        <ion-scroll scrollY="true" class="tab-content">
+            <ion-list>
+                <ion-item>
+                    <ion-icon name='md-map' color="positive" item-left></ion-icon>
+                    公司
+                    <ion-note item-right>{{userInfo.ui_ssgs}}</ion-note>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name='ios-analytics' color="energized" item-left></ion-icon>
+                    部门
+                    <ion-note item-right>{{userInfo.ui_ssbm}}</ion-note>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name='ios-phone-portrait' color="calm" item-left></ion-icon>
+                    手机号
+                    <ion-note item-right>{{userInfo.ui_yddh}}</ion-note>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name='md-mail' color="calm" item-left></ion-icon>
+                    邮箱
+                    <ion-note item-right>{{userInfo.ui_mail}}</ion-note>
+                </ion-item>
+            </ion-list>
+            <ion-list>
+                <ion-item (click)="pwdEdit()">
+                    <ion-icon name='ios-unlock' color="assertive" item-left></ion-icon>
+                    修改密码
+                    <ion-icon name='ios-arrow-forward' item-right></ion-icon>
+                </ion-item>
+                <ion-item (click)="edit()">
+                    <ion-icon name='md-create' color="balanced" item-left></ion-icon>
+                    修改资料
+                    <ion-icon name='ios-arrow-forward' item-right></ion-icon>
+                </ion-item>
+            </ion-list>
 
+
+
+            <div class="padding">
+                <button ion-button block color="assertive">退出登录</button>
+            </div>
+
+        </ion-scroll>
+    </div>
 </ion-content>

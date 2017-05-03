@@ -4,7 +4,8 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!--.nav-decor隐藏头部-->
+<ion-header class="nav-decor">
 
     <ion-navbar>
         <ion-title>登录</ion-title>
@@ -13,20 +14,20 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content fullscreen="true">
     <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
         <ion-list>
             <ion-item>
                 <ion-label color="primary">用户名</ion-label>
-                <ion-input type="text" formControlName="username" clearInput></ion-input>
+                <ion-input type="text" formControlName="ui_id" clearInput></ion-input>
             </ion-item>
-            <div *ngIf="!loginForm.controls.username.valid && loginForm.controls.username.touched" class="validation-failed"> 请输入正确用户名</div>
+            <div *ngIf="!loginForm.controls.ui_id.valid && loginForm.controls.ui_id.touched" class="validation-failed"> 请输入正确用户名</div>
 
             <ion-item>
                 <ion-label color="primary">密　码</ion-label>
-                <ion-input type="password" formControlName="password" clearInput></ion-input>
+                <ion-input type="password" formControlName="ui_pwd" clearInput></ion-input>
             </ion-item>
-            <div *ngIf="!loginForm.controls.password.valid" class="validation-failed">请输入密码</div>
+            <div *ngIf="!loginForm.controls.ui_pwd.valid" class="validation-failed">请输入密码</div>
 
         </ion-list>
         <div padding-horizontal>

@@ -29,13 +29,20 @@ export class LoginPage {
               private alertCtrl: AlertController,
               private globalData: GlobalData,
               private loginService: LoginService) {
+              
     this.loginForm = this.formBuilder.group({
-      username: ['yanxiaojun617', [Validators.required, Validators.minLength(4)]],// 第一个参数是默认值
-      password: ['123456', [Validators.required, Validators.minLength(4)]]
+      ui_id: ['admin', [Validators.required, Validators.minLength(4)]],// 第一个参数是默认值
+      ui_pwd: ['123', [Validators.required, Validators.minLength(2)]]
     });
   }
 
   ionViewWillEnter() {
+       let elements = document.querySelectorAll(".tabbar");
+    if (elements != null) {
+        Object.keys(elements).map((key) => {
+            elements[key].style.display = 'none';
+        });
+    } 
     this.storage.get('UserInfo').then(userInfo => {
       this.userInfo = userInfo || null;
     });
@@ -43,6 +50,13 @@ export class LoginPage {
 
   ionViewCanLeave(): boolean {
     let bool = !!this.userInfo;
+    let elements = document.querySelectorAll(".tabbar");
+    if (elements != null) {
+        Object.keys(elements).map((key) => {
+            elements[key].style.display = 'flex';
+        });
+    }
+
     if (this.canLeave || bool) {
       return true;
     } else {
@@ -59,6 +73,9 @@ export class LoginPage {
       }).present();
       return false;
     }
+
+
+
   }
 
   login(user) {
@@ -66,10 +83,10 @@ export class LoginPage {
     this.loginService.login(user)
       .subscribe((userInfo: UserInfo) => {
         this.submitted = false;
-        userInfo.token = 'xx122a9Wf';//从后台获取token,暂时写死
-        this.globalData.userId =userInfo.id;
-        this.globalData.username =userInfo.username;
-        this.globalData.token =userInfo.token;
+        //userInfo.token = 'xx122a9Wf';//从后台获取token,暂时写死
+        this.globalData.ui_id =userInfo.ui_id;
+        this.globalData.ui_desc =userInfo.ui_desc;
+       // this.globalData.token =userInfo.token;
         this.userInfo = userInfo;
         this.storage.set('UserInfo', userInfo);
         this.viewCtrl.dismiss(userInfo);
@@ -82,5 +99,7 @@ export class LoginPage {
     modal.present();
     this.canLeave = false
   }
+ 
+ 
 
 }

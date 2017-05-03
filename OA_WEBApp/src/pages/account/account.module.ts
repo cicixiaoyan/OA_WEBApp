@@ -10,7 +10,7 @@ import { Account } from './account';
     IonicPageModule.forChild(Account),
   ],
   exports: [
-    Account
+    Account,
   ]
 })
 export class AccountModule {}

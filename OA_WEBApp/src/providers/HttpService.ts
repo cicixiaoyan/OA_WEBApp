@@ -17,10 +17,10 @@ export class HttpService {
 
   public get(url: string, paramMap?: any): Observable<Response> {
     return this.http.get(url, new RequestOptions({
-      search: HttpService.buildURLSearchParams(paramMap),
-      headers: new Headers({
-        'token': this.globalData.token
-      })
+      search: HttpService.buildURLSearchParams(paramMap)
+      // ,headers: new Headers({
+      //   'token': this.globalData.token
+      // })
     }));
   }
 
@@ -32,8 +32,9 @@ export class HttpService {
   public postFormData(url: string, paramMap?: any): Observable<Response> {
     let headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      'Accept': 'application/json;charset=utf-8',
-      'token': this.globalData.token
+      'Accept': 'application/json;charset=utf-8'
+      // ,
+      // 'token': this.globalData.token
     });
     return this.http.post(url, HttpService.buildURLSearchParams(paramMap).toString(), new RequestOptions({headers: headers}));
   }
@@ -44,10 +45,11 @@ export class HttpService {
 
   public delete(url: string, paramMap?: any): Observable<Response> {
     return this.http.delete(url, new RequestOptions({
-      search: HttpService.buildURLSearchParams(paramMap),
-      headers: new Headers({
-        'token': this.globalData.token
-      })
+      search: HttpService.buildURLSearchParams(paramMap)
+      // ,
+      // headers: new Headers({
+      //   'token': this.globalData.token
+      // })
     }));
   }
 
@@ -57,19 +59,21 @@ export class HttpService {
 
   public head(url: string, paramMap?: any): Observable<Response> {
     return this.http.head(url, new RequestOptions({
-      search: HttpService.buildURLSearchParams(paramMap),
-      headers: new Headers({
-        'token': this.globalData.token
-      })
+      search: HttpService.buildURLSearchParams(paramMap)
+      // ,
+      // headers: new Headers({
+      //   'token': this.globalData.token
+      // })
     }));
   }
 
   public options(url: string, paramMap?: any): Observable<Response> {
     return this.http.options(url, new RequestOptions({
-      search: HttpService.buildURLSearchParams(paramMap),
-      headers: new Headers({
-        'token': this.globalData.token
-      })
+      search: HttpService.buildURLSearchParams(paramMap)
+      // ,
+      // headers: new Headers({
+      //   'token': this.globalData.token
+      // })
     }));
   }
 
@@ -91,9 +95,9 @@ export class HttpService {
   private getOptions(options): RequestOptionsArgs {
     if (!options) {
       options = new RequestOptions({
-        headers: new Headers({
-          'token': this.globalData.token
-        })
+        // headers: new Headers({
+        //   'token': this.globalData.token
+        // })
       });
       return options;
     }

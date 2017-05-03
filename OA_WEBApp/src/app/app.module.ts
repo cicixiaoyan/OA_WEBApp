@@ -10,6 +10,8 @@ import { HomeModule } from '../pages/home/home.module';
 import { MailModule } from '../pages/mail/mail.module';
 import { NoticeModule } from '../pages/notice/notice.module';
 import { AccountModule } from '../pages/account/account.module';
+import { AccountEditModule } from '../pages/account/account-edit/account-edit.module';
+import { AccountPasswordeditModule } from '../pages/account/account-passwordedit/account-passwordedit.module';
 import { LoginModule } from '../pages/login/login.module';
 
 
@@ -59,6 +61,8 @@ export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions,
     MailModule,
     NoticeModule,
     AccountModule,
+    AccountEditModule,
+    AccountPasswordeditModule,
     LoginModule
   ],
   bootstrap: [IonicApp],

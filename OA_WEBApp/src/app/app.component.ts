@@ -57,9 +57,9 @@ export class MyApp {
         this.storage.get('UserInfo').then((userInfo: UserInfo) => {
           if (userInfo) {
             this.events.publish('user:login', userInfo);
-            this.globalData.userId = userInfo.id;
-            this.globalData.username = userInfo.username;
-            this.globalData.token = userInfo.token;
+            this.globalData.ui_id = userInfo.ui_id;
+            this.globalData.ui_desc = userInfo.ui_desc;
+            // this.globalData.token = userInfo.token;
           } else {
             let modal = this.modalCtrl.create(LoginPage);
             modal.present();

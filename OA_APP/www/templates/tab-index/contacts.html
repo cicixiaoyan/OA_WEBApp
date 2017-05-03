@@ -1,0 +1,26 @@
+<ion-view view-title="通讯录" class="tab-index" hide-tabs="true">
+    <ion-content style="background: #f4f4f4;overflow: hidden;" overflow-scroll="true" class="has-header ">
+        <div class="bar bar-header item-input-inset" style="position: absolute;">
+            <label class="item-input-wrapper">
+		    <i class="icon ion-ios-search placeholder-icon"></i>
+		    <input type="search" placeholder="请输入关键字" ng-model="searchKey">
+		  </label>
+            <button class="button button-assertive" ng-click="search(searchKey)">搜索</button>
+        </div>
+
+
+        <ion-scroll style="position: absolute;width: 100%;top: 44px;bottom: 0;">
+            <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+            <div class="list">
+                <div class="item item-divider">本部</div>
+
+                <a ng-repeat="someone in peopleList track by $index" class="item item-icon-right" ng-click="modalOpen(someone.ui_id)">
+			   	{{someone.ui_id}}{{someone.ui_desc}}（{{someone.ui_sex}}）
+			   	<p class="font-12">{{someone.ui_lx}}&emsp;{{someone.zwmc}}</p>
+			   	<i class="icon ion-ios-arrow-right Lavender"></i>
+			  </a>
+            </div>
+            <ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
+        </ion-scroll>
+    </ion-content>
+</ion-view>

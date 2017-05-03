@@ -1,0 +1,65 @@
+<ion-view class="tab-index backlog" hide-tabs="true">
+    <ion-nav-title>
+        <div class="button-bar header-button-bar">
+            <a ng-click="showNotDone()" ng-class="{'button-assertive':!done}" class="button button-small">未办理</a>
+            <a ng-click="showDone()" class="button button-small" ng-class="{'button-assertive':done}">已办理</a>
+        </div>
+    </ion-nav-title>
+
+    <ion-content style="background: #f4f4f4;overflow: hidden;" overflow-scroll="true" class="has-header">
+        <div class="padding-horizontal padding-top">
+            <div class="select-box ">
+                <div class="calm-bg light">
+                    <div>所有表单类型&emsp;<i class="ion ion-chevron-down"></i></div>
+                </div>
+                <select name="">
+			    	<option selected="selected" value="">报账单</option>
+			    	<option value="">请假</option>
+			    	<option value="">收文</option>
+			    	<option value="">测试</option> 	
+			    </select>
+            </div>
+        </div>
+
+        <div class="bar bar-header item-input-inset">
+            <label class="item-input-wrapper">
+		    <i class="icon ion-ios-search placeholder-icon"></i>
+		    <input type="search" ng-model="searchKey" placeholder="请输入关键字">
+		  </label>
+            <button class="button button-assertive" ng-click="search()">搜索</button>
+        </div>
+
+        <ion-scroll style="position: absolute;width: 100%;top: 96px;bottom: 0;">
+            <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+            <ion-list ng-if="!done">
+                <ion-item class="item-icon-right" ng-click="downloadFile()">
+                    <span><span class="ion-record positive"></span>&nbsp;[测试表单]1</span>
+                    <p class="font-12">发起人：系统管理员&emsp;当前步骤：审批</p>
+                    <i class="icon ion-ios-arrow-right Lavender"></i>
+                </ion-item>
+                <ion-item class="item-icon-right" ng-click="modalOpen()">
+                    <span><span class="ion-record positive"></span>&nbsp;[测试表单]1</span>
+                    <p class="font-12">发起人：系统管理员&emsp;当前步骤：审批</p>
+                    <i class="icon ion-ios-arrow-right Lavender"></i>
+                </ion-item>
+
+            </ion-list>
+            <ion-list ng-if="done">
+                <ion-item class="item-icon-right" ng-click="modalOpen()">
+                    <span>[测试表单]1</span>
+                    <p class="font-12">审批状态：自动结束&emsp;发起人：系统管理员</p>
+                    <p class="font-12">当前步骤：审批</p>
+                    <i class="icon ion-ios-arrow-right Lavender"></i>
+                </ion-item>
+                <ion-item class="item-icon-right" ng-click="modalOpen()">
+                    <span>[测试表单]1</span>
+                    <p class="font-12">审批状态：自动结束&emsp;发起人：系统管理员</p>
+                    <p class="font-12">当前步骤：审批</p>
+                    <i class="icon ion-ios-arrow-right Lavender"></i>
+                </ion-item>
+            </ion-list>
+            <ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
+        </ion-scroll>
+    </ion-content>
+
+</ion-view>

@@ -1,0 +1,13 @@
+<ion-view view-title="新建工作" class="tab-index" hide-tabs="true">
+    <ion-content style="background: #f4f4f4;" class="has-header ">
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+        <div class="list">
+            <a ng-repeat="item in list track by $index" class="item item-icon-right" ng-click="addWork($index)">
+		    {{item.wfName}}
+		    <i class="icon ion-ios-arrow-right Lavender"></i>
+		  </a>
+        </div>
+        <ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
+
+    </ion-content>
+</ion-view>

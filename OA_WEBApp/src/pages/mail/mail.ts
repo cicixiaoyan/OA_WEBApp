@@ -14,8 +14,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class Mail {
   box: string = "inbox";
-  checkBtn: object = { read: false, unread: true, all: false };
-  isDraft: boolean = false;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

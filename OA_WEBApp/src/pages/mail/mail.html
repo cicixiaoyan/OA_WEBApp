@@ -20,53 +20,6 @@
 </ion-header>
 
 
-<ion-content style="background: #f4f4f4;overflow: hidden;" overflow-scroll="true" class="has-header">
+<ion-content padding>
 
-    <div *ngIf="inbox" class="padding" style="border-bottom: 1px solid #ddd;">
-        <button ion-button small (click)="check('unread')" [ngClass]="{'button-calm':checkBtn.unread}">未读</button>
-        <button ion-button small (click)="check('read')" [ngClass]="{'button-calm':checkBtn.read}">已读</button>
-        <button ion-button small (click)="check('all')" [ngClass]="{'button-calm':checkBtn.all}">全部</button>
-    </div>
-
-    <div *ngIf="!inbox" class="padding" style="border-bottom: 1px solid #ddd;">
-        <button (click)="checkDraft()" [ngClass]="{'button-calm':!isDraft}">已发送</button>
-        <button (click)="checkDraft(true)" [ngClass]="{'button-calm':isDraft}">草稿箱</button>
-    </div>
-
-    <ion-scroll style="position: absolute;width: 100%;top: 52px;bottom: 0;">
-        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
-        <!--<ion-list ng-if="inbox">
-            <ion-item ng-repeat="msg in inboxList" class="item-avatar item-icon-right" ng-click="doRead(msg.jsyjid)">
-                <img src="img/mike.png">
-                <span>{{msg.jsnr}}</span>
-                <p class="font-12">
-                    来至:{{msg.fsrName}}</span>&emsp;{{msg.jssj}}
-                </p>
-                <i class="icon ion-ios-arrow-right Lavender"></i>
-
-                <ion-option-button class="calm-bg light" ng-click="$event.stopPropagation()">
-                    <span>删除</span>
-                </ion-option-button>
-
-                <ion-option-button class="positive-bg light" ng-click="" ng-if="msg.read">
-                    <span>标为已读</span>
-                </ion-option-button>
-            </ion-item>
-        </ion-list>
-        <ion-list ng-if="!inbox">
-            <ion-item ng-repeat="msg in outboxList" class="item-avatar item-icon-right" ng-click="doRead(msg.jsyjid)">
-                <img src="img/mike.png">
-                <span>{{msg.jsnr}}</span>
-                <p class="font-12">
-                    发至:{{msg.fsrName}}</span>&emsp;{{msg.jssj}}
-                </p>
-                <i class="icon ion-ios-arrow-right Lavender"></i>
-
-                <ion-option-button class="calm-bg light" ng-click="$event.stopPropagation()">
-                    <span>删除</span>
-                </ion-option-button>
-            </ion-item>
-        </ion-list>-->
-        <ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
-    </ion-scroll>
 </ion-content>

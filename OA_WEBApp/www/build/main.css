@@ -46354,8 +46354,62 @@ page-home .index-row ion-col div.balanced {
   border-color: #b9fbcc;
 }
 
+page-login ion-content {
+  background: rgba(0, 0, 0, 0.4) url(../assets/img/login-bg.jpg) no-repeat;
+  background-size: cover;
+}
+
+page-login ion-content .login-header {
+  height: 43px;
+  line-height: 44px;
+  font-size: 17px;
+  color: #fff;
+  text-align: center;
+}
+
+page-login ion-content .login-top {
+  padding: 30px 0;
+  background: transparent;
+  text-align: center;
+}
+
+page-login ion-content .login-top img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 1px solid #eee;
+  background-color: #fff;
+}
+
+page-login ion-content ion-item:first-child {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+page-login ion-content ion-item:last-child {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
 page-find-password .verification {
   position: absolute;
   right: 0;
   top: 25px;
+}
+
+page-mail .subbox {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+page-mail-read .mail-content ion-scroll {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 144px;
+  right: 0;
+}
+
+page-mail-read .mail-content ion-scroll div {
+  width: 100%;
 }

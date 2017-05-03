@@ -21,52 +21,57 @@
 
 
 <ion-content style="background: #f4f4f4;overflow: hidden;" overflow-scroll="true" class="has-header">
+    <div [ngSwitch]="box" class="subbox">
+        <div *ngSwitchCase="'inbox'">
+            <button ion-button small (click)="check('unread')" [ngClass]="{'button-ios-calm':checkBtn.unread}">未读</button>
+            <button ion-button small (click)="check('read')" [ngClass]="{'button-ios-calm':checkBtn.read}">已读</button>
+            <button ion-button small (click)="check('all')" [ngClass]="{'button-ios-calm':checkBtn.all}">全部</button>
+        </div>
 
-    <div *ngIf="inbox" class="padding" style="border-bottom: 1px solid #ddd;">
-        <button ion-button small (click)="check('unread')" [ngClass]="{'button-calm':checkBtn.unread}">未读</button>
-        <button ion-button small (click)="check('read')" [ngClass]="{'button-calm':checkBtn.read}">已读</button>
-        <button ion-button small (click)="check('all')" [ngClass]="{'button-calm':checkBtn.all}">全部</button>
+        <div *ngSwitchCase="'outbox'">
+            <button ion-button small (click)="checkDraft()" [ngClass]="{'button-ios-calm':!isDraft}">已发送</button>
+            <button ion-button small (click)="checkDraft(true)" [ngClass]="{'button-ios-calm':isDraft}">草稿箱</button>
+        </div>
     </div>
 
-    <div *ngIf="!inbox" class="padding" style="border-bottom: 1px solid #ddd;">
-        <button (click)="checkDraft()" [ngClass]="{'button-calm':!isDraft}">已发送</button>
-        <button (click)="checkDraft(true)" [ngClass]="{'button-calm':isDraft}">草稿箱</button>
-    </div>
 
     <ion-scroll style="position: absolute;width: 100%;top: 52px;bottom: 0;">
         <ion-refresher on-refresh="doRefresh()"></ion-refresher>
-        <!--<ion-list ng-if="inbox">
-            <ion-item ng-repeat="msg in inboxList" class="item-avatar item-icon-right" ng-click="doRead(msg.jsyjid)">
-                <img src="img/mike.png">
-                <span>{{msg.jsnr}}</span>
-                <p class="font-12">
-                    来至:{{msg.fsrName}}</span>&emsp;{{msg.jssj}}
-                </p>
-                <i class="icon ion-ios-arrow-right Lavender"></i>
+        <div [ngSwitch]="box">
+            <ion-list *ngSwitchCase="'inbox'">
+                <ion-item-sliding *ngFor="let mail of inboxList " (click)="doRead(mail.jsyjid)">
+                    <ion-item>
+                        <ion-avatar item-left>
+                            <img src="../assets/img/mike.png">
+                        </ion-avatar>
+                        <span>{{mail.jsnr}}</span>
+                        <p class="font-12">来至:{{mail.fsrName}}&emsp;{{mail.jssj}}</p>
+                    </ion-item>
+                    <ion-item-options side="right">
+                        <button ion-button color="primary">
+                            <ion-icon name="mail"></ion-icon>删除
+                        </button>
+                    </ion-item-options>
+                </ion-item-sliding>
+            </ion-list>
+            <ion-list *ngSwitchCase="'outbox'">
+                <ion-item-sliding *ngFor="let mail of outboxList " (click)="doRead(mail.jsyjid)">
+                    <ion-item>
+                        <ion-avatar item-left>
+                            <img src="../assets/img/mike.png">
+                        </ion-avatar>
+                        <span>{{mail.jsnr}}</span>
+                        <p class="font-12">发至:{{mail.fsrName}}&emsp;{{mail.jssj}}</p>
+                    </ion-item>
+                    <ion-item-options side="right">
+                        <button ion-button color="primary">
+                            <ion-icon name="mail"></ion-icon>删除
+                        </button>
+                    </ion-item-options>
+                </ion-item-sliding>
+            </ion-list>
+        </div>
 
-                <ion-option-button class="calm-bg light" ng-click="$event.stopPropagation()">
-                    <span>删除</span>
-                </ion-option-button>
-
-                <ion-option-button class="positive-bg light" ng-click="" ng-if="msg.read">
-                    <span>标为已读</span>
-                </ion-option-button>
-            </ion-item>
-        </ion-list>
-        <ion-list ng-if="!inbox">
-            <ion-item ng-repeat="msg in outboxList" class="item-avatar item-icon-right" ng-click="doRead(msg.jsyjid)">
-                <img src="img/mike.png">
-                <span>{{msg.jsnr}}</span>
-                <p class="font-12">
-                    发至:{{msg.fsrName}}</span>&emsp;{{msg.jssj}}
-                </p>
-                <i class="icon ion-ios-arrow-right Lavender"></i>
-
-                <ion-option-button class="calm-bg light" ng-click="$event.stopPropagation()">
-                    <span>删除</span>
-                </ion-option-button>
-            </ion-item>
-        </ion-list>-->
         <ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
     </ion-scroll>
 </ion-content>

@@ -14,8 +14,12 @@
 </ion-header>
 
 
-<ion-content fullscreen="true">
-    <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+<ion-content>
+    <div class="login-header">登录</div>
+    <div class="login-top">
+        <img src="../assets/img/logo.png" alt="公司logo" />
+    </div>
+    <form padding [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
         <ion-list>
             <ion-item>
                 <ion-label color="primary">用户名</ion-label>

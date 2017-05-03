@@ -6,13 +6,41 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>mail-read</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>信息详情</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="read()">转发</button>
+        </ion-buttons>
+    </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">
+    <ion-list>
 
+        <ion-item>
+            <ion-label>发送人&emsp;</ion-label>
+            <ion-input type="text" placeholder="系统管理员"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>主题&emsp;&emsp;</ion-label>
+            <ion-input type="test" placeholder="主题1"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>发送时间</ion-label>
+            <ion-input type="test" placeholder="2012-12-12 12：12"></ion-input>
+        </ion-item>
+
+    </ion-list>
+
+    <div class="mail-content">
+        <ion-scroll scrollY="true">
+            <div>
+                你该交作业了
+            </div>
+        </ion-scroll>
+    </div>
 </ion-content>

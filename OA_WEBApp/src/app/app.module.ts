@@ -8,6 +8,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { HomeModule } from '../pages/home/home.module';
 import { MailModule } from '../pages/mail/mail.module';
+import { MailReadModule } from '../pages/mail/mail-read/mail-read.module';
+import { MailWriteModule } from '../pages/mail/mail-write/mail-write.module';
 import { NoticeModule } from '../pages/notice/notice.module';
 import { AccountModule } from '../pages/account/account.module';
 import { AccountEditModule } from '../pages/account/account-edit/account-edit.module';
@@ -59,6 +61,8 @@ export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions,
     IonicStorageModule.forRoot(),
     HomeModule,
     MailModule,
+    MailReadModule,
+    MailWriteModule,
     NoticeModule,
     AccountModule,
     AccountEditModule,

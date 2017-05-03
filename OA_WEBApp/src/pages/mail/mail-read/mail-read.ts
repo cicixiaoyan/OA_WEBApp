@@ -21,4 +21,6 @@ export class MailRead {
     console.log('ionViewDidLoad MailRead');
   }
 
+  read(){}
+
 }

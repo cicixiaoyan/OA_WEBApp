@@ -46261,6 +46261,21 @@ ion-navbar.toolbar {
   }
 }
 
+[contentEditable=true]:empty:not(:focus):before {
+  content: attr(data-text);
+}
+
+.message-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px;
+  outline: 0;
+  font-size: 1em;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-user-modify: read-write-plaintext-only;
+}
+
 page-account .top {
   position: relative;
   padding: 20px 0 10px;
@@ -46402,14 +46417,91 @@ page-mail .subbox {
   border-bottom: 1px solid #ddd;
 }
 
-page-mail-read .mail-content ion-scroll {
+page-mail-read .mail-content {
   position: absolute;
   bottom: 0;
   left: 0;
-  top: 144px;
+  top: 160px;
   right: 0;
 }
 
-page-mail-read .mail-content ion-scroll div {
+page-mail-read .mail-content div.mydiv {
   width: 100%;
+  padding: 10px;
+}
+
+page-mail-read .message-reply {
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  border-top: 1px solid #222;
+}
+
+page-mail-read .message-reply > div {
+  width: 100%;
+  padding-right: 60px;
+}
+
+page-mail-read .message-reply > div textarea {
+  width: 100%;
+  height: 54px;
+  padding-right: 0;
+}
+
+page-mail-read .message-reply > div button {
+  position: absolute;
+  right: 2px;
+  bottom: 7px;
+  height: 40px;
+}
+
+page-mail-write .share-btn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  color: #6dd;
+}
+
+page-mail-write .share-btn ion-icon {
+  padding-right: 4px;
+  font-size: 1.5em;
+  color: gray;
+}
+
+page-mail-write .mail-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 110px;
+  right: 0;
+}
+
+page-mail-write .mail-content .affix ion-col {
+  position: relative;
+}
+
+page-mail-write .mail-content .affix ion-col > div {
+  padding: 10px 5px;
+  text-align: center;
+  background-color: #dee;
+  height: 130px;
+}
+
+page-mail-write .mail-content .affix ion-col > div .affix-icon {
+  font-size: 34px;
+  color: gray;
+}
+
+page-mail-write .mail-content .affix ion-col > div .affix-dismiss {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-block;
+}
+
+page-mail-write .mail-content .affix ion-col .affix-add {
+  font-size: 50px;
+  color: #888;
+  text-align: center;
 }

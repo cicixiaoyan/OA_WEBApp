@@ -1,6 +1,4 @@
 // http://ionicframework.com/docs/v2/theming/
-
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +12,19 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+// 用法
+//  <div class="message-textarea" contenteditable="true" data-text="输入信息"></div>
+[contentEditable=true]:empty:not(:focus):before {
+    content: attr(data-text);
+}
+
+.message-textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px;
+    outline: 0;
+    font-size: 1em;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-user-modify: read-write-plaintext-only;
+}

@@ -1,3 +1,50 @@
 page-mail-write {
-
+    .share-btn {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        color: #6dd;
+        ion-icon {
+            padding-right: 4px;
+            font-size: 1.5em;
+            color: gray;
+        }
+    }
+    .mail-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        top: 110px;
+        right: 0;
+        // mydiv {
+        //     width: 100%;
+        //     padding: 10px;
+        // }
+        .affix {
+            ion-col {
+                position: relative;
+                >div {
+                    padding: 10px 5px;
+                    text-align: center;
+                    background-color: #dee;
+                    height: 130px;
+                    .affix-icon {
+                        font-size: 34px;
+                        color: gray;
+                    }
+                    .affix-dismiss {
+                        position: absolute;
+                        top: 8px;
+                        right: 8px;
+                        display: inline-block;
+                    }
+                }
+                .affix-add {
+                    font-size: 50px;
+                    color: #888;
+                    text-align: center;
+                }
+            }
+        }
+    }
 }

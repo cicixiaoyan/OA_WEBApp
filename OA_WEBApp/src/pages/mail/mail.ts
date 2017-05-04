@@ -96,6 +96,10 @@ export class Mail {
       this.navCtrl.push(MailRead,{id:id});
     }
 
+    doWrite(){
+        this.navCtrl.push(MailWrite);
+    }
+
     doRefresh() {
 
     }

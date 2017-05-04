@@ -17,9 +17,29 @@ export class MailRead {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  ionViewWillEnter() {
+    let elements = document.querySelectorAll(".tabbar");
+    if(elements != null) {
+        Object.keys(elements).map((key) => {
+            elements[key].style.display ='none';
+        });
+    } 
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad MailRead');
   }
+
+  ionViewWillLeave() {
+    let elements = document.querySelectorAll(".tabbar");
+    if(elements != null) {
+        Object.keys(elements).map((key) => {
+            elements[key].style.display ='flex';
+        });
+    }
+  }
+
+
 
   read(){}
 

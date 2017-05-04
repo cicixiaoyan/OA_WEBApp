@@ -1,18 +1,73 @@
 <!--
-  Generated template for the MailWrite page.
+  Generated template for the MailRead page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>mail-write</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>写信</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="read()">发送</button>
+        </ion-buttons>
+    </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">
+    <div>
 
+        <ion-list style="position:relative;">
+
+            <ion-item>
+                <ion-label>发送人&emsp;</ion-label>
+                <ion-input type="text" placeholder="系统管理员"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>主题&emsp;&emsp;</ion-label>
+                <ion-input type="test" placeholder="主题1"></ion-input>
+            </ion-item>
+            <button ion-button clear class="share-btn">
+              <ion-icon name="share"></ion-icon>1
+            </button>
+        </ion-list>
+    </div>
+
+
+    <div>
+        <ion-scroll scrollY="true" class="mail-content">
+            <!--<textarea class="mydiv">
+
+            </textarea>-->
+            <div class="message-textarea" contenteditable="true" data-text="输入信息"></div>
+            <div class="affix">
+                <ion-grid>
+                    <ion-row align-items-center>
+                        <ion-col col-6>
+                            <div>
+                                <ion-icon class="affix-icon" name="md-image"></ion-icon>
+                                <p>log.1</p>
+                                <p>5.00MB</p>
+                                <ion-icon class="affix-dismiss" name="ios-close-circle-outline"></ion-icon>
+                            </div>
+                        </ion-col>
+                        <ion-col col-6 text-center>
+                            <ion-icon name="add" class="affix-add"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </ion-scroll>
+    </div>
 </ion-content>
+<div class="list message-reply">
+
+    <div class="item">
+        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>
+        <button ion-button small color="positive">发送</button>
+    </div>
+
+</div>

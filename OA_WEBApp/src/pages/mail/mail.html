@@ -15,7 +15,13 @@
                 发件箱
             </ion-segment-button>
         </ion-segment>
+
     </ion-toolbar>
+
+    <!--
+    <ion-buttons ion-button icon-only end (click)="doWrite()">
+        <ion-icon name="ios-add-circle-outline"></ion-icon>
+    </ion-buttons>-->
 
 </ion-header>
 
@@ -74,4 +80,9 @@
 
         <ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
     </ion-scroll>
+
+    <ion-fab bottom right>
+        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+
 </ion-content>

@@ -7,7 +7,7 @@ import { MailRead } from './mail-read';
     MailRead,
   ],
   imports: [
-    IonicPageModule.forChild(MailRead),
+    IonicPageModule.forChild(MailRead)
   ],
   exports: [
     MailRead

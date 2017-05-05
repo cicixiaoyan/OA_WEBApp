@@ -10,7 +10,8 @@ import { NoticeDetail } from './notice-detail/notice-detail';
     NoticeDetail
   ],
   imports: [
-    IonicPageModule.forChild(Notice)
+    IonicPageModule.forChild(Notice),
+    IonicPageModule.forChild(NoticeDetail)
   ],
   exports: [
     Notice,

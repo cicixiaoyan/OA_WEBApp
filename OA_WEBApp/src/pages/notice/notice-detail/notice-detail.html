@@ -6,13 +6,45 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>notice-detail</ion-title>
-  </ion-navbar>
-
+    <ion-navbar>
+        <ion-title>公告详情</ion-title>
+    </ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <div class="detail-header">
+        <h4>[{{detailNotice.gglb}}]{{detailNotice.ggzt}}</h4>
+        <p>
+            {{detailNotice.lrr}}
+            <span class="right">{{detailNotice.lrsj}}</span>
+        </p>
+    </div>
+    <div class="content">
+        <ion-scroll class="detail-content" id="noticeContent">
+            <div padding>有效期：{{detailNotice.kssj}}至{{detailNotice.jssj}}</div>
+            <div padding-horizontal [innerHTML]="myDiv"></div>
+            <div class="affix">
+                <ion-grid>
+                    <ion-row align-items-center>
+                        <ion-col col-6>
+                            <div>
+                                <ion-icon class="affix-icon" name="md-image"></ion-icon>
+                                <p>log.1</p>
+                                <p color="gray">5.00MB</p>
+                                <ion-icon class="affix-dismiss" name="ios-close-circle-outline"></ion-icon>
+                            </div>
+                        </ion-col>
+                        <ion-col col-6 text-center>
+                            <div>
+                                <ion-icon name="add" class="affix-add"></ion-icon>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </ion-scroll>
+    </div>
+
 
 </ion-content>

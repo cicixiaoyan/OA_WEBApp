@@ -5,14 +5,36 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>backlog</ion-title>
-  </ion-navbar>
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="work">
+            <ion-segment-button value="notDone">
+                未办理
+            </ion-segment-button>
+            <ion-segment-button value="done">
+                已办理
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <div [ngSwitch]="work">
+        <ion-list inset *ngSwitchCase="'notDone'">
 
+            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.ggid}">
+                <span>&nbsp;[{{work.wfName}}]{{work.wfNo}}</span>
+                <p>发起人：{{work.fqr}}&emsp;当前步骤：{{work.dqbz}}</p>
+            </button>
+
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'done'">
+            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.ggid}">
+                <span>&nbsp;[{{work.wfName}}]{{work.wfNo}}</span>
+                <p>发起人：{{work.fqr}}&emsp;当前步骤：{{work.dqbz}}</p>
+            </button>
+        </ion-list>
+    </div>
 </ion-content>

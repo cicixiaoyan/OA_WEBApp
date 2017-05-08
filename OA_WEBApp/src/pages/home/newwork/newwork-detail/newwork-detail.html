@@ -1,0 +1,112 @@
+<!--
+  Generated template for the NewworkDetail page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{title}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-list inset *ngIf="firstStep">
+
+        <ion-item>
+            <ion-label>当前步骤：</ion-label>
+            <ion-input type="text" placeholder="当前步骤1"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>&emsp;流水号：<em>&emsp;1&nbsp;—</em></ion-label>
+
+            <ion-input type="text" placeholder="请输入流水号"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>工作标题：</ion-label>
+            <ion-input type="text" placeholder="请输入工作标题"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>紧急情况：</ion-label>
+            <ion-select [(ngModel)]="emergencyLevel" placeholder="请选择紧急情况" cancelText="取消" okText="确定">
+                <ion-option value="1">高</ion-option>
+                <ion-option value="2" selected="true">中</ion-option>
+                <ion-option value="3">低</ion-option>
+            </ion-select>
+        </ion-item>
+        <div id="strhtm" style="min-height: 100px;;"></div>
+
+    </ion-list>
+    <ion-list inset *ngIf="!firstStep">
+        <ion-item>
+            <ion-label>审批类型：</ion-label>
+            <ion-select [(ngModel)]="emergencyLevel" placeholder="请选择审批类型" cancelText="取消" okText="确定">
+                <ion-option value="1" selected="true">上级审批</ion-option>
+                <ion-option value="2">领导审批</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>经办人员：</ion-label>
+            <ion-select [(ngModel)]="manager" multiple="true" placeholder="请选择经办人员" cancelText="取消" okText="确定">
+                <ion-option value="1">系统管理员1</ion-option>
+                <ion-option value="2">系统管理员2</ion-option>
+                <ion-option value="3">系统管理员3</ion-option>
+
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>经办部门：</ion-label>
+            <ion-select [(ngModel)]="department" multiple="true" placeholder="请选择经办部门" cancelText="取消" okText="确定">
+                <ion-option value="">请选择</ion-option>
+                <ion-option value="1">总部</ion-option>
+                <ion-option value="2">研究部</ion-option>
+                <ion-option value="3">设计部</ion-option>
+                <ion-option value="4">测试部部</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>经办角色：</ion-label>
+            <ion-select [(ngModel)]="role" multiple="true" placeholder="请选择经办人员" cancelText="取消" okText="确定">
+                <ion-option value="1">管理员</ion-option>
+                <ion-option value="1">总经理助理</ion-option>
+
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>审批人员：</ion-label>
+            <ion-select [(ngModel)]="review" multiple="true" placeholder="还未审批" cancelText="取消" okText="确定">
+                <ion-option value="1">系统管理员2</ion-option>
+                <ion-option value="1">系统管理员3</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+
+    <ion-row no-padding text-center *ngIf="!firstStep">
+        <ion-col>
+            <button (click)="msgNotification('site')" ion-button icon-left>
+              <ion-icon [name]='siteNotification?"md-checkbox-outline":"md-square-outline"'></ion-icon>
+              站内消息提醒
+            </button>
+        </ion-col>
+        <ion-col>
+            <button (click)="msgNotification('phone')" ion-button icon-left>
+              <ion-icon [name]='phoneNotification?"md-checkbox-outline":"md-square-outline"'></ion-icon>
+              手机短信提醒
+            </button>
+        </ion-col>
+    </ion-row>
+
+    <div padding>
+        <button *ngIf="firstStep" ion-button block color="calm" (click)="showNextStep()">下一步</button>
+        <div *ngIf="!firstStep">
+            <button ion-button block color="calm" (click)="showfirstStep()">上一步</button>
+            <button ion-button block color="danger" (click)="submit()">提交</button>
+        </div>
+
+    </div>
+
+</ion-content>

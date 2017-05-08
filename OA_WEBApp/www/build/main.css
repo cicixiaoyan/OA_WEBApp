@@ -50510,6 +50510,40 @@ page-home .index-row ion-col div.balanced {
   border-color: #b9fbcc;
 }
 
+page-newwork-detail .item-select ion-label {
+  -webkit-flex: initial;
+  -ms-flex: initial;
+  flex: initial;
+  max-width: 200px;
+  pointer-events: none;
+}
+
+page-newwork-detail .item-select ion-select {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  max-width: 100%;
+  width: 100%;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin-left: 16px;
+  border: 1px solid #FF5722;
+  border-radius: 5px;
+}
+
+page-newwork-detail .item-select ion-select .select-text {
+  overflow: hidden;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  min-width: 16px;
+  font-size: inherit;
+  white-space: pre-wrap;
+  text-align: center;
+}
+
 page-login ion-content {
   background: rgba(0, 0, 0, 0.4) url(../assets/img/login-bg.jpg) no-repeat;
   background-size: cover;
@@ -50629,6 +50663,10 @@ page-mail-write .mail-content {
 
 .checkpeople-popover .button-small-ios {
   padding: 0 0.2em;
+}
+
+.affix {
+  border-top: 1px dotted #dee;
 }
 
 .affix ion-col {

@@ -20,6 +20,7 @@ export class TabsPage {
 
   constructor(navParams: NavParams) {
     this.mySelectedIndex = navParams.data.tabIndex || 0;
+    this.tab1Root = navParams.data.tab1Component || Home;
   }
 
 }

@@ -6,13 +6,24 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>contacts</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>通讯录</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content style="background: #f4f4f4;overflow: hidden;" overflow-scroll="true">
+    <ion-searchbar color="dark" type="text" [(ngModel)]="searchKey" [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event)">
+    </ion-searchbar>
+    <ion-scroll style="position: absolute;width: 100%;top: 44px;bottom: 0;">
+        <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->
+        <ion-list inset style="margin:16px 0;">
+            <button ion-item *ngFor="let contact of items" [navPush]="nxPage" [navParams]="{id:contact.ui_id}">
+                <span>{{contact.ui_desc}}({{contact.ui_id}})</span>
+                <p>{{contact.ui_lx}}&emsp;{{contact.zwmc}}</p>
+            </button>
+        </ion-list>
+        <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->
+    </ion-scroll>
 </ion-content>

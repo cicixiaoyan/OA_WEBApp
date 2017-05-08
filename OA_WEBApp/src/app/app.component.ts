@@ -9,6 +9,9 @@ import {TabsPage} from "../pages/tabs/tabs";
 import {GlobalData} from "../providers/GlobalData";
 import {UserInfo} from "../model/UserInfo";
 import {LoginPage} from "../pages/login/login";
+import {Backlog} from "../pages/home/backlog/backlog";
+import {Contacts} from "../pages/home/contacts/contacts";
+import {Newwork} from '../pages/home/newwork/newwork';
 
 
 declare var AppMinimize;
@@ -18,6 +21,7 @@ export interface PageInterface {
   component: any;
   icon: string;
   index?: number;
+  tab1Component?:any;
 }
 
 @Component({
@@ -28,13 +32,14 @@ export class MyApp {
 
   // set our app's pages
   appPages: PageInterface[] = [
-    { title: '首页', component: TabsPage,index: 0, icon: 'calendar' },
-    { title: '邮件', component: TabsPage, index: 1, icon: 'information-circle' },
-    { title: '通讯录', component: TabsPage, index: 2, icon: 'contacts' },
-    { title: '公告管理', component: TabsPage, index: 3, icon: 'contacts' },
-    { title: '新建工作', component: TabsPage, index: 4, icon: 'contacts' },
-    { title: '待办事项', component: TabsPage, index: 5, icon: 'contacts' },
-    { title: '登陆', component: LoginPage, index: 1, icon: 'contacts' }
+    { title: '首页', component: TabsPage,index: 0, icon: 'calendar'},
+    { title: '邮件', component: TabsPage, index: 1, icon: 'ios-mail' },
+    { title: '通讯录', component: TabsPage, index: 4, icon: 'md-call',tab1Component:Contacts },
+    { title: '公告管理', component: TabsPage, index: 2, icon: 'ios-notifications' },
+    { title: '新建工作', component: TabsPage, index: 5, icon: 'md-exit',tab1Component:Newwork },
+    { title: '待办事项', component: TabsPage, index: 6, icon: 'ios-calendar',tab1Component:Backlog },
+    { title: '设置', component: TabsPage, index: 3, icon: 'ios-cog'},
+    { title: '登陆', component: LoginPage, index: 7, icon: 'contacts' }
   ];
 
   rootPage = TabsPage;
@@ -85,7 +90,12 @@ export class MyApp {
     this.menu.close();
 
     if (page.index) {
-      this.nav.setRoot(page.component, { tabIndex: page.index });
+      if(page.tab1Component){
+        this.nav.setRoot(page.component, { tab1Component:page.tab1Component,tabIndex: page.index });
+      }else{
+        this.nav.setRoot(page.component, { tabIndex: page.index });
+      }
+      
 
     } else {
       this.nav.setRoot(page.component).catch(() => {

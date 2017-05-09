@@ -4,6 +4,9 @@ import {Storage} from '@ionic/storage';
 // import { LoginPage } from '../login/login';
 import {TabsPage} from "../tabs/tabs";
 import {Mail} from '../mail/mail';
+import {Backlog} from "../home/backlog/backlog";
+import {Contacts} from "../home/contacts/contacts";
+import {Newwork} from '../home/newwork/newwork';
 
  
 /**
@@ -36,9 +39,9 @@ export class Home {
   appPages: HomePageInterface[] = [
     { title: '邮件', component: Mail, index: 1, icon: 'ios-mail',color:"positive" },
     { title: '公告管理', component: TabsPage, index: 2, icon: 'ios-notifications',color:"royal" },
-    { title: '通讯录', component: TabsPage, index: 4, icon: 'md-call',color:"energized" },
-    { title: '待办事项', component: TabsPage, index: 6, icon: 'ios-calendar',color:"assertive" },
-    { title: '新建工作', component: TabsPage, index: 5, icon: 'md-exit' ,color:"balanced"},
+    { title: '通讯录', component: Contacts, icon: 'md-call',color:"energized" },
+    { title: '待办事项', component: Backlog, icon: 'ios-calendar',color:"assertive" },
+    { title: '新建工作', component: Newwork, icon: 'md-exit' ,color:"balanced"},
     { title: '设置', component: TabsPage, index: 3, icon: 'ios-cog' ,color:"calm"},
   ];
 
@@ -58,10 +61,10 @@ export class Home {
 
     if (page.index) {
      
-      this.nav.parent(page.component, { tabIndex: page.index });
-
+      this.navCtrl.parent.select( page.index );
+      // this.navCtrl.setRoot(page.component, { tabIndex: page.index });
     } else {
-
+      this.navCtrl.push(page.component);
       // this.nav.parent.setRoot(page.component).catch(() => {
       //   console.log("Didn't set nav root");
       // });

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { HttpService } from "../../../providers/HttpService";
 import {ContactsDetail} from './contacts-detail/contacts-detail';
 
 /**
@@ -20,13 +20,20 @@ export class Contacts {
   params: any = {id: 42};
   items;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public httpService: HttpService) {
     this.initializeItems();
 
   }
-	// {{someone.ui_id}}{{someone.ui_desc}}（{{someone.ui_sex}}）
-	// 		   	<p class="font-12">{{someone.ui_lx}}&emsp;{{someone.zwmc}}</p>
+
   initializeItems() {
+    // let data={action: "Yh_List", page: 1, size: 1};
+    // this.httpService.postFormData("ashx/MailList.ashx/Yh_List",data)
+    //   .map(Response => Response.json())
+    //   .subscribe(list => {
+    //     this.items = list;
+    //   });
     this.items = [
            {"ui_id":"admin","ui_desc":"系统管理员","ui_sex":"男","ui_lx":"总部","zwmc":"员工"},
            {"ui_id":"admin1","ui_desc":"系统管理员1","ui_sex":"男","ui_lx":"总部","zwmc":"员工1"},
@@ -40,7 +47,12 @@ export class Contacts {
   }
 
   search(event){
-    alert(this.searchKey);
+    // let data={action: "noticeBykeyWords", page: 1, size: 1,title: "" + escape(key) + ""};
+    // this.httpService.postFormData("ashx/MailList.ashx/noticeBykeyWords",data)
+    //   .map(Response => Response.json())
+    //   .subscribe(list => {
+    //     this.items = list;
+    //   });
   }
 
 }

@@ -111,6 +111,8 @@ export class LoginPage {
     this.canLeave = false
   }
  
- 
+  dismiss(){
+    this.viewCtrl.dismiss();
+  }
 
 }

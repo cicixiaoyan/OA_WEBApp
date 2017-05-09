@@ -7,7 +7,7 @@ import {AppVersion} from '@ionic-native/app-version';
 import {Camera, CameraOptions} from '@ionic-native/camera';
 import {Toast} from '@ionic-native/toast';
 import {File} from '@ionic-native/file';
-import {Transfer, TransferObject} from '@ionic-native/transfer';
+import {Transfer, FileUploadOptions, TransferObject} from '@ionic-native/transfer';
 import {InAppBrowser} from '@ionic-native/in-app-browser';
 import {ImagePicker} from '@ionic-native/image-picker';
 import {Network} from '@ionic-native/network';
@@ -36,8 +36,45 @@ export class NativeService {
               private loadingCtrl: LoadingController) {
   }
 
+  // const fileTransfer: TransferObject = this.transfer.create();
+
+
   warn(info): void {
     console.log('%cNativeService/' + info, 'color:#e8c406');
+  }
+
+
+  /**
+   * 上传
+   */
+  upload() {
+    let options: FileUploadOptions = {
+      fileKey: 'file',
+      fileName: 'name.jpg',
+      headers: {}
+    };
+
+    this.transfer.create().upload('<file path>', '<api endpoint>', options)
+    .then((data) => {
+      // success
+    }, (err) => {
+      // error
+    })
+  }
+
+  /**
+   * 下载
+   */
+
+  download() {
+    const url = 'http://www.example.com/file.pdf';
+    this.transfer.create().download(url, this.file.dataDirectory + 'file.pdf').then((entry) => {
+      console.log('download complete: ' + entry.toURL());
+      alert("succeed")
+    }, (error) => {
+      // handle error
+      alert(error)
+    });
   }
 
   /**
@@ -299,6 +336,7 @@ export class NativeService {
     this.file.resolveLocalFilesystemUrl(path).then(fileEnter => gotFile(fileEnter)).catch(err => fail(err));
     // window['resolveLocalFileSystemURL'](path, gotFile, fail);
   }
+
 
   /**
    * 获取网络类型 如`unknown`, `ethernet`, `wifi`, `2g`, `3g`, `4g`, `cellular`, `none`

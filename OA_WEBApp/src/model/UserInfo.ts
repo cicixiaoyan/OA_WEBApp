@@ -19,7 +19,7 @@ export class UserInfo {
   ui_ssbm:string;//部门
   ui_ssgs:string;//-所属子公司
   ui_status:string;//用户状态
-  ui_yndx:string;//移动电话
+  ui_yddx:string;//移动电话
   ui_zw:string;//职务
   photo:string;//照片暂无
 }

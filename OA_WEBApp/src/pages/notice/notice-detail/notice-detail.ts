@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HttpService } from "../../../providers/HttpService";
 /**
  * Generated class for the NoticeDetail page.
  *
@@ -16,7 +17,7 @@ export class NoticeDetail {
   myDiv:string = '';
   contentHtml:any;
   downloadProgress:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public httpService:HttpService) {
     console.log(this.navParams.get('id'));
     this.initializeItems();
     
@@ -24,6 +25,12 @@ export class NoticeDetail {
 
 
   initializeItems(){
+    // let data={id: this.navParams.get('id'),action:"noticeById"};
+    // this.httpService.postFormData("ashx/Notice.ashx/noticeById",data)
+    //   .map(Response => Response.json())
+    //   .subscribe(list => {
+    //     this.detailNotice = list[0];
+    //   });
     this.detailNotice = {
       "gglb":"活动安排",
       "ggzt":"公告标题公告标题公告标题公告标题公告标题公告标题",

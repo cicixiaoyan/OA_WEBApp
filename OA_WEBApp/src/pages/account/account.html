@@ -8,8 +8,12 @@
 
     <ion-navbar>
         <ion-title>个人中心</ion-title>
+        <ion-buttons end *ngIf="isChange">
+            <button ion-button icon-only (click)="save()">
+                保存
+            </button>
+        </ion-buttons>
     </ion-navbar>
-
 </ion-header>
 
 
@@ -17,7 +21,7 @@
     <div class="top">
         <div class="top-bg"></div>
         <div>
-            <img src="../assets/img/ionic.png" alt="photo" height="60" />
+            <img (click)="changePhoto()" [src]="userInfo.photo" alt="photo" height="60" />
             <h5><span class="positive">♂</span>&nbsp;<span class="positive">{{userInfo.ui_desc}}</span></h5>
             <div class="row row-no-padding">
                 <div class="col col-50" style="border-right: 1px solid;">

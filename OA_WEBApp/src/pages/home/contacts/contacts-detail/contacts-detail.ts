@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { UserInfo } from "../../../../model/UserInfo";
+import { HttpService } from "../../../../providers/HttpService";
 
 /**
  * Generated class for the ContactsDetail page.
@@ -17,7 +18,19 @@ import { UserInfo } from "../../../../model/UserInfo";
 export class ContactsDetail {
   //checkman: UserInfo = new UserInfo();
   checkman;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public httpService: HttpService) {
+                this.initializeItems();
+
+  }
+  initializeItems(){
+    // let data={action: "YH_ById", id: this.navParams.get("id")};
+    // this.httpService.postFormData("ashx/MailList.ashx/YH_ById",data)
+    //   .map(Response => Response.json())
+    //   .subscribe(list => {
+    //     this.items = list;
+    //   });
     this.checkman = {
         ui_bgdh:'123456',//办公电话
         ui_czdh:'123456',//--内线电话
@@ -38,7 +51,6 @@ export class ContactsDetail {
         photo:'无'//照片暂无
     };
   }
-
 
 
   ionViewDidLoad() {

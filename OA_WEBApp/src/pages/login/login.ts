@@ -1,13 +1,16 @@
 import {Component} from '@angular/core';
-import {ModalController, ViewController, Platform, AlertController} from 'ionic-angular';
+import {ModalController, NavController,ViewController,Nav, Platform, AlertController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {FormBuilder, Validators} from '@angular/forms';
 
 import {LoginService} from './LoginService';
 
 import {FindPassword} from './find-password/find-password';
-import {UserInfo} from "../../model/UserInfo";
+// import {UserInfo} from "../../model/UserInfo";
 import {GlobalData} from "../../providers/GlobalData";
+
+import { TabsPage} from '../tabs/tabs';
+import { HttpService } from "../../providers/HttpService";
 
 
 @Component({
@@ -16,10 +19,11 @@ import {GlobalData} from "../../providers/GlobalData";
   providers: [LoginService]
 })
 export class LoginPage {
-  userInfo: UserInfo;
+  userInfo: any;
   submitted: boolean = false;
   canLeave: boolean = false;
   loginForm: any;
+  nav:Nav;
 
   constructor(private viewCtrl: ViewController,
               private formBuilder: FormBuilder,
@@ -28,11 +32,14 @@ export class LoginPage {
               private platform: Platform,
               private alertCtrl: AlertController,
               private globalData: GlobalData,
-              private loginService: LoginService) {
+              private loginService: LoginService,
+              public navCtrl: NavController,
+              private httpService: HttpService
+              ) {
               
     this.loginForm = this.formBuilder.group({
-      ui_id: ['admin', [Validators.required, Validators.minLength(4)]],// 第一个参数是默认值
-      ui_pwd: ['123', [Validators.required, Validators.minLength(2)]]
+      UserName: ['admin', [Validators.required, Validators.minLength(4)]],// 第一个参数是默认值
+      UserPass: ['123', [Validators.required, Validators.minLength(2)]]
     });
   }
 
@@ -80,17 +87,21 @@ export class LoginPage {
 
   login(user) {
     this.submitted = true;
-    this.loginService.login(user)
-      .subscribe((userInfo: UserInfo) => {
+    // user.action = 'logininfo';
+    this.httpService.postFormData("ashx/Login.ashx/LoginInfo",user)
+     .map(responce => responce.json())
+    .subscribe((userInfo) => {
+        console.log(userInfo)
         this.submitted = false;
         //userInfo.token = 'xx122a9Wf';//从后台获取token,暂时写死
-        this.globalData.ui_id =userInfo.ui_id;
-        this.globalData.ui_desc =userInfo.ui_desc;
+        this.globalData.ui_id = userInfo[0].ui_id
+        this.globalData.ui_desc =userInfo[0].ui_desc;
        // this.globalData.token =userInfo.token;
-        this.userInfo = userInfo;
-        this.storage.set('UserInfo', userInfo);
-        this.viewCtrl.dismiss(userInfo);
-      });
+        this.userInfo = userInfo[0];
+        this.storage.set('UserInfo', userInfo[0]);
+        // this.viewCtrl.dismiss(userInfo);
+        this.navCtrl.setRoot(TabsPage, { tabIndex: 0 });
+    })
   }
 
   findPassword() {

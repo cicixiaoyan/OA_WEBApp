@@ -50510,6 +50510,14 @@ page-home .index-row ion-col div.balanced {
   border-color: #b9fbcc;
 }
 
+page-backlog-detail .item-ios {
+  font-size: 1.4rem;
+}
+
+page-backlog-detail ion-row button {
+  padding: 0 0.2em;
+}
+
 page-newwork-detail .item-select ion-label {
   -webkit-flex: initial;
   -ms-flex: initial;

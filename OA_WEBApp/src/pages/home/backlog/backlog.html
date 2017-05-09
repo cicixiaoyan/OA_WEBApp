@@ -21,7 +21,7 @@
 
 <ion-content>
     <div [ngSwitch]="work">
-        <ion-list inset *ngSwitchCase="'notDone'">
+        <ion-list *ngSwitchCase="'notDone'">
 
             <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.ggid}">
                 <span>&nbsp;[{{work.wfName}}]{{work.wfNo}}</span>

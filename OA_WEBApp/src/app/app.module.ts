@@ -41,6 +41,8 @@ import {Http, XHRBackend, RequestOptions, HttpModule} from "@angular/http";
 import {HttpInterceptHandle} from "../providers/HttpInterceptHandle";
 import {GlobalData} from "../providers/GlobalData";
 
+import { HTTP } from '@ionic-native/http';
+
 export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions, httpInterceptHandle: HttpInterceptHandle) {
   return new HttpIntercept(backend, defaultOptions, httpInterceptHandle);
 }
@@ -95,7 +97,8 @@ export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions,
     Helper,
     Utils,
     HttpInterceptHandle,
-    GlobalData
+    GlobalData,
+    HTTP
   ]
 })
 export class AppModule {}

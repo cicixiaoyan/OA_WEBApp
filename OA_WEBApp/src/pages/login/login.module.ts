@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { LoginPage } from './login';
-import { FindPassword } from './find-password/find-password'
+import { FindPasswordModule } from './find-password/find-password.module'
  
 @NgModule({
   declarations: [
-    LoginPage,
-    FindPassword
+    LoginPage
   ],
   imports: [
     IonicPageModule.forChild(LoginPage),
+    FindPasswordModule
   ],
   exports: [
-    LoginPage,
-    FindPassword
+    LoginPage
   ]
 })
 export class LoginModule {}

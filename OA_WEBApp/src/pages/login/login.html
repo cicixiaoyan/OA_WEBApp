@@ -23,15 +23,15 @@
         <ion-list>
             <ion-item>
                 <ion-label color="primary">用户名</ion-label>
-                <ion-input type="text" formControlName="ui_id" clearInput></ion-input>
+                <ion-input type="text" formControlName="UserName" clearInput></ion-input>
             </ion-item>
-            <div *ngIf="!loginForm.controls.ui_id.valid && loginForm.controls.ui_id.touched" class="validation-failed"> 请输入正确用户名</div>
+            <div *ngIf="!loginForm.controls.UserName.valid && loginForm.controls.UserName.touched" class="validation-failed"> 请输入正确用户名</div>
 
             <ion-item>
                 <ion-label color="primary">密　码</ion-label>
-                <ion-input type="password" formControlName="ui_pwd" clearInput></ion-input>
+                <ion-input type="password" formControlName="UserPass" clearInput></ion-input>
             </ion-item>
-            <div *ngIf="!loginForm.controls.ui_pwd.valid" class="validation-failed">请输入密码</div>
+            <div *ngIf="!loginForm.controls.UserPass.valid" class="validation-failed">请输入密码</div>
 
         </ion-list>
         <div padding-horizontal>

@@ -13,6 +13,65 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <ion-card>
+        <ion-card-header>
+            33ee
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list>
+                <ion-item>
+                    <ion-label>当前步骤：</ion-label>
+                    <ion-input type="text" placeholder="当前步骤1"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>&emsp;流水号：<em>&emsp;1&nbsp;—</em></ion-label>
+
+                    <ion-input type="text" placeholder="请输入流水号"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>审批状态：</ion-label>
+                    <ion-input type="text" placeholder="无"></ion-input>
+                </ion-item>
+                <div id="strhtm" style="min-height: 100px;;"></div>
+
+            </ion-list>
+            <ion-row>
+                <ion-col col-auto style="padding-left:12px;padding-top:5px;text-align:right;">
+                    相关附件：
+                </ion-col>
+                <ion-col col-lg-8 col-xl-6 style="position: relative;padding-left: 40px;background-color: #d7eaf9;">
+                    <ion-icon name="md-image" color="energized" style="position:absolute;left:.4rem;display:inline-block;font-size:3.6rem;"></ion-icon>
+                    <div>
+                        <span>text.png</span>
+                        <span ng-click="" style="position:absolute;right:10px;font-size:1.2rem">下载</span>
+                        <p style="font-size:1.2rem;">2.5M</p>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+        <ion-row text-center>
+            <ion-col col-4>
+                <button ion-button icon-left clear small>
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    <div>审批通过</div>
+                </button>
+            </ion-col>
+            <ion-col col-4>
+                <button ion-button icon-left clear small>
+                    <ion-icon name="text"></ion-icon>
+                    <div>审批驳回</div>
+                </button>
+            </ion-col>
+            <ion-col col-4>
+                <button ion-button icon-left clear small>
+                        <ion-icon name="text"></ion-icon>
+                        <div>返回</div>
+                    </button>
+            </ion-col>
+        </ion-row>
+    </ion-card>
 
 </ion-content>

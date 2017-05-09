@@ -8,6 +8,7 @@ import 'rxjs/add/operator/toPromise';
 import {Observable} from "rxjs";
 import {Utils} from "./Utils";
 import {GlobalData} from "./GlobalData";
+import { APP_SERVE_URL } from './Constants'
 
 @Injectable()
 export class HttpService {
@@ -16,17 +17,19 @@ export class HttpService {
   }
 
   public get(url: string, paramMap?: any): Observable<Response> {
-    return this.http.get(url, new RequestOptions({
+    return this.http.get(APP_SERVE_URL+url, new RequestOptions({
       search: HttpService.buildURLSearchParams(paramMap)
-      // ,headers: new Headers({
+      ,headers: new Headers(
+      //   {
       //   'token': this.globalData.token
-      // })
+      // }
+      )
     }));
   }
 
   // 默认Content-Type为application/json;
   public post(url: string, body: any = null, options?: RequestOptionsArgs): Observable<Response> {
-    return this.http.post(url, body, this.getOptions(options));
+    return this.http.post(APP_SERVE_URL+url, body, this.getOptions(options));
   }
 
   public postFormData(url: string, paramMap?: any): Observable<Response> {
@@ -36,15 +39,15 @@ export class HttpService {
       // ,
       // 'token': this.globalData.token
     });
-    return this.http.post(url, HttpService.buildURLSearchParams(paramMap).toString(), new RequestOptions({headers: headers}));
+    return this.http.post(APP_SERVE_URL+url, HttpService.buildURLSearchParams(paramMap).toString(), new RequestOptions({headers: headers}));
   }
 
   public put(url: string, body: any = null, options?: RequestOptionsArgs): Observable<Response> {
-    return this.http.put(url, body, this.getOptions(options));
+    return this.http.put(APP_SERVE_URL+url, body, this.getOptions(options));
   }
 
   public delete(url: string, paramMap?: any): Observable<Response> {
-    return this.http.delete(url, new RequestOptions({
+    return this.http.delete(APP_SERVE_URL+url, new RequestOptions({
       search: HttpService.buildURLSearchParams(paramMap)
       // ,
       // headers: new Headers({
@@ -54,11 +57,11 @@ export class HttpService {
   }
 
   public patch(url: string, body: any = null, options?: RequestOptionsArgs): Observable<Response> {
-    return this.http.patch(url, body, this.getOptions(options));
+    return this.http.patch(APP_SERVE_URL+url, body, this.getOptions(options));
   }
 
   public head(url: string, paramMap?: any): Observable<Response> {
-    return this.http.head(url, new RequestOptions({
+    return this.http.head(APP_SERVE_URL+url, new RequestOptions({
       search: HttpService.buildURLSearchParams(paramMap)
       // ,
       // headers: new Headers({
@@ -68,7 +71,7 @@ export class HttpService {
   }
 
   public options(url: string, paramMap?: any): Observable<Response> {
-    return this.http.options(url, new RequestOptions({
+    return this.http.options(APP_SERVE_URL+url, new RequestOptions({
       search: HttpService.buildURLSearchParams(paramMap)
       // ,
       // headers: new Headers({
@@ -95,9 +98,11 @@ export class HttpService {
   private getOptions(options): RequestOptionsArgs {
     if (!options) {
       options = new RequestOptions({
-        // headers: new Headers({
-        //   'token': this.globalData.token
-        // })
+        headers: new Headers(
+          // {
+          //  'token': this.globalData.token
+          // }
+      )
       });
       return options;
     }

@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, Nav, NavParams } from 'ionic-angular';
-
+import {Storage} from '@ionic/storage';
 // import { LoginPage } from '../login/login';
 import {TabsPage} from "../tabs/tabs";
 import {Mail} from '../mail/mail';
@@ -42,11 +42,12 @@ export class Home {
     { title: '设置', component: TabsPage, index: 3, icon: 'ios-cog' ,color:"calm"},
   ];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public storage :Storage) {
     
   }
 
   ionViewDidLoad() {
+    console.log(this.storage.get("UserInfo"));
     console.log('ionViewDidLoad Home');
   }
 

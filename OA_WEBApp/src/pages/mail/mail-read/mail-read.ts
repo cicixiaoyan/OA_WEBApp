@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { Content } from 'ionic-angular';
 /**
  * Generated class for the MailRead page.
  *
@@ -13,6 +13,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'mail-read.html',
 })
 export class MailRead {
+  @ViewChild(Content) content: Content;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -28,6 +29,7 @@ export class MailRead {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MailRead');
+    this.content.resize();
   }
 
   ionViewWillLeave() {

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .ion-ios-add:before {
   content: "\f102";
 }
@@ -24415,7 +24416,7 @@ ion-segment {
 }
 
 .toolbar-ios .segment-button {
-  max-width: 60px;
+  max-width: 90px;
   height: 2.6rem;
   font-size: 1.2rem;
   line-height: 2.5rem;
@@ -50417,6 +50418,32 @@ ion-navbar.toolbar {
   -webkit-user-modify: read-write-plaintext-only;
 }
 
+.menu-header {
+  background: url(../assets/img/header-bg.jpg);
+}
+
+.menu-header a {
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  border: 2px solid #03A9F4;
+  border-radius: 50%;
+  margin: 3px auto;
+  overflow: hidden;
+}
+
+.menu-header a img {
+  height: 100%;
+  width: 100%;
+}
+
+.menu-header span {
+  font-size: 16px;
+  font-weight: 500;
+  font-family: '微软雅黑';
+}
+
 page-account .top {
   position: relative;
   padding: 20px 0 10px;
@@ -50537,7 +50564,7 @@ page-newwork-detail .item-select ion-select {
   -ms-flex: 1;
   flex: 1;
   margin-left: 16px;
-  border: 1px solid #FF5722;
+  border: 1px solid #607D8B;
   border-radius: 5px;
 }
 
@@ -50614,9 +50641,6 @@ page-mail-read .mail-content div.mydiv {
 }
 
 page-mail-read .message-reply {
-  position: absolute;
-  left: 0;
-  bottom: -4px;
   width: 100%;
   border-top: 1px solid #222;
 }
@@ -50740,6 +50764,10 @@ page-mail-write .mail-content {
   border: 1px solid #ddd;
 }
 
+.searchbar-ios-dark .searchbar-ios-cancel {
+  color: #fff;
+}
+
 page-notice-detail .detail-header {
   position: relative;
   padding: 0 10px;
@@ -50751,6 +50779,11 @@ page-notice-detail .detail-header {
 page-notice-detail .detail-header .right {
   position: absolute;
   right: 28px;
+}
+
+page-notice-detail .detail-header .detail-title {
+  padding: 10px 0;
+  font-size: 2rem;
 }
 
 page-notice-detail .detail-content {

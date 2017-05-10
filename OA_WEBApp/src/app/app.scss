@@ -28,3 +28,26 @@
     overflow-y: auto;
     -webkit-user-modify: read-write-plaintext-only;
 }
+
+.menu-header {
+    background: url(../assets/img/header-bg.jpg);
+    a {
+        display: block;
+        margin: 0 auto;
+        width: 100px;
+        height: 100px;
+        border: 2px solid #03A9F4;
+        border-radius: 50%;
+        margin: 3px auto;
+        overflow: hidden;
+        img {
+            height: 100%;
+            width: 100%;
+        }
+    }
+    span {
+        font-size: 16px;
+        font-weight: 500;
+        font-family: '微软雅黑';
+    }
+}

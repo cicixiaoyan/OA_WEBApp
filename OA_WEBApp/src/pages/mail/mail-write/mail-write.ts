@@ -1,6 +1,11 @@
 import { Component,ViewChild,ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, PopoverController } from 'ionic-angular';
 
+import { NativeService } from '../../../providers/NativeService';
+import {FileService} from "../../../providers/FileService";
+import {FileObj} from "../../../model/FileObj";
+import {FILE_SERVE_URL} from "../../../providers/Constants";
+
 /**
  * Generated class for the MailWrite page.
  *
@@ -45,11 +50,15 @@ import { IonicPage, NavController, NavParams, ActionSheetController, PopoverCont
 export class PopoverPage {
   os: string;
   items;
+  haveAffix: boolean = false;
 
-  constructor(private navParams: NavParams) {
+  constructor(private navParams: NavParams,
+              private fileService: FileService,
+              public nativeService: NativeService) {
     this.initializeItems();
   }
-    initializeItems() {
+
+  initializeItems() {
     this.items = [
             { ui_id: "1", ui_desc: "admin", bianhao: "dewr", ui_ssbm: "本部", ui_zw: "职员" },
             { ui_id: "2", ui_desc: "admin", bianhao: "dewr", ui_ssbm: "本部", ui_zw: "职员" },
@@ -79,11 +88,16 @@ export class PopoverPage {
   templateUrl: 'mail-write.html',
 })
 export class MailWrite {
+    // avatarPath: string;
+  imageBase64: string;
+  affixPath:string;
   @ViewChild('popoverContent', { read: ElementRef }) content: ElementRef;
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public actionSheetCtrl: ActionSheetController,
-              private popoverCtrl: PopoverController) {
+              private popoverCtrl: PopoverController,
+              private fileService: FileService,
+              public nativeService: NativeService) {
   }
 
   ionViewDidLoad() {
@@ -91,18 +105,26 @@ export class MailWrite {
   }
 
   addAffix(){
+    let options = {
+      targetWidth: 400,
+      targetHeight: 400
+    };
     let actionSheet = this.actionSheetCtrl.create({
-      title: '附件选择',
+      title: '添加附件选择',
       buttons: [
         {
           text: '相册',
           handler: () => {
-            console.log('相册');
+           this.nativeService.getPictureByCamera(options).then(imageBase64 => {
+                  this.getPictureSuccess(imageBase64);
+                });
           }
         },{
           text: '拍照',
           handler: () => {
-            console.log('拍照');
+            this.nativeService.getPictureByPhotoLibrary(options).then(imageBase64 => {
+              this.getPictureSuccess(imageBase64);
+            });
           }
         },{
           text: '文件',
@@ -128,6 +150,17 @@ export class MailWrite {
     popover.present({
       ev: myEvent
     });
+  }
+
+  private getPictureSuccess(imageBase64) {
+    this.imageBase64 = <string>imageBase64;
+    this.affixPath = 'data:image/jpg;base64,' + imageBase64;
+    let fileObj = <FileObj>{'base64': this.imageBase64};
+      this.fileService.uploadByBase64(fileObj).subscribe(result => {// 上传图片到文件服务器
+        if (result.success) {
+          let origPath = FILE_SERVE_URL + result.data[0].origPath;
+        }
+      });
   }
 
 }

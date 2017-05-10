@@ -1,18 +1,35 @@
 <ion-menu [content]="content">
 
-    <ion-header>
-        <ion-toolbar>
-            <ion-title>导航</ion-title>
-        </ion-toolbar>
+    <ion-header class="menu-header" padding-bottom>
+        <ion-row text-center>
+            <ion-col>
+                <a (click)="goTo('edit')">
+                    <img [src]="photo" title="头像" onerror="this.onerror = ''; this.src = '../assets/img/ionic.png'" />
+                </a>
+                <span>系统管理员</span>
+            </ion-col>
+        </ion-row>
     </ion-header>
 
     <ion-content>
         <ion-list>
             <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
-                <ion-icon item-left [name]="p.icon"></ion-icon>
+                <ion-icon color="positive" item-left [name]="p.icon"></ion-icon>
                 {{p.title}}
             </button>
         </ion-list>
+        <ion-row>
+            <ion-col col-6>
+                <button (click)="goTo()" ion-button icon-left clear>
+                    <ion-icon name='contacts'></ion-icon>注销登录
+                </button>
+            </ion-col>
+            <ion-col col-6>
+                <button (click)="goTo('edit')" ion-button icon-left clear>
+                    <ion-icon name='ios-cog'></ion-icon>设置
+                </button>
+            </ion-col>
+        </ion-row>
     </ion-content>
 
 </ion-menu>

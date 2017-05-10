@@ -86,13 +86,13 @@
     </ion-list>
 
     <ion-row no-padding text-center *ngIf="!firstStep">
-        <ion-col>
+        <ion-col col-6>
             <button (click)="msgNotification('site')" ion-button icon-left>
               <ion-icon [name]='siteNotification?"md-checkbox-outline":"md-square-outline"'></ion-icon>
               站内消息提醒
             </button>
         </ion-col>
-        <ion-col>
+        <ion-col col-6>
             <button (click)="msgNotification('phone')" ion-button icon-left>
               <ion-icon [name]='phoneNotification?"md-checkbox-outline":"md-square-outline"'></ion-icon>
               手机短信提醒

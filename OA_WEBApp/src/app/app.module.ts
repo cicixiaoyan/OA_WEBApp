@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, Content } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 
@@ -30,7 +30,6 @@ import {ImagePicker} from '@ionic-native/image-picker';
 import {PhotoViewer} from '@ionic-native/photo-viewer';
 
 
-
 import {NativeService} from "../providers/NativeService";
 import {HttpIntercept} from "../providers/HttpIntercept";
 import {HttpService} from "../providers/HttpService";
@@ -58,7 +57,8 @@ export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions,
     IonicModule.forRoot(MyApp,{
       backButtonText: '',  
       iconMode: 'ios',  
-      mode: 'ios'
+      mode: 'ios',
+      tabsHideOnSubPages: true
     }),
     IonicStorageModule.forRoot(),
     HomeModule,
@@ -88,6 +88,7 @@ export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions,
     Camera,
     ImagePicker,
     PhotoViewer,
+    Content,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: Http, useFactory: httpFactory, deps: [XHRBackend, RequestOptions, HttpInterceptHandle]},
     NativeService,

@@ -85,16 +85,16 @@ export class Account {
         {
           text: '从相册选择图片',
           handler: () => {
-            this.nativeService.getPictureByCamera(options).then(imageBase64 => {
+            this.nativeService.getPictureByPhotoLibrary(options).then(imageBase64 => {
               this.getPictureSuccess(imageBase64);
             });
           }
         },{
           text: '拍照',
           handler: () => {
-            this.nativeService.getPictureByPhotoLibrary(options).then(imageBase64 => {
-              this.getPictureSuccess(imageBase64);
-            });
+            this.nativeService.getPictureByCamera(options).then(imageBase64 => {
+                  this.getPictureSuccess(imageBase64);
+                });
           }
         },{
           text: '取消',

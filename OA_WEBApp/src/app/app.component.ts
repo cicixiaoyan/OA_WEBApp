@@ -29,6 +29,7 @@ export interface PageInterface {
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
+  photo:any="../assets/img/ben.png";
 
   // set our app's pages
   appPages: PageInterface[] = [
@@ -37,9 +38,9 @@ export class MyApp {
     { title: '通讯录', component: TabsPage, index: 4, icon: 'md-call',tab1Component:Contacts },
     { title: '公告管理', component: TabsPage, index: 2, icon: 'ios-notifications' },
     { title: '新建工作', component: TabsPage, index: 5, icon: 'md-exit',tab1Component:Newwork },
-    { title: '待办事项', component: TabsPage, index: 6, icon: 'ios-calendar',tab1Component:Backlog },
-    { title: '设置', component: TabsPage, index: 3, icon: 'ios-cog'},
-    { title: '登陆', component: LoginPage, index: 7, icon: 'contacts' }
+    { title: '待办事项', component: TabsPage, index: 6, icon: 'ios-calendar',tab1Component:Backlog }
+    // ,{ title: '设置', component: TabsPage, index: 3, icon: 'ios-cog'},
+    // { title: '登陆', component: LoginPage, index: 7, icon: 'contacts' }
   ];
 
   rootPage = TabsPage;
@@ -59,20 +60,20 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      //   this.storage.get('UserInfo').then((userInfo: UserInfo) => {
-      //     if (userInfo) {
-      //       this.events.publish('user:login', userInfo);
-      //       this.globalData.ui_id = userInfo.ui_id;
-      //       this.globalData.ui_desc = userInfo.ui_desc;
-      //       // this.globalData.token = userInfo.token;
-      //     } else {
-      //       let modal = this.modalCtrl.create(LoginPage);
-      //       modal.present();
-      //       modal.onDidDismiss(data => {
-      //         data && console.log(data);
-      //       });
-      //     }
-      // });
+        this.storage.get('UserInfo').then((userInfo: UserInfo) => {
+          if (userInfo) {
+            this.events.publish('user:login', userInfo);
+            this.globalData.ui_id = userInfo.ui_id;
+            this.globalData.ui_desc = userInfo.ui_desc;
+            // this.globalData.token = userInfo.token;
+          } else {
+            let modal = this.modalCtrl.create(LoginPage);
+            modal.present();
+            modal.onDidDismiss(data => {
+              data && console.log(data);
+            });
+          }
+      });
       statusBar.styleDefault();
       splashScreen.hide();
       this.registerBackButtonAction();//注册返回按键事件
@@ -104,6 +105,16 @@ export class MyApp {
     }
 
 
+  }
+
+  goTo(name){
+    this.menu.close();
+    if(name=="edit"){
+      this.nav.setRoot(TabsPage,{tabIndex:3});
+    }else{
+      this.nav.setRoot(LoginPage,{tabIndex:7});
+    }
+    
   }
 
   assertNetwork() {

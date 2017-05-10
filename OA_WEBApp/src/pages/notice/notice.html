@@ -5,26 +5,23 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
     <ion-navbar>
         <ion-title>公告管理</ion-title>
     </ion-navbar>
-
-
-
+    <ion-searchbar color="dark" type="text" placeholder="请输入关键字" [(ngModel)]="searchKey" [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event)">
+    </ion-searchbar>
 </ion-header>
 
-<ion-content style="background: #f4f4f4;overflow: hidden;" overflow-scroll="true">
-    <ion-searchbar color="dark" type="text" [(ngModel)]="searchKey" [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event)">
-    </ion-searchbar>
-    <ion-scroll style="position: absolute;width: 100%;top: 44px;bottom: 0;">
-        <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->
-        <ion-list inset style="margin:16px 0;">
-            <button ion-item *ngFor="let notice of items" [navPush]="nxPage" [navParams]="{id:notice.ggid}">
-                <span>[{{notice.gglb}}]{{notice.ggzt}}</span>
-                <p>{{notice.lrr}}&emsp;{{notice.lrsj|date:"yyyy年MM月dd日 HH时mm分"}}</p>
-            </button>
-        </ion-list>
-        <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->
-    </ion-scroll>
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-list inset style="margin:16px 0;">
+        <button ion-item *ngFor="let notice of items" [navPush]="nxPage" [navParams]="{id:notice.ggid}">
+            <span>[{{notice.gglb}}]{{notice.ggzt}}</span>
+            <p>{{notice.lrr}}&emsp;{{notice.lrsj|date:"yyyy年MM月dd日 HH时mm分"}}</p>
+        </button>
+    </ion-list>
+    <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->
 </ion-content>

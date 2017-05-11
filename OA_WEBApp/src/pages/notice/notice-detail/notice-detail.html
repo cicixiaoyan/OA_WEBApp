@@ -17,29 +17,22 @@
         <div class="detail-title"><span color="calm">[{{detailNotice.gglb}}]</span>{{detailNotice.ggzt}}</div>
         <p>
             {{detailNotice.lrr}}
-            <span class="right">{{detailNotice.lrsj}}</span>
+            <span class="right">{{detailNotice.lrsj|date : "yyyy年MM月dd日 hh时mm分"}}</span>
         </p>
     </div>
     <div class="content">
         <ion-scroll class="detail-content" id="noticeContent">
-            <div padding>有效期：{{detailNotice.kssj}}至{{detailNotice.jssj}}</div>
+            <div padding>开始时间：{{detailNotice.kssj|date : "yyyy年MM月dd日 hh时mm分"}}
+                <br/>结束时间：{{detailNotice.jssj|date : "yyyy年MM月dd日 hh时mm分"}}</div>
             <div padding-horizontal [innerHTML]="myDiv"></div>
-            <div class="affix">
+            <div class="affix" *ngIf="detailNotice.attName">
                 <ion-grid>
                     <ion-row align-items-center>
-                        <ion-col col-6>
-                            <div>
+                        <ion-col col-6 col-lg-4>
+                            <div (click)="download(detailNotice.ggfj)">
                                 <ion-icon class="affix-icon" name="md-image"></ion-icon>
-                                <p>log.1</p>
-                                <p color="gray">5.00MB</p>
-                                <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>
-                            </div>
-                        </ion-col>
-                        <ion-col col-6>
-                            <div>
-                                <ion-icon class="affix-icon" name="md-image"></ion-icon>
-                                <p>log.1</p>
-                                <p color="gray">5.00MB</p>
+                                <p>{{detailNotice.attName}}</p>
+                                <p color="gray">大小未知</p>
                                 <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>
                             </div>
                         </ion-col>

@@ -23,17 +23,17 @@
 
             <ion-item>
                 <ion-label>发送人&emsp;</ion-label>
-                <ion-input type="text" placeholder="系统管理员"></ion-input>
+                <ion-input type="text" disabled="disabled" [(ngModel)]="mailDetail.fsrName" placeholder="系统管理员"></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label>主题&emsp;&emsp;</ion-label>
-                <ion-input type="test" placeholder="主题1"></ion-input>
+                <ion-input type="test" disabled="disabled" [(ngModel)]="mailDetail.jsbt" placeholder="主题1"></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label>发送时间</ion-label>
-                <ion-input type="test" placeholder="2012-12-12 12：12"></ion-input>
+                <ion-input type="test" disabled="disabled" [(ngModel)]="mailDetail.fssj" placeholder="发送时间未知"></ion-input>
             </ion-item>
 
         </ion-list>
@@ -42,6 +42,7 @@
 
     <div>
         <ion-scroll scrollY="true" class="mail-content">
+            <!--<div padding-horizontal [innerHTML]="mailContent"></div>-->
             <div class="mydiv">
                 你该交作业了<br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
                 <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
@@ -52,6 +53,20 @@
                 <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
                 <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
                 <br>你该交作业了<br>你该交作业了<br>你该交作业了<br>
+            </div>
+            <div class="affix" *ngIf="mailDetail.attName">
+                <ion-grid>
+                    <ion-row align-items-center>
+                        <ion-col col-6 col-lg-4>
+                            <div (click)="download(mailDetail.ggfj)">
+                                <ion-icon class="affix-icon" name="md-image"></ion-icon>
+                                <p>{{mailDetail.attName}}</p>
+                                <p color="gray">大小未知</p>
+                                <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
             </div>
         </ion-scroll>
     </div>

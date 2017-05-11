@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
 
 import { MailRead} from '../mail/mail-read/mail-read';
 import { MailWrite} from '../mail/mail-write/mail-write';
@@ -70,7 +70,7 @@ export class Mail {
         }
     ];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private modalCtrl:ModalController) {
   }
 
   ionViewDidLoad() {
@@ -97,7 +97,12 @@ export class Mail {
     }
 
     doWrite(){
-        this.navCtrl.push(MailWrite);
+      let modal = this.modalCtrl.create(MailWrite);
+      modal.present();
+      modal.onDidDismiss(data => {
+        data && console.log(data);
+      });
+        // this.navCtrl.push(MailWrite);
     }
 
     doRefresh() {

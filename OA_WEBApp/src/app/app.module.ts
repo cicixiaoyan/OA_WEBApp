@@ -19,26 +19,27 @@ import { LoginModule } from '../pages/login/login.module';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {AppVersion} from '@ionic-native/app-version';
-import {Toast} from '@ionic-native/toast';
-import {File} from '@ionic-native/file';
-import {Transfer} from '@ionic-native/transfer';
-import {InAppBrowser} from '@ionic-native/in-app-browser';
-import {Network} from '@ionic-native/network';
-import {Camera} from '@ionic-native/camera';
-import {ImagePicker} from '@ionic-native/image-picker';
-import {PhotoViewer} from '@ionic-native/photo-viewer';
+import { AppVersion } from '@ionic-native/app-version';
+import { Toast } from '@ionic-native/toast';
+import { File } from '@ionic-native/file';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { Transfer} from '@ionic-native/transfer';
+import { InAppBrowser} from '@ionic-native/in-app-browser';
+import { Network } from '@ionic-native/network';
+import { Camera } from '@ionic-native/camera';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 
-import {NativeService} from "../providers/NativeService";
-import {HttpIntercept} from "../providers/HttpIntercept";
-import {HttpService} from "../providers/HttpService";
-import {FileService} from "../providers/FileService";
-import {Helper} from "../providers/Helper";
-import {Utils} from "../providers/Utils";
-import {Http, XHRBackend, RequestOptions, HttpModule} from "@angular/http";
-import {HttpInterceptHandle} from "../providers/HttpInterceptHandle";
-import {GlobalData} from "../providers/GlobalData";
+import { NativeService } from "../providers/NativeService";
+import { HttpIntercept } from "../providers/HttpIntercept";
+import { HttpService } from "../providers/HttpService";
+import { FileService } from "../providers/FileService";
+import { Helper } from "../providers/Helper";
+import { Utils } from "../providers/Utils";
+import { Http, XHRBackend, RequestOptions, HttpModule } from "@angular/http";
+import { HttpInterceptHandle } from "../providers/HttpInterceptHandle";
+import { GlobalData } from "../providers/GlobalData";
 
 // import { HTTP } from '@ionic-native/http';
 
@@ -82,6 +83,7 @@ export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions,
     AppVersion,
     Toast,
     File,
+    FileChooser,
     Transfer,
     InAppBrowser,
     Network,

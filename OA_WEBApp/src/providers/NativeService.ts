@@ -11,8 +11,11 @@ import {Transfer, FileUploadOptions, TransferObject} from '@ionic-native/transfe
 import {InAppBrowser} from '@ionic-native/in-app-browser';
 import {ImagePicker} from '@ionic-native/image-picker';
 import {Network} from '@ionic-native/network';
+import { FileChooser } from '@ionic-native/file-chooser';
 
 import {APP_DOWNLOAD, APK_DOWNLOAD} from "./Constants";
+
+import {Observable} from "rxjs";
 declare var LocationPlugin;
 declare var AMapNavigation;
 declare var cordova: any;
@@ -30,6 +33,7 @@ export class NativeService {
               private toast: Toast,
               private transfer: Transfer,
               private file: File,
+              private fileChooser: FileChooser,
               private inAppBrowser: InAppBrowser,
               private imagePicker: ImagePicker,
               private network: Network,
@@ -43,38 +47,67 @@ export class NativeService {
     console.log('%cNativeService/' + info, 'color:#e8c406');
   }
 
+  // FileChoose( url:string, options, trustAllHosts?:boolean){
+  //   this.fileChooser.open().then(uri => {
+  //     return this.upload(uri,url,options,trustAllHosts);
+  //   }).catch(err => {
+  //     console.log(err)
+  //   })
+  // }
 
-  /**
-   * 上传
-   */
-  upload() {
-    let options: FileUploadOptions = {
-      fileKey: 'file',
-      fileName: 'name.jpg',
-      headers: {}
-    };
+  // /**
+  //  * 上传
+  //  */
+  // upload(fileUrl, url, options, trustAllHosts?:boolean) {
+  //   let alert = this.alertCtrl.create({
+  //     title: '上传进度：0%',
+  //     enableBackdropDismiss: false,
+  //     buttons: ['后台下载']
+  //   });
+  //   alert.present();
 
-    this.transfer.create().upload('<file path>', '<api endpoint>', options)
-    .then((data) => {
-      // success
-    }, (err) => {
-      // error
-    })
-  }
+  //   const fileTransfer: TransferObject = this.transfer.create();
+
+  //   fileTransfer.onProgress((event: ProgressEvent) => {
+  //       let num = Math.floor(event.loaded / event.total * 100);
+  //       if (num === 100) {
+  //         alert.dismiss();
+  //       } else {
+  //         let title = document.getElementsByClassName('alert-title')[0];
+  //         title && (title.innerHTML = '上传进度：' + num + '%');
+  //       }
+  //   });
+  //   return fileTransfer.upload(fileUrl,url, options);
+  // }
 
   /**
    * 下载
    */
 
-  download() {
-    const url = 'http://www.example.com/file.pdf';
-    this.transfer.create().download(url, this.file.dataDirectory + 'file.pdf').then((entry) => {
-      console.log('download complete: ' + entry.toURL());
-      alert("succeed")
-    }, (error) => {
-      // handle error
-      alert(error)
-    });
+  download(source: string, target: string, trustAllHosts?, Optional?) {
+      let alert = this.alertCtrl.create({
+        title: '下载进度：0%',
+        enableBackdropDismiss: false,
+        buttons: ['后台下载']
+      });
+      alert.present();
+
+      const fileTransfer: TransferObject = this.transfer.create();
+      target = this.file.externalRootDirectory + target; //文件保存的目录
+
+      fileTransfer.download(source, target,trustAllHosts,Optional).then(() => {
+        window['install'].install(target.replace('file://', ''));
+      });
+
+      fileTransfer.onProgress((event: ProgressEvent) => {
+        let num = Math.floor(event.loaded / event.total * 100);
+        if (num === 100) {
+          alert.dismiss();
+        } else {
+          let title = document.getElementsByClassName('alert-title')[0];
+          title && (title.innerHTML = '下载进度：' + num + '%');
+        }
+      });
   }
 
   /**
@@ -400,6 +433,75 @@ export class NativeService {
       });
     });
   }
+
+    // formData:any;
+    // upload(filePaths:Array<string>):Observable<any> {
+    //     //每个文件上传任务创建一个信号
+    //     var observables: Array<any> = [];
+    //     filePaths.forEach((value:string, i, array) => {
+    //         if (!value.startsWith('file://')) {
+    //             value = 'file://' + value;
+    //         }
+            
+    //         console.log('这里应该执行了吧.........');
+ 
+    //         var observable = new Observable((sub:any) => {
+    //             this.file.resolveLocalFilesystemUrl(value).then(entry => {
+    //                 (<FileEntry>entry).file(file => {
+    //                     // this.readFile(<Blob>file);
+    //                     let blob: Blob = <Blob>file;
+    //                     const reader = new FileReader();
+    //                     reader.onloadend = () => {
+                            
+    //                         const imgBlob = new Blob([reader.result], {type: blob.type});
+    //                         this.formData.append('file', imgBlob, (<any>blob).name);
+    //                         console.log('已经成功一半了.................'+ + imgBlob);
+                            
+    //                         sub.next(null);
+    //                         sub.complete();
+    //                     };
+    //                     reader.readAsArrayBuffer(blob);
+    //                 });
+    //             })
+    //             .catch(error => console.log('报错了，日了狗----->' + JSON.stringify(error)));
+    //         });
+ 
+    //         observables.push(observable);
+    //     });
+ 
+    //     return Observable.create(observables);
+    // }
+ 
+ 
+    // uploadFile(host: string, params: Map<string, string>, filePaths:Array<string>, context: any, success: Function, fail: Function) {
+    //     this.formData = new FormData();
+ 
+    //     this.upload(filePaths).subscribe(data => {
+ 
+    //         console.log('开始上传........');
+ 
+    //         params.forEach((value, key) => {
+    //             this.formData.append(key, value);
+    //         });
+    //         this.http.post(host, this.formData).toPromise().then(res => {
+    //             success.call(context, res);
+    //         }).catch(error => {
+    //             fail.call(context, error);
+    //         });
+            
+
+    //         // .catch(e => this.handleError(e))
+    //         // .map(response => response.text())
+    //         // // .finally(() => console.log('完成了'))
+    //         // .subscribe(ok => console.log('上传成功了'));
+ 
+    //     }, error => {
+    //         console.log('文件处理失败');
+    //     });
+    // }
+
+
+
 
 
 }

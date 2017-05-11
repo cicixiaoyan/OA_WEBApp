@@ -16,8 +16,11 @@ import { HttpService } from "../../providers/HttpService";
 export class Notice {
   nxPage: any = NoticeDetail;
   params: any = {id: 42};
-  searchKey:string;
+  searchKey: string;
   items;
+  page: number = 1;
+  size: number = 1;
+  moredata: boolean = true;
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public httpService: HttpService) {
@@ -42,7 +45,27 @@ export class Notice {
     setTimeout(() => {
       console.log('数据加载完成');
       refresher.complete();
-    }, 2000);
+    }, 1000);
+  }
+
+  doInfinite(): Promise<any> {
+    if(this.moredata){
+      this.size++;//应该是this.page++,后台未设置好
+      const data = { page:this.page,size:this.size};
+      this.getList(data).subscribe(list =>{
+        if(list==[]){
+          this.moredata = false;
+        }else{
+          this.items = this.items.concat(list);
+        }
+      });
+    }
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 500);
+    })
   }
 
   private getList(data){

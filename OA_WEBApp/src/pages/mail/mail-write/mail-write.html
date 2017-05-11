@@ -7,12 +7,16 @@
 <ion-header>
 
     <ion-navbar>
+
+        <button ion-button (click)="dismiss()">取消</button>
+
         <ion-title>写信</ion-title>
         <ion-buttons end>
-            <button ion-button (click)="read()">发送</button>
+            <button ion-button icon-left (click)="read()">
+                <ion-icon name="ios-send"></ion-icon> 发送
+            </button>
         </ion-buttons>
     </ion-navbar>
-
 </ion-header>
 
 
@@ -23,7 +27,7 @@
 
             <ion-item>
                 <ion-label>收件人&emsp;</ion-label>
-                <ion-input type="text" #peoples placeholder="系统管理员" (click)="checkPeople($event)"></ion-input>
+                <ion-input type="text" [(ngModel)]="addressee" #popoverContent placeholder="系统管理员" (click)="checkPeople($event)"></ion-input>
             </ion-item>
 
             <ion-item>

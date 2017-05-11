@@ -23,5 +23,7 @@
             <p>{{notice.lrr}}&emsp;{{notice.lrsj|date:"yyyy年MM月dd日 HH时mm分"}}</p>
         </button>
     </ion-list>
-    <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->
+    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

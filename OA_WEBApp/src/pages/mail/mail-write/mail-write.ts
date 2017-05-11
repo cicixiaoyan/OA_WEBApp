@@ -1,10 +1,14 @@
 import { Component,ViewChild,ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ViewController, AlertController, ActionSheetController, PopoverController } from 'ionic-angular';
 
 import { NativeService } from '../../../providers/NativeService';
 import {FileService} from "../../../providers/FileService";
 import {FileObj} from "../../../model/FileObj";
 import {FILE_SERVE_URL} from "../../../providers/Constants";
+import { FileChooser } from '@ionic-native/file-chooser';
+import {Transfer, FileUploadOptions, TransferObject} from '@ionic-native/transfer';
+
+
 
 /**
  * Generated class for the MailWrite page.
@@ -27,9 +31,8 @@ import {FILE_SERVE_URL} from "../../../providers/Constants";
       <ion-searchbar color="danger" (ionInput)="getItems($event)" placeholder="请输入编码或姓名"></ion-searchbar>
             
       <div text-center>
-          <button icon-left ion-button small color="calm"><ion-icon name="search"></ion-icon>查询</button>
-          <button icon-left ion-button small color="calm"><ion-icon name="ios-trash-outline"></ion-icon>清空</button>
-          <button icon-left ion-button small color="calm"><ion-icon name="checkmark"></ion-icon>确定</button>
+          <button (click)="search()" icon-left ion-button small color="calm"><ion-icon name="search"></ion-icon>查询</button>
+          <button (click)="confirm()" icon-left ion-button small color="calm"><ion-icon name="checkmark"></ion-icon>确定</button>
       </div>
 
       <ion-list-header>
@@ -41,7 +44,7 @@ import {FILE_SERVE_URL} from "../../../providers/Constants";
           {{item.ui_desc}}({{item.ui_id}})<br>
           <span>{{item.ui_ssbm}}&emsp;{{item.ui_zw}}</span>
         </ion-label>
-        <ion-checkbox checked="true"></ion-checkbox>
+        <ion-checkbox [checked]="item.checked"></ion-checkbox>
       </ion-item>
     <ion-list>
 
@@ -49,36 +52,62 @@ import {FILE_SERVE_URL} from "../../../providers/Constants";
 })
 export class PopoverPage {
   os: string;
-  items;
+  items: any = [];
   haveAffix: boolean = false;
+  addressee: string;
+  addresseeIds: string;
 
   constructor(private navParams: NavParams,
               private fileService: FileService,
-              public nativeService: NativeService) {
+              public nativeService: NativeService,
+              public viewCtrl: ViewController) {
+                this.addressee = this.navParams.get("addressee");
+                this.addresseeIds = this.navParams.get("addresseeIds");
+                console.log(this.addressee,this.addresseeIds);
     this.initializeItems();
   }
 
   initializeItems() {
-    this.items = [
-            { ui_id: "1", ui_desc: "admin", bianhao: "dewr", ui_ssbm: "本部", ui_zw: "职员" },
-            { ui_id: "2", ui_desc: "admin", bianhao: "dewr", ui_ssbm: "本部", ui_zw: "职员" },
-            { ui_id: "3", ui_desc: "admin", bianhao: "dewr", ui_ssbm: "本部", ui_zw: "职员" }
-        ];
+    const testArray = [
+        { ui_id: "1", ui_desc: "admin", bianhao: "dewr", ui_ssbm: "本部", ui_zw: "职员" },
+        { ui_id: "2", ui_desc: "admin", bianhao: "dewr", ui_ssbm: "本部", ui_zw: "职员" },
+        { ui_id: "3", ui_desc: "admin", bianhao: "dewr", ui_ssbm: "本部", ui_zw: "职员" }
+    ];
+
+    this.items = testArray.map(function(value,index){
+      return Object.assign(value, {checked:false});
+    });
+    console.log(this.items);
   }
 
   getItems(ev) {
-    // Reset items back to all of the items
-    this.initializeItems();
+    // // Reset items back to all of the items
+    // this.initializeItems();
 
-    // set val to the value of the ev target
-    var val = ev.target.value;
+    // // set val to the value of the ev target
+    // var val = ev.target.value;
 
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      this.items = this.items.filter((item) => {
-        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
+    // // if the value is an empty string don't filter the items
+    // if (val && val.trim() != '') {
+    //   this.items = this.items.filter((item) => {
+    //     return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+    //   })
+    // }
+  }
+
+  serach(){}
+
+  confirm(){
+    console.log(confirm)
+    this.addressee = "";
+    this.addresseeIds = "";
+    for(var value of this.items){
+      if(value.checked){
+        this.addressee += value.ui_desc +",";
+        this.addresseeIds += value.ui_id + ",";
+      }
     }
+    this.viewCtrl.dismiss();
   }
 }
 
@@ -90,14 +119,20 @@ export class PopoverPage {
 export class MailWrite {
     // avatarPath: string;
   imageBase64: string;
-  affixPath:string;
+  affixPath: string;
+  addressee: string = '';
+  addresseeIds: string = ""
   @ViewChild('popoverContent', { read: ElementRef }) content: ElementRef;
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public actionSheetCtrl: ActionSheetController,
               private popoverCtrl: PopoverController,
               private fileService: FileService,
-              public nativeService: NativeService) {
+              public nativeService: NativeService,
+              private fileChooser: FileChooser,
+              private alertCtrl: AlertController,
+              private transfer: Transfer,
+              private viewCtrl:ViewController) {
   }
 
   ionViewDidLoad() {
@@ -129,7 +164,20 @@ export class MailWrite {
         },{
           text: '文件',
           handler: () => {
-            console.log('文件');
+            this.fileChooser.open().then(fileURL => {
+              var pathOption : FileUploadOptions = {
+                fileKey:"file",
+                fileName:fileURL.substr(fileURL.lastIndexOf('/')+1),
+                mimeType:"text/plain"
+              };
+              var url = encodeURI("http://some.server.com/upload.php");;
+              return this.upload(fileURL,url,pathOption);
+            }).catch(err => {
+              console.log(err)
+            })
+
+            
+            
           }
         },{
           text: '取消',
@@ -145,8 +193,7 @@ export class MailWrite {
 
   checkPeople(myEvent) {
 
-    let popover = this.popoverCtrl.create(PopoverPage);
-
+    let popover = this.popoverCtrl.create(PopoverPage,{addressee:this.addressee,addresseeIds:this.addresseeIds});
     popover.present({
       ev: myEvent
     });
@@ -159,9 +206,42 @@ export class MailWrite {
       this.fileService.uploadByBase64(fileObj).subscribe(result => {// 上传图片到文件服务器
         if (result.success) {
           let origPath = FILE_SERVE_URL + result.data[0].origPath;
+          console.log(origPath);
         }
       });
   }
+
+
+
+    /**
+   * 上传
+   */
+  upload(fileUrl, url, options, trustAllHosts?:boolean) {
+      let alert = this.alertCtrl.create({
+        title: '上传进度：0%',
+        enableBackdropDismiss: false,
+        buttons: ['后台下载']
+      });
+      alert.present();
+
+      const fileTransfer: TransferObject = this.transfer.create();
+
+      fileTransfer.onProgress((event: ProgressEvent) => {
+          let num = Math.floor(event.loaded / event.total * 100);
+          if (num === 100) {
+            alert.dismiss();
+          } else {
+            let title = document.getElementsByClassName('alert-title')[0];
+            title && (title.innerHTML = '上传进度：' + num + '%');
+          }
+      });
+      return fileTransfer.upload(fileUrl,url, options);
+  }
+
+  dismiss(){
+    this.viewCtrl.dismiss();
+  }
+  
 
 }
 

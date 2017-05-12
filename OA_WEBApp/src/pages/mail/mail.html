@@ -48,9 +48,9 @@
                 <ion-item-sliding *ngFor="let mail of inboxList " (click)="doRead(mail.jsyjid)">
                     <ion-item>
                         <ion-avatar item-left>
-                            <img src="../assets/img/mike.png">
+                            <img src="assets/img/mike.png">
                         </ion-avatar>
-                        <span>{{mail.jsnr}}</span>
+                        <span style="color:#2196F3;" *ngIf="mail.jszt=='未读'">●&nbsp;</span><span>{{mail.jsnr}}</span>
                         <p class="font-12">来至:{{mail.fsrName}}&emsp;{{mail.jssj}}</p>
                     </ion-item>
                     <ion-item-options side="right">
@@ -64,7 +64,7 @@
                 <ion-item-sliding *ngFor="let mail of outboxList " (click)="doRead(mail.jsyjid)">
                     <ion-item>
                         <ion-avatar item-left>
-                            <img src="../assets/img/mike.png">
+                            <img src="assets/img/mike.png">
                         </ion-avatar>
                         <span>{{mail.jsnr}}</span>
                         <p class="font-12">发至:{{mail.fsrName}}&emsp;{{mail.jssj}}</p>
@@ -77,7 +77,10 @@
                 </ion-item-sliding>
             </ion-list>
         </div>
-
+        <div text-center padding style="background:#ddd;font-size:.9em;">
+            <div padding>暂无消息！！！</div>
+            <img src="assets/img/face/face2.png" height="100">
+        </div>
         <ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
     </ion-scroll>
 

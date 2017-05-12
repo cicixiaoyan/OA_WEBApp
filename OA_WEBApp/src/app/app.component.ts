@@ -1,17 +1,18 @@
 import { Component, ViewChild } from '@angular/core';
-import {Storage} from '@ionic/storage';
+import { Storage } from '@ionic/storage';
 import { Platform, MenuController, Nav, IonicApp, ModalController, Keyboard, ToastController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import {NativeService} from "../providers/NativeService";
-import {TabsPage} from "../pages/tabs/tabs";
-import {GlobalData} from "../providers/GlobalData";
-import {UserInfo} from "../model/UserInfo";
-import {LoginPage} from "../pages/login/login";
-import {Backlog} from "../pages/home/backlog/backlog";
-import {Contacts} from "../pages/home/contacts/contacts";
-import {Newwork} from '../pages/home/newwork/newwork';
+import { NativeService } from "../providers/NativeService";
+import { Welcome } from '../pages/welcome/welcome';
+import { TabsPage } from "../pages/tabs/tabs";
+import { GlobalData } from "../providers/GlobalData";
+import { UserInfo } from "../model/UserInfo";
+import { LoginPage } from "../pages/login/login";
+import { Backlog } from "../pages/home/backlog/backlog";
+import { Contacts } from "../pages/home/contacts/contacts";
+import { Newwork } from '../pages/home/newwork/newwork';
 
 
 declare var AppMinimize;
@@ -29,7 +30,7 @@ export interface PageInterface {
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  photo:any="../assets/img/ben.png";
+  photo:any="assets/img/ben.png";
 
   // set our app's pages
   appPages: PageInterface[] = [
@@ -43,7 +44,7 @@ export class MyApp {
     // { title: '登陆', component: LoginPage, index: 7, icon: 'contacts' }
   ];
 
-  rootPage = TabsPage;
+  rootPage : any;
   backButtonPressed: boolean = false;
   constructor(public menu: MenuController,
               private platform: Platform,
@@ -57,28 +58,39 @@ export class MyApp {
               private modalCtrl: ModalController,
               private events: Events,
               private nativeService: NativeService) {
+
+    this.storage.get('firstIn').then((result) => { 
+          
+        if(result){  
+            this.rootPage = TabsPage;
+        } 
+        else{
+            this.storage.set('firstIn', true);
+            this.rootPage = Welcome;
+        }
+    }); 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+      // Here you can do any higher level native things you might need.      
         this.storage.get('UserInfo').then((userInfo: UserInfo) => {
-          if (userInfo) {
-            this.events.publish('user:login', userInfo);
-            this.globalData.ui_id = userInfo.ui_id;
-            this.globalData.ui_desc = userInfo.ui_desc;
-            // this.globalData.token = userInfo.token;
-          } else {
-            let modal = this.modalCtrl.create(LoginPage);
-            modal.present();
-            modal.onDidDismiss(data => {
-              data && console.log(data);
-            });
-          }
-      });
-      statusBar.styleDefault();
-      splashScreen.hide();
-      this.registerBackButtonAction();//注册返回按键事件
-      this.assertNetwork();//检测网络
-      // this.nativeService.detectionUpgrade();//检测app是否升级
+            if (userInfo) {
+                this.events.publish('user:login', userInfo);
+                this.globalData.ui_id = userInfo.ui_id;
+                this.globalData.ui_desc = userInfo.ui_desc;
+                // this.globalData.token = userInfo.token;
+            } else {
+                let modal = this.modalCtrl.create(LoginPage);
+                modal.present();
+                modal.onDidDismiss(data => {
+                  data && console.log(data);
+                });
+            }
+        });
+        statusBar.styleDefault();
+        splashScreen.hide();
+        this.registerBackButtonAction();//注册返回按键事件
+        this.assertNetwork();//检测网络
+        // this.nativeService.detectionUpgrade();//检测app是否升级
     });
 
   };
@@ -146,8 +158,13 @@ export class MyApp {
       }
       let activeVC = this.nav.getActive();
       let tabs = activeVC.instance.tabs;
-      let activeNav = tabs.getSelected();
-      return activeNav.canGoBack() ? activeNav.pop() : AppMinimize.minimize();//this.showExit()
+      if(!!tabs){
+          let activeNav = tabs.getSelected();
+          return activeNav.canGoBack() ? activeNav.pop() : AppMinimize.minimize();//this.showExit()
+      }else{
+          return AppMinimize.minimize();
+      }
+
 
     }, 1);
   };

@@ -19,7 +19,14 @@ export class Mail {
   inbox: boolean = true;
   isDraft: boolean = true;
   checkBtn: object = { "read": false, "unread": true, "all": false };
-  inboxList: object =[{
+  inboxList: any =[];
+  outboxList : any = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams,private modalCtrl:ModalController) {
+    this.initializeItems();
+}
+
+  initializeItems(){
+      this.inboxList = [{
             jsyjid: "1",
             jsbt: "信息主题1", //接受主题
             fsrName: "系统管理员", //发送人姓名
@@ -30,8 +37,7 @@ export class Mail {
             jsnr: "新公章[公章]发布，默认密码为123456，请您尽快修改密码！", //接受内容
             yjfj: "", //--邮件附件
             jszt: "已读" //zhuagt
-        },
-        {
+        },{
             jsyjid: "2",
             jsbt: "信息主题2", //接受标题
             fsrName: "系统管理员", //发送人姓名
@@ -44,7 +50,9 @@ export class Mail {
             jszt: "未读" //状态
         }
     ];
-    outboxList : object = [{
+
+    this.outboxList = [
+        {
             jsyjid: "1",
             jsbt: "信息主题3", //接受主题
             fsrName: "系统管理员", //发送人姓名
@@ -55,8 +63,7 @@ export class Mail {
             jsnr: "你该交作业了3", //接受内容
             yjfj: "", //--邮件附件
             jszt: "已读" //zhuagt
-        },
-        {
+        },{
             jsyjid: "2",
             jsbt: "信息主题4", //接受标题
             fsrName: "系统管理员", //发送人姓名
@@ -69,8 +76,6 @@ export class Mail {
             jszt: "未读" //状态
         }
     ];
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,private modalCtrl:ModalController) {
   }
 
   ionViewDidLoad() {
@@ -81,6 +86,9 @@ export class Mail {
   check(name) {
     this.checkBtn = { "read": false, "unread": false, "all": false };
     this.checkBtn[name] = true;
+    if( name = "unread") {
+        
+    }
   }
 
   //选择草稿箱、发件箱

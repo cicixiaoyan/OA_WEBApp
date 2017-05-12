@@ -139,6 +139,10 @@ export class MailWrite {
     console.log('ionViewDidLoad MailWrite');
   }
 
+  send(){
+    this.nativeService.showToast("信息已发送");
+  }
+
   addAffix(){
     let options = {
       targetWidth: 400,

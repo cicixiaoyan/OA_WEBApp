@@ -15,6 +15,7 @@ import { AccountModule } from '../pages/account/account.module';
 import { AccountEditModule } from '../pages/account/account-edit/account-edit.module';
 import { AccountPasswordeditModule } from '../pages/account/account-passwordedit/account-passwordedit.module';
 import { LoginModule } from '../pages/login/login.module';
+import { WelcomeModule } from '../pages/welcome/welcome.module';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -70,7 +71,8 @@ export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions,
     AccountModule,
     AccountEditModule,
     AccountPasswordeditModule,
-    LoginModule
+    LoginModule,
+    WelcomeModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

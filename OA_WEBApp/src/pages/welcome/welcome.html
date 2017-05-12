@@ -1,0 +1,46 @@
+<!--
+  Generated template for the Welcome page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>welcome</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-slides pager>
+
+        <ion-slide>
+            <img src="assets/img/welcome/slide1.jpg" />
+        </ion-slide>
+
+        <ion-slide>
+            <img src="assets/img/welcome/slide2.png" />
+        </ion-slide>
+
+        <ion-slide>
+            <img src="assets/img/welcome/slide3.png" />
+        </ion-slide>
+
+        <ion-slide>
+            <ion-row>
+                <ion-col>
+                    <img src="assets/img/welcome/slide4.png" />
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <button light (click)="goToHome()">立即启动</button>
+                </ion-col>
+            </ion-row>
+        </ion-slide>
+
+    </ion-slides>
+
+</ion-content>

@@ -44,7 +44,7 @@ export class Account {
               private actionSheetCtrl: ActionSheetController,
               private fileService: FileService,
               public nativeService: NativeService) {
-                this.userInfo.photo = "../assets/img/ionic.png";
+                
      this.storage.get('UserInfo').then((userInfo: UserInfo) => {
           if (userInfo) {
             this.userInfo = userInfo;
@@ -52,6 +52,7 @@ export class Account {
             this.globalData.ui_id = userInfo.ui_id;
             this.globalData.ui_desc = userInfo.ui_desc;
             // this.globalData.token = userInfo.token;
+            this.userInfo.photo = this.userInfo.photo?this.userInfo.photo: "assets/img/ionic.png";
           } else {
             let modal = this.modalCtrl.create(LoginPage);
             modal.present();

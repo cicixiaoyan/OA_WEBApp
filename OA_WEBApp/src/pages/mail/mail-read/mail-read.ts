@@ -70,7 +70,7 @@ export class MailRead {
   }
 
   read(){
-      let modal = this.modalCtrl.create(MailWrite);
+      let modal = this.modalCtrl.create(MailWrite,{mail:this.mailDetail});
       modal.present();
       modal.onDidDismiss(data => {
         data && console.log(data);

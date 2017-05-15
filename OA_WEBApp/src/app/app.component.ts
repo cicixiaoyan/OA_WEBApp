@@ -59,33 +59,36 @@ export class MyApp {
               private events: Events,
               private nativeService: NativeService) {
 
-    this.storage.get('firstIn').then((result) => { 
-          
-        if(result){  
-            this.rootPage = TabsPage;
-        } 
-        else{
-            this.storage.set('firstIn', true);
-            this.rootPage = Welcome;
-        }
-    }); 
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.      
-        this.storage.get('UserInfo').then((userInfo: UserInfo) => {
-            if (userInfo) {
-                this.events.publish('user:login', userInfo);
-                this.globalData.ui_id = userInfo.ui_id;
-                this.globalData.ui_desc = userInfo.ui_desc;
-                // this.globalData.token = userInfo.token;
-            } else {
-                let modal = this.modalCtrl.create(LoginPage);
-                modal.present();
-                modal.onDidDismiss(data => {
-                  data && console.log(data);
+      // Here you can do any higher level native things you might need.   
+        this.storage.get('firstIn').then((result) => { 
+          
+            if(result){  
+                this.rootPage = TabsPage;
+                this.storage.get('UserInfo').then((userInfo: UserInfo) => {
+                    if (userInfo) {
+                        this.events.publish('user:login', userInfo);
+                        this.globalData.ui_id = userInfo.ui_id;
+                        this.globalData.ui_desc = userInfo.ui_desc;
+                        // this.globalData.token = userInfo.token;
+                    } else {
+                        
+                        let modal = this.modalCtrl.create(LoginPage);
+                        modal.present();
+                        modal.onDidDismiss(data => {
+                          data && console.log(data);
+                        });
+                    }
                 });
+            } 
+            else{
+                this.storage.set('firstIn', true);
+                this.rootPage = Welcome;
             }
-        });
+        }); 
+
         statusBar.styleDefault();
         splashScreen.hide();
         this.registerBackButtonAction();//注册返回按键事件

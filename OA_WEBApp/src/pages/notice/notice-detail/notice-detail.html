@@ -21,7 +21,7 @@
         </p>
     </div>
     <div class="content">
-        <ion-scroll class="detail-content" id="noticeContent">
+        <ion-scroll class="detail-content" scrollY="true" id="noticeContent">
             <div padding>开始时间：{{detailNotice.kssj|date : "yyyy年MM月dd日 hh时mm分"}}
                 <br/>结束时间：{{detailNotice.jssj|date : "yyyy年MM月dd日 hh时mm分"}}</div>
             <div padding-horizontal [innerHTML]="myDiv"></div>

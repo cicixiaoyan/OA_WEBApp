@@ -3,7 +3,13 @@ page-welcome {
         background-color: #eeeeee;
     }
     ion-slide img {
-        height: 70vh !important;
+        height: 100vh !important;
         width: auto !important;
+    }
+    .start-button {
+        position: absolute;
+        bottom: 28px;
+        text-align: center;
+        width: 100%;
     }
 }

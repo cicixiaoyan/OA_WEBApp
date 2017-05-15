@@ -20,7 +20,8 @@ export class Notice {
   items;
   page: number = 1;
   size: number = 1;
-  moredata: boolean = true;
+  moredata: boolean = true;//是否能加载更多
+  isEmpty : boolean = false;//是否无数据
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public httpService: HttpService) {
@@ -30,7 +31,11 @@ export class Notice {
   initializeItems() {
     let data={page:1,size:1,action:"noticeall"};
     this.getList(data).subscribe(list => {
+        if(!!list && list.length == 0){
+           this.isEmpty = true;
+        }
         this.items = list;
+        
     });
     // this.items = [
     //     {"ggid":"1","gglb":"公告类型","ggzt":"公告主题","lrr":"发布者","lrsj":"2012-12-12 12:12"},

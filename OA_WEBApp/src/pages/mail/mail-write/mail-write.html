@@ -26,13 +26,13 @@
         <ion-list style="position:relative;">
 
             <ion-item>
-                <ion-label>收件人&emsp;</ion-label>
-                <ion-input type="text" [(ngModel)]="addressee" #popoverContent placeholder="系统管理员" (click)="checkPeople($event)"></ion-input>
+                <ion-label style="align-self:center;">收件人&emsp;</ion-label>
+                <ion-textarea min-rows="1" [(ngModel)]="addressee" #popoverContent placeholder="请选择收件人" (click)="checkPeople($event)"></ion-textarea>
             </ion-item>
 
             <ion-item>
                 <ion-label>主题&emsp;&emsp;</ion-label>
-                <ion-input type="test" placeholder="主题1"></ion-input>
+                <ion-input type="test" [(ngModel)]="fsbt" placeholder="主题1"></ion-input>
             </ion-item>
             <button ion-button clear class="share-btn" (click)="addAffix()">
               <ion-icon name="share"></ion-icon>1
@@ -53,7 +53,7 @@
                         <ion-col col-6>
                             <div>
                                 <ion-icon class="affix-icon" name="md-image"></ion-icon>
-                                <p>log.1</p>
+                                <p>{{attName}}</p>
                                 <p color="gray">5.00MB</p>
                                 <ion-icon class="affix-dismiss" name="ios-close-circle-outline"></ion-icon>
                             </div>

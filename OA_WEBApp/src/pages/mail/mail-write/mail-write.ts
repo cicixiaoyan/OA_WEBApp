@@ -1,12 +1,14 @@
-import { Component,ViewChild,ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams,ViewController, AlertController, ActionSheetController, PopoverController } from 'ionic-angular';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, ActionSheetController, PopoverController } from 'ionic-angular';
 
+import { GlobalData } from '../../../providers/GlobalData';
 import { NativeService } from '../../../providers/NativeService';
-import {FileService} from "../../../providers/FileService";
-import {FileObj} from "../../../model/FileObj";
-import {FILE_SERVE_URL} from "../../../providers/Constants";
+import { FileService } from "../../../providers/FileService";
+import { FileObj } from "../../../model/FileObj";
+import { FILE_SERVE_URL } from "../../../providers/Constants";
 import { FileChooser } from '@ionic-native/file-chooser';
-import {Transfer, FileUploadOptions, TransferObject} from '@ionic-native/transfer';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { Storage } from '@ionic/storage';
 
 
 
@@ -39,12 +41,12 @@ import {Transfer, FileUploadOptions, TransferObject} from '@ionic-native/transfe
         通讯录
       </ion-list-header>
 
-      <ion-item *ngFor="let item of items">
+      <ion-item *ngFor="let item of items;let i = index">
         <ion-label>
           {{item.ui_desc}}({{item.ui_id}})<br>
           <span>{{item.ui_ssbm}}&emsp;{{item.ui_zw}}</span>
         </ion-label>
-        <ion-checkbox [checked]="item.checked"></ion-checkbox>
+        <ion-checkbox [checked]="item.checked" (ionChange)="checkPeople(i)"></ion-checkbox>
       </ion-item>
     <ion-list>
 
@@ -60,7 +62,8 @@ export class PopoverPage {
   constructor(private navParams: NavParams,
               private fileService: FileService,
               public nativeService: NativeService,
-              public viewCtrl: ViewController) {
+              public viewCtrl: ViewController,
+              public storage: Storage) {
                 this.addressee = this.navParams.get("addressee");
                 this.addresseeIds = this.navParams.get("addresseeIds");
                 console.log(this.addressee,this.addresseeIds);
@@ -69,15 +72,29 @@ export class PopoverPage {
 
   initializeItems() {
     const testArray = [
-        { ui_id: "1", ui_desc: "admin", bianhao: "dewr", ui_ssbm: "本部", ui_zw: "职员" },
-        { ui_id: "2", ui_desc: "admin", bianhao: "dewr", ui_ssbm: "本部", ui_zw: "职员" },
-        { ui_id: "3", ui_desc: "admin", bianhao: "dewr", ui_ssbm: "本部", ui_zw: "职员" }
+        { ui_id: "1", ui_desc: "admin1", bianhao: "dewr1", ui_ssbm: "本部1", ui_zw: "职员" },
+        { ui_id: "2", ui_desc: "admin2", bianhao: "dewr2", ui_ssbm: "本部2", ui_zw: "职员" },
+        { ui_id: "3", ui_desc: "admin3", bianhao: "dewr3", ui_ssbm: "本部3", ui_zw: "职员" },
+        { ui_id: "4", ui_desc: "admin4", bianhao: "dewr4", ui_ssbm: "本部4", ui_zw: "职员" },
+        { ui_id: "5", ui_desc: "admin5", bianhao: "dewr5", ui_ssbm: "本部5", ui_zw: "职员" },
+        { ui_id: "6", ui_desc: "admin6", bianhao: "dewr6", ui_ssbm: "本部6", ui_zw: "职员" },
+        { ui_id: "7", ui_desc: "admin7", bianhao: "dewr7", ui_ssbm: "本部7", ui_zw: "职员" }
     ];
 
+    const idArr = this.addresseeIds.split(",");
+
     this.items = testArray.map(function(value,index){
-      return Object.assign(value, {checked:false});
+      for(var i in idArr){
+        if(idArr[i] !== value.ui_id){
+           Object.assign(value, {checked:false});
+        }else{
+           return Object.assign(value, {checked:true});
+            
+        }
+      }
+      return value;
+      
     });
-    console.log(this.items);
   }
 
   getItems(ev) {
@@ -97,6 +114,10 @@ export class PopoverPage {
 
   serach(){}
 
+  checkPeople(index: number){
+    this.items[index].checked = !this.items[index].checked;
+  }
+
   confirm(){
     console.log(confirm)
     this.addressee = "";
@@ -107,7 +128,7 @@ export class PopoverPage {
         this.addresseeIds += value.ui_id + ",";
       }
     }
-    this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss({addressee:this.addressee,addresseeIds:this.addresseeIds});
   }
 }
 
@@ -121,7 +142,10 @@ export class MailWrite {
   imageBase64: string;
   affixPath: string;
   addressee: string = '';
-  addresseeIds: string = ""
+  addresseeIds: string = "";
+  attName: string = "109.png";
+  fsbt:"主题";
+  // mailObj : object = {};
   @ViewChild('popoverContent', { read: ElementRef }) content: ElementRef;
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -132,7 +156,23 @@ export class MailWrite {
               private fileChooser: FileChooser,
               private alertCtrl: AlertController,
               private transfer: Transfer,
-              private viewCtrl:ViewController) {
+              private viewCtrl:ViewController,
+              private globaldata: GlobalData,) {
+      console.log(this.navParams.get("mail"));
+      let mail = this.navParams.get("mail");
+      if(typeof(mail) !== "undefined"){
+        this.affixPath = mail.yjfj;
+        this.fsbt = mail.jsbt;
+        
+
+        // Object.assign(this.mailObj,{
+        //   "fsrName":this.globaldata.ui_desc,
+        //   "fsrID":this.globaldata.ui_id,
+        //   "attName":mail.attName,
+        //   "fsbt":mail.jsbt,
+        //   "yjfj":mail.yjfj       
+        // })
+      }
   }
 
   ionViewDidLoad() {
@@ -200,6 +240,15 @@ export class MailWrite {
     let popover = this.popoverCtrl.create(PopoverPage,{addressee:this.addressee,addresseeIds:this.addresseeIds});
     popover.present({
       ev: myEvent
+    });
+    popover.onDidDismiss(data => {
+      if(!!data){
+        console.log(data);
+        //{addressee:this.addressee,addresseeIds:this.addresseeIds}
+        this.addressee = data.addressee;
+        this.addresseeIds = data.addresseeIds;
+      }
+      
     });
   }
 

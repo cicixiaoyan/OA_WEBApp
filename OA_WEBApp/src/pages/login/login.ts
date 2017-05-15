@@ -87,7 +87,7 @@ export class LoginPage {
 
   login(user) {
     this.submitted = true;
-    // user.action = 'logininfo';
+    user.action = 'logininfo';
     this.httpService.postFormData("ashx/Login.ashx/LoginInfo",user)
      .map(responce => responce.json())
     .subscribe((userInfo) => {

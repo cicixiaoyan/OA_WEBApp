@@ -1,6 +1,10 @@
 {
-  "name": "OA_WEBApp",
-  "app_id": "",
-  "v2": true,
-  "typescript": true
+    "name": "OA_WEBApp",
+    "app_id": "",
+    "v2": true,
+    "typescript": true,
+    "proxies": [{
+        "path": "/ashx",
+        "proxyUrl": "http://192.168.0.70:80/ashx"
+    }]
 }

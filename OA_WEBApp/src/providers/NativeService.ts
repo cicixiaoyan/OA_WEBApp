@@ -95,8 +95,9 @@ export class NativeService {
       const fileTransfer: TransferObject = this.transfer.create();
       target = this.file.externalRootDirectory + target; //文件保存的目录
 
-      fileTransfer.download(source, target,trustAllHosts,Optional).then(() => {
-        window['install'].install(target.replace('file://', ''));
+      fileTransfer.download(encodeURI(source), target).then((entry) => {
+        console.log('download complete: ' + entry.toURL());
+        //window['install'].install(target.replace('file://', ''));
       });
 
       fileTransfer.onProgress((event: ProgressEvent) => {

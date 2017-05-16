@@ -3,6 +3,9 @@ import { IonicPage, NavController, ModalController, NavParams } from 'ionic-angu
 import { Content } from 'ionic-angular';
 import { NativeService } from "../../../providers/NativeService";
 import { MailWrite } from '../mail-write/mail-write';
+
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
 /**
  * Generated class for the MailRead page.
  *
@@ -22,7 +25,7 @@ export class MailRead {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private nativeService: NativeService,
-              private modalCtrl: ModalController) {
+              private modalCtrl: ModalController,private transfer: Transfer, private file: File) {
       this.initializeItems();
   }
 
@@ -77,9 +80,15 @@ export class MailRead {
       });
   }
 
-  download(path){
-    const target = path.split("/").pop();
+  download(Path){
+    let path = "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png";
+    const target = path.split("/").pop();//target为文件名字
     this.nativeService.download(path,target);
+  //   this.transfer.create().download(encodeURI(path), this.file.externalDataDirectory + 'file.png').then((entry) => {
+  //   console.log('download complete: ' + entry.toURL());
+  // }, (error) => {
+  //   // handle error
+  // });
   }
 
 }

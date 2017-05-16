@@ -14,7 +14,7 @@
 
 
 <ion-content>
-    <ion-list>
+    <ion-list inset style="margin:16px 0;">
         <button ion-item *ngFor="let item of items" (click)="addNew(item.FK_fid)">
     {{item.wfName}}
   </button>

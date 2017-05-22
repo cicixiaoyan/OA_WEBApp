@@ -11,6 +11,7 @@ import { MailModule } from '../pages/mail/mail.module';
 import { MailReadModule } from '../pages/mail/mail-read/mail-read.module';
 import { MailWriteModule } from '../pages/mail/mail-write/mail-write.module';
 import { NoticeModule } from '../pages/notice/notice.module';
+import { NoticeDetailModule } from '../pages/notice/notice-detail/notice-detail.module';
 import { AccountModule } from '../pages/account/account.module';
 import { AccountEditModule } from '../pages/account/account-edit/account-edit.module';
 import { AccountPasswordeditModule } from '../pages/account/account-passwordedit/account-passwordedit.module';
@@ -68,6 +69,7 @@ export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions,
     MailReadModule,
     MailWriteModule,
     NoticeModule,
+    NoticeDetailModule,
     AccountModule,
     AccountEditModule,
     AccountPasswordeditModule,

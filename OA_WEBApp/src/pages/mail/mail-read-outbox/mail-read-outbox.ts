@@ -56,7 +56,8 @@ export class MailReadOutbox {
         jsnr: "你该交作业了2", //接受内容
         attName:"236.png",
         yjfj: "236.png", //--邮件附件
-        jszt: "未读" //状态
+        jszt: "未读", //状态
+        msbz: "是"//密送标志
     }
     this.mailContent = this.mailDetail.ggnr;
   }

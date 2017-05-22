@@ -145,6 +145,7 @@ export class MailWrite {
   addresseeIds: string = "";
   attName: string = "109.png";
   fsbt:"主题";
+  msbz: boolean = false; //密送标志
   // mailObj : object = {};
   @ViewChild('popoverContent', { read: ElementRef }) content: ElementRef;
   constructor(public navCtrl: NavController, 
@@ -180,6 +181,7 @@ export class MailWrite {
   }
 
   send(){
+    console.log(this.msbz);
     this.nativeService.showToast("信息已发送");
   }
 

@@ -160,16 +160,23 @@ export class MyApp {
         return;
       }
       let activeVC = this.nav.getActive();
-      let tabs = activeVC.instance.tabs;
-      if(!!tabs){
-          let activeNav = tabs.getSelected();
-          return activeNav.canGoBack() ? activeNav.pop() : AppMinimize.minimize();//this.showExit()
-      }else{
-          return AppMinimize.minimize();
+      let page = activeVC.instance;
+      //当前页面非tab栏
+        if (!(page instanceof TabsPage)) {
+          if (!this.nav.canGoBack()) {
+            return AppMinimize.minimize();
+          }
+          return this.nav.pop();
+        }
+      let tabs = page.tabs;
+      let activeNav = tabs.getSelected();
+      if (!activeNav.canGoBack()) {
+        //当前页面为tab栏，退出APP
+        return AppMinimize.minimize();
       }
-
-
-    }, 1);
+      //当前页面为tab栏的子页面，正常返回
+      return activeNav.pop();
+    }, 101);
   };
 
   //双击退出提示框

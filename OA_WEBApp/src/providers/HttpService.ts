@@ -17,7 +17,7 @@ export class HttpService {
   }
 
   public get(url: string, paramMap?: any): Observable<Response> {
-    return this.http.get(APP_SERVE_URL+url, new RequestOptions({
+    return this.http.get(url, new RequestOptions({
       search: HttpService.buildURLSearchParams(paramMap)
       ,headers: new Headers(
       //   {

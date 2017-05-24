@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Refresher } from 'ionic-angular';
 
 import { BacklogDetail } from './backlog-detail/backlog-detail';
-
+import { BacklogService } from "./backlogService";
 /**
  * Generated class for the Backlog page.
  *
@@ -11,39 +11,85 @@ import { BacklogDetail } from './backlog-detail/backlog-detail';
  */
 @IonicPage()
 @Component({
-  selector: 'page-backlog',
-  templateUrl: 'backlog.html',
+    selector: 'page-backlog',
+    templateUrl: 'backlog.html',
+    providers: [BacklogService]
 })
 export class Backlog {
-  work: string = "notDone";
-  nxPage: any = BacklogDetail;
-  params: any;
+    work: string = "notDone";
+    nxPage: any = BacklogDetail;
+    params: any;
+    items: any;
+    moredata: boolean = true;
+    data: any;
 
-  items: any;
+    constructor(public navCtrl: NavController, 
+                public navParams: NavParams, 
+                private backlogService: BacklogService) {
+        this.data = { "page": 1, "size": 10 };   
+        this.doRefresh();       
+    }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.items = [
-      {
-      ggid:"1",
-      wfName: "测试工作流2",
-      wfNo: "2", //工作编号
-      FK_fid: "1234" ,//表单id
-      fqr:"系统管理员",
-      dqbz:"1"
-    },
-      {
-      ggid:"1",
-      wfName: "测试工作流2",
-      wfNo: "2", //工作编号
-      FK_fid: "1234" ,//表单id
-      fqr:"系统管理员",
-      dqbz:"审批"
-    },
-    ]
-  }
+    ionViewDidLoad() {
+      console.log('ionViewDidLoad Backlog');
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Backlog');
-  }
+    doRefresh(refresher?: Refresher) {
+        //this.initializeItems();
+        this.moredata = true;
+        this.items = [];
+        if(this.work === "ontDone") {
+            //....
+            this._getNotDoneList(this.data);
+        }else {
+            //...
+            this._getDoneList(this.data);
+        }
+        if(!!refresher){
+            setTimeout(() => {
+                console.log('数据加载完成');
+                refresher.complete();
+            }, 1000);
+        }
+
+    }
+
+    doInfinite(): Promise<any> {
+        if(this.moredata) {
+            if(this.work === "ontDone") {
+               //....
+                this._getNotDoneList(this.data);
+            }else {
+                //...
+                this._getDoneList(this.data);
+            }
+        }
+
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve();
+            }, 500);
+        })
+    }
+
+    _getNotDoneList(data) {
+        this.backlogService.getNotDoneList(data).subscribe(list => {
+            if(list === []) {
+                this.moredata = false;
+            }else {
+                this.items = this.items.concat(list);
+            }
+        });
+    }
+
+    _getDoneList(data) {
+        this.backlogService.getDoneList(data).subscribe(list => {
+            if(list === []) {
+                this.moredata = false;
+            }else {
+                this.items = this.items.concat(list);
+            }
+        });
+    }
 
 }

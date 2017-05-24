@@ -24,6 +24,11 @@
 
 <ion-content>
     <div [ngSwitch]="work">
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
+            </ion-refresher-content>
+        </ion-refresher>
+
         <ion-list *ngSwitchCase="'notDone'">
 
             <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.ggid}">
@@ -39,5 +44,10 @@
                 <p>发起人：{{work.fqr}}&emsp;当前步骤：{{work.dqbz}}</p>
             </button>
         </ion-list>
+
+        <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+
     </div>
 </ion-content>

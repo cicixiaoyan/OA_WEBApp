@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { Backlog } from './backlog';
+import { BacklogService } from "./backlogService";
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import { Backlog } from './backlog';
   ],
   exports: [
     Backlog
-  ]
+  ],
+  providers: [BacklogService]
 })
 export class BacklogModule {}

@@ -88,9 +88,9 @@ export class LoginPage {
   login(user) {
     this.submitted = true;
     user.action = 'logininfo';
-    this.httpService.postFormData("ashx/Login.ashx/LoginInfo",user)
-     .map(responce => responce.json())
-    .subscribe((userInfo) => {
+    // this.httpService.postFormData("ashx/Login.ashx/LoginInfo",user)
+    //  .map(responce => responce.json())
+    this.loginService.login(user).subscribe((userInfo) => {
         console.log(userInfo)
         this.submitted = false;
         //userInfo.token = 'xx122a9Wf';//从后台获取token,暂时写死

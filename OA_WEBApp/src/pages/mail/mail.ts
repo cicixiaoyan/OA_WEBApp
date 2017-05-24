@@ -13,8 +13,8 @@ import { MailService } from "./mailService";
  */
 @IonicPage()
 @Component({
-  selector: 'page-mail',
-  templateUrl: 'mail.html',
+    selector: 'page-mail',
+    templateUrl: 'mail.html',
 })
 export class Mail {
     box: string = "inbox";
@@ -22,41 +22,36 @@ export class Mail {
     isDraft: boolean = false;//默认为发件箱
     isEmpty: boolean = false;
     checkBtn: object = { "read": false, "unread": true, "all": false };
-    inboxList: any =[];
+    inboxList: any = [];
     outboxList : any = [];
     moredata : boolean = true;
-    inboxData: { "size": 1, "page":1 };
-    outboxData: { "size": 1, "page":1 };
+    inboxData: any;
+    outboxData: any;
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 private modalCtrl: ModalController,
                 private mailService: MailService) {
+        this.inboxData = { "size": 1, "page":0 };
+        this.outboxData = { "size": 1, "page":0 };
         this.initializeItems();
-}
+    }
 
-    initializeItems(){
-        this.mailService.getInboxList().subscribe(list => {
-            this.inboxList = list;
-            console.log(this.inboxList);
-        });
-
-        this.mailService.getOutboxList().subscribe(list => {
-            this.outboxList = list;
-            console.log(this.outboxList);
-        })
-
+    initializeItems() {
+        this.doInfinite();
         //默认为收件箱和草稿箱
         // this.checkRead("read");
         // this.checkDraft(true); 
-  }
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Mail');
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad Mail');
+    }
 
-  //选择已读、未读、全部
-    checkRead(name: string = "unread" , data: {page:1,size:1}) {
+    //选择已读、未读、全部
+    checkRead(name: string = "unread" ) {
+        this.inboxData.page = 1;
+        this.inboxList = []; 
         this.checkBtn = { "read": false, "unread": false, "all": false };
         this.checkBtn[name] = true;
         if( name === "unread") {
@@ -68,19 +63,13 @@ export class Mail {
         else {
             //参数设置
         }
-        this.mailService.getOutboxList(data).subscribe(list => { 
-            if(list==[]){
-                this.moredata = false;
-            }else{
-                this.outboxList = this.outboxList.concat(list);
-            }
-        });
-  }
+        this._getInboxList(this.inboxData);
+    }
 
-  //选择草稿箱、发件箱
-    checkDraft(bol: boolean = false, data: {page:1,size:1}) {
-
-        this.outboxList = (data.page==1) ? [] : this.outboxList;
+    //选择草稿箱、发件箱
+    checkDraft(bol: boolean = false) {
+        this.outboxData.page = 1;
+        this.outboxList = [];
 
         if (bol) {
             this.isDraft = true;
@@ -89,53 +78,53 @@ export class Mail {
             this.isDraft = false;
             //参数设置
         }
-        this.mailService.getOutboxList(data).subscribe(list => { 
-            if(list==[]){
-                this.moredata = false;
-            }else{
-                this.outboxList = this.outboxList.concat(list);
-            }
-        });
+        this._getOutboxList(this.outboxData);
     }
 
-
-    doRead(id){
+    doRead(id) {
         this.navCtrl.push(MailRead,{id:id});
     }
 
-    doReadOutBox(id){
+    doReadOutBox(id) {
         this.navCtrl.push(MailReadOutbox,{id:id});
     }
 
-    doWrite(){
+    doWrite() {
         let modal = this.modalCtrl.create(MailWrite);
         modal.present();
         modal.onDidDismiss(data => {
             data && console.log(data);
         });
-            // this.navCtrl.push(MailWrite);
+        // this.navCtrl.push(MailWrite);
     }
 
-    doRefresh(refresher: Refresher){
-        this.initializeItems();
+    doRefresh(refresher: Refresher) {
+        //this.initializeItems();
+        this.moredata = true;
+        if(this.box === "inbox") {
+            this.inboxList = [];
+            this.inboxData.page = 1; 
+            this._getInboxList(this.inboxData);
+        }else {
+            this.outboxList = [];
+            this.outboxData.page = 1;
+            this._getOutboxList(this.outboxData);
+        }
+
         setTimeout(() => {
-        console.log('数据加载完成');
-        refresher.complete();
+            console.log('数据加载完成');
+            refresher.complete();
         }, 1000);
     }
 
     doInfinite(): Promise<any> {
         if(this.moredata){
-            if(this.box === "inbox"){
+            if(this.box === "inbox") {
                 this.inboxData.page++; 
-                this.mailService.getInboxList().subscribe(list => {
-                    
-                });
-            }else{
+                this._getInboxList(this.inboxData);
+            }else {
                 this.outboxData.page++;
-                this.mailService.getOutboxList().subscribe(list => {
-
-                });
+                this._getOutboxList(this.outboxData);
             }
         }
 
@@ -144,6 +133,26 @@ export class Mail {
                 resolve();
             }, 500);
         })
+    }
+
+    _getInboxList(inboxData) {
+        this.mailService.getInboxList(inboxData).subscribe(list => {
+            if(list==[]) {
+                this.moredata = false;
+            }else {
+                this.inboxList = this.inboxList.concat(list);
+            }
+        });
+    }
+
+    _getOutboxList(outboxData) {
+        this.mailService.getOutboxList(outboxData).subscribe(list => {
+            if(list==[]) {
+                this.moredata = false;
+            }else {
+                this.outboxList = this.outboxList.concat(list);
+            }
+        });
     }
 
 }

@@ -38,7 +38,9 @@
                 <ion-option value="3">低</ion-option>
             </ion-select>
         </ion-item>
-        <div id="strhtm" style="min-height: 100px;;"></div>
+        <!--<div id="strhtm" style="min-height: 100px;overflow-x:auto;"></div>-->
+        <iframe id="iframe" class="iframe" onload="this.height='100%'" style="width:100%;overflow-x:auto" sandbox="allow-scripts allow-top-navigation allow-pointer-lock allow-same-origin allow-popups allow-forms" src="https://www.baidu.com">
+        </iframe>
 
     </ion-list>
     <ion-list inset *ngIf="!firstStep">
@@ -84,22 +86,22 @@
             </ion-select>
         </ion-item>
     </ion-list>
-
-    <ion-row no-padding text-center *ngIf="!firstStep">
-        <ion-col col-6>
-            <button (click)="msgNotification('site')" ion-button icon-left>
+    <ion-grid padding-horizontal>
+        <ion-row no-padding text-center *ngIf="!firstStep">
+            <ion-col col-6>
+                <button (click)="msgNotification('site')" ion-button icon-left>
               <ion-icon [name]='siteNotification?"md-checkbox-outline":"md-square-outline"'></ion-icon>
               站内消息提醒
             </button>
-        </ion-col>
-        <ion-col col-6>
-            <button (click)="msgNotification('phone')" ion-button icon-left>
+            </ion-col>
+            <ion-col col-6>
+                <button (click)="msgNotification('phone')" ion-button icon-left>
               <ion-icon [name]='phoneNotification?"md-checkbox-outline":"md-square-outline"'></ion-icon>
               手机短信提醒
             </button>
-        </ion-col>
-    </ion-row>
-
+            </ion-col>
+        </ion-row>
+    </ion-grid>
     <div padding>
         <button *ngIf="firstStep" ion-button block color="calm" (click)="showNextStep()">下一步</button>
         <div *ngIf="!firstStep">

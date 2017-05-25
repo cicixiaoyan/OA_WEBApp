@@ -19,7 +19,7 @@ export class Backlog {
     work: string = "notDone";
     nxPage: any = BacklogDetail;
     params: any;
-    items: any;
+    items: any = [];
     moredata: boolean = true;
     data: any;
 
@@ -27,7 +27,7 @@ export class Backlog {
                 public navParams: NavParams, 
                 private backlogService: BacklogService) {
         this.data = { "page": 1, "size": 10 };   
-        this.doRefresh();       
+        this._getNotDoneList(this.data);      
     }
 
     ionViewDidLoad() {

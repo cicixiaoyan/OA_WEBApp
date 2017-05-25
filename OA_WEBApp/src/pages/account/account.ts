@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 
 import { AccountEdit } from '../account/account-edit/account-edit';
 import { AccountPasswordedit } from '../account/account-passwordedit/account-passwordedit';
+import { AboutusPage } from '../account/aboutus/aboutus';
 
 
 import { UserInfo } from "../../model/UserInfo";
@@ -71,6 +72,10 @@ export class Account {
     this.navCtrl.push(AccountEdit);
   }
 
+  getAboutus(){
+    this.navCtrl.push(AboutusPage);
+  }
+
   pwdEdit(){
     this.navCtrl.push(AccountPasswordedit);
   }
@@ -115,7 +120,7 @@ export class Account {
     this.userInfo.photo = 'data:image/jpg;base64,' + imageBase64;
   }
 
-    save() {
+  save() {
     if (this.isChange) {
       let fileObj = <FileObj>{'base64': this.imageBase64};
       this.fileService.uploadByBase64(fileObj).subscribe(result => {// 上传图片到文件服务器

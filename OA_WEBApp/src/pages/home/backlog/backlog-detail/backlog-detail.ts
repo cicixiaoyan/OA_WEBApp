@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HttpService } from "../../../../providers/HttpService";
 
 /**
  * Generated class for the BacklogDetail page.
@@ -14,12 +15,37 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class BacklogDetail {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  item: any = [];
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              private httpService: HttpService) {
     console.log(this.navParams.get("id"));
+    this.initializeItems()
+  }
+
+  initializeItems(){
+    this.httpService.get('../../assets/data/backlog-done.json')
+      .map(res => res.json())
+      .subscribe(item => {
+        this.item = item[0];
+      })
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BacklogDetail');
   }
+
+  approved() {
+    console.log("审批通过");
+  }
+
+  overrule() {
+    console.log("审批驳回");
+  }
+
+  cancel() {
+    this.navCtrl.pop();
+  }
+
 
 }

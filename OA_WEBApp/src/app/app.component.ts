@@ -156,7 +156,8 @@ export class MyApp {
      
       let activePortal = this.ionicApp._modalPortal.getActive();
       if (activePortal) {
-        activePortal.dismiss();
+        activePortal.dismiss().catch(() => {});
+        activePortal.onDidDismiss(() => {});
         return;
       }
       let activeVC = this.nav.getActive();

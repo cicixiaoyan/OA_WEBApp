@@ -50549,6 +50549,10 @@ page-account .padding-bottom44 {
   padding-bottom: 44px;
 }
 
+page-account .list-ios {
+  margin: -1px 0 16px 0;
+}
+
 page-home .index-row ion-col {
   padding: 5px 12px;
   font-size: 12px;
@@ -50611,6 +50615,12 @@ page-backlog-detail ion-row button {
   padding: 0 0.2em;
 }
 
+page-backlog-detail .label-ios + ion-input .text-input,
+page-backlog-detail .label-ios + ion-textarea .text-input {
+  margin-left: 0;
+  width: 100%;
+}
+
 page-newwork-detail .item-select ion-label {
   -webkit-flex: initial;
   -ms-flex: initial;
@@ -50634,6 +50644,10 @@ page-newwork-detail .item-select ion-select {
   border-radius: 5px;
 }
 
+page-newwork-detail .item-select ion-select:focus {
+  border: 2px solid #627f8d;
+}
+
 page-newwork-detail .item-select ion-select .select-text {
   overflow: hidden;
   -webkit-flex: 1;
@@ -50643,6 +50657,11 @@ page-newwork-detail .item-select ion-select .select-text {
   font-size: inherit;
   white-space: pre-wrap;
   text-align: center;
+}
+
+page-newwork-detail .button-ios {
+  padding: 0 .4em;
+  width: 100%;
 }
 
 page-login ion-content {

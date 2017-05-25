@@ -38,10 +38,8 @@ export class Mail {
     }
 
     initializeItems() {
-        this.doInfinite();
-        //默认为收件箱和草稿箱
-        // this.checkRead("read");
-        // this.checkDraft(true); 
+        this._getInboxList(this.inboxData);
+        this._getOutboxList(this.outboxData);
     }
 
     ionViewDidLoad() {
@@ -99,6 +97,7 @@ export class Mail {
     }
 
     doRefresh(refresher: Refresher) {
+        console.log("加载更多")
         //this.initializeItems();
         this.moredata = true;
         if(this.box === "inbox") {

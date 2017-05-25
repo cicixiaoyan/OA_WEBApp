@@ -57,6 +57,15 @@
                     <ion-note item-right>{{userInfo.ui_mail}}</ion-note>
                 </ion-item>
             </ion-list>
+
+            <ion-list>
+                <ion-item (click)="getAboutus()">
+                    <ion-icon name='ios-at-outline' color="assertive" item-left></ion-icon>
+                    关于我们
+                    <ion-icon name='ios-arrow-forward' item-right></ion-icon>
+                </ion-item>
+            </ion-list>
+
             <ion-list>
                 <ion-item (click)="pwdEdit()">
                     <ion-icon name='ios-unlock' color="assertive" item-left></ion-icon>

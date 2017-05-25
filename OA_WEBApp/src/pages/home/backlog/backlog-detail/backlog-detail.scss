@@ -7,4 +7,9 @@ page-backlog-detail {
             padding: 0 0.2em;
         }
     }
+    .label-ios+ion-input .text-input,
+    .label-ios+ion-textarea .text-input {
+        margin-left: 0;
+        width: 100%;
+    }
 }

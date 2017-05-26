@@ -7,7 +7,7 @@ import {AppVersion} from '@ionic-native/app-version';
 import {Camera, CameraOptions} from '@ionic-native/camera';
 import {Toast} from '@ionic-native/toast';
 import {File} from '@ionic-native/file';
-import {Transfer, FileUploadOptions, TransferObject} from '@ionic-native/transfer';
+import {Transfer, TransferObject} from '@ionic-native/transfer'; // FileUploadOptions
 import {InAppBrowser} from '@ionic-native/in-app-browser';
 import {ImagePicker} from '@ionic-native/image-picker';
 import {Network} from '@ionic-native/network';
@@ -15,7 +15,7 @@ import { FileChooser } from '@ionic-native/file-chooser';
 
 import {APP_DOWNLOAD, APK_DOWNLOAD} from "./Constants";
 
-import {Observable} from "rxjs";
+// import {Observable} from "rxjs";
 declare var LocationPlugin;
 declare var AMapNavigation;
 declare var cordova: any;
@@ -93,11 +93,11 @@ export class NativeService {
       alert.present();
 
       const fileTransfer: TransferObject = this.transfer.create();
-      target = this.file.externalRootDirectory + target; //文件保存的目录
+      target = this.file.externalRootDirectory + target; // 文件保存的目录
 
       fileTransfer.download(encodeURI(source), target).then((entry) => {
         console.log('download complete: ' + entry.toURL());
-        //window['install'].install(target.replace('file://', ''));
+        // window['install'].install(target.replace('file://', ''));
       });
 
       fileTransfer.onProgress((event: ProgressEvent) => {
@@ -122,7 +122,7 @@ export class NativeService {
    * 检查app是否需要升级
    */
   detectionUpgrade() {
-    //这里连接后台判断是否需要升级,不需要升级就return
+    // 这里连接后台判断是否需要升级,不需要升级就return
     this.alertCtrl.create({
       title: '升级',
       subTitle: '发现新版本,是否立即升级？',
@@ -150,7 +150,7 @@ export class NativeService {
       alert.present();
 
       const fileTransfer: TransferObject = this.transfer.create();
-      const apk = this.file.externalRootDirectory + 'android.apk'; //apk保存的目录
+      const apk = this.file.externalRootDirectory + 'android.apk'; // apk保存的目录
 
       fileTransfer.download(APK_DOWNLOAD, apk).then(() => {
         window['install'].install(apk.replace('file://', ''));
@@ -225,7 +225,7 @@ export class NativeService {
         content: content
       });
       this.loading.present();
-      setTimeout(() => {//最长显示10秒
+      setTimeout(() => {// 最长显示10秒
         this.loadingIsOpen && this.loading.dismiss();
         this.loadingIsOpen = false;
       }, 10000);
@@ -247,22 +247,22 @@ export class NativeService {
    */
   getPicture(options = {}): Promise<string> {
     let ops: CameraOptions = Object.assign({
-      sourceType: this.camera.PictureSourceType.CAMERA,//图片来源,CAMERA:拍照,PHOTOLIBRARY:相册
-      destinationType: this.camera.DestinationType.DATA_URL,//默认返回base64字符串,DATA_URL:base64   FILE_URI:图片路径
-      quality: 100,//图像质量，范围为0 - 100
-      allowEdit: true,//选择图片前是否允许编辑
+      sourceType: this.camera.PictureSourceType.CAMERA, // 图片来源,CAMERA:拍照,PHOTOLIBRARY:相册
+      destinationType: this.camera.DestinationType.DATA_URL, // 默认返回base64字符串,DATA_URL:base64   FILE_URI:图片路径
+      quality: 100, // 图像质量，范围为0 - 100
+      allowEdit: true, // 选择图片前是否允许编辑
       encodingType: this.camera.EncodingType.JPEG,
-      targetWidth: 1000,//缩放图像的宽度（像素）
-      targetHeight: 1000,//缩放图像的高度（像素）
-      saveToPhotoAlbum: true,//是否保存到相册
-      correctOrientation: true//设置摄像机拍摄的图像是否为正确的方向
+      targetWidth: 1000, // 缩放图像的宽度（像素）
+      targetHeight: 1000, // 缩放图像的高度（像素）
+      saveToPhotoAlbum: true, // 是否保存到相册
+      correctOrientation: true // 设置摄像机拍摄的图像是否为正确的方向
     }, options);
     return new Promise((resolve) => {
       this.camera.getPicture(ops).then((imgData: string) => {
         resolve(imgData);
       }, (err) => {
         err == 20 && this.showToast('没有权限,请在设置中开启权限');
-        this.warn('getPicture:' + err)
+        this.warn('getPicture:' + err);
       });
     });
   };
@@ -276,7 +276,7 @@ export class NativeService {
     return new Promise((resolve) => {
       this.getPicture(Object.assign({
         sourceType: this.camera.PictureSourceType.CAMERA,
-        destinationType: this.camera.DestinationType.DATA_URL//DATA_URL: 0 base64字符串, FILE_URI: 1图片路径
+        destinationType: this.camera.DestinationType.DATA_URL// DATA_URL: 0 base64字符串, FILE_URI: 1图片路径
       }, options)).then((imgData: string) => {
         resolve(imgData);
       }).catch(err => {
@@ -295,7 +295,7 @@ export class NativeService {
     return new Promise((resolve) => {
       this.getPicture(Object.assign({
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-        destinationType: this.camera.DestinationType.DATA_URL//DATA_URL: 0 base64字符串, FILE_URI: 1图片路径
+        destinationType: this.camera.DestinationType.DATA_URL// DATA_URL: 0 base64字符串, FILE_URI: 1图片路径
       }, options)).then((imgData: string) => {
         resolve(imgData);
       }).catch(err => {
@@ -312,18 +312,18 @@ export class NativeService {
    */
   getMultiplePicture(options = {}): Promise<any> {
     let that = this;
-    let destinationType = options['destinationType'] || 0;//0:base64字符串,1:图片url
+    let destinationType = options['destinationType'] || 0; // 0:base64字符串,1:图片url
     return new Promise((resolve) => {
       this.imagePicker.getPictures(Object.assign({
         maximumImagesCount: 6,
-        width: 1000,//缩放图像的宽度（像素）
-        height: 1000,//缩放图像的高度（像素）
-        quality: 100//图像质量，范围为0 - 100
+        width: 1000, // 缩放图像的宽度（像素）
+        height: 1000, // 缩放图像的高度（像素）
+        quality: 100 // 图像质量，范围为0 - 100
       }, options)).then(files => {
         if (destinationType === 1) {
           resolve(files);
         } else {
-          let imgBase64s = [];//base64字符串数组
+          let imgBase64s = []; // base64字符串数组
           for (let fileUrl of files) {
             that.convertImgToBase64(fileUrl, base64 => {
               imgBase64s.push(base64);
@@ -348,7 +348,7 @@ export class NativeService {
   convertImgToBase64(url, callback) {
     this.getFileContentAsBase64(url, function (base64Image) {
       callback.call(this, base64Image.substring(base64Image.indexOf(';base64,') + 8));
-    })
+    });
   }
 
   private getFileContentAsBase64(path, callback) {

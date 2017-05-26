@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ModalController,Refresher } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Refresher } from 'ionic-angular';
 
 import { MailRead} from '../mail/mail-read/mail-read';
 import { MailWrite} from '../mail/mail-write/mail-write';
@@ -18,8 +18,8 @@ import { MailService } from "./mailService";
 })
 export class Mail {
     box: string = "inbox";
-    inbox: boolean = true;//默认为收件箱
-    isDraft: boolean = false;//默认为发件箱
+    inbox: boolean = true; // 默认为收件箱
+    isDraft: boolean = false; // 默认为发件箱
     isEmpty: boolean = false;
     checkBtn: object = { "read": false, "unread": true, "all": false };
     inboxList: any = [];
@@ -32,8 +32,8 @@ export class Mail {
                 public navParams: NavParams,
                 private modalCtrl: ModalController,
                 private mailService: MailService) {
-        this.inboxData = { "size": 1, "page":0 };
-        this.outboxData = { "size": 1, "page":0 };
+        this.inboxData = { "size": 1, "page": 0 };
+        this.outboxData = { "size": 1, "page": 0 };
         this.initializeItems();
     }
 
@@ -46,45 +46,45 @@ export class Mail {
         console.log('ionViewDidLoad Mail');
     }
 
-    //选择已读、未读、全部
+    // 选择已读、未读、全部
     checkRead(name: string = "unread" ) {
         this.inboxData.page = 1;
         this.inboxList = []; 
         this.checkBtn = { "read": false, "unread": false, "all": false };
         this.checkBtn[name] = true;
-        if( name === "unread") {
-            //参数设置
+        if ( name === "unread") {
+            // 参数设置
         }
-        else if( name === "read" ) {
-            //参数设置
+        else if ( name === "read" ) {
+            // 参数设置
         }
         else {
-            //参数设置
+            // 参数设置
         }
         this._getInboxList(this.inboxData);
     }
 
-    //选择草稿箱、发件箱
+    // 选择草稿箱、发件箱
     checkDraft(bol: boolean = false) {
         this.outboxData.page = 1;
         this.outboxList = [];
 
         if (bol) {
             this.isDraft = true;
-            //参数设置
+            // 参数设置
         } else {
             this.isDraft = false;
-            //参数设置
+            // 参数设置
         }
         this._getOutboxList(this.outboxData);
     }
 
     doRead(id) {
-        this.navCtrl.push(MailRead,{id:id});
+        this.navCtrl.push(MailRead, {id: id});
     }
 
     doReadOutBox(id) {
-        this.navCtrl.push(MailReadOutbox,{id:id});
+        this.navCtrl.push(MailReadOutbox, {id: id});
     }
 
     doWrite() {
@@ -97,10 +97,10 @@ export class Mail {
     }
 
     doRefresh(refresher: Refresher) {
-        console.log("加载更多")
-        //this.initializeItems();
+        console.log("加载更多");
+        // this.initializeItems();
         this.moredata = true;
-        if(this.box === "inbox") {
+        if (this.box === "inbox") {
             this.inboxList = [];
             this.inboxData.page = 1; 
             this._getInboxList(this.inboxData);
@@ -117,8 +117,8 @@ export class Mail {
     }
 
     doInfinite(): Promise<any> {
-        if(this.moredata){
-            if(this.box === "inbox") {
+        if (this.moredata){
+            if (this.box === "inbox") {
                 this.inboxData.page++; 
                 this._getInboxList(this.inboxData);
             }else {
@@ -131,12 +131,12 @@ export class Mail {
             setTimeout(() => {
                 resolve();
             }, 500);
-        })
+        });
     }
 
     _getInboxList(inboxData) {
         this.mailService.getInboxList(inboxData).subscribe(list => {
-            if(list==[]) {
+            if (list === []) {
                 this.moredata = false;
             }else {
                 this.inboxList = this.inboxList.concat(list);
@@ -146,7 +146,7 @@ export class Mail {
 
     _getOutboxList(outboxData) {
         this.mailService.getOutboxList(outboxData).subscribe(list => {
-            if(list==[]) {
+            if (list === []) {
                 this.moredata = false;
             }else {
                 this.outboxList = this.outboxList.concat(list);

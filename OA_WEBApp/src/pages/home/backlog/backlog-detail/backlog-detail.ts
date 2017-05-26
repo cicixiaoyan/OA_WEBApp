@@ -20,7 +20,7 @@ export class BacklogDetail {
               public navParams: NavParams,
               private httpService: HttpService) {
     console.log(this.navParams.get("id"));
-    this.initializeItems()
+    this.initializeItems();
   }
 
   initializeItems(){
@@ -28,7 +28,7 @@ export class BacklogDetail {
       .map(res => res.json())
       .subscribe(item => {
         this.item = item[0];
-      })
+      });
   }
 
   ionViewDidLoad() {

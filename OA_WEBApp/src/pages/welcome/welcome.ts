@@ -23,7 +23,7 @@ export class Welcome {
   }
 
    goToHome(){
-        this.navCtrl.setRoot(TabsPage,{index:0});
+        this.navCtrl.setRoot(TabsPage, {index: 0});
     }
 
 }

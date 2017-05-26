@@ -21,7 +21,7 @@ export class FindPassword {
   };
 
   confirm() {
-    this.navCtrl.setRoot(LoginPage)
+    this.navCtrl.setRoot(LoginPage);
   }
 
   dismiss() {

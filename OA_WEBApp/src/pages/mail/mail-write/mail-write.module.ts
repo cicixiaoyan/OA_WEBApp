@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { MailWrite,PopoverPage } from './mail-write';
+import { MailWrite, PopoverPage } from './mail-write';
 
 @NgModule({
   declarations: [

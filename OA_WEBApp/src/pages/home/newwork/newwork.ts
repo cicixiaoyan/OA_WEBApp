@@ -17,20 +17,20 @@ import { NewworkDetail } from './newwork-detail/newwork-detail';
 export class Newwork {
   items = [{
             wfName: "测试工作流1",
-            wfNo: "2", //工作编号
-            FK_fid: "1234" //表单id
+            wfNo: "2", // 工作编号
+            FK_fid: "1234" // 表单id
 
         },
         {
             wfName: "测试工作流2",
-            wfNo: "2", //工作编号
-            FK_fid: "1234" //表单id
+            wfNo: "2", // 工作编号
+            FK_fid: "1234" // 表单id
 
         },
         {
             wfName: "测试工作流3",
-            wfNo: "2", //工作编号
-            FK_fid: "1234" //表单id
+            wfNo: "2", // 工作编号
+            FK_fid: "1234" // 表单id
 
         }
     ];
@@ -43,7 +43,7 @@ export class Newwork {
   }
 
   addNew(id){
-    this.navCtrl.push(NewworkDetail,{id:id});
+    this.navCtrl.push(NewworkDetail, {id: id});
   }
 
 }

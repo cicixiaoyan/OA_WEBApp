@@ -31,21 +31,21 @@ export class Backlog {
     }
 
     ionViewDidLoad() {
-      console.log('ionViewDidLoad Backlog');
+        console.log('ionViewDidLoad Backlog');
     }
 
     doRefresh(refresher?: Refresher) {
-        //this.initializeItems();
+        // this.initializeItems();
         this.moredata = true;
         this.items = [];
-        if(this.work === "ontDone") {
-            //....
+        if (this.work === "ontDone") {
+            // ....
             this._getNotDoneList(this.data);
         }else {
-            //...
+            // ...
             this._getDoneList(this.data);
         }
-        if(!!refresher){
+        if (!!refresher){
             setTimeout(() => {
                 console.log('数据加载完成');
                 refresher.complete();
@@ -55,12 +55,12 @@ export class Backlog {
     }
 
     doInfinite(): Promise<any> {
-        if(this.moredata) {
-            if(this.work === "ontDone") {
-               //....
+        if (this.moredata) {
+            if (this.work === "ontDone") {
+               // ....
                 this._getNotDoneList(this.data);
             }else {
-                //...
+                // ...
                 this._getDoneList(this.data);
             }
         }
@@ -69,12 +69,12 @@ export class Backlog {
             setTimeout(() => {
                 resolve();
             }, 500);
-        })
+        });
     }
 
     _getNotDoneList(data) {
         this.backlogService.getNotDoneList(data).subscribe(list => {
-            if(list === []) {
+            if (list === []) {
                 this.moredata = false;
             }else {
                 this.items = this.items.concat(list);
@@ -84,7 +84,7 @@ export class Backlog {
 
     _getDoneList(data) {
         this.backlogService.getDoneList(data).subscribe(list => {
-            if(list === []) {
+            if (list === []) {
                 this.moredata = false;
             }else {
                 this.items = this.items.concat(list);

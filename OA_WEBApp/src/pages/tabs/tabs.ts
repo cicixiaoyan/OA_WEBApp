@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 
 import { Home } from '../home/home';
@@ -11,7 +11,7 @@ import {Tabs} from "ionic-angular";
     templateUrl: 'tabs.html'
 })
 export class TabsPage {
-    @ViewChild('mainTabs') tabs:Tabs;
+    @ViewChild('mainTabs') tabs: Tabs;
 
     tab1Root = Home;
     tab2Root = Mail;

@@ -18,9 +18,11 @@ export class AccountEdit {
     ui_csrq: '1990-02-19',
     ui_rzrq: '1990-02-19'
   };
-  ui_sex:string;
+  ui_sex: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private actionSheetCtrl:ActionSheetController) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              private actionSheetCtrl: ActionSheetController) {
   }
 
   ionViewDidLoad() {
@@ -38,12 +40,12 @@ export class AccountEdit {
           handler: () => {
             this.ui_sex = "男";
           }
-        },{
+        }, {
           text: '女',
           handler: () => {
             this.ui_sex = "女";
           }
-        },{
+        }, {
           text: '取消',
           role: 'cancel',
           handler: () => {

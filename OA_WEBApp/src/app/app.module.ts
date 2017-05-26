@@ -58,7 +58,7 @@ export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions,
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp,{
+    IonicModule.forRoot(MyApp, {
       backButtonText: '',  
       iconMode: 'ios',  
       mode: 'ios',

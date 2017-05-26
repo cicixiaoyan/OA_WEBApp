@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 import {Observable} from "rxjs";
 import {Utils} from "./Utils";
 import {GlobalData} from "./GlobalData";
-import { APP_SERVE_URL } from './Constants'
+import { APP_SERVE_URL } from './Constants';
 
 @Injectable()
 export class HttpService {
@@ -17,9 +17,9 @@ export class HttpService {
   }
 
   public get(url: string, paramMap?: any): Observable<Response> {
-    return this.http.get(url, new RequestOptions({
+    return this.http.get(APP_SERVE_URL + url, new RequestOptions({
       search: HttpService.buildURLSearchParams(paramMap)
-      ,headers: new Headers(
+      , headers: new Headers(
       //   {
       //   'token': this.globalData.token
       // }
@@ -29,7 +29,7 @@ export class HttpService {
 
   // 默认Content-Type为application/json;
   public post(url: string, body: any = null, options?: RequestOptionsArgs): Observable<Response> {
-    return this.http.post(APP_SERVE_URL+url, body, this.getOptions(options));
+    return this.http.post(APP_SERVE_URL + url, body, this.getOptions(options));
   }
 
   public postFormData(url: string, paramMap?: any): Observable<Response> {
@@ -43,15 +43,15 @@ export class HttpService {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     let bodyRes = HttpService.buildURLSearchParams(paramMap).toString();
     let requestOptions = new RequestOptions({headers: headers});
-    return this.http.post(APP_SERVE_URL+url, bodyRes, requestOptions);
+    return this.http.post(APP_SERVE_URL + url, bodyRes, requestOptions);
   }
 
   public put(url: string, body: any = null, options?: RequestOptionsArgs): Observable<Response> {
-    return this.http.put(APP_SERVE_URL+url, body, this.getOptions(options));
+    return this.http.put(APP_SERVE_URL + url, body, this.getOptions(options));
   }
 
   public delete(url: string, paramMap?: any): Observable<Response> {
-    return this.http.delete(APP_SERVE_URL+url, new RequestOptions({
+    return this.http.delete(APP_SERVE_URL + url, new RequestOptions({
       search: HttpService.buildURLSearchParams(paramMap),
       headers: new Headers(
         // {
@@ -62,11 +62,11 @@ export class HttpService {
   }
 
   public patch(url: string, body: any = null, options?: RequestOptionsArgs): Observable<Response> {
-    return this.http.patch(APP_SERVE_URL+url, body, this.getOptions(options));
+    return this.http.patch(APP_SERVE_URL + url, body, this.getOptions(options));
   }
 
   public head(url: string, paramMap?: any): Observable<Response> {
-    return this.http.head(APP_SERVE_URL+url, new RequestOptions({
+    return this.http.head(APP_SERVE_URL + url, new RequestOptions({
       search: HttpService.buildURLSearchParams(paramMap),
        headers: new Headers(
       //    {
@@ -77,10 +77,10 @@ export class HttpService {
   }
 
   public options(url: string, paramMap?: any): Observable<Response> {
-    return this.http.options(APP_SERVE_URL+url, new RequestOptions({
+    return this.http.options(APP_SERVE_URL + url, new RequestOptions({
       search: HttpService.buildURLSearchParams(paramMap)
-      ,headers: new Headers(
-      //{
+      , headers: new Headers(
+      // {
       //   'token': this.globalData.token
       // }
       )
@@ -95,7 +95,7 @@ export class HttpService {
     for (let key in paramMap) {
       let val = paramMap[key];
       if (val instanceof Date) {
-        val = Utils.dateFormat(val, 'yyyy-MM-dd hh:mm:ss')
+        val = Utils.dateFormat(val, 'yyyy-MM-dd hh:mm:ss');
       }
       params.set(key, val);
     }

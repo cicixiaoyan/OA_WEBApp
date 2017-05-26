@@ -15,7 +15,7 @@ import {ContactsDetail} from './contacts-detail/contacts-detail';
   templateUrl: 'contacts.html',
 })
 export class Contacts {
-  searchKey:string;
+  searchKey: string;
   nxPage: any = ContactsDetail;
   params: any = {id: 42};
   items;
@@ -41,13 +41,13 @@ export class Contacts {
   }
 
   doInfinite(): Promise<any> {
-    if(this.moredata){
+    if (this.moredata){
       this.size++;
-      const data = { page:this.page,size:this.size};
-      this.getList(data).subscribe(list =>{
-        if(list==[]){
+      const data = { page: this.page, size: this.size};
+      this.getList(data).subscribe(list => {
+        if (list === []){
           this.moredata = false;
-        }else{
+        }else {
           this.items = this.items.concat(list);
         }
       });
@@ -57,7 +57,7 @@ export class Contacts {
       setTimeout(() => {
         resolve();
       }, 500);
-    })
+    });
   }
 
   initializeItems() {
@@ -71,7 +71,7 @@ export class Contacts {
     //     this.items = list;
     //   });
 
-    //假数据
+    // 假数据
     // this.items = [
     //        {"ui_id":"admin","ui_desc":"系统管理员","ui_sex":"男","ui_lx":"总部","zwmc":"员工"},
     //        {"ui_id":"admin1","ui_desc":"系统管理员1","ui_sex":"男","ui_lx":"总部","zwmc":"员工1"},
@@ -81,9 +81,9 @@ export class Contacts {
   }
 
   private getList(data?){
-    data = !!data ? data : { page:1,size:1};
+    data = !!data ? data : { page: 1, size: 1};
     data.action = "Yh_List";
-    return this.httpService.postFormData("ashx/MailList.ashx/Yh_List",data).map(Response => Response.json());
+    return this.httpService.postFormData("ashx/MailList.ashx/Yh_List", data).map(Response => Response.json());
   }
 
   ionViewDidLoad() {
@@ -92,7 +92,7 @@ export class Contacts {
 
   search(refresher: Refresher){
     console.log(this.searchKey);
-    this.initializeItems()
+    this.initializeItems();
     // let data={action: "noticeBykeyWords", page: 1, size: 1,title: "系统管理员"};
     // this.httpService.postFormData("ashx/MailList.ashx/noticeBykeyWords",data)
     //   .map(Response => Response.json())

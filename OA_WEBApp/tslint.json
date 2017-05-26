@@ -1,11 +1,60 @@
 {
-  "rules": {
-    "no-duplicate-variable": true,
-    "no-unused-variable": [
-      true
+    "rules": {
+        "no-duplicate-variable": true,
+        "no-unused-variable": [
+            true
+        ],
+        "class-name": true,
+        "comment-format": [true,
+            "check-space"
+        ],
+        "whitespace": [true,
+            "check-branch",
+            "check-decl",
+            "check-operator",
+            "check-module",
+            "check-separator",
+            "check-type"
+        ],
+        "typedef-whitespace": [
+            true,
+            {
+                "call-signature": "nospace",
+                "index-signature": "nospace",
+                "parameter": "nospace",
+                "property-declaration": "nospace",
+                "variable-declaration": "nospace"
+            },
+            {
+                "call-signature": "onespace",
+                "index-signature": "onespace",
+                "parameter": "onespace",
+                "property-declaration": "onespace",
+                "variable-declaration": "onespace"
+            }
+        ],
+        "next-line": [true,
+            "check-catch",
+            "check-else"
+        ],
+        "indent": [
+            false, "spaces"
+        ],
+        "align": [true, "parameters", "statements"],
+        "no-switch-case-fall-through": true,
+        "jsdoc-format": true,
+        "use-isnan": true,
+        "linebreak-style": [true, "CRLF"],
+        // "quotemark": [true,
+        //     "double",
+        //     "avoid-escape"
+        // ],
+        "semicolon": [true, "always", "ignore-bound-class-methods"],
+        "no-var-keyword": true,
+        "no-trailing-whitespace": [true, "ignore-comments"],
+        "no-namespace": [true, "allow-declarations"]
+    },
+    "rulesDirectory": [
+        "node_modules/tslint-eslint-rules/dist/rules"
     ]
-  },
-  "rulesDirectory": [
-    "node_modules/tslint-eslint-rules/dist/rules"
-  ]
 }

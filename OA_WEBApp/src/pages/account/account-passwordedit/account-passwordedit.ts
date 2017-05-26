@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage,NavController, ViewController} from 'ionic-angular';
+import {IonicPage, NavController, ViewController} from 'ionic-angular';
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {LoginPage} from './../../login/login';
 /**
@@ -27,7 +27,7 @@ editPasswordForm: FormGroup;
   };
 
   confirm() {
-    this.navCtrl.setRoot(LoginPage)
+    this.navCtrl.setRoot(LoginPage);
   }
 
   dismiss() {

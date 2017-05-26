@@ -14,12 +14,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class NewworkDetail {
   title : string = "新建工作";
-  firstStep:boolean=true;
-  emergencyLevel:string;
-  manager:string;
-  department:string;
-  role:string;
-  review:string;
+  firstStep: boolean = true;
+  emergencyLevel: string;
+  manager: string;
+  department: string;
+  role: string;
+  review: string;
   phoneNotification: boolean = false;
   siteNotification: boolean = false;
 

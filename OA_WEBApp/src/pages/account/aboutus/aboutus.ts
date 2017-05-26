@@ -43,10 +43,10 @@ export class AboutusPage {
 
   detectionUpgrade() {
     let version = this.nativeService.getVersionNumber();
-    //从服务器获取最新版本号
+    // 从服务器获取最新版本号
     this.httpService.get("url").map(res => res.json)
       .subscribe(item => {
-        if(item[0].version == version) {
+        if (item[0].version == version) {
           return this.updateStr = "已是最新版";
         }else {
           this.nativeService.detectionUpgrade();

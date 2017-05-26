@@ -46,7 +46,7 @@ export class Utils {
    * @example  dateFormat(new Date(),'yyyy-MM-ddThh:mm:ss+08:00')   "2017-02-28T09:24:00+08:00"
    * @returns {string}
    */
- static dateFormat(date: Date, sFormat:string = 'yyyy-MM-dd'): string {
+ static dateFormat(date: Date, sFormat: string = 'yyyy-MM-dd'): string {
     let time = {
       Year: 0,
       TYear: '0',
@@ -96,7 +96,7 @@ export class Utils {
       .replace(/m/g, String(time.Minute))
       .replace(/ss/ig, time.TSecond)
       .replace(/s/ig, String(time.Second))
-      .replace(/fff/ig, String(time.Millisecond))
+      .replace(/fff/ig, String(time.Millisecond));
   }
 
   /**

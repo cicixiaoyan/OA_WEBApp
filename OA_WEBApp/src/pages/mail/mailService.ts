@@ -10,11 +10,11 @@ export class MailService {
   }
 
   getInboxList(param?){
-    return this.httpService.get('../../assets/data/mail-inbox.json').map((res: Response) => res.json());
+    return this.httpService.get('assets/data/mail-inbox.json').map((res: Response) => res.json());
   }
 
   getOutboxList(param?) {
-    return this.httpService.get('../../assets/data/mail-outbox.json').map((res: Response) => res.json());
+    return this.httpService.get('assets/data/mail-outbox.json').map((res: Response) => res.json());
   }
 
 //   getInboxList(param?):Observable<any>{

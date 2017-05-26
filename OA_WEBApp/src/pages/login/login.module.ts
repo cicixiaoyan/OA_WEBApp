@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { LoginPage } from './login';
-import { FindPasswordModule } from './find-password/find-password.module'
+import { FindPasswordModule } from './find-password/find-password.module';
  
 @NgModule({
   declarations: [

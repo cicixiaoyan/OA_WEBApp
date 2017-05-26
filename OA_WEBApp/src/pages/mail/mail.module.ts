@@ -14,6 +14,6 @@ import { MailService } from "./mailService";
   exports: [
     Mail
   ],
-  providers:[MailService]
+  providers: [MailService]
 })
 export class MailModule {}

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ModalController, NavController,ViewController,Nav, Platform, AlertController} from 'ionic-angular';
+import {ModalController, NavController, ViewController, Nav, Platform, AlertController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {FormBuilder, Validators} from '@angular/forms';
 
@@ -23,7 +23,7 @@ export class LoginPage {
   submitted: boolean = false;
   canLeave: boolean = false;
   loginForm: any;
-  nav:Nav;
+  nav: Nav;
 
   constructor(private viewCtrl: ViewController,
               private formBuilder: FormBuilder,
@@ -38,21 +38,21 @@ export class LoginPage {
               ) {
               
     this.loginForm = this.formBuilder.group({
-      UserName: ['admin', [Validators.required, Validators.minLength(4)]],// 第一个参数是默认值
+      UserName: ['admin', [Validators.required, Validators.minLength(4)]], // 第一个参数是默认值
       UserPass: ['123', [Validators.required, Validators.minLength(2)]]
     });
   }
 
-  ionViewWillEnter() {
-       let elements = document.querySelectorAll(".tabbar");
-    if (elements != null) {
-        Object.keys(elements).map((key) => {
-            elements[key].style.display = 'none';
+    ionViewWillEnter() {
+        let elements = document.querySelectorAll(".tabbar");
+        if (elements != null) {
+            Object.keys(elements).map((key) => {
+                elements[key].style.display = 'none';
+            });
+        } 
+        this.storage.get('UserInfo').then(userInfo => {
+            this.userInfo = userInfo || null;
         });
-    } 
-    this.storage.get('UserInfo').then(userInfo => {
-      this.userInfo = userInfo || null;
-    });
   }
 
   ionViewCanLeave(): boolean {
@@ -91,24 +91,24 @@ export class LoginPage {
     // this.httpService.postFormData("ashx/Login.ashx/LoginInfo",user)
     //  .map(responce => responce.json())
     this.loginService.login(user).subscribe((userInfo) => {
-        console.log(userInfo)
+        console.log(userInfo);
         this.submitted = false;
-        //userInfo.token = 'xx122a9Wf';//从后台获取token,暂时写死
-        this.globalData.ui_id = userInfo[0].ui_id
-        this.globalData.ui_desc =userInfo[0].ui_desc;
-       // this.globalData.token =userInfo.token;
+        // userInfo.token = 'xx122a9Wf';//从后台获取token,暂时写死
+        this.globalData.ui_id = userInfo[0].ui_id;
+        this.globalData.ui_desc = userInfo[0].ui_desc;
+       // this.globalData.token = userInfo.token;
         this.userInfo = userInfo[0];
         this.storage.set('UserInfo', userInfo[0]);
         // this.viewCtrl.dismiss(userInfo);
         this.navCtrl.setRoot(TabsPage, { tabIndex: 0 });
-    })
+    });
   }
 
   findPassword() {
     this.canLeave = true;
     let modal = this.modalCtrl.create(FindPassword);
     modal.present();
-    this.canLeave = false
+    this.canLeave = false;
   }
  
   dismiss(){

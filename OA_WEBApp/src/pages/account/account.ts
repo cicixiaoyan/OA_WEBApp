@@ -13,9 +13,9 @@ import { LoginPage } from "../login/login";
 
 import { NativeService } from '../../providers/NativeService';
 
-import {FileService} from "../../providers/FileService";
-import {FileObj} from "../../model/FileObj";
-import {FILE_SERVE_URL} from "../../providers/Constants";
+import { FileService } from "../../providers/FileService";
+import { FileObj } from "../../model/FileObj";
+import { FILE_SERVE_URL } from "../../providers/Constants";
 
 
 /**
@@ -26,8 +26,8 @@ import {FILE_SERVE_URL} from "../../providers/Constants";
  */
 @IonicPage()
 @Component({
-  selector: 'page-account',
-  templateUrl: 'account.html',
+    selector: 'page-account',
+    templateUrl: 'account.html',
 })
 
 export class Account {
@@ -37,29 +37,29 @@ export class Account {
     imageBase64: string;
 
     constructor(public navCtrl: NavController,
-                public navParams: NavParams,
-                private storage: Storage,
-                private globalData: GlobalData,
-                private events: Events,
-                private modalCtrl: ModalController,
-                private actionSheetCtrl: ActionSheetController,
-                private fileService: FileService,
-                public nativeService: NativeService) {
-      this.userInfo.photo = "assets/img/ionic.png";            
-      this.storage.get('UserInfo').then((userInfo: UserInfo) => {
+        public navParams: NavParams,
+        private storage: Storage,
+        private globalData: GlobalData,
+        private events: Events,
+        private modalCtrl: ModalController,
+        private actionSheetCtrl: ActionSheetController,
+        private fileService: FileService,
+        public nativeService: NativeService) {
+        this.userInfo.photo = "assets/img/ionic.png";
+        this.storage.get('UserInfo').then((userInfo: UserInfo) => {
             if (userInfo) {
-              userInfo.photo = userInfo.photo ? userInfo.photo : this.userInfo.photo;
-              this.userInfo = userInfo;
-              this.events.publish('user:login', userInfo);
-              this.globalData.ui_id = userInfo.ui_id;
-              this.globalData.ui_desc = userInfo.ui_desc;
-              // this.globalData.token = userInfo.token;
+                userInfo.photo = userInfo.photo ? userInfo.photo : this.userInfo.photo;
+                this.userInfo = userInfo;
+                this.events.publish('user:login', userInfo);
+                this.globalData.ui_id = userInfo.ui_id;
+                this.globalData.ui_desc = userInfo.ui_desc;
+                // this.globalData.token = userInfo.token;
             } else {
-              let modal = this.modalCtrl.create(LoginPage);
-              modal.present();
-              modal.onDidDismiss(data => {
-                data && console.log(data);
-              });
+                let modal = this.modalCtrl.create(LoginPage);
+                modal.present();
+                modal.onDidDismiss(data => {
+                    data && console.log(data);
+                });
             }
         });
     }
@@ -68,19 +68,19 @@ export class Account {
         console.log('ionViewDidLoad Account');
     }
 
-    edit(){
+    edit() {
         this.navCtrl.push(AccountEdit);
     }
 
-    getAboutus(){
+    getAboutus() {
         this.navCtrl.push(AboutusPage);
     }
 
-    pwdEdit(){
+    pwdEdit() {
         this.navCtrl.push(AccountPasswordedit);
     }
 
-    changePhoto(){
+    changePhoto() {
         let options = {
             targetWidth: 400,
             targetHeight: 400
@@ -88,27 +88,27 @@ export class Account {
         let actionSheet = this.actionSheetCtrl.create({
             title: '修改头像',
             buttons: [
-              {
-                text: '从相册选择图片',
-                handler: () => {
-                    this.nativeService.getPictureByPhotoLibrary(options).then(imageBase64 => {
-                      this.getPictureSuccess(imageBase64);
-                    });
-                }
-              }, {
-                text: '拍照',
-                handler: () => {
-                    this.nativeService.getPictureByCamera(options).then(imageBase64 => {
-                          this.getPictureSuccess(imageBase64);
+                {
+                    text: '从相册选择图片',
+                    handler: () => {
+                        this.nativeService.getPictureByPhotoLibrary(options).then(imageBase64 => {
+                            this.getPictureSuccess(imageBase64);
                         });
+                    }
+                }, {
+                    text: '拍照',
+                    handler: () => {
+                        this.nativeService.getPictureByCamera(options).then(imageBase64 => {
+                            this.getPictureSuccess(imageBase64);
+                        });
+                    }
+                }, {
+                    text: '取消',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('取消修改');
+                    }
                 }
-              }, {
-                text: '取消',
-                role: 'cancel',
-                handler: () => {
-                    console.log('取消修改');
-                }
-              }
             ]
         });
         actionSheet.present();
@@ -122,7 +122,7 @@ export class Account {
 
     save() {
         if (this.isChange) {
-            let fileObj = <FileObj>{'base64': this.imageBase64};
+            let fileObj = <FileObj>{ 'base64': this.imageBase64 };
             this.fileService.uploadByBase64(fileObj).subscribe(result => {// 上传图片到文件服务器
                 if (result.success) {
                     let origPath = FILE_SERVE_URL + result.data[0].origPath;

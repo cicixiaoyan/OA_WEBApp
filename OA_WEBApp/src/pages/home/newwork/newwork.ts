@@ -11,39 +11,39 @@ import { NewworkDetail } from './newwork-detail/newwork-detail';
  */
 @IonicPage()
 @Component({
-  selector: 'page-newwork',
-  templateUrl: 'newwork.html',
+    selector: 'page-newwork',
+    templateUrl: 'newwork.html',
 })
 export class Newwork {
-  items = [{
-            wfName: "测试工作流1",
-            wfNo: "2", // 工作编号
-            FK_fid: "1234" // 表单id
+    items = [{
+        wfName: "测试工作流1",
+        wfNo: "2", // 工作编号
+        FK_fid: "1234" // 表单id
 
-        },
-        {
-            wfName: "测试工作流2",
-            wfNo: "2", // 工作编号
-            FK_fid: "1234" // 表单id
+    },
+    {
+        wfName: "测试工作流2",
+        wfNo: "2", // 工作编号
+        FK_fid: "1234" // 表单id
 
-        },
-        {
-            wfName: "测试工作流3",
-            wfNo: "2", // 工作编号
-            FK_fid: "1234" // 表单id
+    },
+    {
+        wfName: "测试工作流3",
+        wfNo: "2", // 工作编号
+        FK_fid: "1234" // 表单id
 
-        }
+    }
     ];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Newwork');
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad Newwork');
+    }
 
-  addNew(id){
-    this.navCtrl.push(NewworkDetail, {id: id});
-  }
+    addNew(id) {
+        this.navCtrl.push(NewworkDetail, { id: id });
+    }
 
 }

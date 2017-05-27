@@ -4,16 +4,16 @@ import { Mail } from './mail';
 import { MailReadOutboxModule } from "./mail-read-outbox/mail-read-outbox.module";
 import { MailService } from "./mailService";
 @NgModule({
-  declarations: [
-    Mail,
-  ],
-  imports: [
-    IonicPageModule.forChild(Mail),
-    MailReadOutboxModule
-  ],
-  exports: [
-    Mail
-  ],
-  providers: [MailService]
+    declarations: [
+        Mail,
+    ],
+    imports: [
+        IonicPageModule.forChild(Mail),
+        MailReadOutboxModule
+    ],
+    exports: [
+        Mail
+    ],
+    providers: [MailService]
 })
-export class MailModule {}
+export class MailModule { }

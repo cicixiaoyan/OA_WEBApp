@@ -3,14 +3,14 @@ import { IonicPageModule } from 'ionic-angular';
 import { FindPassword } from './find-password';
 
 @NgModule({
-  declarations: [
-    FindPassword,
-  ],
-  imports: [
-    IonicPageModule.forChild(FindPassword),
-  ],
-  exports: [
-    FindPassword
-  ]
+    declarations: [
+        FindPassword,
+    ],
+    imports: [
+        IonicPageModule.forChild(FindPassword),
+    ],
+    exports: [
+        FindPassword
+    ]
 })
-export class FindPasswordModule {}
+export class FindPasswordModule { }

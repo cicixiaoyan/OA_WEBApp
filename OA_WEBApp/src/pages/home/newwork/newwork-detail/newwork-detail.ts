@@ -9,36 +9,36 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  */
 @IonicPage()
 @Component({
-  selector: 'page-newwork-detail',
-  templateUrl: 'newwork-detail.html',
+    selector: 'page-newwork-detail',
+    templateUrl: 'newwork-detail.html',
 })
 export class NewworkDetail {
-  title : string = "新建工作";
-  firstStep: boolean = true;
-  emergencyLevel: string;
-  manager: string;
-  department: string;
-  role: string;
-  review: string;
-  phoneNotification: boolean = false;
-  siteNotification: boolean = false;
+    title: string = "新建工作";
+    firstStep: boolean = true;
+    emergencyLevel: string;
+    manager: string;
+    department: string;
+    role: string;
+    review: string;
+    phoneNotification: boolean = false;
+    siteNotification: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    console.log(this.navParams.get("id"));
-  }
+    constructor(public navCtrl: NavController, public navParams: NavParams) {
+        console.log(this.navParams.get("id"));
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad NewworkDetail');
-  }
-  showNextStep(){
-    this.firstStep = false;
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad NewworkDetail');
+    }
+    showNextStep() {
+        this.firstStep = false;
+    }
 
-  showfirstStep(){
-    this.firstStep = true;
-  }
+    showfirstStep() {
+        this.firstStep = true;
+    }
 
-   msgNotification = function(obj) {
+    msgNotification = function (obj) {
         if (obj == 'site') {
             this.siteNotification = !this.siteNotification;
         } else {

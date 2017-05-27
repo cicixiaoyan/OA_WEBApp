@@ -3,14 +3,14 @@ import { IonicPageModule } from 'ionic-angular';
 import { NoticeDetail } from './notice-detail';
 
 @NgModule({
-  declarations: [
-    NoticeDetail,
-  ],
-  imports: [
-    IonicPageModule.forChild(NoticeDetail),
-  ],
-  exports: [
-    NoticeDetail
-  ]
+    declarations: [
+        NoticeDetail,
+    ],
+    imports: [
+        IonicPageModule.forChild(NoticeDetail),
+    ],
+    exports: [
+        NoticeDetail
+    ]
 })
-export class NoticeDetailModule {}
+export class NoticeDetailModule { }

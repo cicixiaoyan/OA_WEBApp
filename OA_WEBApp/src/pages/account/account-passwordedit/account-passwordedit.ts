@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {IonicPage, NavController, ViewController} from 'ionic-angular';
-import {FormBuilder, Validators, FormGroup} from '@angular/forms';
-import {LoginPage} from './../../login/login';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { LoginPage } from './../../login/login';
 /**
  * Generated class for the AccountPasswordedit page.
  *
@@ -10,29 +10,29 @@ import {LoginPage} from './../../login/login';
  */
 @IonicPage()
 @Component({
-  selector: 'page-account-passwordedit',
-  templateUrl: 'account-passwordedit.html',
+    selector: 'page-account-passwordedit',
+    templateUrl: 'account-passwordedit.html',
 })
 export class AccountPasswordedit {
-editPasswordForm: FormGroup;
+    editPasswordForm: FormGroup;
 
-  constructor(private navCtrl: NavController,
-              private viewCtrl: ViewController,
-              private formBuilder: FormBuilder) {
-    this.editPasswordForm = this.formBuilder.group({
-      oldPassword: [, [Validators.required, Validators.minLength(3)]],
-      nwePassword: [, [Validators.required, Validators.minLength(3)]],
-      confirmPassword: [, [Validators.required, Validators.minLength(3)]]
-    });
-  };
+    constructor(private navCtrl: NavController,
+        private viewCtrl: ViewController,
+        private formBuilder: FormBuilder) {
+        this.editPasswordForm = this.formBuilder.group({
+            oldPassword: [, [Validators.required, Validators.minLength(3)]],
+            nwePassword: [, [Validators.required, Validators.minLength(3)]],
+            confirmPassword: [, [Validators.required, Validators.minLength(3)]]
+        });
+    };
 
-  confirm() {
-    this.navCtrl.setRoot(LoginPage);
-  }
+    confirm() {
+        this.navCtrl.setRoot(LoginPage);
+    }
 
-  dismiss() {
-    this.viewCtrl.dismiss();
-  }
+    dismiss() {
+        this.viewCtrl.dismiss();
+    }
 
 
 }

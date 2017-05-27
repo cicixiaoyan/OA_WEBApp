@@ -10,42 +10,43 @@ import { HttpService } from "../../../../providers/HttpService";
  */
 @IonicPage()
 @Component({
-  selector: 'page-backlog-detail',
-  templateUrl: 'backlog-detail.html',
+    selector: 'page-backlog-detail',
+    templateUrl: 'backlog-detail.html',
 })
 export class BacklogDetail {
 
-  item: any = [];
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              private httpService: HttpService) {
-    console.log(this.navParams.get("id"));
-    this.initializeItems();
-  }
+    item: any = [];
+    isComplete: boolean = false;
+    constructor(public navCtrl: NavController,
+        public navParams: NavParams,
+        private httpService: HttpService) {
+        console.log(this.navParams.get("id"));
+        this.initializeItems();
+    }
 
-  initializeItems(){
-    this.httpService.get('../../assets/data/backlog-done.json')
-      .map(res => res.json())
-      .subscribe(item => {
-        this.item = item[0];
-      });
-  }
+    initializeItems() {
+        this.httpService.get('assets/data/backlog-done.json')
+            .map(res => res.json())
+            .subscribe(item => {
+                this.item = item[0];
+            });
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad BacklogDetail');
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad BacklogDetail');
+    }
 
-  approved() {
-    console.log("审批通过");
-  }
+    approved() {
+        console.log("审批通过");
+    }
 
-  overrule() {
-    console.log("审批驳回");
-  }
+    overrule() {
+        console.log("审批驳回");
+    }
 
-  cancel() {
-    this.navCtrl.pop();
-  }
+    cancel() {
+        this.navCtrl.pop();
+    }
 
 
 }

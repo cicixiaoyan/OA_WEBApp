@@ -3,14 +3,14 @@ import { IonicPageModule } from 'ionic-angular';
 import { Welcome } from './welcome';
 
 @NgModule({
-  declarations: [
-    Welcome,
-  ],
-  imports: [
-    IonicPageModule.forChild(Welcome),
-  ],
-  exports: [
-    Welcome
-  ]
+    declarations: [
+        Welcome,
+    ],
+    imports: [
+        IonicPageModule.forChild(Welcome),
+    ],
+    exports: [
+        Welcome
+    ]
 })
-export class WelcomeModule {}
+export class WelcomeModule { }

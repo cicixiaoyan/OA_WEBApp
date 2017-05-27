@@ -25,16 +25,25 @@
                     <ion-input type="text" placeholder="当前步骤1"></ion-input>
                 </ion-item>
 
-                <ion-item>
-                    <ion-label>&emsp;流水号：<em>&emsp;1&nbsp;—</em></ion-label>
-
-                    <ion-input type="text" placeholder="请输入流水号"></ion-input>
-                </ion-item>
-
-                <ion-item>
-                    <ion-label>审批状态：</ion-label>
+                <ion-item *ngIf="isComplete">
+                    <ion-label>审批模式：</ion-label>
                     <ion-input type="text" placeholder="无"></ion-input>
                 </ion-item>
+
+                <div *ngIf="!isComplete">
+                    <ion-item>
+                        <ion-label>&emsp;流水号：<em>&emsp;1&nbsp;—</em></ion-label>
+
+                        <ion-input type="text" placeholder="请输入流水号"></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>审批状态：</ion-label>
+                        <ion-input type="text" placeholder="无"></ion-input>
+                    </ion-item>
+                </div>
+
+
                 <div id="strhtm" style="min-height: 100px;overflow-x:auto;"></div>
 
             </ion-list>
@@ -52,7 +61,7 @@
                 </ion-col>
             </ion-row>
 
-            <ion-list>
+            <ion-list *ngIf="!isComplete">
                 <ion-item>
                     <ion-label>审批记录：</ion-label>
                     <ion-textarea type="text" placeholder="无"></ion-textarea>
@@ -79,9 +88,9 @@
             </ion-col>
             <ion-col col-4>
                 <button ion-button icon-left clear small>
-                        <ion-icon name="md-return-left"></ion-icon>
-                        <div>返回</div>
-                    </button>
+                    <ion-icon name="md-return-left"></ion-icon>
+                    <div>返回</div>
+                </button>
             </ion-col>
         </ion-row>
     </ion-card>

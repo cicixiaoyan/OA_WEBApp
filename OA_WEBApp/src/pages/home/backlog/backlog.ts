@@ -23,11 +23,11 @@ export class Backlog {
     moredata: boolean = true;
     data: any;
 
-    constructor(public navCtrl: NavController, 
-                public navParams: NavParams, 
-                private backlogService: BacklogService) {
-        this.data = { "page": 1, "size": 10 };   
-        this._getNotDoneList(this.data);      
+    constructor(public navCtrl: NavController,
+        public navParams: NavParams,
+        private backlogService: BacklogService) {
+        this.data = { "page": 1, "size": 10 };
+        this.getNotDoneList(this.data);
     }
 
     ionViewDidLoad() {
@@ -40,12 +40,12 @@ export class Backlog {
         this.items = [];
         if (this.work === "ontDone") {
             // ....
-            this._getNotDoneList(this.data);
-        }else {
+            this.getNotDoneList(this.data);
+        } else {
             // ...
-            this._getDoneList(this.data);
+            this.getDoneList(this.data);
         }
-        if (!!refresher){
+        if (!!refresher) {
             setTimeout(() => {
                 console.log('数据加载完成');
                 refresher.complete();
@@ -57,11 +57,11 @@ export class Backlog {
     doInfinite(): Promise<any> {
         if (this.moredata) {
             if (this.work === "ontDone") {
-               // ....
-                this._getNotDoneList(this.data);
-            }else {
+                // ....
+                this.getNotDoneList(this.data);
+            } else {
                 // ...
-                this._getDoneList(this.data);
+                this.getDoneList(this.data);
             }
         }
 
@@ -72,21 +72,21 @@ export class Backlog {
         });
     }
 
-    _getNotDoneList(data) {
+    private getNotDoneList(data) {
         this.backlogService.getNotDoneList(data).subscribe(list => {
             if (list === []) {
                 this.moredata = false;
-            }else {
+            } else {
                 this.items = this.items.concat(list);
             }
         });
     }
 
-    _getDoneList(data) {
+    private getDoneList(data) {
         this.backlogService.getDoneList(data).subscribe(list => {
             if (list === []) {
                 this.moredata = false;
-            }else {
+            } else {
                 this.items = this.items.concat(list);
             }
         });

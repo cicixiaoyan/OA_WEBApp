@@ -4,15 +4,15 @@ import { Backlog } from './backlog';
 import { BacklogService } from "./backlogService";
 
 @NgModule({
-  declarations: [
-    Backlog,
-  ],
-  imports: [
-    IonicPageModule.forChild(Backlog),
-  ],
-  exports: [
-    Backlog
-  ],
-  providers: [BacklogService]
+    declarations: [
+        Backlog,
+    ],
+    imports: [
+        IonicPageModule.forChild(Backlog),
+    ],
+    exports: [
+        Backlog
+    ],
+    providers: [BacklogService]
 })
-export class BacklogModule {}
+export class BacklogModule { }

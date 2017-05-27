@@ -3,14 +3,14 @@ import { IonicPageModule } from 'ionic-angular';
 import { Account } from './account';
 
 @NgModule({
-  declarations: [
-    Account,
-  ],
-  imports: [
-    IonicPageModule.forChild(Account),
-  ],
-  exports: [
-    Account,
-  ]
+    declarations: [
+        Account,
+    ],
+    imports: [
+        IonicPageModule.forChild(Account),
+    ],
+    exports: [
+        Account,
+    ]
 })
-export class AccountModule {}
+export class AccountModule { }

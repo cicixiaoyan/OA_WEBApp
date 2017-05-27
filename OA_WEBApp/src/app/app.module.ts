@@ -26,8 +26,8 @@ import { AppVersion } from '@ionic-native/app-version';
 import { Toast } from '@ionic-native/toast';
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
-import { Transfer} from '@ionic-native/transfer';
-import { InAppBrowser} from '@ionic-native/in-app-browser';
+import { Transfer } from '@ionic-native/transfer';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Network } from '@ionic-native/network';
 import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -47,67 +47,67 @@ import { GlobalData } from "../providers/GlobalData";
 // import { HTTP } from '@ionic-native/http';
 
 export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions, httpInterceptHandle: HttpInterceptHandle) {
-  return new HttpIntercept(backend, defaultOptions, httpInterceptHandle);
+    return new HttpIntercept(backend, defaultOptions, httpInterceptHandle);
 }
 
 @NgModule({
-  declarations: [
-    MyApp,
-    TabsPage
-  ],
-  imports: [
-    BrowserModule,
-    HttpModule,
-    IonicModule.forRoot(MyApp, {
-      backButtonText: '',  
-      iconMode: 'ios',  
-      mode: 'ios',
-      tabsHideOnSubPages: true
-    }),
-    IonicStorageModule.forRoot(),
-    HomeModule,
-    MailModule,
-    MailReadModule,
-    MailWriteModule,
-    NoticeModule,
-    NoticeDetailModule,
-    AccountModule,
-    AboutusPageModule,
-    AccountEditModule,
-    AccountPasswordeditModule,
-    LoginModule,
-    WelcomeModule
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    TabsPage
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    AppVersion,
-    Toast,
-    File,
-    FileChooser,
-    Transfer,
-    InAppBrowser,
-    Network,
-    Camera,
-    ImagePicker,
-    PhotoViewer,
-    Content,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    {provide: Http, useFactory: httpFactory, deps: [XHRBackend, RequestOptions, HttpInterceptHandle]},
-    NativeService,
-    HttpIntercept,
-    HttpService,
-    FileService,
-    Helper,
-    Utils,
-    HttpInterceptHandle,
-    GlobalData
-    // ,HTTP
-  ]
+    declarations: [
+        MyApp,
+        TabsPage
+    ],
+    imports: [
+        BrowserModule,
+        HttpModule,
+        IonicModule.forRoot(MyApp, {
+            backButtonText: '',
+            iconMode: 'ios',
+            mode: 'ios',
+            tabsHideOnSubPages: true
+        }),
+        IonicStorageModule.forRoot(),
+        HomeModule,
+        MailModule,
+        MailReadModule,
+        MailWriteModule,
+        NoticeModule,
+        NoticeDetailModule,
+        AccountModule,
+        AboutusPageModule,
+        AccountEditModule,
+        AccountPasswordeditModule,
+        LoginModule,
+        WelcomeModule
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
+        TabsPage
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        AppVersion,
+        Toast,
+        File,
+        FileChooser,
+        Transfer,
+        InAppBrowser,
+        Network,
+        Camera,
+        ImagePicker,
+        PhotoViewer,
+        Content,
+        { provide: ErrorHandler, useClass: IonicErrorHandler },
+        { provide: Http, useFactory: httpFactory, deps: [XHRBackend, RequestOptions, HttpInterceptHandle] },
+        NativeService,
+        HttpIntercept,
+        HttpService,
+        FileService,
+        Helper,
+        Utils,
+        HttpInterceptHandle,
+        GlobalData
+        // ,HTTP
+    ]
 })
-export class AppModule {}
+export class AppModule { }

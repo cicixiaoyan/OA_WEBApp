@@ -2,12 +2,12 @@ page-mail-write {
     .share-btn {
         position: absolute;
         right: 0;
-        bottom: 0;
+        bottom: 54px;
         color: #6dd;
         ion-icon {
             padding-right: 4px;
             font-size: 1.5em;
-            color: gray;
+            color: color($colors, calm);
         }
     }
     .mail-content {
@@ -20,6 +20,12 @@ page-mail-write {
         //     width: 100%;
         //     padding: 10px;
         // }
+    }
+}
+
+.popover-ios {
+    .popover-content {
+        width: 70%;
     }
 }
 

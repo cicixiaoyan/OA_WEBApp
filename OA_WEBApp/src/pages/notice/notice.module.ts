@@ -4,14 +4,14 @@ import { Notice } from './notice';
 
 
 @NgModule({
-  declarations: [
-    Notice
-  ],
-  imports: [
-    IonicPageModule.forChild(Notice)
-  ],
-  exports: [
-    Notice
-  ]
+    declarations: [
+        Notice
+    ],
+    imports: [
+        IonicPageModule.forChild(Notice)
+    ],
+    exports: [
+        Notice
+    ]
 })
-export class NoticeModule {}
+export class NoticeModule { }

@@ -14,54 +14,62 @@
 
 
 <ion-content>
-    <ion-list>
-        <ion-item>
-            <ion-label stacked>编码</ion-label>
-            <ion-input type="text" placeholder="请输入编码" disabled></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label stacked>姓名</ion-label>
-            <ion-input type="text" placeholder="请输入姓名" disabled></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label stacked>公司</ion-label>
-            <ion-input type="text" placeholder="公司名称" disabled></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label stacked>部门</ion-label>
-            <ion-input type="text" placeholder="部门名称" disabled></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label stacked>职位</ion-label>
-            <ion-input type="text" placeholder="职位" disabled></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label stacked>入职时间</ion-label>
-            <ion-input type="text" placeholder="入职时间" [(ngModel)]="event.ui_rzrq" disabled></ion-input>
-        </ion-item>
-        <ion-item (click)="checkSex()">
-            <ion-label stacked>性别</ion-label>
-            <ion-input type="text" placeholder="性别" [(ngModel)]="ui_sex"></ion-input>
-        </ion-item>
-        <ion-item (click)="checkBirth">
-            <ion-label stacked>出生日期</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD" [(ngModel)]="event.ui_csrq"></ion-datetime>
-        </ion-item>
-        <ion-item>
-            <ion-label stacked>移动电话</ion-label>
-            <ion-input type="text" placeholder="移动电话"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label stacked>电子邮箱</ion-label>
-            <ion-input type="text" placeholder="电子邮箱"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label stacked>办公电话</ion-label>
-            <ion-input type="text" placeholder="办公电话"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label stacked>内线电话</ion-label>
-            <ion-input type="text" placeholder="内线电话"></ion-input>
-        </ion-item>
-    </ion-list>
+    <form [formGroup]="editForm" (ngSubmit)="edit(editForm.value)">
+        <ion-list>
+            <ion-item>
+                <ion-label stacked>编码</ion-label>
+                <ion-input type="text" [(ngModel)]="userInfo.ui_id" placeholder="请输入编码" disabled></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>姓名</ion-label>
+                <ion-input type="text" [(ngModel)]="userInfo.ui_desc" placeholder="请输入姓名" disabled></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>公司</ion-label>
+                <ion-input type="text" [(ngModel)]="userInfo.ui_ssgs" placeholder="公司名称" disabled></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>部门</ion-label>
+                <ion-input type="text" [(ngModel)]="userInfo.ui_ssbm" placeholder="部门名称" disabled></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>职位</ion-label>
+                <ion-input type="text" [(ngModel)]="userInfo.ui_zw" placeholder="职位" disabled></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>入职时间</ion-label>
+                <ion-input type="text" [(ngModel)]="userInfo.ui_rzrq" formControlName="ui_rzrq" placeholder="入职时间" disabled></ion-input>
+            </ion-item>
+            <ion-item (click)="checkSex()">
+                <ion-label stacked>性别</ion-label>
+                <ion-input type="text" [(ngModel)]="userInfo.ui_sex" formControlName="ui_sex" placeholder="性别"></ion-input>
+            </ion-item>
+            <ion-item (click)="checkBirth">
+                <ion-label stacked>出生日期</ion-label>
+                <ion-datetime [(ngModel)]="userInfo.ui_csrq" formControlName="ui_csrq" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>移动电话</ion-label>
+                <ion-input type="text" [(ngModel)]="userInfo.ui_yddx" formControlName="ui_yddx" placeholder="移动电话"></ion-input>
+            </ion-item>
+            <div *ngIf="!editForm.controls.ui_yddx.valid && editForm.controls.ui_yddx.touched" class="validation-failed">请输入合法的电话号码</div>
+
+            <ion-item>
+                <ion-label stacked>电子邮箱</ion-label>
+                <ion-input type="text" [(ngModel)]="userInfo.ui_mail" formControlName="ui_mail" placeholder="电子邮箱"></ion-input>
+            </ion-item>
+            <div *ngIf="!editForm.controls.ui_yddx.valid && editForm.controls.ui_yddx.touched" class="validation-failed">请输入正确的电子邮箱</div>
+
+            <ion-item>
+                <ion-label stacked>办公电话</ion-label>
+                <ion-input type="text" [(ngModel)]="userInfo.ui_bgdh" formControlName="ui_bgdh" placeholder="办公电话"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>内线电话</ion-label>
+                <ion-input type="text" [(ngModel)]="userInfo.ui_czdh" formControlName="ui_czdh" placeholder="内线电话"></ion-input>
+            </ion-item>
+
+        </ion-list>
+    </form>
 </ion-content>

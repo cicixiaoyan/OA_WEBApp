@@ -50753,14 +50753,14 @@ page-mail-read .message-reply > div button {
 page-mail-write .share-btn {
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: 54px;
   color: #6dd;
 }
 
 page-mail-write .share-btn ion-icon {
   padding-right: 4px;
   font-size: 1.5em;
-  color: gray;
+  color: #11c1f3;
 }
 
 page-mail-write .mail-content {
@@ -50769,6 +50769,10 @@ page-mail-write .mail-content {
   left: 0;
   top: 170px;
   right: 0;
+}
+
+.popover-ios .popover-content {
+  width: 70%;
 }
 
 .checkpeople-popover ion-item {

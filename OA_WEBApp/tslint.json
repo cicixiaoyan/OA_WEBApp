@@ -38,20 +38,20 @@
             "check-else"
         ],
         "indent": [
-            false, "spaces"
+            4, "spaces"
         ],
         "align": [true, "parameters", "statements"],
         "no-switch-case-fall-through": true,
         "jsdoc-format": true,
         "use-isnan": true,
-        "linebreak-style": [true, "CRLF"],
+        "linebreak-style": [true, "LF"],
         // "quotemark": [true,
         //     "double",
         //     "avoid-escape"
         // ],
         "semicolon": [true, "always", "ignore-bound-class-methods"],
         "no-var-keyword": true,
-        "no-trailing-whitespace": [true, "ignore-comments"],
+        // "no-trailing-whitespace": [true, "ignore-comments"],
         "no-namespace": [true, "allow-declarations"]
     },
     "rulesDirectory": [

@@ -10,20 +10,20 @@ import { TabsPage } from '../tabs/tabs';
  */
 @IonicPage()
 @Component({
-  selector: 'page-welcome',
-  templateUrl: 'welcome.html',
+    selector: 'page-welcome',
+    templateUrl: 'welcome.html',
 })
 export class Welcome {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Welcome');
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad Welcome');
+    }
 
-   goToHome(){
-        this.navCtrl.setRoot(TabsPage, {index: 0});
+    goToHome() {
+        this.navCtrl.setRoot(TabsPage, { index: 0 });
     }
 
 }

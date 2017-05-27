@@ -3,14 +3,14 @@ import { IonicPageModule } from 'ionic-angular';
 import { MailRead } from './mail-read';
 
 @NgModule({
-  declarations: [
-    MailRead,
-  ],
-  imports: [
-    IonicPageModule.forChild(MailRead)
-  ],
-  exports: [
-    MailRead
-  ]
+    declarations: [
+        MailRead,
+    ],
+    imports: [
+        IonicPageModule.forChild(MailRead)
+    ],
+    exports: [
+        MailRead
+    ]
 })
-export class MailReadModule {}
+export class MailReadModule { }

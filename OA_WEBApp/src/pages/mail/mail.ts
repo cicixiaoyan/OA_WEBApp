@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, Refresher } from 'ionic-angular';
 
-import { MailRead} from '../mail/mail-read/mail-read';
-import { MailWrite} from '../mail/mail-write/mail-write';
-import { MailReadOutbox} from '../mail/mail-read-outbox/mail-read-outbox';
+import { MailRead } from '../mail/mail-read/mail-read';
+import { MailWrite } from '../mail/mail-write/mail-write';
+import { MailReadOutbox } from '../mail/mail-read-outbox/mail-read-outbox';
 import { MailService } from "./mailService";
 /**
  * Generated class for the Mail page.
@@ -23,15 +23,15 @@ export class Mail {
     isEmpty: boolean = false;
     checkBtn: object = { "read": false, "unread": true, "all": false };
     inboxList: any = [];
-    outboxList : any = [];
-    moredata : boolean = true;
+    outboxList: any = [];
+    moredata: boolean = true;
     inboxData: any;
     outboxData: any;
 
     constructor(public navCtrl: NavController,
-                public navParams: NavParams,
-                private modalCtrl: ModalController,
-                private mailService: MailService) {
+        public navParams: NavParams,
+        private modalCtrl: ModalController,
+        private mailService: MailService) {
         this.inboxData = { "size": 1, "page": 0 };
         this.outboxData = { "size": 1, "page": 0 };
         this.initializeItems();
@@ -47,15 +47,15 @@ export class Mail {
     }
 
     // 选择已读、未读、全部
-    checkRead(name: string = "unread" ) {
+    checkRead(name: string = "unread") {
         this.inboxData.page = 1;
-        this.inboxList = []; 
+        this.inboxList = [];
         this.checkBtn = { "read": false, "unread": false, "all": false };
         this.checkBtn[name] = true;
-        if ( name === "unread") {
+        if (name === "unread") {
             // 参数设置
         }
-        else if ( name === "read" ) {
+        else if (name === "read") {
             // 参数设置
         }
         else {
@@ -80,11 +80,11 @@ export class Mail {
     }
 
     doRead(id) {
-        this.navCtrl.push(MailRead, {id: id});
+        this.navCtrl.push(MailRead, { id: id });
     }
 
     doReadOutBox(id) {
-        this.navCtrl.push(MailReadOutbox, {id: id});
+        this.navCtrl.push(MailReadOutbox, { id: id });
     }
 
     doWrite() {
@@ -102,9 +102,9 @@ export class Mail {
         this.moredata = true;
         if (this.box === "inbox") {
             this.inboxList = [];
-            this.inboxData.page = 1; 
+            this.inboxData.page = 1;
             this._getInboxList(this.inboxData);
-        }else {
+        } else {
             this.outboxList = [];
             this.outboxData.page = 1;
             this._getOutboxList(this.outboxData);
@@ -117,11 +117,11 @@ export class Mail {
     }
 
     doInfinite(): Promise<any> {
-        if (this.moredata){
+        if (this.moredata) {
             if (this.box === "inbox") {
-                this.inboxData.page++; 
+                this.inboxData.page++;
                 this._getInboxList(this.inboxData);
-            }else {
+            } else {
                 this.outboxData.page++;
                 this._getOutboxList(this.outboxData);
             }
@@ -138,7 +138,7 @@ export class Mail {
         this.mailService.getInboxList(inboxData).subscribe(list => {
             if (list === []) {
                 this.moredata = false;
-            }else {
+            } else {
                 this.inboxList = this.inboxList.concat(list);
             }
         });
@@ -148,7 +148,7 @@ export class Mail {
         this.mailService.getOutboxList(outboxData).subscribe(list => {
             if (list === []) {
                 this.moredata = false;
-            }else {
+            } else {
                 this.outboxList = this.outboxList.concat(list);
             }
         });

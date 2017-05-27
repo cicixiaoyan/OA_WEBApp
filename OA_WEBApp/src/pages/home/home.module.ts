@@ -11,20 +11,20 @@ import { NewworkDetailModule } from './newwork/newwork-detail/newwork-detail.mod
 
 
 @NgModule({
-  declarations: [
-    Home,
-  ],
-  imports: [
-    IonicPageModule.forChild(Home),
-    BacklogModule,
-    BacklogDetailModule,
-    ContactsModule,
-    ContactsDetailModule,
-    NewworkModule,
-    NewworkDetailModule
-  ],
-  exports: [
-    Home
-  ]
+    declarations: [
+        Home,
+    ],
+    imports: [
+        IonicPageModule.forChild(Home),
+        BacklogModule,
+        BacklogDetailModule,
+        ContactsModule,
+        ContactsDetailModule,
+        NewworkModule,
+        NewworkDetailModule
+    ],
+    exports: [
+        Home
+    ]
 })
-export class HomeModule {}
+export class HomeModule { }

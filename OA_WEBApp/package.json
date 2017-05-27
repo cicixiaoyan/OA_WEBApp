@@ -64,23 +64,6 @@
         "@ionic/cli-plugin-ionic-angular": "^1.2.0",
         "typescript": "~2.2.1"
     },
-    "cordovaPlugins": [
-        "cordova-plugin-whitelist",
-        "cordova-plugin-console",
-        "cordova-plugin-device",
-        "cordova-plugin-statusbar",
-        "cordova-plugin-splashscreen",
-        "ionic-plugin-keyboard",
-        "cordova-plugin-x-toast",
-        "cordova-plugin-network-information",
-        "cordova-plugin-app-version",
-        "cordova-plugin-inappbrowser",
-        "cordova-plugin-file",
-        "cordova-plugin-file-transfer",
-        "cordova-plugin-camera",
-        "com-sarriaroman-photoviewer",
-        "com.synconset.imagepicker"
-    ],
     "cordovaPlatforms": [],
     "description": "OA_WEBApp: An Ionic project",
     "cordova": {

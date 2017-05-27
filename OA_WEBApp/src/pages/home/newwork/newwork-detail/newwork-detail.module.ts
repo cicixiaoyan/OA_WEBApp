@@ -3,14 +3,14 @@ import { IonicPageModule } from 'ionic-angular';
 import { NewworkDetail } from './newwork-detail';
 
 @NgModule({
-  declarations: [
-    NewworkDetail,
-  ],
-  imports: [
-    IonicPageModule.forChild(NewworkDetail),
-  ],
-  exports: [
-    NewworkDetail
-  ]
+    declarations: [
+        NewworkDetail,
+    ],
+    imports: [
+        IonicPageModule.forChild(NewworkDetail),
+    ],
+    exports: [
+        NewworkDetail
+    ]
 })
-export class NewworkDetailModule {}
+export class NewworkDetailModule { }

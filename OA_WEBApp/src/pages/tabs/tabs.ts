@@ -5,7 +5,7 @@ import { Home } from '../home/home';
 import { Mail } from '../mail/mail';
 import { Notice } from '../notice/notice';
 import { Account } from '../account/account';
-import {Tabs} from "ionic-angular";
+import { Tabs } from "ionic-angular";
 
 @Component({
     templateUrl: 'tabs.html'

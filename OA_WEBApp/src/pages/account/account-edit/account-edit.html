@@ -18,23 +18,23 @@
         <ion-list>
             <ion-item>
                 <ion-label stacked>编码</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.ui_id" placeholder="请输入编码" disabled></ion-input>
+                <ion-input type="text" [(ngModel)]="userInfo.ui_id" [ngModelOptions]="{standalone: true}" placeholder="请输入编码" disabled></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>姓名</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.ui_desc" placeholder="请输入姓名" disabled></ion-input>
+                <ion-input type="text" [(ngModel)]="userInfo.ui_desc" [ngModelOptions]="{standalone: true}" placeholder="请输入姓名" disabled></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>公司</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.ui_ssgs" placeholder="公司名称" disabled></ion-input>
+                <ion-input type="text" [(ngModel)]="userInfo.ui_ssgs" [ngModelOptions]="{standalone: true}" placeholder="公司名称" disabled></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>部门</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.ui_ssbm" placeholder="部门名称" disabled></ion-input>
+                <ion-input type="text" [(ngModel)]="userInfo.ui_ssbm" [ngModelOptions]="{standalone: true}" placeholder="部门名称" disabled></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>职位</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.ui_zw" placeholder="职位" disabled></ion-input>
+                <ion-input type="text" [(ngModel)]="userInfo.ui_zw" [ngModelOptions]="{standalone: true}" placeholder="职位" disabled></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>入职时间</ion-label>
@@ -71,5 +71,11 @@
             </ion-item>
 
         </ion-list>
+        <div padding text-center>
+            <button ion-button type="submit" color="danger" [disabled]="!editForm.valid||submitted">保存</button>
+            <button ion-button clear small type="submit">取消修改</button>
+        </div>
+
+
     </form>
 </ion-content>

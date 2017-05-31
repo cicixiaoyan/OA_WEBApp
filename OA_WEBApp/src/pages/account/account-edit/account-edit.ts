@@ -19,6 +19,7 @@ export class AccountEdit {
 
     userInfo: UserInfo = new UserInfo();
     editForm: any;
+    submitted: boolean = false;
 
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
@@ -76,6 +77,7 @@ export class AccountEdit {
     }
 
     edit(value) {
+        this.submitted = true;
         console.log(value);
     }
 

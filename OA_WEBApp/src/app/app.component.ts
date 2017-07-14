@@ -64,7 +64,7 @@ export class MyApp {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.   
             this.storage.get('firstIn').then((result) => {
-
+                this.nativeService.showToast("不是第一次进入")
                 if (result) {
                     this.rootPage = TabsPage;
                     this.storage.get('UserInfo').then((userInfo: UserInfo) => {
@@ -143,16 +143,16 @@ export class MyApp {
     };
 
     registerBackButtonAction() {
-        if (!this.nativeService.isAndroid()) {
-            return;
-        }
+        // if (!this.nativeService.isAndroid()) {
+        //     return;
+        // }
         this.platform.registerBackButtonAction(() => {
             if (this.keyboard.isOpen()) {// 如果键盘开启则隐藏键盘
                 this.keyboard.close();
                 return;
             }
             // 如果想点击返回按钮隐藏toast或loading或Overlay就把下面加上
-            this.ionicApp._toastPortal.getActive() || this.ionicApp._loadingPortal.getActive() || this.ionicApp._overlayPortal.getActive();
+            //this.ionicApp._toastPortal.getActive() || this.ionicApp._loadingPortal.getActive() || this.ionicApp._overlayPortal.getActive();
 
             let activePortal = this.ionicApp._modalPortal.getActive();
             if (activePortal) {

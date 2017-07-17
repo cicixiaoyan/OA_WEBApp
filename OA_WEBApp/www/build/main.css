@@ -51374,3 +51374,19 @@ page-notice-detail .notice-affix a {
   line-height: 44px;
   font-size: 2rem;
 }
+
+page-welcome ion-slide {
+  background-color: #eeeeee;
+}
+
+page-welcome ion-slide img {
+  height: 100vh !important;
+  width: auto !important;
+}
+
+page-welcome .start-button {
+  position: absolute;
+  bottom: 28px;
+  text-align: center;
+  width: 100%;
+}

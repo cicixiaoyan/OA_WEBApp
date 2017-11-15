@@ -47,24 +47,24 @@ export class MyApp {
     rootPage: any;
     backButtonPressed: boolean = false;
     constructor(public menu: MenuController,
-        private platform: Platform,
-        private statusBar: StatusBar,
-        private splashScreen: SplashScreen,
-        private keyboard: Keyboard,
-        private ionicApp: IonicApp,
-        private storage: Storage,
-        private globalData: GlobalData,
-        private toastCtrl: ToastController,
-        private modalCtrl: ModalController,
-        private events: Events,
-        private nativeService: NativeService) {
+                private platform: Platform,
+                private statusBar: StatusBar,
+                private splashScreen: SplashScreen,
+                private keyboard: Keyboard,
+                private ionicApp: IonicApp,
+                private storage: Storage,
+                private globalData: GlobalData,
+                private toastCtrl: ToastController,
+                private modalCtrl: ModalController,
+                private events: Events,
+                private nativeService: NativeService) {
 
 
         platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.   
             this.storage.get('firstIn').then((result) => {
-                this.nativeService.showToast("不是第一次进入")
+                this.nativeService.showToast("不是第一次进入");
                 if (result) {
                     this.rootPage = TabsPage;
                     this.storage.get('UserInfo').then((userInfo: UserInfo) => {

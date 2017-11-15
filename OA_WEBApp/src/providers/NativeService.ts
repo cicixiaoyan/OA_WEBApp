@@ -26,18 +26,18 @@ export class NativeService {
     private loadingIsOpen: boolean = false;
 
     constructor(private platform: Platform,
-        private toastCtrl: ToastController,
-        private alertCtrl: AlertController,
-        private appVersion: AppVersion,
-        private camera: Camera,
-        private toast: Toast,
-        private transfer: Transfer,
-        private file: File,
-        private fileChooser: FileChooser,
-        private inAppBrowser: InAppBrowser,
-        private imagePicker: ImagePicker,
-        private network: Network,
-        private loadingCtrl: LoadingController) {
+                private toastCtrl: ToastController,
+                private alertCtrl: AlertController,
+                private appVersion: AppVersion,
+                private camera: Camera,
+                private toast: Toast,
+                private transfer: Transfer,
+                private file: File,
+                private fileChooser: FileChooser,
+                private inAppBrowser: InAppBrowser,
+                private imagePicker: ImagePicker,
+                private network: Network,
+                private loadingCtrl: LoadingController) {
     }
 
     // const fileTransfer: TransferObject = this.transfer.create();
@@ -211,7 +211,7 @@ export class NativeService {
                 showCloseButton: false
             }).present();
         }
-    };
+    }
 
 
     /**
@@ -230,7 +230,7 @@ export class NativeService {
                 this.loadingIsOpen = false;
             }, 10000);
         }
-    };
+    }
 
     /**
      * 关闭loading
@@ -238,7 +238,7 @@ export class NativeService {
     hideLoading(): void {
         this.loadingIsOpen && this.loading.dismiss();
         this.loadingIsOpen = false;
-    };
+    }
 
     /**
      * 使用cordova-plugin-camera获取照片
@@ -265,7 +265,7 @@ export class NativeService {
                 this.warn('getPicture:' + err);
             });
         });
-    };
+    }
 
     /**
      * 通过拍照获取照片
@@ -283,7 +283,7 @@ export class NativeService {
                 String(err).indexOf('cancel') != -1 ? this.showToast('取消拍照', 1500) : this.showToast('获取照片失败');
             });
         });
-    };
+    }
 
 
     /**
@@ -302,7 +302,7 @@ export class NativeService {
                 String(err).indexOf('cancel') != -1 ? this.showToast('取消选择图片', 1500) : this.showToast('获取照片失败');
             });
         });
-    };
+    }
 
 
     /**
@@ -338,7 +338,7 @@ export class NativeService {
                 this.showToast('获取照片失败');
             });
         });
-    };
+    }
 
     /**
      * 根据图片绝对路径转化为base64字符串

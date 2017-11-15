@@ -59,10 +59,10 @@ export class PopoverPage {
     addresseeIds: string;
 
     constructor(private navParams: NavParams,
-        private fileService: FileService,
-        public nativeService: NativeService,
-        public viewCtrl: ViewController,
-        public storage: Storage) {
+                private fileService: FileService,
+                public nativeService: NativeService,
+                public viewCtrl: ViewController,
+                public storage: Storage) {
         this.addressee = this.navParams.get("addressee");
         this.addresseeIds = this.navParams.get("addresseeIds");
         console.log(this.addressee, this.addresseeIds);
@@ -83,7 +83,7 @@ export class PopoverPage {
         const idArr = this.addresseeIds.split(",");
 
         this.items = testArray.map(function (value, index) {
-            for (var i in idArr) {
+            for (let i in idArr) {
                 if (idArr[i] !== value.ui_id) {
                     Object.assign(value, { checked: false });
                 } else {
@@ -121,7 +121,7 @@ export class PopoverPage {
         console.log(confirm);
         this.addressee = "";
         this.addresseeIds = "";
-        for (var value of this.items) {
+        for (let value of this.items) {
             if (value.checked) {
                 this.addressee += value.ui_desc + ",";
                 this.addresseeIds += value.ui_id + ",";
@@ -148,16 +148,16 @@ export class MailWrite {
     // mailObj : object = {};
     @ViewChild("popoverContent", { read: ElementRef }) content: ElementRef;
     constructor(public navCtrl: NavController,
-        public navParams: NavParams,
-        public actionSheetCtrl: ActionSheetController,
-        private popoverCtrl: PopoverController,
-        private fileService: FileService,
-        public nativeService: NativeService,
-        private fileChooser: FileChooser,
-        private alertCtrl: AlertController,
-        private transfer: Transfer,
-        private viewCtrl: ViewController,
-        private globaldata: GlobalData) {
+                public navParams: NavParams,
+                public actionSheetCtrl: ActionSheetController,
+                private popoverCtrl: PopoverController,
+                private fileService: FileService,
+                public nativeService: NativeService,
+                private fileChooser: FileChooser,
+                private alertCtrl: AlertController,
+                private transfer: Transfer,
+                private viewCtrl: ViewController,
+                private globaldata: GlobalData) {
         console.log(this.navParams.get("mail"));
         let mail = this.navParams.get("mail");
         if (typeof (mail) !== "undefined") {
@@ -210,12 +210,12 @@ export class MailWrite {
                     text: '文件',
                     handler: () => {
                         this.fileChooser.open().then(fileURL => {
-                            var pathOption: FileUploadOptions = {
+                            let pathOption: FileUploadOptions = {
                                 fileKey: "file",
                                 fileName: fileURL.substr(fileURL.lastIndexOf('/') + 1),
                                 mimeType: "text/plain"
                             };
-                            var url = encodeURI("http://some.server.com/upload.php");
+                            let url = encodeURI("http://some.server.com/upload.php");
                             return this.upload(fileURL, url, pathOption);
                         }).catch(err => {
                             console.log(err);

@@ -26,15 +26,15 @@ export class LoginPage {
     nav: Nav;
 
     constructor(private viewCtrl: ViewController,
-        private formBuilder: FormBuilder,
-        private storage: Storage,
-        private modalCtrl: ModalController,
-        private platform: Platform,
-        private alertCtrl: AlertController,
-        private globalData: GlobalData,
-        private loginService: LoginService,
-        public navCtrl: NavController,
-        private httpService: HttpService
+                private formBuilder: FormBuilder,
+                private storage: Storage,
+                private modalCtrl: ModalController,
+                private platform: Platform,
+                private alertCtrl: AlertController,
+                private globalData: GlobalData,
+                private loginService: LoginService,
+                public navCtrl: NavController,
+                private httpService: HttpService
     ) {
 
         this.loginForm = this.formBuilder.group({
@@ -99,7 +99,8 @@ export class LoginPage {
             // this.globalData.token = userInfo.token;
             this.userInfo = userInfo[0];
             this.storage.set('UserInfo', userInfo[0]);
-            // this.viewCtrl.dismiss(userInfo);
+            alert(this.storage.get('UserInfo'));
+            this.viewCtrl.dismiss(userInfo);
             this.navCtrl.setRoot(TabsPage, { tabIndex: 0 });
         });
     }

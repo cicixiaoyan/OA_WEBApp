@@ -29,9 +29,9 @@ export class Mail {
     outboxData: any;
 
     constructor(public navCtrl: NavController,
-        public navParams: NavParams,
-        private modalCtrl: ModalController,
-        private mailService: MailService) {
+                public navParams: NavParams,
+                private modalCtrl: ModalController,
+                private mailService: MailService) {
         this.inboxData = { "size": 1, "page": 0 };
         this.outboxData = { "size": 1, "page": 0 };
         this.initializeItems();
@@ -40,9 +40,12 @@ export class Mail {
     initializeItems() {
         this._getInboxList(this.inboxData);
         this._getOutboxList(this.outboxData);
-        if(this.inboxList){
-            setInterval(this.getNewInboxList(this.inboxData),5000);
-        }
+        console.log(this);
+
+        setInterval(() => {
+            console.log(this);
+            this.getNewInboxList(this.inboxData);
+       }, 50000);
     }
 
     ionViewDidLoad() {
@@ -138,37 +141,25 @@ export class Mail {
     }
 
     getNewInboxList(inboxData){
+        inboxData.page = 1;
         this.mailService.getInboxList(inboxData).subscribe(list => {
-            console.log(list)
-            let arr = list.filter(function(item){
-                return item.jsyjid == this.inboxList[0].jsyjid;
+            console.log(list);
+            let arr = list.filter(item => {
+                return item.jsyjid !== this.inboxList[0].jsyjid;
             });
-            console.log(arr);
-            this.inboxList = [...this.inboxList,...arr];
-            // if (list === []  ) {
-            //     return;
-            // } else {
-            //     let arr = [];
-            //     for(let i of list){
-            //         if(list[i].jsyjid == this.inboxList[0].jsyjid){
-            //             return;
-            //         }else{
-            //             arr.push(list)
-            //         }
-            //     }
-            // }
+            if (arr !== []) {
+                this.inboxList = [...this.inboxList, ...arr];
+            }
         });
-    };
+    }
 
 
     _getInboxList(inboxData) {
         this.mailService.getInboxList(inboxData).subscribe(list => {
-            console.log(list)
             if (list === []) {
                 this.moredata = false;
             } else {
-                this.inboxList = [...this.inboxList,...list];
-                //this.inboxList = this.inboxList.concat(list);
+                this.inboxList = [...this.inboxList, ...list];
             }
         });
     }
@@ -178,8 +169,7 @@ export class Mail {
             if (list === []) {
                 this.moredata = false;
             } else {
-                this.outboxList = [...this.outboxList,...list];
-                //this.outboxList = this.outboxList.concat(list);
+                this.outboxList = [...this.outboxList, ...list];
             }
         });
     }

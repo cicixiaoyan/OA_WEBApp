@@ -22,9 +22,9 @@ export class AccountEdit {
     submitted: boolean = false;
 
     constructor(public navCtrl: NavController,
-        public navParams: NavParams,
-        private actionSheetCtrl: ActionSheetController,
-        private formBuilder: FormBuilder) {
+                public navParams: NavParams,
+                private actionSheetCtrl: ActionSheetController,
+                private formBuilder: FormBuilder) {
 
         this.editForm = this.formBuilder.group({
             ui_rzrq: ['admin', [Validators.required, Validators.minLength(4)]], // 第一个参数是默认值
@@ -79,6 +79,10 @@ export class AccountEdit {
     edit(value) {
         this.submitted = true;
         console.log(value);
+    }
+
+    return(){
+        this.navCtrl.pop();
     }
 
 

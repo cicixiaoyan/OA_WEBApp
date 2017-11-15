@@ -44,7 +44,7 @@
         "no-switch-case-fall-through": true,
         "jsdoc-format": true,
         "use-isnan": true,
-        "linebreak-style": [true, "LF"],
+        //"linebreak-style": [true, "LF"],
         // "quotemark": [true,
         //     "double",
         //     "avoid-escape"

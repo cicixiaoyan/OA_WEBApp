@@ -37,14 +37,14 @@ export class Account {
     imageBase64: string;
 
     constructor(public navCtrl: NavController,
-        public navParams: NavParams,
-        private storage: Storage,
-        private globalData: GlobalData,
-        private events: Events,
-        private modalCtrl: ModalController,
-        private actionSheetCtrl: ActionSheetController,
-        private fileService: FileService,
-        public nativeService: NativeService) {
+                public navParams: NavParams,
+                private storage: Storage,
+                private globalData: GlobalData,
+                private events: Events,
+                private modalCtrl: ModalController,
+                private actionSheetCtrl: ActionSheetController,
+                private fileService: FileService,
+                public nativeService: NativeService) {
         this.userInfo.photo = "assets/img/ionic.png";
         this.storage.get('UserInfo').then((userInfo: UserInfo) => {
             if (userInfo) {

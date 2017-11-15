@@ -4,7 +4,7 @@
   "proxies": [
     {
       "path": "/ashx",
-      "proxyUrl": "http://192.168.0.70:80/ashx"
+      "proxyUrl": "http://192.168.0.49:789/ashx"
     }
   ],
   "type": "ionic-angular"

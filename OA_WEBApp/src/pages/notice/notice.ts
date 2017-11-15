@@ -23,8 +23,8 @@ export class Notice {
     moredata: boolean = true; // 是否能加载更多
     isEmpty: boolean = false; // 是否无数据
     constructor(public navCtrl: NavController,
-        public navParams: NavParams,
-        public httpService: HttpService) {
+                public navParams: NavParams,
+                public httpService: HttpService) {
         this.initializeItems();
     }
 

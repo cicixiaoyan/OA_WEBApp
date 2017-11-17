@@ -6,7 +6,7 @@ import { TabsPage } from "../tabs/tabs";
 import { Mail } from '../mail/mail';
 import { Backlog } from "../home/backlog/backlog";
 import { Contacts } from "../home/contacts/contacts";
-import { Newwork } from '../home/newwork/newwork';
+// import { Newwork } from '../home/newwork/newwork';
 
 
 /**
@@ -41,7 +41,7 @@ export class Home {
         { title: '公告管理', component: TabsPage, index: 2, icon: 'ios-notifications', color: "royal" },
         { title: '通讯录', component: Contacts, icon: 'md-call', color: "energized" },
         { title: '待办事项', component: Backlog, icon: 'ios-calendar', color: "assertive" },
-        { title: '新建工作', component: Newwork, icon: 'md-exit', color: "balanced" },
+        // { title: '新建工作', component: Newwork, icon: 'md-exit', color: "balanced" },
         { title: '设置', component: TabsPage, index: 3, icon: 'ios-cog', color: "calm" },
     ];
 

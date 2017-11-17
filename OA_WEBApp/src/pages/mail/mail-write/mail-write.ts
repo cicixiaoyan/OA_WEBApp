@@ -10,6 +10,8 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { Storage } from '@ionic/storage';
 
+import { HttpService } from "../../../providers/HttpService";
+
 
 
 /**
@@ -157,6 +159,7 @@ export class MailWrite {
                 private alertCtrl: AlertController,
                 private transfer: Transfer,
                 private viewCtrl: ViewController,
+                public httpService: HttpService,
                 private globaldata: GlobalData) {
         console.log(this.navParams.get("mail"));
         let mail = this.navParams.get("mail");
@@ -181,6 +184,12 @@ export class MailWrite {
 
     send() {
         console.log(this.msbz);
+        let data =  {
+            "Uid": "admin",
+            "AcceptUid": "046",
+            "Content": "123456"
+        };
+        this.httpService.postFormData("ashx/UserSheet.ashx", data).map(Response => Response.json());
         this.nativeService.showToast("信息已发送");
     }
 

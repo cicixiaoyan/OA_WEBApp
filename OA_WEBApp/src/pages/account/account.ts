@@ -51,8 +51,8 @@ export class Account {
                 userInfo.photo = userInfo.photo ? userInfo.photo : this.userInfo.photo;
                 this.userInfo = userInfo;
                 this.events.publish('user:login', userInfo);
-                this.globalData.ui_id = userInfo.ui_id;
-                this.globalData.ui_desc = userInfo.ui_desc;
+                this.globalData.Uid = userInfo.Uid;
+                this.globalData.Name = userInfo.Name;
                 // this.globalData.token = userInfo.token;
             } else {
                 let modal = this.modalCtrl.create(LoginPage);

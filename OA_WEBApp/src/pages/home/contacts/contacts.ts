@@ -24,8 +24,8 @@ export class Contacts {
     moredata: boolean = true;
 
     constructor(public navCtrl: NavController,
-        public navParams: NavParams,
-        public httpService: HttpService) {
+                public navParams: NavParams,
+                public httpService: HttpService) {
         this.initializeItems();
 
     }
@@ -62,7 +62,8 @@ export class Contacts {
 
     initializeItems() {
         this.getList().subscribe(list => {
-            this.items = list;
+            if (list.Result == true)
+                this.items = list.Data;
         });
         // let data={action: "Yh_List", page: 1, size: 1};
         // this.httpService.postFormData("ashx/MailList.ashx/Yh_List",data)
@@ -82,8 +83,7 @@ export class Contacts {
 
     private getList(data?) {
         data = !!data ? data : { page: 1, size: 1 };
-        data.action = "Yh_List";
-        return this.httpService.postFormData("ashx/MailList.ashx/Yh_List", data).map(Response => Response.json());
+        return this.httpService.postFormData("ashx/UserSheet.ashx", data).map(Response => Response.json());
     }
 
     ionViewDidLoad() {
@@ -93,6 +93,13 @@ export class Contacts {
     search(refresher: Refresher) {
         console.log(this.searchKey);
         this.initializeItems();
+        return this.httpService.postFormData("ashx/UserSheet.ashx", {"Name": this.searchKey}).map(Response => Response.json())
+            .subscribe(list => {
+                if (list.Result == true)
+                    this.items = list.Data;
+                else
+                    this.items = [];
+            });
         // let data={action: "noticeBykeyWords", page: 1, size: 1,title: "系统管理员"};
         // this.httpService.postFormData("ashx/MailList.ashx/noticeBykeyWords",data)
         //   .map(Response => Response.json())

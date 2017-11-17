@@ -22,13 +22,13 @@
         <div class="top-bg"></div>
         <div>
             <img (click)="changePhoto()" [src]="userInfo.photo" alt="photo" height="60" />
-            <h5><span class="positive">♂</span>&nbsp;<span class="positive">{{userInfo.ui_desc}}</span></h5>
+            <h5><span class="positive">♂</span>&nbsp;<span class="positive">{{userInfo.Name}}</span></h5>
             <div class="row row-no-padding">
                 <div class="col col-50" style="border-right: 1px solid;">
-                    职位：{{userInfo.ui_zw}}
+                    职位：{{userInfo.Duty}}
                 </div>
                 <div class="col col-50">
-                    入职时间：{{userInfo.ui_rzrq|date:"yyyy-MM-dd"}}
+                    入职时间：{{userInfo.InDate|date:"yyyy-MM-dd"}}
                 </div>
             </div>
         </div>
@@ -39,23 +39,23 @@
                 <ion-item>
                     <ion-icon name='md-map' color="positive" item-left></ion-icon>
                     公司
-                    <ion-note item-right>{{userInfo.ui_ssgs}}</ion-note>
+                    <ion-note item-right>{{userInfo.Company}}</ion-note>
                 </ion-item>
                 <ion-item>
                     <ion-icon name='ios-analytics' color="energized" item-left></ion-icon>
                     部门
-                    <ion-note item-right>{{userInfo.ui_ssbm}}</ion-note>
+                    <ion-note item-right>{{userInfo.Dept}}</ion-note>
                 </ion-item>
                 <ion-item>
                     <ion-icon name='ios-phone-portrait' color="calm" item-left></ion-icon>
                     手机号
-                    <ion-note item-right>{{userInfo.ui_yddh}}</ion-note>
+                    <ion-note item-right>{{userInfo.Mobile}}</ion-note>
                 </ion-item>
-                <ion-item>
+                <!-- <ion-item>
                     <ion-icon name='md-mail' color="calm" item-left></ion-icon>
                     邮箱
                     <ion-note item-right>{{userInfo.ui_mail}}</ion-note>
-                </ion-item>
+                </ion-item> -->
             </ion-list>
 
             <ion-list>

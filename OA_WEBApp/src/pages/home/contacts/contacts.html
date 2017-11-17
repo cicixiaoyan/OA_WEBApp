@@ -21,9 +21,9 @@
     </ion-refresher>
     <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->
     <ion-list inset style="margin:16px 0;">
-        <button ion-item *ngFor="let contact of items" [navPush]="nxPage" [navParams]="{id:contact.ui_id}">
-            <span>{{contact.ui_desc}}({{contact.ui_id}})</span>
-            <p>{{contact.ui_lx}}&emsp;{{contact.zwmc}}</p>
+        <button ion-item *ngFor="let contact of items" [navPush]="nxPage" [navParams]="{id:contact.Uid}">
+            <span>{{contact.Name}}({{contact.Uid}})</span>
+            <p>{{contact.Dept}}&emsp;{{contact.Duty}}</p>
         </button>
     </ion-list>
     <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->

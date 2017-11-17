@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, Refresher } from 'ionic-angular';
 
+import { GlobalData } from "../../providers/GlobalData";
+
 import { MailRead } from '../mail/mail-read/mail-read';
 import { MailWrite } from '../mail/mail-write/mail-write';
 import { MailReadOutbox } from '../mail/mail-read-outbox/mail-read-outbox';
@@ -30,10 +32,24 @@ export class Mail {
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
+                public globalData: GlobalData,
                 private modalCtrl: ModalController,
                 private mailService: MailService) {
-        this.inboxData = { "size": 1, "page": 0 };
-        this.outboxData = { "size": 1, "page": 0 };
+        this.inboxData = { 
+            "PageSize": 5,
+            "PageIndex": 1 , 
+            "Mail": this.mailService.Mail["inbox"], 
+            "Uid": this.globalData.Uid,
+            "Status": this.mailService.mailStatus["unread"]
+        };
+
+        this.outboxData = { 
+            "PageSize": 5, 
+            "PageIndex": 1, 
+            "Mail": this.mailService.Mail["outbox"], 
+            "Uid": this.globalData.Uid,
+            "Status": this.mailService.mailStatus["unread"]
+        };
         this.initializeItems();
     }
 
@@ -53,26 +69,29 @@ export class Mail {
     }
 
     // 选择已读、未读、全部
-    checkRead(name: string = "unread") {
-        this.inboxData.page = 1;
+    checkRead(name: string = "read") {
+        this.inboxData.PageIndex = 1;
         this.inboxList = [];
         this.checkBtn = { "read": false, "unread": false, "all": false };
         this.checkBtn[name] = true;
         if (name === "unread") {
             // 参数设置
+            this.inboxData.Status = this.mailService.mailStatus["unread"];
         }
         else if (name === "read") {
             // 参数设置
+            this.inboxData.Status = this.mailService.mailStatus["read"];
         }
         else {
             // 参数设置
+            this.inboxData.Status = this.mailService.mailStatus["all"];
         }
         this._getInboxList(this.inboxData);
     }
 
     // 选择草稿箱、发件箱
     checkDraft(bol: boolean = false) {
-        this.outboxData.page = 1;
+        this.outboxData.PageIndex = 1;
         this.outboxList = [];
 
         if (bol) {
@@ -108,11 +127,11 @@ export class Mail {
         this.moredata = true;
         if (this.box === "inbox") {
             this.inboxList = [];
-            this.inboxData.page = 1;
+            this.inboxData.PageIndex = 1;
             this._getInboxList(this.inboxData);
         } else {
             this.outboxList = [];
-            this.outboxData.page = 1;
+            this.outboxData.PageIndex = 1;
             this._getOutboxList(this.outboxData);
         }
 
@@ -125,10 +144,10 @@ export class Mail {
     doInfinite(): Promise<any> {
         if (this.moredata) {
             if (this.box === "inbox") {
-                this.inboxData.page++;
+                this.inboxData.PageIndex++;
                 this._getInboxList(this.inboxData);
             } else {
-                this.outboxData.page++;
+                this.outboxData.PageIndex++;
                 this._getOutboxList(this.outboxData);
             }
         }
@@ -141,14 +160,15 @@ export class Mail {
     }
 
     getNewInboxList(inboxData){
-        inboxData.page = 1;
+        inboxData.PageIndex = 1;
         this.mailService.getInboxList(inboxData).subscribe(list => {
-            console.log(list);
-            let arr = list.filter(item => {
-                return item.jsyjid !== this.inboxList[0].jsyjid;
-            });
-            if (arr !== []) {
-                this.inboxList = [...this.inboxList, ...arr];
+            if (list.Result == true ) {
+                let arr = list.Data.filter(item => {
+                    return item.Id !== this.inboxList[0].Id;
+                });
+                if (arr !== []) {
+                    this.inboxList = [...this.inboxList, ...arr];
+                }
             }
         });
     }
@@ -156,7 +176,7 @@ export class Mail {
 
     _getInboxList(inboxData) {
         this.mailService.getInboxList(inboxData).subscribe(list => {
-            if (list === []) {
+            if (list.Result == true  ) {
                 this.moredata = false;
             } else {
                 this.inboxList = [...this.inboxList, ...list];
@@ -166,7 +186,7 @@ export class Mail {
 
     _getOutboxList(outboxData) {
         this.mailService.getOutboxList(outboxData).subscribe(list => {
-            if (list === []) {
+            if (list.Result == true ) {
                 this.moredata = false;
             } else {
                 this.outboxList = [...this.outboxList, ...list];

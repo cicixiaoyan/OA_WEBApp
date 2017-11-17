@@ -27,21 +27,21 @@ export class AccountEdit {
                 private formBuilder: FormBuilder) {
 
         this.editForm = this.formBuilder.group({
-            ui_rzrq: ['admin', [Validators.required, Validators.minLength(4)]], // 第一个参数是默认值
-            ui_sex: ['123', [Validators.required, Validators.minLength(2)]],
-            ui_csrq: [],
-            ui_yddx: [],
-            ui_mail: [],
-            ui_bgdh: [],
-            ui_czdh: []
+            InDate: ['1990-02-19', [Validators.required, Validators.minLength(4)]], // 第一个参数是默认值
+            Sex: ['男', [Validators.required, Validators.minLength(2)]],
+            BirthDate: [],
+            // ui_yddx: [],
+            // ui_mail: [],
+            // ui_bgdh: [],
+            // ui_czdh: []
         });
 
         this.initialize();
     }
 
     initialize() {
-        this.userInfo.ui_csrq = "1990-02-19";
-        this.userInfo.ui_rzrq = "1990-02-19";
+        this.userInfo.BirthDate = "1990-02-19";
+        this.userInfo.InDate = "1990-02-19";
     }
 
     ionViewDidLoad() {
@@ -57,12 +57,12 @@ export class AccountEdit {
                     text: '男',
                     role: 'destructive',
                     handler: () => {
-                        this.userInfo.ui_sex = "男";
+                        this.userInfo.Sex = "男";
                     }
                 }, {
                     text: '女',
                     handler: () => {
-                        this.userInfo.ui_sex = "女";
+                        this.userInfo.Sex = "女";
                     }
                 }, {
                     text: '取消',

@@ -17,14 +17,14 @@ export class AccountPasswordedit {
     editPasswordForm: FormGroup;
 
     constructor(private navCtrl: NavController,
-        private viewCtrl: ViewController,
-        private formBuilder: FormBuilder) {
+                private viewCtrl: ViewController,
+                private formBuilder: FormBuilder) {
         this.editPasswordForm = this.formBuilder.group({
-            oldPassword: [, [Validators.required, Validators.minLength(3)]],
-            nwePassword: [, [Validators.required, Validators.minLength(3)]],
+            oldPwd: [, [Validators.required, Validators.minLength(3)]],
+            newPwd: [, [Validators.required, Validators.minLength(3)]],
             confirmPassword: [, [Validators.required, Validators.minLength(3)]]
         });
-    };
+    }
 
     confirm() {
         this.navCtrl.setRoot(LoginPage);

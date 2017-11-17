@@ -94,11 +94,11 @@ export class LoginPage {
             console.log(userInfo);
             this.submitted = false;
             // userInfo.token = 'xx122a9Wf';//从后台获取token,暂时写死
-            this.globalData.ui_id = userInfo[0].ui_id;
-            this.globalData.ui_desc = userInfo[0].ui_desc;
+            this.globalData.Uid = userInfo.Data.Uid;
+            this.globalData.Name = userInfo.Data.Name;
             // this.globalData.token = userInfo.token;
-            this.userInfo = userInfo[0];
-            this.storage.set('UserInfo', userInfo[0]);
+            this.userInfo = userInfo.Data;
+            this.storage.set('UserInfo', userInfo.Data);
             alert(this.storage.get('UserInfo'));
             this.viewCtrl.dismiss(userInfo);
             this.navCtrl.setRoot(TabsPage, { tabIndex: 0 });

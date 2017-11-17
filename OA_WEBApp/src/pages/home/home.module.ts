@@ -6,8 +6,8 @@ import { BacklogModule } from './backlog/backlog.module';
 import { BacklogDetailModule } from './backlog/backlog-detail/backlog-detail.module';
 import { ContactsModule } from './contacts/contacts.module';
 import { ContactsDetailModule } from './contacts/contacts-detail/contacts-detail.module';
-import { NewworkModule } from './newwork/newwork.module';
-import { NewworkDetailModule } from './newwork/newwork-detail/newwork-detail.module';
+// import { NewworkModule } from './newwork/newwork.module';
+// import { NewworkDetailModule } from './newwork/newwork-detail/newwork-detail.module';
 
 
 @NgModule({
@@ -20,8 +20,8 @@ import { NewworkDetailModule } from './newwork/newwork-detail/newwork-detail.mod
         BacklogDetailModule,
         ContactsModule,
         ContactsDetailModule,
-        NewworkModule,
-        NewworkDetailModule
+        // NewworkModule,
+        // NewworkDetailModule
     ],
     exports: [
         Home

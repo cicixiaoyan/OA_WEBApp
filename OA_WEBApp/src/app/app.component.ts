@@ -12,7 +12,7 @@ import { UserInfo } from "../model/UserInfo";
 import { LoginPage } from "../pages/login/login";
 import { Backlog } from "../pages/home/backlog/backlog";
 import { Contacts } from "../pages/home/contacts/contacts";
-import { Newwork } from '../pages/home/newwork/newwork';
+// import { Newwork } from '../pages/home/newwork/newwork';
 
 
 declare var AppMinimize;
@@ -38,7 +38,7 @@ export class MyApp {
         { title: '邮件', component: TabsPage, index: 1, icon: 'ios-mail' },
         { title: '通讯录', component: TabsPage, index: 4, icon: 'md-call', tab1Component: Contacts },
         { title: '公告管理', component: TabsPage, index: 2, icon: 'ios-notifications' },
-        { title: '新建工作', component: TabsPage, index: 5, icon: 'md-exit', tab1Component: Newwork },
+        // { title: '新建工作', component: TabsPage, index: 5, icon: 'md-exit', tab1Component: Newwork },
         { title: '待办事项', component: TabsPage, index: 6, icon: 'ios-calendar', tab1Component: Backlog }
         // ,{ title: '设置', component: TabsPage, index: 3, icon: 'ios-cog'},
         // { title: '登陆', component: LoginPage, index: 7, icon: 'contacts' }
@@ -70,8 +70,8 @@ export class MyApp {
                     this.storage.get('UserInfo').then((userInfo: UserInfo) => {
                         if (userInfo) {
                             this.events.publish('user:login', userInfo);
-                            this.globalData.ui_id = userInfo.ui_id;
-                            this.globalData.ui_desc = userInfo.ui_desc;
+                            this.globalData.Uid = userInfo.Uid;
+                            this.globalData.Name = userInfo.Name;
                             // this.globalData.token = userInfo.token;
                         } else {
 
@@ -96,7 +96,7 @@ export class MyApp {
             // this.nativeService.detectionUpgrade(); // 检测app是否升级
         });
 
-    };
+    }
 
     openPage(page: PageInterface) {
         // the nav component was found using @ViewChild(Nav)
@@ -140,7 +140,7 @@ export class MyApp {
                 closeButtonText: '确定'
             }).present();
         }
-    };
+    }
 
     registerBackButtonAction() {
         // if (!this.nativeService.isAndroid()) {
@@ -152,7 +152,7 @@ export class MyApp {
                 return;
             }
             // 如果想点击返回按钮隐藏toast或loading或Overlay就把下面加上
-            //this.ionicApp._toastPortal.getActive() || this.ionicApp._loadingPortal.getActive() || this.ionicApp._overlayPortal.getActive();
+            // this.ionicApp._toastPortal.getActive() || this.ionicApp._loadingPortal.getActive() || this.ionicApp._overlayPortal.getActive();
 
             let activePortal = this.ionicApp._modalPortal.getActive();
             if (activePortal) {
@@ -178,7 +178,7 @@ export class MyApp {
             // 当前页面为tab栏的子页面，正常返回
             return activeNav.pop();
         }, 101);
-    };
+    }
 
     // 双击退出提示框
     showExit() {

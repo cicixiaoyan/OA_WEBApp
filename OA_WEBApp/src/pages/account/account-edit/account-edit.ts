@@ -30,10 +30,10 @@ export class AccountEdit {
             InDate: ['1990-02-19', [Validators.required, Validators.minLength(4)]], // 第一个参数是默认值
             Sex: ['男', [Validators.required, Validators.minLength(2)]],
             BirthDate: [],
-            // ui_yddx: [],
-            // ui_mail: [],
-            // ui_bgdh: [],
-            // ui_czdh: []
+            Mobile: [],
+            ui_mail: [],
+            ui_bgdh: [],
+            ui_czdh: []
         });
 
         this.initialize();

@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler, Content } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, Content, Config } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 
@@ -40,15 +40,19 @@ import { HttpService } from "../providers/HttpService";
 import { FileService } from "../providers/FileService";
 import { Helper } from "../providers/Helper";
 import { Utils } from "../providers/Utils";
-import { Http, XHRBackend, RequestOptions, HttpModule } from "@angular/http";
+import { Http, HttpModule } from "@angular/http";
 import { HttpInterceptHandle } from "../providers/HttpInterceptHandle";
 import { GlobalData } from "../providers/GlobalData";
 
+import { Logger } from "../providers/Logger";
+import { ModalFromRightEnter, ModalFromRightLeave, ModalScaleEnter, ModalScaleLeave } from "./itransitions";
+
 // import { HTTP } from '@ionic-native/http';
 
-export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions, httpInterceptHandle: HttpInterceptHandle) {
-    return new HttpIntercept(backend, defaultOptions, httpInterceptHandle);
-}
+// export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions, 
+//                             httpInterceptHandle: HttpInterceptHandle) {
+//     return new HttpIntercept(backend, defaultOptions, httpInterceptHandle);
+// }
 
 @NgModule({
     declarations: [
@@ -98,7 +102,6 @@ export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions,
         PhotoViewer,
         Content,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
-        { provide: Http, useFactory: httpFactory, deps: [XHRBackend, RequestOptions, HttpInterceptHandle] },
         NativeService,
         HttpIntercept,
         HttpService,
@@ -110,4 +113,15 @@ export function httpFactory(backend: XHRBackend, defaultOptions: RequestOptions,
         // ,HTTP
     ]
 })
-export class AppModule { }
+export class AppModule { 
+    constructor(public config: Config) {
+        this.setCustomTransitions();
+      }
+    
+      private setCustomTransitions() {
+        this.config.setTransition('modal-from-right-enter', ModalFromRightEnter);
+        this.config.setTransition('modal-from-right-leave', ModalFromRightLeave);
+        this.config.setTransition('modal-scale-enter', ModalScaleEnter);
+        this.config.setTransition('modal-scale-leave', ModalScaleLeave);
+      }
+}

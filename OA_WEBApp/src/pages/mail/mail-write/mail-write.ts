@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, AlertController, ActionSheetController, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, 
+    AlertController, ActionSheetController, PopoverController } from 'ionic-angular';
 
 import { GlobalData } from '../../../providers/GlobalData';
 import { NativeService } from '../../../providers/NativeService';
@@ -11,6 +12,7 @@ import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/trans
 import { Storage } from '@ionic/storage';
 
 import { HttpService } from "../../../providers/HttpService";
+import { MailService } from "../mailService";
 
 
 
@@ -35,8 +37,11 @@ import { HttpService } from "../../../providers/HttpService";
         <ion-searchbar color="danger" (ionInput)="getItems($event)" placeholder="请输入编码或姓名"></ion-searchbar>
                 
         <div text-center>
-            <button (click)="search()" icon-left ion-button small color="calm"><ion-icon name="search"></ion-icon>查询</button>
-            <button (click)="confirm()" icon-left ion-button small color="calm"><ion-icon name="checkmark"></ion-icon>确定</button>
+            <button (click)="search()" icon-left ion-button small color="calm">
+            <ion-icon name="search"></ion-icon>查询</button>
+            
+            <button (click)="confirm()" icon-left ion-button small color="calm">
+            <ion-icon name="checkmark"></ion-icon>确定</button>
         </div>
 
         <ion-list-header>
@@ -64,7 +69,8 @@ export class PopoverPage {
                 private fileService: FileService,
                 public nativeService: NativeService,
                 public viewCtrl: ViewController,
-                public storage: Storage) {
+                public storage: Storage,
+                public mailService: MailService) {
         this.addressee = this.navParams.get("addressee");
         this.addresseeIds = this.navParams.get("addresseeIds");
         console.log(this.addressee, this.addresseeIds);
@@ -72,30 +78,36 @@ export class PopoverPage {
     }
 
     initializeItems() {
-        const testArray = [
-            { ui_id: "1", ui_desc: "admin1", bianhao: "dewr1", ui_ssbm: "本部1", ui_zw: "职员" },
-            { ui_id: "2", ui_desc: "admin2", bianhao: "dewr2", ui_ssbm: "本部2", ui_zw: "职员" },
-            { ui_id: "3", ui_desc: "admin3", bianhao: "dewr3", ui_ssbm: "本部3", ui_zw: "职员" },
-            { ui_id: "4", ui_desc: "admin4", bianhao: "dewr4", ui_ssbm: "本部4", ui_zw: "职员" },
-            { ui_id: "5", ui_desc: "admin5", bianhao: "dewr5", ui_ssbm: "本部5", ui_zw: "职员" },
-            { ui_id: "6", ui_desc: "admin6", bianhao: "dewr6", ui_ssbm: "本部6", ui_zw: "职员" },
-            { ui_id: "7", ui_desc: "admin7", bianhao: "dewr7", ui_ssbm: "本部7", ui_zw: "职员" }
-        ];
+        // const testArray = [
+        //     { ui_id: "1", ui_desc: "admin1", bianhao: "dewr1", ui_ssbm: "本部1", ui_zw: "职员" },
+        //     { ui_id: "2", ui_desc: "admin2", bianhao: "dewr2", ui_ssbm: "本部2", ui_zw: "职员" },
+        //     { ui_id: "3", ui_desc: "admin3", bianhao: "dewr3", ui_ssbm: "本部3", ui_zw: "职员" },
+        //     { ui_id: "4", ui_desc: "admin4", bianhao: "dewr4", ui_ssbm: "本部4", ui_zw: "职员" },
+        //     { ui_id: "5", ui_desc: "admin5", bianhao: "dewr5", ui_ssbm: "本部5", ui_zw: "职员" },
+        //     { ui_id: "6", ui_desc: "admin6", bianhao: "dewr6", ui_ssbm: "本部6", ui_zw: "职员" },
+        //     { ui_id: "7", ui_desc: "admin7", bianhao: "dewr7", ui_ssbm: "本部7", ui_zw: "职员" }
+        // ];
 
-        const idArr = this.addresseeIds.split(",");
+        this.mailService.getRecipients().subscribe((result) => {
+            console.log(result);
+            const idArr = this.addresseeIds.split(",");
 
-        this.items = testArray.map(function (value, index) {
-            for (let i in idArr) {
-                if (idArr[i] !== value.ui_id) {
-                    Object.assign(value, { checked: false });
-                } else {
-                    return Object.assign(value, { checked: true });
+            this.items = result.map(function (value, index) {
+                for (let i in idArr) {
+                    if (idArr[i] !== value.ui_id) {
+                        Object.assign(value, { checked: false });
+                    } else {
+                        return Object.assign(value, { checked: true });
 
+                    }
                 }
-            }
-            return value;
+                return value;
+
+            });
 
         });
+
+
     }
 
     getItems(ev) {

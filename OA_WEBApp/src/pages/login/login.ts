@@ -21,7 +21,7 @@ import { HttpService } from "../../providers/HttpService";
 export class LoginPage {
     userInfo: any;
     submitted: boolean = false;
-    // canLeave: boolean = false;
+    canLeave: boolean = false;
     loginForm: any;
     nav: Nav;
 
@@ -55,35 +55,35 @@ export class LoginPage {
         });
     }
 
-    // ionViewCanLeave(): boolean {
-    //     let bool = !!this.userInfo;
-    //     let elements = document.querySelectorAll(".tabbar");
-    //     if (elements != null) {
-    //         Object.keys(elements).map((key) => {
-    //             elements[key].style.display = 'flex';
-    //         });
-    //     }
+    ionViewCanLeave(): boolean {
+        let bool = !!this.userInfo;
+        let elements = document.querySelectorAll(".tabbar");
+        if (elements != null) {
+            Object.keys(elements).map((key) => {
+                elements[key].style.display = 'flex';
+            });
+        }
 
-    //     if (this.canLeave || bool) {
-    //         return true;
-    //     } else {
-    //         this.alertCtrl.create({
-    //             title: '确认退出软件？',
-    //             buttons: [{ text: '取消' },
-    //             {
-    //                 text: '确定',
-    //                 handler: () => {
-    //                     this.platform.exitApp();
-    //                 }
-    //             }
-    //             ]
-    //         }).present();
-    //         return false;
-    //     }
+        if (this.canLeave || bool) {
+            return true;
+        } else {
+            this.alertCtrl.create({
+                title: '确认退出软件？',
+                buttons: [{ text: '取消' },
+                {
+                    text: '确定',
+                    handler: () => {
+                        this.platform.exitApp();
+                    }
+                }
+                ]
+            }).present();
+            return false;
+        }
 
 
 
-    // }
+    }
 
     login(user) {
         this.submitted = true;
@@ -101,15 +101,14 @@ export class LoginPage {
             this.storage.set('UserInfo', userInfo.Data);
             alert(this.storage.get('UserInfo'));
             this.viewCtrl.dismiss(userInfo);
-            this.navCtrl.setRoot(TabsPage, { tabIndex: 0 });
         });
     }
 
     findPassword() {
-        // this.canLeave = true;
+        this.canLeave = true;
         let modal = this.modalCtrl.create(FindPassword);
         modal.present();
-        // this.canLeave = false;
+        this.canLeave = false;
     }
 
     dismiss() {

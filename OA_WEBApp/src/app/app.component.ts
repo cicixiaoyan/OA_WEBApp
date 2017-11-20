@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Platform, MenuController, Nav, IonicApp, ModalController, Keyboard, ToastController, Events } from 'ionic-angular';
+import { Platform, MenuController, Nav, IonicApp, 
+    ModalController, Keyboard, ToastController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -64,7 +65,7 @@ export class MyApp {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.   
             this.storage.get('firstIn').then((result) => {
-                this.nativeService.showToast("不是第一次进入");
+                // this.nativeService.showToast("不是第一次进入");
                 if (result) {
                     this.rootPage = TabsPage;
                     this.storage.get('UserInfo').then((userInfo: UserInfo) => {
@@ -152,7 +153,8 @@ export class MyApp {
                 return;
             }
             // 如果想点击返回按钮隐藏toast或loading或Overlay就把下面加上
-            // this.ionicApp._toastPortal.getActive() || this.ionicApp._loadingPortal.getActive() || this.ionicApp._overlayPortal.getActive();
+            // this.ionicApp._toastPortal.getActive() || this.ionicApp._loadingPortal.getActive() || 
+            // this.ionicApp._overlayPortal.getActive();
 
             let activePortal = this.ionicApp._modalPortal.getActive();
             if (activePortal) {
@@ -191,6 +193,6 @@ export class MyApp {
                 this.backButtonPressed = false;
             }, 2000);
         }
-    };
+    }
 
 }

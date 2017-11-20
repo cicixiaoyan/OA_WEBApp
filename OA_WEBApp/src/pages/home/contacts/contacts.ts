@@ -93,7 +93,8 @@ export class Contacts {
     search(refresher: Refresher) {
         console.log(this.searchKey);
         this.initializeItems();
-        return this.httpService.postFormData("ashx/UserSheet.ashx", {"Name": this.searchKey}).map(Response => Response.json())
+        return this.httpService.postFormData("ashx/UserSheet.ashx", {"Name": this.searchKey})
+        .map(Response => Response.json())
             .subscribe(list => {
                 if (list.Result == true)
                     this.items = list.Data;

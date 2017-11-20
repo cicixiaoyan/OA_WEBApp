@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Response } from "@angular/http";
 import 'rxjs/add/operator/map';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs/Observable';
 import { HttpService } from "../../providers/HttpService";
 
 @Injectable()
@@ -28,12 +28,28 @@ export class MailService {
     //     return this.httpService.get('assets/data/mail-outbox.json').map((res: Response) => res.json());
     // }
 
-      getInboxList(param?): Observable<any>{
-          return this.httpService.postFormData("ashx/MailList.ashx", param).map((res: Response) => res.json());
-      }
-
-      getOutboxList(param?): Observable<any> {
+    getInboxList(param?): Observable<any>{
         return this.httpService.postFormData("ashx/MailList.ashx", param).map((res: Response) => res.json());
-      }
+    }
+
+    getOutboxList(param?): Observable<any> {
+    return this.httpService.postFormData("ashx/MailList.ashx", param).map((res: Response) => res.json());
+    }
+
+    write(param?): Observable<any>{
+        // Uid 当前用户账号id
+        // AcceptUid 接收账号id
+        // Content 发送内容
+        // 返回json
+        // {"Data":"xxx！","Result":false}
+        return this.httpService.postFormData("ashx/NewsAdd.ashx", param).map((res: Response) => res.json());
+    }
+
+    getRecipients(param?): Observable<any>{
+        // 输入参数
+        // Name 输入查询用户名称
+        // 返回json
+        return this.httpService.postFormData("ashx/UserSheet.ashx", param).map((res: Response) => res.json());
+    }
 
 }

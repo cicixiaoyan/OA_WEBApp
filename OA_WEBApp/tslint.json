@@ -37,8 +37,7 @@
             "check-catch",
             "check-else"
         ],
-        "indent": [
-            4, "spaces"
+        "indent": [ 4, "spaces"
         ],
         "align": [true, "parameters", "statements"],
         "no-switch-case-fall-through": true,
@@ -52,7 +51,8 @@
         "semicolon": [true, "always", "ignore-bound-class-methods"],
         "no-var-keyword": true,
         // "no-trailing-whitespace": [true, "ignore-comments"],
-        "no-namespace": [true, "allow-declarations"]
+        "no-namespace": [true, "allow-declarations"],
+        "max-line-length": [ true, 120 ]
     },
     "rulesDirectory": [
         "node_modules/tslint-eslint-rules/dist/rules"

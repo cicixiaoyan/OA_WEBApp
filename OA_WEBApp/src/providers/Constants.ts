@@ -2,12 +2,12 @@
 // export const FILE_SERVE_URL = 'http://88.128.18.144:3333/';
 
 /*----------------------------------------后台Api地址----------------------------------------*/
-export const APP_SERVE_URL = 'http://192.168.0.49:789/';
+export const APP_SERVE_URL = 'http://192.168.0.49:8100/';
 
 /*----------------------------------------文件服务器地址----------------------------------------*/
-export const FILE_SERVE_URL = 'http://192.168.0.49:789/'; // 文件服务:测试环境
+export const FILE_SERVE_URL = 'http://192.168.0.49:8100/'; // 文件服务:测试环境
 /*----------------------------------------app版本升级服务地址----------------------------------------*/
-export const APP_VERSION_SERVE_URL = 'http://192.168.0.49:789/'; // app版本升级服务;测试环境,查询app最新版本号,更新日志等信息.
+export const APP_VERSION_SERVE_URL = 'http://192.168.0.49:8100/'; // app版本升级服务;测试环境,查询app最新版本号,更新日志等信息.
 export const IS_DEBUG = true; // 是否开发(调试)模式
 
 export const DEFAULT_AVATAR = './assets/img/avatar.png'; // 用户默认头像
@@ -18,7 +18,7 @@ export const REQUEST_TIMEOUT = 20000; // 请求超时时间,单位为毫秒
 
 export const ENABLE_FUNDEBUG = false; // 是否启用fundebug日志监控
 export const FUNDEBUG_API_KEY = 
-'3701a358f79b7daa39592255bde6c3c8772efad642883e42dbb65f3f8ffbae11'; // 去https://fundebug.com/申请key
+'ec3cba8712b00e9db075ee9debf73fdfb2233c748b737d71f69ed7fe04b9ead4'; // 去https://fundebug.com/申请key
 export const APK_DOWNLOAD = 'http://omzo595hi.bkt.clouddn.com/ionic2_tabs.apk'; // android apk下载完整地址,用于android本地升级
 export const APP_DOWNLOAD = 'http://omzo595hi.bkt.clouddn.com/download.html'; // app网页下载地址,用于ios升级或android本地升级失败
 // code push 部署key

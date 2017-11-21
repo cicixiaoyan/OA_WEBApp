@@ -23,9 +23,9 @@ export class AboutusPage {
     updateStr: string = "检查更新";
 
     constructor(public navCtrl: NavController,
-        public navParams: NavParams,
-        public nativeService: NativeService,
-        public httpService: HttpService) {
+                public navParams: NavParams,
+                public nativeService: NativeService,
+                public httpService: HttpService) {
         this.data = {
             "version": "V0.0.1",
             "appName": "成都永朔科技有限公司",

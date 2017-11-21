@@ -33,10 +33,10 @@
                 "variable-declaration": "onespace"
             }
         ],
-        "next-line": [true,
-            "check-catch",
-            "check-else"
-        ],
+        // "next-line": [true,
+        //     "check-catch",
+        //     "check-else"
+        // ],
         "indent": [ 4, "spaces"
         ],
         "align": [true, "parameters", "statements"],

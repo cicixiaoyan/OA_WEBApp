@@ -56,7 +56,8 @@ export class FileService {
                 observer.next({ 'data': [], 'success': true });
             });
         }
-        return this.httpService.post(FILE_SERVE_URL + '/appUpload?directory=ionic2_tabs', fileObjList).map((res: Response) => res.json());
+        return this.httpService.post(FILE_SERVE_URL + '/appUpload?directory=ionic2_tabs', fileObjList)
+        .map((res: Response) => res.json());
     }
 
     /**
@@ -70,7 +71,8 @@ export class FileService {
                 observer.next({ 'data': [], 'success': true });
             });
         }
-        return this.httpService.post(FILE_SERVE_URL + '/appUpload?directory=ionic2_tabs', [fileObj]).map((res: Response) => res.json());
+        return this.httpService.post(FILE_SERVE_URL + '/appUpload?directory=ionic2_tabs', [fileObj])
+        .map((res: Response) => res.json());
     }
 
     /**

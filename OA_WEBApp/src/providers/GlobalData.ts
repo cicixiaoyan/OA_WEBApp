@@ -8,7 +8,7 @@ export class GlobalData {
 
     private _Uid: string;
     private _Name: string;
-    // private _token: string;
+    private _token: string;
 
 
     get Uid(): string {
@@ -27,11 +27,11 @@ export class GlobalData {
         this._Name = value;
     }
 
-    // get token(): string {
-    //   return this._token;
-    // }
+    get token(): string {
+      return this._token;
+    }
 
-    // set token(value: string) {
-    //   this._token = value;
-    // }
+    set token(value: string) {
+      this._token = value;
+    }
 }

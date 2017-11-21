@@ -21,7 +21,6 @@ export class HttpService {
 
   public request(url: string, options: RequestOptionsArgs): Observable<Response> {
     url = Utils.formatUrl(url.startsWith('http') ? url : APP_SERVE_URL + url);
-    // this.optionsAddToken(options);
     return Observable.create(observer => {
       this.nativeService.showLoading();
       IS_DEBUG && console.log('%c 请求前 %c', 'color:blue', '', 'url', url, 'options', options);
@@ -46,6 +45,16 @@ export class HttpService {
     }));
   }
 
+  public noTokenPostFormData(url: string, paramMap: any = null): Observable<Response> {
+    return this.request(url, new RequestOptions({
+      method: RequestMethod.Post,
+      search: HttpService.buildURLSearchParams(paramMap).toString(),
+      headers: new Headers({
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      })
+    }));
+  }
+
   public post(url: string, body: any = {}): Observable<Response> {
     return this.request(url, new RequestOptions({
       method: RequestMethod.Post,
@@ -57,6 +66,7 @@ export class HttpService {
   }
 
   public postFormData(url: string, paramMap: any = null): Observable<Response> {
+    paramMap.Token = this.globalData.token;
     return this.request(url, new RequestOptions({
       method: RequestMethod.Post,
       search: HttpService.buildURLSearchParams(paramMap).toString(),
@@ -114,7 +124,7 @@ export class HttpService {
     for (let key in paramMap) {
       let val = paramMap[key];
       if (val instanceof Date) {
-        val = Utils.dateFormat(val, 'yyyy-MM-dd hh:mm:ss')
+        val = Utils.dateFormat(val, 'yyyy-MM-dd hh:mm:ss');
       }
       params.set(key, val);
     }
@@ -160,14 +170,14 @@ export class HttpService {
     });
   }
 
-//   private optionsAddToken(options: RequestOptionsArgs): void {
-//     let token = this.globalData.token;
-//     if (options.headers) {
-//       options.headers.append('Authorization', 'Bearer ' + token);
-//     } else {
-//       options.headers = new Headers({
-//         'Authorization': 'Bearer ' + token
-//       });
-//     }
-//   }
+  private optionsAddToken(options: RequestOptionsArgs): void {
+    let token = this.globalData.token;
+    if (options.headers) {
+      options.headers.append('Token', token);
+    } else {
+      options.headers = new Headers({
+        'Token': token
+      });
+    }
+  }
 }

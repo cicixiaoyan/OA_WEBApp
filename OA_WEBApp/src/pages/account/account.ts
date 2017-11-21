@@ -77,7 +77,9 @@ export class Account {
     }
 
     pwdEdit() {
-        this.navCtrl.push(AccountPasswordedit);
+        // this.navCtrl.push(AccountPasswordedit);
+        let modal = this.modalCtrl.create(AccountPasswordedit);
+        modal.present();
     }
 
     changePhoto() {

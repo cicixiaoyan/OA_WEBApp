@@ -12,7 +12,15 @@ export class UserInfo {
     Status: string; // 账号状态
     SDate: string; // 账号有效期-开始时间
     EDate: string; // 账号有效期-结束时间
+    UserTp: string; // 用户类型
+    InlinePhone: string; // 内部电话
+    Mail: string; // 邮箱
+    WorkPhone: string; // 办公电话
+    RoleName: string; // 角色名称
+    Token: string; // 角色权限
+    RoleAuthority: string; // 角色权限
     photo: string; // 照片暂无
+    
     // cjr: string; // 创建人
     // Cjsj: string; // 创建时间
     // lasttime: string; // 上次登录时间

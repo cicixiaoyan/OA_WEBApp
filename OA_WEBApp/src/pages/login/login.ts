@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController, ViewController, Nav, Platform, AlertController } from 'ionic-angular';
+import { ModalController, ViewController, Platform, AlertController, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { LoginService } from './LoginService';
+import { UserInfo } from "../../model/UserInfo";
 
 import { FindPassword } from './find-password/find-password';
 // import {UserInfo} from "../../model/UserInfo";
@@ -23,9 +24,9 @@ export class LoginPage {
     submitted: boolean = false;
     canLeave: boolean = false;
     loginForm: any;
-    nav: Nav;
 
     constructor(private viewCtrl: ViewController,
+                private events: Events,
                 private formBuilder: FormBuilder,
                 private storage: Storage,
                 private modalCtrl: ModalController,
@@ -33,7 +34,6 @@ export class LoginPage {
                 private alertCtrl: AlertController,
                 private globalData: GlobalData,
                 private loginService: LoginService,
-                public navCtrl: NavController,
                 private httpService: HttpService
     ) {
 
@@ -44,14 +44,9 @@ export class LoginPage {
     }
 
     ionViewWillEnter() {
-        let elements = document.querySelectorAll(".tabbar");
-        if (elements != null) {
-            Object.keys(elements).map((key) => {
-                elements[key].style.display = 'none';
-            });
-        }
+        this.canLeave = false;
         this.storage.get('UserInfo').then(userInfo => {
-            this.userInfo = userInfo || null;
+            this.userInfo = userInfo && userInfo.user ? userInfo.user : null;
         });
     }
 
@@ -87,20 +82,20 @@ export class LoginPage {
 
     login(user) {
         this.submitted = true;
-        user.action = 'logininfo';
         // this.httpService.postFormData("ashx/Login.ashx/LoginInfo",user)
         //  .map(responce => responce.json())
         this.loginService.login(user).subscribe((userInfo) => {
             console.log(userInfo);
             this.submitted = false;
             // userInfo.token = 'xx122a9Wf';//从后台获取token,暂时写死
+            this.userInfo = userInfo.Data;
             this.globalData.Uid = userInfo.Data.Uid;
             this.globalData.Name = userInfo.Data.Name;
-            // this.globalData.token = userInfo.token;
-            this.userInfo = userInfo.Data;
+            this.globalData.token = userInfo.Data.Token;
             this.storage.set('UserInfo', userInfo.Data);
-            alert(this.storage.get('UserInfo'));
-            this.viewCtrl.dismiss(userInfo);
+            // alert(this.storage.get('UserInfo'));
+            this.events.publish('user:login', userInfo);
+            this.viewCtrl.dismiss(userInfo.Data);
         });
     }
 

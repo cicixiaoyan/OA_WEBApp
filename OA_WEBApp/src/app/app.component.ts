@@ -13,6 +13,7 @@ import { UserInfo } from "../model/UserInfo";
 import { LoginPage } from "../pages/login/login";
 import { Backlog } from "../pages/home/backlog/backlog";
 import { Contacts } from "../pages/home/contacts/contacts";
+import { Utils } from "../providers/Utils";
 // import { Newwork } from '../pages/home/newwork/newwork';
 
 
@@ -73,7 +74,7 @@ export class MyApp {
                             this.events.publish('user:login', userInfo);
                             this.globalData.Uid = userInfo.Uid;
                             this.globalData.Name = userInfo.Name;
-                            // this.globalData.token = userInfo.token;
+                            this.globalData.token = userInfo.RoleAuthority;
                         } else {
 
                             let modal = this.modalCtrl.create(LoginPage);
@@ -128,7 +129,13 @@ export class MyApp {
         if (name == "edit") {
             this.nav.setRoot(TabsPage, { tabIndex: 3 });
         } else {
-            this.nav.setRoot(LoginPage, { tabIndex: 7 });
+            this.storage.clear(); // 清除缓存
+            Utils.sessionStorageClear(); // 清除数据缓存
+            let modal = this.modalCtrl.create(LoginPage);
+            modal.present();
+            modal.onDidDismiss(data => {
+                data && console.log(data);
+            });
         }
 
     }

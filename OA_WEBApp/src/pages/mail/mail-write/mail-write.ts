@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, 
+import { IonicPage, NavController, NavParams, ViewController,
     AlertController, ActionSheetController, PopoverController } from 'ionic-angular';
 
 import { GlobalData } from '../../../providers/GlobalData';
@@ -36,11 +36,11 @@ import { MailService } from "../mailService";
         </ion-item>
         <ion-searchbar color="danger" [(ngModel)]="name"  placeholder="请输入编码或姓名">
         </ion-searchbar>
-                
+
         <div text-center>
             <button (click)="search()" icon-left ion-button small color="calm">
             <ion-icon name="search"></ion-icon>查询</button>
-            
+
             <button (click)="confirm()" icon-left ion-button small color="calm">
             <ion-icon name="checkmark"></ion-icon>确定</button>
         </div>
@@ -69,8 +69,6 @@ export class PopoverPage {
     name: string;
 
     constructor(private navParams: NavParams,
-                private fileService: FileService,
-                public nativeService: NativeService,
                 public viewCtrl: ViewController,
                 public storage: Storage,
                 public mailService: MailService) {
@@ -240,7 +238,7 @@ export class MailWrite {
             //   "fsrID":this.globaldata.ui_id,
             //   "attName":mail.attName,
             //   "fsbt":mail.jsbt,
-            //   "yjfj":mail.yjfj       
+            //   "yjfj":mail.yjfj
             // })
         }
     }
@@ -255,12 +253,12 @@ export class MailWrite {
             "AcceptUid": this.addresseeIds,
             "Content": this.content
         };
-    
+
         this.mailService.write(data).subscribe((resJson) => {
             resJson.Result ? this.nativeService.showToast("信息已发送") :
             this.nativeService.showToast(resJson.Data);
         });
-        
+
     }
 
     addAffix() {

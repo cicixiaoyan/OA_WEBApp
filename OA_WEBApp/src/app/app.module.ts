@@ -10,6 +10,10 @@ import { HomeModule } from '../pages/home/home.module';
 import { MailModule } from '../pages/mail/mail.module';
 import { MailReadModule } from '../pages/mail/mail-read/mail-read.module';
 import { MailWriteModule } from '../pages/mail/mail-write/mail-write.module';
+import { MessagePageModule } from '../pages/message/message.module';
+import { MessageReadPageModule } from '../pages/message/message-read/message-read.module';
+import { MessageReadOutPageModule } from '../pages/message/message-read-out/message-read-out.module';
+import { MessageWritePageModule } from '../pages/message/message-write/message-write.module';
 import { NoticeModule } from '../pages/notice/notice.module';
 import { NoticeDetailModule } from '../pages/notice/notice-detail/notice-detail.module';
 import { AccountModule } from '../pages/account/account.module';
@@ -43,6 +47,7 @@ import { Utils } from "../providers/Utils";
 import { Http, HttpModule } from "@angular/http";
 import { HttpInterceptHandle } from "../providers/HttpInterceptHandle";
 import { GlobalData } from "../providers/GlobalData";
+import { GetContact } from '../providers.GetContact';
 
 import { Logger } from "../providers/Logger";
 import { ModalFromRightEnter, ModalFromRightLeave, ModalScaleEnter, ModalScaleLeave } from "./itransitions";
@@ -66,7 +71,8 @@ export class FunDebugErrorHandler implements ErrorHandler {
 @NgModule({
     declarations: [
         MyApp,
-        TabsPage
+        TabsPage,
+        GetContact
     ],
     imports: [
         BrowserModule,
@@ -82,6 +88,10 @@ export class FunDebugErrorHandler implements ErrorHandler {
         MailModule,
         MailReadModule,
         MailWriteModule,
+        MessagePageModule,
+        MessageReadPageModule,
+        MessageReadOutPageModule,
+        MessageWritePageModule,
         NoticeModule,
         NoticeDetailModule,
         AccountModule,
@@ -94,7 +104,8 @@ export class FunDebugErrorHandler implements ErrorHandler {
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
-        TabsPage
+        TabsPage,
+        GetContact
     ],
     providers: [
         StatusBar,
@@ -123,11 +134,11 @@ export class FunDebugErrorHandler implements ErrorHandler {
         // ,HTTP
     ]
 })
-export class AppModule { 
+export class AppModule {
     constructor(public config: Config) {
         this.setCustomTransitions();
       }
-    
+
       private setCustomTransitions() {
         this.config.setTransition('modal-from-right-enter', ModalFromRightEnter);
         this.config.setTransition('modal-from-right-leave', ModalFromRightLeave);

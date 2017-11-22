@@ -44,15 +44,14 @@ export class Contacts {
         if (this.moredata) {
             this.size++;
             const data = { page: this.page, size: this.size };
-            this.getList(data).subscribe(list => {
-                if (list === []) {
-                    this.moredata = false;
+            this.getList(data).subscribe(resJson => {
+                if (resJson.Result && resJson.Result !== []){
+                    this.items = this.items.concat(resJson.Data);
                 } else {
-                    this.items = this.items.concat(list);
+                    this.moredata = false;
                 }
             });
         }
-
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve();
@@ -61,9 +60,12 @@ export class Contacts {
     }
 
     initializeItems() {
-        this.getList().subscribe(list => {
-            if (list.Result == true)
-                this.items = list.Data;
+        this.getList().subscribe(resJson => {
+            if (resJson.Result && resJson.Result !== []){
+                this.items = resJson.Data;
+            } else {
+                this.httpService.nativeService.showToast(resJson.Data || "无数据");
+            }
         });
         // let data={action: "Yh_List", page: 1, size: 1};
         // this.httpService.postFormData("ashx/MailList.ashx/Yh_List",data)
@@ -95,18 +97,14 @@ export class Contacts {
         this.initializeItems();
         return this.httpService.postFormData("ashx/UserSheet.ashx", {"Name": this.searchKey})
         .map(Response => Response.json())
-            .subscribe(list => {
-                if (list.Result == true)
-                    this.items = list.Data;
-                else
-                    this.items = [];
-            });
-        // let data={action: "noticeBykeyWords", page: 1, size: 1,title: "系统管理员"};
-        // this.httpService.postFormData("ashx/MailList.ashx/noticeBykeyWords",data)
-        //   .map(Response => Response.json())
-        //   .subscribe(list => {
-        //     this.items = list;
-        //   });
+        .subscribe((resJson) => {
+            if (resJson.Result){
+                this.items = resJson.Data;
+            }else{
+                this.items = [];
+            }
+        });
+
 
         // setTimeout(() => {
         //   console.log('数据加载完成');

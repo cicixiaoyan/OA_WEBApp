@@ -6,6 +6,8 @@ import { MailWrite } from '../mail-write/mail-write';
 
 import { Transfer } from '@ionic-native/transfer'; // , FileUploadOptions, TransferObject
 import { File } from '@ionic-native/file';
+
+import { MailService } from '../mailService';
 /**
  * Generated class for the MailRead page.
  *
@@ -15,7 +17,7 @@ import { File } from '@ionic-native/file';
 @IonicPage()
 @Component({
     selector: 'page-mail-read',
-    templateUrl: 'mail-read.html',
+    templateUrl: 'mail-read.html'
 })
 export class MailRead {
     @ViewChild(Content) content: Content;
@@ -23,29 +25,22 @@ export class MailRead {
     mailDetail: any = [];
 
     constructor(public navCtrl: NavController,
-        public navParams: NavParams,
-        private nativeService: NativeService,
-        private modalCtrl: ModalController, private transfer: Transfer, private file: File) {
+                public navParams: NavParams,
+                private nativeService: NativeService,
+                private modalCtrl: ModalController,
+                private transfer: Transfer, 
+                private mailService: MailService,
+                private file: File) {
         this.initializeItems();
     }
 
     initializeItems() {
-        // let data={id: this.navParams.get('id'),action:"noticeById"};
-        // this.httpService.postFormData("ashx/Notice.ashx/noticeById",data)
-        //   .map(Response => Response.json())
-        //   .subscribe(list => {
-        //       if(!!list && list.length != 0 ){
-        //         this.detailNotice = list[0];
-        //         this.myDiv = this.detailNotice.ggnr;
-        //       }else{
-        //          this.toastCtrl.create({
-        //           message: '服务器出错，请稍后再试！！！',
-        //           position: 'middle',
-        //           duration: 2000
-        //         }).present();
-        //         this.navCtrl.pop();
-        //       }
-        //   });
+        
+        this.mailService.read(this.navParams.get('id')).subscribe((resJson) => {
+            if (resJson.Result){
+                this.mailDetail = resJson.Data;
+            }
+        });
 
         this.mailDetail = {
             jsyjid: "2",
@@ -85,7 +80,8 @@ export class MailRead {
         let path = "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png";
         const target = path.split("/").pop(); // target为文件名字
         this.nativeService.download(path, target);
-        //   this.transfer.create().download(encodeURI(path), this.file.externalDataDirectory + 'file.png').then((entry) => {
+        //   this.transfer.create().download(encodeURI(path), this.file.externalDataDirectory + 'file.png')
+        // .then((entry) => {
         //   console.log('download complete: ' + entry.toURL());
         // }, (error) => {
         //   // handle error

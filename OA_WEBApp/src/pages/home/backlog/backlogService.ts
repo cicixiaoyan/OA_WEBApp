@@ -6,23 +6,28 @@ import { HttpService } from "../../../providers/HttpService";
 
 @Injectable()
 export class BacklogService {
+    Status: object = {
+        notdone: 0, // 未办理
+        done: 1 // 已办理
+    };
+
     constructor(public httpService: HttpService) {
     }
 
     getNotDoneList(param?) {
-        return this.httpService.get('../../assets/data/backlog-done.json').map((res: Response) => res.json());
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
     }
 
     getDoneList(param?) {
-        return this.httpService.get('../../assets/data/backlog-done.json').map((res: Response) => res.json());
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
     }
 
-    getDone() {
-        return this.httpService.get('../../assets/data/backlog-done.json').map((res: Response) => res.json());
+    getDone(id) {
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', {Id: id}).map((res: Response) => res.json());
     }
 
-    getNotDone() {
-        return this.httpService.get('../../assets/data/backlog-done.json').map((res: Response) => res.json());
+    getNotDone(id) {
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', {Id: id}).map((res: Response) => res.json());
     }
 
     //   getInboxList(param?):Observable<any>{

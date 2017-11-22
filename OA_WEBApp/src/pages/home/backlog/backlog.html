@@ -31,17 +31,17 @@
 
         <ion-list *ngSwitchCase="'notDone'">
 
-            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.ggid}">
-                <span>&nbsp;[{{work.wfName}}]{{work.wfNo}}</span>
-                <p>发起人：{{work.fqr}}&emsp;当前步骤：{{work.dqbz}}</p>
+            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.Id}">
+                <span>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</span>
+                <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>
             </button>
 
         </ion-list>
 
         <ion-list *ngSwitchCase="'done'">
-            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.ggid}">
-                <span>&nbsp;[{{work.wfName}}]{{work.wfNo}}</span>
-                <p>发起人：{{work.fqr}}&emsp;当前步骤：{{work.dqbz}}</p>
+            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.Id}">
+                <span>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</span>
+                <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>
             </button>
         </ion-list>
 

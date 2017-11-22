@@ -74,7 +74,7 @@ export class MyApp {
                             this.events.publish('user:login', userInfo);
                             this.globalData.Uid = userInfo.Uid;
                             this.globalData.Name = userInfo.Name;
-                            this.globalData.token = userInfo.RoleAuthority;
+                            this.globalData.token = userInfo.Token;
                         } else {
 
                             let modal = this.modalCtrl.create(LoginPage);

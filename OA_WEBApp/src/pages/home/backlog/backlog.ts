@@ -24,9 +24,14 @@ export class Backlog {
     data: any;
 
     constructor(public navCtrl: NavController,
-        public navParams: NavParams,
-        private backlogService: BacklogService) {
-        this.data = { "page": 1, "size": 10 };
+                public navParams: NavParams,
+                private backlogService: BacklogService) {
+        this.data = { 
+            "PageIndex": 1, 
+            "PageSize": 10,
+            "Status": this.backlogService.Status["notdone"],
+            "Uid": this.backlogService.httpService.globalData.Uid
+         };
         this.getNotDoneList(this.data);
     }
 
@@ -37,12 +42,15 @@ export class Backlog {
     doRefresh(refresher?: Refresher) {
         // this.initializeItems();
         this.moredata = true;
+        this.data.PageIndex = 1;
         this.items = [];
-        if (this.work === "ontDone") {
+        if (this.work === "notDone") {
             // ....
+            this.data.Status = this.backlogService.Status["notdone"];
             this.getNotDoneList(this.data);
         } else {
             // ...
+            this.data.Status = this.backlogService.Status["done"];
             this.getDoneList(this.data);
         }
         if (!!refresher) {
@@ -73,21 +81,21 @@ export class Backlog {
     }
 
     private getNotDoneList(data) {
-        this.backlogService.getNotDoneList(data).subscribe(list => {
-            if (list === []) {
-                this.moredata = false;
+        this.backlogService.getNotDoneList(data).subscribe((resJson) => {
+            if (resJson.Result && resJson.Result !== [] ){
+                this.items = this.items.concat(resJson.Data);
             } else {
-                this.items = this.items.concat(list);
+                this.moredata = false;
             }
         });
     }
 
     private getDoneList(data) {
-        this.backlogService.getDoneList(data).subscribe(list => {
-            if (list === []) {
-                this.moredata = false;
+        this.backlogService.getDoneList(data).subscribe((resJson) => {
+            if (resJson.Result && resJson.Result !== [] ){
+                this.items = this.items.concat(resJson.Data);
             } else {
-                this.items = this.items.concat(list);
+                this.moredata = false;
             }
         });
     }

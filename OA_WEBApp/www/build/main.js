@@ -425,10 +425,14 @@ var MailService = (function () {
     //     return this.httpService.get('assets/data/mail-outbox.json').map((res: Response) => res.json());
     // }
     MailService.prototype.getInboxList = function (param) {
+        console.log(12, param);
         return this.httpService.postFormData("ashx/MailList.ashx", param).map(function (res) { return res.json(); });
     };
     MailService.prototype.getOutboxList = function (param) {
         return this.httpService.postFormData("ashx/MailList.ashx", param).map(function (res) { return res.json(); });
+    };
+    MailService.prototype.read = function (id) {
+        return this.httpService.postFormData("ashx/MailList.ashx", { "id": id }).map(function (res) { return res.json(); });
     };
     MailService.prototype.write = function (param) {
         // Uid 当前用户账号id
@@ -444,11 +448,21 @@ var MailService = (function () {
         // 返回json
         return this.httpService.postFormData("ashx/UserSheet.ashx", param).map(function (res) { return res.json(); });
     };
+    MailService.prototype.getRecipientsByDept = function (id) {
+        // 输入参数
+        // Name 输入查询用户名称
+        // 返回json
+        return this.httpService.postFormData("ashx/UserSheet.ashx", { DeptId: id }).map(function (res) { return res.json(); });
+    };
+    MailService.prototype.getDept = function () {
+        return this.httpService.postFormData("ashx/BmLs.ashx", {}).map(function (res) { return res.json(); });
+    };
     MailService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]) === "function" && _a || Object])
     ], MailService);
     return MailService;
+    var _a;
 }());
 
 //# sourceMappingURL=mailService.js.map
@@ -558,7 +572,7 @@ var Backlog = (function () {
     };
     Backlog = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-backlog',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog.html"*/`<!--\n  Generated template for the Backlog page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-navbar>\n        <ion-title>待办事项</ion-title>\n    </ion-navbar>\n    <ion-toolbar no-border-top>\n        <ion-segment class="content-ios" [(ngModel)]="work">\n            <ion-segment-button value="notDone">\n                未办理\n            </ion-segment-button>\n            <ion-segment-button value="done">\n                已办理\n            </ion-segment-button>\n        </ion-segment>\n    </ion-toolbar>\n\n</ion-header>\n\n\n<ion-content>\n    <div [ngSwitch]="work">\n        <ion-refresher (ionRefresh)="doRefresh($event)">\n            <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n            </ion-refresher-content>\n        </ion-refresher>\n\n        <ion-list *ngSwitchCase="\'notDone\'">\n\n            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.ggid}">\n                <span>&nbsp;[{{work.wfName}}]{{work.wfNo}}</span>\n                <p>发起人：{{work.fqr}}&emsp;当前步骤：{{work.dqbz}}</p>\n            </button>\n\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'done\'">\n            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.ggid}">\n                <span>&nbsp;[{{work.wfName}}]{{work.wfNo}}</span>\n                <p>发起人：{{work.fqr}}&emsp;当前步骤：{{work.dqbz}}</p>\n            </button>\n        </ion-list>\n\n        <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n        </ion-infinite-scroll>\n\n    </div>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog.html"*/,
+            selector: 'page-backlog',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog.html"*/`<!--\n  Generated template for the Backlog page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-navbar>\n        <ion-title>待办事项</ion-title>\n    </ion-navbar>\n    <ion-toolbar no-border-top>\n        <ion-segment class="content-ios" [(ngModel)]="work">\n            <ion-segment-button value="notDone">\n                未办理\n            </ion-segment-button>\n            <ion-segment-button value="done">\n                已办理\n            </ion-segment-button>\n        </ion-segment>\n    </ion-toolbar>\n\n</ion-header>\n\n\n<ion-content>\n    <div [ngSwitch]="work">\n        <ion-refresher (ionRefresh)="doRefresh($event)">\n            <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n            </ion-refresher-content>\n        </ion-refresher>\n\n        <ion-list *ngSwitchCase="\'notDone\'">\n\n            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.Id}">\n                <span>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</span>\n                <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>\n            </button>\n\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'done\'">\n            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.Id}">\n                <span>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</span>\n                <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>\n            </button>\n        </ion-list>\n\n        <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n        </ion-infinite-scroll>\n\n    </div>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_3__backlogService__["a" /* BacklogService */]]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
@@ -946,10 +960,13 @@ var HttpService = (function () {
     };
     HttpService = HttpService_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__GlobalData__["a" /* GlobalData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__GlobalData__["a" /* GlobalData */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_8__Logger__["a" /* Logger */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__Logger__["a" /* Logger */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6__NativeService__["a" /* NativeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__NativeService__["a" /* NativeService */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */],
+            __WEBPACK_IMPORTED_MODULE_5__GlobalData__["a" /* GlobalData */],
+            __WEBPACK_IMPORTED_MODULE_8__Logger__["a" /* Logger */],
+            __WEBPACK_IMPORTED_MODULE_6__NativeService__["a" /* NativeService */]])
     ], HttpService);
     return HttpService;
-    var HttpService_1, _a, _b, _c, _d;
+    var HttpService_1;
 }());
 
 //# sourceMappingURL=HttpService.js.map
@@ -1193,7 +1210,7 @@ var MailRead = (function () {
     ], MailRead.prototype, "content", void 0);
     MailRead = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-mail-read',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-read\mail-read.html"*/`<!--\n  Generated template for the MailRead page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>信息详情</ion-title>\n        <ion-buttons end>\n            <button ion-button (click)="read()">转发</button>\n        </ion-buttons>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n    <div>\n\n        <ion-list>\n\n            <ion-item>\n                <ion-label>发送人&emsp;</ion-label>\n                <ion-input type="text" disabled="disabled" [(ngModel)]="mailDetail.fsrName" placeholder="系统管理员"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>主题&emsp;&emsp;</ion-label>\n                <ion-input type="test" disabled="disabled" [(ngModel)]="mailDetail.jsbt" placeholder="主题1"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>发送时间</ion-label>\n                <ion-input type="test" disabled="disabled" [(ngModel)]="mailDetail.fssj" placeholder="发送时间未知"></ion-input>\n            </ion-item>\n\n        </ion-list>\n    </div>\n\n\n    <div>\n        <ion-scroll scrollY="true" class="mail-content">\n            <!--<div padding-horizontal [innerHTML]="mailContent"></div>-->\n            <div class="mydiv">\n                你该交作业了<br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br>\n            </div>\n            <div class="affix" *ngIf="mailDetail.attName">\n                <ion-grid>\n                    <ion-row align-items-center>\n                        <ion-col col-6 col-lg-4>\n                            <div (click)="download(mailDetail.ggfj)">\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                <p>{{mailDetail.attName}}</p>\n                                <p color="gray">大小未知</p>\n                                <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n                            </div>\n                        </ion-col>\n                    </ion-row>\n                </ion-grid>\n            </div>\n        </ion-scroll>\n    </div>\n</ion-content>\n<ion-footer class="message-reply">\n    <div class="item">\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n        <button ion-button small color="positive">发送</button>\n    </div>\n</ion-footer>\n<!--<div class="list message-reply">\n\n    <div class="item">\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n        <button ion-button small color="positive">发送</button>\n    </div>\n\n</div>-->`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-read\mail-read.html"*/,
+            selector: 'page-mail-read',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-read\mail-read.html"*/`<!--\n  Generated template for the MailRead page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>信息详情</ion-title>\n        <!-- <ion-buttons end>\n            <button ion-button (click)="read()">转发</button>\n        </ion-buttons> -->\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n    <div>\n\n        <ion-list>\n\n            <ion-item>\n                <ion-label>发送人&emsp;</ion-label>\n                <ion-input type="text" disabled="disabled" [(ngModel)]="mailDetail.fsrName" placeholder="系统管理员"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>主题&emsp;&emsp;</ion-label>\n                <ion-input type="test" disabled="disabled" [(ngModel)]="mailDetail.jsbt" placeholder="主题1"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>发送时间</ion-label>\n                <ion-input type="test" disabled="disabled" [(ngModel)]="mailDetail.fssj" placeholder="发送时间未知"></ion-input>\n            </ion-item>\n\n        </ion-list>\n    </div>\n\n\n    <div>\n        <ion-scroll scrollY="true" class="mail-content">\n            <!--<div padding-horizontal [innerHTML]="mailContent"></div>-->\n            <div class="mydiv">\n                你该交作业了<br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br>\n            </div>\n            <div class="affix" *ngIf="mailDetail.attName">\n                <ion-grid>\n                    <ion-row align-items-center>\n                        <ion-col col-6 col-lg-4>\n                            <div (click)="download(mailDetail.ggfj)">\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                <p>{{mailDetail.attName}}</p>\n                                <p color="gray">大小未知</p>\n                                <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n                            </div>\n                        </ion-col>\n                    </ion-row>\n                </ion-grid>\n            </div>\n        </ion-scroll>\n    </div>\n</ion-content>\n<ion-footer class="message-reply">\n    <div class="item">\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n        <button ion-button small color="positive">发送</button>\n    </div>\n</ion-footer>\n<!--<div class="list message-reply">\n\n    <div class="item">\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n        <button ion-button small color="positive">发送</button>\n    </div>\n\n</div>-->`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-read\mail-read.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
@@ -2605,10 +2622,13 @@ var AccountPasswordedit = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-account-passwordedit',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-passwordedit\account-passwordedit.html"*/`<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            修改\n        </ion-title>\n        <ion-buttons>\n            <button ion-button (click)="dismiss()">关闭</button>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <form [formGroup]="editPasswordForm" (ngSubmit)="confirm()">\n        <ion-list>\n            <ion-item>\n                <ion-label>&emsp;原密码：</ion-label>\n                <ion-input placeholder="请输入原密码" [(ngModel)]="oldPwd" type="password" formControlName="oldPwd"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!editPasswordForm.controls.oldPwd.valid&& editPasswordForm.controls.oldPwd.touched" color="danger">请输入原密码</span>\n            <ion-item>\n                <ion-label>&emsp;新密码：</ion-label>\n                <ion-input placeholder="请输入新密码" [(ngModel)]="newPwd"  type="password" formControlName="newPwd"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!editPasswordForm.controls.newPwd.valid&& editPasswordForm.controls.newPwd.touched" color="danger">请输入新密码</span>\n            <ion-item>\n                <ion-label>确认密码：</ion-label>\n                <ion-input placeholder="请再次输入新密码" type="password" formControlName="confirmPassword"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!editPasswordForm.controls.confirmPassword.valid&& editPasswordForm.controls.confirmPassword.touched" color="danger">请确认新密码</span>\n        </ion-list>\n        <div padding-horizontal>\n            <button color="danger" ion-button block type="submit" [disabled]="!editPasswordForm.valid">确　认</button>\n        </div>\n    </form>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-passwordedit\account-passwordedit.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__["a" /* HttpService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__["a" /* HttpService */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
     ], AccountPasswordedit);
     return AccountPasswordedit;
-    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=account-passwordedit.js.map
@@ -2969,23 +2989,23 @@ var AppModule = (function () {
                 }, {
                     links: [
                         { loadChildren: '../pages/account/aboutus/aboutus.module#AboutusPageModule', name: 'AboutusPage', segment: 'aboutus', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/account/account-edit/account-edit.module#AccountEditModule', name: 'AccountEdit', segment: 'account-edit', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/account/account-passwordedit/account-passwordedit.module#AccountPasswordeditModule', name: 'AccountPasswordedit', segment: 'account-passwordedit', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/account/account.module#AccountModule', name: 'Account', segment: 'account', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/backlog/backlog-detail/backlog-detail.module#BacklogDetailModule', name: 'BacklogDetail', segment: 'backlog-detail', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/backlog/backlog.module#BacklogModule', name: 'Backlog', segment: 'backlog', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/home/contacts/contacts-detail/contacts-detail.module#ContactsDetailModule', name: 'ContactsDetail', segment: 'contacts-detail', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/account/account-edit/account-edit.module#AccountEditModule', name: 'AccountEdit', segment: 'account-edit', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/contacts/contacts.module#ContactsModule', name: 'Contacts', segment: 'contacts', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/home/home.module#HomeModule', name: 'Home', segment: 'home', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/home/newwork/newwork-detail/newwork-detail.module#NewworkDetailModule', name: 'NewworkDetail', segment: 'newwork-detail', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/home/contacts/contacts-detail/contacts-detail.module#ContactsDetailModule', name: 'ContactsDetail', segment: 'contacts-detail', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/newwork/newwork.module#NewworkModule', name: 'Newwork', segment: 'newwork', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/mail/mail-read-outbox/mail-read-outbox.module#MailReadOutboxModule', name: 'MailReadOutbox', segment: 'mail-read-outbox', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/home/newwork/newwork-detail/newwork-detail.module#NewworkDetailModule', name: 'NewworkDetail', segment: 'newwork-detail', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/home/home.module#HomeModule', name: 'Home', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mail/mail-read/mail-read.module#MailReadModule', name: 'MailRead', segment: 'mail-read', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mail/mail-write/mail-write.module#MailWriteModule', name: 'MailWrite', segment: 'mail-write', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/mail/mail.module#MailModule', name: 'Mail', segment: 'mail', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/mail/mail-read-outbox/mail-read-outbox.module#MailReadOutboxModule', name: 'MailReadOutbox', segment: 'mail-read-outbox', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/notice/notice-detail/notice-detail.module#NoticeDetailModule', name: 'NoticeDetail', segment: 'notice-detail', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/welcome/welcome.module#WelcomeModule', name: 'Welcome', segment: 'welcome', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/notice/notice.module#NoticeModule', name: 'Notice', segment: 'notice', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/welcome/welcome.module#WelcomeModule', name: 'Welcome', segment: 'welcome', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/mail/mail.module#MailModule', name: 'Mail', segment: 'mail', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["a" /* IonicStorageModule */].forRoot(),
@@ -3547,10 +3567,9 @@ var LoginService = (function () {
     };
     LoginService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__providers_HttpService__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__providers_HttpService__["a" /* HttpService */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_HttpService__["a" /* HttpService */]])
     ], LoginService);
     return LoginService;
-    var _a;
 }());
 
 //# sourceMappingURL=LoginService.js.map
@@ -4672,15 +4691,13 @@ var TabsPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MailWrite; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_FileService__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_Constants__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file_chooser__ = __webpack_require__(145);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_transfer__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_HttpService__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__mailService__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_FileService__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_Constants__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file_chooser__ = __webpack_require__(145);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_transfer__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mailService__ = __webpack_require__(165);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4690,8 +4707,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
 
 
 
@@ -4715,6 +4730,7 @@ var PopoverPage = (function () {
         this.viewCtrl = viewCtrl;
         this.storage = storage;
         this.mailService = mailService;
+        this.deptItems = [];
         this.items = [];
         this.haveAffix = false;
         this.addressee = this.navParams.get("addressee");
@@ -4733,35 +4749,82 @@ var PopoverPage = (function () {
         //     { ui_id: "7", ui_desc: "admin7", bianhao: "dewr7", ui_ssbm: "本部7", ui_zw: "职员" }
         // ];
         var _this = this;
-        this.mailService.getRecipients().subscribe(function (result) {
+        this.mailService.getDept().subscribe(function (resJson) {
+            if (resJson.Result) {
+                _this.deptItems = resJson.Data;
+            }
+        });
+        this.mailService.getRecipients({}).subscribe(function (result) {
             console.log(result);
-            var idArr = _this.addresseeIds.split(",");
-            _this.items = result.map(function (value, index) {
-                for (var i in idArr) {
-                    if (idArr[i] !== value.ui_id) {
-                        Object.assign(value, { checked: false });
+            if (result.Result) {
+                var idArr_1 = _this.addresseeIds.split(",");
+                _this.items = result.Data.map(function (value, index) {
+                    for (var i in idArr_1) {
+                        if (idArr_1[i] !== value.Uid) {
+                            Object.assign(value, { checked: false });
+                        }
+                        else {
+                            return Object.assign(value, { checked: true });
+                        }
                     }
-                    else {
-                        return Object.assign(value, { checked: true });
-                    }
-                }
-                return value;
-            });
+                    return value;
+                });
+            }
         });
     };
     PopoverPage.prototype.getItems = function (ev) {
-        // // Reset items back to all of the items
-        // this.initializeItems();
-        // // set val to the value of the ev target
-        // var val = ev.target.value;
-        // // if the value is an empty string don't filter the items
+        // Reset items back to all of the items
+        this.initializeItems();
+        // set val to the value of the ev target
+        var val = ev.target.value;
+        this.name = val;
+        // if the value is an empty string don't filter the items
         // if (val && val.trim() != '') {
         //   this.items = this.items.filter((item) => {
         //     return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-        //   })
+        //   });
         // }
     };
-    PopoverPage.prototype.serach = function () { };
+    PopoverPage.prototype.getRecipientsByDept = function (id) {
+        var _this = this;
+        this.mailService.getRecipientsByDept({ DeptId: id }).subscribe(function (result) {
+            console.log(result);
+            if (result.Result) {
+                var idArr_2 = _this.addresseeIds.split(",");
+                _this.items = result.Data.map(function (value, index) {
+                    for (var i in idArr_2) {
+                        if (idArr_2[i] !== value.Uid) {
+                            Object.assign(value, { checked: false });
+                        }
+                        else {
+                            return Object.assign(value, { checked: true });
+                        }
+                    }
+                    return value;
+                });
+            }
+        });
+    };
+    PopoverPage.prototype.serach = function () {
+        var _this = this;
+        this.mailService.getRecipients({ name: this.name }).subscribe(function (result) {
+            console.log(result);
+            if (result.Result) {
+                var idArr_3 = _this.addresseeIds.split(",");
+                _this.items = result.Data.map(function (value, index) {
+                    for (var i in idArr_3) {
+                        if (idArr_3[i] !== value.Uid) {
+                            Object.assign(value, { checked: false });
+                        }
+                        else {
+                            return Object.assign(value, { checked: true });
+                        }
+                    }
+                    return value;
+                });
+            }
+        });
+    };
     PopoverPage.prototype.checkPeople = function (index) {
         this.items[index].checked = !this.items[index].checked;
     };
@@ -4772,28 +4835,24 @@ var PopoverPage = (function () {
         for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
             var value = _a[_i];
             if (value.checked) {
-                this.addressee += value.ui_desc + ",";
-                this.addresseeIds += value.ui_id + ",";
+                this.addressee += value.Name + ",";
+                this.addresseeIds += value.Uid + ",";
             }
         }
         this.viewCtrl.dismiss({ addressee: this.addressee, addresseeIds: this.addresseeIds });
     };
     PopoverPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            template: "\n        <ion-list class=\"checkpeople-popover\">\n        <ion-item>\n            <ion-label>\u90E8\u95E8\u9009\u62E9</ion-label>\n            <ion-select [(ngModel)]=\"os\" submitText=\"\u786E\u5B9A\" cancelText=\"\u53D6\u6D88\">\n                <ion-option value=\"dos\">\u672C\u90E8</ion-option>\n                <ion-option value=\"lunix\">\u7814\u53D1\u90E8</ion-option>\n                <ion-option value=\"mac7\">\u6D4B\u8BD5\u90E8</ion-option>\n            </ion-select>\n        </ion-item>\n        <ion-searchbar color=\"danger\" (ionInput)=\"getItems($event)\" placeholder=\"\u8BF7\u8F93\u5165\u7F16\u7801\u6216\u59D3\u540D\"></ion-searchbar>\n                \n        <div text-center>\n            <button (click)=\"search()\" icon-left ion-button small color=\"calm\">\n            <ion-icon name=\"search\"></ion-icon>\u67E5\u8BE2</button>\n            \n            <button (click)=\"confirm()\" icon-left ion-button small color=\"calm\">\n            <ion-icon name=\"checkmark\"></ion-icon>\u786E\u5B9A</button>\n        </div>\n\n        <ion-list-header>\n            \u901A\u8BAF\u5F55\n        </ion-list-header>\n\n        <ion-item *ngFor=\"let item of items;let i = index\">\n            <ion-label>\n            {{item.ui_desc}}({{item.ui_id}})<br>\n            <span>{{item.ui_ssbm}}&emsp;{{item.ui_zw}}</span>\n            </ion-label>\n            <ion-checkbox [checked]=\"item.checked\" (ionChange)=\"checkPeople(i)\"></ion-checkbox>\n        </ion-item>\n        <ion-list>\n    "
+            template: "\n        <ion-list class=\"checkpeople-popover\">\n        <ion-item>\n            <ion-label>\u90E8\u95E8\u9009\u62E9</ion-label>\n            <ion-select [(ngModel)]=\"dept\" submitText=\"\u786E\u5B9A\" (ngModelChange)=\"getRecipientsByDept(dept)\"\n                cancelText=\"\u53D6\u6D88\" okText=\"\u786E\u5B9A\">\n                <ion-option  *ngFor=\"let item of deptItems;let i = index\" [value]=\"item.Id\">\n                    {{item.BmName}}\n                </ion-option>\n            </ion-select>\n        </ion-item>\n        <ion-searchbar color=\"danger\" [(ngModel)]=\"name\"  placeholder=\"\u8BF7\u8F93\u5165\u7F16\u7801\u6216\u59D3\u540D\">\n        </ion-searchbar>\n                \n        <div text-center>\n            <button (click)=\"search()\" icon-left ion-button small color=\"calm\">\n            <ion-icon name=\"search\"></ion-icon>\u67E5\u8BE2</button>\n            \n            <button (click)=\"confirm()\" icon-left ion-button small color=\"calm\">\n            <ion-icon name=\"checkmark\"></ion-icon>\u786E\u5B9A</button>\n        </div>\n\n        <ion-list-header>\n            \u901A\u8BAF\u5F55\n        </ion-list-header>\n\n        <ion-item *ngFor=\"let item of items;let i = index\">\n            <ion-label>\n            {{item.Name}}({{item.Uid}})<br>\n            <span>{{item.Dept}}&emsp;{{item.Duty}}</span>\n            </ion-label>\n            <ion-checkbox [checked]=\"item.checked\" (ionChange)=\"checkPeople(i)\"></ion-checkbox>\n        </ion-item>\n        <ion-list>\n    "
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_FileService__["a" /* FileService */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */],
-            __WEBPACK_IMPORTED_MODULE_10__mailService__["a" /* MailService */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__providers_FileService__["a" /* FileService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_FileService__["a" /* FileService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_8__mailService__["a" /* MailService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__mailService__["a" /* MailService */]) === "function" && _f || Object])
     ], PopoverPage);
     return PopoverPage;
+    var _a, _b, _c, _d, _e, _f;
 }());
 
 var MailWrite = (function () {
-    function MailWrite(navCtrl, navParams, actionSheetCtrl, popoverCtrl, fileService, nativeService, fileChooser, alertCtrl, transfer, viewCtrl, httpService, globaldata) {
+    function MailWrite(navCtrl, navParams, actionSheetCtrl, popoverCtrl, fileService, nativeService, fileChooser, alertCtrl, transfer, viewCtrl, mailService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.actionSheetCtrl = actionSheetCtrl;
@@ -4804,13 +4863,12 @@ var MailWrite = (function () {
         this.alertCtrl = alertCtrl;
         this.transfer = transfer;
         this.viewCtrl = viewCtrl;
-        this.httpService = httpService;
-        this.globaldata = globaldata;
+        this.mailService = mailService;
         this.addressee = "";
         this.addresseeIds = "";
         this.attName = "109.png";
         this.msbz = false; // 密送标志
-        console.log(this.navParams.get("mail"));
+        // console.log(this.navParams.get("mail"));
         var mail = this.navParams.get("mail");
         if (typeof (mail) !== "undefined") {
             this.affixPath = mail.yjfj;
@@ -4828,14 +4886,16 @@ var MailWrite = (function () {
         console.log("ionViewDidLoad MailWrite");
     };
     MailWrite.prototype.send = function () {
-        console.log(this.msbz);
+        var _this = this;
         var data = {
-            "Uid": "admin",
-            "AcceptUid": "046",
-            "Content": "123456"
+            "Uid": this.mailService.httpService.globalData.Uid,
+            "AcceptUid": this.addresseeIds,
+            "Content": this.content
         };
-        this.httpService.postFormData("ashx/UserSheet.ashx", data).map(function (Response) { return Response.json(); });
-        this.nativeService.showToast("信息已发送");
+        this.mailService.write(data).subscribe(function (resJson) {
+            resJson.Result ? _this.nativeService.showToast("信息已发送") :
+                _this.nativeService.showToast(resJson.Data);
+        });
     };
     MailWrite.prototype.addAffix = function () {
         var _this = this;
@@ -4907,7 +4967,7 @@ var MailWrite = (function () {
         var fileObj = { "base64": this.imageBase64 };
         this.fileService.uploadByBase64(fileObj).subscribe(function (result) {
             if (result.success) {
-                var origPath = __WEBPACK_IMPORTED_MODULE_5__providers_Constants__["e" /* FILE_SERVE_URL */] + result.data[0].origPath;
+                var origPath = __WEBPACK_IMPORTED_MODULE_4__providers_Constants__["e" /* FILE_SERVE_URL */] + result.data[0].origPath;
                 console.log(origPath);
             }
         });
@@ -4940,26 +5000,16 @@ var MailWrite = (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])("popoverContent", { read: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */] }),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */]) === "function" && _a || Object)
     ], MailWrite.prototype, "content", void 0);
     MailWrite = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-mail-write',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-write\mail-write.html"*/`<!--\n  Generated template for the MailRead page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button (click)="dismiss()">取消</button>\n\n        <ion-title>写信</ion-title>\n        <ion-buttons end>\n            <button ion-button icon-left (click)="send()">\n                <ion-icon name="ios-send"></ion-icon> 发送\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n    <div>\n\n        <ion-list style="position:relative;">\n\n            <ion-item>\n                <ion-label style="align-self:center;">收件人&emsp;</ion-label>\n                <ion-textarea min-rows="1" [(ngModel)]="addressee" #popoverContent placeholder="请选择收件人" (click)="checkPeople($event)"></ion-textarea>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>主&emsp;题&emsp;</ion-label>\n                <ion-input type="test" [(ngModel)]="fsbt" placeholder="主题1"></ion-input>\n            </ion-item>\n            <button ion-button clear class="share-btn" (click)="addAffix()">\n              <ion-icon name="share"></ion-icon>1\n            </button>\n\n            <ion-item>\n                <ion-label>密&emsp;送&emsp;</ion-label>\n                <ion-toggle [(ngModel)]="msbz"></ion-toggle>\n            </ion-item>\n        </ion-list>\n    </div>\n\n\n    <div>\n        <ion-scroll scrollY="true" class="mail-content">\n            <!--<textarea class="mydiv">\n\n            </textarea>-->\n            <div class="message-textarea" contenteditable="true" data-text="输入信息"></div>\n            <div class="affix" *ngIf="haveAffix">\n                <ion-grid>\n                    <ion-row align-items-center>\n                        <ion-col col-6>\n                            <div>\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                <p>{{attName}}</p>\n                                <p color="gray">5.00MB</p>\n                                <ion-icon class="affix-dismiss" name="ios-close-circle-outline"></ion-icon>\n                            </div>\n                        </ion-col>\n                        <ion-col col-6 text-center>\n                            <div>\n                                <ion-icon name="add" class="affix-add"></ion-icon>\n                            </div>\n                        </ion-col>\n                    </ion-row>\n                </ion-grid>\n            </div>\n        </ion-scroll>\n    </div>\n</ion-content>\n<div class="list message-reply">\n\n    <div class="item">\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n        <button ion-button small color="positive">发送</button>\n    </div>\n\n</div>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-write\mail-write.html"*/,
+            selector: 'page-mail-write',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-write\mail-write.html"*/`<!--\n  Generated template for the MailRead page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button (click)="dismiss()">取消</button>\n\n        <ion-title>写信</ion-title>\n        <ion-buttons end>\n            <button ion-button icon-left (click)="send()">\n                <ion-icon name="ios-send"></ion-icon> 发送\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n    <div>\n\n        <ion-list style="position:relative;">\n\n            <ion-item>\n                <ion-label style="align-self:center;">收件人&emsp;</ion-label>\n                <ion-textarea min-rows="1" [(ngModel)]="addressee" #popoverContent placeholder="请选择收件人" (click)="checkPeople($event)"></ion-textarea>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>主&emsp;题&emsp;</ion-label>\n                <ion-input type="test" [(ngModel)]="fsbt" placeholder="主题1"></ion-input>\n            </ion-item>\n            <!-- <button ion-button clear class="share-btn" (click)="addAffix()">\n              <ion-icon name="share"></ion-icon>1\n            </button> -->\n\n            <ion-item>\n                <ion-label>密&emsp;送&emsp;</ion-label>\n                <ion-toggle [(ngModel)]="msbz"></ion-toggle>\n            </ion-item>\n        </ion-list>\n    </div>\n\n\n    <div>\n        <ion-scroll scrollY="true" class="mail-content">\n            <!--<textarea class="mydiv">\n\n            </textarea>-->\n            <div class="message-textarea" contenteditable="true" data-text="输入信息"></div>\n            <div class="affix" *ngIf="haveAffix">\n                <ion-grid>\n                    <ion-row align-items-center>\n                        <ion-col col-6>\n                            <div>\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                <p>{{attName}}</p>\n                                <p color="gray">5.00MB</p>\n                                <ion-icon class="affix-dismiss" name="ios-close-circle-outline"></ion-icon>\n                            </div>\n                        </ion-col>\n                        <ion-col col-6 text-center>\n                            <div>\n                                <ion-icon name="add" class="affix-add"></ion-icon>\n                            </div>\n                        </ion-col>\n                    </ion-row>\n                </ion-grid>\n            </div>\n        </ion-scroll>\n    </div>\n</ion-content>\n<div class="list message-reply">\n\n    <div class="item">\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n        <button ion-button small color="positive">发送</button>\n    </div>\n\n</div>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-write\mail-write.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* PopoverController */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_FileService__["a" /* FileService */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_file_chooser__["a" /* FileChooser */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_7__ionic_native_transfer__["a" /* Transfer */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_9__providers_HttpService__["a" /* HttpService */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */]])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* PopoverController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* PopoverController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_3__providers_FileService__["a" /* FileService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_FileService__["a" /* FileService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_native_file_chooser__["a" /* FileChooser */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_native_file_chooser__["a" /* FileChooser */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_transfer__["a" /* Transfer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_transfer__["a" /* Transfer */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_8__mailService__["a" /* MailService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__mailService__["a" /* MailService */]) === "function" && _m || Object])
     ], MailWrite);
     return MailWrite;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
 }());
 
 //# sourceMappingURL=mail-write.js.map

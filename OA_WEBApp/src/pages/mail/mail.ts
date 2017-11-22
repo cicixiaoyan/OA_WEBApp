@@ -37,10 +37,10 @@ export class Mail {
                 private mailService: MailService) {
         this.inboxData = { 
             "PageSize": 5,
-            "PageIndex": 1 , 
+            "PageIndex": 1, 
             "Mail": this.mailService.Mail["inbox"], 
             "Uid": this.globalData.Uid,
-            "Status": this.mailService.mailStatus["unread"]
+            "Status": this.mailService.mailStatus["unread"],
         };
 
         this.outboxData = { 
@@ -175,20 +175,31 @@ export class Mail {
 
 
     _getInboxList(inboxData) {
-        this.mailService.getInboxList(inboxData).subscribe(list => {
-            if (list.Result == true  ) {
+        this.mailService.getInboxList(inboxData).subscribe(resJson => {
+            if (resJson.Result == false  ) {
                 this.moredata = false;
+                if (this.inboxData.PageIndex === 1) {
+                     this.mailService.httpService.nativeService.showToast(resJson.Data);
+                     this.inboxList = [];                 
+                }
+
             } else {
+                let list = resJson.Data;
                 this.inboxList = [...this.inboxList, ...list];
             }
         });
     }
 
     _getOutboxList(outboxData) {
-        this.mailService.getOutboxList(outboxData).subscribe(list => {
-            if (list.Result == true ) {
+        this.mailService.getOutboxList(outboxData).subscribe(resJson => {
+            if (resJson.Result == false ) {
                 this.moredata = false;
+                if (this.inboxData.PageIndex === 1) {
+                    this.mailService.httpService.nativeService.showToast(resJson.Data);
+                    this.outboxList = [];                 
+               }
             } else {
+                let list = resJson.Data;
                 this.outboxList = [...this.outboxList, ...list];
             }
         });

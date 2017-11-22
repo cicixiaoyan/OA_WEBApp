@@ -200,7 +200,7 @@ export class NativeService {
      * @param message 信息内容
      * @param duration 显示时长
      */
-    showToast(message: string = '操作完成', duration: number = 2000): void {
+    showToast(message: string = '操作完成', duration: number = 2000, callback?: object): void {
         if (this.isMobile()) {
             this.toast.show(message, String(duration), 'center').subscribe();
         } else {

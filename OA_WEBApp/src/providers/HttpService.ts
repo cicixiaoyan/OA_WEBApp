@@ -14,9 +14,9 @@ import { Logger } from "./Logger";
 export class HttpService {
 
   constructor(public http: Http,
-              private globalData: GlobalData,
+              public globalData: GlobalData,
               public logger: Logger,
-              private nativeService: NativeService) {
+              public nativeService: NativeService) {
   }
 
   public request(url: string, options: RequestOptionsArgs): Observable<Response> {
@@ -48,7 +48,8 @@ export class HttpService {
   public noTokenPostFormData(url: string, paramMap: any = null): Observable<Response> {
     return this.request(url, new RequestOptions({
       method: RequestMethod.Post,
-      search: HttpService.buildURLSearchParams(paramMap).toString(),
+      // search: HttpService.buildURLSearchParams(paramMap).toString(),
+      body: HttpService.buildURLSearchParams(paramMap).toString(),
       headers: new Headers({
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       })
@@ -56,6 +57,9 @@ export class HttpService {
   }
 
   public post(url: string, body: any = {}): Observable<Response> {
+    body.Token = this.globalData.token;
+
+    console.log(body);
     return this.request(url, new RequestOptions({
       method: RequestMethod.Post,
       body: body,
@@ -69,7 +73,8 @@ export class HttpService {
     paramMap.Token = this.globalData.token;
     return this.request(url, new RequestOptions({
       method: RequestMethod.Post,
-      search: HttpService.buildURLSearchParams(paramMap).toString(),
+      // search: HttpService.buildURLSearchParams(paramMap).toString(),
+      body: HttpService.buildURLSearchParams(paramMap).toString(),
       headers: new Headers({
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       })

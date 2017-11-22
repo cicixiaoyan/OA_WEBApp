@@ -32,20 +32,20 @@ export class AccountPasswordedit {
     }
 
     confirm() {
-        let param = {oldPwd: this.oldPwd, newPwd: this.newPwd};
+        let param = {oldPwd: this.oldPwd, newPwd: this.newPwd, Uid: this.httpService.globalData.Uid};
         this.httpService.postFormData("ashx/PwdMod.ashx", param)
             .map(responce => responce.json())
             .subscribe((Resjson) => {
-                if (Resjson.result){
+                if (Resjson.Result){
+                    this.httpService.nativeService.showToast("修改密码成功", 800);
                     let modal = this.modalCtrl.create(LoginPage);
                     modal.present();
                     modal.onDidDismiss(data => {
                         data && console.log(data);
                     });
                 }else{
-
+                    this.httpService.nativeService.showToast("修改密码失败： " + Resjson.Data, 800);
                 }
-
             });
         
     }

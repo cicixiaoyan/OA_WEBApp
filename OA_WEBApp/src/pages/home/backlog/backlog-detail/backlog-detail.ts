@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HttpService } from "../../../../providers/HttpService";
-
+import { BacklogService } from '../backlogService';
+import { NativeService } from '../../../../providers/NativeService';
 /**
  * Generated class for the BacklogDetail page.
  *
@@ -18,18 +18,23 @@ export class BacklogDetail {
     item: any = [];
     isComplete: boolean = false;
     constructor(public navCtrl: NavController,
-        public navParams: NavParams,
-        private httpService: HttpService) {
+                public navParams: NavParams,
+                private backlogService: BacklogService,
+                private nativeService: NativeService
+            ) {
         console.log(this.navParams.get("id"));
         this.initializeItems();
     }
 
     initializeItems() {
-        this.httpService.get('assets/data/backlog-done.json')
-            .map(res => res.json())
-            .subscribe(item => {
-                this.item = item[0];
-            });
+        this.backlogService.getDone(this.navParams.get("id")).subscribe((resJson) => {
+            if (resJson.Result){
+                this.item = resJson.Data;
+            }else{
+                this.nativeService.showToast(resJson.Data);
+                this.navCtrl.pop();
+            }
+        });
     }
 
     ionViewDidLoad() {

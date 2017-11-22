@@ -29,11 +29,16 @@ export class MailService {
     // }
 
     getInboxList(param?): Observable<any>{
+        console.log(12, param);
         return this.httpService.postFormData("ashx/MailList.ashx", param).map((res: Response) => res.json());
     }
 
     getOutboxList(param?): Observable<any> {
     return this.httpService.postFormData("ashx/MailList.ashx", param).map((res: Response) => res.json());
+    }
+
+    read(id): Observable<any>{
+        return this.httpService.postFormData("ashx/MailList.ashx", {"id": id}).map((res: Response) => res.json());
     }
 
     write(param?): Observable<any>{
@@ -50,6 +55,17 @@ export class MailService {
         // Name 输入查询用户名称
         // 返回json
         return this.httpService.postFormData("ashx/UserSheet.ashx", param).map((res: Response) => res.json());
+    }
+
+    getRecipientsByDept(id?): Observable<any>{
+        // 输入参数
+        // Name 输入查询用户名称
+        // 返回json
+        return this.httpService.postFormData("ashx/UserSheet.ashx", {DeptId: id}).map((res: Response) => res.json());
+    }
+
+    getDept(): Observable<any> {
+        return this.httpService.postFormData("ashx/BmLs.ashx", {}).map((res: Response) => res.json());
     }
 
 }

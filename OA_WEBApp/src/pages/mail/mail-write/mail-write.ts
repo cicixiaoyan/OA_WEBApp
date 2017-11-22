@@ -11,7 +11,6 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { Storage } from '@ionic/storage';
 
-import { HttpService } from "../../../providers/HttpService";
 import { MailService } from "../mailService";
 
 
@@ -28,13 +27,15 @@ import { MailService } from "../mailService";
         <ion-list class="checkpeople-popover">
         <ion-item>
             <ion-label>部门选择</ion-label>
-            <ion-select [(ngModel)]="os" submitText="确定" cancelText="取消">
-                <ion-option value="dos">本部</ion-option>
-                <ion-option value="lunix">研发部</ion-option>
-                <ion-option value="mac7">测试部</ion-option>
+            <ion-select [(ngModel)]="dept" submitText="确定" (ngModelChange)="getRecipientsByDept(dept)"
+                cancelText="取消" okText="确定">
+                <ion-option  *ngFor="let item of deptItems;let i = index" [value]="item.Id">
+                    {{item.BmName}}
+                </ion-option>
             </ion-select>
         </ion-item>
-        <ion-searchbar color="danger" (ionInput)="getItems($event)" placeholder="请输入编码或姓名"></ion-searchbar>
+        <ion-searchbar color="danger" [(ngModel)]="name"  placeholder="请输入编码或姓名">
+        </ion-searchbar>
                 
         <div text-center>
             <button (click)="search()" icon-left ion-button small color="calm">
@@ -50,8 +51,8 @@ import { MailService } from "../mailService";
 
         <ion-item *ngFor="let item of items;let i = index">
             <ion-label>
-            {{item.ui_desc}}({{item.ui_id}})<br>
-            <span>{{item.ui_ssbm}}&emsp;{{item.ui_zw}}</span>
+            {{item.Name}}({{item.Uid}})<br>
+            <span>{{item.Dept}}&emsp;{{item.Duty}}</span>
             </ion-label>
             <ion-checkbox [checked]="item.checked" (ionChange)="checkPeople(i)"></ion-checkbox>
         </ion-item>
@@ -59,11 +60,13 @@ import { MailService } from "../mailService";
     `
 })
 export class PopoverPage {
-    os: string;
+    dept: string;
+    deptItems: any = [];
     items: any = [];
     haveAffix: boolean = false;
     addressee: string;
     addresseeIds: string;
+    name: string;
 
     constructor(private navParams: NavParams,
                 private fileService: FileService,
@@ -88,22 +91,30 @@ export class PopoverPage {
         //     { ui_id: "7", ui_desc: "admin7", bianhao: "dewr7", ui_ssbm: "本部7", ui_zw: "职员" }
         // ];
 
-        this.mailService.getRecipients().subscribe((result) => {
+        this.mailService.getDept().subscribe((resJson) => {
+            if (resJson.Result){
+                this.deptItems = resJson.Data;
+            }
+        });
+
+        this.mailService.getRecipients({}).subscribe((result) => {
             console.log(result);
-            const idArr = this.addresseeIds.split(",");
+            if (result.Result){
+                const idArr = this.addresseeIds.split(",");
 
-            this.items = result.map(function (value, index) {
-                for (let i in idArr) {
-                    if (idArr[i] !== value.ui_id) {
-                        Object.assign(value, { checked: false });
-                    } else {
-                        return Object.assign(value, { checked: true });
+                this.items = result.Data.map(function (value, index) {
+                    for (let i in idArr) {
+                        if (idArr[i] !== value.Uid) {
+                            Object.assign(value, { checked: false });
+                        } else {
+                            return Object.assign(value, { checked: true });
 
+                        }
                     }
-                }
-                return value;
+                    return value;
 
-            });
+                });
+            }
 
         });
 
@@ -111,21 +122,66 @@ export class PopoverPage {
     }
 
     getItems(ev) {
-        // // Reset items back to all of the items
-        // this.initializeItems();
+        // Reset items back to all of the items
+        this.initializeItems();
 
-        // // set val to the value of the ev target
-        // var val = ev.target.value;
-
-        // // if the value is an empty string don't filter the items
+        // set val to the value of the ev target
+        let val = ev.target.value;
+        this.name = val;
+        // if the value is an empty string don't filter the items
         // if (val && val.trim() != '') {
         //   this.items = this.items.filter((item) => {
         //     return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-        //   })
+        //   });
         // }
     }
 
-    serach() { }
+    getRecipientsByDept(id){
+        this.mailService.getRecipientsByDept({DeptId: id}).subscribe((result) => {
+            console.log(result);
+            if (result.Result){
+                const idArr = this.addresseeIds.split(",");
+
+                this.items = result.Data.map(function (value, index) {
+                    for (let i in idArr) {
+                        if (idArr[i] !== value.Uid) {
+                            Object.assign(value, { checked: false });
+                        } else {
+                            return Object.assign(value, { checked: true });
+
+                        }
+                    }
+                    return value;
+
+                });
+            }
+        });
+    }
+
+
+
+    serach() {
+
+        this.mailService.getRecipients({name: this.name}).subscribe((result) => {
+            console.log(result);
+            if (result.Result){
+                const idArr = this.addresseeIds.split(",");
+
+                this.items = result.Data.map(function (value, index) {
+                    for (let i in idArr) {
+                        if (idArr[i] !== value.Uid) {
+                            Object.assign(value, { checked: false });
+                        } else {
+                            return Object.assign(value, { checked: true });
+
+                        }
+                    }
+                    return value;
+
+                });
+            }
+        });
+     }
 
     checkPeople(index: number) {
         this.items[index].checked = !this.items[index].checked;
@@ -137,8 +193,8 @@ export class PopoverPage {
         this.addresseeIds = "";
         for (let value of this.items) {
             if (value.checked) {
-                this.addressee += value.ui_desc + ",";
-                this.addresseeIds += value.ui_id + ",";
+                this.addressee += value.Name + ",";
+                this.addresseeIds += value.Uid + ",";
             }
         }
         this.viewCtrl.dismiss({ addressee: this.addressee, addresseeIds: this.addresseeIds });
@@ -171,9 +227,8 @@ export class MailWrite {
                 private alertCtrl: AlertController,
                 private transfer: Transfer,
                 private viewCtrl: ViewController,
-                public httpService: HttpService,
-                private globaldata: GlobalData) {
-        console.log(this.navParams.get("mail"));
+                private mailService: MailService) {
+        // console.log(this.navParams.get("mail"));
         let mail = this.navParams.get("mail");
         if (typeof (mail) !== "undefined") {
             this.affixPath = mail.yjfj;
@@ -195,14 +250,17 @@ export class MailWrite {
     }
 
     send() {
-        console.log(this.msbz);
         let data =  {
-            "Uid": "admin",
-            "AcceptUid": "046",
-            "Content": "123456"
+            "Uid": this.mailService.httpService.globalData.Uid,
+            "AcceptUid": this.addresseeIds,
+            "Content": this.content
         };
-        this.httpService.postFormData("ashx/UserSheet.ashx", data).map(Response => Response.json());
-        this.nativeService.showToast("信息已发送");
+    
+        this.mailService.write(data).subscribe((resJson) => {
+            resJson.Result ? this.nativeService.showToast("信息已发送") :
+            this.nativeService.showToast(resJson.Data);
+        });
+        
     }
 
     addAffix() {

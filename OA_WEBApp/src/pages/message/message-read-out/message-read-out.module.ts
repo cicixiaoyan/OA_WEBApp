@@ -9,5 +9,6 @@ import { MessageReadOutPage } from './message-read-out';
   imports: [
     IonicPageModule.forChild(MessageReadOutPage),
   ],
+  exports: [MessageReadOutPage]
 })
 export class MessageReadOutPageModule {}

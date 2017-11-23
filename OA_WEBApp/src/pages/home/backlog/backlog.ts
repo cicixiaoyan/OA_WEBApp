@@ -22,6 +22,7 @@ export class Backlog {
     items: any = [];
     moredata: boolean = true;
     data: any;
+    isEmpty: boolean = false;
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
@@ -83,9 +84,11 @@ export class Backlog {
     private getNotDoneList(data) {
         this.backlogService.getNotDoneList(data).subscribe((resJson) => {
             if (resJson.Result && resJson.Result !== [] ){
+                this.isEmpty = true;
                 this.items = this.items.concat(resJson.Data);
             } else {
                 this.moredata = false;
+                this.isEmpty = this.data.PageIndex == 1 ? true : false;
             }
         });
     }
@@ -93,9 +96,11 @@ export class Backlog {
     private getDoneList(data) {
         this.backlogService.getDoneList(data).subscribe((resJson) => {
             if (resJson.Result && resJson.Result !== [] ){
+                this.isEmpty = true;
                 this.items = this.items.concat(resJson.Data);
             } else {
                 this.moredata = false;
+                this.isEmpty = this.data.PageIndex == 1 ? true : false;
             }
         });
     }

@@ -3,7 +3,7 @@ import { IonicPage, NavController, Nav, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 // import { LoginPage } from '../login/login';
 import { TabsPage } from "../tabs/tabs";
-import { Mail } from '../mail/mail';
+import { MessagePage } from '../message/message';
 import { Backlog } from "../home/backlog/backlog";
 import { Contacts } from "../home/contacts/contacts";
 // import { Newwork } from '../home/newwork/newwork';
@@ -37,7 +37,7 @@ export class Home {
 
     // set our app's pages
     appPages: HomePageInterface[] = [
-        { title: '邮件', component: Mail, index: 1, icon: 'ios-mail', color: "positive" },
+        { title: '消息', component: MessagePage, index: 1, icon: 'ios-mail', color: "positive" },
         { title: '公告管理', component: TabsPage, index: 2, icon: 'ios-notifications', color: "royal" },
         { title: '通讯录', component: Contacts, icon: 'md-call', color: "energized" },
         { title: '待办事项', component: Backlog, icon: 'ios-calendar', color: "assertive" },

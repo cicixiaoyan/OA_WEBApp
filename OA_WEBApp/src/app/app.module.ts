@@ -14,14 +14,16 @@ import { MessagePageModule } from '../pages/message/message.module';
 import { MessageReadPageModule } from '../pages/message/message-read/message-read.module';
 import { MessageReadOutPageModule } from '../pages/message/message-read-out/message-read-out.module';
 import { MessageWritePageModule } from '../pages/message/message-write/message-write.module';
-import { NoticeModule } from '../pages/notice/notice.module';
-import { NoticeDetailModule } from '../pages/notice/notice-detail/notice-detail.module';
+import { AnnouncementPageModule } from '../pages/announcement/announcement.module';
+import { AnnouncementDetailPageModule } from '../pages/announcement/announcement-detail/announcement-detail.module';
 import { AccountModule } from '../pages/account/account.module';
 import { AboutusPageModule } from '../pages/account/aboutus/aboutus.module';
 import { AccountEditModule } from '../pages/account/account-edit/account-edit.module';
 import { AccountPasswordeditModule } from '../pages/account/account-passwordedit/account-passwordedit.module';
 import { LoginModule } from '../pages/login/login.module';
 import { WelcomeModule } from '../pages/welcome/welcome.module';
+
+import { ContactsPopoverPageModule } from '../pages/contacts-popover/contacts-popover.module';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -47,7 +49,6 @@ import { Utils } from "../providers/Utils";
 import { Http, HttpModule } from "@angular/http";
 import { HttpInterceptHandle } from "../providers/HttpInterceptHandle";
 import { GlobalData } from "../providers/GlobalData";
-import { GetContact } from '../providers.GetContact';
 
 import { Logger } from "../providers/Logger";
 import { ModalFromRightEnter, ModalFromRightLeave, ModalScaleEnter, ModalScaleLeave } from "./itransitions";
@@ -71,8 +72,7 @@ export class FunDebugErrorHandler implements ErrorHandler {
 @NgModule({
     declarations: [
         MyApp,
-        TabsPage,
-        GetContact
+        TabsPage
     ],
     imports: [
         BrowserModule,
@@ -92,20 +92,20 @@ export class FunDebugErrorHandler implements ErrorHandler {
         MessageReadPageModule,
         MessageReadOutPageModule,
         MessageWritePageModule,
-        NoticeModule,
-        NoticeDetailModule,
+        AnnouncementPageModule,
+        AnnouncementDetailPageModule,
         AccountModule,
         AboutusPageModule,
         AccountEditModule,
         AccountPasswordeditModule,
         LoginModule,
-        WelcomeModule
+        WelcomeModule,
+        ContactsPopoverPageModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
-        TabsPage,
-        GetContact
+        TabsPage
     ],
     providers: [
         StatusBar,

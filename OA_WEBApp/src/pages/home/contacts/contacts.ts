@@ -22,6 +22,7 @@ export class Contacts {
     page: number = 1;
     size: number = 1;
     moredata: boolean = true;
+    isEmpty: boolean = false;
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
@@ -63,7 +64,10 @@ export class Contacts {
         this.getList().subscribe(resJson => {
             if (resJson.Result && resJson.Result !== []){
                 this.items = resJson.Data;
+                this.isEmpty = false;
             } else {
+                this.isEmpty = true;
+                this.moredata = false;
                 this.httpService.nativeService.showToast(resJson.Data || "无数据");
             }
         });
@@ -100,8 +104,11 @@ export class Contacts {
         .subscribe((resJson) => {
             if (resJson.Result){
                 this.items = resJson.Data;
+                this.isEmpty = false;
             }else{
                 this.items = [];
+                this.isEmpty = true;
+                this.moredata = false;
             }
         });
 

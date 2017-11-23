@@ -9,5 +9,8 @@ import { MessageReadPage } from './message-read';
   imports: [
     IonicPageModule.forChild(MessageReadPage),
   ],
+  exports: [
+    MessageReadPage
+  ]
 })
 export class MessageReadPageModule {}

@@ -51507,6 +51507,51 @@ page-account .list-ios {
   margin: -1px 0 16px 0;
 }
 
+.searchbar-ios-dark .searchbar-ios-cancel {
+  color: #fff;
+}
+
+page-announcement-detail .detail-header {
+  position: relative;
+  padding: 0 10px;
+  border-bottom: 3px double #aaa;
+  background: url(../assets/img/header-bg.jpg) no-repeat;
+  background-size: cover;
+}
+
+page-announcement-detail .detail-header .right {
+  position: absolute;
+  right: 28px;
+}
+
+page-announcement-detail .detail-header .detail-title {
+  padding: 10px 0;
+  font-size: 2rem;
+}
+
+page-announcement-detail .detail-content {
+  position: absolute;
+  bottom: 0;
+  top: 120px;
+  left: 0;
+  right: 0;
+}
+
+page-announcement-detail .notice-affix {
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  border-top: 1px solid #222;
+}
+
+page-announcement-detail .notice-affix a {
+  display: inline-block;
+  height: 44px;
+  line-height: 44px;
+  font-size: 2rem;
+}
+
 page-home .index-row ion-col {
   padding: 5px 12px;
   font-size: 12px;
@@ -51762,49 +51807,47 @@ page-mail-write .mail-content {
   border: 1px solid #ddd;
 }
 
-.searchbar-ios-dark .searchbar-ios-cancel {
-  color: #fff;
+page-message .subbox {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
 }
 
-page-notice-detail .detail-header {
-  position: relative;
-  padding: 0 10px;
-  border-bottom: 3px double #aaa;
-  background: url(../assets/img/header-bg.jpg) no-repeat;
-  background-size: cover;
-}
-
-page-notice-detail .detail-header .right {
-  position: absolute;
-  right: 28px;
-}
-
-page-notice-detail .detail-header .detail-title {
-  padding: 10px 0;
-  font-size: 2rem;
-}
-
-page-notice-detail .detail-content {
+page-message-read .message-content {
   position: absolute;
   bottom: 0;
-  top: 120px;
   left: 0;
+  top: 160px;
   right: 0;
 }
 
-page-notice-detail .notice-affix {
-  position: absolute;
-  left: 0;
-  bottom: -4px;
+page-message-read .message-content div.mydiv {
   width: 100%;
-  border-top: 1px solid #222;
+  padding: 10px;
 }
 
-page-notice-detail .notice-affix a {
-  display: inline-block;
-  height: 44px;
-  line-height: 44px;
-  font-size: 2rem;
+page-message-read .message-reply {
+  width: 100%;
+  border-top: 1px solid #699df7;
+}
+
+page-message-read .message-reply > div {
+  width: 100%;
+  padding-right: 60px;
+}
+
+page-message-read .message-reply > div textarea {
+  width: 100%;
+  height: 54px;
+  padding: 2px 10px;
+  border: none;
+  border-right: 1px solid #99bdfa;
+}
+
+page-message-read .message-reply > div button {
+  position: absolute;
+  right: 2px;
+  bottom: 7px;
+  height: 40px;
 }
 
 page-welcome ion-slide {

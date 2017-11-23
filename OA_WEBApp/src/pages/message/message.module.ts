@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { MessagePage } from './message';
+import { MessageService } from './messageService';
 
 @NgModule({
   declarations: [
@@ -9,5 +10,9 @@ import { MessagePage } from './message';
   imports: [
     IonicPageModule.forChild(MessagePage),
   ],
+  providers: [MessageService],
+  exports: [
+    MessagePage
+  ]
 })
 export class MessagePageModule {}

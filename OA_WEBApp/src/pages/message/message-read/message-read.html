@@ -5,14 +5,53 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>message-read</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-</ion-content>
+  
+      <ion-navbar>
+          <ion-title>消息详情</ion-title>
+      </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">
+      <div>
+          <ion-list>
+  
+              <ion-item>
+                  <ion-label>发送人&emsp;</ion-label>
+                  <ion-input type="text" disabled="disabled" [(ngModel)]="mailDetail.SendPerson" placeholder="系统管理员"></ion-input>
+              </ion-item>
+  
+              <ion-item>
+                  <ion-label>发送时间</ion-label>
+                  <ion-input type="test" disabled="disabled" [(ngModel)]="mailDetail.MailDate" placeholder="发送时间未知"></ion-input>
+              </ion-item>
+  
+          </ion-list>
+      </div>
+  
+      <div>
+          <ion-scroll scrollY="true" class="message-content">
+              <!--<div padding-horizontal [innerHTML]="mailContent"></div>-->
+              <!-- <ion-textarea [(ngModule)]="Content"  placeholder="回复: "></ion-textarea> -->
+              <div class="mydiv">
+                  你该交作业了<br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
+                  <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
+                  <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
+                  <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
+                  <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
+                  <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
+                  <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
+                  <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
+                  <br>你该交作业了<br>你该交作业了<br>你该交作业了<br>
+              </div>
+          </ion-scroll>
+      </div>
+  </ion-content>
+  <!-- <ion-footer class="message-reply">
+      <div class="item">
+          <ion-textarea [(ngModule)]="writeContent"  placeholder="回复: "></ion-textarea>
+          <button ion-button small color="positive" (click)="reply()">发送</button>
+      </div>
+  </ion-footer> -->
+  

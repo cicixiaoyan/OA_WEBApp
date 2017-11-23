@@ -2,8 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 
 import { Home } from '../home/home';
-import { Mail } from '../mail/mail';
-import { Notice } from '../notice/notice';
+// import { Mail } from '../mail/mail';
+import { MessagePage } from '../message/message';
+import { AnnouncementPage } from '../announcement/announcement';
 import { Account } from '../account/account';
 import { Tabs } from "ionic-angular";
 
@@ -14,8 +15,8 @@ export class TabsPage {
     @ViewChild('mainTabs') tabs: Tabs;
 
     tab1Root = Home;
-    tab2Root = Mail;
-    tab3Root = Notice;
+    tab2Root = MessagePage;
+    tab3Root = AnnouncementPage;
     tab4Root = Account;
     mySelectedIndex: number;
 

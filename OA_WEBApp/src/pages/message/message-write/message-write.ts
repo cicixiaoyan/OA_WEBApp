@@ -5,8 +5,8 @@ import { GlobalData } from '../../../providers/GlobalData';
 import { NativeService } from '../../../providers/NativeService';
 import { FileObj } from "../../../model/FileObj";
 
-import { MessageService } from "../MessageService";
-import { GetContact } from '../../../providers/GetContact';
+import { MessageService } from "../messageService";
+import { ContactsPopoverPage } from '../../contacts-popover/contacts-popover';
 
 /**
  * Generated class for the MessageWritePage page.
@@ -19,7 +19,7 @@ import { GetContact } from '../../../providers/GetContact';
 
 @Component({
     selector: 'page-message-write',
-    templateUrl: 'mail-message.html',
+    templateUrl: 'message-write.html',
 })
 
 export class MessageWritePage {
@@ -66,7 +66,7 @@ export class MessageWritePage {
 
     checkPeople(myEvent) {
 
-        let popover = this.popoverCtrl.create(GetContact,
+        let popover = this.popoverCtrl.create(ContactsPopoverPage,
             { addressee: this.addressee, addresseeIds: this.addresseeIds });
         popover.present({
             ev: myEvent

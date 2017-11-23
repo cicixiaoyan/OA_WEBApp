@@ -18,12 +18,12 @@
         <ion-row style="border-bottom: 2px solid #ddd;padding-bottom: 0;">
             <ion-col col-4 text-center style="border-right:1px solid #ddd;">
                 <img src="../assets/img/ben.png" alt="photo" style="height: 70px;width: 70px;border-radius: 50%;">
-                <div>{{checkman.ui_desc}}&nbsp;·<span class="royal">&nbsp;♂</span></div>
+                <div>{{checkman.Name}}&nbsp;·<span class="royal">&nbsp;{{checkman.Sex}}</span></div>
             </ion-col>
             <ion-col col-8>
-                <p>账号：{{checkman.ui_id}}</p>
-                <p>职位：{{checkman.ui_zw}}</p>
-                <p>公司：{{checkman.ui_ssgs}}</p>
+                <p>账号：{{checkman.Uid || "未知"}}</p>
+                <p>职位：{{checkman.Duty}}</p>
+                <p>公司：{{checkman.Company}}</p>
             </ion-col>
         </ion-row>
     </ion-grid>
@@ -31,28 +31,28 @@
         <ion-item>
             <ion-icon color="energized" name="ios-analytics" item-left></ion-icon>
             部门
-            <ion-note item-right>{{checkman.ui_ssbm}}</ion-note>
+            <ion-note item-right>{{checkman.Dept}}</ion-note>
 
         </ion-item>
         <ion-item (click)="call(checkman.tel)">
             <ion-icon color="danger" name="md-call" item-left></ion-icon>
             电话
-            <ion-note item-right>{{checkman.ui_czdh}}</ion-note>
+            <ion-note item-right>{{checkman.InlinePhone}}</ion-note>
         </ion-item>
         <ion-item (click)="call(checkman.mobile)">
             <ion-icon color="calm" name="md-phone-portrait" item-left></ion-icon>
             手机
-            <ion-note item-right>{{checkman.ui_yndx}}</ion-note>
+            <ion-note item-right>{{checkman.Mobile}}</ion-note>
         </ion-item>
-        <ion-item>
+        <!-- <ion-item>
             <ion-icon color="balanced" name="md-send" item-left></ion-icon>
             传真
             <ion-note item-right>{{checkman.fax}}</ion-note>
-        </ion-item>
+        </ion-item> -->
         <ion-item>
             <ion-icon color="royal" name="md-mail" item-left></ion-icon>
             邮件
-            <ion-note item-right>{{checkman.ui_mail}}</ion-note>
+            <ion-note item-right>{{checkman.Mail}}</ion-note>
         </ion-item>
 
 

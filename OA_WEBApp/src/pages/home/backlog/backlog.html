@@ -9,7 +9,7 @@
         <ion-title>待办事项</ion-title>
     </ion-navbar>
     <ion-toolbar no-border-top>
-        <ion-segment class="content-ios" [(ngModel)]="work">
+        <ion-segment class="content-ios" [(ngModel)]="work" (ngModelChange)="doRefresh()">
             <ion-segment-button value="notDone">
                 未办理
             </ion-segment-button>
@@ -44,6 +44,11 @@
                 <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>
             </button>
         </ion-list>
+
+        <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">
+            <div padding>暂无此类信息！！！</div>
+            <img src="assets/img/face/face2.png" height="100">
+        </div>
 
         <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">
             <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>

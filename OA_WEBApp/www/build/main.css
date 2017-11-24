@@ -51464,6 +51464,10 @@ ion-navbar.toolbar {
   font-family: '微软雅黑';
 }
 
+.validation-failed {
+  color: #f53d3d;
+}
+
 page-account .top {
   position: relative;
   padding: 20px 0 10px;
@@ -51505,6 +51509,11 @@ page-account .padding-bottom44 {
 
 page-account .list-ios {
   margin: -1px 0 16px 0;
+}
+
+page-account-edit .validation-failed {
+  color: #f53d3d;
+  padding-left: 1rem;
 }
 
 .searchbar-ios-dark .searchbar-ios-cancel {
@@ -51655,6 +51664,12 @@ page-login ion-content ion-item:first-child {
 page-login ion-content ion-item:last-child {
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
+}
+
+page-login .validation-failed {
+  color: #f53d3d;
+  padding-left: 1rem;
+  background: #fff;
 }
 
 page-find-password .verification {
@@ -51816,7 +51831,7 @@ page-message-read .message-content {
   position: absolute;
   bottom: 0;
   left: 0;
-  top: 160px;
+  top: 116px;
   right: 0;
 }
 
@@ -51848,6 +51863,27 @@ page-message-read .message-reply > div button {
   right: 2px;
   bottom: 7px;
   height: 40px;
+}
+
+page-message-read-out .message-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 116px;
+  right: 0;
+}
+
+page-message-read-out .message-content div.mydiv {
+  width: 100%;
+  padding: 10px;
+}
+
+page-message-write .mail-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 60px;
+  right: 0;
 }
 
 page-welcome ion-slide {

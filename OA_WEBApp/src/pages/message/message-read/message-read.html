@@ -32,19 +32,11 @@
 
     <div>
         <ion-scroll scrollY="true" class="message-content">
-            <!--<div padding-horizontal [innerHTML]="mailContent"></div>-->
-            <!-- <ion-textarea [(ngModule)]="Content"  placeholder="回复: "></ion-textarea> -->
-            <div class="mydiv">
-                你该交作业了<br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
-                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
-                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
-                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
-                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
-                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
-                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
-                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了
-                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br>
-            </div>
+            <div padding-horizontal [innerHTML]="messageContent"></div>
+            <!-- <ion-textarea [(ngModule)]="messageDetail.Title"  placeholder="回复: "></ion-textarea> -->
+            <!-- <div class="mydiv">
+                {{messageDetail.Title}}
+            </div> -->
         </ion-scroll>
     </div>
 </ion-content>

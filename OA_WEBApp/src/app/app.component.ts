@@ -10,6 +10,7 @@ import { Welcome } from '../pages/welcome/welcome';
 import { TabsPage } from "../pages/tabs/tabs";
 import { GlobalData } from "../providers/GlobalData";
 import { UserInfo } from "../model/UserInfo";
+import { LoginService } from '../pages/login/LoginService';
 import { LoginPage } from "../pages/login/login";
 import { Backlog } from "../pages/home/backlog/backlog";
 import { Contacts } from "../pages/home/contacts/contacts";
@@ -59,6 +60,7 @@ export class MyApp {
                 private toastCtrl: ToastController,
                 private modalCtrl: ModalController,
                 private events: Events,
+                private loginService: LoginService,
                 private nativeService: NativeService) {
 
 
@@ -69,12 +71,23 @@ export class MyApp {
                 // this.nativeService.showToast("不是第一次进入");
                 if (result) {
                     this.rootPage = TabsPage;
-                    this.storage.get('UserInfo').then((userInfo: UserInfo) => {
-                        if (userInfo) {
-                            this.events.publish('user:login', userInfo);
-                            this.globalData.Uid = userInfo.Uid;
-                            this.globalData.Name = userInfo.Name;
-                            this.globalData.token = userInfo.Token;
+                    this.storage.get('loginInfo').then((loginInfo) => {
+                        if (loginInfo) {
+                            this.loginService.login(loginInfo).subscribe((resJson) => {
+                                if (resJson.result){
+                                    this.globalData.Uid = resJson.Data.Uid;
+                                    this.globalData.Name = resJson.Data.Name;
+                                    this.globalData.token = resJson.Data.Token;
+                                    this.events.publish('user:login', result.Data);
+                                }else{
+                                    let modal = this.modalCtrl.create(LoginPage);
+                                    modal.present();
+                                    modal.onDidDismiss(data => {
+                                        data && console.log(data);
+                                    });
+                                }
+                            });
+                            
                         } else {
 
                             let modal = this.modalCtrl.create(LoginPage);

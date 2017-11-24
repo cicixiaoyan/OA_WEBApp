@@ -29,9 +29,9 @@ export class MessageService {
         return this.httpService.postFormData("ashx/MailList.ashx", param).map((res: Response) => res.json());
     }
 
-    read(id): Observable<any>{
-        return this.httpService.postFormData("ashx/MailList.ashx", {"id": id}).map((res: Response) => res.json());
-    }
+    // read(id): Observable<any>{
+    //     return this.httpService.postFormData("ashx/MailList.ashx", {"id": id}).map((res: Response) => res.json());
+    // }
 
     write(param?): Observable<any>{
         // Uid 当前用户账号id

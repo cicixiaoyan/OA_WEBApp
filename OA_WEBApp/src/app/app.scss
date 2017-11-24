@@ -51,3 +51,7 @@
         font-family: '微软雅黑';
     }
 }
+
+.validation-failed {
+    color: color($colors, danger);
+}

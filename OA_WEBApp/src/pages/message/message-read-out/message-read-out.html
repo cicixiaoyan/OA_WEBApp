@@ -5,14 +5,38 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>message-read-out</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-</ion-content>
+  
+      <ion-navbar>
+          <ion-title>消息详情</ion-title>
+      </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">
+      <div>
+          <ion-list>
+  
+              <ion-item>
+                  <ion-label>发送人&emsp;</ion-label>
+                  <ion-input type="text" disabled="disabled" [(ngModel)]="messageDetail.AccessPerson" placeholder="系统管理员"></ion-input>
+              </ion-item>
+  
+              <ion-item>
+                  <ion-label>发送时间</ion-label>
+                  <ion-input type="test" disabled="disabled" [(ngModel)]="messageDetail.MailDate" placeholder="发送时间未知"></ion-input>
+              </ion-item>
+  
+          </ion-list>
+      </div>
+  
+      <div>
+          <ion-scroll scrollY="true" class="message-content">
+              <div padding-horizontal [innerHTML]="messageContent"></div>
+              <!-- <ion-textarea [(ngModule)]="messageDetail.Title"  placeholder="回复: "></ion-textarea> -->
+              <!-- <div class="mydiv">
+                {{messageDetail.Title}}
+              </div> -->
+          </ion-scroll>
+      </div>
+  </ion-content>

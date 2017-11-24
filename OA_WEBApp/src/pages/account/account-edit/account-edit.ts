@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, ModalController } from 'ionic-angular';
 import { UserInfo } from "../../../model/UserInfo";
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-
-
+import { Storage } from '@ionic/storage';
+import { LoginPage } from "../../login/login";
 /**
  * Generated class for the AccountEdit page.
  *
@@ -24,22 +24,36 @@ export class AccountEdit {
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 private actionSheetCtrl: ActionSheetController,
+                private storage: Storage,
+                private modalCtrl: ModalController,
                 private formBuilder: FormBuilder) {
 
         this.editForm = this.formBuilder.group({
             InDate: ['1990-02-19', [Validators.required, Validators.minLength(4)]], // 第一个参数是默认值
             Sex: ['男', [Validators.required, Validators.minLength(2)]],
             BirthDate: [],
-            Mobile: [],
-            ui_mail: [],
-            ui_bgdh: [],
-            ui_czdh: []
+            Mobile: [null, [Validators.minLength(11), Validators.maxLength(11)]],
+            Mail: [null, [Validators.email]],
+            WorkPhone: [null, [Validators.maxLength(11)]],
+            InlinePhone: [null, [Validators.maxLength(11)]]
         });
 
         this.initialize();
     }
 
     initialize() {
+        this.storage.get("UserInfo").then((UserInfo) => {
+            if (UserInfo){
+                this.userInfo = UserInfo;
+            }else{
+                let modal = this.modalCtrl.create(LoginPage);
+                modal.present();
+                modal.onDidDismiss(data => {
+                    data && console.log(data);
+                });
+            }
+            
+        });
         this.userInfo.BirthDate = "1990-02-19";
         this.userInfo.InDate = "1990-02-19";
     }

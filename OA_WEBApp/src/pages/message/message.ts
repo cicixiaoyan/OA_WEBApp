@@ -92,12 +92,13 @@ export class MessagePage {
       this._getInboxList(this.inboxData);
   }
 
-  doRead(id) {
-      this.navCtrl.push(MessageReadPage, { id: id });
+  doRead(Params) {
+      this.navCtrl.push(MessageReadPage, { Params: Params });
   }
 
-  doReadOutBox(id) {
-      this.navCtrl.push(MessageReadOutPage, { id: id });
+  doReadOutBox(Params) {
+      console.log(Params);
+      this.navCtrl.push(MessageReadOutPage, { Params: Params });
   }
 
   doWrite() {

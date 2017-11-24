@@ -22,17 +22,17 @@
       <ion-buttons ion-button icon-only end (click)="doWrite()">
           <ion-icon name="ios-add-circle-outline"></ion-icon>
       </ion-buttons>-->
-      <div [ngSwitch]="box" class="subbox">
+      <div [ngSwitch]="box"  class="subbox">
           <div *ngSwitchCase="'inbox'">
               <button ion-button small (click)="checkRead('unread')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.unread}">未读</button>
               <button ion-button small (click)="checkRead('read')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.read}">已读</button>
               <button ion-button small (click)="checkRead('all')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.all}">全部</button>
           </div>
   
-          <!-- <div *ngSwitchCase="'outbox'">
-              <button ion-button small (click)="checkDraft()" class="button-ios-light" [ngClass]="{'button-ios-calm':!isDraft}">已读</button>
-              <button ion-button small (click)="checkDraft(true)" class="button-ios-light" [ngClass]="{'button-ios-calm':isDraft}">未读</button>
-          </div> -->
+          <div *ngSwitchCase="'outbox'">
+              <button ion-button small (click)="checkDraft()" class="button-ios-light button-ios-calm">已发送</button>
+              <!-- <button ion-button small (click)="checkDraft(true)" class="button-ios-light" [ngClass]="{'button-ios-calm':isDraft}">未读</button> -->
+          </div>
       </div>
   
   </ion-header>
@@ -46,13 +46,13 @@
       </ion-refresher>
       <div [ngSwitch]="box">
           <ion-list *ngSwitchCase="'inbox'">
-              <ion-item-sliding *ngFor="let message of inboxList " (click)="doRead(message.Id)">
+              <ion-item-sliding *ngFor="let message of inboxList " (click)="doRead(message)">
                   <ion-item>
                       <ion-avatar item-left>
                           <img src="assets/img/mike.png">
                       </ion-avatar>
-                      <span style="color:#2196F3;" *ngIf="message.Status=='0'">●&nbsp;</span><span>{{message.Content}}</span>
-                      <p class="font-12">来至:{{message.Name}}&emsp;{{message.SendDate}}</p>
+                      <span style="color:#2196F3;" *ngIf="message.Status=='0'">●&nbsp;</span><span>{{message.Tile}}</span>
+                      <p class="font-12">来至:{{message.SendPerson}}&emsp;{{message.MailDate}}</p>
                   </ion-item>
                   <ion-item-options side="right">
                       <button ion-button color="primary">
@@ -62,13 +62,13 @@
               </ion-item-sliding>
           </ion-list>
           <ion-list *ngSwitchCase="'outbox'">
-              <ion-item-sliding *ngFor="let message of outboxList " (click)="doReadOutBox(message.Id)">
+              <ion-item-sliding *ngFor="let message of outboxList " (click)="doReadOutBox(message)">
                   <ion-item>
                       <ion-avatar item-left>
                           <img src="assets/img/mike.png">
                       </ion-avatar>
-                      <span>{{message.Content}}</span>
-                      <p class="font-12">发至:{{message.Name}}&emsp;{{message.SendDate}}</p>
+                      <span>{{message.Title}}</span>
+                      <p class="font-12">发至:{{message.AccessPerson}}&emsp;{{message.MailDate}}</p>
                   </ion-item>
                   <ion-item-options side="right">
                       <button ion-button color="primary">

@@ -1,1 +1,6 @@
-page-account-edit {}
+page-account-edit {
+    .validation-failed {
+        color: color($colors, danger);
+        padding-left: 1rem;
+    }
+}

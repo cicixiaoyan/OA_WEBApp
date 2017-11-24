@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Content } from 'ionic-angular';
+
+
+import { MessageService } from '../messageService';
 
 /**
  * Generated class for the MessageReadOutPage page.
@@ -14,10 +18,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'message-read-out.html',
 })
 export class MessageReadOutPage {
+  @ViewChild(Content) content: Content;
+  messageDetail: any = [];
+  messageContent: string; // 消息内容
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.initializeItems();
   }
-
+  initializeItems() {
+      this.messageDetail = this.navParams.get("Params");
+      this.messageContent = this.messageDetail.Title;
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MessageReadOutPage');
   }

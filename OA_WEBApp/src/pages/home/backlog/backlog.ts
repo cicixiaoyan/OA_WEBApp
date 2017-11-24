@@ -84,7 +84,7 @@ export class Backlog {
     private getNotDoneList(data) {
         this.backlogService.getNotDoneList(data).subscribe((resJson) => {
             if (resJson.Result && resJson.Result !== [] ){
-                this.isEmpty = true;
+                this.isEmpty = false;
                 this.items = this.items.concat(resJson.Data);
             } else {
                 this.moredata = false;
@@ -96,7 +96,7 @@ export class Backlog {
     private getDoneList(data) {
         this.backlogService.getDoneList(data).subscribe((resJson) => {
             if (resJson.Result && resJson.Result !== [] ){
-                this.isEmpty = true;
+                this.isEmpty = false;
                 this.items = this.items.concat(resJson.Data);
             } else {
                 this.moredata = false;

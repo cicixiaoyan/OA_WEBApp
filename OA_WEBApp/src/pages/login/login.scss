@@ -30,4 +30,11 @@ page-login {
             border-bottom-right-radius: 6px;
         }
     }
+
+    .validation-failed{
+        color: color($colors, danger);
+        padding-left: 1rem;
+        background: #fff;
+    }
+
 }

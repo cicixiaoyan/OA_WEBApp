@@ -14,7 +14,7 @@ export class BacklogService {
     constructor(public httpService: HttpService) {
     }
 
-    getNotDoneList(param?) {
+    getNotDoneList(param?) { // uid, PageIndex, PageSize, Status
         return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
     }
 
@@ -22,12 +22,16 @@ export class BacklogService {
         return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
     }
 
-    getDone(id) {
-        return this.httpService.postFormData('/ashx/TodoLs.ashx', {Id: id}).map((res: Response) => res.json());
+    getDone(param?) {// id
+        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map((res: Response) => res.json());
     }
 
-    getNotDone(id) {
-        return this.httpService.postFormData('/ashx/TodoLs.ashx', {Id: id}).map((res: Response) => res.json());
+    getNotDone(param?) {// id
+        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map((res: Response) => res.json());
+    }
+
+    TodoApprove(param?) {// ISPass
+        return this.httpService.postFormData('/ashx/TodoApprove.ashx', param).map((res: Response) => res.json());
     }
 
     //   getInboxList(param?):Observable<any>{

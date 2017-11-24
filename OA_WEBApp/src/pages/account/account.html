@@ -25,10 +25,10 @@
             <h5><span class="positive">♂</span>&nbsp;<span class="positive">{{userInfo.Name}}</span></h5>
             <div class="row row-no-padding">
                 <div class="col col-50" style="border-right: 1px solid;">
-                    职位：{{userInfo.Duty}}
+                    职位：{{userInfo.Duty || "无"}}
                 </div>
                 <div class="col col-50">
-                    入职时间：{{userInfo.InDate|date:"yyyy-MM-dd"}}
+                    入职时间：{{(userInfo.InDate|date:"yyyy-MM-dd") || "未设置"}}
                 </div>
             </div>
         </div>
@@ -44,12 +44,12 @@
                 <ion-item>
                     <ion-icon name='ios-analytics' color="energized" item-left></ion-icon>
                     部门
-                    <ion-note item-right>{{userInfo.Dept}}</ion-note>
+                    <ion-note item-right>{{userInfo.Dept || "无"}}</ion-note>
                 </ion-item>
                 <ion-item>
                     <ion-icon name='ios-phone-portrait' color="calm" item-left></ion-icon>
                     手机号
-                    <ion-note item-right>{{userInfo.Mobile}}</ion-note>
+                    <ion-note item-right>{{userInfo.Mobile || "无"}}</ion-note>
                 </ion-item>
                 <!-- <ion-item>
                     <ion-icon name='md-mail' color="calm" item-left></ion-icon>

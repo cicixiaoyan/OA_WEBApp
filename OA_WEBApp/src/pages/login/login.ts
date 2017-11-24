@@ -92,8 +92,9 @@ export class LoginPage {
             this.globalData.Uid = userInfo.Data.Uid;
             this.globalData.Name = userInfo.Data.Name;
             this.globalData.token = userInfo.Data.Token;
-            alert(this.globalData.token);
+            // alert(this.globalData.token);
             this.storage.set('UserInfo', userInfo.Data);
+            this.storage.set('LoginInfo', user);
             // alert(this.storage.get('UserInfo'));
             this.events.publish('user:login', userInfo);
             this.viewCtrl.dismiss(userInfo.Data);

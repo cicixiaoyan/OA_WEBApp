@@ -38,41 +38,41 @@
             </ion-item>
             <ion-item>
                 <ion-label stacked>入职时间</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.InDate" formControlName="ui_rzrq" placeholder="入职时间" disabled></ion-input>
+                <ion-input type="text" [(ngModel)]="userInfo.InDate" formControlName="InDate" placeholder="入职时间" disabled></ion-input>
             </ion-item>
             <ion-item (click)="checkSex()">
                 <ion-label stacked>性别</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.Sex" formControlName="ui_sex" placeholder="性别"></ion-input>
+                <ion-input type="text" [(ngModel)]="userInfo.Sex" formControlName="Sex" placeholder="性别"></ion-input>
             </ion-item>
             <ion-item (click)="checkBirth">
                 <ion-label stacked>出生日期</ion-label>
-                <ion-datetime [(ngModel)]="userInfo.BirthDate" formControlName="ui_csrq" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+                <ion-datetime [(ngModel)]="userInfo.BirthDate" cancelText="取消" doneText="确定" formControlName="BirthDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label stacked>移动电话</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.Mobile" formControlName="ui_yddx" placeholder="移动电话"></ion-input>
+                <ion-input type="text" [(ngModel)]="userInfo.Mobile" formControlName="Mobile" placeholder="移动电话"></ion-input>
             </ion-item>
-            <div *ngIf="!editForm.controls.ui_yddx.valid && editForm.controls.ui_yddx.touched" class="validation-failed">请输入合法的电话号码</div>
+            <div *ngIf="!editForm.controls.Mobile.valid && editForm.controls.Mobile.touched" class="validation-failed">请输入合法的电话号码</div>
 
             <ion-item>
                 <ion-label stacked>电子邮箱</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.ui_mail" formControlName="ui_mail" placeholder="电子邮箱"></ion-input>
+                <ion-input type="text" [(ngModel)]="userInfo.Mail" formControlName="Mail" placeholder="电子邮箱"></ion-input>
             </ion-item>
-            <div *ngIf="!editForm.controls.ui_yddx.valid && editForm.controls.ui_yddx.touched" class="validation-failed">请输入正确的电子邮箱</div>
+            <div *ngIf="!editForm.controls.Mail.valid && editForm.controls.Mail.touched" class="validation-failed">请输入正确的电子邮箱</div>
 
             <ion-item>
                 <ion-label stacked>办公电话</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.ui_bgdh" formControlName="ui_bgdh" placeholder="办公电话"></ion-input>
+                <ion-input type="text" [(ngModel)]="userInfo.WorkPhone" formControlName="WorkPhone" placeholder="办公电话"></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label stacked>内线电话</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.ui_czdh" formControlName="ui_czdh" placeholder="内线电话"></ion-input>
+                <ion-input type="text" [(ngModel)]="userInfo.InlinePhone" formControlName="InlinePhone" placeholder="内线电话"></ion-input>
             </ion-item>
 
         </ion-list>
         <div padding text-center>
-            <button ion-button type="submit" color="danger" [disabled]="!editForm.valid||submitted">保存</button>
+            <button ion-button type="submit" color="danger" [disabled]="!editForm.valid">保存</button>
             <button ion-button clear small navPop>取消修改</button>
         </div>
 

@@ -27,7 +27,11 @@ export class BacklogDetail {
     }
 
     initializeItems() {
-        this.backlogService.getDone(this.navParams.get("id")).subscribe((resJson) => {
+        let data = {
+            "Id": this.navParams.get("id"),
+            "Uid": this.backlogService.httpService.globalData.Uid
+        };
+        this.backlogService.getDone(data).subscribe((resJson) => {
             if (resJson.Result){
                 this.item = resJson.Data;
             }else{

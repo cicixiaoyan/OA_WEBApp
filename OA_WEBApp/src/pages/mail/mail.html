@@ -52,7 +52,7 @@
                         <img src="assets/img/mike.png">
                     </ion-avatar>
                     <span style="color:#2196F3;" *ngIf="mail.Status==0">●&nbsp;</span><span>{{mail.Title}}</span>
-                    <p class="font-12">来至:{{mail.SendPerson}}&emsp;{{mail.MailDate}}</p>
+                    <p class="font-12">来至:{{mail.SendPerson}}&emsp;{{mail.MailDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>
                 </ion-item>
                 <ion-item-options side="right">
                     <button ion-button color="primary">
@@ -68,7 +68,7 @@
                         <img src="assets/img/mike.png">
                     </ion-avatar>
                     <span>{{mail.Title}}</span>
-                    <p class="font-12">发至:{{mail.AccessPerson}}&emsp;{{mail.MailDate}}</p>
+                    <p class="font-12">发至:{{mail.AccessPerson}}&emsp;{{mail.MailDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>
                 </ion-item>
                 <ion-item-options side="right">
                     <button ion-button color="primary">

@@ -6,6 +6,8 @@ import { TabsPage } from "../tabs/tabs";
 import { MessagePage } from '../message/message';
 import { Backlog } from "../home/backlog/backlog";
 import { Contacts } from "../home/contacts/contacts";
+import { SmsPage } from '../sms/sms';
+import { Mail } from '../mail/mail';
 // import { Newwork } from '../home/newwork/newwork';
 
 
@@ -43,6 +45,8 @@ export class Home {
         { title: '待办事项', component: Backlog, icon: 'ios-calendar', color: "assertive" },
         // { title: '新建工作', component: Newwork, icon: 'md-exit', color: "balanced" },
         { title: '设置', component: TabsPage, index: 3, icon: 'ios-cog', color: "calm" },
+        { title: '短信', component: SmsPage, icon: 'ios-cog', color: "calm" },
+        { title: '邮件', component: Mail,  icon: 'ios-cog', color: "calm" },
     ];
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {

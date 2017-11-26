@@ -51886,6 +51886,24 @@ page-message-write .mail-content {
   right: 0;
 }
 
+page-sms .subbox {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+page-sms-read .sms-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 110px;
+  right: 0;
+}
+
+page-sms-read .sms-content div.mydiv {
+  width: 100%;
+  padding: 10px;
+}
+
 page-welcome ion-slide {
   background-color: #eeeeee;
 }

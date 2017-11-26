@@ -23,6 +23,8 @@ import { AccountPasswordeditModule } from '../pages/account/account-passwordedit
 import { LoginModule } from '../pages/login/login.module';
 import { WelcomeModule } from '../pages/welcome/welcome.module';
 import { SmsPageModule } from '../pages/sms/sms.module';
+import { SmsReadPageModule } from '../pages/sms/sms-read/sms-read.module';
+import { SmsWritePageModule } from '../pages/sms/sms-write/sms-write.module';
 
 import { ContactsPopoverPageModule } from '../pages/contacts-popover/contacts-popover.module';
 
@@ -102,6 +104,8 @@ export class FunDebugErrorHandler implements ErrorHandler {
         LoginModule,
         WelcomeModule,
         SmsPageModule,
+        SmsReadPageModule,
+        SmsWritePageModule,
         ContactsPopoverPageModule
     ],
     bootstrap: [IonicApp],

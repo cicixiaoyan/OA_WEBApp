@@ -52,13 +52,6 @@ export class LoginPage {
 
     ionViewCanLeave(): boolean {
         let bool = !!this.userInfo;
-        let elements = document.querySelectorAll(".tabbar");
-        if (elements != null) {
-            Object.keys(elements).map((key) => {
-                elements[key].style.display = 'flex';
-            });
-        }
-
         if (this.canLeave || bool) {
             return true;
         } else {
@@ -75,9 +68,6 @@ export class LoginPage {
             }).present();
             return false;
         }
-
-
-
     }
 
     login(user) {
@@ -105,7 +95,10 @@ export class LoginPage {
         this.canLeave = true;
         let modal = this.modalCtrl.create(FindPassword);
         modal.present();
-        this.canLeave = false;
+        modal.onDidDismiss(data => {
+            this.canLeave = false;
+        });
+
     }
 
     dismiss() {

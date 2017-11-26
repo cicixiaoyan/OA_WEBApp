@@ -53,6 +53,9 @@ import { Http, HttpModule } from "@angular/http";
 import { HttpInterceptHandle } from "../providers/HttpInterceptHandle";
 import { GlobalData } from "../providers/GlobalData";
 
+import { BackButtonService } from '../services/backButtonService';
+
+
 import { Logger } from "../providers/Logger";
 import { ModalFromRightEnter, ModalFromRightLeave, ModalScaleEnter, ModalScaleLeave } from "./itransitions";
 
@@ -136,7 +139,9 @@ export class FunDebugErrorHandler implements ErrorHandler {
         Utils,
         HttpInterceptHandle,
         GlobalData,
-        Logger
+        Logger,
+        BackButtonService
+
         // ,HTTP
     ]
 })

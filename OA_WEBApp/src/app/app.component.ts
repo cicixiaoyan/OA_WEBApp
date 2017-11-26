@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Platform, MenuController, Nav, IonicApp, 
+import { Platform, MenuController, Nav, IonicApp,
     ModalController, Keyboard, ToastController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -47,7 +47,7 @@ export class MyApp {
         // { title: '登陆', component: LoginPage, index: 7, icon: 'contacts' }
     ];
 
-    rootPage: any;
+    rootPage: TabsPage;
     backButtonPressed: boolean = false;
     constructor(public menu: MenuController,
                 private platform: Platform,
@@ -66,11 +66,11 @@ export class MyApp {
 
         platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.   
+            // Here you can do any higher level native things you might need.
             this.storage.get('firstIn').then((result) => {
                 // this.nativeService.showToast("不是第一次进入");
                 if (result) {
-                    this.rootPage = TabsPage;
+                    // this.rootPage = TabsPage;
                     this.storage.get('loginInfo').then((loginInfo) => {
                         if (loginInfo) {
                             this.loginService.login(loginInfo).subscribe((resJson) => {
@@ -84,23 +84,32 @@ export class MyApp {
                                     modal.present();
                                     modal.onDidDismiss(data => {
                                         data && console.log(data);
+                                        this.nav.setRoot(TabsPage, { tabIndex: 0 });
                                     });
                                 }
                             });
-                            
+
                         } else {
 
                             let modal = this.modalCtrl.create(LoginPage);
                             modal.present();
                             modal.onDidDismiss(data => {
                                 data && console.log(data);
+                                this.nav.setRoot(TabsPage, { tabIndex: 0 });
                             });
                         }
                     });
                 }
                 else {
+
                     this.storage.set('firstIn', true);
-                    this.rootPage = Welcome;
+                    let modal = this.modalCtrl.create(Welcome);
+                    modal.present();
+                    modal.onDidDismiss(data => {
+                        data && console.log(data);
+                        this.nav.setRoot(TabsPage, { tabIndex: 0 });
+                    });
+                    // this.rootPage = Welcome;
                 }
             });
 
@@ -164,43 +173,33 @@ export class MyApp {
     }
 
     registerBackButtonAction() {
-        // if (!this.nativeService.isAndroid()) {
-        //     return;
-        // }
+        if (!this.nativeService.isAndroid()) {
+          return;
+        }
         this.platform.registerBackButtonAction(() => {
-            if (this.keyboard.isOpen()) {// 如果键盘开启则隐藏键盘
-                this.keyboard.close();
-                return;
-            }
-            // 如果想点击返回按钮隐藏toast或loading或Overlay就把下面加上
-            // this.ionicApp._toastPortal.getActive() || this.ionicApp._loadingPortal.getActive() || 
-            // this.ionicApp._overlayPortal.getActive();
-
-            let activePortal = this.ionicApp._modalPortal.getActive();
-            if (activePortal) {
-                activePortal.dismiss().catch(() => { });
-                activePortal.onDidDismiss(() => { });
-                return;
-            }
-            let activeVC = this.nav.getActive();
-            let page = activeVC.instance;
-            // 当前页面非tab栏
-            if (!(page instanceof TabsPage)) {
-                if (!this.nav.canGoBack()) {
-                    return AppMinimize.minimize();
-                }
-                return this.nav.pop();
-            }
-            let tabs = page.tabs;
-            let activeNav = tabs.getSelected();
-            if (!activeNav.canGoBack()) {
-                // 当前页面为tab栏，退出APP
-                return AppMinimize.minimize();
-            }
-            // 当前页面为tab栏的子页面，正常返回
-            return activeNav.pop();
-        }, 101);
-    }
+          if (this.keyboard.isOpen()) {// 如果键盘开启则隐藏键盘
+            this.keyboard.close();
+            return;
+          }
+          // 如果想点击返回按钮隐藏toast或loading或Overlay就把下面加上
+          // this.ionicApp._toastPortal.getActive() ||
+        //   this.ionicApp._loadingPortal.getActive()|| this.ionicApp._overlayPortal.getActive()
+          let activePortal = this.ionicApp._modalPortal.getActive()
+          || this.ionicApp._toastPortal.getActive() ||
+          this.ionicApp._overlayPortal.getActive();
+          if (activePortal) {
+            activePortal.dismiss();
+            return;
+          }
+          let activeVC = this.nav.getActive();
+          let tabs = activeVC.instance.tabs;
+          let activeNav = tabs.getSelected();
+          return activeNav.canGoBack() ?
+            activeNav.pop() :
+            // this.nativeService.minimize(); //
+             this.showExit();
+        }, 1);
+      }
 
     // 双击退出提示框
     showExit() {

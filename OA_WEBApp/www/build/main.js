@@ -1,6 +1,280 @@
 webpackJsonp([0],{
 
-/***/ 149:
+/***/ 148:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_HttpService__ = __webpack_require__(24);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+// import { UserInfo } from "../../model/UserInfo";
+var LoginService = (function () {
+    function LoginService(httpService) {
+        this.httpService = httpService;
+    }
+    LoginService.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Login');
+    };
+    LoginService.prototype.login = function (user) {
+        return this.httpService.noTokenPostFormData("ashx/Login.ashx", user).map(function (responce) { return responce.json(); });
+        // return Observable.create((observer) => {
+        //   observer.next(userInfo);
+        // });
+    };
+    LoginService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_HttpService__["a" /* HttpService */]])
+    ], LoginService);
+    return LoginService;
+}());
+
+//# sourceMappingURL=LoginService.js.map
+
+/***/ }),
+
+/***/ 165:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Utils; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+/**
+ * Utils类存放和业务无关的公共方法
+ * @description
+ */
+var Utils = (function () {
+    function Utils() {
+    }
+    Utils_1 = Utils;
+    Utils.isEmpty = function (value) {
+        return value == null || typeof value === 'string' && value.length === 0;
+    };
+    Utils.isNotEmpty = function (value) {
+        return !Utils_1.isEmpty(value);
+    };
+    /**
+     * 格式“是”or“否”
+     * @param value
+     * @returns {string|string}
+     */
+    Utils.formatYesOrNo = function (value) {
+        return value == 1 ? '是' : (value == '0' ? '否' : null);
+    };
+    /**
+     * 日期对象转为日期字符串
+     * @param date 需要格式化的日期对象
+     * @param sFormat 输出格式,默认为yyyy-MM-dd                        年：y，月：M，日：d，时：h，分：m，秒：s
+     * @example  dateFormat(new Date())                               "2017-02-28"
+     * @example  dateFormat(new Date(),'yyyy-MM-dd')                  "2017-02-28"
+     * @example  dateFormat(new Date(),'yyyy-MM-dd HH:mm:ss')         "2017-02-28 13:24:00"   ps:HH:24小时制
+     * @example  dateFormat(new Date(),'yyyy-MM-dd hh:mm:ss')         "2017-02-28 01:24:00"   ps:hh:12小时制
+     * @example  dateFormat(new Date(),'hh:mm')                       "09:24"
+     * @example  dateFormat(new Date(),'yyyy-MM-ddTHH:mm:ss+08:00')   "2017-02-28T13:24:00+08:00"
+     * @example  dateFormat(new Date('2017-02-28 13:24:00'),'yyyy-MM-ddTHH:mm:ss+08:00')   "2017-02-28T13:24:00+08:00"
+     * @returns {string}
+     */
+    Utils.dateFormat = function (date, sFormat) {
+        if (sFormat === void 0) { sFormat = 'yyyy-MM-dd'; }
+        var time = {
+            Year: 0,
+            TYear: '0',
+            Month: 0,
+            TMonth: '0',
+            Day: 0,
+            TDay: '0',
+            Hour: 0,
+            THour: '0',
+            hour: 0,
+            Thour: '0',
+            Minute: 0,
+            TMinute: '0',
+            Second: 0,
+            TSecond: '0',
+            Millisecond: 0
+        };
+        time.Year = date.getFullYear();
+        time.TYear = String(time.Year).substr(2);
+        time.Month = date.getMonth() + 1;
+        time.TMonth = time.Month < 10 ? "0" + time.Month : String(time.Month);
+        time.Day = date.getDate();
+        time.TDay = time.Day < 10 ? "0" + time.Day : String(time.Day);
+        time.Hour = date.getHours();
+        time.THour = time.Hour < 10 ? "0" + time.Hour : String(time.Hour);
+        time.hour = time.Hour < 13 ? time.Hour : time.Hour - 12;
+        time.Thour = time.hour < 10 ? "0" + time.hour : String(time.hour);
+        time.Minute = date.getMinutes();
+        time.TMinute = time.Minute < 10 ? "0" + time.Minute : String(time.Minute);
+        time.Second = date.getSeconds();
+        time.TSecond = time.Second < 10 ? "0" + time.Second : String(time.Second);
+        time.Millisecond = date.getMilliseconds();
+        return sFormat.replace(/yyyy/ig, String(time.Year))
+            .replace(/yyy/ig, String(time.Year))
+            .replace(/yy/ig, time.TYear)
+            .replace(/y/ig, time.TYear)
+            .replace(/MM/g, time.TMonth)
+            .replace(/M/g, String(time.Month))
+            .replace(/dd/ig, time.TDay)
+            .replace(/d/ig, String(time.Day))
+            .replace(/HH/g, time.THour)
+            .replace(/H/g, String(time.Hour))
+            .replace(/hh/g, time.Thour)
+            .replace(/h/g, String(time.hour))
+            .replace(/mm/g, time.TMinute)
+            .replace(/m/g, String(time.Minute))
+            .replace(/ss/ig, time.TSecond)
+            .replace(/s/ig, String(time.Second))
+            .replace(/fff/ig, String(time.Millisecond));
+    };
+    /**
+     * 返回字符串长度，汉子计数为2
+     * @param str
+     * @returns {number}
+     */
+    Utils.strLength = function (str) {
+        var len = 0;
+        for (var i = 0, length_1 = str.length; i < length_1; i++) {
+            str.charCodeAt(i) > 255 ? len += 2 : len++;
+        }
+        return len;
+    };
+    /**
+     * 把url中的双斜杠替换为单斜杠
+     * 如:http://localhost:8080//api//demo.替换后http://localhost:8080/api/demo
+     * @param url
+     * @returns {string}
+     */
+    Utils.formatUrl = function (url) {
+        if (url === void 0) { url = ''; }
+        var index = 0;
+        if (url.startsWith('http')) {
+            index = 7;
+        }
+        return url.substring(0, index) + url.substring(index).replace(/\/\/*/g, '/');
+    };
+    Utils.sessionStorageGetItem = function (key) {
+        var jsonString = sessionStorage.getItem(key);
+        if (jsonString) {
+            return JSON.parse(jsonString);
+        }
+        return null;
+    };
+    Utils.sessionStorageSetItem = function (key, value) {
+        sessionStorage.setItem(key, JSON.stringify(value));
+    };
+    Utils.sessionStorageRemoveItem = function (key) {
+        sessionStorage.removeItem(key);
+    };
+    Utils.sessionStorageClear = function () {
+        sessionStorage.clear();
+    };
+    /**
+     * 每次调用sequence加1
+     * @type {()=>number}
+     */
+    Utils.getSequence = (function () {
+        var sequence = 1;
+        return function () {
+            return ++sequence;
+        };
+    })();
+    Utils = Utils_1 = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [])
+    ], Utils);
+    return Utils;
+    var Utils_1;
+}());
+
+//# sourceMappingURL=Utils.js.map
+
+/***/ }),
+
+/***/ 166:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(376);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__message_message__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__announcement_announcement__ = __webpack_require__(389);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__account_account__ = __webpack_require__(391);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_backButtonService__ = __webpack_require__(757);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+// import { Mail } from '../mail/mail';
+
+
+
+
+
+var TabsPage = (function () {
+    function TabsPage(navParams, platform, backButtonService) {
+        var _this = this;
+        this.platform = platform;
+        this.backButtonService = backButtonService;
+        this.tab1Root = __WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* Home */];
+        this.tab2Root = __WEBPACK_IMPORTED_MODULE_3__message_message__["a" /* MessagePage */];
+        this.tab3Root = __WEBPACK_IMPORTED_MODULE_4__announcement_announcement__["a" /* AnnouncementPage */];
+        this.tab4Root = __WEBPACK_IMPORTED_MODULE_5__account_account__["a" /* Account */];
+        this.mySelectedIndex = navParams.data.tabIndex || 0;
+        this.tab1Root = navParams.data.tab1Component || __WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* Home */];
+        platform.ready().then(function () {
+            _this.backButtonService.registerBackButtonAction(_this.tabs);
+        });
+    }
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('mainTabs'),
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["u" /* Tabs */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["u" /* Tabs */]) === "function" && _a || Object)
+    ], TabsPage.prototype, "tabs", void 0);
+    TabsPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\tabs\tabs.html"*/`<ion-tabs #mainTabs [selectedIndex]="mySelectedIndex">\n\n    <ion-tab [root]="tab1Root" tabTitle="首页" tabIcon="ios-home"></ion-tab>\n\n    <ion-tab [root]="tab2Root" tabTitle="信息" tabIcon="ios-mail"></ion-tab>\n\n    <ion-tab [root]="tab3Root" tabTitle="公告" tabIcon="ios-notifications"></ion-tab>\n\n    <ion-tab [root]="tab4Root" tabTitle="设置" tabIcon="ios-settings"></ion-tab>\n\n</ion-tabs>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\tabs\tabs.html"*/
+        }),
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* Platform */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6__services_backButtonService__["a" /* BackButtonService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_backButtonService__["a" /* BackButtonService */]) === "function" && _d || Object])
+    ], TabsPage);
+    return TabsPage;
+    var _a, _b, _c, _d;
+}());
+
+// WEBPACK FOOTER //
+// ./src/pages/tabs/tabs.ts
+//# sourceMappingURL=tabs.js.map
+
+/***/ }),
+
+/***/ 167:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,10 +282,10 @@ webpackJsonp([0],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__message_message_read_message_read__ = __webpack_require__(284);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__message_message_write_message_write__ = __webpack_require__(285);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__message_message_read_out_message_read_out__ = __webpack_require__(379);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__messageService__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__message_message_read_message_read__ = __webpack_require__(377);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__message_message_write_message_write__ = __webpack_require__(378);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__message_message_read_out_message_read_out__ = __webpack_require__(380);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__messageService__ = __webpack_require__(92);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -198,12 +472,12 @@ var MessagePage = (function () {
     };
     MessagePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-message',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message.html"*/`<!--\n\n  Generated template for the MessagePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n      <ion-toolbar>\n\n          <ion-segment [(ngModel)]="box">\n\n              <ion-segment-button value="inbox">\n\n                  收消息\n\n              </ion-segment-button>\n\n              <ion-segment-button value="outbox">\n\n                  发消息\n\n              </ion-segment-button>\n\n          </ion-segment>\n\n  \n\n      </ion-toolbar>\n\n  \n\n      <!--\n\n      <ion-buttons ion-button icon-only end (click)="doWrite()">\n\n          <ion-icon name="ios-add-circle-outline"></ion-icon>\n\n      </ion-buttons>-->\n\n      <div [ngSwitch]="box"  class="subbox">\n\n          <div *ngSwitchCase="\'inbox\'">\n\n              <button ion-button small (click)="checkRead(\'unread\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.unread}">未读</button>\n\n              <button ion-button small (click)="checkRead(\'read\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.read}">已读</button>\n\n              <button ion-button small (click)="checkRead(\'all\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.all}">全部</button>\n\n          </div>\n\n  \n\n          <div *ngSwitchCase="\'outbox\'">\n\n              <button ion-button small (click)="checkDraft()" class="button-ios-light button-ios-calm">已发送</button>\n\n              <!-- <button ion-button small (click)="checkDraft(true)" class="button-ios-light" [ngClass]="{\'button-ios-calm\':isDraft}">未读</button> -->\n\n          </div>\n\n      </div>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content style="background: #f4f4f4;overflow: hidden;" overflow-scroll="true" class="has-header">\n\n      <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->\n\n      <ion-refresher (ionRefresh)="doRefresh($event)">\n\n          <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n\n          </ion-refresher-content>\n\n      </ion-refresher>\n\n      <div [ngSwitch]="box">\n\n          <ion-list *ngSwitchCase="\'inbox\'">\n\n              <ion-item-sliding *ngFor="let message of inboxList " (click)="doRead(message)">\n\n                  <ion-item>\n\n                      <ion-avatar item-left>\n\n                          <img src="assets/img/mike.png">\n\n                      </ion-avatar>\n\n                      <span style="color:#2196F3;" *ngIf="message.Status==\'0\'">●&nbsp;</span><span>{{message.Tile}}</span>\n\n                      <p class="font-12">来至:{{message.SendPerson}}&emsp;{{message.MailDate}}</p>\n\n                  </ion-item>\n\n                  <ion-item-options side="right">\n\n                      <button ion-button color="primary">\n\n                          <ion-icon name="md-trash"></ion-icon>删除\n\n                      </button>\n\n                  </ion-item-options>\n\n              </ion-item-sliding>\n\n          </ion-list>\n\n          <ion-list *ngSwitchCase="\'outbox\'">\n\n              <ion-item-sliding *ngFor="let message of outboxList " (click)="doReadOutBox(message)">\n\n                  <ion-item>\n\n                      <ion-avatar item-left>\n\n                          <img src="assets/img/mike.png">\n\n                      </ion-avatar>\n\n                      <span>{{message.Title}}</span>\n\n                      <p class="font-12">发至:{{message.AccessPerson}}&emsp;{{message.MailDate}}</p>\n\n                  </ion-item>\n\n                  <ion-item-options side="right">\n\n                      <button ion-button color="primary">\n\n                          <ion-icon name="md-trash"></ion-icon>删除\n\n                      </button>\n\n                  </ion-item-options>\n\n              </ion-item-sliding>\n\n          </ion-list>\n\n      </div>\n\n      <div *ngIf="isEmpty" text-center padding style="background:#ddd;font-size:.9em;">\n\n          <div padding>暂无消息数据！！！</div>\n\n          <img src="assets/img/face/face2.png" height="100">\n\n      </div>\n\n      <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->\n\n      <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n\n          <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n\n      </ion-infinite-scroll>\n\n      <ion-fab bottom right>\n\n          <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n\n      </ion-fab>\n\n  \n\n  </ion-content>\n\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message.html"*/,
+            selector: 'page-message',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\message\message.html"*/`<!--\n\n  Generated template for the MessagePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n      <ion-toolbar>\n\n          <ion-segment [(ngModel)]="box">\n\n              <ion-segment-button value="inbox">\n\n                  收消息\n\n              </ion-segment-button>\n\n              <ion-segment-button value="outbox">\n\n                  发消息\n\n              </ion-segment-button>\n\n          </ion-segment>\n\n  \n\n      </ion-toolbar>\n\n  \n\n      <!--\n\n      <ion-buttons ion-button icon-only end (click)="doWrite()">\n\n          <ion-icon name="ios-add-circle-outline"></ion-icon>\n\n      </ion-buttons>-->\n\n      <div [ngSwitch]="box"  class="subbox">\n\n          <div *ngSwitchCase="\'inbox\'">\n\n              <button ion-button small (click)="checkRead(\'unread\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.unread}">未读</button>\n\n              <button ion-button small (click)="checkRead(\'read\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.read}">已读</button>\n\n              <button ion-button small (click)="checkRead(\'all\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.all}">全部</button>\n\n          </div>\n\n  \n\n          <div *ngSwitchCase="\'outbox\'">\n\n              <button ion-button small (click)="checkDraft()" class="button-ios-light button-ios-calm">已发送</button>\n\n              <!-- <button ion-button small (click)="checkDraft(true)" class="button-ios-light" [ngClass]="{\'button-ios-calm\':isDraft}">未读</button> -->\n\n          </div>\n\n      </div>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content style="background: #f4f4f4;overflow: hidden;" overflow-scroll="true" class="has-header">\n\n      <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->\n\n      <ion-refresher (ionRefresh)="doRefresh($event)">\n\n          <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n\n          </ion-refresher-content>\n\n      </ion-refresher>\n\n      <div [ngSwitch]="box">\n\n          <ion-list *ngSwitchCase="\'inbox\'">\n\n              <ion-item-sliding *ngFor="let message of inboxList " (click)="doRead(message)">\n\n                  <ion-item>\n\n                      <ion-avatar item-left>\n\n                          <img src="assets/img/mike.png">\n\n                      </ion-avatar>\n\n                      <span style="color:#2196F3;" *ngIf="message.Status==\'0\'">●&nbsp;</span><span>{{message.Tile}}</span>\n\n                      <p class="font-12">来至:{{message.SendPerson}}&emsp;{{message.MailDate}}</p>\n\n                  </ion-item>\n\n                  <ion-item-options side="right">\n\n                      <button ion-button color="primary">\n\n                          <ion-icon name="md-trash"></ion-icon>删除\n\n                      </button>\n\n                  </ion-item-options>\n\n              </ion-item-sliding>\n\n          </ion-list>\n\n          <ion-list *ngSwitchCase="\'outbox\'">\n\n              <ion-item-sliding *ngFor="let message of outboxList " (click)="doReadOutBox(message)">\n\n                  <ion-item>\n\n                      <ion-avatar item-left>\n\n                          <img src="assets/img/mike.png">\n\n                      </ion-avatar>\n\n                      <span>{{message.Title}}</span>\n\n                      <p class="font-12">发至:{{message.AccessPerson}}&emsp;{{message.MailDate}}</p>\n\n                  </ion-item>\n\n                  <ion-item-options side="right">\n\n                      <button ion-button color="primary">\n\n                          <ion-icon name="md-trash"></ion-icon>删除\n\n                      </button>\n\n                  </ion-item-options>\n\n              </ion-item-sliding>\n\n          </ion-list>\n\n      </div>\n\n      <div *ngIf="isEmpty" text-center padding style="background:#ddd;font-size:.9em;">\n\n          <div padding>暂无消息数据！！！</div>\n\n          <img src="assets/img/face/face2.png" height="100">\n\n      </div>\n\n      <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->\n\n      <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n\n          <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n\n      </ion-infinite-scroll>\n\n      <ion-fab bottom right>\n\n          <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n\n      </ion-fab>\n\n  \n\n  </ion-content>\n\n`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\message\message.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_6__messageService__["a" /* MessageService */]])
     ], MessagePage);
     return MessagePage;
@@ -213,182 +487,15 @@ var MessagePage = (function () {
 
 /***/ }),
 
-/***/ 166:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Utils; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-/**
- * Utils类存放和业务无关的公共方法
- * @description
- */
-var Utils = (function () {
-    function Utils() {
-    }
-    Utils_1 = Utils;
-    Utils.isEmpty = function (value) {
-        return value == null || typeof value === 'string' && value.length === 0;
-    };
-    Utils.isNotEmpty = function (value) {
-        return !Utils_1.isEmpty(value);
-    };
-    /**
-     * 格式“是”or“否”
-     * @param value
-     * @returns {string|string}
-     */
-    Utils.formatYesOrNo = function (value) {
-        return value == 1 ? '是' : (value == '0' ? '否' : null);
-    };
-    /**
-     * 日期对象转为日期字符串
-     * @param date 需要格式化的日期对象
-     * @param sFormat 输出格式,默认为yyyy-MM-dd                        年：y，月：M，日：d，时：h，分：m，秒：s
-     * @example  dateFormat(new Date())                               "2017-02-28"
-     * @example  dateFormat(new Date(),'yyyy-MM-dd')                  "2017-02-28"
-     * @example  dateFormat(new Date(),'yyyy-MM-dd HH:mm:ss')         "2017-02-28 13:24:00"   ps:HH:24小时制
-     * @example  dateFormat(new Date(),'yyyy-MM-dd hh:mm:ss')         "2017-02-28 01:24:00"   ps:hh:12小时制
-     * @example  dateFormat(new Date(),'hh:mm')                       "09:24"
-     * @example  dateFormat(new Date(),'yyyy-MM-ddTHH:mm:ss+08:00')   "2017-02-28T13:24:00+08:00"
-     * @example  dateFormat(new Date('2017-02-28 13:24:00'),'yyyy-MM-ddTHH:mm:ss+08:00')   "2017-02-28T13:24:00+08:00"
-     * @returns {string}
-     */
-    Utils.dateFormat = function (date, sFormat) {
-        if (sFormat === void 0) { sFormat = 'yyyy-MM-dd'; }
-        var time = {
-            Year: 0,
-            TYear: '0',
-            Month: 0,
-            TMonth: '0',
-            Day: 0,
-            TDay: '0',
-            Hour: 0,
-            THour: '0',
-            hour: 0,
-            Thour: '0',
-            Minute: 0,
-            TMinute: '0',
-            Second: 0,
-            TSecond: '0',
-            Millisecond: 0
-        };
-        time.Year = date.getFullYear();
-        time.TYear = String(time.Year).substr(2);
-        time.Month = date.getMonth() + 1;
-        time.TMonth = time.Month < 10 ? "0" + time.Month : String(time.Month);
-        time.Day = date.getDate();
-        time.TDay = time.Day < 10 ? "0" + time.Day : String(time.Day);
-        time.Hour = date.getHours();
-        time.THour = time.Hour < 10 ? "0" + time.Hour : String(time.Hour);
-        time.hour = time.Hour < 13 ? time.Hour : time.Hour - 12;
-        time.Thour = time.hour < 10 ? "0" + time.hour : String(time.hour);
-        time.Minute = date.getMinutes();
-        time.TMinute = time.Minute < 10 ? "0" + time.Minute : String(time.Minute);
-        time.Second = date.getSeconds();
-        time.TSecond = time.Second < 10 ? "0" + time.Second : String(time.Second);
-        time.Millisecond = date.getMilliseconds();
-        return sFormat.replace(/yyyy/ig, String(time.Year))
-            .replace(/yyy/ig, String(time.Year))
-            .replace(/yy/ig, time.TYear)
-            .replace(/y/ig, time.TYear)
-            .replace(/MM/g, time.TMonth)
-            .replace(/M/g, String(time.Month))
-            .replace(/dd/ig, time.TDay)
-            .replace(/d/ig, String(time.Day))
-            .replace(/HH/g, time.THour)
-            .replace(/H/g, String(time.Hour))
-            .replace(/hh/g, time.Thour)
-            .replace(/h/g, String(time.hour))
-            .replace(/mm/g, time.TMinute)
-            .replace(/m/g, String(time.Minute))
-            .replace(/ss/ig, time.TSecond)
-            .replace(/s/ig, String(time.Second))
-            .replace(/fff/ig, String(time.Millisecond));
-    };
-    /**
-     * 返回字符串长度，汉子计数为2
-     * @param str
-     * @returns {number}
-     */
-    Utils.strLength = function (str) {
-        var len = 0;
-        for (var i = 0, length_1 = str.length; i < length_1; i++) {
-            str.charCodeAt(i) > 255 ? len += 2 : len++;
-        }
-        return len;
-    };
-    /**
-     * 把url中的双斜杠替换为单斜杠
-     * 如:http://localhost:8080//api//demo.替换后http://localhost:8080/api/demo
-     * @param url
-     * @returns {string}
-     */
-    Utils.formatUrl = function (url) {
-        if (url === void 0) { url = ''; }
-        var index = 0;
-        if (url.startsWith('http')) {
-            index = 7;
-        }
-        return url.substring(0, index) + url.substring(index).replace(/\/\/*/g, '/');
-    };
-    Utils.sessionStorageGetItem = function (key) {
-        var jsonString = sessionStorage.getItem(key);
-        if (jsonString) {
-            return JSON.parse(jsonString);
-        }
-        return null;
-    };
-    Utils.sessionStorageSetItem = function (key, value) {
-        sessionStorage.setItem(key, JSON.stringify(value));
-    };
-    Utils.sessionStorageRemoveItem = function (key) {
-        sessionStorage.removeItem(key);
-    };
-    Utils.sessionStorageClear = function () {
-        sessionStorage.clear();
-    };
-    /**
-     * 每次调用sequence加1
-     * @type {()=>number}
-     */
-    Utils.getSequence = (function () {
-        var sequence = 1;
-        return function () {
-            return ++sequence;
-        };
-    })();
-    Utils = Utils_1 = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [])
-    ], Utils);
-    return Utils;
-    var Utils_1;
-}());
-
-//# sourceMappingURL=Utils.js.map
-
-/***/ }),
-
-/***/ 167:
+/***/ 168:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Backlog; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog_detail_backlog_detail__ = __webpack_require__(380);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog_detail_backlog_detail__ = __webpack_require__(381);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(169);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -496,11 +603,11 @@ var Backlog = (function () {
     };
     Backlog = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-backlog',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog.html"*/`<!--\n  Generated template for the Backlog page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-navbar>\n        <ion-title>待办事项</ion-title>\n    </ion-navbar>\n    <ion-toolbar no-border-top>\n        <ion-segment class="content-ios" [(ngModel)]="work" (ngModelChange)="doRefresh()">\n            <ion-segment-button value="notDone">\n                未办理\n            </ion-segment-button>\n            <ion-segment-button value="done">\n                已办理\n            </ion-segment-button>\n        </ion-segment>\n    </ion-toolbar>\n\n</ion-header>\n\n\n<ion-content>\n    <div [ngSwitch]="work">\n        <ion-refresher (ionRefresh)="doRefresh($event)">\n            <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n            </ion-refresher-content>\n        </ion-refresher>\n\n        <ion-list *ngSwitchCase="\'notDone\'">\n\n            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.Id}">\n                <span>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</span>\n                <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>\n            </button>\n\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'done\'">\n            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.Id}">\n                <span>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</span>\n                <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>\n            </button>\n        </ion-list>\n\n        <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n            <div padding>暂无此类信息！！！</div>\n            <img src="assets/img/face/face2.png" height="100">\n        </div>\n\n        <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n        </ion-infinite-scroll>\n\n    </div>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog.html"*/,
+            selector: 'page-backlog',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\home\backlog\backlog.html"*/`<!--\n\n  Generated template for the Backlog page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n    <ion-navbar>\n\n        <ion-title>待办事项</ion-title>\n\n    </ion-navbar>\n\n    <ion-toolbar no-border-top>\n\n        <ion-segment class="content-ios" [(ngModel)]="work" (ngModelChange)="doRefresh()">\n\n            <ion-segment-button value="notDone">\n\n                未办理\n\n            </ion-segment-button>\n\n            <ion-segment-button value="done">\n\n                已办理\n\n            </ion-segment-button>\n\n        </ion-segment>\n\n    </ion-toolbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <div [ngSwitch]="work">\n\n        <ion-refresher (ionRefresh)="doRefresh($event)">\n\n            <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n\n            </ion-refresher-content>\n\n        </ion-refresher>\n\n\n\n        <ion-list *ngSwitchCase="\'notDone\'">\n\n\n\n            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.Id}">\n\n                <span>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</span>\n\n                <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>\n\n            </button>\n\n\n\n        </ion-list>\n\n\n\n        <ion-list *ngSwitchCase="\'done\'">\n\n            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.Id}">\n\n                <span>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</span>\n\n                <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>\n\n            </button>\n\n        </ion-list>\n\n\n\n        <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n\n            <div padding>暂无此类信息！！！</div>\n\n            <img src="assets/img/face/face2.png" height="100">\n\n        </div>\n\n\n\n        <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n\n            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n\n        </ion-infinite-scroll>\n\n\n\n    </div>\n\n</ion-content>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\home\backlog\backlog.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_3__backlogService__["a" /* BacklogService */]]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_3__backlogService__["a" /* BacklogService */]])
     ], Backlog);
     return Backlog;
@@ -510,13 +617,13 @@ var Backlog = (function () {
 
 /***/ }),
 
-/***/ 168:
+/***/ 169:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(24);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -566,7 +673,7 @@ var BacklogService = (function () {
 
 /***/ }),
 
-/***/ 169:
+/***/ 170:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -574,7 +681,7 @@ var BacklogService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contacts_detail_contacts_detail__ = __webpack_require__(381);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contacts_detail_contacts_detail__ = __webpack_require__(382);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -694,10 +801,10 @@ var Contacts = (function () {
     };
     Contacts = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contacts',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts.html"*/`<!--\n\n  Generated template for the Contacts page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>通讯录</ion-title>\n\n    </ion-navbar>\n\n    <ion-searchbar color="dark" type="text" placeholder="请输入姓名" [(ngModel)]="searchKey" [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event)">\n\n    </ion-searchbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n\n        </ion-refresher-content>\n\n    </ion-refresher>\n\n    <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->\n\n    <ion-list inset style="margin:16px 0;">\n\n        <button ion-item *ngFor="let contact of items" [navPush]="nxPage" [navParams]="{id:contact.Uid}">\n\n            <span>{{contact.Name}}({{contact.Uid}})</span>\n\n            <p>{{contact.Dept}}&emsp;{{contact.Duty}}</p>\n\n        </button>\n\n    </ion-list>\n\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n\n        <div padding>未搜索到信息！！！</div>\n\n        <img src="assets/img/face/face2.png" height="100">\n\n    </div>\n\n    <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->\n\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n\n    </ion-infinite-scroll>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts.html"*/,
+            selector: 'page-contacts',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\home\contacts\contacts.html"*/`<!--\n\n  Generated template for the Contacts page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>通讯录</ion-title>\n\n    </ion-navbar>\n\n    <ion-searchbar color="dark" type="text" placeholder="请输入姓名" [(ngModel)]="searchKey" [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event)">\n\n    </ion-searchbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n\n        </ion-refresher-content>\n\n    </ion-refresher>\n\n    <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->\n\n    <ion-list inset style="margin:16px 0;">\n\n        <button ion-item *ngFor="let contact of items" [navPush]="nxPage" [navParams]="{id:contact.Uid}">\n\n            <span>{{contact.Name}}({{contact.Uid}})</span>\n\n            <p>{{contact.Dept}}&emsp;{{contact.Duty}}</p>\n\n        </button>\n\n    </ion-list>\n\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n\n        <div padding>未搜索到信息！！！</div>\n\n        <img src="assets/img/face/face2.png" height="100">\n\n    </div>\n\n    <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->\n\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n\n    </ion-infinite-scroll>\n\n</ion-content>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\home\contacts\contacts.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
     ], Contacts);
     return Contacts;
@@ -707,13 +814,13 @@ var Contacts = (function () {
 
 /***/ }),
 
-/***/ 170:
+/***/ 171:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SmsService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(24);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -755,13 +862,13 @@ var SmsService = (function () {
 
 /***/ }),
 
-/***/ 171:
+/***/ 172:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(24);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -813,49 +920,6 @@ var AnnouncementService = (function () {
 
 /***/ }),
 
-/***/ 172:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_HttpService__ = __webpack_require__(24);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-// import { UserInfo } from "../../model/UserInfo";
-var LoginService = (function () {
-    function LoginService(httpService) {
-        this.httpService = httpService;
-    }
-    LoginService.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Login');
-    };
-    LoginService.prototype.login = function (user) {
-        return this.httpService.noTokenPostFormData("ashx/Login.ashx", user).map(function (responce) { return responce.json(); });
-        // return Observable.create((observer) => {
-        //   observer.next(userInfo);
-        // });
-    };
-    LoginService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_HttpService__["a" /* HttpService */]])
-    ], LoginService);
-    return LoginService;
-}());
-
-//# sourceMappingURL=LoginService.js.map
-
-/***/ }),
-
 /***/ 185:
 /***/ (function(module, exports) {
 
@@ -883,12 +947,12 @@ webpackEmptyAsyncContext.id = 185;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_app_version__ = __webpack_require__(275);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(276);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_toast__ = __webpack_require__(277);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(147);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(146);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_transfer__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_in_app_browser__ = __webpack_require__(278);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_image_picker__ = __webpack_require__(279);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_network__ = __webpack_require__(280);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_file_chooser__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_file_chooser__ = __webpack_require__(147);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__Constants__ = __webpack_require__(51);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1308,8 +1372,8 @@ var NativeService = (function () {
     };
     NativeService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* Platform */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["u" /* ToastController */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* Platform */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_2__ionic_native_app_version__["a" /* AppVersion */],
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */],
@@ -1320,7 +1384,7 @@ var NativeService = (function () {
             __WEBPACK_IMPORTED_MODULE_7__ionic_native_in_app_browser__["a" /* InAppBrowser */],
             __WEBPACK_IMPORTED_MODULE_8__ionic_native_image_picker__["a" /* ImagePicker */],
             __WEBPACK_IMPORTED_MODULE_9__ionic_native_network__["a" /* Network */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* LoadingController */]])
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* LoadingController */]])
     ], NativeService);
     return NativeService;
 }());
@@ -1352,16 +1416,16 @@ webpackEmptyAsyncContext.id = 230;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HttpService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(286);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(283);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs__ = __webpack_require__(151);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs__ = __webpack_require__(150);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Utils__ = __webpack_require__(166);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Utils__ = __webpack_require__(165);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__GlobalData__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__NativeService__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Constants__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Logger__ = __webpack_require__(377);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Logger__ = __webpack_require__(374);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1576,8 +1640,185 @@ var HttpService = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Welcome; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tabs_tabs__ = __webpack_require__(84);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(48);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+/**
+ * Generated class for the Welcome page.
+ *
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
+ */
+var Welcome = (function () {
+    function Welcome(viewCtrl, navParams, modalCtrl) {
+        this.viewCtrl = viewCtrl;
+        this.navParams = navParams;
+        this.modalCtrl = modalCtrl;
+    }
+    Welcome.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Welcome');
+    };
+    Welcome.prototype.goToHome = function () {
+        // this.navCtrl.setRoot(TabsPage, { index: 0 });
+        this.viewCtrl.dismiss();
+        var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_2__login_login__["a" /* LoginPage */]);
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            data && console.log(data);
+        });
+    };
+    Welcome = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-welcome',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\welcome\welcome.html"*/`<!--\n\n  Generated template for the Welcome page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header class="nav-decor">\n\n\n\n    <ion-navbar>\n\n        <ion-title>welcome</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-slides pager>\n\n\n\n        <ion-slide>\n\n            <img src="assets/img/welcome/slide1.jpg" />\n\n        </ion-slide>\n\n\n\n        <ion-slide>\n\n            <img src="assets/img/welcome/slide2.png" />\n\n        </ion-slide>\n\n\n\n        <ion-slide>\n\n            <img src="assets/img/welcome/slide3.png" />\n\n        </ion-slide>\n\n\n\n        <ion-slide>\n\n            <ion-row>\n\n                <ion-col>\n\n                    <img src="assets/img/welcome/slide4.png" />\n\n                </ion-col>\n\n            </ion-row>\n\n            <ion-row class="start-button">\n\n                <ion-col>\n\n                    <button ion-button clear color="light" (click)="goToHome()">立即启动</button>\n\n                </ion-col>\n\n            </ion-row>\n\n        </ion-slide>\n\n\n\n    </ion-slides>\n\n\n\n</ion-content>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\welcome\welcome.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */]])
+    ], Welcome);
+    return Welcome;
+}());
+
+//# sourceMappingURL=welcome.js.map
+
+/***/ }),
+
+/***/ 33:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GlobalData; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+/**
+ * Created by yanxiaojun on 2017/4/13.
+ */
+
+var GlobalData = (function () {
+    function GlobalData() {
+    }
+    Object.defineProperty(GlobalData.prototype, "Uid", {
+        get: function () {
+            return this._Uid;
+        },
+        set: function (value) {
+            this._Uid = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GlobalData.prototype, "Name", {
+        get: function () {
+            return this._Name;
+        },
+        set: function (value) {
+            this._Name = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GlobalData.prototype, "token", {
+        get: function () {
+            return this._token;
+        },
+        set: function (value) {
+            this._token = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    GlobalData = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])()
+    ], GlobalData);
+    return GlobalData;
+}());
+
+//# sourceMappingURL=GlobalData.js.map
+
+/***/ }),
+
+/***/ 374:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Logger; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__GlobalData__ = __webpack_require__(33);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Utils类存放和业务无关的公共方法
+ * @description
+ */
+var Logger = (function () {
+    function Logger(globalData) {
+        this.globalData = globalData;
+    }
+    Logger.prototype.log = function (err, action, other) {
+        if (other === void 0) { other = null; }
+        console.log('Logger.log：action-' + action);
+        other && console.log(other);
+        console.log(err);
+        fundebug.notifyError(err, {
+            metaData: {
+                action: action,
+                other: other,
+                user: { id: this.globalData.Uid, name: this.globalData.Name }
+            }
+        });
+    };
+    Logger.prototype.httpLog = function (err, msg, other) {
+        if (other === void 0) { other = {}; }
+        console.log('Logger.httpLog：msg-' + msg);
+        fundebug.notifyHttpError(err, {
+            metaData: {
+                action: msg,
+                other: other,
+                user: { id: this.globalData.Uid, name: this.globalData.Name }
+            }
+        });
+    };
+    Logger = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__GlobalData__["a" /* GlobalData */]])
+    ], Logger);
+    return Logger;
+}());
+
+//# sourceMappingURL=Logger.js.map
+
+/***/ }),
+
+/***/ 375:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FindPassword; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login__ = __webpack_require__(48);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1591,43 +1832,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the Welcome page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-var Welcome = (function () {
-    function Welcome(navCtrl, navParams, modalCtrl) {
+var FindPassword = (function () {
+    function FindPassword(navCtrl, viewCtrl, formBuilder) {
         this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.modalCtrl = modalCtrl;
-    }
-    Welcome.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Welcome');
-    };
-    Welcome.prototype.goToHome = function () {
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__tabs_tabs__["a" /* TabsPage */], { index: 0 });
-        var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_3__login_login__["a" /* LoginPage */]);
-        modal.present();
-        modal.onDidDismiss(function (data) {
-            data && console.log(data);
+        this.viewCtrl = viewCtrl;
+        this.formBuilder = formBuilder;
+        this.findPasswordForm = this.formBuilder.group({
+            phone: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(11), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].pattern('1[0-9]{10}')]],
+            verificationCode: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(6), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].pattern('[0-9]{6}')]],
+            newPassword: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(6)]]
         });
+    }
+    ;
+    FindPassword.prototype.confirm = function () {
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__login__["a" /* LoginPage */]);
     };
-    Welcome = __decorate([
+    FindPassword.prototype.dismiss = function () {
+        this.viewCtrl.dismiss();
+    };
+    FindPassword = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-welcome',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\welcome\welcome.html"*/`<!--\n  Generated template for the Welcome page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header class="nav-decor">\n\n    <ion-navbar>\n        <ion-title>welcome</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-slides pager>\n\n        <ion-slide>\n            <img src="assets/img/welcome/slide1.jpg" />\n        </ion-slide>\n\n        <ion-slide>\n            <img src="assets/img/welcome/slide2.png" />\n        </ion-slide>\n\n        <ion-slide>\n            <img src="assets/img/welcome/slide3.png" />\n        </ion-slide>\n\n        <ion-slide>\n            <ion-row>\n                <ion-col>\n                    <img src="assets/img/welcome/slide4.png" />\n                </ion-col>\n            </ion-row>\n            <ion-row class="start-button">\n                <ion-col>\n                    <button ion-button clear color="light" (click)="goToHome()">立即启动</button>\n                </ion-col>\n            </ion-row>\n        </ion-slide>\n\n    </ion-slides>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\welcome\welcome.html"*/,
+            selector: 'page-find-password',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\login\find-password\find-password.html"*/`<!--\n  Generated template for the FindPassword page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            找回密码\n        </ion-title>\n        <ion-buttons>\n            <button ion-button (click)="dismiss()">关闭</button>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <form [formGroup]="findPasswordForm" (ngSubmit)="confirm()">\n        <ion-list>\n            <ion-item>\n                <ion-label>手机号</ion-label>\n                <ion-input type="number" formControlName="phone"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.phone.valid&& findPasswordForm.controls.phone.touched" color="danger">请输入手机号码</span>\n            <ion-item>\n                <ion-label>验证码</ion-label>\n                <ion-input type="number" formControlName="verificationCode"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.verificationCode.valid&& findPasswordForm.controls.verificationCode.touched" color="danger">请输入验证码</span>\n            <ion-item>\n                <ion-label>新密码</ion-label>\n                <ion-input type="password" formControlName="newPassword"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.newPassword.valid&& findPasswordForm.controls.newPassword.touched" color="danger">请输入新密码</span>\n        </ion-list>\n        <div padding-horizontal>\n            <button ion-button block type="submit" [disabled]="!findPasswordForm.valid">确　认</button>\n        </div>\n        <button class="verification" ion-button small color="secondary" *ngIf="findPasswordForm.controls.phone.valid">获取验证码</button>\n    </form>\n</ion-content>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\login\find-password\find-password.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */]])
-    ], Welcome);
-    return Welcome;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
+    ], FindPassword);
+    return FindPassword;
 }());
 
-//# sourceMappingURL=welcome.js.map
+//# sourceMappingURL=find-password.js.map
 
 /***/ }),
 
-/***/ 283:
+/***/ 376:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1635,12 +1873,12 @@ var Welcome = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(84);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__message_message__ = __webpack_require__(149);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_backlog_backlog__ = __webpack_require__(167);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__home_contacts_contacts__ = __webpack_require__(169);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__sms_sms__ = __webpack_require__(382);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mail_mail__ = __webpack_require__(385);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(166);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__message_message__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_backlog_backlog__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__home_contacts_contacts__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__sms_sms__ = __webpack_require__(383);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mail_mail__ = __webpack_require__(386);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1697,14 +1935,14 @@ var Home = (function () {
         }
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Nav */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* Nav */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* Nav */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* Nav */])
     ], Home.prototype, "nav", void 0);
     Home = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\home.html"*/`<!--\n  Generated template for the Home page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <button ion-button icon-only menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>首页</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-grid>\n        <ion-row class="index-row">\n            <ion-col col-4 *ngFor="let p of appPages" (click)="openPage(p)">\n                <div [class]="p.color">\n                    <ion-icon [name]="p.icon"></ion-icon>{{p.title}}\n                </div>\n            </ion-col>\n        </ion-row>\n    </ion-grid>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\home.html"*/,
+            selector: 'page-home',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\home\home.html"*/`<!--\n\n  Generated template for the Home page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <button ion-button icon-only menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>首页</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n    <ion-grid>\n\n        <ion-row class="index-row">\n\n            <ion-col col-4 *ngFor="let p of appPages" (click)="openPage(p)">\n\n                <div [class]="p.color">\n\n                    <ion-icon [name]="p.icon"></ion-icon>{{p.title}}\n\n                </div>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n</ion-content>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\home\home.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
     ], Home);
     return Home;
 }());
@@ -1713,7 +1951,7 @@ var Home = (function () {
 
 /***/ }),
 
-/***/ 284:
+/***/ 377:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1750,14 +1988,14 @@ var MessageReadPage = (function () {
         this.messageContent = this.messageDetail.Title;
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */])
     ], MessageReadPage.prototype, "content", void 0);
     MessageReadPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-message-read',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-read\message-read.html"*/`<!--\n\n  Generated template for the MessageReadPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>消息详情</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n    <div>\n\n        <ion-list>\n\n\n\n            <ion-item>\n\n                <ion-label>发送人&emsp;</ion-label>\n\n                <ion-input type="text" disabled="disabled" [(ngModel)]="messageDetail.SendPerson" placeholder="系统管理员"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label>发送时间</ion-label>\n\n                <ion-input type="test" disabled="disabled" [(ngModel)]="messageDetail.MailDate" placeholder="发送时间未知"></ion-input>\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n    </div>\n\n\n\n    <div>\n\n        <ion-scroll scrollY="true" class="message-content">\n\n            <div padding-horizontal [innerHTML]="messageContent"></div>\n\n            <!-- <ion-textarea [(ngModule)]="messageDetail.Title"  placeholder="回复: "></ion-textarea> -->\n\n            <!-- <div class="mydiv">\n\n                {{messageDetail.Title}}\n\n            </div> -->\n\n        </ion-scroll>\n\n    </div>\n\n</ion-content>\n\n<!-- <ion-footer class="message-reply">\n\n      <div class="item">\n\n          <ion-textarea [(ngModule)]="writeContent"  placeholder="回复: "></ion-textarea>\n\n          <button ion-button small color="positive" (click)="reply()">发送</button>\n\n      </div>\n\n  </ion-footer> -->`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-read\message-read.html"*/,
+            selector: 'page-message-read',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\message\message-read\message-read.html"*/`<!--\n\n  Generated template for the MessageReadPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>消息详情</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n    <div>\n\n        <ion-list>\n\n\n\n            <ion-item>\n\n                <ion-label>发送人&emsp;</ion-label>\n\n                <ion-input type="text" disabled="disabled" [(ngModel)]="messageDetail.SendPerson" placeholder="系统管理员"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label>发送时间</ion-label>\n\n                <ion-input type="test" disabled="disabled" [(ngModel)]="messageDetail.MailDate" placeholder="发送时间未知"></ion-input>\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n    </div>\n\n\n\n    <div>\n\n        <ion-scroll scrollY="true" class="message-content">\n\n            <div padding-horizontal [innerHTML]="messageContent"></div>\n\n            <!-- <ion-textarea [(ngModule)]="messageDetail.Title"  placeholder="回复: "></ion-textarea> -->\n\n            <!-- <div class="mydiv">\n\n                {{messageDetail.Title}}\n\n            </div> -->\n\n        </ion-scroll>\n\n    </div>\n\n</ion-content>\n\n<!-- <ion-footer class="message-reply">\n\n      <div class="item">\n\n          <ion-textarea [(ngModule)]="writeContent"  placeholder="回复: "></ion-textarea>\n\n          <button ion-button small color="positive" (click)="reply()">发送</button>\n\n      </div>\n\n  </ion-footer> -->`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\message\message-read\message-read.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
     ], MessageReadPage);
     return MessageReadPage;
 }());
@@ -1766,7 +2004,7 @@ var MessageReadPage = (function () {
 
 /***/ }),
 
-/***/ 285:
+/***/ 378:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1774,8 +2012,8 @@ var MessageReadPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messageService__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__contacts_popover_contacts_popover__ = __webpack_require__(378);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messageService__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__contacts_popover_contacts_popover__ = __webpack_require__(379);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1853,12 +2091,12 @@ var MessageWritePage = (function () {
     ], MessageWritePage.prototype, "content", void 0);
     MessageWritePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-message-write',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-write\message-write.html"*/`<!--\n\n  Generated template for the MessageWritePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n    \n\n        <ion-navbar>\n\n    \n\n            <button ion-button (click)="dismiss()">取消</button>\n\n    \n\n            <ion-title>写信</ion-title>\n\n            <ion-buttons end>\n\n                <button ion-button icon-left (click)="send()">\n\n                    <ion-icon name="ios-send"></ion-icon> 发送\n\n                </button>\n\n            </ion-buttons>\n\n        </ion-navbar>\n\n    </ion-header>\n\n    \n\n    \n\n    <ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n        <div>\n\n    \n\n            <ion-list style="position:relative;">\n\n                <ion-item>\n\n                    <ion-label style="align-self:center;">收件人&emsp;</ion-label>\n\n                    <ion-textarea min-rows="1" [(ngModel)]="addressee" #popoverContent placeholder="请选择收件人" (click)="checkPeople($event)"></ion-textarea>\n\n                </ion-item>\n\n            </ion-list>\n\n        </div>\n\n    \n\n        <div>\n\n            <ion-scroll scrollY="true" class="mail-content">\n\n                <!--<textarea class="mydiv">\n\n    \n\n                </textarea>-->\n\n                <div class="message-textarea" contenteditable="true" data-text="输入信息" [(ngModel)]="contont"></div>\n\n  \n\n            </ion-scroll>\n\n        </div>\n\n    </ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-write\message-write.html"*/,
+            selector: 'page-message-write',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\message\message-write\message-write.html"*/`<!--\n\n  Generated template for the MessageWritePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n    \n\n        <ion-navbar>\n\n    \n\n            <button ion-button (click)="dismiss()">取消</button>\n\n    \n\n            <ion-title>写信</ion-title>\n\n            <ion-buttons end>\n\n                <button ion-button icon-left (click)="send()">\n\n                    <ion-icon name="ios-send"></ion-icon> 发送\n\n                </button>\n\n            </ion-buttons>\n\n        </ion-navbar>\n\n    </ion-header>\n\n    \n\n    \n\n    <ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n        <div>\n\n    \n\n            <ion-list style="position:relative;">\n\n                <ion-item>\n\n                    <ion-label style="align-self:center;">收件人&emsp;</ion-label>\n\n                    <ion-textarea min-rows="1" [(ngModel)]="addressee" #popoverContent placeholder="请选择收件人" (click)="checkPeople($event)"></ion-textarea>\n\n                </ion-item>\n\n            </ion-list>\n\n        </div>\n\n    \n\n        <div>\n\n            <ion-scroll scrollY="true" class="mail-content">\n\n                <!--<textarea class="mydiv">\n\n    \n\n                </textarea>-->\n\n                <div class="message-textarea" contenteditable="true" data-text="输入信息" [(ngModel)]="contont"></div>\n\n  \n\n            </ion-scroll>\n\n        </div>\n\n    </ion-content>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\message\message-write\message-write.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* PopoverController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
             __WEBPACK_IMPORTED_MODULE_3__messageService__["a" /* MessageService */]])
     ], MessageWritePage);
     return MessageWritePage;
@@ -1868,127 +2106,7 @@ var MessageWritePage = (function () {
 
 /***/ }),
 
-/***/ 33:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GlobalData; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-/**
- * Created by yanxiaojun on 2017/4/13.
- */
-
-var GlobalData = (function () {
-    function GlobalData() {
-    }
-    Object.defineProperty(GlobalData.prototype, "Uid", {
-        get: function () {
-            return this._Uid;
-        },
-        set: function (value) {
-            this._Uid = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(GlobalData.prototype, "Name", {
-        get: function () {
-            return this._Name;
-        },
-        set: function (value) {
-            this._Name = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(GlobalData.prototype, "token", {
-        get: function () {
-            return this._token;
-        },
-        set: function (value) {
-            this._token = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    GlobalData = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])()
-    ], GlobalData);
-    return GlobalData;
-}());
-
-//# sourceMappingURL=GlobalData.js.map
-
-/***/ }),
-
-/***/ 377:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Logger; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__GlobalData__ = __webpack_require__(33);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-/**
- * Utils类存放和业务无关的公共方法
- * @description
- */
-var Logger = (function () {
-    function Logger(globalData) {
-        this.globalData = globalData;
-    }
-    Logger.prototype.log = function (err, action, other) {
-        if (other === void 0) { other = null; }
-        console.log('Logger.log：action-' + action);
-        other && console.log(other);
-        console.log(err);
-        fundebug.notifyError(err, {
-            metaData: {
-                action: action,
-                other: other,
-                user: { id: this.globalData.Uid, name: this.globalData.Name }
-            }
-        });
-    };
-    Logger.prototype.httpLog = function (err, msg, other) {
-        if (other === void 0) { other = {}; }
-        console.log('Logger.httpLog：msg-' + msg);
-        fundebug.notifyHttpError(err, {
-            metaData: {
-                action: msg,
-                other: other,
-                user: { id: this.globalData.Uid, name: this.globalData.Name }
-            }
-        });
-    };
-    Logger = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__GlobalData__["a" /* GlobalData */]])
-    ], Logger);
-    return Logger;
-}());
-
-//# sourceMappingURL=Logger.js.map
-
-/***/ }),
-
-/***/ 378:
+/***/ 379:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1996,7 +2114,7 @@ var Logger = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__ = __webpack_require__(24);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2121,10 +2239,10 @@ var ContactsPopoverPage = (function () {
     };
     ContactsPopoverPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contacts-popover',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\contacts-popover\contacts-popover.html"*/`<!--\n  Generated template for the ContactsPopoverPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>联系人选择</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-list class="checkpeople-popover">\n    <ion-item>\n        <ion-label>部门选择</ion-label>\n        <ion-select [(ngModel)]="dept" submitText="确定" (ngModelChange)="getRecipientsByDept(dept)"\n            cancelText="取消" okText="确定">\n            <ion-option  *ngFor="let item of deptItems;let i = index" [value]="item.Id">\n                {{item.BmName}}\n            </ion-option>\n        </ion-select>\n    </ion-item>\n    <ion-searchbar color="danger" [(ngModel)]="name"  placeholder="请输入编码或姓名">\n    </ion-searchbar>\n  \n    <div text-center>\n        <button (click)="search()" icon-left ion-button small color="calm">\n        <ion-icon name="search"></ion-icon>查询</button>\n  \n        <button (click)="confirm()" icon-left ion-button small color="calm">\n        <ion-icon name="checkmark"></ion-icon>确定</button>\n    </div>\n  \n    <ion-list-header>\n        通讯录\n    </ion-list-header>\n  \n    <ion-item *ngFor="let item of items;let i = index">\n        <ion-label>\n        {{item.Name}}({{item.Uid}})<br>\n        <span>{{item.Dept}}&emsp;{{item.Duty}}</span>\n        </ion-label>\n        <ion-checkbox [checked]="item.checked" (ionChange)="checkPeople(i)"></ion-checkbox>\n    </ion-item>\n  </ion-list>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\contacts-popover\contacts-popover.html"*/,
+            selector: 'page-contacts-popover',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\contacts-popover\contacts-popover.html"*/`<!--\n\n  Generated template for the ContactsPopoverPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>联系人选择</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n  <ion-list class="checkpeople-popover">\n\n    <ion-item>\n\n        <ion-label>部门选择</ion-label>\n\n        <ion-select [(ngModel)]="dept" submitText="确定" (ngModelChange)="getRecipientsByDept(dept)"\n\n            cancelText="取消" okText="确定">\n\n            <ion-option  *ngFor="let item of deptItems;let i = index" [value]="item.Id">\n\n                {{item.BmName}}\n\n            </ion-option>\n\n        </ion-select>\n\n    </ion-item>\n\n    <ion-searchbar color="danger" [(ngModel)]="name"  placeholder="请输入编码或姓名">\n\n    </ion-searchbar>\n\n  \n\n    <div text-center>\n\n        <button (click)="search()" icon-left ion-button small color="calm">\n\n        <ion-icon name="search"></ion-icon>查询</button>\n\n  \n\n        <button (click)="confirm()" icon-left ion-button small color="calm">\n\n        <ion-icon name="checkmark"></ion-icon>确定</button>\n\n    </div>\n\n  \n\n    <ion-list-header>\n\n        通讯录\n\n    </ion-list-header>\n\n  \n\n    <ion-item *ngFor="let item of items;let i = index">\n\n        <ion-label>\n\n        {{item.Name}}({{item.Uid}})<br>\n\n        <span>{{item.Dept}}&emsp;{{item.Duty}}</span>\n\n        </ion-label>\n\n        <ion-checkbox [checked]="item.checked" (ionChange)="checkPeople(i)"></ion-checkbox>\n\n    </ion-item>\n\n  </ion-list>\n\n</ion-content>\n\n`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\contacts-popover\contacts-popover.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
             __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
             __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__["a" /* HttpService */]])
     ], ContactsPopoverPage);
@@ -2135,7 +2253,7 @@ var ContactsPopoverPage = (function () {
 
 /***/ }),
 
-/***/ 379:
+/***/ 380:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2175,14 +2293,14 @@ var MessageReadOutPage = (function () {
         console.log('ionViewDidLoad MessageReadOutPage');
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */])
     ], MessageReadOutPage.prototype, "content", void 0);
     MessageReadOutPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-message-read-out',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-read-out\message-read-out.html"*/`<!--\n\n  Generated template for the MessageReadOutPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n      <ion-navbar>\n\n          <ion-title>消息详情</ion-title>\n\n      </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n      <div>\n\n          <ion-list>\n\n  \n\n              <ion-item>\n\n                  <ion-label>发送人&emsp;</ion-label>\n\n                  <ion-input type="text" disabled="disabled" [(ngModel)]="messageDetail.AccessPerson" placeholder="系统管理员"></ion-input>\n\n              </ion-item>\n\n  \n\n              <ion-item>\n\n                  <ion-label>发送时间</ion-label>\n\n                  <ion-input type="test" disabled="disabled" [(ngModel)]="messageDetail.MailDate" placeholder="发送时间未知"></ion-input>\n\n              </ion-item>\n\n  \n\n          </ion-list>\n\n      </div>\n\n  \n\n      <div>\n\n          <ion-scroll scrollY="true" class="message-content">\n\n              <div padding-horizontal [innerHTML]="messageContent"></div>\n\n              <!-- <ion-textarea [(ngModule)]="messageDetail.Title"  placeholder="回复: "></ion-textarea> -->\n\n              <!-- <div class="mydiv">\n\n                {{messageDetail.Title}}\n\n              </div> -->\n\n          </ion-scroll>\n\n      </div>\n\n  </ion-content>\n\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-read-out\message-read-out.html"*/,
+            selector: 'page-message-read-out',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\message\message-read-out\message-read-out.html"*/`<!--\n\n  Generated template for the MessageReadOutPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n      <ion-navbar>\n\n          <ion-title>消息详情</ion-title>\n\n      </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n      <div>\n\n          <ion-list>\n\n  \n\n              <ion-item>\n\n                  <ion-label>发送人&emsp;</ion-label>\n\n                  <ion-input type="text" disabled="disabled" [(ngModel)]="messageDetail.AccessPerson" placeholder="系统管理员"></ion-input>\n\n              </ion-item>\n\n  \n\n              <ion-item>\n\n                  <ion-label>发送时间</ion-label>\n\n                  <ion-input type="test" disabled="disabled" [(ngModel)]="messageDetail.MailDate" placeholder="发送时间未知"></ion-input>\n\n              </ion-item>\n\n  \n\n          </ion-list>\n\n      </div>\n\n  \n\n      <div>\n\n          <ion-scroll scrollY="true" class="message-content">\n\n              <div padding-horizontal [innerHTML]="messageContent"></div>\n\n              <!-- <ion-textarea [(ngModule)]="messageDetail.Title"  placeholder="回复: "></ion-textarea> -->\n\n              <!-- <div class="mydiv">\n\n                {{messageDetail.Title}}\n\n              </div> -->\n\n          </ion-scroll>\n\n      </div>\n\n  </ion-content>\n\n`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\message\message-read-out\message-read-out.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
     ], MessageReadOutPage);
     return MessageReadOutPage;
 }());
@@ -2191,14 +2309,14 @@ var MessageReadOutPage = (function () {
 
 /***/ }),
 
-/***/ 380:
+/***/ 381:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogDetail; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(169);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(23);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2260,10 +2378,10 @@ var BacklogDetail = (function () {
     };
     BacklogDetail = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-backlog-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog-detail\backlog-detail.html"*/`<!--\n  Generated template for the BacklogDetail page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>事项详情</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-card>\n        <ion-card-header>\n            33ee\n        </ion-card-header>\n        <ion-card-content>\n            <ion-list>\n                <ion-item>\n                    <ion-label>当前步骤：</ion-label>\n                    <ion-input type="text" placeholder="当前步骤1"></ion-input>\n                </ion-item>\n\n                <ion-item *ngIf="isComplete">\n                    <ion-label>审批模式：</ion-label>\n                    <ion-input type="text" placeholder="无"></ion-input>\n                </ion-item>\n\n                <div *ngIf="!isComplete">\n                    <ion-item>\n                        <ion-label>&emsp;流水号：<em>&emsp;1&nbsp;—</em></ion-label>\n\n                        <ion-input type="text" placeholder="请输入流水号"></ion-input>\n                    </ion-item>\n\n                    <ion-item>\n                        <ion-label>审批状态：</ion-label>\n                        <ion-input type="text" placeholder="无"></ion-input>\n                    </ion-item>\n                </div>\n\n\n                <div id="strhtm" style="min-height: 100px;overflow-x:auto;"></div>\n\n            </ion-list>\n            <ion-row>\n                <ion-col col-auto style="padding-left:12px;padding-top:5px;text-align:right;">\n                    &nbsp;相关附件：\n                </ion-col>\n                <ion-col col-lg-8 col-xl-6 style="position: relative;padding-left: 40px;background-color: #d7eaf9;">\n                    <ion-icon name="md-image" color="energized" style="position:absolute;left:.4rem;display:inline-block;font-size:3.6rem;"></ion-icon>\n                    <div>\n                        <span>text.png</span>\n                        <span ng-click="" style="position:absolute;right:10px;font-size:1.2rem">下载</span>\n                        <p style="font-size:1.2rem;">2.5M</p>\n                    </div>\n                </ion-col>\n            </ion-row>\n\n            <ion-list *ngIf="!isComplete">\n                <ion-item>\n                    <ion-label>审批记录：</ion-label>\n                    <ion-textarea type="text" placeholder="无"></ion-textarea>\n                </ion-item>\n                <ion-item>\n                    <ion-textarea placeholder="请输入本次审批意见" rows="2"></ion-textarea>\n                </ion-item>\n            </ion-list>\n\n\n        </ion-card-content>\n        <ion-row text-center>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-checkmark"></ion-icon>\n                    <div>审批通过</div>\n                </button>\n            </ion-col>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-close"></ion-icon>\n                    <div>审批驳回</div>\n                </button>\n            </ion-col>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-return-left"></ion-icon>\n                    <div>返回</div>\n                </button>\n            </ion-col>\n        </ion-row>\n    </ion-card>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog-detail\backlog-detail.html"*/,
+            selector: 'page-backlog-detail',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\home\backlog\backlog-detail\backlog-detail.html"*/`<!--\n\n  Generated template for the BacklogDetail page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>事项详情</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-card>\n\n        <ion-card-header>\n\n            33ee\n\n        </ion-card-header>\n\n        <ion-card-content>\n\n            <ion-list>\n\n                <ion-item>\n\n                    <ion-label>当前步骤：</ion-label>\n\n                    <ion-input type="text" placeholder="当前步骤1"></ion-input>\n\n                </ion-item>\n\n\n\n                <ion-item *ngIf="isComplete">\n\n                    <ion-label>审批模式：</ion-label>\n\n                    <ion-input type="text" placeholder="无"></ion-input>\n\n                </ion-item>\n\n\n\n                <div *ngIf="!isComplete">\n\n                    <ion-item>\n\n                        <ion-label>&emsp;流水号：<em>&emsp;1&nbsp;—</em></ion-label>\n\n\n\n                        <ion-input type="text" placeholder="请输入流水号"></ion-input>\n\n                    </ion-item>\n\n\n\n                    <ion-item>\n\n                        <ion-label>审批状态：</ion-label>\n\n                        <ion-input type="text" placeholder="无"></ion-input>\n\n                    </ion-item>\n\n                </div>\n\n\n\n\n\n                <div id="strhtm" style="min-height: 100px;overflow-x:auto;"></div>\n\n\n\n            </ion-list>\n\n            <ion-row>\n\n                <ion-col col-auto style="padding-left:12px;padding-top:5px;text-align:right;">\n\n                    &nbsp;相关附件：\n\n                </ion-col>\n\n                <ion-col col-lg-8 col-xl-6 style="position: relative;padding-left: 40px;background-color: #d7eaf9;">\n\n                    <ion-icon name="md-image" color="energized" style="position:absolute;left:.4rem;display:inline-block;font-size:3.6rem;"></ion-icon>\n\n                    <div>\n\n                        <span>text.png</span>\n\n                        <span ng-click="" style="position:absolute;right:10px;font-size:1.2rem">下载</span>\n\n                        <p style="font-size:1.2rem;">2.5M</p>\n\n                    </div>\n\n                </ion-col>\n\n            </ion-row>\n\n\n\n            <ion-list *ngIf="!isComplete">\n\n                <ion-item>\n\n                    <ion-label>审批记录：</ion-label>\n\n                    <ion-textarea type="text" placeholder="无"></ion-textarea>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-textarea placeholder="请输入本次审批意见" rows="2"></ion-textarea>\n\n                </ion-item>\n\n            </ion-list>\n\n\n\n\n\n        </ion-card-content>\n\n        <ion-row text-center>\n\n            <ion-col col-4>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-checkmark"></ion-icon>\n\n                    <div>审批通过</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col col-4>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-close"></ion-icon>\n\n                    <div>审批驳回</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col col-4>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-return-left"></ion-icon>\n\n                    <div>返回</div>\n\n                </button>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n</ion-content>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\home\backlog\backlog-detail\backlog-detail.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__backlogService__["a" /* BacklogService */],
             __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */]])
     ], BacklogDetail);
@@ -2274,7 +2392,7 @@ var BacklogDetail = (function () {
 
 /***/ }),
 
-/***/ 381:
+/***/ 382:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2332,10 +2450,10 @@ var ContactsDetail = (function () {
     };
     ContactsDetail = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contacts-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts-detail\contacts-detail.html"*/`<!--\n  Generated template for the ContactsDetail page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>详细信息</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-grid>\n        <ion-row style="border-bottom: 2px solid #ddd;padding-bottom: 0;">\n            <ion-col col-4 text-center style="border-right:1px solid #ddd;">\n                <img src="../assets/img/ben.png" alt="photo" style="height: 70px;width: 70px;border-radius: 50%;">\n                <div>{{checkman.Name}}&nbsp;·<span class="royal">&nbsp;{{checkman.Sex}}</span></div>\n            </ion-col>\n            <ion-col col-8>\n                <p>账号：{{checkman.Uid || "未知"}}</p>\n                <p>职位：{{checkman.Duty}}</p>\n                <p>公司：{{checkman.Company}}</p>\n            </ion-col>\n        </ion-row>\n    </ion-grid>\n    <ion-list>\n        <ion-item>\n            <ion-icon color="energized" name="ios-analytics" item-left></ion-icon>\n            部门\n            <ion-note item-right>{{checkman.Dept}}</ion-note>\n\n        </ion-item>\n        <ion-item (click)="call(checkman.tel)">\n            <ion-icon color="danger" name="md-call" item-left></ion-icon>\n            电话\n            <ion-note item-right>{{checkman.InlinePhone}}</ion-note>\n        </ion-item>\n        <ion-item (click)="call(checkman.mobile)">\n            <ion-icon color="calm" name="md-phone-portrait" item-left></ion-icon>\n            手机\n            <ion-note item-right>{{checkman.Mobile}}</ion-note>\n        </ion-item>\n        <!-- <ion-item>\n            <ion-icon color="balanced" name="md-send" item-left></ion-icon>\n            传真\n            <ion-note item-right>{{checkman.fax}}</ion-note>\n        </ion-item> -->\n        <ion-item>\n            <ion-icon color="royal" name="md-mail" item-left></ion-icon>\n            邮件\n            <ion-note item-right>{{checkman.Mail}}</ion-note>\n        </ion-item>\n\n\n    </ion-list>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts-detail\contacts-detail.html"*/,
+            selector: 'page-contacts-detail',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\home\contacts\contacts-detail\contacts-detail.html"*/`<!--\n\n  Generated template for the ContactsDetail page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>详细信息</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-grid>\n\n        <ion-row style="border-bottom: 2px solid #ddd;padding-bottom: 0;">\n\n            <ion-col col-4 text-center style="border-right:1px solid #ddd;">\n\n                <img src="../assets/img/ben.png" alt="photo" style="height: 70px;width: 70px;border-radius: 50%;">\n\n                <div>{{checkman.Name}}&nbsp;·<span class="royal">&nbsp;{{checkman.Sex}}</span></div>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n                <p>账号：{{checkman.Uid || "未知"}}</p>\n\n                <p>职位：{{checkman.Duty}}</p>\n\n                <p>公司：{{checkman.Company}}</p>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-icon color="energized" name="ios-analytics" item-left></ion-icon>\n\n            部门\n\n            <ion-note item-right>{{checkman.Dept}}</ion-note>\n\n\n\n        </ion-item>\n\n        <ion-item (click)="call(checkman.tel)">\n\n            <ion-icon color="danger" name="md-call" item-left></ion-icon>\n\n            电话\n\n            <ion-note item-right>{{checkman.InlinePhone}}</ion-note>\n\n        </ion-item>\n\n        <ion-item (click)="call(checkman.mobile)">\n\n            <ion-icon color="calm" name="md-phone-portrait" item-left></ion-icon>\n\n            手机\n\n            <ion-note item-right>{{checkman.Mobile}}</ion-note>\n\n        </ion-item>\n\n        <!-- <ion-item>\n\n            <ion-icon color="balanced" name="md-send" item-left></ion-icon>\n\n            传真\n\n            <ion-note item-right>{{checkman.fax}}</ion-note>\n\n        </ion-item> -->\n\n        <ion-item>\n\n            <ion-icon color="royal" name="md-mail" item-left></ion-icon>\n\n            邮件\n\n            <ion-note item-right>{{checkman.Mail}}</ion-note>\n\n        </ion-item>\n\n\n\n\n\n    </ion-list>\n\n\n\n</ion-content>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\home\contacts\contacts-detail\contacts-detail.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
     ], ContactsDetail);
     return ContactsDetail;
@@ -2345,7 +2463,7 @@ var ContactsDetail = (function () {
 
 /***/ }),
 
-/***/ 382:
+/***/ 383:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2353,9 +2471,9 @@ var ContactsDetail = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sms_sms_read_sms_read__ = __webpack_require__(383);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sms_sms_write_sms_write__ = __webpack_require__(384);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__smsService__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sms_sms_read_sms_read__ = __webpack_require__(384);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sms_sms_write_sms_write__ = __webpack_require__(385);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__smsService__ = __webpack_require__(171);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2488,12 +2606,12 @@ var SmsPage = (function () {
     };
     SmsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-sms',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\sms\sms.html"*/`<!--\n  Generated template for the SmsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>短信</ion-title>\n  </ion-navbar>\n    <div class="subbox">\n        <div>\n            <button ion-button small (click)="checkRead(true)" class="button-ios-light" [ngClass]="{\'button-ios-calm\':isSent}">已发送</button>\n            <button ion-button small (click)="checkRead()" class="button-ios-light" [ngClass]="{\'button-ios-calm\':!isSent}">待发送</button>\n        </div>\n    </div>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n        <ion-item-sliding *ngFor="let sms of list" (click)="doRead(sms)">\n            <ion-item>\n                <!-- <ion-avatar item-left>\n                    <img src="assets/img/mike.png">\n                </ion-avatar> -->\n                <span style="color:#2196F3;" *ngIf="sms.Status==0">●&nbsp;</span><span>{{sms.SmsMsg}}</span>\n                <p class="font-12">发至:{{sms.AccessNumber}}&emsp;{{sms.SendDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n            </ion-item>\n            <ion-item-options side="right">\n                <button ion-button color="primary">\n                    <ion-icon name="md-trash"></ion-icon>删除\n                </button>\n            </ion-item-options>\n        </ion-item-sliding>\n    </ion-list>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\sms\sms.html"*/,
+            selector: 'page-sms',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\sms\sms.html"*/`<!--\n\n  Generated template for the SmsPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>短信</ion-title>\n\n  </ion-navbar>\n\n    <div class="subbox">\n\n        <div>\n\n            <button ion-button small (click)="checkRead(true)" class="button-ios-light" [ngClass]="{\'button-ios-calm\':isSent}">已发送</button>\n\n            <button ion-button small (click)="checkRead()" class="button-ios-light" [ngClass]="{\'button-ios-calm\':!isSent}">待发送</button>\n\n        </div>\n\n    </div>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n\n        </ion-refresher-content>\n\n    </ion-refresher>\n\n    <ion-list>\n\n        <ion-item-sliding *ngFor="let sms of list" (click)="doRead(sms)">\n\n            <ion-item>\n\n                <!-- <ion-avatar item-left>\n\n                    <img src="assets/img/mike.png">\n\n                </ion-avatar> -->\n\n                <span style="color:#2196F3;" *ngIf="sms.Status==0">●&nbsp;</span><span>{{sms.SmsMsg}}</span>\n\n                <p class="font-12">发至:{{sms.AccessNumber}}&emsp;{{sms.SendDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n\n            </ion-item>\n\n            <ion-item-options side="right">\n\n                <button ion-button color="primary">\n\n                    <ion-icon name="md-trash"></ion-icon>删除\n\n                </button>\n\n            </ion-item-options>\n\n        </ion-item-sliding>\n\n    </ion-list>\n\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n\n    </ion-infinite-scroll>\n\n    <ion-fab bottom right>\n\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n\n    </ion-fab>\n\n</ion-content>\n\n`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\sms\sms.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_5__smsService__["a" /* SmsService */]])
     ], SmsPage);
     return SmsPage;
@@ -2503,7 +2621,7 @@ var SmsPage = (function () {
 
 /***/ }),
 
-/***/ 383:
+/***/ 384:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2541,14 +2659,14 @@ var SmsReadPage = (function () {
         this.Content = this.detail.SmsMsg;
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */])
     ], SmsReadPage.prototype, "content", void 0);
     SmsReadPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-sms-read',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\sms\sms-read\sms-read.html"*/`<!--\n  Generated template for the SmsReadPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>短息详情</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-list>\n    <ion-item>\n        <ion-label>接收号码&emsp;</ion-label>\n        <ion-input type="text" disabled="disabled" [(ngModel)]="detail.AccessNumber" placeholder="系统管理员"></ion-input>\n    </ion-item>\n\n    <ion-item>\n        <ion-label>发送时间</ion-label>\n        <ion-input type="test" disabled="disabled" [(ngModel)]="detail.SendDate" placeholder="发送时间未知"></ion-input>\n    </ion-item>\n\n  </ion-list>\n\n  <div>\n    <ion-scroll scrollY="true" class="sms-content">\n        <div padding-horizontal [innerHTML]="Content"></div>\n        <!-- <div class="mydiv"></div> -->\n    \n    </ion-scroll>\n  </div>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\sms\sms-read\sms-read.html"*/,
+            selector: 'page-sms-read',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\sms\sms-read\sms-read.html"*/`<!--\n\n  Generated template for the SmsReadPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>短息详情</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n  <ion-list>\n\n    <ion-item>\n\n        <ion-label>接收号码&emsp;</ion-label>\n\n        <ion-input type="text" disabled="disabled" [(ngModel)]="detail.AccessNumber" placeholder="系统管理员"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n        <ion-label>发送时间</ion-label>\n\n        <ion-input type="test" disabled="disabled" [(ngModel)]="detail.SendDate" placeholder="发送时间未知"></ion-input>\n\n    </ion-item>\n\n\n\n  </ion-list>\n\n\n\n  <div>\n\n    <ion-scroll scrollY="true" class="sms-content">\n\n        <div padding-horizontal [innerHTML]="Content"></div>\n\n        <!-- <div class="mydiv"></div> -->\n\n    \n\n    </ion-scroll>\n\n  </div>\n\n</ion-content>\n\n`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\sms\sms-read\sms-read.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
     ], SmsReadPage);
     return SmsReadPage;
 }());
@@ -2557,14 +2675,14 @@ var SmsReadPage = (function () {
 
 /***/ }),
 
-/***/ 384:
+/***/ 385:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SmsWritePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_GlobalData__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__smsService__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__smsService__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(23);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2613,19 +2731,20 @@ var SmsWritePage = (function () {
     };
     SmsWritePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-sms-write',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\sms\sms-write\sms-write.html"*/`<!--\n  Generated template for the SmsWritePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        \n        <button ion-button (click)="dismiss()">取消</button>\n\n        <ion-title>写短信</ion-title>\n        <ion-buttons end>\n            <button ion-button icon-left (click)="send()">\n                <ion-icon name="ios-send"></ion-icon> 发送\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">\n      <ion-list>\n        <ion-item>\n          <ion-label>接收号码&emsp;</ion-label>\n          <ion-input type="tel"  [(ngModel)]="CellPhone" placeholder="手机号"></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-label>是否定时</ion-label>\n            <ion-toggle  [(ngModel)]="IsTimer"></ion-toggle>\n        </ion-item>\n\n        <ion-item>\n            <ion-label>发送时间</ion-label>\n            <ion-datetime displayFormat="YYYY-MM-DD HH:mm:ss" pickerFormat="YYYY-MM-DD HH:mm" [(ngModel)]="SendDate" cancelText="取消" doneText="确定" ></ion-datetime>\n        </ion-item>\n\n      </ion-list>\n\n      <div>\n        <ion-scroll scrollY="true" class="sms-content">\n            <div class="message-textarea" contenteditable="true" data-text="输入信息" [(ngModel)]="Content"></div>\n        </ion-scroll>\n      </div>\n    </form> \n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\sms\sms-write\sms-write.html"*/,
+            selector: 'page-sms-write',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\sms\sms-write\sms-write.html"*/`<!--\n\n  Generated template for the SmsWritePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        \n\n        <button ion-button (click)="dismiss()">取消</button>\n\n\n\n        <ion-title>写短信</ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-left (click)="send()">\n\n                <ion-icon name="ios-send"></ion-icon> 发送\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">\n\n      <ion-list>\n\n        <ion-item>\n\n          <ion-label>接收号码&emsp;</ion-label>\n\n          <ion-input type="tel"  [(ngModel)]="CellPhone" placeholder="手机号"></ion-input>\n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <ion-label>是否定时</ion-label>\n\n            <ion-toggle  [(ngModel)]="IsTimer"></ion-toggle>\n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <ion-label>发送时间</ion-label>\n\n            <ion-datetime displayFormat="YYYY-MM-DD HH:mm:ss" pickerFormat="YYYY-MM-DD HH:mm" [(ngModel)]="SendDate" cancelText="取消" doneText="确定" ></ion-datetime>\n\n        </ion-item>\n\n\n\n      </ion-list>\n\n\n\n      <div>\n\n        <ion-scroll scrollY="true" class="sms-content">\n\n            <div class="message-textarea" contenteditable="true" data-text="输入信息" [(ngModel)]="Content"></div>\n\n        </ion-scroll>\n\n      </div>\n\n    </form> \n\n</ion-content>\n\n`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\sms\sms-write\sms-write.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__providers_GlobalData__["a" /* GlobalData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__providers_GlobalData__["a" /* GlobalData */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__smsService__["a" /* SmsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__smsService__["a" /* SmsService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_GlobalData__["a" /* GlobalData */],
+            __WEBPACK_IMPORTED_MODULE_2__smsService__["a" /* SmsService */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */]])
     ], SmsWritePage);
     return SmsWritePage;
-    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=sms-write.js.map
 
 /***/ }),
 
-/***/ 385:
+/***/ 386:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2633,10 +2752,10 @@ var SmsWritePage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mail_mail_read_mail_read__ = __webpack_require__(386);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mail_mail_write_mail_write__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mail_mail_read_outbox_mail_read_outbox__ = __webpack_require__(387);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mailService__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mail_mail_read_mail_read__ = __webpack_require__(387);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mail_mail_write_mail_write__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mail_mail_read_outbox_mail_read_outbox__ = __webpack_require__(388);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mailService__ = __webpack_require__(95);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2837,12 +2956,12 @@ var Mail = (function () {
     };
     Mail = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-mail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail.html"*/`<!--\n  Generated template for the Mail page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-toolbar>\n        <ion-segment [(ngModel)]="box">\n            <ion-segment-button value="inbox">\n                收件箱\n            </ion-segment-button>\n            <ion-segment-button value="outbox">\n                发件箱\n            </ion-segment-button>\n        </ion-segment>\n\n    </ion-toolbar>\n\n    <!--\n    <ion-buttons ion-button icon-only end (click)="doWrite()">\n        <ion-icon name="ios-add-circle-outline"></ion-icon>\n    </ion-buttons>-->\n    <div [ngSwitch]="box" class="subbox">\n        <div *ngSwitchCase="\'inbox\'">\n            <button ion-button small (click)="checkRead(\'unread\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.unread}">未读</button>\n            <button ion-button small (click)="checkRead(\'read\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.read}">已读</button>\n            <button ion-button small (click)="checkRead(\'all\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.all}">全部</button>\n        </div>\n\n        <div *ngSwitchCase="\'outbox\'">\n            <button ion-button small (click)="checkDraft()" class="button-ios-light" [ngClass]="{\'button-ios-calm\':!isDraft}">已发送</button>\n            <button ion-button small (click)="checkDraft(true)" class="button-ios-light" [ngClass]="{\'button-ios-calm\':isDraft}">草稿箱</button>\n        </div>\n    </div>\n\n</ion-header>\n\n\n<ion-content style="background: #f4f4f4;overflow: hidden;" overflow-scroll="true" class="has-header">\n    <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <div [ngSwitch]="box">\n        <ion-list *ngSwitchCase="\'inbox\'">\n            <ion-item-sliding *ngFor="let mail of inboxList " (click)="doRead(mail.Id)">\n                <ion-item>\n                    <ion-avatar item-left>\n                        <img src="assets/img/mike.png">\n                    </ion-avatar>\n                    <span style="color:#2196F3;" *ngIf="mail.Status==0">●&nbsp;</span><span>{{mail.Title}}</span>\n                    <p class="font-12">来至:{{mail.SendPerson}}&emsp;{{mail.MailDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n                </ion-item>\n                <ion-item-options side="right">\n                    <button ion-button color="primary">\n                        <ion-icon name="md-trash"></ion-icon>删除\n                    </button>\n                </ion-item-options>\n            </ion-item-sliding>\n        </ion-list>\n        <ion-list *ngSwitchCase="\'outbox\'">\n            <ion-item-sliding *ngFor="let mail of outboxList " (click)="doReadOutBox(mail.Id)">\n                <ion-item>\n                    <ion-avatar item-left>\n                        <img src="assets/img/mike.png">\n                    </ion-avatar>\n                    <span>{{mail.Title}}</span>\n                    <p class="font-12">发至:{{mail.AccessPerson}}&emsp;{{mail.MailDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n                </ion-item>\n                <ion-item-options side="right">\n                    <button ion-button color="primary">\n                        <ion-icon name="md-trash"></ion-icon>删除\n                    </button>\n                </ion-item-options>\n            </ion-item-sliding>\n        </ion-list>\n    </div>\n    <div *ngIf="isEmpty" text-center padding style="background:#ddd;font-size:.9em;">\n        <div padding>暂无消息数据！！！</div>\n        <img src="assets/img/face/face2.png" height="100">\n    </div>\n    <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail.html"*/,
+            selector: 'page-mail',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\mail\mail.html"*/`<!--\n\n  Generated template for the Mail page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-toolbar>\n\n        <ion-segment [(ngModel)]="box">\n\n            <ion-segment-button value="inbox">\n\n                收件箱\n\n            </ion-segment-button>\n\n            <ion-segment-button value="outbox">\n\n                发件箱\n\n            </ion-segment-button>\n\n        </ion-segment>\n\n\n\n    </ion-toolbar>\n\n\n\n    <!--\n\n    <ion-buttons ion-button icon-only end (click)="doWrite()">\n\n        <ion-icon name="ios-add-circle-outline"></ion-icon>\n\n    </ion-buttons>-->\n\n    <div [ngSwitch]="box" class="subbox">\n\n        <div *ngSwitchCase="\'inbox\'">\n\n            <button ion-button small (click)="checkRead(\'unread\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.unread}">未读</button>\n\n            <button ion-button small (click)="checkRead(\'read\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.read}">已读</button>\n\n            <button ion-button small (click)="checkRead(\'all\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.all}">全部</button>\n\n        </div>\n\n\n\n        <div *ngSwitchCase="\'outbox\'">\n\n            <button ion-button small (click)="checkDraft()" class="button-ios-light" [ngClass]="{\'button-ios-calm\':!isDraft}">已发送</button>\n\n            <button ion-button small (click)="checkDraft(true)" class="button-ios-light" [ngClass]="{\'button-ios-calm\':isDraft}">草稿箱</button>\n\n        </div>\n\n    </div>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content style="background: #f4f4f4;overflow: hidden;" overflow-scroll="true" class="has-header">\n\n    <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->\n\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n\n        </ion-refresher-content>\n\n    </ion-refresher>\n\n    <div [ngSwitch]="box">\n\n        <ion-list *ngSwitchCase="\'inbox\'">\n\n            <ion-item-sliding *ngFor="let mail of inboxList " (click)="doRead(mail.Id)">\n\n                <ion-item>\n\n                    <ion-avatar item-left>\n\n                        <img src="assets/img/mike.png">\n\n                    </ion-avatar>\n\n                    <span style="color:#2196F3;" *ngIf="mail.Status==0">●&nbsp;</span><span>{{mail.Title}}</span>\n\n                    <p class="font-12">来至:{{mail.SendPerson}}&emsp;{{mail.MailDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n\n                </ion-item>\n\n                <ion-item-options side="right">\n\n                    <button ion-button color="primary">\n\n                        <ion-icon name="md-trash"></ion-icon>删除\n\n                    </button>\n\n                </ion-item-options>\n\n            </ion-item-sliding>\n\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'outbox\'">\n\n            <ion-item-sliding *ngFor="let mail of outboxList " (click)="doReadOutBox(mail.Id)">\n\n                <ion-item>\n\n                    <ion-avatar item-left>\n\n                        <img src="assets/img/mike.png">\n\n                    </ion-avatar>\n\n                    <span>{{mail.Title}}</span>\n\n                    <p class="font-12">发至:{{mail.AccessPerson}}&emsp;{{mail.MailDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n\n                </ion-item>\n\n                <ion-item-options side="right">\n\n                    <button ion-button color="primary">\n\n                        <ion-icon name="md-trash"></ion-icon>删除\n\n                    </button>\n\n                </ion-item-options>\n\n            </ion-item-sliding>\n\n        </ion-list>\n\n    </div>\n\n    <div *ngIf="isEmpty" text-center padding style="background:#ddd;font-size:.9em;">\n\n        <div padding>暂无消息数据！！！</div>\n\n        <img src="assets/img/face/face2.png" height="100">\n\n    </div>\n\n    <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->\n\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n\n    </ion-infinite-scroll>\n\n    <ion-fab bottom right>\n\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n\n    </ion-fab>\n\n\n\n</ion-content>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\mail\mail.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_6__mailService__["a" /* MailService */]])
     ], Mail);
     return Mail;
@@ -2852,7 +2971,7 @@ var Mail = (function () {
 
 /***/ }),
 
-/***/ 386:
+/***/ 387:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2860,10 +2979,10 @@ var Mail = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mail_write_mail_write__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mail_write_mail_write__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_transfer__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(147);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mailService__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mailService__ = __webpack_require__(95);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2948,17 +3067,17 @@ var MailRead = (function () {
         // });
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */])
     ], MailRead.prototype, "content", void 0);
     MailRead = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-mail-read',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-read\mail-read.html"*/`<!--\n  Generated template for the MailRead page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>信息详情</ion-title>\n        <!-- <ion-buttons end>\n            <button ion-button (click)="read()">转发</button>\n        </ion-buttons> -->\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n    <div>\n        <ion-list>\n\n            <ion-item>\n                <ion-label>发送人&emsp;</ion-label>\n                <ion-input type="text" disabled="disabled" [(ngModel)]="mailDetail.fsrName" placeholder="系统管理员"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>主题&emsp;&emsp;</ion-label>\n                <ion-input type="test" disabled="disabled" [(ngModel)]="mailDetail.jsbt" placeholder="主题1"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>发送时间</ion-label>\n                <ion-input type="test" disabled="disabled" [(ngModel)]="mailDetail.fssj" placeholder="发送时间未知"></ion-input>\n            </ion-item>\n\n        </ion-list>\n    </div>\n\n\n    <div>\n        <ion-scroll scrollY="true" class="mail-content">\n            <!--<div padding-horizontal [innerHTML]="mailContent"></div>-->\n            <div class="mydiv">\n                你该交作业了<br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br>\n            </div>\n            <div class="affix" *ngIf="mailDetail.attName">\n                <ion-grid>\n                    <ion-row align-items-center>\n                        <ion-col col-6 col-lg-4>\n                            <div (click)="download(mailDetail.ggfj)">\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                <p>{{mailDetail.attName}}</p>\n                                <p color="gray">大小未知</p>\n                                <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n                            </div>\n                        </ion-col>\n                    </ion-row>\n                </ion-grid>\n            </div>\n        </ion-scroll>\n    </div>\n</ion-content>\n<ion-footer class="message-reply">\n    <div class="item">\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n        <button ion-button small color="positive">发送</button>\n    </div>\n</ion-footer>\n<!--<div class="list message-reply">\n\n    <div class="item">\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n        <button ion-button small color="positive">发送</button>\n    </div>\n\n</div>-->`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-read\mail-read.html"*/
+            selector: 'page-mail-read',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\mail\mail-read\mail-read.html"*/`<!--\n\n  Generated template for the MailRead page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>信息详情</ion-title>\n\n        <!-- <ion-buttons end>\n\n            <button ion-button (click)="read()">转发</button>\n\n        </ion-buttons> -->\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n    <div>\n\n        <ion-list>\n\n\n\n            <ion-item>\n\n                <ion-label>发送人&emsp;</ion-label>\n\n                <ion-input type="text" disabled="disabled" [(ngModel)]="mailDetail.fsrName" placeholder="系统管理员"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label>主题&emsp;&emsp;</ion-label>\n\n                <ion-input type="test" disabled="disabled" [(ngModel)]="mailDetail.jsbt" placeholder="主题1"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label>发送时间</ion-label>\n\n                <ion-input type="test" disabled="disabled" [(ngModel)]="mailDetail.fssj" placeholder="发送时间未知"></ion-input>\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n    </div>\n\n\n\n\n\n    <div>\n\n        <ion-scroll scrollY="true" class="mail-content">\n\n            <!--<div padding-horizontal [innerHTML]="mailContent"></div>-->\n\n            <div class="mydiv">\n\n                你该交作业了<br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br>\n\n            </div>\n\n            <div class="affix" *ngIf="mailDetail.attName">\n\n                <ion-grid>\n\n                    <ion-row align-items-center>\n\n                        <ion-col col-6 col-lg-4>\n\n                            <div (click)="download(mailDetail.ggfj)">\n\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n\n                                <p>{{mailDetail.attName}}</p>\n\n                                <p color="gray">大小未知</p>\n\n                                <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n\n                            </div>\n\n                        </ion-col>\n\n                    </ion-row>\n\n                </ion-grid>\n\n            </div>\n\n        </ion-scroll>\n\n    </div>\n\n</ion-content>\n\n<ion-footer class="message-reply">\n\n    <div class="item">\n\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n\n        <button ion-button small color="positive">发送</button>\n\n    </div>\n\n</ion-footer>\n\n<!--<div class="list message-reply">\n\n\n\n    <div class="item">\n\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n\n        <button ion-button small color="positive">发送</button>\n\n    </div>\n\n\n\n</div>-->`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\mail\mail-read\mail-read.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_4__ionic_native_transfer__["a" /* Transfer */],
             __WEBPACK_IMPORTED_MODULE_6__mailService__["a" /* MailService */],
             __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__["a" /* File */]])
@@ -2970,7 +3089,7 @@ var MailRead = (function () {
 
 /***/ }),
 
-/***/ 387:
+/***/ 388:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2978,7 +3097,7 @@ var MailRead = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mail_write_mail_write__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mail_write_mail_write__ = __webpack_require__(93);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3060,17 +3179,17 @@ var MailReadOutbox = (function () {
         this.nativeService.download(path, target);
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */])
     ], MailReadOutbox.prototype, "content", void 0);
     MailReadOutbox = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-mail-read-outbox',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-read-outbox\mail-read-outbox.html"*/`<!--\n  Generated template for the MailReadOutbox page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>信息详情</ion-title>\n        <ion-buttons end>\n            <button ion-button (click)="read()">转发</button>\n        </ion-buttons>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n    <div>\n\n        <ion-list>\n\n            <ion-item>\n                <ion-label style="align-self:center;">收件人&emsp;</ion-label>\n                <ion-textarea disabled="disabled" [(ngModel)]="mailDetail.fsrName" #popoverContent placeholder="收件人"></ion-textarea>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>主题&emsp;&emsp;</ion-label>\n                <ion-input type="test" disabled="disabled" [(ngModel)]="mailDetail.jsbt" placeholder="主题1"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>发送时间</ion-label>\n                <ion-input type="test" disabled="disabled" [(ngModel)]="mailDetail.fssj" placeholder="发送时间未知"></ion-input>\n            </ion-item>\n\n        </ion-list>\n    </div>\n\n\n    <div>\n        <ion-scroll scrollY="true" class="mail-content">\n            <!--<div padding-horizontal [innerHTML]="mailContent"></div>-->\n            <div class="mydiv">\n                你该交作业了<br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br>\n            </div>\n            <div class="affix" *ngIf="mailDetail.attName">\n                <ion-grid>\n                    <ion-row align-items-center>\n                        <ion-col col-6 col-lg-4>\n                            <div (click)="download(mailDetail.ggfj)">\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                <p>{{mailDetail.attName}}</p>\n                                <p color="gray">大小未知</p>\n                                <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n                            </div>\n                        </ion-col>\n                    </ion-row>\n                </ion-grid>\n            </div>\n        </ion-scroll>\n    </div>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-read-outbox\mail-read-outbox.html"*/,
+            selector: 'page-mail-read-outbox',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\mail\mail-read-outbox\mail-read-outbox.html"*/`<!--\n\n  Generated template for the MailReadOutbox page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>信息详情</ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button (click)="read()">转发</button>\n\n        </ion-buttons>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n    <div>\n\n\n\n        <ion-list>\n\n\n\n            <ion-item>\n\n                <ion-label style="align-self:center;">收件人&emsp;</ion-label>\n\n                <ion-textarea disabled="disabled" [(ngModel)]="mailDetail.fsrName" #popoverContent placeholder="收件人"></ion-textarea>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label>主题&emsp;&emsp;</ion-label>\n\n                <ion-input type="test" disabled="disabled" [(ngModel)]="mailDetail.jsbt" placeholder="主题1"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label>发送时间</ion-label>\n\n                <ion-input type="test" disabled="disabled" [(ngModel)]="mailDetail.fssj" placeholder="发送时间未知"></ion-input>\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n    </div>\n\n\n\n\n\n    <div>\n\n        <ion-scroll scrollY="true" class="mail-content">\n\n            <!--<div padding-horizontal [innerHTML]="mailContent"></div>-->\n\n            <div class="mydiv">\n\n                你该交作业了<br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br>\n\n            </div>\n\n            <div class="affix" *ngIf="mailDetail.attName">\n\n                <ion-grid>\n\n                    <ion-row align-items-center>\n\n                        <ion-col col-6 col-lg-4>\n\n                            <div (click)="download(mailDetail.ggfj)">\n\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n\n                                <p>{{mailDetail.attName}}</p>\n\n                                <p color="gray">大小未知</p>\n\n                                <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n\n                            </div>\n\n                        </ion-col>\n\n                    </ion-row>\n\n                </ion-grid>\n\n            </div>\n\n        </ion-scroll>\n\n    </div>\n\n</ion-content>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\mail\mail-read-outbox\mail-read-outbox.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */]])
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */]])
     ], MailReadOutbox);
     return MailReadOutbox;
 }());
@@ -3079,15 +3198,15 @@ var MailReadOutbox = (function () {
 
 /***/ }),
 
-/***/ 388:
+/***/ 389:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcement_detail_announcement_detail__ = __webpack_require__(389);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcement_detail_announcement_detail__ = __webpack_require__(390);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(172);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3192,10 +3311,10 @@ var AnnouncementPage = (function () {
     };
     AnnouncementPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-announcement',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement.html"*/`<!--\n  Generated template for the AnnouncementPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n      <ion-title>公告管理</ion-title>\n  </ion-navbar>\n\n  <div class="subbox">\n    <div >\n        <button ion-button small (click)="checkRead(\'enter\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.enter}">录入</button>\n        <button ion-button small (click)="checkRead(\'published\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.published}">已发布</button>\n        <button ion-button small (click)="checkRead(\'all\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.all}">全部</button>\n    </div>\n  </div>\n  <!-- <ion-searchbar color="dark" type="text" placeholder="请输入关键字" [(ngModel)]="searchKey"\n   [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event)"></ion-searchbar> -->\n</ion-header>\n\n<ion-content>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n      </ion-refresher-content>\n  </ion-refresher>\n  <ion-list inset style="margin:16px 0;">\n      <button ion-item *ngFor="let item of items" [navPush]="nxPage" [navParams]="{item:item}">\n          <span>[{{item.AnnouncementType}}]{{item.AnnouncementTitle}}</span>\n          <p>{{item.AnnouncementPublishPerson}}&emsp;{{item.AnnouncementPublishDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n      </button>\n  </ion-list>\n  <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n      <div padding>暂无公告！！！</div>\n      <img src="assets/img/face/face2.png" height="100">\n  </div>\n  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement.html"*/,
+            selector: 'page-announcement',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\announcement\announcement.html"*/`<!--\n\n  Generated template for the AnnouncementPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n      <ion-title>公告管理</ion-title>\n\n  </ion-navbar>\n\n\n\n  <div class="subbox">\n\n    <div >\n\n        <button ion-button small (click)="checkRead(\'enter\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.enter}">录入</button>\n\n        <button ion-button small (click)="checkRead(\'published\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.published}">已发布</button>\n\n        <button ion-button small (click)="checkRead(\'all\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.all}">全部</button>\n\n    </div>\n\n  </div>\n\n  <!-- <ion-searchbar color="dark" type="text" placeholder="请输入关键字" [(ngModel)]="searchKey"\n\n   [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event)"></ion-searchbar> -->\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n\n      </ion-refresher-content>\n\n  </ion-refresher>\n\n  <ion-list inset style="margin:16px 0;">\n\n      <button ion-item *ngFor="let item of items" [navPush]="nxPage" [navParams]="{item:item}">\n\n          <span>[{{item.AnnouncementType}}]{{item.AnnouncementTitle}}</span>\n\n          <p>{{item.AnnouncementPublishPerson}}&emsp;{{item.AnnouncementPublishDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n\n      </button>\n\n  </ion-list>\n\n  <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n\n      <div padding>暂无公告！！！</div>\n\n      <img src="assets/img/face/face2.png" height="100">\n\n  </div>\n\n  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n\n      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n\n  </ion-infinite-scroll>\n\n</ion-content>\n\n`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\announcement\announcement.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_3__announcementService__["a" /* AnnouncementService */]])
     ], AnnouncementPage);
     return AnnouncementPage;
@@ -3205,7 +3324,7 @@ var AnnouncementPage = (function () {
 
 /***/ }),
 
-/***/ 389:
+/***/ 390:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3213,7 +3332,7 @@ var AnnouncementPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(172);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3264,10 +3383,10 @@ var AnnouncementDetailPage = (function () {
     };
     AnnouncementDetailPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-announcement-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/`<!--\n  Generated template for the AnnouncementDetailPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  \n      <ion-navbar>\n          <ion-title>公告详情</ion-title>\n      </ion-navbar>\n  </ion-header>\n  \n  \n  <ion-content>\n      <div class="detail-header">\n          <div class="detail-title"><span color="calm">[{{item.AnnouncementType}}]</span>{{item.AnnouncementTitle}}</div>\n          <p>\n              {{item.AnnouncementPublishPerson}}\n              <span class="right">{{item.AnnouncementPublishDate|date : "yyyy年MM月dd日 hh时mm分"}}</span>\n          </p>\n      </div>\n      <div class="content">\n          <ion-scroll class="detail-content" scrollY="true" id="noticeContent">\n              <div padding>开始时间：{{item.AnnouncementStarDate|date : "yyyy年MM月dd日 hh时mm分"}}\n                  <br/>结束时间：{{item.AnnouncementEndDate|date : "yyyy年MM月dd日 hh时mm分"}}</div>\n              <div padding-horizontal [innerHTML]="myDiv"></div>\n              <div class="affix" *ngIf="attObj">\n                  <ion-grid>\n                      <ion-row align-items-center>\n                          <ion-col col-6 col-lg-4>\n                              <div (click)="download(attObj.AttNewName)">\n                                  <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                  <p>{{attObj.attName}}</p>\n                                  <p color="gray">大小未知</p>\n                                  <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n                              </div>\n                          </ion-col>\n                      </ion-row>\n                  </ion-grid>\n              </div>\n          </ion-scroll>\n      </div>\n  \n  \n  </ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/,
+            selector: 'page-announcement-detail',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/`<!--\n\n  Generated template for the AnnouncementDetailPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n      <ion-navbar>\n\n          <ion-title>公告详情</ion-title>\n\n      </ion-navbar>\n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content>\n\n      <div class="detail-header">\n\n          <div class="detail-title"><span color="calm">[{{item.AnnouncementType}}]</span>{{item.AnnouncementTitle}}</div>\n\n          <p>\n\n              {{item.AnnouncementPublishPerson}}\n\n              <span class="right">{{item.AnnouncementPublishDate|date : "yyyy年MM月dd日 hh时mm分"}}</span>\n\n          </p>\n\n      </div>\n\n      <div class="content">\n\n          <ion-scroll class="detail-content" scrollY="true" id="noticeContent">\n\n              <div padding>开始时间：{{item.AnnouncementStarDate|date : "yyyy年MM月dd日 hh时mm分"}}\n\n                  <br/>结束时间：{{item.AnnouncementEndDate|date : "yyyy年MM月dd日 hh时mm分"}}</div>\n\n              <div padding-horizontal [innerHTML]="myDiv"></div>\n\n              <div class="affix" *ngIf="attObj">\n\n                  <ion-grid>\n\n                      <ion-row align-items-center>\n\n                          <ion-col col-6 col-lg-4>\n\n                              <div (click)="download(attObj.AttNewName)">\n\n                                  <ion-icon class="affix-icon" name="md-image"></ion-icon>\n\n                                  <p>{{attObj.attName}}</p>\n\n                                  <p color="gray">大小未知</p>\n\n                                  <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n\n                              </div>\n\n                          </ion-col>\n\n                      </ion-row>\n\n                  </ion-grid>\n\n              </div>\n\n          </ion-scroll>\n\n      </div>\n\n  \n\n  \n\n  </ion-content>\n\n`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_3__announcementService__["a" /* AnnouncementService */],
             __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */]])
     ], AnnouncementDetailPage);
@@ -3278,7 +3397,7 @@ var AnnouncementDetailPage = (function () {
 
 /***/ }),
 
-/***/ 390:
+/***/ 391:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3286,14 +3405,14 @@ var AnnouncementDetailPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__account_account_edit_account_edit__ = __webpack_require__(391);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__account_account_edit_account_edit__ = __webpack_require__(392);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__account_account_passwordedit_account_passwordedit__ = __webpack_require__(394);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__account_aboutus_aboutus__ = __webpack_require__(395);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__model_UserInfo__ = __webpack_require__(392);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__model_UserInfo__ = __webpack_require__(393);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_GlobalData__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__login_login__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__login_login__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_NativeService__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_FileService__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_FileService__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_Constants__ = __webpack_require__(51);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3430,14 +3549,14 @@ var Account = (function () {
     };
     Account = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-account',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account.html"*/`<!--\n  Generated template for the Account page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>个人中心</ion-title>\n        <ion-buttons end *ngIf="isChange">\n            <button ion-button icon-only (click)="save()">\n                保存\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n    <div class="top">\n        <div class="top-bg"></div>\n        <div>\n            <img (click)="changePhoto()" [src]="userInfo.photo" alt="photo" height="60" />\n            <h5><span class="positive">♂</span>&nbsp;<span class="positive">{{userInfo.Name}}</span></h5>\n            <div class="row row-no-padding">\n                <div class="col col-50" style="border-right: 1px solid;">\n                    职位：{{userInfo.Duty || "无"}}\n                </div>\n                <div class="col col-50">\n                    入职时间：{{(userInfo.InDate|date:"yyyy-MM-dd") || "未设置"}}\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class="imformation">\n        <ion-scroll scrollY="true" class="tab-content">\n            <ion-list>\n                <ion-item>\n                    <ion-icon name=\'md-map\' color="positive" item-left></ion-icon>\n                    公司\n                    <ion-note item-right>{{userInfo.Company}}</ion-note>\n                </ion-item>\n                <ion-item>\n                    <ion-icon name=\'ios-analytics\' color="energized" item-left></ion-icon>\n                    部门\n                    <ion-note item-right>{{userInfo.Dept || "无"}}</ion-note>\n                </ion-item>\n                <ion-item>\n                    <ion-icon name=\'ios-phone-portrait\' color="calm" item-left></ion-icon>\n                    手机号\n                    <ion-note item-right>{{userInfo.Mobile || "无"}}</ion-note>\n                </ion-item>\n                <!-- <ion-item>\n                    <ion-icon name=\'md-mail\' color="calm" item-left></ion-icon>\n                    邮箱\n                    <ion-note item-right>{{userInfo.ui_mail}}</ion-note>\n                </ion-item> -->\n            </ion-list>\n\n            <ion-list>\n                <ion-item (click)="getAboutus()">\n                    <ion-icon name=\'ios-at-outline\' color="assertive" item-left></ion-icon>\n                    关于我们\n                    <ion-icon name=\'ios-arrow-forward\' item-right></ion-icon>\n                </ion-item>\n            </ion-list>\n\n            <ion-list>\n                <ion-item (click)="pwdEdit()">\n                    <ion-icon name=\'ios-unlock\' color="assertive" item-left></ion-icon>\n                    修改密码\n                    <ion-icon name=\'ios-arrow-forward\' item-right></ion-icon>\n                </ion-item>\n                <ion-item (click)="edit()">\n                    <ion-icon name=\'md-create\' color="balanced" item-left></ion-icon>\n                    修改资料\n                    <ion-icon name=\'ios-arrow-forward\' item-right></ion-icon>\n                </ion-item>\n            </ion-list>\n\n\n\n            <div class="padding">\n                <button ion-button block color="assertive">退出登录</button>\n            </div>\n\n        </ion-scroll>\n    </div>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account.html"*/,
+            selector: 'page-account',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\account\account.html"*/`<!--\n\n  Generated template for the Account page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>个人中心</ion-title>\n\n        <ion-buttons end *ngIf="isChange">\n\n            <button ion-button icon-only (click)="save()">\n\n                保存\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n    <div class="top">\n\n        <div class="top-bg"></div>\n\n        <div>\n\n            <img (click)="changePhoto()" [src]="userInfo.photo" alt="photo" height="60" />\n\n            <h5><span class="positive">♂</span>&nbsp;<span class="positive">{{userInfo.Name}}</span></h5>\n\n            <div class="row row-no-padding">\n\n                <div class="col col-50" style="border-right: 1px solid;">\n\n                    职位：{{userInfo.Duty || "无"}}\n\n                </div>\n\n                <div class="col col-50">\n\n                    入职时间：{{(userInfo.InDate|date:"yyyy-MM-dd") || "未设置"}}\n\n                </div>\n\n            </div>\n\n        </div>\n\n    </div>\n\n    <div class="imformation">\n\n        <ion-scroll scrollY="true" class="tab-content">\n\n            <ion-list>\n\n                <ion-item>\n\n                    <ion-icon name=\'md-map\' color="positive" item-left></ion-icon>\n\n                    公司\n\n                    <ion-note item-right>{{userInfo.Company}}</ion-note>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-icon name=\'ios-analytics\' color="energized" item-left></ion-icon>\n\n                    部门\n\n                    <ion-note item-right>{{userInfo.Dept || "无"}}</ion-note>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-icon name=\'ios-phone-portrait\' color="calm" item-left></ion-icon>\n\n                    手机号\n\n                    <ion-note item-right>{{userInfo.Mobile || "无"}}</ion-note>\n\n                </ion-item>\n\n                <!-- <ion-item>\n\n                    <ion-icon name=\'md-mail\' color="calm" item-left></ion-icon>\n\n                    邮箱\n\n                    <ion-note item-right>{{userInfo.ui_mail}}</ion-note>\n\n                </ion-item> -->\n\n            </ion-list>\n\n\n\n            <ion-list>\n\n                <ion-item (click)="getAboutus()">\n\n                    <ion-icon name=\'ios-at-outline\' color="assertive" item-left></ion-icon>\n\n                    关于我们\n\n                    <ion-icon name=\'ios-arrow-forward\' item-right></ion-icon>\n\n                </ion-item>\n\n            </ion-list>\n\n\n\n            <ion-list>\n\n                <ion-item (click)="pwdEdit()">\n\n                    <ion-icon name=\'ios-unlock\' color="assertive" item-left></ion-icon>\n\n                    修改密码\n\n                    <ion-icon name=\'ios-arrow-forward\' item-right></ion-icon>\n\n                </ion-item>\n\n                <ion-item (click)="edit()">\n\n                    <ion-icon name=\'md-create\' color="balanced" item-left></ion-icon>\n\n                    修改资料\n\n                    <ion-icon name=\'ios-arrow-forward\' item-right></ion-icon>\n\n                </ion-item>\n\n            </ion-list>\n\n\n\n\n\n\n\n            <div class="padding">\n\n                <button ion-button block color="assertive">退出登录</button>\n\n            </div>\n\n\n\n        </ion-scroll>\n\n    </div>\n\n</ion-content>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\account\account.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
             __WEBPACK_IMPORTED_MODULE_7__providers_GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Events */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Events */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */],
             __WEBPACK_IMPORTED_MODULE_10__providers_FileService__["a" /* FileService */],
             __WEBPACK_IMPORTED_MODULE_9__providers_NativeService__["a" /* NativeService */]])
@@ -3449,17 +3568,17 @@ var Account = (function () {
 
 /***/ }),
 
-/***/ 391:
+/***/ 392:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountEdit; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_UserInfo__ = __webpack_require__(392);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_UserInfo__ = __webpack_require__(393);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__login_login__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__login_login__ = __webpack_require__(48);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3559,13 +3678,13 @@ var AccountEdit = (function () {
     };
     AccountEdit = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-account-edit',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-edit\account-edit.html"*/`<!--\n  Generated template for the AccountEdit page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>修改资料</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="editForm" (ngSubmit)="edit(editForm.value)">\n        <ion-list>\n            <ion-item>\n                <ion-label stacked>编码</ion-label>\n                <ion-input type="text" [(ngModel)]="userInfo.Uid" [ngModelOptions]="{standalone: true}" placeholder="请输入编码" disabled></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label stacked>姓名</ion-label>\n                <ion-input type="text" [(ngModel)]="userInfo.Name" [ngModelOptions]="{standalone: true}" placeholder="请输入姓名" disabled></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label stacked>公司</ion-label>\n                <ion-input type="text" [(ngModel)]="userInfo.Company" [ngModelOptions]="{standalone: true}" placeholder="公司名称" disabled></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label stacked>部门</ion-label>\n                <ion-input type="text" [(ngModel)]="userInfo.Dept" [ngModelOptions]="{standalone: true}" placeholder="部门名称" disabled></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label stacked>职位</ion-label>\n                <ion-input type="text" [(ngModel)]="userInfo.Duty" [ngModelOptions]="{standalone: true}" placeholder="职位" disabled></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label stacked>入职时间</ion-label>\n                <ion-input type="text" [(ngModel)]="userInfo.InDate" formControlName="InDate" placeholder="入职时间" disabled></ion-input>\n            </ion-item>\n            <ion-item (click)="checkSex()">\n                <ion-label stacked>性别</ion-label>\n                <ion-input type="text" [(ngModel)]="userInfo.Sex" formControlName="Sex" placeholder="性别"></ion-input>\n            </ion-item>\n            <ion-item (click)="checkBirth">\n                <ion-label stacked>出生日期</ion-label>\n                <ion-datetime [(ngModel)]="userInfo.BirthDate" cancelText="取消" doneText="确定" formControlName="BirthDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n            <ion-item>\n                <ion-label stacked>移动电话</ion-label>\n                <ion-input type="text" [(ngModel)]="userInfo.Mobile" formControlName="Mobile" placeholder="移动电话"></ion-input>\n            </ion-item>\n            <div *ngIf="!editForm.controls.Mobile.valid && editForm.controls.Mobile.touched" class="validation-failed">请输入合法的电话号码</div>\n\n            <ion-item>\n                <ion-label stacked>电子邮箱</ion-label>\n                <ion-input type="text" [(ngModel)]="userInfo.Mail" formControlName="Mail" placeholder="电子邮箱"></ion-input>\n            </ion-item>\n            <div *ngIf="!editForm.controls.Mail.valid && editForm.controls.Mail.touched" class="validation-failed">请输入正确的电子邮箱</div>\n\n            <ion-item>\n                <ion-label stacked>办公电话</ion-label>\n                <ion-input type="text" [(ngModel)]="userInfo.WorkPhone" formControlName="WorkPhone" placeholder="办公电话"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label stacked>内线电话</ion-label>\n                <ion-input type="text" [(ngModel)]="userInfo.InlinePhone" formControlName="InlinePhone" placeholder="内线电话"></ion-input>\n            </ion-item>\n\n        </ion-list>\n        <div padding text-center>\n            <button ion-button type="submit" color="danger" [disabled]="!editForm.valid">保存</button>\n            <button ion-button clear small navPop>取消修改</button>\n        </div>\n\n\n    </form>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-edit\account-edit.html"*/,
+            selector: 'page-account-edit',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\account\account-edit\account-edit.html"*/`<!--\n\n  Generated template for the AccountEdit page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>修改资料</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <form [formGroup]="editForm" (ngSubmit)="edit(editForm.value)">\n\n        <ion-list>\n\n            <ion-item>\n\n                <ion-label stacked>编码</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Uid" [ngModelOptions]="{standalone: true}" placeholder="请输入编码" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>姓名</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Name" [ngModelOptions]="{standalone: true}" placeholder="请输入姓名" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>公司</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Company" [ngModelOptions]="{standalone: true}" placeholder="公司名称" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>部门</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Dept" [ngModelOptions]="{standalone: true}" placeholder="部门名称" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>职位</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Duty" [ngModelOptions]="{standalone: true}" placeholder="职位" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>入职时间</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.InDate" formControlName="InDate" placeholder="入职时间" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item (click)="checkSex()">\n\n                <ion-label stacked>性别</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Sex" formControlName="Sex" placeholder="性别"></ion-input>\n\n            </ion-item>\n\n            <ion-item (click)="checkBirth">\n\n                <ion-label stacked>出生日期</ion-label>\n\n                <ion-datetime [(ngModel)]="userInfo.BirthDate" cancelText="取消" doneText="确定" formControlName="BirthDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>移动电话</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Mobile" formControlName="Mobile" placeholder="移动电话"></ion-input>\n\n            </ion-item>\n\n            <div *ngIf="!editForm.controls.Mobile.valid && editForm.controls.Mobile.touched" class="validation-failed">请输入合法的电话号码</div>\n\n\n\n            <ion-item>\n\n                <ion-label stacked>电子邮箱</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Mail" formControlName="Mail" placeholder="电子邮箱"></ion-input>\n\n            </ion-item>\n\n            <div *ngIf="!editForm.controls.Mail.valid && editForm.controls.Mail.touched" class="validation-failed">请输入正确的电子邮箱</div>\n\n\n\n            <ion-item>\n\n                <ion-label stacked>办公电话</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.WorkPhone" formControlName="WorkPhone" placeholder="办公电话"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label stacked>内线电话</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.InlinePhone" formControlName="InlinePhone" placeholder="内线电话"></ion-input>\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n        <div padding text-center>\n\n            <button ion-button type="submit" color="danger" [disabled]="!editForm.valid">保存</button>\n\n            <button ion-button clear small navPop>取消修改</button>\n\n        </div>\n\n\n\n\n\n    </form>\n\n</ion-content>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\account\account-edit\account-edit.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */],
             __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]])
     ], AccountEdit);
     return AccountEdit;
@@ -3575,7 +3694,7 @@ var AccountEdit = (function () {
 
 /***/ }),
 
-/***/ 392:
+/***/ 393:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3590,61 +3709,6 @@ var UserInfo = (function () {
 
 /***/ }),
 
-/***/ 393:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FindPassword; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login__ = __webpack_require__(49);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var FindPassword = (function () {
-    function FindPassword(navCtrl, viewCtrl, formBuilder) {
-        this.navCtrl = navCtrl;
-        this.viewCtrl = viewCtrl;
-        this.formBuilder = formBuilder;
-        this.findPasswordForm = this.formBuilder.group({
-            phone: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(11), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].pattern('1[0-9]{10}')]],
-            verificationCode: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(6), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].pattern('[0-9]{6}')]],
-            newPassword: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(6)]]
-        });
-    }
-    ;
-    FindPassword.prototype.confirm = function () {
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__login__["a" /* LoginPage */]);
-    };
-    FindPassword.prototype.dismiss = function () {
-        this.viewCtrl.dismiss();
-    };
-    FindPassword = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-find-password',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\find-password\find-password.html"*/`<!--\n  Generated template for the FindPassword page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            找回密码\n        </ion-title>\n        <ion-buttons>\n            <button ion-button (click)="dismiss()">关闭</button>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <form [formGroup]="findPasswordForm" (ngSubmit)="confirm()">\n        <ion-list>\n            <ion-item>\n                <ion-label>手机号</ion-label>\n                <ion-input type="number" formControlName="phone"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.phone.valid&& findPasswordForm.controls.phone.touched" color="danger">请输入手机号码</span>\n            <ion-item>\n                <ion-label>验证码</ion-label>\n                <ion-input type="number" formControlName="verificationCode"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.verificationCode.valid&& findPasswordForm.controls.verificationCode.touched" color="danger">请输入验证码</span>\n            <ion-item>\n                <ion-label>新密码</ion-label>\n                <ion-input type="password" formControlName="newPassword"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.newPassword.valid&& findPasswordForm.controls.newPassword.touched" color="danger">请输入新密码</span>\n        </ion-list>\n        <div padding-horizontal>\n            <button ion-button block type="submit" [disabled]="!findPasswordForm.valid">确　认</button>\n        </div>\n        <button class="verification" ion-button small color="secondary" *ngIf="findPasswordForm.controls.phone.valid">获取验证码</button>\n    </form>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\find-password\find-password.html"*/
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
-    ], FindPassword);
-    return FindPassword;
-}());
-
-//# sourceMappingURL=find-password.js.map
-
-/***/ }),
-
 /***/ 394:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3653,7 +3717,7 @@ var FindPassword = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__ = __webpack_require__(24);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3712,11 +3776,11 @@ var AccountPasswordedit = (function () {
     };
     AccountPasswordedit = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-account-passwordedit',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-passwordedit\account-passwordedit.html"*/`<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            修改\n        </ion-title>\n        <ion-buttons>\n            <button ion-button (click)="dismiss()">关闭</button>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <form [formGroup]="editPasswordForm" (ngSubmit)="confirm()">\n        <ion-list>\n            <ion-item>\n                <ion-label>&emsp;原密码：</ion-label>\n                <ion-input placeholder="请输入原密码" [(ngModel)]="oldPwd" type="password" formControlName="oldPwd"></ion-input>\n            </ion-item>\n            <div padding-left *ngIf="!editPasswordForm.controls.oldPwd.valid&& editPasswordForm.controls.oldPwd.touched"  class="validation-failed">请输入原密码</div>\n            <ion-item>\n                <ion-label>&emsp;新密码：</ion-label>\n                <ion-input placeholder="请输入新密码" [(ngModel)]="newPwd"  type="password" formControlName="newPwd"></ion-input>\n            </ion-item>\n            <div padding-left *ngIf="!editPasswordForm.controls.newPwd.valid&& editPasswordForm.controls.newPwd.touched"  class="validation-failed">请输入新密码</div>\n            <ion-item>\n                <ion-label>确认密码：</ion-label>\n                <ion-input placeholder="请再次输入新密码" type="password" formControlName="confirmPassword"></ion-input>\n            </ion-item>\n            <div padding-left *ngIf="!editPasswordForm.controls.confirmPassword.valid&& editPasswordForm.controls.confirmPassword.touched"  class="validation-failed">请确认新密码</div>\n        </ion-list>\n        <div padding-horizontal>\n            <button color="danger" ion-button block type="submit" [disabled]="!editPasswordForm.valid">确　认</button>\n        </div>\n    </form>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-passwordedit\account-passwordedit.html"*/,
+            selector: 'page-account-passwordedit',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\account\account-passwordedit\account-passwordedit.html"*/`<ion-header>\n\n    <ion-toolbar>\n\n        <ion-title>\n\n            修改\n\n        </ion-title>\n\n        <ion-buttons>\n\n            <button ion-button (click)="dismiss()">关闭</button>\n\n        </ion-buttons>\n\n    </ion-toolbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n    <form [formGroup]="editPasswordForm" (ngSubmit)="confirm()">\n\n        <ion-list>\n\n            <ion-item>\n\n                <ion-label>&emsp;原密码：</ion-label>\n\n                <ion-input placeholder="请输入原密码" [(ngModel)]="oldPwd" type="password" formControlName="oldPwd"></ion-input>\n\n            </ion-item>\n\n            <div padding-left *ngIf="!editPasswordForm.controls.oldPwd.valid&& editPasswordForm.controls.oldPwd.touched"  class="validation-failed">请输入原密码</div>\n\n            <ion-item>\n\n                <ion-label>&emsp;新密码：</ion-label>\n\n                <ion-input placeholder="请输入新密码" [(ngModel)]="newPwd"  type="password" formControlName="newPwd"></ion-input>\n\n            </ion-item>\n\n            <div padding-left *ngIf="!editPasswordForm.controls.newPwd.valid&& editPasswordForm.controls.newPwd.touched"  class="validation-failed">请输入新密码</div>\n\n            <ion-item>\n\n                <ion-label>确认密码：</ion-label>\n\n                <ion-input placeholder="请再次输入新密码" type="password" formControlName="confirmPassword"></ion-input>\n\n            </ion-item>\n\n            <div padding-left *ngIf="!editPasswordForm.controls.confirmPassword.valid&& editPasswordForm.controls.confirmPassword.touched"  class="validation-failed">请确认新密码</div>\n\n        </ion-list>\n\n        <div padding-horizontal>\n\n            <button color="danger" ion-button block type="submit" [disabled]="!editPasswordForm.valid">确　认</button>\n\n        </div>\n\n    </form>\n\n</ion-content>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\account\account-passwordedit\account-passwordedit.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__["a" /* HttpService */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
     ], AccountPasswordedit);
@@ -3791,10 +3855,10 @@ var AboutusPage = (function () {
     };
     AboutusPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-aboutus',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\aboutus\aboutus.html"*/`<!--\n  Generated template for the AboutusPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>关于我们</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding text-center>\n    <img [src]="data.logo" alt="公司logo" />\n    <h2>{{data.appName}}</h2>\n    <p>{{data.version}}</p>\n    <button ion-button (click)="detectionUpgrade()">{{updateStr}}</button>\n\n</ion-content>\n<ion-footer text-center>{{data.copyright}}&copy;{{period}}</ion-footer>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\aboutus\aboutus.html"*/,
+            selector: 'page-aboutus',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\account\aboutus\aboutus.html"*/`<!--\n\n  Generated template for the AboutusPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>关于我们</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding text-center>\n\n    <img [src]="data.logo" alt="公司logo" />\n\n    <h2>{{data.appName}}</h2>\n\n    <p>{{data.version}}</p>\n\n    <button ion-button (click)="detectionUpgrade()">{{updateStr}}</button>\n\n\n\n</ion-content>\n\n<ion-footer text-center>{{data.copyright}}&copy;{{period}}</ion-footer>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\account\aboutus\aboutus.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */],
             __WEBPACK_IMPORTED_MODULE_3__providers_HttpService__["a" /* HttpService */]])
     ], AboutusPage);
@@ -3860,7 +3924,7 @@ var HttpInterceptHandle = (function () {
     }
     HttpInterceptHandle = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["f" /* Events */], __WEBPACK_IMPORTED_MODULE_2__NativeService__["a" /* NativeService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["g" /* Events */], __WEBPACK_IMPORTED_MODULE_2__NativeService__["a" /* NativeService */]])
     ], HttpInterceptHandle);
     return HttpInterceptHandle;
 }());
@@ -3894,7 +3958,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(442);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_tabs_tabs__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_tabs_tabs__ = __webpack_require__(166);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home_module__ = __webpack_require__(726);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_mail_mail_module__ = __webpack_require__(731);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_mail_mail_read_mail_read_module__ = __webpack_require__(733);
@@ -3919,8 +3983,8 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__ionic_native_splash_screen__ = __webpack_require__(274);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__ionic_native_app_version__ = __webpack_require__(275);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__ionic_native_toast__ = __webpack_require__(277);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__ionic_native_file__ = __webpack_require__(147);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__ionic_native_file_chooser__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__ionic_native_file__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__ionic_native_file_chooser__ = __webpack_require__(147);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__ionic_native_transfer__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__ionic_native_in_app_browser__ = __webpack_require__(278);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__ionic_native_network__ = __webpack_require__(280);
@@ -3930,15 +3994,16 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__providers_NativeService__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__providers_HttpIntercept__ = __webpack_require__(753);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__providers_HttpService__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__providers_FileService__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__providers_FileService__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__providers_Helper__ = __webpack_require__(754);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__providers_Utils__ = __webpack_require__(166);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__angular_http__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__providers_Utils__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__angular_http__ = __webpack_require__(149);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__providers_HttpInterceptHandle__ = __webpack_require__(396);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__providers_GlobalData__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__providers_Logger__ = __webpack_require__(377);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__itransitions__ = __webpack_require__(755);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__providers_Constants__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__services_backButtonService__ = __webpack_require__(757);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__providers_Logger__ = __webpack_require__(374);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__itransitions__ = __webpack_require__(755);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__providers_Constants__ = __webpack_require__(51);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3997,13 +4062,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 // 安装依赖:cnpm i fundebug-javascript --save
 // https://docs.fundebug.com/notifier/javascript/framework/ionic2.html
 
 var fundebug = __webpack_require__(756);
-fundebug.apikey = __WEBPACK_IMPORTED_MODULE_49__providers_Constants__["f" /* FUNDEBUG_API_KEY */];
-fundebug.releasestage = __WEBPACK_IMPORTED_MODULE_49__providers_Constants__["g" /* IS_DEBUG */] ? 'development' : 'production'; // 应用开发阶段，development:开发;production:生产
-fundebug.silent = !__WEBPACK_IMPORTED_MODULE_49__providers_Constants__["d" /* ENABLE_FUNDEBUG */]; // 如果暂时不需要使用Fundebug，将silent属性设为true
+fundebug.apikey = __WEBPACK_IMPORTED_MODULE_50__providers_Constants__["f" /* FUNDEBUG_API_KEY */];
+fundebug.releasestage = __WEBPACK_IMPORTED_MODULE_50__providers_Constants__["g" /* IS_DEBUG */] ? 'development' : 'production'; // 应用开发阶段，development:开发;production:生产
+fundebug.silent = !__WEBPACK_IMPORTED_MODULE_50__providers_Constants__["d" /* ENABLE_FUNDEBUG */]; // 如果暂时不需要使用Fundebug，将silent属性设为true
 var FunDebugErrorHandler = (function () {
     function FunDebugErrorHandler() {
     }
@@ -4020,10 +4086,10 @@ var AppModule = (function () {
         this.setCustomTransitions();
     }
     AppModule.prototype.setCustomTransitions = function () {
-        this.config.setTransition('modal-from-right-enter', __WEBPACK_IMPORTED_MODULE_48__itransitions__["a" /* ModalFromRightEnter */]);
-        this.config.setTransition('modal-from-right-leave', __WEBPACK_IMPORTED_MODULE_48__itransitions__["b" /* ModalFromRightLeave */]);
-        this.config.setTransition('modal-scale-enter', __WEBPACK_IMPORTED_MODULE_48__itransitions__["c" /* ModalScaleEnter */]);
-        this.config.setTransition('modal-scale-leave', __WEBPACK_IMPORTED_MODULE_48__itransitions__["d" /* ModalScaleLeave */]);
+        this.config.setTransition('modal-from-right-enter', __WEBPACK_IMPORTED_MODULE_49__itransitions__["a" /* ModalFromRightEnter */]);
+        this.config.setTransition('modal-from-right-leave', __WEBPACK_IMPORTED_MODULE_49__itransitions__["b" /* ModalFromRightLeave */]);
+        this.config.setTransition('modal-scale-enter', __WEBPACK_IMPORTED_MODULE_49__itransitions__["c" /* ModalScaleEnter */]);
+        this.config.setTransition('modal-scale-leave', __WEBPACK_IMPORTED_MODULE_49__itransitions__["d" /* ModalScaleLeave */]);
     };
     AppModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
@@ -4034,7 +4100,7 @@ var AppModule = (function () {
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_44__angular_http__["d" /* HttpModule */],
-                __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */], {
+                __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */], {
                     backButtonText: '',
                     iconMode: 'ios',
                     mode: 'ios',
@@ -4091,7 +4157,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_24__pages_sms_sms_write_sms_write_module__["a" /* SmsWritePageModule */],
                 __WEBPACK_IMPORTED_MODULE_25__pages_contacts_popover_contacts_popover_module__["a" /* ContactsPopoverPageModule */]
             ],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* IonicApp */]],
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* IonicApp */]],
             entryComponents: [
                 __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */],
                 __WEBPACK_IMPORTED_MODULE_5__pages_tabs_tabs__["a" /* TabsPage */]
@@ -4109,7 +4175,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_35__ionic_native_camera__["a" /* Camera */],
                 __WEBPACK_IMPORTED_MODULE_36__ionic_native_image_picker__["a" /* ImagePicker */],
                 __WEBPACK_IMPORTED_MODULE_37__ionic_native_photo_viewer__["a" /* PhotoViewer */],
-                __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* Content */],
+                __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* Content */],
                 { provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ErrorHandler */], useClass: FunDebugErrorHandler },
                 __WEBPACK_IMPORTED_MODULE_38__providers_NativeService__["a" /* NativeService */],
                 __WEBPACK_IMPORTED_MODULE_39__providers_HttpIntercept__["a" /* HttpIntercept */],
@@ -4119,13 +4185,15 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_43__providers_Utils__["a" /* Utils */],
                 __WEBPACK_IMPORTED_MODULE_45__providers_HttpInterceptHandle__["a" /* HttpInterceptHandle */],
                 __WEBPACK_IMPORTED_MODULE_46__providers_GlobalData__["a" /* GlobalData */],
-                __WEBPACK_IMPORTED_MODULE_47__providers_Logger__["a" /* Logger */]
+                __WEBPACK_IMPORTED_MODULE_48__providers_Logger__["a" /* Logger */],
+                __WEBPACK_IMPORTED_MODULE_47__services_backButtonService__["a" /* BackButtonService */]
                 // ,HTTP
             ]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* Config */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* Config */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* Config */]) === "function" && _a || Object])
     ], AppModule);
     return AppModule;
+    var _a;
 }());
 
 //# sourceMappingURL=app.module.js.map
@@ -4144,13 +4212,13 @@ var AppModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(274);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_NativeService__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_welcome_welcome__ = __webpack_require__(282);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__ = __webpack_require__(166);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_GlobalData__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_login_LoginService__ = __webpack_require__(172);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_login_login__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_home_backlog_backlog__ = __webpack_require__(167);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_home_contacts_contacts__ = __webpack_require__(169);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__providers_Utils__ = __webpack_require__(166);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_login_LoginService__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_login_login__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_home_backlog_backlog__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_home_contacts_contacts__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__providers_Utils__ = __webpack_require__(165);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4205,11 +4273,11 @@ var MyApp = (function () {
         this.backButtonPressed = false;
         platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.   
+            // Here you can do any higher level native things you might need.
             _this.storage.get('firstIn').then(function (result) {
                 // this.nativeService.showToast("不是第一次进入");
                 if (result) {
-                    _this.rootPage = __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__["a" /* TabsPage */];
+                    // this.rootPage = TabsPage;
                     _this.storage.get('loginInfo').then(function (loginInfo) {
                         if (loginInfo) {
                             _this.loginService.login(loginInfo).subscribe(function (resJson) {
@@ -4224,6 +4292,7 @@ var MyApp = (function () {
                                     modal.present();
                                     modal.onDidDismiss(function (data) {
                                         data && console.log(data);
+                                        _this.nav.setRoot(__WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__["a" /* TabsPage */], { tabIndex: 0 });
                                     });
                                 }
                             });
@@ -4233,13 +4302,20 @@ var MyApp = (function () {
                             modal.present();
                             modal.onDidDismiss(function (data) {
                                 data && console.log(data);
+                                _this.nav.setRoot(__WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__["a" /* TabsPage */], { tabIndex: 0 });
                             });
                         }
                     });
                 }
                 else {
                     _this.storage.set('firstIn', true);
-                    _this.rootPage = __WEBPACK_IMPORTED_MODULE_6__pages_welcome_welcome__["a" /* Welcome */];
+                    var modal = _this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_6__pages_welcome_welcome__["a" /* Welcome */]);
+                    modal.present();
+                    modal.onDidDismiss(function (data) {
+                        data && console.log(data);
+                        _this.nav.setRoot(__WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__["a" /* TabsPage */], { tabIndex: 0 });
+                    });
+                    // this.rootPage = Welcome;
                 }
             });
             statusBar.styleDefault();
@@ -4294,41 +4370,32 @@ var MyApp = (function () {
     };
     MyApp.prototype.registerBackButtonAction = function () {
         var _this = this;
-        // if (!this.nativeService.isAndroid()) {
-        //     return;
-        // }
+        if (!this.nativeService.isAndroid()) {
+            return;
+        }
         this.platform.registerBackButtonAction(function () {
             if (_this.keyboard.isOpen()) {
                 _this.keyboard.close();
                 return;
             }
             // 如果想点击返回按钮隐藏toast或loading或Overlay就把下面加上
-            // this.ionicApp._toastPortal.getActive() || this.ionicApp._loadingPortal.getActive() || 
-            // this.ionicApp._overlayPortal.getActive();
-            var activePortal = _this.ionicApp._modalPortal.getActive();
+            // this.ionicApp._toastPortal.getActive() ||
+            //   this.ionicApp._loadingPortal.getActive()|| this.ionicApp._overlayPortal.getActive()
+            var activePortal = _this.ionicApp._modalPortal.getActive()
+                || _this.ionicApp._toastPortal.getActive() ||
+                _this.ionicApp._overlayPortal.getActive();
             if (activePortal) {
-                activePortal.dismiss().catch(function () { });
-                activePortal.onDidDismiss(function () { });
+                activePortal.dismiss();
                 return;
             }
             var activeVC = _this.nav.getActive();
-            var page = activeVC.instance;
-            // 当前页面非tab栏
-            if (!(page instanceof __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__["a" /* TabsPage */])) {
-                if (!_this.nav.canGoBack()) {
-                    return AppMinimize.minimize();
-                }
-                return _this.nav.pop();
-            }
-            var tabs = page.tabs;
+            var tabs = activeVC.instance.tabs;
             var activeNav = tabs.getSelected();
-            if (!activeNav.canGoBack()) {
-                // 当前页面为tab栏，退出APP
-                return AppMinimize.minimize();
-            }
-            // 当前页面为tab栏的子页面，正常返回
-            return activeNav.pop();
-        }, 101);
+            return activeNav.canGoBack() ?
+                activeNav.pop() :
+                // this.nativeService.minimize(); //
+                _this.showExit();
+        }, 1);
     };
     // 双击退出提示框
     MyApp.prototype.showExit = function () {
@@ -4345,34 +4412,23 @@ var MyApp = (function () {
         }
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["n" /* Nav */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["n" /* Nav */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* Nav */]),
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* Nav */]) === "function" && _a || Object)
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\app\app.html"*/`<ion-menu [content]="content">\n\n    <ion-header class="menu-header" padding-bottom>\n        <ion-row text-center>\n            <ion-col>\n                <a (click)="goTo(\'edit\')">\n                    <img [src]="photo" title="头像" />\n                </a>\n                <span>系统管理员</span>\n            </ion-col>\n        </ion-row>\n    </ion-header>\n\n    <ion-content>\n        <ion-list>\n            <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">\n                <ion-icon color="positive" item-left [name]="p.icon"></ion-icon>\n                {{p.title}}\n            </button>\n        </ion-list>\n        <ion-row>\n            <ion-col col-6>\n                <button (click)="goTo()" ion-button icon-left clear>\n                    <ion-icon name=\'contacts\'></ion-icon>注销登录\n                </button>\n            </ion-col>\n            <ion-col col-6>\n                <button (click)="goTo(\'edit\')" ion-button icon-left clear>\n                    <ion-icon name=\'ios-cog\'></ion-icon>设置\n                </button>\n            </ion-col>\n        </ion-row>\n    </ion-content>\n\n</ion-menu>\n<ion-nav #content [root]="rootPage"></ion-nav>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\app\app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\app\app.html"*/`<ion-menu [content]="content">\n\n\n\n    <ion-header class="menu-header" padding-bottom>\n\n        <ion-row text-center>\n\n            <ion-col>\n\n                <a (click)="goTo(\'edit\')">\n\n                    <img [src]="photo" title="头像" />\n\n                </a>\n\n                <span>系统管理员</span>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-header>\n\n\n\n    <ion-content>\n\n        <ion-list>\n\n            <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">\n\n                <ion-icon color="positive" item-left [name]="p.icon"></ion-icon>\n\n                {{p.title}}\n\n            </button>\n\n        </ion-list>\n\n        <ion-row>\n\n            <ion-col col-6>\n\n                <button (click)="goTo()" ion-button icon-left clear>\n\n                    <ion-icon name=\'contacts\'></ion-icon>注销登录\n\n                </button>\n\n            </ion-col>\n\n            <ion-col col-6>\n\n                <button (click)="goTo(\'edit\')" ion-button icon-left clear>\n\n                    <ion-icon name=\'ios-cog\'></ion-icon>设置\n\n                </button>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-content>\n\n\n\n</ion-menu>\n\n<ion-nav #content [root]="rootPage"></ion-nav>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\app\app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* MenuController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["r" /* Platform */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__["a" /* StatusBar */],
-            __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* Keyboard */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* IonicApp */],
-            __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */],
-            __WEBPACK_IMPORTED_MODULE_8__providers_GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["u" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* Events */],
-            __WEBPACK_IMPORTED_MODULE_9__pages_login_LoginService__["a" /* LoginService */],
-            __WEBPACK_IMPORTED_MODULE_5__providers_NativeService__["a" /* NativeService */]])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* MenuController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* MenuController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["s" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["s" /* Platform */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* Keyboard */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* Keyboard */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* IonicApp */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* IonicApp */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_8__providers_GlobalData__["a" /* GlobalData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__providers_GlobalData__["a" /* GlobalData */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["v" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["v" /* ToastController */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["n" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["n" /* ModalController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* Events */]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_9__pages_login_LoginService__["a" /* LoginService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__pages_login_LoginService__["a" /* LoginService */]) === "function" && _o || Object, typeof (_p = typeof __WEBPACK_IMPORTED_MODULE_5__providers_NativeService__["a" /* NativeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_NativeService__["a" /* NativeService */]) === "function" && _p || Object])
     ], MyApp);
     return MyApp;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
 }());
 
 //# sourceMappingURL=app.component.js.map
 
 /***/ }),
 
-/***/ 49:
+/***/ 48:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4381,8 +4437,8 @@ var MyApp = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__LoginService__ = __webpack_require__(172);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__find_password_find_password__ = __webpack_require__(393);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__LoginService__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__find_password_find_password__ = __webpack_require__(375);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_GlobalData__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_HttpService__ = __webpack_require__(24);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -4432,12 +4488,6 @@ var LoginPage = (function () {
     LoginPage.prototype.ionViewCanLeave = function () {
         var _this = this;
         var bool = !!this.userInfo;
-        var elements = document.querySelectorAll(".tabbar");
-        if (elements != null) {
-            Object.keys(elements).map(function (key) {
-                elements[key].style.display = 'flex';
-            });
-        }
         if (this.canLeave || bool) {
             return true;
         }
@@ -4457,46 +4507,54 @@ var LoginPage = (function () {
         }
     };
     LoginPage.prototype.login = function (user) {
-        var _this = this;
         this.submitted = true;
         // this.httpService.postFormData("ashx/Login.ashx/LoginInfo",user)
         //  .map(responce => responce.json())
-        this.loginService.login(user).subscribe(function (userInfo) {
-            console.log(userInfo);
-            _this.submitted = false;
-            // userInfo.token = 'xx122a9Wf';//从后台获取token,暂时写死
-            _this.userInfo = userInfo.Data;
-            _this.globalData.Uid = userInfo.Data.Uid;
-            _this.globalData.Name = userInfo.Data.Name;
-            _this.globalData.token = userInfo.Data.Token;
-            // alert(this.globalData.token);
-            _this.storage.set('UserInfo', userInfo.Data);
-            _this.storage.set('LoginInfo', user);
-            // alert(this.storage.get('UserInfo'));
-            _this.events.publish('user:login', userInfo);
-            _this.viewCtrl.dismiss(userInfo.Data);
-        });
+        this.globalData.Uid = "123";
+        this.globalData.Name = "456";
+        this.globalData.token = "234";
+        this.viewCtrl.dismiss();
+        this.userInfo = { "Name": "admin", "Uid": "admin" };
+        this.storage.set('UserInfo', this.userInfo);
+        // this.loginService.login(user).subscribe((userInfo) => {
+        //     console.log(userInfo);
+        //     this.submitted = false;
+        //     // userInfo.token = 'xx122a9Wf';//从后台获取token,暂时写死
+        //     this.userInfo = userInfo.Data;
+        //     this.globalData.Uid = userInfo.Data.Uid;
+        //     this.globalData.Name = userInfo.Data.Name;
+        //     this.globalData.token = userInfo.Data.Token;
+        //     // alert(this.globalData.token);
+        //     this.storage.set('UserInfo', userInfo.Data);
+        //     this.storage.set('LoginInfo', user);
+        //     // alert(this.storage.get('UserInfo'));
+        //     this.events.publish('user:login', userInfo);
+        //     this.viewCtrl.dismiss(userInfo.Data);
+        // });
     };
     LoginPage.prototype.findPassword = function () {
+        var _this = this;
         this.canLeave = true;
         var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_5__find_password_find_password__["a" /* FindPassword */]);
         modal.present();
-        this.canLeave = false;
+        modal.onDidDismiss(function (data) {
+            _this.canLeave = false;
+        });
     };
     LoginPage.prototype.dismiss = function () {
         this.viewCtrl.dismiss();
     };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-login',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\login.html"*/`<!--\n  Generated template for the Login page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<!--.nav-decor隐藏头部-->\n<ion-header class="nav-decor">\n\n    <ion-navbar>\n        <ion-title>登录</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <div class="login-header">登录</div>\n    <div class="login-top">\n        <img src="assets/img/logo.png" alt="公司logo" />\n    </div>\n    <form padding [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">\n        <ion-list>\n            <ion-item>\n                <ion-label color="primary">用户名</ion-label>\n                <ion-input type="text" formControlName="UserName" clearInput></ion-input>\n            </ion-item>\n            <div *ngIf="!loginForm.controls.UserName.valid && loginForm.controls.UserName.touched" class="validation-failed"> 请输入正确用户名</div>\n\n            <ion-item>\n                <ion-label color="primary">密　码</ion-label>\n                <ion-input type="password" formControlName="UserPass" clearInput></ion-input>\n            </ion-item>\n            <div *ngIf="!loginForm.controls.UserPass.valid" class="validation-failed">请输入密码</div>\n\n        </ion-list>\n        <div padding-horizontal>\n            <button ion-button block type="submit" [disabled]="!loginForm.valid||submitted">登　录</button>\n        </div>\n    </form>\n    <ion-grid>\n        <ion-row>\n            <ion-col text-center (click)="findPassword()">\n                <button ion-button small clear color="primary">找回密码</button>\n            </ion-col>\n        </ion-row>\n    </ion-grid>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\login.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\login\login.html"*/`<!--\n\n  Generated template for the Login page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<!--.nav-decor隐藏头部-->\n\n<ion-header class="nav-decor">\n\n\n\n    <ion-navbar>\n\n        <ion-title>登录</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <div class="login-header">登录</div>\n\n    <div class="login-top">\n\n        <img src="assets/img/logo.png" alt="公司logo" />\n\n    </div>\n\n    <form padding [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">\n\n        <ion-list>\n\n            <ion-item>\n\n                <ion-label color="primary">用户名</ion-label>\n\n                <ion-input type="text" formControlName="UserName" clearInput></ion-input>\n\n            </ion-item>\n\n            <div *ngIf="!loginForm.controls.UserName.valid && loginForm.controls.UserName.touched" class="validation-failed"> 请输入正确用户名</div>\n\n\n\n            <ion-item>\n\n                <ion-label color="primary">密　码</ion-label>\n\n                <ion-input type="password" formControlName="UserPass" clearInput></ion-input>\n\n            </ion-item>\n\n            <div *ngIf="!loginForm.controls.UserPass.valid" class="validation-failed">请输入密码</div>\n\n\n\n        </ion-list>\n\n        <div padding-horizontal>\n\n            <button ion-button block type="submit" [disabled]="!loginForm.valid||submitted">登　录</button>\n\n        </div>\n\n    </form>\n\n    <ion-grid>\n\n        <ion-row>\n\n            <ion-col text-center (click)="findPassword()">\n\n                <button ion-button small clear color="primary">找回密码</button>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n</ion-content>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\login\login.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_4__LoginService__["a" /* LoginService */]]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Events */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Events */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
             __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* Platform */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* Platform */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_6__providers_GlobalData__["a" /* GlobalData */],
             __WEBPACK_IMPORTED_MODULE_4__LoginService__["a" /* LoginService */],
@@ -4567,7 +4625,7 @@ var CODE_PUSH_DEPLOYMENT_KEY = {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomeModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home__ = __webpack_require__(376);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlog_backlog_module__ = __webpack_require__(727);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__backlog_backlog_detail_backlog_detail_module__ = __webpack_require__(728);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__contacts_contacts_module__ = __webpack_require__(729);
@@ -4596,7 +4654,7 @@ var HomeModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__home__["a" /* Home */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__home__["a" /* Home */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__home__["a" /* Home */]),
                 __WEBPACK_IMPORTED_MODULE_3__backlog_backlog_module__["a" /* BacklogModule */],
                 __WEBPACK_IMPORTED_MODULE_4__backlog_backlog_detail_backlog_detail_module__["a" /* BacklogDetailModule */],
                 __WEBPACK_IMPORTED_MODULE_5__contacts_contacts_module__["a" /* ContactsModule */],
@@ -4621,8 +4679,8 @@ var HomeModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog__ = __webpack_require__(167);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(169);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4642,7 +4700,7 @@ var BacklogModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__backlog__["a" /* Backlog */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__backlog__["a" /* Backlog */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__backlog__["a" /* Backlog */]),
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__backlog__["a" /* Backlog */]
@@ -4664,7 +4722,7 @@ var BacklogModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogDetailModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog_detail__ = __webpack_require__(380);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog_detail__ = __webpack_require__(381);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4683,7 +4741,7 @@ var BacklogDetailModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */]),
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */]
@@ -4704,7 +4762,7 @@ var BacklogDetailModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactsModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts__ = __webpack_require__(169);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts__ = __webpack_require__(170);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4723,7 +4781,7 @@ var ContactsModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */]),
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */]
@@ -4744,7 +4802,7 @@ var ContactsModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactsDetailModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts_detail__ = __webpack_require__(381);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts_detail__ = __webpack_require__(382);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4763,7 +4821,7 @@ var ContactsDetailModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__contacts_detail__["a" /* ContactsDetail */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts_detail__["a" /* ContactsDetail */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts_detail__["a" /* ContactsDetail */]),
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__contacts_detail__["a" /* ContactsDetail */]
@@ -4784,9 +4842,9 @@ var ContactsDetailModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MailModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mail__ = __webpack_require__(385);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mail__ = __webpack_require__(386);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mail_read_outbox_mail_read_outbox_module__ = __webpack_require__(732);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mailService__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mailService__ = __webpack_require__(95);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4807,7 +4865,7 @@ var MailModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__mail__["a" /* Mail */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__mail__["a" /* Mail */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__mail__["a" /* Mail */]),
                 __WEBPACK_IMPORTED_MODULE_3__mail_read_outbox_mail_read_outbox_module__["a" /* MailReadOutboxModule */]
             ],
             exports: [
@@ -4830,7 +4888,7 @@ var MailModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MailReadOutboxModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mail_read_outbox__ = __webpack_require__(387);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mail_read_outbox__ = __webpack_require__(388);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4849,7 +4907,7 @@ var MailReadOutboxModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__mail_read_outbox__["a" /* MailReadOutbox */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__mail_read_outbox__["a" /* MailReadOutbox */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__mail_read_outbox__["a" /* MailReadOutbox */]),
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__mail_read_outbox__["a" /* MailReadOutbox */]
@@ -4870,7 +4928,7 @@ var MailReadOutboxModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MailReadModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mail_read__ = __webpack_require__(386);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mail_read__ = __webpack_require__(387);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4889,7 +4947,7 @@ var MailReadModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__mail_read__["a" /* MailRead */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__mail_read__["a" /* MailRead */])
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__mail_read__["a" /* MailRead */])
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__mail_read__["a" /* MailRead */]
@@ -4910,7 +4968,7 @@ var MailReadModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MailWriteModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mail_write__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mail_write__ = __webpack_require__(93);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4930,8 +4988,8 @@ var MailWriteModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__mail_write__["b" /* PopoverPage */]
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__mail_write__["a" /* MailWrite */]),
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__mail_write__["b" /* PopoverPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__mail_write__["a" /* MailWrite */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__mail_write__["b" /* PopoverPage */]),
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__mail_write__["a" /* MailWrite */],
@@ -4953,8 +5011,8 @@ var MailWriteModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MessagePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message__ = __webpack_require__(149);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messageService__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messageService__ = __webpack_require__(92);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4974,7 +5032,7 @@ var MessagePageModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__message__["a" /* MessagePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__message__["a" /* MessagePage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__message__["a" /* MessagePage */]),
             ],
             providers: [__WEBPACK_IMPORTED_MODULE_3__messageService__["a" /* MessageService */]],
             exports: [
@@ -4996,7 +5054,7 @@ var MessagePageModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MessageReadPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_read__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_read__ = __webpack_require__(377);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5015,7 +5073,7 @@ var MessageReadPageModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__message_read__["a" /* MessageReadPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__message_read__["a" /* MessageReadPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__message_read__["a" /* MessageReadPage */]),
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__message_read__["a" /* MessageReadPage */]
@@ -5036,7 +5094,7 @@ var MessageReadPageModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MessageReadOutPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_read_out__ = __webpack_require__(379);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_read_out__ = __webpack_require__(380);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5055,7 +5113,7 @@ var MessageReadOutPageModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__message_read_out__["a" /* MessageReadOutPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__message_read_out__["a" /* MessageReadOutPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__message_read_out__["a" /* MessageReadOutPage */]),
             ],
             exports: [__WEBPACK_IMPORTED_MODULE_2__message_read_out__["a" /* MessageReadOutPage */]]
         })
@@ -5074,8 +5132,8 @@ var MessageReadOutPageModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MessageWritePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_write__ = __webpack_require__(285);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messageService__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_write__ = __webpack_require__(378);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messageService__ = __webpack_require__(92);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5095,7 +5153,7 @@ var MessageWritePageModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__message_write__["a" /* MessageWritePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__message_write__["a" /* MessageWritePage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__message_write__["a" /* MessageWritePage */]),
             ],
             providers: [__WEBPACK_IMPORTED_MODULE_3__messageService__["a" /* MessageService */]],
             exports: [
@@ -5117,8 +5175,8 @@ var MessageWritePageModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcement__ = __webpack_require__(388);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcement__ = __webpack_require__(389);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(172);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5138,7 +5196,7 @@ var AnnouncementPageModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__announcement__["a" /* AnnouncementPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__announcement__["a" /* AnnouncementPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__announcement__["a" /* AnnouncementPage */]),
             ],
             providers: [__WEBPACK_IMPORTED_MODULE_3__announcementService__["a" /* AnnouncementService */]]
         })
@@ -5157,7 +5215,7 @@ var AnnouncementPageModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementDetailPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcement_detail__ = __webpack_require__(389);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcement_detail__ = __webpack_require__(390);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5176,7 +5234,7 @@ var AnnouncementDetailPageModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */]),
             ],
         })
     ], AnnouncementDetailPageModule);
@@ -5194,7 +5252,7 @@ var AnnouncementDetailPageModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__account__ = __webpack_require__(390);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__account__ = __webpack_require__(391);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5213,7 +5271,7 @@ var AccountModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__account__["a" /* Account */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__account__["a" /* Account */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__account__["a" /* Account */]),
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__account__["a" /* Account */],
@@ -5253,7 +5311,7 @@ var AboutusPageModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__aboutus__["a" /* AboutusPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__aboutus__["a" /* AboutusPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__aboutus__["a" /* AboutusPage */]),
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__aboutus__["a" /* AboutusPage */]
@@ -5274,7 +5332,7 @@ var AboutusPageModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountEditModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__account_edit__ = __webpack_require__(391);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__account_edit__ = __webpack_require__(392);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5293,7 +5351,7 @@ var AccountEditModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__account_edit__["a" /* AccountEdit */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__account_edit__["a" /* AccountEdit */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__account_edit__["a" /* AccountEdit */]),
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__account_edit__["a" /* AccountEdit */]
@@ -5333,7 +5391,7 @@ var AccountPasswordeditModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__account_passwordedit__["a" /* AccountPasswordedit */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__account_passwordedit__["a" /* AccountPasswordedit */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__account_passwordedit__["a" /* AccountPasswordedit */]),
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__account_passwordedit__["a" /* AccountPasswordedit */]
@@ -5354,9 +5412,9 @@ var AccountPasswordeditModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__find_password_find_password_module__ = __webpack_require__(746);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__LoginService__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__LoginService__ = __webpack_require__(148);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5377,7 +5435,7 @@ var LoginModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]),
                 __WEBPACK_IMPORTED_MODULE_3__find_password_find_password_module__["a" /* FindPasswordModule */]
             ],
             exports: [
@@ -5400,7 +5458,7 @@ var LoginModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FindPasswordModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__find_password__ = __webpack_require__(393);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__find_password__ = __webpack_require__(375);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5419,7 +5477,7 @@ var FindPasswordModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__find_password__["a" /* FindPassword */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__find_password__["a" /* FindPassword */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__find_password__["a" /* FindPassword */]),
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__find_password__["a" /* FindPassword */]
@@ -5459,7 +5517,7 @@ var WelcomeModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__welcome__["a" /* Welcome */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__welcome__["a" /* Welcome */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__welcome__["a" /* Welcome */]),
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__welcome__["a" /* Welcome */]
@@ -5480,8 +5538,8 @@ var WelcomeModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SmsPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sms__ = __webpack_require__(382);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smsService__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sms__ = __webpack_require__(383);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smsService__ = __webpack_require__(171);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5501,7 +5559,7 @@ var SmsPageModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__sms__["a" /* SmsPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__sms__["a" /* SmsPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__sms__["a" /* SmsPage */]),
             ],
             exports: [__WEBPACK_IMPORTED_MODULE_2__sms__["a" /* SmsPage */]],
             providers: [__WEBPACK_IMPORTED_MODULE_3__smsService__["a" /* SmsService */]]
@@ -5521,7 +5579,7 @@ var SmsPageModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SmsReadPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sms_read__ = __webpack_require__(383);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sms_read__ = __webpack_require__(384);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5540,7 +5598,7 @@ var SmsReadPageModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__sms_read__["a" /* SmsReadPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__sms_read__["a" /* SmsReadPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__sms_read__["a" /* SmsReadPage */]),
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__sms_read__["a" /* SmsReadPage */]
@@ -5561,7 +5619,7 @@ var SmsReadPageModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SmsWritePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sms_write__ = __webpack_require__(384);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sms_write__ = __webpack_require__(385);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5580,7 +5638,7 @@ var SmsWritePageModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__sms_write__["a" /* SmsWritePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__sms_write__["a" /* SmsWritePage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__sms_write__["a" /* SmsWritePage */]),
             ],
             exports: [__WEBPACK_IMPORTED_MODULE_2__sms_write__["a" /* SmsWritePage */]]
         })
@@ -5599,7 +5657,7 @@ var SmsWritePageModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactsPopoverPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts_popover__ = __webpack_require__(378);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts_popover__ = __webpack_require__(379);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5618,7 +5676,7 @@ var ContactsPopoverPageModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__contacts_popover__["a" /* ContactsPopoverPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts_popover__["a" /* ContactsPopoverPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts_popover__["a" /* ContactsPopoverPage */]),
             ],
             exports: [__WEBPACK_IMPORTED_MODULE_2__contacts_popover__["a" /* ContactsPopoverPage */]]
         })
@@ -5636,8 +5694,8 @@ var ContactsPopoverPageModule = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HttpIntercept; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(151);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(150);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__HttpInterceptHandle__ = __webpack_require__(396);
 var __extends = (this && this.__extends) || (function () {
@@ -5783,7 +5841,7 @@ var HttpIntercept = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__FileService__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__FileService__ = __webpack_require__(94);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5812,7 +5870,7 @@ var Helper = (function () {
     }
     Helper = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* ModalController */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["n" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */],
             __WEBPACK_IMPORTED_MODULE_3__FileService__["a" /* FileService */]])
     ], Helper);
@@ -5867,7 +5925,7 @@ var ModalFromRightEnter = (function (_super) {
             .add(contentWrapper);
     };
     return ModalFromRightEnter;
-}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["q" /* PageTransition */]));
+}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["r" /* PageTransition */]));
 
 var ModalFromRightLeave = (function (_super) {
     __extends(ModalFromRightLeave, _super);
@@ -5889,7 +5947,7 @@ var ModalFromRightLeave = (function (_super) {
             .add(wrapper);
     };
     return ModalFromRightLeave;
-}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["q" /* PageTransition */]));
+}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["r" /* PageTransition */]));
 
 var ModalScaleEnter = (function (_super) {
     __extends(ModalScaleEnter, _super);
@@ -5909,7 +5967,7 @@ var ModalScaleEnter = (function (_super) {
             .add(wrapper);
     };
     return ModalScaleEnter;
-}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["q" /* PageTransition */]));
+}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["r" /* PageTransition */]));
 
 var ModalScaleLeave = (function (_super) {
     __extends(ModalScaleLeave, _super);
@@ -5928,23 +5986,19 @@ var ModalScaleLeave = (function (_super) {
             .add(wrapper);
     };
     return ModalScaleLeave;
-}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["q" /* PageTransition */]));
+}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["r" /* PageTransition */]));
 
 //# sourceMappingURL=itransitions.js.map
 
 /***/ }),
 
-/***/ 84:
+/***/ 757:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BackButtonService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(283);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__message_message__ = __webpack_require__(149);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__announcement_announcement__ = __webpack_require__(388);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__account_account__ = __webpack_require__(390);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5956,46 +6010,77 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
-// import { Mail } from '../mail/mail';
-
-
-
-
-var TabsPage = (function () {
-    function TabsPage(navParams) {
-        this.tab1Root = __WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* Home */];
-        this.tab2Root = __WEBPACK_IMPORTED_MODULE_3__message_message__["a" /* MessagePage */];
-        this.tab3Root = __WEBPACK_IMPORTED_MODULE_4__announcement_announcement__["a" /* AnnouncementPage */];
-        this.tab4Root = __WEBPACK_IMPORTED_MODULE_5__account_account__["a" /* Account */];
-        this.mySelectedIndex = navParams.data.tabIndex || 0;
-        this.tab1Root = navParams.data.tab1Component || __WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* Home */];
+var BackButtonService = (function () {
+    // 构造函数 依赖注入
+    function BackButtonService(platform, appCtrl, toastCtrl) {
+        this.platform = platform;
+        this.appCtrl = appCtrl;
+        this.toastCtrl = toastCtrl;
+        // 控制硬件返回按钮是否触发，默认false
+        this.backButtonPressed = false;
     }
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('mainTabs'),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* Tabs */])
-    ], TabsPage.prototype, "tabs", void 0);
-    TabsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\tabs\tabs.html"*/`<ion-tabs #mainTabs [selectedIndex]="mySelectedIndex">\n    <ion-tab [root]="tab1Root" tabTitle="首页" tabIcon="ios-home"></ion-tab>\n    <ion-tab [root]="tab2Root" tabTitle="信息" tabIcon="ios-mail"></ion-tab>\n    <ion-tab [root]="tab3Root" tabTitle="公告" tabIcon="ios-notifications"></ion-tab>\n    <ion-tab [root]="tab4Root" tabTitle="设置" tabIcon="ios-settings"></ion-tab>\n</ion-tabs>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\tabs\tabs.html"*/
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */]])
-    ], TabsPage);
-    return TabsPage;
+    // 注册方法
+    BackButtonService.prototype.registerBackButtonAction = function (tabRef) {
+        var _this = this;
+        // registerBackButtonAction是系统自带的方法
+        this.platform.registerBackButtonAction(function () {
+            // 获取NavController
+            var activeNav = _this.appCtrl.getActiveNav();
+            // 如果可以返回上一页，则执行pop
+            if (activeNav.canGoBack()) {
+                activeNav.pop();
+            }
+            else {
+                if (tabRef == null || tabRef._selectHistory[tabRef._selectHistory.length - 1] === tabRef.getByIndex(0).id) {
+                    // 执行退出
+                    _this.showExit();
+                }
+                else {
+                    // 选择首页第一个的标签
+                    tabRef.select(0);
+                }
+            }
+        });
+    };
+    // 退出应用方法
+    BackButtonService.prototype.showExit = function () {
+        var _this = this;
+        // 如果为true，退出
+        if (this.backButtonPressed) {
+            this.platform.exitApp();
+        }
+        else {
+            // 第一次按，弹出Toast
+            this.toastCtrl.create({
+                message: '再按一次退出应用',
+                duration: 2000,
+                position: 'top'
+            }).present();
+            // 标记为true
+            this.backButtonPressed = true;
+            // 两秒后标记为false，如果退出的话，就不会执行了
+            setTimeout(function () { return _this.backButtonPressed = false; }, 2000);
+        }
+    };
+    BackButtonService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* Platform */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* App */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ToastController */]) === "function" && _c || Object])
+    ], BackButtonService);
+    return BackButtonService;
+    var _a, _b, _c;
 }());
 
-// WEBPACK FOOTER //
-// ./src/pages/tabs/tabs.ts 
-//# sourceMappingURL=tabs.js.map
+//# sourceMappingURL=backButtonService.js.map
 
 /***/ }),
 
-/***/ 85:
+/***/ 92:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MessageService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(24);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -6052,7 +6137,7 @@ var MessageService = (function () {
 
 /***/ }),
 
-/***/ 94:
+/***/ 93:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6061,12 +6146,12 @@ var MessageService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_FileService__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_FileService__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_Constants__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file_chooser__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file_chooser__ = __webpack_require__(147);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_transfer__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mailService__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mailService__ = __webpack_require__(95);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6212,8 +6297,8 @@ var PopoverPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             template: "\n        <ion-list class=\"checkpeople-popover\">\n        <ion-item>\n            <ion-label>\u90E8\u95E8\u9009\u62E9</ion-label>\n            <ion-select [(ngModel)]=\"dept\" submitText=\"\u786E\u5B9A\" (ngModelChange)=\"getRecipientsByDept(dept)\"\n                cancelText=\"\u53D6\u6D88\" okText=\"\u786E\u5B9A\">\n                <ion-option  *ngFor=\"let item of deptItems;let i = index\" [value]=\"item.Id\">\n                    {{item.BmName}}\n                </ion-option>\n            </ion-select>\n        </ion-item>\n        <ion-searchbar color=\"danger\" [(ngModel)]=\"name\"  placeholder=\"\u8BF7\u8F93\u5165\u7F16\u7801\u6216\u59D3\u540D\">\n        </ion-searchbar>\n\n        <div text-center>\n            <button (click)=\"search()\" icon-left ion-button small color=\"calm\">\n            <ion-icon name=\"search\"></ion-icon>\u67E5\u8BE2</button>\n\n            <button (click)=\"confirm()\" icon-left ion-button small color=\"calm\">\n            <ion-icon name=\"checkmark\"></ion-icon>\u786E\u5B9A</button>\n        </div>\n\n        <ion-list-header>\n            \u901A\u8BAF\u5F55\n        </ion-list-header>\n\n        <ion-item *ngFor=\"let item of items;let i = index\">\n            <ion-label>\n            {{item.Name}}({{item.Uid}})<br>\n            <span>{{item.Dept}}&emsp;{{item.Duty}}</span>\n            </ion-label>\n            <ion-checkbox [checked]=\"item.checked\" (ionChange)=\"checkPeople(i)\"></ion-checkbox>\n        </ion-item>\n        <ion-list>\n    "
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
             __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */],
             __WEBPACK_IMPORTED_MODULE_8__mailService__["a" /* MailService */]])
     ], PopoverPage);
@@ -6373,18 +6458,18 @@ var MailWrite = (function () {
     ], MailWrite.prototype, "content", void 0);
     MailWrite = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-mail-write',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-write\mail-write.html"*/`<!--\n  Generated template for the MailRead page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button (click)="dismiss()">取消</button>\n\n        <ion-title>写信</ion-title>\n        <ion-buttons end>\n            <button ion-button icon-left (click)="send()">\n                <ion-icon name="ios-send"></ion-icon> 发送\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n    <div>\n\n        <ion-list style="position:relative;">\n\n            <ion-item>\n                <ion-label style="align-self:center;">收件人&emsp;</ion-label>\n                <ion-textarea min-rows="1" [(ngModel)]="addressee" #popoverContent placeholder="请选择收件人" (click)="checkPeople($event)"></ion-textarea>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>主&emsp;题&emsp;</ion-label>\n                <ion-input type="test" [(ngModel)]="fsbt" placeholder="主题1"></ion-input>\n            </ion-item>\n            <!-- <button ion-button clear class="share-btn" (click)="addAffix()">\n              <ion-icon name="share"></ion-icon>1\n            </button> -->\n\n            <ion-item>\n                <ion-label>密&emsp;送&emsp;</ion-label>\n                <ion-toggle [(ngModel)]="msbz"></ion-toggle>\n            </ion-item>\n        </ion-list>\n    </div>\n\n\n    <div>\n        <ion-scroll scrollY="true" class="mail-content">\n            <!--<textarea class="mydiv">\n\n            </textarea>-->\n            <div class="message-textarea" contenteditable="true" data-text="输入信息"></div>\n            <div class="affix" *ngIf="haveAffix">\n                <ion-grid>\n                    <ion-row align-items-center>\n                        <ion-col col-6>\n                            <div>\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                <p>{{attName}}</p>\n                                <p color="gray">5.00MB</p>\n                                <ion-icon class="affix-dismiss" name="ios-close-circle-outline"></ion-icon>\n                            </div>\n                        </ion-col>\n                        <ion-col col-6 text-center>\n                            <div>\n                                <ion-icon name="add" class="affix-add"></ion-icon>\n                            </div>\n                        </ion-col>\n                    </ion-row>\n                </ion-grid>\n            </div>\n        </ion-scroll>\n    </div>\n</ion-content>\n<div class="list message-reply">\n\n    <div class="item">\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n        <button ion-button small color="positive">发送</button>\n    </div>\n\n</div>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-write\mail-write.html"*/,
+            selector: 'page-mail-write',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\mail\mail-write\mail-write.html"*/`<!--\n\n  Generated template for the MailRead page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n\n\n        <button ion-button (click)="dismiss()">取消</button>\n\n\n\n        <ion-title>写信</ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-left (click)="send()">\n\n                <ion-icon name="ios-send"></ion-icon> 发送\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n    <div>\n\n\n\n        <ion-list style="position:relative;">\n\n\n\n            <ion-item>\n\n                <ion-label style="align-self:center;">收件人&emsp;</ion-label>\n\n                <ion-textarea min-rows="1" [(ngModel)]="addressee" #popoverContent placeholder="请选择收件人" (click)="checkPeople($event)"></ion-textarea>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label>主&emsp;题&emsp;</ion-label>\n\n                <ion-input type="test" [(ngModel)]="fsbt" placeholder="主题1"></ion-input>\n\n            </ion-item>\n\n            <!-- <button ion-button clear class="share-btn" (click)="addAffix()">\n\n              <ion-icon name="share"></ion-icon>1\n\n            </button> -->\n\n\n\n            <ion-item>\n\n                <ion-label>密&emsp;送&emsp;</ion-label>\n\n                <ion-toggle [(ngModel)]="msbz"></ion-toggle>\n\n            </ion-item>\n\n        </ion-list>\n\n    </div>\n\n\n\n\n\n    <div>\n\n        <ion-scroll scrollY="true" class="mail-content">\n\n            <!--<textarea class="mydiv">\n\n\n\n            </textarea>-->\n\n            <div class="message-textarea" contenteditable="true" data-text="输入信息"></div>\n\n            <div class="affix" *ngIf="haveAffix">\n\n                <ion-grid>\n\n                    <ion-row align-items-center>\n\n                        <ion-col col-6>\n\n                            <div>\n\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n\n                                <p>{{attName}}</p>\n\n                                <p color="gray">5.00MB</p>\n\n                                <ion-icon class="affix-dismiss" name="ios-close-circle-outline"></ion-icon>\n\n                            </div>\n\n                        </ion-col>\n\n                        <ion-col col-6 text-center>\n\n                            <div>\n\n                                <ion-icon name="add" class="affix-add"></ion-icon>\n\n                            </div>\n\n                        </ion-col>\n\n                    </ion-row>\n\n                </ion-grid>\n\n            </div>\n\n        </ion-scroll>\n\n    </div>\n\n</ion-content>\n\n<div class="list message-reply">\n\n\n\n    <div class="item">\n\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n\n        <button ion-button small color="positive">发送</button>\n\n    </div>\n\n\n\n</div>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\mail\mail-write\mail-write.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* PopoverController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */],
             __WEBPACK_IMPORTED_MODULE_3__providers_FileService__["a" /* FileService */],
             __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */],
             __WEBPACK_IMPORTED_MODULE_5__ionic_native_file_chooser__["a" /* FileChooser */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_6__ionic_native_transfer__["a" /* Transfer */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
             __WEBPACK_IMPORTED_MODULE_8__mailService__["a" /* MailService */]])
     ], MailWrite);
     return MailWrite;
@@ -6394,7 +6479,7 @@ var MailWrite = (function () {
 
 /***/ }),
 
-/***/ 95:
+/***/ 94:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6402,7 +6487,7 @@ var MailWrite = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HttpService__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Constants__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs__ = __webpack_require__(151);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs__ = __webpack_require__(150);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NativeService__ = __webpack_require__(23);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -6555,13 +6640,13 @@ var FileService = (function () {
 
 /***/ }),
 
-/***/ 96:
+/***/ 95:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MailService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(24);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {

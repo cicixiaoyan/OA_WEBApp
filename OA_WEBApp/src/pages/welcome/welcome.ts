@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, ViewController, NavParams, ModalController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { LoginPage } from "../login/login";
 /**
@@ -15,7 +15,7 @@ import { LoginPage } from "../login/login";
 })
 export class Welcome {
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController) {
+    constructor(public viewCtrl: ViewController, public navParams: NavParams, private modalCtrl: ModalController) {
     }
 
     ionViewDidLoad() {
@@ -23,7 +23,8 @@ export class Welcome {
     }
 
     goToHome() {
-        this.navCtrl.setRoot(TabsPage, { index: 0 });
+        // this.navCtrl.setRoot(TabsPage, { index: 0 });
+        this.viewCtrl.dismiss();
         let modal = this.modalCtrl.create(LoginPage);
         modal.present();
         modal.onDidDismiss(data => {

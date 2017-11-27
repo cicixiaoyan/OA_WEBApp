@@ -41,7 +41,7 @@ export class Utils {
    * @example  dateFormat(new Date('2017-02-28 13:24:00'),'yyyy-MM-ddTHH:mm:ss+08:00')   "2017-02-28T13:24:00+08:00"
    * @returns {string}
    */
-  static dateFormat(date: Date, sFormat: String = 'yyyy-MM-dd'): string {
+  static dateFormat(date: Date, sFormat: String = 'yyyy-MM-dd', range: number = 0): string {
     let time = {
       Year: 0,
       TYear: '0',
@@ -59,6 +59,8 @@ export class Utils {
       TSecond: '0',
       Millisecond: 0
     };
+
+    date.setDate(date.getDate() + range);
     time.Year = date.getFullYear();
     time.TYear = String(time.Year).substr(2);
     time.Month = date.getMonth() + 1;
@@ -151,5 +153,52 @@ export class Utils {
 
   static sessionStorageClear() {
     sessionStorage.clear();
+  }
+
+  static getFileMimeType(fileType: string): string {
+    let mimeType: string = '';
+  
+    switch (fileType) {
+      case 'txt':
+        mimeType = 'text/plain';
+        break;
+      case 'docx':
+        mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+        break;
+      case 'doc':
+        mimeType = 'application/msword';
+        break;
+      case 'pptx':
+        mimeType = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
+        break;
+      case 'ppt':
+        mimeType = 'application/vnd.ms-powerpoint';
+        break;
+      case 'xlsx':
+        mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+        break;
+      case 'xls':
+        mimeType = 'application/vnd.ms-excel';
+        break;
+      case 'zip':
+        mimeType = 'application/x-zip-compressed';
+        break;
+      case 'rar':
+        mimeType = 'application/octet-stream';
+        break;
+      case 'pdf':
+        mimeType = 'application/pdf';
+        break;
+      case 'jpg':
+        mimeType = 'image/jpeg';
+        break;
+      case 'png':
+        mimeType = 'image/png';
+        break;
+      default:
+        mimeType = 'application/' + fileType;
+        break;
+    }
+    return mimeType;
   }
 }

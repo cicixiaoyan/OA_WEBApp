@@ -9,9 +9,11 @@ import { FileObj } from "../../../model/FileObj";
 import { FILE_SERVE_URL } from "../../../providers/Constants";
 import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 
 import { MailService } from "../mailService";
+import { Utils } from '../../../providers/Utils';
 
 
 
@@ -212,7 +214,9 @@ export class MailWrite {
     addresseeIds: string = "";
     attName: string = "109.png";
     fsbt: "主题";
-    msbz: boolean = false; // 密送标志
+    haveAffix: boolean = false;
+
+    writeForm: FormGroup;
     // mailObj : object = {};
     @ViewChild("popoverContent", { read: ElementRef }) content: ElementRef;
     constructor(public navCtrl: NavController,
@@ -225,7 +229,19 @@ export class MailWrite {
                 private alertCtrl: AlertController,
                 private transfer: Transfer,
                 private viewCtrl: ViewController,
-                private mailService: MailService) {
+                private globalData: GlobalData,
+                private mailService: MailService,
+                private formBuilder: FormBuilder) {
+
+        this.writeForm = this.formBuilder.group({
+            addressee: ['', [Validators.required]],
+            Title: ['', []],
+            Level: ["普通", []],
+            Bcc: [false, []],
+            Content: ["", [Validators.maxLength(180)]],
+        
+        });
+        
         // console.log(this.navParams.get("mail"));
         let mail = this.navParams.get("mail");
         if (typeof (mail) !== "undefined") {
@@ -247,11 +263,26 @@ export class MailWrite {
         console.log("ionViewDidLoad MailWrite");
     }
 
-    send() {
-        let data =  {
-            "Uid": this.mailService.httpService.globalData.Uid,
-            "AcceptUid": this.addresseeIds,
-            "Content": this.content
+    sent(data) {
+        // AccessPresonId= context.Request.Params["AccessPresonId"],
+        // AccessPerson= context.Request.Params["AccessPerson"],
+        // Title= context.Request.Params["Title"],
+        // Content= context.Request.Params["Content"],
+        // Level = context.Request.Params["Level"],
+        // Bcc= context.Request.Params["Bcc"],
+        // AttNo= context.Request.Params["AttNo"],
+        // UserId= context.Request.Params["UserId"],
+        // UserName = context.Request.Params["UserName"],
+        let data1 =  {
+            "AccessPresonId": this.addresseeIds,
+            "AccessPerson": this.addressee,
+            "Title": data.Title,
+            "Content": data.Content,
+            "Level": data.Level,
+            "Bcc": data.Bcc,
+            "AttNo": this.attName,
+            "UserId": this.globalData.Uid,
+            "UserName": this.globalData.Name
         };
 
         this.mailService.write(data).subscribe((resJson) => {
@@ -272,14 +303,15 @@ export class MailWrite {
                 {
                     text: '相册',
                     handler: () => {
-                        this.nativeService.getPictureByCamera(options).then(imageBase64 => {
+                        this.nativeService.getPictureByPhotoLibrary(options).subscribe(imageBase64 => {
                             this.getPictureSuccess(imageBase64);
                         });
+
                     }
                 }, {
                     text: '拍照',
                     handler: () => {
-                        this.nativeService.getPictureByPhotoLibrary(options).then(imageBase64 => {
+                        this.nativeService.getPictureByCamera(options).subscribe(imageBase64 => {
                             this.getPictureSuccess(imageBase64);
                         });
                     }
@@ -287,19 +319,23 @@ export class MailWrite {
                     text: '文件',
                     handler: () => {
                         this.fileChooser.open().then(fileURL => {
+                            let mimeType = fileURL.toLowerCase().split(".").splice(-1)[0];
+                            alert(mimeType);
                             let pathOption: FileUploadOptions = {
-                                fileKey: "file",
-                                fileName: fileURL.substr(fileURL.lastIndexOf('/') + 1),
-                                mimeType: "text/plain"
+                                "fileKey": "file",
+                                "fileName": fileURL.substr(fileURL.lastIndexOf('/') + 1),
+                                "mimeType": Utils.getFileMimeType( mimeType ),
+                                "headers" : {
+                                    "Connection": "close"
+                                },
+                                "httpMethod" : "POST"
                             };
-                            let url = encodeURI("http://some.server.com/upload.php");
-                            return this.upload(fileURL, url, pathOption);
+                            let url = encodeURI("http://192.168.0.49:8000/AttachUpload");
+                            console.log(fileURL, url, pathOption, true);
+                            return this.upload(fileURL, url, pathOption, true);
                         }).catch(err => {
                             console.log(err);
                         });
-
-
-
                     }
                 }, {
                     text: '取消',
@@ -324,7 +360,7 @@ export class MailWrite {
             if (!!data) {
                 console.log(data);
                 // {addressee:this.addressee,addresseeIds:this.addresseeIds}
-                this.addressee = data.addressee;
+                this.writeForm.patchValue({'addressee': data.addressee});
                 this.addresseeIds = data.addresseeIds;
             }
 
@@ -336,8 +372,8 @@ export class MailWrite {
         this.affixPath = "data:image/jpg;base64," + imageBase64;
         let fileObj = <FileObj>{ "base64": this.imageBase64 };
         this.fileService.uploadByBase64(fileObj).subscribe(result => {// 上传图片到文件服务器
-            if (result.success) {
-                let origPath = FILE_SERVE_URL + result.data[0].origPath;
+            if (result) {
+                let origPath = FILE_SERVE_URL + result.origPath;
                 console.log(origPath);
             }
         });
@@ -352,7 +388,7 @@ export class MailWrite {
         let alert = this.alertCtrl.create({
             title: '上传进度：0%',
             enableBackdropDismiss: false,
-            buttons: ['后台下载']
+            buttons: ['后台上传']
         });
         alert.present();
 
@@ -364,10 +400,21 @@ export class MailWrite {
                 alert.dismiss();
             } else {
                 let title = document.getElementsByClassName('alert-title')[0];
-                title && (title.innerHTML = '上传进度：' + num + '%');
+                title && (title.innerHTML = '上传进度：' + url + event.loaded + " " + event.total + '%');
             }
         });
-        return fileTransfer.upload(fileUrl, url, options);
+        return fileTransfer.upload(fileUrl, url, options, trustAllHosts).then((data) => {
+            console.log(data);
+            this.haveAffix = true;
+
+          }, (err) => {
+            // error
+            console.log(err);
+          }).catch((err) => {
+            console.log(err);
+            alert.dismiss();
+            this.nativeService.showToast(err);
+          });
     }
 
     dismiss() {

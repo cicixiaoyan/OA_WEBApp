@@ -12,7 +12,7 @@
 
         <ion-title>写短信</ion-title>
         <ion-buttons end>
-            <button ion-button icon-left (click)="send()">
+            <button ion-button icon-left [disabled]="!writeForm.valid" (click)="sent(writeForm.value)">
                 <ion-icon name="ios-send"></ion-icon> 发送
             </button>
         </ion-buttons>
@@ -26,25 +26,24 @@
       <ion-list>
         <ion-item>
           <ion-label>接收号码&emsp;</ion-label>
-          <ion-input type="tel"  [(ngModel)]="CellPhone" placeholder="手机号"></ion-input>
+          <ion-input type="text"  formControlName="CellPhone"  placeholder="手机号" #popoverContent placeholder="请选择收件人" (click)="checkPeople($event)"></ion-input>
         </ion-item>
+
+        <div *ngIf="!writeForm.controls.CellPhone.valid && writeForm.controls.CellPhone.touched" class="validation-failed">请添加收件人</div>
 
         <ion-item>
             <ion-label>是否定时</ion-label>
-            <ion-toggle  [(ngModel)]="IsTimer"></ion-toggle>
+            <ion-toggle  formControlName="IsTimer"></ion-toggle>
         </ion-item>
 
-        <ion-item>
+        <ion-item *ngIf="writeForm.get('IsTimer').value">
             <ion-label>发送时间</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DD HH:mm:ss" pickerFormat="YYYY-MM-DD HH:mm" [(ngModel)]="SendDate" cancelText="取消" doneText="确定" ></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DD HH:mm" minuteValues="0,15,30,45" [min]="min" [max]="max" formControlName="SendDate" placeholder="点击选择时间"  pickerFormat="YYYY-MM-DD HH:mm" cancelText="取消" doneText="确定" ></ion-datetime>
+        </ion-item>
+        <ion-item >
+            <ion-textarea formControlName="Content" rows="6" class="write-textarea" placeholder="输入信息"></ion-textarea>
         </ion-item>
 
       </ion-list>
-
-      <div>
-        <ion-scroll scrollY="true" class="sms-content">
-            <div class="message-textarea" contenteditable="true" data-text="输入信息" [(ngModel)]="Content"></div>
-        </ion-scroll>
-      </div>
     </form> 
 </ion-content>

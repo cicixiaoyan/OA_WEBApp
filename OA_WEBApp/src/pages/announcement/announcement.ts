@@ -20,7 +20,7 @@ export class AnnouncementPage {
   nxPage: any = AnnouncementDetailPage;
   params: any;
   items: any;
-  checkBtn = { "enter": false, "published": false, "all": false };
+  checkBtn = { "enter": true, "published": false, "all": false };
 //   page: number = 1;
 //   size: number = 1;
   moredata: boolean = true; // 是否能加载更多
@@ -66,7 +66,7 @@ export class AnnouncementPage {
   }
 
 // 选择录入、已发布、全部
-checkRead(name: string = "read") {
+checkRead(name: string = "enter") {
     this.data.PageIndex = 1;
     this.items = [];
     this.checkBtn = { "enter": false, "published": false, "all": false };

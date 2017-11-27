@@ -6,14 +6,24 @@ import { ToastController, LoadingController, Platform, Loading, AlertController 
 import { AppVersion } from '@ionic-native/app-version';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Toast } from '@ionic-native/toast';
-import { File } from '@ionic-native/file';
+import { File, FileEntry } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer'; // FileUploadOptions
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Network } from '@ionic-native/network';
 import { FileChooser } from '@ionic-native/file-chooser';
+import { Observable } from "rxjs";
+import { Logger } from "./Logger";
 
-import { APP_DOWNLOAD, APK_DOWNLOAD } from "./Constants";
+import {
+    APP_DOWNLOAD,
+    APK_DOWNLOAD,
+    IMAGE_SIZE,
+    QUALITY_SIZE,
+    REQUEST_TIMEOUT,
+    CODE_PUSH_DEPLOYMENT_KEY,
+    IS_DEBUG
+  } from "./Constants";
 
 // import {Observable} from "rxjs";
 declare var LocationPlugin;
@@ -37,7 +47,8 @@ export class NativeService {
                 private inAppBrowser: InAppBrowser,
                 private imagePicker: ImagePicker,
                 private network: Network,
-                private loadingCtrl: LoadingController) {
+                private loadingCtrl: LoadingController,
+                public logger: Logger) {
     }
 
     // const fileTransfer: TransferObject = this.transfer.create();
@@ -240,136 +251,121 @@ export class NativeService {
         this.loadingIsOpen = false;
     }
 
-    /**
-     * 使用cordova-plugin-camera获取照片
-     * @param options
-     * @returns {Promise<string>}
-     */
-    getPicture(options = {}): Promise<string> {
-        let ops: CameraOptions = Object.assign({
-            sourceType: this.camera.PictureSourceType.CAMERA, // 图片来源,CAMERA:拍照,PHOTOLIBRARY:相册
-            destinationType: this.camera.DestinationType.DATA_URL, // 默认返回base64字符串,DATA_URL:base64   FILE_URI:图片路径
-            quality: 100, // 图像质量，范围为0 - 100
-            allowEdit: true, // 选择图片前是否允许编辑
-            encodingType: this.camera.EncodingType.JPEG,
-            targetWidth: 1000, // 缩放图像的宽度（像素）
-            targetHeight: 1000, // 缩放图像的高度（像素）
-            saveToPhotoAlbum: true, // 是否保存到相册
-            correctOrientation: true // 设置摄像机拍摄的图像是否为正确的方向
-        }, options);
-        return new Promise((resolve) => {
-            this.camera.getPicture(ops).then((imgData: string) => {
-                resolve(imgData);
-            }, (err) => {
-                err == 20 && this.showToast('没有权限,请在设置中开启权限');
-                this.warn('getPicture:' + err);
-            });
-        });
-    }
+  /**
+   * 使用cordova-plugin-camera获取照片
+   * @param options
+   */
+  getPicture(options: CameraOptions = {}): Observable<string> {
+    let ops: CameraOptions = Object.assign({
+      sourceType: this.camera.PictureSourceType.CAMERA, // 图片来源,CAMERA:拍照,PHOTOLIBRARY:相册
+      destinationType: this.camera.DestinationType.DATA_URL, // 默认返回base64字符串,DATA_URL:base64   FILE_URI:图片路径
+      quality: QUALITY_SIZE, // 图像质量，范围为0 - 100
+      allowEdit: false, // 选择图片前是否允许编辑
+      encodingType: this.camera.EncodingType.JPEG,
+      targetWidth: IMAGE_SIZE, // 缩放图像的宽度（像素）
+      targetHeight: IMAGE_SIZE, // 缩放图像的高度（像素）
+      saveToPhotoAlbum: false, // 是否保存到相册
+      correctOrientation: true // 设置摄像机拍摄的图像是否为正确的方向
+    }, options);
+    return Observable.create(observer => {
+      this.camera.getPicture(ops).then((imgData: string) => {
+        if (ops.destinationType === this.camera.DestinationType.DATA_URL) {
+          observer.next('data:image/jpg;base64,' + imgData);
+        } else {
+          observer.next(imgData);
+        }
+      }).catch(err => {
+        if (err == 20) {
+          this.showToast('没有权限,请在设置中开启权限', 1000);
+          return;
+        }
+        if (String(err).indexOf('cancel') != -1) {
+          return;
+        }
+        this.logger.log(err, '使用cordova-plugin-camera获取照片失败');
+        this.showToast('获取照片失败', 800);
+      });
+    });
+  }
 
-    /**
-     * 通过拍照获取照片
-     * @param options
-     * @return {Promise<string>}
-     */
-    getPictureByCamera(options = {}): Promise<string> {
-        return new Promise((resolve) => {
-            this.getPicture(Object.assign({
-                sourceType: this.camera.PictureSourceType.CAMERA,
-                destinationType: this.camera.DestinationType.DATA_URL// DATA_URL: 0 base64字符串, FILE_URI: 1图片路径
-            }, options)).then((imgData: string) => {
-                resolve(imgData);
-            }).catch(err => {
-                String(err).indexOf('cancel') != -1 ? this.showToast('取消拍照', 1500) : this.showToast('获取照片失败');
-            });
-        });
-    }
+  /**
+   * 通过拍照获取照片
+   * @param options
+   */
+  getPictureByCamera(options: CameraOptions = {}): Observable<string> {
+    let ops: CameraOptions = Object.assign({
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      destinationType: this.camera.DestinationType.DATA_URL // DATA_URL: 0 base64字符串, FILE_URI: 1图片路径
+    }, options);
+    return this.getPicture(ops);
+  }
 
+  /**
+   * 通过图库获取照片
+   * @param options
+   */
+  getPictureByPhotoLibrary(options: CameraOptions = {}): Observable<string> {
+    let ops: CameraOptions = Object.assign({
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.DATA_URL // DATA_URL: 0 base64字符串, FILE_URI: 1图片路径
+    }, options);
+    return this.getPicture(ops);
+  }
 
-    /**
-     * 通过图库获取照片
-     * @param options
-     * @return {Promise<string>}
-     */
-    getPictureByPhotoLibrary(options = {}): Promise<string> {
-        return new Promise((resolve) => {
-            this.getPicture(Object.assign({
-                sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-                destinationType: this.camera.DestinationType.DATA_URL// DATA_URL: 0 base64字符串, FILE_URI: 1图片路径
-            }, options)).then((imgData: string) => {
-                resolve(imgData);
-            }).catch(err => {
-                String(err).indexOf('cancel') != -1 ? this.showToast('取消选择图片', 1500) : this.showToast('获取照片失败');
-            });
-        });
-    }
-
-
-    /**
-     * 通过图库选择多图
-     * @param options
-     * @return {Promise<T>}
-     */
-    getMultiplePicture(options = {}): Promise<any> {
-        let that = this;
+  /**
+   * 通过图库选择多图
+   * @param options
+   */
+  getMultiplePicture(options = {}): Observable<any> {
+    let that = this;
+    let ops = Object.assign({
+      maximumImagesCount: 6,
+      width: IMAGE_SIZE, // 缩放图像的宽度（像素）
+      height: IMAGE_SIZE, // 缩放图像的高度（像素）
+      quality: QUALITY_SIZE // 图像质量，范围为0 - 100
+    }, options);
+    return Observable.create(observer => {
+      this.imagePicker.getPictures(ops).then(files => {
         let destinationType = options['destinationType'] || 0; // 0:base64字符串,1:图片url
-        return new Promise((resolve) => {
-            this.imagePicker.getPictures(Object.assign({
-                maximumImagesCount: 6,
-                width: 1000, // 缩放图像的宽度（像素）
-                height: 1000, // 缩放图像的高度（像素）
-                quality: 100 // 图像质量，范围为0 - 100
-            }, options)).then(files => {
-                if (destinationType === 1) {
-                    resolve(files);
-                } else {
-                    let imgBase64s = []; // base64字符串数组
-                    for (let fileUrl of files) {
-                        that.convertImgToBase64(fileUrl, base64 => {
-                            imgBase64s.push(base64);
-                            if (imgBase64s.length === files.length) {
-                                resolve(imgBase64s);
-                            }
-                        });
-                    }
-                }
-            }).catch(err => {
-                this.warn('getMultiplePicture:' + err);
-                this.showToast('获取照片失败');
+        if (destinationType === 1) {
+          observer.next(files);
+        } else {
+          let imgBase64s = []; // base64字符串数组
+          for (let fileUrl of files) {
+            that.convertImgToBase64(fileUrl).subscribe(base64 => {
+              imgBase64s.push(base64);
+              if (imgBase64s.length === files.length) {
+                observer.next(imgBase64s);
+              }
             });
-        });
-    }
-
-    /**
-     * 根据图片绝对路径转化为base64字符串
-     * @param url 绝对路径
-     * @param callback 回调函数
-     */
-    convertImgToBase64(url, callback) {
-        this.getFileContentAsBase64(url, function (base64Image) {
-            callback.call(this, base64Image.substring(base64Image.indexOf(';base64,') + 8));
-        });
-    }
-
-    private getFileContentAsBase64(path, callback) {
-        function fail(err) {
-            console.log('Cannot found requested file' + err);
+          }
         }
+      }).catch(err => {
+        this.logger.log(err, '通过图库选择多图失败');
+        this.showToast('获取照片失败', 800);
+      });
+    });
+  }
 
-        function gotFile(fileEntry) {
-            fileEntry.file(function (file) {
-                let reader = new FileReader();
-                reader.onloadend = function (e) {
-                    let content = this.result;
-                    callback(content);
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-
-        this.file.resolveLocalFilesystemUrl(path).then(fileEnter => gotFile(fileEnter)).catch(err => fail(err));
-        // window['resolveLocalFileSystemURL'](path, gotFile, fail);
-    }
+  /**
+   * 根据图片绝对路径转化为base64字符串
+   * @param path 绝对路径
+   */
+  convertImgToBase64(path: string): Observable<string> {
+    return Observable.create(observer => {
+      this.file.resolveLocalFilesystemUrl(path).then((fileEnter: FileEntry) => {
+        fileEnter.file(file => {
+          let reader = new FileReader();
+          reader.onloadend = function (e) {
+            observer.next(this.result);
+          };
+          reader.readAsDataURL(file);
+        });
+      }).catch(err => {
+        this.logger.log(err, '根据图片绝对路径转化为base64字符串失败');
+      });
+    });
+  }
 
 
     /**
@@ -474,7 +470,8 @@ export class NativeService {
     // }
 
 
-    // uploadFile(host: string, params: Map<string, string>, filePaths:Array<string>, context: any, success: Function, fail: Function) {
+    // uploadFile(host: string, params: Map<string, string>, 
+    // filePaths:Array<string>, context: any, success: Function, fail: Function) {
     //     this.formData = new FormData();
 
     //     this.upload(filePaths).subscribe(data => {

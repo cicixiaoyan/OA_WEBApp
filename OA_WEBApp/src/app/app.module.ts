@@ -26,7 +26,9 @@ import { SmsPageModule } from '../pages/sms/sms.module';
 import { SmsReadPageModule } from '../pages/sms/sms-read/sms-read.module';
 import { SmsWritePageModule } from '../pages/sms/sms-write/sms-write.module';
 
+
 import { ContactsPopoverPageModule } from '../pages/contacts-popover/contacts-popover.module';
+import { GetmobilePopoverPageModule } from '../pages/getmobile-popover/getmobile-popover.module';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -109,7 +111,8 @@ export class FunDebugErrorHandler implements ErrorHandler {
         SmsPageModule,
         SmsReadPageModule,
         SmsWritePageModule,
-        ContactsPopoverPageModule
+        ContactsPopoverPageModule,
+        GetmobilePopoverPageModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [

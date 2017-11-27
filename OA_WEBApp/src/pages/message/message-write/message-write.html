@@ -12,7 +12,7 @@
     
             <ion-title>写信</ion-title>
             <ion-buttons end>
-                <button ion-button icon-left (click)="send()">
+                <button ion-button icon-left [disabled]="!writeForm.valid" (click)="sent(writeForm.value)">
                     <ion-icon name="ios-send"></ion-icon> 发送
                 </button>
             </ion-buttons>
@@ -20,24 +20,18 @@
     </ion-header>
     
     
-    <ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">
-        <div>
-    
-            <ion-list style="position:relative;">
-                <ion-item>
-                    <ion-label style="align-self:center;">收件人&emsp;</ion-label>
-                    <ion-textarea min-rows="1" [(ngModel)]="addressee" #popoverContent placeholder="请选择收件人" (click)="checkPeople($event)"></ion-textarea>
-                </ion-item>
-            </ion-list>
-        </div>
-    
-        <div>
-            <ion-scroll scrollY="true" class="mail-content">
-                <!--<textarea class="mydiv">
-    
-                </textarea>-->
-                <div class="message-textarea" contenteditable="true" data-text="输入信息" [(ngModel)]="contont"></div>
-  
-            </ion-scroll>
-        </div>
+    <ion-content>
+        <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">
+            <div>
+                <ion-list style="position:relative;">
+                    <ion-item>
+                        <ion-label style="align-self:center;">收件人&emsp;</ion-label>
+                        <ion-input min-rows="1" formControlName="addressee"  #popoverContent placeholder="请选择收件人" (click)="checkPeople($event)"></ion-input>
+                    </ion-item>
+                    <ion-item >
+                        <ion-textarea formControlName="Content" rows="6" class="write-textarea" placeholder="输入消息..."></ion-textarea>
+                    </ion-item>
+                </ion-list>
+            </div>
+        </form>
     </ion-content>

@@ -176,31 +176,32 @@ export class Mail {
 
     _getInboxList(inboxData) {
         this.mailService.getInboxList(inboxData).subscribe(resJson => {
-            if (resJson.Result == false  ) {
-                this.moredata = false;
-                if (this.inboxData.PageIndex === 1) {
-                     this.mailService.httpService.nativeService.showToast(resJson.Data);
-                     this.inboxList = [];                 
-                }
-
-            } else {
+            if (resJson.Result && resJson.Data !== []){
+                this.isEmpty = false;
                 let list = resJson.Data;
                 this.inboxList = [...this.inboxList, ...list];
+            }else{
+                this.moredata = false;
+                if (this.inboxData.PageIndex === 1) {
+                    this.isEmpty = true;
+                    this.inboxList = [];                 
+                }
             }
         });
     }
 
     _getOutboxList(outboxData) {
         this.mailService.getOutboxList(outboxData).subscribe(resJson => {
-            if (resJson.Result == false ) {
-                this.moredata = false;
-                if (this.inboxData.PageIndex === 1) {
-                    this.mailService.httpService.nativeService.showToast(resJson.Data);
-                    this.outboxList = [];                 
-               }
-            } else {
+            if (resJson.Result && resJson.Data !== []){
+                this.isEmpty = false;
                 let list = resJson.Data;
                 this.outboxList = [...this.outboxList, ...list];
+            }else{
+                this.moredata = false;
+                if (this.outboxData.PageIndex === 1) {
+                    this.isEmpty = true;
+                    this.outboxList = [];                 
+                }
             }
         });
     }

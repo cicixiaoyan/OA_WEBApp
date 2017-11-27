@@ -4,6 +4,7 @@ import { IonicPage, NavParams, PopoverController, ViewController } from 'ionic-a
 import { GlobalData } from '../../../providers/GlobalData';
 import { NativeService } from '../../../providers/NativeService';
 import { FileObj } from "../../../model/FileObj";
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { MessageService } from "../messageService";
 import { ContactsPopoverPage } from '../../contacts-popover/contacts-popover';
@@ -23,41 +24,39 @@ import { ContactsPopoverPage } from '../../contacts-popover/contacts-popover';
 })
 
 export class MessageWritePage {
-    // avatarPath: string;
-    imageBase64: string;
-    affixPath: string;
     addressee: string = "";
     addresseeIds: string = "";
     attName: string = "109.png";
-    fsbt: "主题";
-    msbz: boolean = false; // 密送标志
+    writeForm: FormGroup;
     // mailObj : object = {};
     @ViewChild("popoverContent", { read: ElementRef }) content: ElementRef;
     constructor(public navParams: NavParams,
                 public nativeService: NativeService,
                 private popoverCtrl: PopoverController,
                 private viewCtrl: ViewController,
-                private messageService: MessageService) {
-        // console.log(this.navParams.get("mail"));
-        let mail = this.navParams.get("mail");
-        if (typeof (mail) !== "undefined") {
-            this.affixPath = mail.yjfj;
-            this.fsbt = mail.jsbt;
-        }
+                private messageService: MessageService,
+                private formBuilder: FormBuilder) {
+
+        this.writeForm = this.formBuilder.group({
+            addressee: ['', [Validators.required]], // 第一个参数是默认值
+            Content: ["", [Validators.maxLength(180), Validators.required]],
+        });
+
+
     }
 
     ionViewDidLoad() {
         console.log("ionViewDidLoad MailWrite");
     }
 
-    send() {
-        let data =  {
+    sent(data) {
+        let data1 =  {
             "Uid": this.messageService.httpService.globalData.Uid,
             "AcceptUid": this.addresseeIds,
-            "Content": this.content
+            "Content": data.Content
         };
 
-        this.messageService.write(data).subscribe((resJson) => {
+        this.messageService.write(data1).subscribe((resJson) => {
             resJson.Result ? this.nativeService.showToast("信息已发送") :
             this.nativeService.showToast(resJson.Data);
         });
@@ -73,9 +72,8 @@ export class MessageWritePage {
         });
         popover.onDidDismiss(data => {
             if (!!data) {
-                console.log(data);
-                // {addressee:this.addressee,addresseeIds:this.addresseeIds}
-                this.addressee = data.addressee;
+            
+                this.writeForm.patchValue({'addressee': data.addressee});
                 this.addresseeIds = data.addresseeIds;
             }
 

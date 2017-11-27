@@ -50,6 +50,10 @@ export class MailService {
         return this.httpService.postFormData("ashx/NewsAdd.ashx", param).map((res: Response) => res.json());
     }
 
+    AttachUpload(param): Observable<any>{
+        return this.httpService.postFormData("ashx/AttachUpload.ashx", param).map((res: Response) => res.json());
+    }
+
     getRecipients(param?): Observable<any>{
         // 输入参数
         // Name 输入查询用户名称

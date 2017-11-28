@@ -70,7 +70,7 @@ export class FileService {
     if (!fileObjList || fileObjList.length == 0) {
       return Observable.of([]);
     }
-    return this.httpService.post(FILE_SERVE_URL + '/appUpload', fileObjList).map((res: Response) => {
+    return this.httpService.post(FILE_SERVE_URL + '/ashx/appUpload.aspx', fileObjList).map((res: Response) => {
       let result = res.json();
       if (!result.success) {
         this.nativeService.showToast(result.msg, 800);
@@ -94,7 +94,7 @@ export class FileService {
     if (!fileObj.base64) {
       return Observable.never();
     }
-    return this.httpService.post(FILE_SERVE_URL + '/appUpload', [fileObj]).map((res: Response) => {
+    return this.httpService.post(FILE_SERVE_URL + '/ashx/appUpload.aspx', [fileObj]).map((res: Response) => {
       let result = res.json();
       if (!result.success) {
         this.nativeService.showToast(result.msg, 800);

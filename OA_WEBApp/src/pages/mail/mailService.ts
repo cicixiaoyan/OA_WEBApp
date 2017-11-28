@@ -14,7 +14,7 @@ export class MailService {
     mailStatus: object = {
         read: 1, // 已读
         unread: 0, // 未读
-        all: 3 // 全部
+        all: 2 // 全部
     };
 
     constructor(public httpService: HttpService) {

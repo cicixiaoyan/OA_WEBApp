@@ -39,6 +39,7 @@ export class MailRead {
         this.mailService.read(this.navParams.get('id')).subscribe((resJson) => {
             if (resJson.Result){
                 this.mailDetail = resJson.Data;
+                this.mailDetail.Name = this.mailDetail.Name.split(":")[1];
             }
         });
 

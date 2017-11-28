@@ -4,6 +4,7 @@ import { UserInfo } from "../../../model/UserInfo";
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import { LoginPage } from "../../login/login";
+import { HttpService } from '../../../providers/HttpService';
 /**
  * Generated class for the AccountEdit page.
  *
@@ -25,13 +26,14 @@ export class AccountEdit {
                 public navParams: NavParams,
                 private actionSheetCtrl: ActionSheetController,
                 private storage: Storage,
+                private httpService: HttpService,
                 private modalCtrl: ModalController,
                 private formBuilder: FormBuilder) {
 
         this.editForm = this.formBuilder.group({
-            InDate: ['1990-02-19', [Validators.required, Validators.minLength(4)]], // 第一个参数是默认值
+            InDate: ['', [Validators.required, Validators.minLength(4)]], // 第一个参数是默认值
             Sex: ['男', [Validators.required, Validators.minLength(2)]],
-            BirthDate: [],
+            BirthDate: ['', []],
             Mobile: [null, [Validators.minLength(11), Validators.maxLength(11)]],
             Mail: [null, [Validators.email]],
             WorkPhone: [null, [Validators.maxLength(11)]],
@@ -51,11 +53,12 @@ export class AccountEdit {
                 modal.onDidDismiss(data => {
                     data && console.log(data);
                 });
-            }
-            
+            }            
         });
-        this.userInfo.BirthDate = "1990-02-19";
-        this.userInfo.InDate = "1990-02-19";
+        
+
+        // this.userInfo.BirthDate = "1990-02-19";
+        // this.userInfo.InDate = "1990-02-19";
     }
 
     ionViewDidLoad() {
@@ -91,8 +94,25 @@ export class AccountEdit {
     }
 
     edit(value) {
-        this.submitted = true;
-        console.log(value);
+        // this.submitted = true;
+        // console.log(value);
+        value.Uid = this.httpService.globalData.Uid;
+        this.httpService.postFormData("ashx/UserPersonMod.ashx", value)
+        .map(responce => responce.json())
+        .subscribe((Resjson) => {
+            if (Resjson.Result){
+                this.httpService.nativeService.showToast("修改资料成功", 800);   
+                this.httpService.postFormData("ashx/UserInfo.ashx", {id: this.httpService.globalData.Uid})
+                .map(responce => responce.json()).subscribe((res) => {
+                    if (res.Result){
+                        this.storage.set("UserInfo", res.Date);
+                        this.userInfo = res.Data;
+                    }
+                });
+            }else{
+                this.httpService.nativeService.showToast("修改资料失败： " + Resjson.Data, 800);
+            }
+        });
     }
 
     return(){

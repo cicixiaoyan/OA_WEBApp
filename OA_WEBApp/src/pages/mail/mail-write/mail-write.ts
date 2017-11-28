@@ -10,8 +10,6 @@ import { FILE_SERVE_URL } from "../../../providers/Constants";
 import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Storage } from '@ionic/storage';
-
 import { MailService } from "../mailService";
 import { Utils } from '../../../providers/Utils';
 
@@ -72,7 +70,6 @@ export class PopoverPage {
 
     constructor(private navParams: NavParams,
                 public viewCtrl: ViewController,
-                public storage: Storage,
                 public mailService: MailService) {
         this.addressee = this.navParams.get("addressee");
         this.addresseeIds = this.navParams.get("addresseeIds");
@@ -328,9 +325,11 @@ export class MailWrite {
                                 "headers" : {
                                     "Connection": "close"
                                 },
-                                "httpMethod" : "POST"
+                                "chunkedMode": false,
+                                "httpMethod" : "POST",
+                                "params": {"token": this.globalData.token}
                             };
-                            let url = encodeURI("http://192.168.0.49:8000/AttachUpload");
+                            let url = encodeURI(FILE_SERVE_URL + "ashx/AttachUpload.ashx");
                             console.log(fileURL, url, pathOption, true);
                             return this.upload(fileURL, url, pathOption, true);
                         }).catch(err => {
@@ -350,7 +349,6 @@ export class MailWrite {
     }
 
     checkPeople(myEvent) {
-
         let popover = this.popoverCtrl.create(PopoverPage,
             { addressee: this.addressee, addresseeIds: this.addresseeIds });
         popover.present({

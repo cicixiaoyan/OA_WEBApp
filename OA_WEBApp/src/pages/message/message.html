@@ -7,7 +7,7 @@
 <ion-header>
   
       <ion-toolbar>
-          <ion-segment [(ngModel)]="box">
+          <ion-segment [(ngModel)]="box" (ngModelChange)="change()">
               <ion-segment-button value="inbox">
                   收消息
               </ion-segment-button>
@@ -26,7 +26,6 @@
           <div *ngSwitchCase="'inbox'">
               <button ion-button small (click)="checkRead('unread')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.unread}">未读</button>
               <button ion-button small (click)="checkRead('read')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.read}">已读</button>
-              <button ion-button small (click)="checkRead('all')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.all}">全部</button>
           </div>
   
           <div *ngSwitchCase="'outbox'">
@@ -51,8 +50,8 @@
                       <ion-avatar item-left>
                           <img src="assets/img/mike.png">
                       </ion-avatar>
-                      <span style="color:#2196F3;" *ngIf="message.Status=='0'">●&nbsp;</span><span>{{message.Tile}}</span>
-                      <p class="font-12">来至:{{message.SendPerson}}&emsp;{{message.MailDate}}</p>
+                      <span style="color:#2196F3;" *ngIf="message.Status=='0'">●&nbsp;</span><span>{{message.Content}}</span>
+                      <p class="font-12">来至:{{message.Name}}&emsp;{{message.SendDate}}</p>
                   </ion-item>
                   <ion-item-options side="right">
                       <button ion-button color="primary">
@@ -67,8 +66,8 @@
                       <ion-avatar item-left>
                           <img src="assets/img/mike.png">
                       </ion-avatar>
-                      <span>{{message.Title}}</span>
-                      <p class="font-12">发至:{{message.AccessPerson}}&emsp;{{message.MailDate}}</p>
+                      <span>{{message.Content}}</span>
+                      <p class="font-12">发至:{{message.Name}}&emsp;{{message.SendDate}}</p>
                   </ion-item>
                   <ion-item-options side="right">
                       <button ion-button color="primary">
@@ -78,7 +77,7 @@
               </ion-item-sliding>
           </ion-list>
       </div>
-      <div *ngIf="isEmpty" text-center padding style="background:#ddd;font-size:.9em;">
+      <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">
           <div padding>暂无消息数据！！！</div>
           <img src="assets/img/face/face2.png" height="100">
       </div>

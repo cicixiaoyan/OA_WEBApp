@@ -38,7 +38,7 @@ export class Mail {
         this.inboxData = { 
             "PageSize": 5,
             "PageIndex": 1, 
-            "Mail": this.mailService.Mail["inbox"], 
+            "MailStatus": this.mailService.Mail["inbox"], 
             "Uid": this.globalData.Uid,
             "Status": this.mailService.mailStatus["unread"],
         };
@@ -46,7 +46,7 @@ export class Mail {
         this.outboxData = { 
             "PageSize": 5, 
             "PageIndex": 1, 
-            "Mail": this.mailService.Mail["outbox"], 
+            "MailStatus": this.mailService.Mail["outbox"], 
             "Uid": this.globalData.Uid,
             "Status": this.mailService.mailStatus["unread"]
         };
@@ -124,6 +124,14 @@ export class Mail {
     doRefresh(refresher: Refresher) {
         console.log("加载更多");
         // this.initializeItems();
+        this.change();
+        setTimeout(() => {
+            console.log('数据加载完成');
+            refresher.complete();
+        }, 1000);
+    }
+
+    change(){
         this.moredata = true;
         if (this.box === "inbox") {
             this.inboxList = [];
@@ -134,11 +142,6 @@ export class Mail {
             this.outboxData.PageIndex = 1;
             this._getOutboxList(this.outboxData);
         }
-
-        setTimeout(() => {
-            console.log('数据加载完成');
-            refresher.complete();
-        }, 1000);
     }
 
     doInfinite(): Promise<any> {

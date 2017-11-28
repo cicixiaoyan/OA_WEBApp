@@ -2,12 +2,12 @@
 // export const FILE_SERVE_URL = 'http://88.128.18.144:3333/';
 
 /*----------------------------------------后台Api地址----------------------------------------*/
-export const APP_SERVE_URL = 'http://192.168.0.49:8000/'; // 'http://192.168.0.49:789/';
+export const APP_SERVE_URL = 'http://192.168.0.49:8100/'; // 'http://192.168.0.49:789/';
 
 /*----------------------------------------文件服务器地址----------------------------------------*/
-export const FILE_SERVE_URL = 'http://192.168.0.49:8000/'; // 文件服务:测试环境
+export const FILE_SERVE_URL = 'http://192.168.0.49:8100/'; // 文件服务:测试环境
 /*----------------------------------------app版本升级服务地址----------------------------------------*/
-export const APP_VERSION_SERVE_URL = 'http://192.168.0.49:8000/'; // app版本升级服务;测试环境,查询app最新版本号,更新日志等信息.
+export const APP_VERSION_SERVE_URL = 'http://192.168.0.49:8100/'; // app版本升级服务;测试环境,查询app最新版本号,更新日志等信息.
 export const IS_DEBUG = true; // 是否开发(调试)模式
 
 export const DEFAULT_AVATAR = './assets/img/avatar.png'; // 用户默认头像

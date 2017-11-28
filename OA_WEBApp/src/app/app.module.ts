@@ -25,6 +25,9 @@ import { WelcomeModule } from '../pages/welcome/welcome.module';
 import { SmsPageModule } from '../pages/sms/sms.module';
 import { SmsReadPageModule } from '../pages/sms/sms-read/sms-read.module';
 import { SmsWritePageModule } from '../pages/sms/sms-write/sms-write.module';
+import { MeetingPageModule } from '../pages/meeting/meeting.module';
+import { MeetingWritePageModule } from '../pages/meeting/meeting-write/meeting-write.module';
+
 
 
 import { ContactsPopoverPageModule } from '../pages/contacts-popover/contacts-popover.module';
@@ -112,7 +115,9 @@ export class FunDebugErrorHandler implements ErrorHandler {
         SmsReadPageModule,
         SmsWritePageModule,
         ContactsPopoverPageModule,
-        GetmobilePopoverPageModule
+        GetmobilePopoverPageModule,
+        MeetingPageModule,
+        MeetingWritePageModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [

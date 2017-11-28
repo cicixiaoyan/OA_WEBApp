@@ -24,7 +24,7 @@ export class MessageReadPage {
     }
     initializeItems() {
         this.messageDetail = this.navParams.get("Params");
-        this.messageContent = this.messageDetail.Title;
+        this.messageDetail.Name = this.messageDetail.Name.split(":")[1];
     }
 
 }

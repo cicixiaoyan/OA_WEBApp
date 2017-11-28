@@ -41,7 +41,7 @@ export class MessagePage {
       this.inboxData = { 
           "PageSize": 5,
           "PageIndex": 1, 
-          "Mail": this.messageService.Message["inbox"], 
+          "NewsStatus": this.messageService.Message["inbox"], 
           "Uid": this.globalData.Uid,
           "Status": this.messageService.messageStatus["unread"],
       };
@@ -49,7 +49,7 @@ export class MessagePage {
       this.outboxData = { 
           "PageSize": 5, 
           "PageIndex": 1, 
-          "Mail": this.messageService.Message["outbox"], 
+          "NewsStatus": this.messageService.Message["outbox"], 
           "Uid": this.globalData.Uid,
           "Status": this.messageService.messageStatus["all"]
       };
@@ -113,21 +113,25 @@ export class MessagePage {
   doRefresh(refresher: Refresher) {
       console.log("加载更多");
       // this.initializeItems();
-      this.moredata = true;
-      if (this.box === "inbox") {
-          this.inboxList = [];
-          this.inboxData.PageIndex = 1;
-          this._getInboxList(this.inboxData);
-      } else {
-          this.outboxList = [];
-          this.outboxData.PageIndex = 1;
-          this._getOutboxList(this.outboxData);
-      }
+      this.change();
 
       setTimeout(() => {
           console.log('数据加载完成');
           refresher.complete();
       }, 1000);
+  }
+
+  change(){
+    this.moredata = true;
+    if (this.box === "inbox") {
+        this.inboxList = [];
+        this.inboxData.PageIndex = 1;
+        this._getInboxList(this.inboxData);
+    } else {
+        this.outboxList = [];
+        this.outboxData.PageIndex = 1;
+        this._getOutboxList(this.outboxData);
+    }
   }
 
   doInfinite(): Promise<any> {

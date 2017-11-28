@@ -22,11 +22,11 @@ export class MessageService {
 
     getInboxList(param?): Observable<any>{
         console.log(12, param);
-        return this.httpService.postFormData("ashx/MailList.ashx", param).map((res: Response) => res.json());
+        return this.httpService.postFormData("ashx/NewsLs.ashx", param).map((res: Response) => res.json());
     }
 
     getOutboxList(param?): Observable<any> {
-        return this.httpService.postFormData("ashx/MailList.ashx", param).map((res: Response) => res.json());
+        return this.httpService.postFormData("ashx/NewsLs.ashx", param).map((res: Response) => res.json());
     }
 
     // read(id): Observable<any>{

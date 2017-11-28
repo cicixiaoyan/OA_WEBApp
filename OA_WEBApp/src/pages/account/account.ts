@@ -16,6 +16,8 @@ import { NativeService } from '../../providers/NativeService';
 import { FileService } from "../../providers/FileService";
 import { FileObj } from "../../model/FileObj";
 import { FILE_SERVE_URL } from "../../providers/Constants";
+import { Utils } from "../../providers/Utils";
+
 
 
 /**
@@ -93,14 +95,14 @@ export class Account {
                 {
                     text: '从相册选择图片',
                     handler: () => {
-                        this.nativeService.getPictureByPhotoLibrary(options).then(imageBase64 => {
+                        this.nativeService.getPictureByPhotoLibrary(options).subscribe(imageBase64 => {
                             this.getPictureSuccess(imageBase64);
                         });
                     }
                 }, {
                     text: '拍照',
                     handler: () => {
-                        this.nativeService.getPictureByCamera(options).then(imageBase64 => {
+                        this.nativeService.getPictureByCamera(options).subscribe(imageBase64 => {
                             this.getPictureSuccess(imageBase64);
                         });
                     }
@@ -126,8 +128,8 @@ export class Account {
         if (this.isChange) {
             let fileObj = <FileObj>{ 'base64': this.imageBase64 };
             this.fileService.uploadByBase64(fileObj).subscribe(result => {// 上传图片到文件服务器
-                if (result.success) {
-                    let origPath = FILE_SERVE_URL + result.data[0].origPath;
+                if (result) {
+                    let origPath = FILE_SERVE_URL + result[0].origPath;
                     this.storage.get('UserInfo').then((userInfo: UserInfo) => {
                         userInfo.photo = origPath;
                         this.storage.set('UserInfo', userInfo);
@@ -139,6 +141,16 @@ export class Account {
         } else {
             this.userInfo.photo = this.storage.get('UserInfo')["photo"];
         }
+    }
+
+    signOut(){
+        this.storage.clear(); // 清除缓存
+        Utils.sessionStorageClear(); // 清除数据缓存
+        let modal = this.modalCtrl.create(LoginPage);
+        modal.present();
+        modal.onDidDismiss(data => {
+            data && console.log(data);
+        });
     }
 
 }

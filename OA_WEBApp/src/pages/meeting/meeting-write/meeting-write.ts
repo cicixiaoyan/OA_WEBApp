@@ -19,12 +19,30 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
   templateUrl: 'meeting-write.html',
 })
 export class MeetingWritePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  writeForm: FormGroup;
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private formBuilder: FormBuilder) {
+    this.writeForm = this.formBuilder.group({
+        Theme: ['', [Validators.required, Validators.maxLength(30)]], // 第一个参数是默认值
+        Type: ["", [Validators.required]],
+        Location: ["", [ Validators.required]],
+        StartTime: ["", [ Validators.required]],
+        EndTime: ["", [Validators.required]],
+        Participants: ["", [Validators.maxLength(180), Validators.required]],
+        Dept: ["", []],
+        Host: ["", [Validators.maxLength(8)]],
+        Attendance: ["", [Validators.maxLength(180)]],
+        Description: ["", [Validators.maxLength(180)]],
+        Affix: ["", [Validators.maxLength(180)]],
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MeetingWritePage');
+  }
+  sent(data){
+
   }
 
 }

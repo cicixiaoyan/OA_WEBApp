@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, ModalController, NavParams } from 'ionic-angular';
 import { Content } from 'ionic-angular';
 import { NativeService } from "../../../providers/NativeService";
-import { MailWrite } from '../mail-write/mail-write';
+// import { MailWrite } from '../mail-write/mail-write';
 
 import { Transfer } from '@ionic-native/transfer'; // , FileUploadOptions, TransferObject
 import { File } from '@ionic-native/file';
@@ -28,14 +28,14 @@ export class MailRead {
                 public navParams: NavParams,
                 private nativeService: NativeService,
                 private modalCtrl: ModalController,
-                private transfer: Transfer, 
+                private transfer: Transfer,
                 private mailService: MailService,
                 private file: File) {
         this.initializeItems();
     }
 
     initializeItems() {
-        
+
         this.mailService.read(this.navParams.get('id')).subscribe((resJson) => {
             if (resJson.Result){
                 this.mailDetail = resJson.Data;
@@ -70,7 +70,7 @@ export class MailRead {
     }
 
     read() {
-        let modal = this.modalCtrl.create(MailWrite, { mail: this.mailDetail });
+        let modal = this.modalCtrl.create("MailWrite", { mail: this.mailDetail });
         modal.present();
         modal.onDidDismiss(data => {
             data && console.log(data);

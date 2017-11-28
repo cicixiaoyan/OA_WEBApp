@@ -44,29 +44,29 @@
                 <ion-label stacked>性别</ion-label>
                 <ion-input type="text" [(ngModel)]="userInfo.Sex" formControlName="Sex" placeholder="性别"></ion-input>
             </ion-item>
-            <ion-item (click)="checkBirth">
+            <ion-item>
                 <ion-label stacked>出生日期</ion-label>
                 <ion-datetime [(ngModel)]="userInfo.BirthDate" placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="BirthDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
             </ion-item>
             <ion-item>
-                <ion-label stacked>移动电话</ion-label>
+                <ion-label>移动电话</ion-label>
                 <ion-input type="number" [(ngModel)]="userInfo.Mobile" formControlName="Mobile" placeholder="移动电话"></ion-input>
             </ion-item>
             <div *ngIf="!editForm.controls.Mobile.valid && editForm.controls.Mobile.touched" class="validation-failed">请输入合法的电话号码</div>
 
             <ion-item>
-                <ion-label stacked>电子邮箱</ion-label>
+                <ion-label>电子邮箱</ion-label>
                 <ion-input type="text" [(ngModel)]="userInfo.Mail" formControlName="Mail" placeholder="电子邮箱"></ion-input>
             </ion-item>
             <div *ngIf="!editForm.controls.Mail.valid && editForm.controls.Mail.touched" class="validation-failed">请输入正确的电子邮箱</div>
 
             <ion-item>
-                <ion-label stacked>办公电话</ion-label>
+                <ion-label>办公电话</ion-label>
                 <ion-input type="number" [(ngModel)]="userInfo.WorkPhone" formControlName="WorkPhone" placeholder="办公电话"></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label stacked>内线电话</ion-label>
+                <ion-label>内线电话</ion-label>
                 <ion-input type="number" [(ngModel)]="userInfo.InlinePhone" formControlName="InlinePhone" placeholder="内线电话"></ion-input>
             </ion-item>
 

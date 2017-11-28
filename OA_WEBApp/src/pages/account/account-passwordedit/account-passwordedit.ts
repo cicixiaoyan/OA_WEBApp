@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ViewController, ModalController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { LoginPage } from '../../login/login';
+// import { LoginPage } from '../../login/login';
 import { HttpService } from '../../../providers/HttpService';
 /**
  * Generated class for the AccountPasswordedit page.
@@ -25,9 +25,9 @@ export class AccountPasswordedit {
                 private httpService: HttpService,
                 private formBuilder: FormBuilder) {
         this.editPasswordForm = this.formBuilder.group({
-            oldPwd: [, [Validators.required, Validators.minLength(3)]],
-            newPwd: [, [Validators.required, Validators.minLength(3)]],
-            confirmPassword: [, [Validators.required, Validators.minLength(3)]]
+            "oldPwd": [, [Validators.required, Validators.minLength(3)]],
+            "newPwd": [, [Validators.required, Validators.minLength(3)]],
+            "confirmPassword": [, [Validators.required, Validators.minLength(3)]]
         });
     }
 
@@ -38,7 +38,7 @@ export class AccountPasswordedit {
             .subscribe((Resjson) => {
                 if (Resjson.Result){
                     this.httpService.nativeService.showToast("修改密码成功", 800);
-                    let modal = this.modalCtrl.create(LoginPage);
+                    let modal = this.modalCtrl.create("LoginPage");
                     modal.present();
                     modal.onDidDismiss(data => {
                         data && console.log(data);
@@ -47,7 +47,7 @@ export class AccountPasswordedit {
                     this.httpService.nativeService.showToast("修改密码失败： " + Resjson.Data, 800);
                 }
             });
-        
+
     }
 
     dismiss() {

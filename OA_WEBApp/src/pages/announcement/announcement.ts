@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Refresher } from 'ionic-angular';
-import { AnnouncementDetailPage } from './announcement-detail/announcement-detail';
+// import { AnnouncementDetailPage } from './announcement-detail/announcement-detail';
 import { AnnouncementService } from './announcementService';
 
 /**
@@ -17,7 +17,7 @@ import { AnnouncementService } from './announcementService';
 })
 export class AnnouncementPage {
 
-  nxPage: any = AnnouncementDetailPage;
+  nxPage: any = "AnnouncementDetailPage";
   params: any;
   items: any;
   checkBtn = { "enter": true, "published": false, "all": false };
@@ -53,7 +53,7 @@ export class AnnouncementPage {
 
   doInfinite(): Promise<any> {
       if (this.moredata) {
-          this.data.PageIndex++; 
+          this.data.PageIndex++;
           this.getList();
 
       }

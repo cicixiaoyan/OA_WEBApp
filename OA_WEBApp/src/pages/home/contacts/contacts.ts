@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Refresher } from 'ionic-angular';
 import { HttpService } from "../../../providers/HttpService";
-import { ContactsDetail } from './contacts-detail/contacts-detail';
+// import { ContactsDetail } from './contacts-detail/contacts-detail';
 
 /**
  * Generated class for the Contacts page.
@@ -16,7 +16,7 @@ import { ContactsDetail } from './contacts-detail/contacts-detail';
 })
 export class Contacts {
     searchKey: string;
-    nxPage: any = ContactsDetail;
+    nxPage: any = "ContactsDetail";
     params: any = { id: 42 };
     items;
     page: number = 1;

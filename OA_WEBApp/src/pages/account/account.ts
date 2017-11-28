@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, ModalController, ActionSheetController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-import { AccountEdit } from '../account/account-edit/account-edit';
-import { AccountPasswordedit } from '../account/account-passwordedit/account-passwordedit';
-import { AboutusPage } from '../account/aboutus/aboutus';
+// import { AccountEdit } from '../account/account-edit/account-edit';
+// import { AccountPasswordedit } from '../account/account-passwordedit/account-passwordedit';
+// import { AboutusPage } from '../account/aboutus/aboutus';
 
 
 import { UserInfo } from "../../model/UserInfo";
 import { GlobalData } from "../../providers/GlobalData";
-import { LoginPage } from "../login/login";
+// import { LoginPage } from "../login/login";
 
 import { NativeService } from '../../providers/NativeService';
 
@@ -57,7 +57,7 @@ export class Account {
                 this.globalData.Name = userInfo.Name;
                 // this.globalData.token = userInfo.token;
             } else {
-                let modal = this.modalCtrl.create(LoginPage);
+                let modal = this.modalCtrl.create("LoginPage");
                 modal.present();
                 modal.onDidDismiss(data => {
                     data && console.log(data);
@@ -71,16 +71,16 @@ export class Account {
     }
 
     edit() {
-        this.navCtrl.push(AccountEdit);
+        this.navCtrl.push("AccountEdit");
     }
 
     getAboutus() {
-        this.navCtrl.push(AboutusPage);
+        this.navCtrl.push("AboutusPage");
     }
 
     pwdEdit() {
         // this.navCtrl.push(AccountPasswordedit);
-        let modal = this.modalCtrl.create(AccountPasswordedit);
+        let modal = this.modalCtrl.create("AccountPasswordedit");
         modal.present();
     }
 
@@ -146,7 +146,7 @@ export class Account {
     signOut(){
         this.storage.clear(); // 清除缓存
         Utils.sessionStorageClear(); // 清除数据缓存
-        let modal = this.modalCtrl.create(LoginPage);
+        let modal = this.modalCtrl.create("LoginPage");
         modal.present();
         modal.onDidDismiss(data => {
             data && console.log(data);

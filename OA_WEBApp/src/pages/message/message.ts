@@ -3,9 +3,9 @@ import { IonicPage, NavController, NavParams, ModalController, Refresher } from 
 
 import { GlobalData } from "../../providers/GlobalData";
 
-import { MessageReadPage } from '../message/message-read/message-read';
-import { MessageWritePage } from '../message/message-write/message-write';
-import { MessageReadOutPage } from '../message/message-read-out/message-read-out';
+// import { MessageReadPage } from '../message/message-read/message-read';
+// import { MessageWritePage } from '../message/message-write/message-write';
+// import { MessageReadOutPage } from '../message/message-read-out/message-read-out';
 import { MessageService } from "./messageService";
 
 /**
@@ -38,18 +38,18 @@ export class MessagePage {
               public globalData: GlobalData,
               private modalCtrl: ModalController,
               private messageService: MessageService) {
-      this.inboxData = { 
+      this.inboxData = {
           "PageSize": 5,
-          "PageIndex": 1, 
-          "NewsStatus": this.messageService.Message["inbox"], 
+          "PageIndex": 1,
+          "NewsStatus": this.messageService.Message["inbox"],
           "Uid": this.globalData.Uid,
           "Status": this.messageService.messageStatus["unread"],
       };
 
-      this.outboxData = { 
-          "PageSize": 5, 
-          "PageIndex": 1, 
-          "NewsStatus": this.messageService.Message["outbox"], 
+      this.outboxData = {
+          "PageSize": 5,
+          "PageIndex": 1,
+          "NewsStatus": this.messageService.Message["outbox"],
           "Uid": this.globalData.Uid,
           "Status": this.messageService.messageStatus["all"]
       };
@@ -93,16 +93,16 @@ export class MessagePage {
   }
 
   doRead(Params) {
-      this.navCtrl.push(MessageReadPage, { Params: Params });
+      this.navCtrl.push("MessageReadPage", { Params: Params });
   }
 
   doReadOutBox(Params) {
       console.log(Params);
-      this.navCtrl.push(MessageReadOutPage, { Params: Params });
+      this.navCtrl.push("MessageReadOutPage", { Params: Params });
   }
 
   doWrite() {
-      let modal = this.modalCtrl.create(MessageWritePage);
+      let modal = this.modalCtrl.create("MessageWritePage");
       modal.present();
       modal.onDidDismiss(data => {
           data && console.log(data);
@@ -173,7 +173,7 @@ export class MessagePage {
               this.moredata = false;
               if (this.inboxData.PageIndex === 1) {
                    this.messageService.httpService.nativeService.showToast(resJson.Data);
-                   this.inboxList = [];                 
+                   this.inboxList = [];
               }
 
           } else {
@@ -189,7 +189,7 @@ export class MessagePage {
               this.moredata = false;
               if (this.inboxData.PageIndex === 1) {
                   this.messageService.httpService.nativeService.showToast(resJson.Data);
-                  this.outboxList = [];                 
+                  this.outboxList = [];
              }
           } else {
               let list = resJson.Data;

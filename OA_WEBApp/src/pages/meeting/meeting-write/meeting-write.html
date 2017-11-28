@@ -6,9 +6,9 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>添加会议</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>添加会议</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
@@ -21,49 +21,52 @@
                     <ion-label style="align-self:center;">会议主题</ion-label>
                     <ion-input min-rows="1" formControlName="Theme"></ion-input>
                 </ion-item>
-                <ion-item >
+                <ion-item>
                     <ion-label style="align-self:center;">会议类型</ion-label>
-                    <ion-textarea formControlName="Type" rows="6" class="write-textarea" placeholder="输入消息..."></ion-textarea>
+                    <ion-select formControlName="Type" cancelText="取消" okText="确定" placeholder="请选择">
+                        <ion-option value="1">类型1</ion-option>
+                        <ion-option value="2">类型2</ion-option>
+                    </ion-select>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>召开地点</ion-label>
-                    <ion-input type="text"  formControlName="Location" placeholder="入职时间" disabled></ion-input>
+                    <ion-input type="text" formControlName="Location" placeholder="入职时间" disabled></ion-input>
                 </ion-item>
-                <ion-item (click)="checkBirth">
+                <ion-item>
                     <ion-label stacked>开始时间</ion-label>
-                    <ion-datetime  placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="StartTime" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+                    <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="StartTime" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
                 </ion-item>
-                <ion-item (click)="checkBirth">
+                <ion-item>
                     <ion-label stacked>结束时间</ion-label>
-                    <ion-datetime  placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="EndTime" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+                    <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="EndTime" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>参加人员</ion-label>
-                    <ion-input type="text"  formControlName="Peoples" placeholder="入职时间" disabled></ion-input>
+                    <ion-input type="text" formControlName="Participants" placeholder="入职时间" disabled></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>参加部门</ion-label>
-                    <ion-input type="text"  formControlName="Dept" placeholder="入职时间" disabled></ion-input>
+                    <ion-input type="text" formControlName="Dept" placeholder="入职时间" disabled></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>主持人</ion-label>
-                    <ion-input type="text"  formControlName="InDate" placeholder="入职时间" disabled></ion-input>
+                    <ion-input type="text" formControlName="Host" placeholder="入职时间" disabled></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>出席范围</ion-label>
-                    <ion-input type="text"  formControlName="T" placeholder="入职时间" disabled></ion-input>
+                    <ion-input type="text" formControlName="Attendance" placeholder="入职时间" disabled></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>简要说明</ion-label>
-                    <ion-input type="text"  formControlName="describetion" placeholder="入职时间" disabled></ion-input>
+                    <ion-input type="text" formControlName="Description" placeholder="入职时间" disabled></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>附件</ion-label>
-                    <ion-input type="text"  formControlName="Affix" placeholder="入职时间" disabled></ion-input>
+                    <ion-input type="text" formControlName="Affix" placeholder="入职时间" disabled></ion-input>
                 </ion-item>
             </ion-list>
             <div padding text-center>
-                <button ion-button type="submit" color="danger" [disabled]="editForm.valid">保存</button>
+                <button ion-button type="submit" color="danger" [disabled]="!writeForm.valid">保存</button>
                 <button ion-button clear small navPop>取消修改</button>
             </div>
         </div>

@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { ModalController, ViewController, Platform, AlertController, Events } from 'ionic-angular';
+import { IonicPage, ModalController, ViewController, Platform, AlertController, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { LoginService } from './LoginService';
 import { UserInfo } from "../../model/UserInfo";
 
-import { FindPassword } from './find-password/find-password';
+// import { FindPassword } from './find-password/find-password';
 // import {UserInfo} from "../../model/UserInfo";
 import { GlobalData } from "../../providers/GlobalData";
 
-import { TabsPage } from '../tabs/tabs';
+// import { TabsPage } from '../tabs/tabs';
 import { HttpService } from "../../providers/HttpService";
-
+@IonicPage()
 
 @Component({
     selector: 'page-login',
@@ -93,7 +93,7 @@ export class LoginPage {
 
     findPassword() {
         this.canLeave = true;
-        let modal = this.modalCtrl.create(FindPassword);
+        let modal = this.modalCtrl.create("FindPassword");
         modal.present();
         modal.onDidDismiss(data => {
             this.canLeave = false;

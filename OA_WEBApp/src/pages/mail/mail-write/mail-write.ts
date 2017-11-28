@@ -157,7 +157,7 @@ export class PopoverPage {
 
 
 
-    serach() {
+    search() {
 
         this.mailService.getRecipients({name: this.name}).subscribe((result) => {
             console.log(result);
@@ -236,9 +236,9 @@ export class MailWrite {
             Level: ["普通", []],
             Bcc: [false, []],
             Content: ["", [Validators.maxLength(180)]],
-        
+
         });
-        
+
         // console.log(this.navParams.get("mail"));
         let mail = this.navParams.get("mail");
         if (typeof (mail) !== "undefined") {

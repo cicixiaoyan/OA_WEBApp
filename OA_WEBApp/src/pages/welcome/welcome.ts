@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, ViewController, NavParams, ModalController } from 'ionic-angular';
-import { TabsPage } from '../tabs/tabs';
-import { LoginPage } from "../login/login";
+// import { TabsPage } from '../tabs/tabs';
+// import { LoginPage } from "../login/login";
 /**
  * Generated class for the Welcome page.
  *
@@ -25,7 +25,7 @@ export class Welcome {
     goToHome() {
         // this.navCtrl.setRoot(TabsPage, { index: 0 });
         this.viewCtrl.dismiss();
-        let modal = this.modalCtrl.create(LoginPage);
+        let modal = this.modalCtrl.create("LoginPage");
         modal.present();
         modal.onDidDismiss(data => {
             data && console.log(data);

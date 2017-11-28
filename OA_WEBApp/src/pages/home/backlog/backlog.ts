@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Refresher } from 'ionic-angular';
 
-import { BacklogDetail } from './backlog-detail/backlog-detail';
+// import { BacklogDetail } from './backlog-detail/backlog-detail';
 import { BacklogService } from "./backlogService";
 /**
  * Generated class for the Backlog page.
@@ -17,7 +17,7 @@ import { BacklogService } from "./backlogService";
 })
 export class Backlog {
     work: string = "notDone";
-    nxPage: any = BacklogDetail;
+    nxPage: any = "BacklogDetail";
     params: any;
     items: any = [];
     moredata: boolean = true;
@@ -27,8 +27,8 @@ export class Backlog {
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 private backlogService: BacklogService) {
-        this.data = { 
-            "PageIndex": 1, 
+        this.data = {
+            "PageIndex": 1,
             "PageSize": 10,
             "Status": this.backlogService.Status["notdone"],
             "Uid": this.backlogService.httpService.globalData.Uid

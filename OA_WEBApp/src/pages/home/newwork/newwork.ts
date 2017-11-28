@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { NewworkDetail } from './newwork-detail/newwork-detail';
+// import { NewworkDetail } from './newwork-detail/newwork-detail';
 
 /**
  * Generated class for the Newwork page.
@@ -43,7 +43,7 @@ export class Newwork {
     }
 
     addNew(id) {
-        this.navCtrl.push(NewworkDetail, { id: id });
+        this.navCtrl.push("NewworkDetail", { id: id });
     }
 
 }

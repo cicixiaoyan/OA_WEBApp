@@ -51633,6 +51633,53 @@ page-backlog-detail .label-ios + ion-textarea .text-input {
   width: 100%;
 }
 
+page-newwork-detail .item-select ion-label {
+  -webkit-flex: initial;
+  -ms-flex: initial;
+  -webkit-box-flex: initial;
+  flex: initial;
+  max-width: 200px;
+  pointer-events: none;
+}
+
+page-newwork-detail .item-select ion-select {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  overflow: hidden;
+  max-width: 100%;
+  width: 100%;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin-left: 16px;
+  border: 1px solid #607D8B;
+  border-radius: 5px;
+}
+
+page-newwork-detail .item-select ion-select:focus {
+  border: 2px solid #627f8d;
+}
+
+page-newwork-detail .item-select ion-select .select-text {
+  overflow: hidden;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  -webkit-box-flex: 1;
+  flex: 1;
+  min-width: 16px;
+  font-size: inherit;
+  white-space: pre-wrap;
+  text-align: center;
+}
+
+page-newwork-detail .button-ios {
+  padding: 0 .4em;
+  width: 100%;
+}
+
 page-login ion-content {
   background: rgba(0, 0, 0, 0.4) url(../assets/img/login-bg.jpg) no-repeat;
   background-size: cover;

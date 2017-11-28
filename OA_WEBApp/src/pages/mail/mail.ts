@@ -3,9 +3,9 @@ import { IonicPage, NavController, NavParams, ModalController, Refresher } from 
 
 import { GlobalData } from "../../providers/GlobalData";
 
-import { MailRead } from '../mail/mail-read/mail-read';
-import { MailWrite } from '../mail/mail-write/mail-write';
-import { MailReadOutbox } from '../mail/mail-read-outbox/mail-read-outbox';
+// import { MailRead } from '../mail/mail-read/mail-read';
+// import { MailWrite } from '../mail/mail-write/mail-write';
+// import { MailReadOutbox } from '../mail/mail-read-outbox/mail-read-outbox';
 import { MailService } from "./mailService";
 /**
  * Generated class for the Mail page.
@@ -35,18 +35,18 @@ export class Mail {
                 public globalData: GlobalData,
                 private modalCtrl: ModalController,
                 private mailService: MailService) {
-        this.inboxData = { 
+        this.inboxData = {
             "PageSize": 5,
-            "PageIndex": 1, 
-            "MailStatus": this.mailService.Mail["inbox"], 
+            "PageIndex": 1,
+            "MailStatus": this.mailService.Mail["inbox"],
             "Uid": this.globalData.Uid,
             "Status": this.mailService.mailStatus["unread"],
         };
 
-        this.outboxData = { 
-            "PageSize": 5, 
-            "PageIndex": 1, 
-            "MailStatus": this.mailService.Mail["outbox"], 
+        this.outboxData = {
+            "PageSize": 5,
+            "PageIndex": 1,
+            "MailStatus": this.mailService.Mail["outbox"],
             "Uid": this.globalData.Uid,
             "Status": this.mailService.mailStatus["unread"]
         };
@@ -105,15 +105,15 @@ export class Mail {
     }
 
     doRead(id) {
-        this.navCtrl.push(MailRead, { id: id });
+        this.navCtrl.push("MailRead", { id: id });
     }
 
     doReadOutBox(id) {
-        this.navCtrl.push(MailReadOutbox, { id: id });
+        this.navCtrl.push("MailReadOutbox", { id: id });
     }
 
     doWrite() {
-        let modal = this.modalCtrl.create(MailWrite);
+        let modal = this.modalCtrl.create("MailWrite");
         modal.present();
         modal.onDidDismiss(data => {
             data && console.log(data);
@@ -187,7 +187,7 @@ export class Mail {
                 this.moredata = false;
                 if (this.inboxData.PageIndex === 1) {
                     this.isEmpty = true;
-                    this.inboxList = [];                 
+                    this.inboxList = [];
                 }
             }
         });
@@ -203,7 +203,7 @@ export class Mail {
                 this.moredata = false;
                 if (this.outboxData.PageIndex === 1) {
                     this.isEmpty = true;
-                    this.outboxList = [];                 
+                    this.outboxList = [];
                 }
             }
         });

@@ -3,8 +3,8 @@ import { IonicPage, NavController, NavParams, ModalController, Refresher } from 
 
 import { GlobalData } from "../../providers/GlobalData";
 
-import { SmsReadPage } from '../sms/sms-read/sms-read';
-import { SmsWritePage } from '../sms/sms-write/sms-write';
+// import { SmsReadPage } from '../sms/sms-read/sms-read';
+// import { SmsWritePage } from '../sms/sms-write/sms-write';
 import { SmsService } from "./smsService";
 
 /**
@@ -33,10 +33,10 @@ export class SmsPage {
               public globalData: GlobalData,
               private modalCtrl: ModalController,
               private smsService: SmsService) {
-      this.list = [];              
-      this.data = { 
+      this.list = [];
+      this.data = {
           "PageSize": 5,
-          "PageIndex": 1, 
+          "PageIndex": 1,
           "UserId": this.globalData.Uid,
           "Status": this.smsService.smsStatus["sent"],
       };
@@ -71,11 +71,11 @@ export class SmsPage {
 
 
   doRead(parma) {
-      this.navCtrl.push(SmsReadPage, { "Params": parma });
+      this.navCtrl.push("SmsReadPage", { "Params": parma });
   }
 
   doWrite() {
-      let modal = this.modalCtrl.create(SmsWritePage);
+      let modal = this.modalCtrl.create("SmsWritePage");
       modal.present();
       modal.onDidDismiss(data => {
           data && console.log(data);
@@ -136,9 +136,9 @@ export class SmsPage {
                     this.moredata = false;
                     if (this.data.PageIndex === 1) {
                         this.smsService.httpService.nativeService.showToast(resJson.Data);
-                        this.list = [];                 
+                        this.list = [];
                     }
-                }      
+                }
             });
     }
 

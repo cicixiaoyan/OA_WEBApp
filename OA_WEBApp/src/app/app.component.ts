@@ -6,14 +6,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { NativeService } from "../providers/NativeService";
-import { Welcome } from '../pages/welcome/welcome';
-import { TabsPage } from "../pages/tabs/tabs";
+// import { Welcome } from '../pages/welcome/welcome';
+// import { TabsPage } from "../pages/tabs/tabs";
 import { GlobalData } from "../providers/GlobalData";
 import { UserInfo } from "../model/UserInfo";
 import { LoginService } from '../pages/login/LoginService';
-import { LoginPage } from "../pages/login/login";
-import { Backlog } from "../pages/home/backlog/backlog";
-import { Contacts } from "../pages/home/contacts/contacts";
+// import { LoginPage } from "../pages/login/login";
+// import { Backlog } from "../pages/home/backlog/backlog";
+// import { Contacts } from "../pages/home/contacts/contacts";
 import { Utils } from "../providers/Utils";
 // import { Newwork } from '../pages/home/newwork/newwork';
 
@@ -37,17 +37,17 @@ export class MyApp {
 
     // set our app's pages
     appPages: PageInterface[] = [
-        { title: '首页', component: TabsPage, index: 0, icon: 'calendar' },
-        { title: '邮件', component: TabsPage, index: 1, icon: 'ios-mail' },
-        { title: '通讯录', component: TabsPage, index: 4, icon: 'md-call', tab1Component: Contacts },
-        { title: '公告管理', component: TabsPage, index: 2, icon: 'ios-notifications' },
+        { title: '首页', component: "TabsPage", index: 0, icon: 'calendar' },
+        { title: '邮件', component: "TabsPage", index: 1, icon: 'ios-mail' },
+        { title: '通讯录', component: "TabsPage", index: 4, icon: 'md-call', tab1Component: "Contacts" },
+        { title: '公告管理', component: "TabsPage", index: 2, icon: 'ios-notifications' },
         // { title: '新建工作', component: TabsPage, index: 5, icon: 'md-exit', tab1Component: Newwork },
-        { title: '待办事项', component: TabsPage, index: 6, icon: 'ios-calendar', tab1Component: Backlog }
+        { title: '待办事项', component: "TabsPage", index: 6, icon: 'ios-calendar', tab1Component: "Backlog" }
         // ,{ title: '设置', component: TabsPage, index: 3, icon: 'ios-cog'},
         // { title: '登陆', component: LoginPage, index: 7, icon: 'contacts' }
     ];
 
-    rootPage: TabsPage;
+    rootPage: string = "TabsPage";
     backButtonPressed: boolean = false;
     constructor(public menu: MenuController,
                 private platform: Platform,
@@ -72,6 +72,7 @@ export class MyApp {
                 if (result) {
                     // this.rootPage = TabsPage;
                     this.storage.get('loginInfo').then((loginInfo) => {
+                        this.nav.setRoot("TabsPage", { tabIndex: 0 });
                         if (loginInfo) {
                             this.loginService.login(loginInfo).subscribe((resJson) => {
                                 if (resJson.result){
@@ -80,22 +81,23 @@ export class MyApp {
                                     this.globalData.token = resJson.Data.Token;
                                     this.events.publish('user:login', result.Data);
                                 }else{
-                                    let modal = this.modalCtrl.create(LoginPage);
+
+                                    // this.NavCtrl.push("LoginPage");
+                                    let modal = this.modalCtrl.create("LoginPage");
                                     modal.present();
                                     modal.onDidDismiss(data => {
                                         data && console.log(data);
-                                        this.nav.setRoot(TabsPage, { tabIndex: 0 });
+                                        this.nav.setRoot("TabsPage", { tabIndex: 0 });
                                     });
                                 }
                             });
 
                         } else {
-
-                            let modal = this.modalCtrl.create(LoginPage);
+                            let modal = this.modalCtrl.create("LoginPage");
                             modal.present();
                             modal.onDidDismiss(data => {
                                 data && console.log(data);
-                                this.nav.setRoot(TabsPage, { tabIndex: 0 });
+                                this.nav.setRoot("TabsPage", { tabIndex: 0 });
                             });
                         }
                     });
@@ -103,11 +105,11 @@ export class MyApp {
                 else {
 
                     this.storage.set('firstIn', true);
-                    let modal = this.modalCtrl.create(Welcome);
+                    let modal = this.modalCtrl.create("Welcome");
                     modal.present();
                     modal.onDidDismiss(data => {
                         data && console.log(data);
-                        this.nav.setRoot(TabsPage, { tabIndex: 0 });
+                        this.nav.setRoot("TabsPage", { tabIndex: 0 });
                     });
                     // this.rootPage = Welcome;
                 }
@@ -149,11 +151,11 @@ export class MyApp {
     goTo(name) {
         this.menu.close();
         if (name == "edit") {
-            this.nav.setRoot(TabsPage, { tabIndex: 3 });
+            this.nav.setRoot("TabsPage", { tabIndex: 3 });
         } else {
             this.storage.clear(); // 清除缓存
             Utils.sessionStorageClear(); // 清除数据缓存
-            let modal = this.modalCtrl.create(LoginPage);
+            let modal = this.modalCtrl.create("LoginPage");
             modal.present();
             modal.onDidDismiss(data => {
                 data && console.log(data);

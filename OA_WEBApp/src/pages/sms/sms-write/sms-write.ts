@@ -5,7 +5,7 @@ import { SmsService } from '../smsService';
 import { NativeService } from '../../../providers/NativeService';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Utils } from '../../../providers/Utils';
-import { GetmobilePopoverPage } from '../../getmobile-popover/getmobile-popover';
+// import { GetmobilePopoverPage } from '../../getmobile-popover/getmobile-popover';
 
 /**
  * Generated class for the SmsWritePage page.
@@ -67,8 +67,8 @@ export class SmsWritePage {
   }
 
   checkPeople(myEvent) {
-    
-    let popover = this.popoverCtrl.create(GetmobilePopoverPage,
+
+    let popover = this.popoverCtrl.create("GetmobilePopoverPage",
         { addressee: this.writeForm.get("CellPhone").value, addresseeIds: this.CellPhones });
     popover.present({
         ev: myEvent

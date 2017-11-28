@@ -12,7 +12,7 @@
 
         <ion-title>写信</ion-title>
         <ion-buttons end>
-            <button ion-button icon-left (click)="send()">
+            <button ion-button icon-left (click)="sent()">
                 <ion-icon name="ios-send"></ion-icon> 发送
             </button>
         </ion-buttons>
@@ -27,7 +27,7 @@
 
                 <ion-item>
                     <ion-label style="align-self:center;">收件人&emsp;</ion-label>
-                    <ion-textarea min-rows="1" readonly="true" formControlName="addressee"  #popoverContent placeholder="双击选择收件人" (click)="checkPeople($event)"></ion-textarea>
+                    <ion-textarea min-rows="1" readonly="true" formControlName="addressee" #popoverContent placeholder="双击选择收件人" (click)="checkPeople($event)"></ion-textarea>
                 </ion-item>
 
                 <ion-item>
@@ -43,12 +43,12 @@
                 </ion-item>
                 <ion-item>
                     <ion-label>紧急程度</ion-label>
-                    <ion-select formControlName="Level" cancelText="取消" okText="确定"  placeholder="请选择">
+                    <ion-select formControlName="Level" cancelText="取消" okText="确定" placeholder="请选择">
                         <ion-option value="普通">普通邮件</ion-option>
                         <ion-option value="重要">重要邮件</ion-option>
                     </ion-select>
                 </ion-item>
-                <ion-item >
+                <ion-item>
                     <ion-textarea formControlName="Content" rows="6" class="write-textarea" placeholder="输入信息"></ion-textarea>
                 </ion-item>
 

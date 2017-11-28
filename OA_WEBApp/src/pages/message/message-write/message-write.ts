@@ -7,7 +7,7 @@ import { FileObj } from "../../../model/FileObj";
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { MessageService } from "../messageService";
-import { ContactsPopoverPage } from '../../contacts-popover/contacts-popover';
+// import { ContactsPopoverPage } from '../../contacts-popover/contacts-popover';
 
 /**
  * Generated class for the MessageWritePage page.
@@ -65,14 +65,14 @@ export class MessageWritePage {
 
     checkPeople(myEvent) {
 
-        let popover = this.popoverCtrl.create(ContactsPopoverPage,
+        let popover = this.popoverCtrl.create("ContactsPopoverPage",
             { addressee: this.addressee, addresseeIds: this.addresseeIds });
         popover.present({
             ev: myEvent
         });
         popover.onDidDismiss(data => {
             if (!!data) {
-            
+
                 this.writeForm.patchValue({'addressee': data.addressee});
                 this.addresseeIds = data.addresseeIds;
             }

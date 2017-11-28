@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, ModalController, NavParams } from 'ionic-angular';
 import { Content } from 'ionic-angular';
 import { NativeService } from "../../../providers/NativeService";
-import { MailWrite } from '../mail-write/mail-write';
+// import { MailWrite } from '../mail-write/mail-write';
 
 /**
  * Generated class for the MailReadOutbox page.
@@ -17,13 +17,13 @@ import { MailWrite } from '../mail-write/mail-write';
 })
 export class MailReadOutbox {
     @ViewChild(Content) content: Content;
-    mailContent: string = "";//消息内容
+    mailContent: string = ""; // 消息内容
     mailDetail: any = [];
 
     constructor(public navCtrl: NavController,
-        public navParams: NavParams,
-        private nativeService: NativeService,
-        private modalCtrl: ModalController) {
+                public navParams: NavParams,
+                private nativeService: NativeService,
+                private modalCtrl: ModalController) {
         this.initializeItems();
     }
 
@@ -47,18 +47,18 @@ export class MailReadOutbox {
 
         this.mailDetail = {
             jsyjid: "2",
-            jsbt: "信息主题2", //接受标题
-            fsrName: "系统管理员", //发送人姓名
-            fsrID: "121", //发送人id
-            fssj: "2012-12-12 12:12:12", //接收时间
-            jssj: "2012-12-12 12:12:12", //发送时间
-            jsrIDs: "123,456,789", //接收人ids
-            jsnr: "你该交作业了2", //接受内容
+            jsbt: "信息主题2", // 接受标题
+            fsrName: "系统管理员", // 发送人姓名
+            fsrID: "121", // 发送人id
+            fssj: "2012-12-12 12:12:12", // 接收时间
+            jssj: "2012-12-12 12:12:12", // 发送时间
+            jsrIDs: "123,456,789", // 接收人ids
+            jsnr: "你该交作业了2", // 接受内容
             attName: "236.png",
-            yjfj: "236.png", //--邮件附件
-            jszt: "未读", //状态
-            msbz: "是"//密送标志
-        }
+            yjfj: "236.png", // --邮件附件
+            jszt: "未读", // 状态
+            msbz: "是"// 密送标志
+        };
         this.mailContent = this.mailDetail.ggnr;
     }
 
@@ -72,7 +72,7 @@ export class MailReadOutbox {
     }
 
     read() {
-        let modal = this.modalCtrl.create(MailWrite);
+        let modal = this.modalCtrl.create("MailWrite");
         modal.present();
         modal.onDidDismiss(data => {
             data && console.log(data);

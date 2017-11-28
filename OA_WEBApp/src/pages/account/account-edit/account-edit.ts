@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, ActionSheetController, ModalContro
 import { UserInfo } from "../../../model/UserInfo";
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Storage } from '@ionic/storage';
-import { LoginPage } from "../../login/login";
+// import { LoginPage } from "../../login/login";
 import { HttpService } from '../../../providers/HttpService';
 /**
  * Generated class for the AccountEdit page.
@@ -48,14 +48,14 @@ export class AccountEdit {
             if (UserInfo){
                 this.userInfo = UserInfo;
             }else{
-                let modal = this.modalCtrl.create(LoginPage);
+                let modal = this.modalCtrl.create("LoginPage");
                 modal.present();
                 modal.onDidDismiss(data => {
                     data && console.log(data);
                 });
-            }            
+            }
         });
-        
+
 
         // this.userInfo.BirthDate = "1990-02-19";
         // this.userInfo.InDate = "1990-02-19";
@@ -101,7 +101,7 @@ export class AccountEdit {
         .map(responce => responce.json())
         .subscribe((Resjson) => {
             if (Resjson.Result){
-                this.httpService.nativeService.showToast("修改资料成功", 800);   
+                this.httpService.nativeService.showToast("修改资料成功", 800);
                 this.httpService.postFormData("ashx/UserInfo.ashx", {id: this.httpService.globalData.Uid})
                 .map(responce => responce.json()).subscribe((res) => {
                     if (res.Result){

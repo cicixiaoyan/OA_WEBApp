@@ -1,14 +1,14 @@
 webpackJsonp([28],{
 
-/***/ 712:
+/***/ 701:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GetmobilePopoverPageModule", function() { return GetmobilePopoverPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactsDetailModule", function() { return ContactsDetailModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__getmobile_popover__ = __webpack_require__(751);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts_detail__ = __webpack_require__(742);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,38 +18,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var GetmobilePopoverPageModule = (function () {
-    function GetmobilePopoverPageModule() {
+var ContactsDetailModule = (function () {
+    function ContactsDetailModule() {
     }
-    GetmobilePopoverPageModule = __decorate([
+    ContactsDetailModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__getmobile_popover__["a" /* GetmobilePopoverPage */],
+                __WEBPACK_IMPORTED_MODULE_2__contacts_detail__["a" /* ContactsDetail */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__getmobile_popover__["a" /* GetmobilePopoverPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts_detail__["a" /* ContactsDetail */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__getmobile_popover__["a" /* GetmobilePopoverPage */]]
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__contacts_detail__["a" /* ContactsDetail */]
+            ]
         })
-    ], GetmobilePopoverPageModule);
-    return GetmobilePopoverPageModule;
+    ], ContactsDetailModule);
+    return ContactsDetailModule;
 }());
 
-//# sourceMappingURL=getmobile-popover.module.js.map
+//# sourceMappingURL=contacts-detail.module.js.map
 
 /***/ }),
 
-/***/ 751:
+/***/ 742:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GetmobilePopoverPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactsDetail; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(363);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -61,118 +60,55 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
-
+// import { UserInfo } from "../../../../model/UserInfo";
 
 /**
- * Generated class for the GetmobilePopoverPage page.
+ * Generated class for the ContactsDetail page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
  */
-var GetmobilePopoverPage = (function () {
-    function GetmobilePopoverPage(navParams, viewCtrl, storage, httpService) {
+var ContactsDetail = (function () {
+    function ContactsDetail(navCtrl, navParams, httpService) {
+        this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.viewCtrl = viewCtrl;
-        this.storage = storage;
         this.httpService = httpService;
-        this.items = [];
-        this.addressee = this.navParams.get("addressee");
-        this.addresseeIds = this.navParams.get("addresseeIds");
-        console.log(this.addressee, this.addresseeIds);
+        // checkman: UserInfo = new UserInfo();
+        this.checkman = {};
         this.initializeItems();
     }
-    GetmobilePopoverPage.prototype.initializeItems = function () {
-        this.search();
-    };
-    GetmobilePopoverPage.prototype.getItems = function (ev) {
-        // Reset items back to all of the items
-        this.initializeItems();
-        // set val to the value of the ev target
-        var val = ev.target.value;
-        this.name = val;
-        // if the value is an empty string don't filter the items
-        // if (val && val.trim() != '') {
-        //   this.items = this.items.filter((item) => {
-        //     return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-        //   });
-        // }
-    };
-    GetmobilePopoverPage.prototype.getRecipientsByDept = function (id) {
+    ContactsDetail.prototype.initializeItems = function () {
         var _this = this;
-        var data = !!id ? { DeptId: id } : {};
-        this.httpService.postFormData("ashx/UserSheet.ashx", data)
-            .map(function (res) { return res.json(); })
-            .subscribe(function (result) {
-            console.log(result);
-            if (result.Result) {
-                var idArr_1 = _this.addresseeIds.split(",");
-                _this.items = result.Data.map(function (value, index) {
-                    for (var i in idArr_1) {
-                        if (idArr_1[i] !== value.Uid) {
-                            Object.assign(value, { checked: false });
-                        }
-                        else {
-                            return Object.assign(value, { checked: true });
-                        }
-                    }
-                    return value;
-                });
+        return this.httpService.postFormData("ashx/UserInfo.ashx", { "Id": this.navParams.get("id") })
+            .map(function (Response) { return Response.json(); })
+            .subscribe(function (resJson) {
+            if (resJson.Result) {
+                _this.checkman = resJson.Data;
+                console.log(resJson.Data);
+            }
+            else {
+                _this.checkman = {};
             }
         });
     };
-    GetmobilePopoverPage.prototype.search = function () {
-        var _this = this;
-        var data = (this.name !== "") ? { name: name } : {};
-        this.httpService.postFormData("ashx/UserSheet.ashx", data)
-            .map(function (res) { return res.json(); })
-            .subscribe(function (result) {
-            console.log(result);
-            if (result.Result) {
-                var idArr_2 = _this.addresseeIds.split(",");
-                _this.items = result.Data.map(function (value, index) {
-                    for (var i in idArr_2) {
-                        if (idArr_2[i] !== value.Uid) {
-                            Object.assign(value, { checked: false });
-                        }
-                        else {
-                            return Object.assign(value, { checked: true });
-                        }
-                    }
-                    return value;
-                });
-            }
-        });
+    ContactsDetail.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ContactsDetail');
     };
-    GetmobilePopoverPage.prototype.checkPeople = function (index) {
-        this.items[index].checked = !this.items[index].checked;
+    ContactsDetail.prototype.call = function (num) {
+        window.location.href = "tel:" + num;
     };
-    GetmobilePopoverPage.prototype.confirm = function () {
-        console.log(confirm);
-        this.addressee = "";
-        this.addresseeIds = "";
-        for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
-            var value = _a[_i];
-            if (value.checked) {
-                this.addressee += value.Name + ",";
-                this.addresseeIds += value.Uid + ",";
-            }
-        }
-        this.viewCtrl.dismiss({ addressee: this.addressee, addresseeIds: this.addresseeIds });
-    };
-    GetmobilePopoverPage = __decorate([
+    ContactsDetail = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-getmobile-popover',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\getmobile-popover\getmobile-popover.html"*/`<!--\n\n  Generated template for the GetmobilePopoverPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n    \n\n      <ion-navbar>\n\n        <ion-title>联系人选择</ion-title>\n\n      </ion-navbar>\n\n    \n\n    </ion-header>\n\n    \n\n    \n\n    <ion-content>\n\n      <ion-list class="checkpeople-popover">\n\n        <ion-searchbar color="danger" [(ngModel)]="name"  placeholder="请输入编码或姓名">\n\n        </ion-searchbar>\n\n      \n\n        <div text-center>\n\n            <button (click)="search()" icon-left ion-button small color="calm">\n\n            <ion-icon name="search"></ion-icon>查询</button>\n\n      \n\n            <button (click)="confirm()" icon-left ion-button small color="calm">\n\n            <ion-icon name="checkmark"></ion-icon>确定</button>\n\n        </div>\n\n      \n\n        <ion-list-header>\n\n            通讯录\n\n        </ion-list-header>\n\n      \n\n        <ion-item *ngFor="let item of items;let i = index">\n\n            <ion-label>\n\n            {{item.Name}}({{item.Uid}})<br>\n\n            <span>{{item.Mobile}}</span>\n\n            </ion-label>\n\n            <ion-checkbox [checked]="item.checked" (ionChange)="checkPeople(i)"></ion-checkbox>\n\n        </ion-item>\n\n      </ion-list>\n\n    </ion-content>\n\n`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\getmobile-popover\getmobile-popover.html"*/,
+            selector: 'page-contacts-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts-detail\contacts-detail.html"*/`<!--\n  Generated template for the ContactsDetail page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>详细信息</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-grid>\n        <ion-row style="border-bottom: 2px solid #ddd;padding-bottom: 0;">\n            <ion-col col-4 text-center style="border-right:1px solid #ddd;">\n                <img src="../assets/img/ben.png" alt="photo" style="height: 70px;width: 70px;border-radius: 50%;">\n                <div>{{checkman.Name}}&nbsp;·<span class="royal">&nbsp;{{checkman.Sex}}</span></div>\n            </ion-col>\n            <ion-col col-8>\n                <p>账号：{{checkman.Uid || "未知"}}</p>\n                <p>职位：{{checkman.Duty}}</p>\n                <p>公司：{{checkman.Company}}</p>\n            </ion-col>\n        </ion-row>\n    </ion-grid>\n    <ion-list>\n        <ion-item>\n            <ion-icon color="energized" name="ios-analytics" item-left></ion-icon>\n            部门\n            <ion-note item-right>{{checkman.Dept}}</ion-note>\n\n        </ion-item>\n        <ion-item (click)="call(checkman.tel)">\n            <ion-icon color="danger" name="md-call" item-left></ion-icon>\n            电话\n            <ion-note item-right>{{checkman.InlinePhone}}</ion-note>\n        </ion-item>\n        <ion-item (click)="call(checkman.mobile)">\n            <ion-icon color="calm" name="md-phone-portrait" item-left></ion-icon>\n            手机\n            <ion-note item-right>{{checkman.Mobile}}</ion-note>\n        </ion-item>\n        <!-- <ion-item>\n            <ion-icon color="balanced" name="md-send" item-left></ion-icon>\n            传真\n            <ion-note item-right>{{checkman.fax}}</ion-note>\n        </ion-item> -->\n        <ion-item>\n            <ion-icon color="royal" name="md-mail" item-left></ion-icon>\n            邮件\n            <ion-note item-right>{{checkman.Mail}}</ion-note>\n        </ion-item>\n\n\n    </ion-list>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts-detail\contacts-detail.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__["a" /* HttpService */]])
-    ], GetmobilePopoverPage);
-    return GetmobilePopoverPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
+    ], ContactsDetail);
+    return ContactsDetail;
 }());
 
-//# sourceMappingURL=getmobile-popover.js.map
+//# sourceMappingURL=contacts-detail.js.map
 
 /***/ })
 

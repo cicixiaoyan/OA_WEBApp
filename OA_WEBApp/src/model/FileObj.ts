@@ -11,3 +11,10 @@ export interface FileObj {
     base64: string; // base64字符串
     parameter: string; // 自定义参数,原文返回
   }
+
+
+export interface AffixObj {
+  OldName: string;
+  NewName: string;
+  AttNo: string;
+}

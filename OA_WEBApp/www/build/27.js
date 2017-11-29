@@ -1,14 +1,14 @@
 webpackJsonp([27],{
 
-/***/ 701:
+/***/ 702:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactsDetailModule", function() { return ContactsDetailModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactsModule", function() { return ContactsModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts_detail__ = __webpack_require__(739);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts__ = __webpack_require__(743);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,37 +18,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ContactsDetailModule = (function () {
-    function ContactsDetailModule() {
+var ContactsModule = (function () {
+    function ContactsModule() {
     }
-    ContactsDetailModule = __decorate([
+    ContactsModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__contacts_detail__["a" /* ContactsDetail */],
+                __WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts_detail__["a" /* ContactsDetail */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */]),
             ],
             exports: [
-                __WEBPACK_IMPORTED_MODULE_2__contacts_detail__["a" /* ContactsDetail */]
+                __WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */]
             ]
         })
-    ], ContactsDetailModule);
-    return ContactsDetailModule;
+    ], ContactsModule);
+    return ContactsModule;
 }());
 
-//# sourceMappingURL=contacts-detail.module.js.map
+//# sourceMappingURL=contacts.module.js.map
 
 /***/ }),
 
-/***/ 739:
+/***/ 743:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactsDetail; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Contacts; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -60,55 +60,124 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import { UserInfo } from "../../../../model/UserInfo";
 
+// import { ContactsDetail } from './contacts-detail/contacts-detail';
 /**
- * Generated class for the ContactsDetail page.
+ * Generated class for the Contacts page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-var ContactsDetail = (function () {
-    function ContactsDetail(navCtrl, navParams, httpService) {
+var Contacts = (function () {
+    function Contacts(navCtrl, navParams, httpService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.httpService = httpService;
-        // checkman: UserInfo = new UserInfo();
-        this.checkman = {};
+        this.nxPage = "ContactsDetail";
+        this.params = { id: 42 };
+        this.page = 1;
+        this.size = 1;
+        this.moredata = true;
+        this.isEmpty = false;
         this.initializeItems();
     }
-    ContactsDetail.prototype.initializeItems = function () {
+    Contacts.prototype.doRefresh = function (refresher) {
+        this.page = 1;
+        this.size = 1;
+        this.initializeItems();
+        setTimeout(function () {
+            console.log('数据加载完成');
+            refresher.complete();
+        }, 2000);
+    };
+    Contacts.prototype.doInfinite = function () {
         var _this = this;
-        return this.httpService.postFormData("ashx/UserInfo.ashx", { "Id": this.navParams.get("id") })
+        if (this.moredata) {
+            this.size++;
+            var data = { page: this.page, size: this.size };
+            this.getList(data).subscribe(function (resJson) {
+                if (resJson.Result && resJson.Result !== []) {
+                    _this.items = _this.items.concat(resJson.Data);
+                }
+                else {
+                    _this.moredata = false;
+                }
+            });
+        }
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve();
+            }, 500);
+        });
+    };
+    Contacts.prototype.initializeItems = function () {
+        var _this = this;
+        this.getList().subscribe(function (resJson) {
+            if (resJson.Result && resJson.Result !== []) {
+                _this.items = resJson.Data;
+                _this.isEmpty = false;
+            }
+            else {
+                _this.isEmpty = true;
+                _this.moredata = false;
+                _this.httpService.nativeService.showToast(resJson.Data || "无数据");
+            }
+        });
+        // let data={action: "Yh_List", page: 1, size: 1};
+        // this.httpService.postFormData("ashx/MailList.ashx/Yh_List",data)
+        //   .map(Response => Response.json())
+        //   .subscribe(list => {
+        //     this.items = list;
+        //   });
+        // 假数据
+        // this.items = [
+        //        {"ui_id":"admin","ui_desc":"系统管理员","ui_sex":"男","ui_lx":"总部","zwmc":"员工"},
+        //        {"ui_id":"admin1","ui_desc":"系统管理员1","ui_sex":"男","ui_lx":"总部","zwmc":"员工1"},
+        //        {"ui_id":"admin2","ui_desc":"系统管理员2","ui_sex":"男","ui_lx":"总部","zwmc":"员工2"},
+        //        {"ui_id":"admin3","ui_desc":"系统管理员3","ui_sex":"男","ui_lx":"总部","zwmc":"员工3"},
+        //     ];
+    };
+    Contacts.prototype.getList = function (data) {
+        data = !!data ? data : { page: 1, size: 1 };
+        return this.httpService.postFormData("ashx/UserSheet.ashx", data).map(function (Response) { return Response.json(); });
+    };
+    Contacts.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Contacts');
+    };
+    Contacts.prototype.search = function (refresher) {
+        var _this = this;
+        console.log(this.searchKey);
+        this.initializeItems();
+        return this.httpService.postFormData("ashx/UserSheet.ashx", { "Name": this.searchKey })
             .map(function (Response) { return Response.json(); })
             .subscribe(function (resJson) {
             if (resJson.Result) {
-                _this.checkman = resJson.Data;
-                console.log(resJson.Data);
+                _this.items = resJson.Data;
+                _this.isEmpty = false;
             }
             else {
-                _this.checkman = {};
+                _this.items = [];
+                _this.isEmpty = true;
+                _this.moredata = false;
             }
         });
+        // setTimeout(() => {
+        //   console.log('数据加载完成');
+        //   refresher.complete();
+        // }, 2000);
     };
-    ContactsDetail.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ContactsDetail');
-    };
-    ContactsDetail.prototype.call = function (num) {
-        window.location.href = "tel:" + num;
-    };
-    ContactsDetail = __decorate([
+    Contacts = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contacts-detail',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\home\contacts\contacts-detail\contacts-detail.html"*/`<!--\n\n  Generated template for the ContactsDetail page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>详细信息</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-grid>\n\n        <ion-row style="border-bottom: 2px solid #ddd;padding-bottom: 0;">\n\n            <ion-col col-4 text-center style="border-right:1px solid #ddd;">\n\n                <img src="../assets/img/ben.png" alt="photo" style="height: 70px;width: 70px;border-radius: 50%;">\n\n                <div>{{checkman.Name}}&nbsp;·<span class="royal">&nbsp;{{checkman.Sex}}</span></div>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n                <p>账号：{{checkman.Uid || "未知"}}</p>\n\n                <p>职位：{{checkman.Duty}}</p>\n\n                <p>公司：{{checkman.Company}}</p>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-icon color="energized" name="ios-analytics" item-left></ion-icon>\n\n            部门\n\n            <ion-note item-right>{{checkman.Dept}}</ion-note>\n\n\n\n        </ion-item>\n\n        <ion-item (click)="call(checkman.tel)">\n\n            <ion-icon color="danger" name="md-call" item-left></ion-icon>\n\n            电话\n\n            <ion-note item-right>{{checkman.InlinePhone}}</ion-note>\n\n        </ion-item>\n\n        <ion-item (click)="call(checkman.mobile)">\n\n            <ion-icon color="calm" name="md-phone-portrait" item-left></ion-icon>\n\n            手机\n\n            <ion-note item-right>{{checkman.Mobile}}</ion-note>\n\n        </ion-item>\n\n        <!-- <ion-item>\n\n            <ion-icon color="balanced" name="md-send" item-left></ion-icon>\n\n            传真\n\n            <ion-note item-right>{{checkman.fax}}</ion-note>\n\n        </ion-item> -->\n\n        <ion-item>\n\n            <ion-icon color="royal" name="md-mail" item-left></ion-icon>\n\n            邮件\n\n            <ion-note item-right>{{checkman.Mail}}</ion-note>\n\n        </ion-item>\n\n\n\n\n\n    </ion-list>\n\n\n\n</ion-content>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\home\contacts\contacts-detail\contacts-detail.html"*/,
+            selector: 'page-contacts',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts.html"*/`<!--\n\n  Generated template for the Contacts page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>通讯录</ion-title>\n\n    </ion-navbar>\n\n    <ion-searchbar color="dark" type="text" placeholder="请输入姓名" [(ngModel)]="searchKey" [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event)">\n\n    </ion-searchbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n\n        </ion-refresher-content>\n\n    </ion-refresher>\n\n    <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->\n\n    <ion-list inset style="margin:16px 0;">\n\n        <button ion-item *ngFor="let contact of items" [navPush]="nxPage" [navParams]="{id:contact.Uid}">\n\n            <span>{{contact.Name}}({{contact.Uid}})</span>\n\n            <p>{{contact.Dept}}&emsp;{{contact.Duty}}</p>\n\n        </button>\n\n    </ion-list>\n\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n\n        <div padding>未搜索到信息！！！</div>\n\n        <img src="assets/img/face/face2.png" height="100">\n\n    </div>\n\n    <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->\n\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n\n    </ion-infinite-scroll>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], ContactsDetail);
-    return ContactsDetail;
+    ], Contacts);
+    return Contacts;
 }());
 
-//# sourceMappingURL=contacts-detail.js.map
+//# sourceMappingURL=contacts.js.map
 
 /***/ })
 

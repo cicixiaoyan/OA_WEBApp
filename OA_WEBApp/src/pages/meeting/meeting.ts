@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Refresher } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Refresher, ModalController } from 'ionic-angular';
 import { MeetingService } from './meeting_service';
 
 /**
@@ -15,7 +15,7 @@ import { MeetingService } from './meeting_service';
   templateUrl: 'meeting.html',
 })
 export class MeetingPage {
-  list: any;
+  list = [];
   checkBtn: any = {
     Drafting: false, // 起草中
     Delivered: true, // 送审中(默认)
@@ -29,12 +29,13 @@ export class MeetingPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              private modalCtrl: ModalController,
               private meetingService: MeetingService) {
       this.data = {
-        Status: this.meetingService.meetingStatus["Delivered"],
-        Uid: this.meetingService.httpService.globalData.Uid,
-        PageIndex: 1,
-        PageSize: 8
+        "status": this.meetingService.meetingStatus["Delivered"],
+        "uid": this.meetingService.httpService.globalData.Uid,
+        "PageIndex": 1,
+        "PageSize": 8
       };
       this.getList(this.data);
   }
@@ -44,8 +45,8 @@ export class MeetingPage {
 
   }
 
-      // 选择已读、未读、全部
-  checkRead(name: string = "read") {
+  // 选择状态
+  checkRead(name: string = "Delivered") {
     this.data.PageIndex = 1;
     this.list = [];
     this.checkBtn = { Drafting: false, Delivered: false, Approved: false,
@@ -53,18 +54,34 @@ export class MeetingPage {
     };
 
     this.checkBtn[name] = true;
-    this.data.Status = this.meetingService.meetingStatus[name];
+    this.data.status = this.meetingService.meetingStatus[name];
+    console.log(this.data);
     this.getList(this.data);
   }
 
+  doRead(Params) {
+    this.navCtrl.push("MeetingWritePage", { "Id": Params });
+    // let modal = this.modalCtrl.create("MeetingEditPage");
+    // modal.present();
+    // modal.onDidDismiss(data => {
+    //     data && console.log(data);
+    // });
+  }
+
+  doWrite() {
+      let modal = this.modalCtrl.create("MeetingWritePage");
+      modal.present();
+      modal.onDidDismiss(data => {
+          data && console.log(data);
+      });
+      // this.navCtrl.push(MailWrite);
+  }
+
   doRefresh(refresher: Refresher) {
-    console.log("加载更多");
-    // this.initializeItems();
     this.list = [];
     this.data.PageIndex = 1;
     this.getList(this.data);
     setTimeout(() => {
-        console.log('数据加载完成');
         refresher.complete();
     }, 1000);
   }
@@ -84,44 +101,17 @@ export class MeetingPage {
   }
 
   private getList(data){
-    this.list = [
-      {
-        Status: 0,
-        Theme: "会议主题1",
-        StartTime: "2017-12-12 15:15",
-        location: "会议室01",
-        Id: "170905001",
-      },
-      {
-        Status: 1,
-        Theme: "会议主题2",
-        StartTime: "2017-12-12 15:15",
-        location: "会议室02",
-        Id: "170905002",
-      },
-      {
-        Status: 3,
-        Theme: "会议主题1",
-        StartTime: "2017-12-12 15:15",
-        location: "会议室01",
-        Id: "170905001",
-      },
-      {
-        Status: 4,
-        Theme: "会议主题2",
-        StartTime: "2017-12-12 15:15",
-        location: "会议室02",
-        Id: "170905002",
-      },
-      {
-        Status: 5,
-        Theme: "会议主题3",
-        StartTime: "2017-12-12 15:15",
-        location: "会议室03",
-        Id: "170905003",
+    this.meetingService.getList(data).subscribe((resJson) => {
+      if (resJson.Result && resJson.Data !== []){
+        this.moredata = true;
+        this.isEmpty = false;
+        let list = resJson.Data;
+        this.list = [...this.list, ...list];
+      }else{
+        this.moredata = false;
+        this.isEmpty = (this.data.PageIndex == 1) ? true : false;
       }
-    ];
-
+    });
     
 
   }

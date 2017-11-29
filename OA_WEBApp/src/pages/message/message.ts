@@ -2,10 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, Refresher } from 'ionic-angular';
 
 import { GlobalData } from "../../providers/GlobalData";
-
-// import { MessageReadPage } from '../message/message-read/message-read';
-// import { MessageWritePage } from '../message/message-write/message-write';
-// import { MessageReadOutPage } from '../message/message-read-out/message-read-out';
 import { MessageService } from "./messageService";
 
 /**

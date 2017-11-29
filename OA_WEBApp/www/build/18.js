@@ -1,14 +1,14 @@
 webpackJsonp([18],{
 
-/***/ 726:
+/***/ 732:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SmsReadPageModule", function() { return SmsReadPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WelcomeModule", function() { return WelcomeModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sms_read__ = __webpack_require__(765);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__welcome__ = __webpack_require__(773);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,36 +18,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var SmsReadPageModule = (function () {
-    function SmsReadPageModule() {
+var WelcomeModule = (function () {
+    function WelcomeModule() {
     }
-    SmsReadPageModule = __decorate([
+    WelcomeModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__sms_read__["a" /* SmsReadPage */],
+                __WEBPACK_IMPORTED_MODULE_2__welcome__["a" /* Welcome */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__sms_read__["a" /* SmsReadPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__welcome__["a" /* Welcome */]),
             ],
             exports: [
-                __WEBPACK_IMPORTED_MODULE_2__sms_read__["a" /* SmsReadPage */]
+                __WEBPACK_IMPORTED_MODULE_2__welcome__["a" /* Welcome */]
             ]
         })
-    ], SmsReadPageModule);
-    return SmsReadPageModule;
+    ], WelcomeModule);
+    return WelcomeModule;
 }());
 
-//# sourceMappingURL=sms-read.module.js.map
+//# sourceMappingURL=welcome.module.js.map
 
 /***/ }),
 
-/***/ 765:
+/***/ 773:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SmsReadPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Welcome; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -59,39 +59,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
+// import { TabsPage } from '../tabs/tabs';
+// import { LoginPage } from "../login/login";
 /**
- * Generated class for the SmsReadPage page.
+ * Generated class for the Welcome page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
  */
-var SmsReadPage = (function () {
-    function SmsReadPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
+var Welcome = (function () {
+    function Welcome(viewCtrl, navParams, modalCtrl) {
+        this.viewCtrl = viewCtrl;
         this.navParams = navParams;
-        this.detail = [];
-        this.initializeItems();
+        this.modalCtrl = modalCtrl;
     }
-    SmsReadPage.prototype.initializeItems = function () {
-        this.detail = this.navParams.get("Params");
-        console.log(this.detail);
-        this.Content = this.detail.SmsMsg;
+    Welcome.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Welcome');
     };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */])
-    ], SmsReadPage.prototype, "content", void 0);
-    SmsReadPage = __decorate([
+    Welcome.prototype.goToHome = function () {
+        // this.navCtrl.setRoot(TabsPage, { index: 0 });
+        this.viewCtrl.dismiss();
+        var modal = this.modalCtrl.create("LoginPage");
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            data && console.log(data);
+        });
+    };
+    Welcome = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-sms-read',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\sms\sms-read\sms-read.html"*/`<!--\n\n  Generated template for the SmsReadPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>短息详情</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n  <ion-list>\n\n    <ion-item>\n\n        <ion-label>接收号码&emsp;</ion-label>\n\n        <ion-input type="text" disabled="disabled" [(ngModel)]="detail.AccessNumber" placeholder="系统管理员"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n        <ion-label>发送时间</ion-label>\n\n        <ion-input type="test" disabled="disabled" [(ngModel)]="detail.SendDate" placeholder="发送时间未知"></ion-input>\n\n    </ion-item>\n\n\n\n  </ion-list>\n\n\n\n  <div>\n\n    <ion-scroll scrollY="true" class="sms-content">\n\n        <div padding-horizontal [innerHTML]="Content"></div>\n\n        <!-- <div class="mydiv"></div> -->\n\n    \n\n    </ion-scroll>\n\n  </div>\n\n</ion-content>\n\n`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\sms\sms-read\sms-read.html"*/,
+            selector: 'page-welcome',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\welcome\welcome.html"*/`<!--\n  Generated template for the Welcome page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header class="nav-decor">\n\n    <ion-navbar>\n        <ion-title>welcome</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-slides pager>\n\n        <ion-slide>\n            <img src="assets/img/welcome/slide1.jpg" />\n        </ion-slide>\n\n        <ion-slide>\n            <img src="assets/img/welcome/slide2.png" />\n        </ion-slide>\n\n        <ion-slide>\n            <img src="assets/img/welcome/slide3.png" />\n        </ion-slide>\n\n        <ion-slide>\n            <ion-row>\n                <ion-col>\n                    <img src="assets/img/welcome/slide4.png" />\n                </ion-col>\n            </ion-row>\n            <ion-row class="start-button">\n                <ion-col>\n                    <button ion-button clear color="light" (click)="goToHome()">立即启动</button>\n                </ion-col>\n            </ion-row>\n        </ion-slide>\n\n    </ion-slides>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\welcome\welcome.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
-    ], SmsReadPage);
-    return SmsReadPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */]])
+    ], Welcome);
+    return Welcome;
 }());
 
-//# sourceMappingURL=sms-read.js.map
+//# sourceMappingURL=welcome.js.map
 
 /***/ })
 

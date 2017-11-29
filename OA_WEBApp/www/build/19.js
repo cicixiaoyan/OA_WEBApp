@@ -1,14 +1,14 @@
 webpackJsonp([19],{
 
-/***/ 723:
+/***/ 731:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessageReadPageModule", function() { return MessageReadPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabsModule", function() { return TabsModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_read__ = __webpack_require__(762);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tabs__ = __webpack_require__(772);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,36 +18,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MessageReadPageModule = (function () {
-    function MessageReadPageModule() {
+var TabsModule = (function () {
+    function TabsModule() {
     }
-    MessageReadPageModule = __decorate([
+    TabsModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__message_read__["a" /* MessageReadPage */],
+                __WEBPACK_IMPORTED_MODULE_2__tabs__["a" /* TabsPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__message_read__["a" /* MessageReadPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__tabs__["a" /* TabsPage */]),
             ],
             exports: [
-                __WEBPACK_IMPORTED_MODULE_2__message_read__["a" /* MessageReadPage */]
+                __WEBPACK_IMPORTED_MODULE_2__tabs__["a" /* TabsPage */]
             ]
         })
-    ], MessageReadPageModule);
-    return MessageReadPageModule;
+    ], TabsModule);
+    return TabsModule;
 }());
 
-//# sourceMappingURL=message-read.module.js.map
+//# sourceMappingURL=tabs.module.js.map
 
 /***/ }),
 
-/***/ 762:
+/***/ 772:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MessageReadPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_backButtonService__ = __webpack_require__(364);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -59,38 +60,44 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+// import { Home } from '../home/home';
+// import { Mail } from '../mail/mail';
+// import { MessagePage } from '../message/message';
+// import { AnnouncementPage } from '../announcement/announcement';
+// import { Account } from '../account/account';
 
-/**
- * Generated class for the MessageReadPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var MessageReadPage = (function () {
-    function MessageReadPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.messageDetail = [];
-        this.initializeItems();
+
+var TabsPage = (function () {
+    function TabsPage(navParams, platform, backButtonService) {
+        var _this = this;
+        this.platform = platform;
+        this.backButtonService = backButtonService;
+        this.tab1Root = "Home";
+        this.tab2Root = "MessagePage";
+        this.tab3Root = "AnnouncementPage";
+        this.tab4Root = "Account";
+        this.mySelectedIndex = navParams.data.tabIndex || 0;
+        this.tab1Root = navParams.data.tab1Component || "Home";
+        platform.ready().then(function () {
+            _this.backButtonService.registerBackButtonAction(_this.tabs);
+        });
     }
-    MessageReadPage.prototype.initializeItems = function () {
-        this.messageDetail = this.navParams.get("Params");
-        this.messageDetail.Name = this.messageDetail.Name.split(":")[1];
-    };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */])
-    ], MessageReadPage.prototype, "content", void 0);
-    MessageReadPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-message-read',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\message\message-read\message-read.html"*/`<!--\n\n  Generated template for the MessageReadPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>消息详情</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n    <div>\n\n        <ion-list>\n\n\n\n            <ion-item>\n\n                <ion-label>发送人&emsp;</ion-label>\n\n                <ion-input type="text" readonly="true" [value]="messageDetail.Name" placeholder="发送人"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label>发送时间</ion-label>\n\n                <ion-input type="test" readonly="true" [value]="messageDetail.SendDate" placeholder="发送时间未知"></ion-input>\n\n            </ion-item>\n\n            \n\n            <ion-item>\n\n                <ion-textarea type="test" readonly="true" [value]="messageDetail.Content" placeholder="信息内容"></ion-textarea>\n\n            </ion-item>\n\n        </ion-list>\n\n    </div>\n\n\n\n    <!-- <div>\n\n        <ion-scroll scrollY="true" class="message-content">\n\n            <div padding-horizontal [innerHTML]="messageContent"></div>\n\n        </ion-scroll>\n\n    </div> -->\n\n</ion-content>\n\n<!-- <ion-footer class="message-reply">\n\n      <div class="item">\n\n          <ion-textarea [(ngModule)]="writeContent"  placeholder="回复: "></ion-textarea>\n\n          <button ion-button small color="positive" (click)="reply()">发送</button>\n\n      </div>\n\n  </ion-footer> -->`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\message\message-read\message-read.html"*/,
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('mainTabs'),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["u" /* Tabs */])
+    ], TabsPage.prototype, "tabs", void 0);
+    TabsPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\tabs\tabs.html"*/`<ion-tabs #mainTabs [selectedIndex]="mySelectedIndex">\n    <ion-tab [root]="tab1Root" tabTitle="首页" tabIcon="ios-home"></ion-tab>\n    <ion-tab [root]="tab2Root" tabTitle="信息" tabIcon="ios-mail"></ion-tab>\n    <ion-tab [root]="tab3Root" tabTitle="公告" tabIcon="ios-notifications"></ion-tab>\n    <ion-tab [root]="tab4Root" tabTitle="设置" tabIcon="ios-settings"></ion-tab>\n</ion-tabs>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\tabs\tabs.html"*/,
+            selector: 'page-tabs',
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
-    ], MessageReadPage);
-    return MessageReadPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__services_backButtonService__["a" /* BackButtonService */]])
+    ], TabsPage);
+    return TabsPage;
 }());
 
-//# sourceMappingURL=message-read.js.map
+// WEBPACK FOOTER //
+// ./src/pages/tabs/tabs.ts
+//# sourceMappingURL=tabs.js.map
 
 /***/ })
 

@@ -1,17 +1,26 @@
 import { Injectable } from "@angular/core";
+import { AlertController } from 'ionic-angular';
 import { HttpService } from "./HttpService";
 import { FILE_SERVE_URL } from "./Constants";
-import { FileObj } from "../model/FileObj";
+import { FileObj, AffixObj } from "../model/FileObj";
 import { Response  } from "@angular/http";
 import { Observable } from "rxjs";
 import { NativeService } from "./NativeService";
 
+import { FileChooser } from '@ionic-native/file-chooser';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { Utils } from './Utils';
 /**
  * 上传图片到文件服务器
  */
 @Injectable()
 export class FileService {
-  constructor(private httpService: HttpService, private nativeService: NativeService) {
+  constructor(private httpService: HttpService,
+              private nativeService: NativeService,
+              private alertCtrl: AlertController,
+              private transfer: Transfer,
+              private fileChooser: FileChooser
+            ) {
   }
 
   /**
@@ -166,5 +175,57 @@ export class FileService {
   private static getFileType(path: string): string {
     return path.substring(path.lastIndexOf('.') + 1);
   }
+
+  /**
+   * app上传附件
+   * 
+   */
+
+  uploadAffix(type: number): Observable<any>{
+    return Observable.create((observer) => {
+      this.fileChooser.open().then(fileURL => {
+        let mimeType = fileURL.toLowerCase().split(".").splice(-1)[0];
+        let pathOption: FileUploadOptions = {
+          "fileKey": "file",
+          "fileName": fileURL.substr(fileURL.lastIndexOf('/') + 1),
+          "mimeType": Utils.getFileMimeType(mimeType),
+          "headers": {
+            "Connection": "close"
+          },
+          "chunkedMode": false,
+          "httpMethod": "POST",
+          "params": { "token": this.httpService.globalData.token, "type": type }
+        };
+        let url = encodeURI(FILE_SERVE_URL + "ashx/AttachUpload.ashx");
+        let alert = this.alertCtrl.create({
+          title: '上传进度：0%',
+          enableBackdropDismiss: false,
+          buttons: ['后台上传']
+        });
+        alert.present();
+        const fileTransfer: TransferObject = this.transfer.create();
+        fileTransfer.onProgress((event: ProgressEvent) => {
+          let num = Math.floor(event.loaded / event.total * 100);
+          if (num === 100) {
+            alert.dismiss();
+          } else {
+            let title = document.getElementsByClassName('alert-title')[0];
+            title && (title.innerHTML = '上传进度：' + url + event.loaded + " " + event.total + '%');
+          }
+        });
+        fileTransfer.upload(fileURL, url, pathOption, true).then((data) => {
+          alert.dismiss();
+          observer.next(data);
+        }, (err) => {
+          console.log(err);
+          alert.dismiss();
+          this.nativeService.showToast(err);
+          observer.next(err);
+        });
+        });
+      });
+
+  }
+
 
 }

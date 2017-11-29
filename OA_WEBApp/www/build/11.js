@@ -1,14 +1,14 @@
 webpackJsonp([11],{
 
-/***/ 699:
+/***/ 718:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BacklogDetailModule", function() { return BacklogDetailModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MailReadModule", function() { return MailReadModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog_detail__ = __webpack_require__(737);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mail_read__ = __webpack_require__(759);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,38 +18,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var BacklogDetailModule = (function () {
-    function BacklogDetailModule() {
+var MailReadModule = (function () {
+    function MailReadModule() {
     }
-    BacklogDetailModule = __decorate([
+    MailReadModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */],
+                __WEBPACK_IMPORTED_MODULE_2__mail_read__["a" /* MailRead */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__mail_read__["a" /* MailRead */])
             ],
             exports: [
-                __WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */]
+                __WEBPACK_IMPORTED_MODULE_2__mail_read__["a" /* MailRead */]
             ]
         })
-    ], BacklogDetailModule);
-    return BacklogDetailModule;
+    ], MailReadModule);
+    return MailReadModule;
 }());
 
-//# sourceMappingURL=backlog-detail.module.js.map
+//# sourceMappingURL=mail-read.module.js.map
 
 /***/ }),
 
-/***/ 731:
+/***/ 735:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MailService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(363);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -61,51 +61,84 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import {Observable} from "rxjs";
 
-var BacklogService = (function () {
-    function BacklogService(httpService) {
+var MailService = (function () {
+    function MailService(httpService) {
         this.httpService = httpService;
-        this.Status = {
-            notdone: 0,
-            done: 1 // 已办理
+        this.Mail = {
+            inbox: 0,
+            outbox: 1 // 发件箱
+        };
+        this.mailStatus = {
+            read: 1,
+            unread: 0,
+            all: 2 // 全部
         };
     }
-    BacklogService.prototype.getNotDoneList = function (param) {
-        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
+    // getInboxList(param?) {
+    //     return this.httpService.get('assets/data/mail-inbox.json').map((res: Response) => res.json());
+    // }
+    // getOutboxList(param?) {
+    //     return this.httpService.get('assets/data/mail-outbox.json').map((res: Response) => res.json());
+    // }
+    MailService.prototype.getInboxList = function (param) {
+        console.log(12, param);
+        return this.httpService.postFormData("ashx/MailList.ashx", param).map(function (res) { return res.json(); });
     };
-    BacklogService.prototype.getDoneList = function (param) {
-        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
+    MailService.prototype.getOutboxList = function (param) {
+        return this.httpService.postFormData("ashx/MailList.ashx", param).map(function (res) { return res.json(); });
     };
-    BacklogService.prototype.getDone = function (param) {
-        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
+    MailService.prototype.read = function (id) {
+        return this.httpService.postFormData("ashx/MailList.ashx", { "id": id }).map(function (res) { return res.json(); });
     };
-    BacklogService.prototype.getNotDone = function (param) {
-        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
+    MailService.prototype.write = function (param) {
+        // Uid 当前用户账号id
+        // AcceptUid 接收账号id
+        // Content 发送内容
+        // 返回json
+        // {"Data":"xxx！","Result":false}
+        return this.httpService.postFormData("ashx/NewsAdd.ashx", param).map(function (res) { return res.json(); });
     };
-    BacklogService.prototype.TodoApprove = function (param) {
-        return this.httpService.postFormData('/ashx/TodoApprove.ashx', param).map(function (res) { return res.json(); });
+    MailService.prototype.AttachUpload = function (param) {
+        return this.httpService.postFormData("ashx/AttachUpload.ashx", param).map(function (res) { return res.json(); });
     };
-    BacklogService = __decorate([
+    MailService.prototype.getRecipients = function (param) {
+        // 输入参数
+        // Name 输入查询用户名称
+        // 返回json
+        return this.httpService.postFormData("ashx/UserSheet.ashx", param).map(function (res) { return res.json(); });
+    };
+    MailService.prototype.getRecipientsByDept = function (id) {
+        // 输入参数
+        // Name 输入查询用户名称
+        // 返回json
+        return this.httpService.postFormData("ashx/UserSheet.ashx", { DeptId: id }).map(function (res) { return res.json(); });
+    };
+    MailService.prototype.getDept = function () {
+        return this.httpService.postFormData("ashx/BmLs.ashx", {}).map(function (res) { return res.json(); });
+    };
+    MailService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], BacklogService);
-    return BacklogService;
+    ], MailService);
+    return MailService;
 }());
 
-//# sourceMappingURL=backlogService.js.map
+//# sourceMappingURL=mailService.js.map
 
 /***/ }),
 
-/***/ 737:
+/***/ 759:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogDetail; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MailRead; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(731);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_transfer__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mailService__ = __webpack_require__(735);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -119,64 +152,97 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+// import { MailWrite } from '../mail-write/mail-write';
+ // , FileUploadOptions, TransferObject
+
+
 /**
- * Generated class for the BacklogDetail page.
+ * Generated class for the MailRead page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-var BacklogDetail = (function () {
-    function BacklogDetail(navCtrl, navParams, backlogService, nativeService) {
+var MailRead = (function () {
+    function MailRead(navCtrl, navParams, nativeService, modalCtrl, transfer, mailService, file) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.backlogService = backlogService;
         this.nativeService = nativeService;
-        this.item = [];
-        this.isComplete = false;
-        console.log(this.navParams.get("id"));
+        this.modalCtrl = modalCtrl;
+        this.transfer = transfer;
+        this.mailService = mailService;
+        this.file = file;
+        this.mailContent = ""; // 消息内容
+        this.mailDetail = [];
         this.initializeItems();
     }
-    BacklogDetail.prototype.initializeItems = function () {
+    MailRead.prototype.initializeItems = function () {
         var _this = this;
-        var data = {
-            "Id": this.navParams.get("id"),
-            "Uid": this.backlogService.httpService.globalData.Uid
-        };
-        this.backlogService.getDone(data).subscribe(function (resJson) {
+        this.mailService.read(this.navParams.get('id')).subscribe(function (resJson) {
             if (resJson.Result) {
-                _this.item = resJson.Data;
-            }
-            else {
-                _this.nativeService.showToast(resJson.Data);
-                _this.navCtrl.pop();
+                _this.mailDetail = resJson.Data;
+                _this.mailDetail.Name = _this.mailDetail.Name.split(":")[1];
             }
         });
+        this.mailDetail = {
+            jsyjid: "2",
+            jsbt: "信息主题2",
+            fsrName: "系统管理员",
+            fsrID: "121",
+            fssj: "2012-12-12 12:12:12",
+            jssj: "2012-12-12 12:12:12",
+            jsrIDs: "123,456,789",
+            jsnr: "你该交作业了2",
+            attName: "236.png",
+            yjfj: "236.png",
+            jszt: "未读",
+            msbz: "是"
+        };
+        this.mailContent = this.mailDetail.ggnr;
     };
-    BacklogDetail.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad BacklogDetail');
+    MailRead.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad MailRead');
+        this.content.resize();
     };
-    BacklogDetail.prototype.approved = function () {
-        console.log("审批通过");
+    MailRead.prototype.ionViewWillLeave = function () {
     };
-    BacklogDetail.prototype.overrule = function () {
-        console.log("审批驳回");
+    MailRead.prototype.read = function () {
+        var modal = this.modalCtrl.create("MailWrite", { mail: this.mailDetail });
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            data && console.log(data);
+        });
     };
-    BacklogDetail.prototype.cancel = function () {
-        this.navCtrl.pop();
+    MailRead.prototype.download = function (Path) {
+        var path = "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png";
+        var target = path.split("/").pop(); // target为文件名字
+        this.nativeService.download(path, target);
+        //   this.transfer.create().download(encodeURI(path), this.file.externalDataDirectory + 'file.png')
+        // .then((entry) => {
+        //   console.log('download complete: ' + entry.toURL());
+        // }, (error) => {
+        //   // handle error
+        // });
     };
-    BacklogDetail = __decorate([
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */])
+    ], MailRead.prototype, "content", void 0);
+    MailRead = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-backlog-detail',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\home\backlog\backlog-detail\backlog-detail.html"*/`<!--\n\n  Generated template for the BacklogDetail page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>事项详情</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-card>\n\n        <ion-card-header>\n\n            33ee\n\n        </ion-card-header>\n\n        <ion-card-content>\n\n            <ion-list>\n\n                <ion-item>\n\n                    <ion-label>当前步骤：</ion-label>\n\n                    <ion-input type="text" placeholder="当前步骤1"></ion-input>\n\n                </ion-item>\n\n\n\n                <ion-item *ngIf="isComplete">\n\n                    <ion-label>审批模式：</ion-label>\n\n                    <ion-input type="text" placeholder="无"></ion-input>\n\n                </ion-item>\n\n\n\n                <div *ngIf="!isComplete">\n\n                    <ion-item>\n\n                        <ion-label>&emsp;流水号：<em>&emsp;1&nbsp;—</em></ion-label>\n\n\n\n                        <ion-input type="text" placeholder="请输入流水号"></ion-input>\n\n                    </ion-item>\n\n\n\n                    <ion-item>\n\n                        <ion-label>审批状态：</ion-label>\n\n                        <ion-input type="text" placeholder="无"></ion-input>\n\n                    </ion-item>\n\n                </div>\n\n\n\n\n\n                <div id="strhtm" style="min-height: 100px;overflow-x:auto;"></div>\n\n\n\n            </ion-list>\n\n            <ion-row>\n\n                <ion-col col-auto style="padding-left:12px;padding-top:5px;text-align:right;">\n\n                    &nbsp;相关附件：\n\n                </ion-col>\n\n                <ion-col col-lg-8 col-xl-6 style="position: relative;padding-left: 40px;background-color: #d7eaf9;">\n\n                    <ion-icon name="md-image" color="energized" style="position:absolute;left:.4rem;display:inline-block;font-size:3.6rem;"></ion-icon>\n\n                    <div>\n\n                        <span>text.png</span>\n\n                        <span ng-click="" style="position:absolute;right:10px;font-size:1.2rem">下载</span>\n\n                        <p style="font-size:1.2rem;">2.5M</p>\n\n                    </div>\n\n                </ion-col>\n\n            </ion-row>\n\n\n\n            <ion-list *ngIf="!isComplete">\n\n                <ion-item>\n\n                    <ion-label>审批记录：</ion-label>\n\n                    <ion-textarea type="text" placeholder="无"></ion-textarea>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-textarea placeholder="请输入本次审批意见" rows="2"></ion-textarea>\n\n                </ion-item>\n\n            </ion-list>\n\n\n\n\n\n        </ion-card-content>\n\n        <ion-row text-center>\n\n            <ion-col col-4>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-checkmark"></ion-icon>\n\n                    <div>审批通过</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col col-4>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-close"></ion-icon>\n\n                    <div>审批驳回</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col col-4>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-return-left"></ion-icon>\n\n                    <div>返回</div>\n\n                </button>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n</ion-content>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\home\backlog\backlog-detail\backlog-detail.html"*/,
+            selector: 'page-mail-read',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-read\mail-read.html"*/`<!--\n  Generated template for the MailRead page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>信息详情</ion-title>\n        <!-- <ion-buttons end>\n            <button ion-button (click)="read()">转发</button>\n        </ion-buttons> -->\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n    <div>\n        <ion-list>\n\n            <ion-item>\n                <ion-label>发送人&emsp;</ion-label>\n                <ion-input type="text" readonly="disabled" [value]="mailDetail.fsrName" placeholder="系统管理员"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>主题&emsp;&emsp;</ion-label>\n                <ion-input type="test" readonly="disabled" [value]="mailDetail.jsbt" placeholder="主题1"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>发送时间</ion-label>\n                <ion-input type="test" readonly="disabled" [value]="mailDetail.fssj" placeholder="发送时间未知"></ion-input>\n            </ion-item>\n\n        </ion-list>\n    </div>\n\n\n    <div>\n        <ion-scroll scrollY="true" class="mail-content">\n            <!--<div padding-horizontal [innerHTML]="mailContent"></div>-->\n            <div class="mydiv">\n                你该交作业了<br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br>\n            </div>\n            <div class="affix" *ngIf="mailDetail.attName">\n                <ion-grid>\n                    <ion-row align-items-center>\n                        <ion-col col-6 col-lg-4>\n                            <div (click)="download(mailDetail.ggfj)">\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                <p>{{mailDetail.attName}}</p>\n                                <p color="gray">大小未知</p>\n                                <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n                            </div>\n                        </ion-col>\n                    </ion-row>\n                </ion-grid>\n            </div>\n        </ion-scroll>\n    </div>\n</ion-content>\n<ion-footer class="message-reply">\n    <div class="item">\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n        <button ion-button small color="positive">发送</button>\n    </div>\n</ion-footer>\n<!--<div class="list message-reply">\n\n    <div class="item">\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n        <button ion-button small color="positive">发送</button>\n    </div>\n\n</div>-->`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-read\mail-read.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__backlogService__["a" /* BacklogService */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */]])
-    ], BacklogDetail);
-    return BacklogDetail;
+            __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_3__ionic_native_transfer__["a" /* Transfer */],
+            __WEBPACK_IMPORTED_MODULE_5__mailService__["a" /* MailService */],
+            __WEBPACK_IMPORTED_MODULE_4__ionic_native_file__["a" /* File */]])
+    ], MailRead);
+    return MailRead;
 }());
 
-//# sourceMappingURL=backlog-detail.js.map
+//# sourceMappingURL=mail-read.js.map
 
 /***/ })
 

@@ -1,14 +1,14 @@
 webpackJsonp([13],{
 
-/***/ 709:
+/***/ 699:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnnouncementDetailPageModule", function() { return AnnouncementDetailPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BacklogDetailModule", function() { return BacklogDetailModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcement_detail__ = __webpack_require__(748);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog_detail__ = __webpack_require__(740);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,35 +18,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AnnouncementDetailPageModule = (function () {
-    function AnnouncementDetailPageModule() {
+var BacklogDetailModule = (function () {
+    function BacklogDetailModule() {
     }
-    AnnouncementDetailPageModule = __decorate([
+    BacklogDetailModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */],
+                __WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */]),
             ],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */]
+            ]
         })
-    ], AnnouncementDetailPageModule);
-    return AnnouncementDetailPageModule;
+    ], BacklogDetailModule);
+    return BacklogDetailModule;
 }());
 
-//# sourceMappingURL=announcement-detail.module.js.map
+//# sourceMappingURL=backlog-detail.module.js.map
 
 /***/ }),
 
-/***/ 734:
+/***/ 733:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(363);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -58,53 +61,51 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+// import {Observable} from "rxjs";
 
-/**
- * Generated class for the AnnouncementPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var AnnouncementService = (function () {
-    function AnnouncementService(httpService) {
+var BacklogService = (function () {
+    function BacklogService(httpService) {
         this.httpService = httpService;
-        this.announcementStatus = {
-            "enter": "录入",
-            "published": "已发布",
-            "all": "0" // 全部
+        this.Status = {
+            notdone: 0,
+            done: 1 // 已办理
         };
     }
-    AnnouncementService.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Login');
+    BacklogService.prototype.getNotDoneList = function (param) {
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
     };
-    AnnouncementService.prototype.getList = function (param) {
-        return this.httpService.postFormData("ashx/Announcement.ashx", param)
-            .map(function (res) { return res.json(); });
+    BacklogService.prototype.getDoneList = function (param) {
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
     };
-    AnnouncementService.prototype.detail = function (key) {
-        return this.httpService.postFormData("ashx/AnnouncementDetail.ashx", { "attKey": key })
-            .map(function (res) { return res.json(); });
+    BacklogService.prototype.getDone = function (param) {
+        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
     };
-    AnnouncementService = __decorate([
+    BacklogService.prototype.getNotDone = function (param) {
+        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
+    };
+    BacklogService.prototype.TodoApprove = function (param) {
+        return this.httpService.postFormData('/ashx/TodoApprove.ashx', param).map(function (res) { return res.json(); });
+    };
+    BacklogService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], AnnouncementService);
-    return AnnouncementService;
+    ], BacklogService);
+    return BacklogService;
 }());
 
-//# sourceMappingURL=announcementService.js.map
+//# sourceMappingURL=backlogService.js.map
 
 /***/ }),
 
-/***/ 748:
+/***/ 740:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementDetailPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogDetail; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(734);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(733);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(45);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -119,53 +120,63 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the AnnouncementDetailPage page.
+ * Generated class for the BacklogDetail page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
  */
-var AnnouncementDetailPage = (function () {
-    function AnnouncementDetailPage(navCtrl, navParams, announcementService, nativeService) {
+var BacklogDetail = (function () {
+    function BacklogDetail(navCtrl, navParams, backlogService, nativeService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.announcementService = announcementService;
+        this.backlogService = backlogService;
         this.nativeService = nativeService;
-        this.myDiv = '';
-        this.item = this.navParams.get('item');
+        this.item = [];
+        this.isComplete = false;
+        console.log(this.navParams.get("id"));
         this.initializeItems();
     }
-    AnnouncementDetailPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad AnnouncementDetailPage');
-    };
-    AnnouncementDetailPage.prototype.initializeItems = function () {
+    BacklogDetail.prototype.initializeItems = function () {
         var _this = this;
-        this.announcementService.detail(this.item.AnnouncementAtt).subscribe(function (resJson) {
-            if (resJson.Result && resJson !== []) {
-                _this.attObg = resJson.Data[0];
+        var data = {
+            "Id": this.navParams.get("id"),
+            "Uid": this.backlogService.httpService.globalData.Uid
+        };
+        this.backlogService.getDone(data).subscribe(function (resJson) {
+            if (resJson.Result) {
+                _this.item = resJson.Data;
             }
             else {
-                _this.attObg = {};
+                _this.nativeService.showToast(resJson.Data);
+                _this.navCtrl.pop();
             }
         });
-        this.myDiv = this.item.AnnouncementTitle;
     };
-    AnnouncementDetailPage.prototype.download = function (path) {
-        var target = path.split("/").pop();
-        this.nativeService.download(path, target);
+    BacklogDetail.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad BacklogDetail');
     };
-    AnnouncementDetailPage = __decorate([
+    BacklogDetail.prototype.approved = function () {
+        console.log("审批通过");
+    };
+    BacklogDetail.prototype.overrule = function () {
+        console.log("审批驳回");
+    };
+    BacklogDetail.prototype.cancel = function () {
+        this.navCtrl.pop();
+    };
+    BacklogDetail = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-announcement-detail',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/`<!--\n\n  Generated template for the AnnouncementDetailPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n      <ion-navbar>\n\n          <ion-title>公告详情</ion-title>\n\n      </ion-navbar>\n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content>\n\n      <div class="detail-header">\n\n          <div class="detail-title"><span color="calm">[{{item.AnnouncementType}}]</span>{{item.AnnouncementTitle}}</div>\n\n          <p>\n\n              {{item.AnnouncementPublishPerson}}\n\n              <span class="right">{{item.AnnouncementPublishDate|date : "yyyy年MM月dd日 hh时mm分"}}</span>\n\n          </p>\n\n      </div>\n\n      <div class="content">\n\n          <ion-scroll class="detail-content" scrollY="true" id="noticeContent">\n\n              <div padding>开始时间：{{item.AnnouncementStarDate|date : "yyyy年MM月dd日 hh时mm分"}}\n\n                  <br/>结束时间：{{item.AnnouncementEndDate|date : "yyyy年MM月dd日 hh时mm分"}}</div>\n\n              <div padding-horizontal [innerHTML]="myDiv"></div>\n\n              <div class="affix" *ngIf="attObj">\n\n                  <ion-grid>\n\n                      <ion-row align-items-center>\n\n                          <ion-col col-6 col-lg-4>\n\n                              <div (click)="download(attObj.AttNewName)">\n\n                                  <ion-icon class="affix-icon" name="md-image"></ion-icon>\n\n                                  <p>{{attObj.attName}}</p>\n\n                                  <p color="gray">大小未知</p>\n\n                                  <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n\n                              </div>\n\n                          </ion-col>\n\n                      </ion-row>\n\n                  </ion-grid>\n\n              </div>\n\n          </ion-scroll>\n\n      </div>\n\n  \n\n  \n\n  </ion-content>\n\n`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/,
+            selector: 'page-backlog-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog-detail\backlog-detail.html"*/`<!--\n  Generated template for the BacklogDetail page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>事项详情</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-card>\n        <ion-card-header>\n            33ee\n        </ion-card-header>\n        <ion-card-content>\n            <ion-list>\n                <ion-item>\n                    <ion-label>当前步骤：</ion-label>\n                    <ion-input type="text" placeholder="当前步骤1"></ion-input>\n                </ion-item>\n\n                <ion-item *ngIf="isComplete">\n                    <ion-label>审批模式：</ion-label>\n                    <ion-input type="text" placeholder="无"></ion-input>\n                </ion-item>\n\n                <div *ngIf="!isComplete">\n                    <ion-item>\n                        <ion-label>&emsp;流水号：<em>&emsp;1&nbsp;—</em></ion-label>\n\n                        <ion-input type="text" placeholder="请输入流水号"></ion-input>\n                    </ion-item>\n\n                    <ion-item>\n                        <ion-label>审批状态：</ion-label>\n                        <ion-input type="text" placeholder="无"></ion-input>\n                    </ion-item>\n                </div>\n\n\n                <div id="strhtm" style="min-height: 100px;overflow-x:auto;"></div>\n\n            </ion-list>\n            <ion-row>\n                <ion-col col-auto style="padding-left:12px;padding-top:5px;text-align:right;">\n                    &nbsp;相关附件：\n                </ion-col>\n                <ion-col col-lg-8 col-xl-6 style="position: relative;padding-left: 40px;background-color: #d7eaf9;">\n                    <ion-icon name="md-image" color="energized" style="position:absolute;left:.4rem;display:inline-block;font-size:3.6rem;"></ion-icon>\n                    <div>\n                        <span>text.png</span>\n                        <span ng-click="" style="position:absolute;right:10px;font-size:1.2rem">下载</span>\n                        <p style="font-size:1.2rem;">2.5M</p>\n                    </div>\n                </ion-col>\n            </ion-row>\n\n            <ion-list *ngIf="!isComplete">\n                <ion-item>\n                    <ion-label>审批记录：</ion-label>\n                    <ion-textarea type="text" placeholder="无"></ion-textarea>\n                </ion-item>\n                <ion-item>\n                    <ion-textarea placeholder="请输入本次审批意见" rows="2"></ion-textarea>\n                </ion-item>\n            </ion-list>\n\n\n        </ion-card-content>\n        <ion-row text-center>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-checkmark"></ion-icon>\n                    <div>审批通过</div>\n                </button>\n            </ion-col>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-close"></ion-icon>\n                    <div>审批驳回</div>\n                </button>\n            </ion-col>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-return-left"></ion-icon>\n                    <div>返回</div>\n                </button>\n            </ion-col>\n        </ion-row>\n    </ion-card>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog-detail\backlog-detail.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3__announcementService__["a" /* AnnouncementService */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */]])
-    ], AnnouncementDetailPage);
-    return AnnouncementDetailPage;
+            __WEBPACK_IMPORTED_MODULE_2__backlogService__["a" /* BacklogService */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */]])
+    ], BacklogDetail);
+    return BacklogDetail;
 }());
 
-//# sourceMappingURL=announcement-detail.js.map
+//# sourceMappingURL=backlog-detail.js.map
 
 /***/ })
 

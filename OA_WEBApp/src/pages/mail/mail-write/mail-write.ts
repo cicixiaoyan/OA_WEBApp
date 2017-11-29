@@ -317,7 +317,6 @@ export class MailWrite {
                     handler: () => {
                         this.fileChooser.open().then(fileURL => {
                             let mimeType = fileURL.toLowerCase().split(".").splice(-1)[0];
-                            alert(mimeType);
                             let pathOption: FileUploadOptions = {
                                 "fileKey": "file",
                                 "fileName": fileURL.substr(fileURL.lastIndexOf('/') + 1),

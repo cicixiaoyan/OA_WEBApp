@@ -1,15 +1,15 @@
 webpackJsonp([12],{
 
-/***/ 710:
+/***/ 700:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnnouncementPageModule", function() { return AnnouncementPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BacklogModule", function() { return BacklogModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcement__ = __webpack_require__(749);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(734);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog__ = __webpack_require__(741);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(733);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,36 +20,39 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AnnouncementPageModule = (function () {
-    function AnnouncementPageModule() {
+var BacklogModule = (function () {
+    function BacklogModule() {
     }
-    AnnouncementPageModule = __decorate([
+    BacklogModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__announcement__["a" /* AnnouncementPage */],
+                __WEBPACK_IMPORTED_MODULE_2__backlog__["a" /* Backlog */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__announcement__["a" /* AnnouncementPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__backlog__["a" /* Backlog */]),
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__announcementService__["a" /* AnnouncementService */]]
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__backlog__["a" /* Backlog */]
+            ],
+            providers: [__WEBPACK_IMPORTED_MODULE_3__backlogService__["a" /* BacklogService */]]
         })
-    ], AnnouncementPageModule);
-    return AnnouncementPageModule;
+    ], BacklogModule);
+    return BacklogModule;
 }());
 
-//# sourceMappingURL=announcement.module.js.map
+//# sourceMappingURL=backlog.module.js.map
 
 /***/ }),
 
-/***/ 734:
+/***/ 733:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(363);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -61,52 +64,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+// import {Observable} from "rxjs";
 
-/**
- * Generated class for the AnnouncementPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var AnnouncementService = (function () {
-    function AnnouncementService(httpService) {
+var BacklogService = (function () {
+    function BacklogService(httpService) {
         this.httpService = httpService;
-        this.announcementStatus = {
-            "enter": "录入",
-            "published": "已发布",
-            "all": "0" // 全部
+        this.Status = {
+            notdone: 0,
+            done: 1 // 已办理
         };
     }
-    AnnouncementService.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Login');
+    BacklogService.prototype.getNotDoneList = function (param) {
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
     };
-    AnnouncementService.prototype.getList = function (param) {
-        return this.httpService.postFormData("ashx/Announcement.ashx", param)
-            .map(function (res) { return res.json(); });
+    BacklogService.prototype.getDoneList = function (param) {
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
     };
-    AnnouncementService.prototype.detail = function (key) {
-        return this.httpService.postFormData("ashx/AnnouncementDetail.ashx", { "attKey": key })
-            .map(function (res) { return res.json(); });
+    BacklogService.prototype.getDone = function (param) {
+        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
     };
-    AnnouncementService = __decorate([
+    BacklogService.prototype.getNotDone = function (param) {
+        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
+    };
+    BacklogService.prototype.TodoApprove = function (param) {
+        return this.httpService.postFormData('/ashx/TodoApprove.ashx', param).map(function (res) { return res.json(); });
+    };
+    BacklogService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], AnnouncementService);
-    return AnnouncementService;
+    ], BacklogService);
+    return BacklogService;
 }());
 
-//# sourceMappingURL=announcementService.js.map
+//# sourceMappingURL=backlogService.js.map
 
 /***/ }),
 
-/***/ 749:
+/***/ 741:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Backlog; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcementService__ = __webpack_require__(734);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(733);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -118,48 +119,67 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import { AnnouncementDetailPage } from './announcement-detail/announcement-detail';
+// import { BacklogDetail } from './backlog-detail/backlog-detail';
 
 /**
- * Generated class for the AnnouncementPage page.
+ * Generated class for the Backlog page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
  */
-var AnnouncementPage = (function () {
-    function AnnouncementPage(navCtrl, navParams, announcementService) {
+var Backlog = (function () {
+    function Backlog(navCtrl, navParams, backlogService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.announcementService = announcementService;
-        this.nxPage = "AnnouncementDetailPage";
-        this.checkBtn = { "enter": true, "published": false, "all": false };
-        //   page: number = 1;
-        //   size: number = 1;
-        this.moredata = true; // 是否能加载更多
-        this.isEmpty = false; // 是否无数据
+        this.backlogService = backlogService;
+        this.work = "notDone";
+        this.nxPage = "BacklogDetail";
         this.items = [];
+        this.moredata = true;
+        this.isEmpty = false;
         this.data = {
-            "UserId": this.announcementService.httpService.globalData.Uid,
             "PageIndex": 1,
             "PageSize": 10,
-            "Status": this.announcementService.announcementStatus["enter"]
+            "Status": this.backlogService.Status["notdone"],
+            "Uid": this.backlogService.httpService.globalData.Uid
         };
-        this.initializeItems();
+        this.getNotDoneList(this.data);
     }
-    AnnouncementPage.prototype.initializeItems = function () {
-        this.getList();
+    Backlog.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Backlog');
     };
-    AnnouncementPage.prototype.doRefresh = function (refresher) {
-        this.initializeItems();
-        setTimeout(function () {
-            console.log('数据加载完成');
-            refresher.complete();
-        }, 1000);
+    Backlog.prototype.doRefresh = function (refresher) {
+        // this.initializeItems();
+        this.moredata = true;
+        this.data.PageIndex = 1;
+        this.items = [];
+        if (this.work === "notDone") {
+            // ....
+            this.data.Status = this.backlogService.Status["notdone"];
+            this.getNotDoneList(this.data);
+        }
+        else {
+            // ...
+            this.data.Status = this.backlogService.Status["done"];
+            this.getDoneList(this.data);
+        }
+        if (!!refresher) {
+            setTimeout(function () {
+                console.log('数据加载完成');
+                refresher.complete();
+            }, 1000);
+        }
     };
-    AnnouncementPage.prototype.doInfinite = function () {
+    Backlog.prototype.doInfinite = function () {
         if (this.moredata) {
-            this.data.PageIndex++;
-            this.getList();
+            if (this.work === "ontDone") {
+                // ....
+                this.getNotDoneList(this.data);
+            }
+            else {
+                // ...
+                this.getDoneList(this.data);
+            }
         }
         return new Promise(function (resolve) {
             setTimeout(function () {
@@ -167,60 +187,45 @@ var AnnouncementPage = (function () {
             }, 500);
         });
     };
-    // 选择录入、已发布、全部
-    AnnouncementPage.prototype.checkRead = function (name) {
-        if (name === void 0) { name = "enter"; }
-        this.data.PageIndex = 1;
-        this.items = [];
-        this.checkBtn = { "enter": false, "published": false, "all": false };
-        this.checkBtn[name] = true;
-        if (name === "enter") {
-            // 参数设置
-            this.data.Status = this.announcementService.announcementStatus["enter"];
-        }
-        else if (name === "published") {
-            // 参数设置
-            this.data.Status = this.announcementService.announcementStatus["published"];
-        }
-        else {
-            // 参数设置
-            this.data.Status = this.announcementService.announcementStatus["all"];
-        }
-        this.getList();
-    };
-    AnnouncementPage.prototype.getList = function () {
+    Backlog.prototype.getNotDoneList = function (data) {
         var _this = this;
-        this.announcementService.getList(this.data).subscribe(function (resJson) {
-            if (resJson.Result && resJson !== []) {
-                _this.moredata = true;
+        this.backlogService.getNotDoneList(data).subscribe(function (resJson) {
+            if (resJson.Result && resJson.Result !== []) {
                 _this.isEmpty = false;
-                var list = resJson.Data;
-                _this.items = _this.items.concat(list);
+                _this.items = _this.items.concat(resJson.Data);
             }
             else {
                 _this.moredata = false;
                 _this.isEmpty = _this.data.PageIndex == 1 ? true : false;
             }
         });
-        //   return this.httpService.postFormData("ashx/Notice.ashx/noticeall", data).map(Response => Response.json());
     };
-    AnnouncementPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Notice');
+    Backlog.prototype.getDoneList = function (data) {
+        var _this = this;
+        this.backlogService.getDoneList(data).subscribe(function (resJson) {
+            if (resJson.Result && resJson.Result !== []) {
+                _this.isEmpty = false;
+                _this.items = _this.items.concat(resJson.Data);
+            }
+            else {
+                _this.moredata = false;
+                _this.isEmpty = _this.data.PageIndex == 1 ? true : false;
+            }
+        });
     };
-    AnnouncementPage.prototype.itemSelected = function () {
-    };
-    AnnouncementPage = __decorate([
+    Backlog = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-announcement',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\announcement\announcement.html"*/`<!--\n\n  Generated template for the AnnouncementPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n      <ion-title>公告管理</ion-title>\n\n  </ion-navbar>\n\n\n\n  <div class="subbox">\n\n    <div >\n\n        <button ion-button small (click)="checkRead(\'enter\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.enter}">录入</button>\n\n        <button ion-button small (click)="checkRead(\'published\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.published}">已发布</button>\n\n        <button ion-button small (click)="checkRead(\'all\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.all}">全部</button>\n\n    </div>\n\n  </div>\n\n  <!-- <ion-searchbar color="dark" type="text" placeholder="请输入关键字" [(ngModel)]="searchKey"\n\n   [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event)"></ion-searchbar> -->\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n\n      </ion-refresher-content>\n\n  </ion-refresher>\n\n  <ion-list inset style="margin:16px 0;">\n\n      <button ion-item *ngFor="let item of items" [navPush]="nxPage" [navParams]="{item:item}">\n\n          <span>[{{item.AnnouncementType}}]{{item.AnnouncementTitle}}</span>\n\n          <p>{{item.AnnouncementPublishPerson}}&emsp;{{item.AnnouncementPublishDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n\n      </button>\n\n  </ion-list>\n\n  <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n\n      <div padding>暂无公告！！！</div>\n\n      <img src="assets/img/face/face2.png" height="100">\n\n  </div>\n\n  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n\n      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n\n  </ion-infinite-scroll>\n\n</ion-content>\n\n`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\announcement\announcement.html"*/,
+            selector: 'page-backlog',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog.html"*/`<!--\n  Generated template for the Backlog page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-navbar>\n        <ion-title>待办事项</ion-title>\n    </ion-navbar>\n    <ion-toolbar no-border-top>\n        <ion-segment class="content-ios" [(ngModel)]="work" (ngModelChange)="doRefresh()">\n            <ion-segment-button value="notDone">\n                未办理\n            </ion-segment-button>\n            <ion-segment-button value="done">\n                已办理\n            </ion-segment-button>\n        </ion-segment>\n    </ion-toolbar>\n\n</ion-header>\n\n\n<ion-content>\n    <div [ngSwitch]="work">\n        <ion-refresher (ionRefresh)="doRefresh($event)">\n            <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n            </ion-refresher-content>\n        </ion-refresher>\n\n        <ion-list *ngSwitchCase="\'notDone\'">\n\n            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.Id}">\n                <span>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</span>\n                <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>\n            </button>\n\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'done\'">\n            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.Id}">\n                <span>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</span>\n                <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>\n            </button>\n        </ion-list>\n\n        <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n            <div padding>暂无此类信息！！！</div>\n            <img src="assets/img/face/face2.png" height="100">\n        </div>\n\n        <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n        </ion-infinite-scroll>\n\n    </div>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog.html"*/,
+            providers: [__WEBPACK_IMPORTED_MODULE_2__backlogService__["a" /* BacklogService */]]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__announcementService__["a" /* AnnouncementService */]])
-    ], AnnouncementPage);
-    return AnnouncementPage;
+            __WEBPACK_IMPORTED_MODULE_2__backlogService__["a" /* BacklogService */]])
+    ], Backlog);
+    return Backlog;
 }());
 
-//# sourceMappingURL=announcement.js.map
+//# sourceMappingURL=backlog.js.map
 
 /***/ })
 

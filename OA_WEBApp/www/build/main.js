@@ -1,6 +1,6 @@
-webpackJsonp([32],{
+webpackJsonp([34],{
 
-/***/ 134:
+/***/ 136:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61,13 +61,286 @@ var Logger = (function () {
 
 /***/ }),
 
-/***/ 157:
+/***/ 159:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FileService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__HttpService__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Constants__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file_chooser__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_transfer__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Utils__ = __webpack_require__(62);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+/**
+ * 上传图片到文件服务器
+ */
+var FileService = (function () {
+    function FileService(httpService, nativeService, alertCtrl, transfer, fileChooser) {
+        this.httpService = httpService;
+        this.nativeService = nativeService;
+        this.alertCtrl = alertCtrl;
+        this.transfer = transfer;
+        this.fileChooser = fileChooser;
+    }
+    FileService_1 = FileService;
+    /**
+     * 根据文件id获取文件信息
+     * @param id
+     * @returns {FileObj}
+     */
+    FileService.prototype.getFileInfoById = function (id) {
+        var _this = this;
+        if (!id) {
+            return __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].never();
+        }
+        return this.httpService.get(__WEBPACK_IMPORTED_MODULE_3__Constants__["e" /* FILE_SERVE_URL */] + '/getById', { id: id }).map(function (res) {
+            var result = res.json();
+            if (!result.success) {
+                _this.nativeService.showToast(result.msg, 800);
+                return {};
+            }
+            else {
+                var fileObj = result.data;
+                fileObj.origPath = __WEBPACK_IMPORTED_MODULE_3__Constants__["e" /* FILE_SERVE_URL */] + fileObj.origPath;
+                fileObj.thumbPath = __WEBPACK_IMPORTED_MODULE_3__Constants__["e" /* FILE_SERVE_URL */] + fileObj.thumbPath;
+                return fileObj;
+            }
+        });
+    };
+    /**
+     * 根据文件id数组获取文件信息
+     * @param ids
+     * @returns {FileObj[]}
+     */
+    FileService.prototype.getFileInfoByIds = function (ids) {
+        var _this = this;
+        if (!ids || ids.length == 0) {
+            return __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].of([]);
+        }
+        return this.httpService.get(__WEBPACK_IMPORTED_MODULE_3__Constants__["e" /* FILE_SERVE_URL */] + '/getByIds', { ids: ids }).map(function (res) {
+            var result = res.json();
+            if (!result.success) {
+                _this.nativeService.showToast(result.msg, 800);
+                return [];
+            }
+            else {
+                for (var _i = 0, _a = result.data; _i < _a.length; _i++) {
+                    var fileObj = _a[_i];
+                    fileObj.origPath = __WEBPACK_IMPORTED_MODULE_3__Constants__["e" /* FILE_SERVE_URL */] + fileObj.origPath;
+                    fileObj.thumbPath = __WEBPACK_IMPORTED_MODULE_3__Constants__["e" /* FILE_SERVE_URL */] + fileObj.thumbPath;
+                }
+                return result.data;
+            }
+        });
+    };
+    /**
+     * 批量上传图片,只支持上传base64字符串
+     * @param fileObjList 数组中的对象必须包含bse64属性
+     * @returns {FileObj[]}
+     */
+    FileService.prototype.uploadMultiByBase64 = function (fileObjList) {
+        var _this = this;
+        if (!fileObjList || fileObjList.length == 0) {
+            return __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].of([]);
+        }
+        return this.httpService.post(__WEBPACK_IMPORTED_MODULE_3__Constants__["e" /* FILE_SERVE_URL */] + '/ashx/appUpload.aspx', fileObjList).map(function (res) {
+            var result = res.json();
+            if (!result.success) {
+                _this.nativeService.showToast(result.msg, 800);
+                return [];
+            }
+            else {
+                for (var _i = 0, _a = result.data; _i < _a.length; _i++) {
+                    var fileObj = _a[_i];
+                    fileObj.origPath = __WEBPACK_IMPORTED_MODULE_3__Constants__["e" /* FILE_SERVE_URL */] + fileObj.origPath;
+                    fileObj.thumbPath = __WEBPACK_IMPORTED_MODULE_3__Constants__["e" /* FILE_SERVE_URL */] + fileObj.thumbPath;
+                }
+                return result.data;
+            }
+        });
+    };
+    /**
+     * 上传单张图片,只支持上传base64字符串
+     * @param fileObj 对象必须包含origPath属性
+     * @returns {FileObj}
+     */
+    FileService.prototype.uploadByBase64 = function (fileObj) {
+        var _this = this;
+        if (!fileObj.base64) {
+            return __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].never();
+        }
+        return this.httpService.post(__WEBPACK_IMPORTED_MODULE_3__Constants__["e" /* FILE_SERVE_URL */] + '/ashx/appUpload.aspx', [fileObj]).map(function (res) {
+            var result = res.json();
+            if (!result.success) {
+                _this.nativeService.showToast(result.msg, 800);
+                return [];
+            }
+            else {
+                var fileObj_1 = result.data[0];
+                fileObj_1.origPath = __WEBPACK_IMPORTED_MODULE_3__Constants__["e" /* FILE_SERVE_URL */] + fileObj_1.origPath;
+                fileObj_1.thumbPath = __WEBPACK_IMPORTED_MODULE_3__Constants__["e" /* FILE_SERVE_URL */] + fileObj_1.thumbPath;
+                return fileObj_1;
+            }
+        });
+    };
+    /**
+     * 批量上传图片
+     * @param fileObjList 数组中的对象必须包含origPath属性
+     * @returns {FileObj[]}
+     */
+    FileService.prototype.uploadMultiByFilePath = function (fileObjList) {
+        var _this = this;
+        if (fileObjList.length == 0) {
+            return __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].of([]);
+        }
+        return __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].create(function (observer) {
+            _this.nativeService.showLoading();
+            var fileObjs = [];
+            var _loop_1 = function (fileObj) {
+                _this.nativeService.convertImgToBase64(fileObj.origPath).subscribe(function (base64) {
+                    fileObjs.push({
+                        'base64': base64,
+                        'type': FileService_1.getFileType(fileObj.origPath),
+                        'parameter': fileObj.parameter
+                    });
+                    if (fileObjs.length === fileObjList.length) {
+                        _this.uploadMultiByBase64(fileObjs).subscribe(function (res) {
+                            observer.next(res);
+                            _this.nativeService.hideLoading();
+                        });
+                    }
+                });
+            };
+            for (var _i = 0, fileObjList_1 = fileObjList; _i < fileObjList_1.length; _i++) {
+                var fileObj = fileObjList_1[_i];
+                _loop_1(fileObj);
+            }
+        });
+    };
+    /**
+     * app上传单张图片
+     * @param fileObj 对象必须包含origPath属性
+     * @returns {FileObj}
+     */
+    FileService.prototype.uploadByFilePath = function (fileObj) {
+        var _this = this;
+        if (!fileObj.origPath) {
+            return __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].never();
+        }
+        return __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].create(function (observer) {
+            _this.nativeService.showLoading();
+            _this.nativeService.convertImgToBase64(fileObj.origPath).subscribe(function (base64) {
+                var file = ({
+                    'base64': base64,
+                    'type': FileService_1.getFileType(fileObj.origPath),
+                    'parameter': fileObj.parameter
+                });
+                _this.uploadByBase64(file).subscribe(function (res) {
+                    observer.next(res);
+                    _this.nativeService.hideLoading();
+                });
+            });
+        });
+    };
+    FileService.getFileType = function (path) {
+        return path.substring(path.lastIndexOf('.') + 1);
+    };
+    /**
+     * app上传附件
+     *
+     */
+    FileService.prototype.uploadAffix = function (type) {
+        var _this = this;
+        return __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].create(function (observer) {
+            _this.fileChooser.open().then(function (fileURL) {
+                var mimeType = fileURL.toLowerCase().split(".").splice(-1)[0];
+                var pathOption = {
+                    "fileKey": "file",
+                    "fileName": fileURL.substr(fileURL.lastIndexOf('/') + 1),
+                    "mimeType": __WEBPACK_IMPORTED_MODULE_8__Utils__["a" /* Utils */].getFileMimeType(mimeType),
+                    "headers": {
+                        "Connection": "close"
+                    },
+                    "chunkedMode": false,
+                    "httpMethod": "POST",
+                    "params": { "token": _this.httpService.globalData.token, "type": type }
+                };
+                var url = encodeURI(__WEBPACK_IMPORTED_MODULE_3__Constants__["e" /* FILE_SERVE_URL */] + "ashx/AttachUpload.ashx");
+                var alert = _this.alertCtrl.create({
+                    title: '上传进度：0%',
+                    enableBackdropDismiss: false,
+                    buttons: ['后台上传']
+                });
+                alert.present();
+                var fileTransfer = _this.transfer.create();
+                fileTransfer.onProgress(function (event) {
+                    var num = Math.floor(event.loaded / event.total * 100);
+                    if (num === 100) {
+                        alert.dismiss();
+                    }
+                    else {
+                        var title = document.getElementsByClassName('alert-title')[0];
+                        title && (title.innerHTML = '上传进度：' + url + event.loaded + " " + event.total + '%');
+                    }
+                });
+                fileTransfer.upload(fileURL, url, pathOption, true).then(function (data) {
+                    alert.dismiss();
+                    observer.next(data);
+                }, function (err) {
+                    console.log(err);
+                    alert.dismiss();
+                    _this.nativeService.showToast(err);
+                    observer.next(err);
+                });
+            });
+        });
+    };
+    FileService = FileService_1 = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__HttpService__["a" /* HttpService */],
+            __WEBPACK_IMPORTED_MODULE_5__NativeService__["a" /* NativeService */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_7__ionic_native_transfer__["a" /* Transfer */],
+            __WEBPACK_IMPORTED_MODULE_6__ionic_native_file_chooser__["a" /* FileChooser */]])
+    ], FileService);
+    return FileService;
+    var FileService_1;
+}());
+
+//# sourceMappingURL=FileService.js.map
+
+/***/ }),
+
+/***/ 160:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_HttpService__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -104,214 +377,6 @@ var LoginService = (function () {
 
 /***/ }),
 
-/***/ 159:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FileService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HttpService__ = __webpack_require__(88);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Constants__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NativeService__ = __webpack_require__(45);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-/**
- * 上传图片到文件服务器
- */
-var FileService = (function () {
-    function FileService(httpService, nativeService) {
-        this.httpService = httpService;
-        this.nativeService = nativeService;
-    }
-    FileService_1 = FileService;
-    /**
-     * 根据文件id获取文件信息
-     * @param id
-     * @returns {FileObj}
-     */
-    FileService.prototype.getFileInfoById = function (id) {
-        var _this = this;
-        if (!id) {
-            return __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].never();
-        }
-        return this.httpService.get(__WEBPACK_IMPORTED_MODULE_2__Constants__["e" /* FILE_SERVE_URL */] + '/getById', { id: id }).map(function (res) {
-            var result = res.json();
-            if (!result.success) {
-                _this.nativeService.showToast(result.msg, 800);
-                return {};
-            }
-            else {
-                var fileObj = result.data;
-                fileObj.origPath = __WEBPACK_IMPORTED_MODULE_2__Constants__["e" /* FILE_SERVE_URL */] + fileObj.origPath;
-                fileObj.thumbPath = __WEBPACK_IMPORTED_MODULE_2__Constants__["e" /* FILE_SERVE_URL */] + fileObj.thumbPath;
-                return fileObj;
-            }
-        });
-    };
-    /**
-     * 根据文件id数组获取文件信息
-     * @param ids
-     * @returns {FileObj[]}
-     */
-    FileService.prototype.getFileInfoByIds = function (ids) {
-        var _this = this;
-        if (!ids || ids.length == 0) {
-            return __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].of([]);
-        }
-        return this.httpService.get(__WEBPACK_IMPORTED_MODULE_2__Constants__["e" /* FILE_SERVE_URL */] + '/getByIds', { ids: ids }).map(function (res) {
-            var result = res.json();
-            if (!result.success) {
-                _this.nativeService.showToast(result.msg, 800);
-                return [];
-            }
-            else {
-                for (var _i = 0, _a = result.data; _i < _a.length; _i++) {
-                    var fileObj = _a[_i];
-                    fileObj.origPath = __WEBPACK_IMPORTED_MODULE_2__Constants__["e" /* FILE_SERVE_URL */] + fileObj.origPath;
-                    fileObj.thumbPath = __WEBPACK_IMPORTED_MODULE_2__Constants__["e" /* FILE_SERVE_URL */] + fileObj.thumbPath;
-                }
-                return result.data;
-            }
-        });
-    };
-    /**
-     * 批量上传图片,只支持上传base64字符串
-     * @param fileObjList 数组中的对象必须包含bse64属性
-     * @returns {FileObj[]}
-     */
-    FileService.prototype.uploadMultiByBase64 = function (fileObjList) {
-        var _this = this;
-        if (!fileObjList || fileObjList.length == 0) {
-            return __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].of([]);
-        }
-        return this.httpService.post(__WEBPACK_IMPORTED_MODULE_2__Constants__["e" /* FILE_SERVE_URL */] + '/ashx/appUpload.aspx', fileObjList).map(function (res) {
-            var result = res.json();
-            if (!result.success) {
-                _this.nativeService.showToast(result.msg, 800);
-                return [];
-            }
-            else {
-                for (var _i = 0, _a = result.data; _i < _a.length; _i++) {
-                    var fileObj = _a[_i];
-                    fileObj.origPath = __WEBPACK_IMPORTED_MODULE_2__Constants__["e" /* FILE_SERVE_URL */] + fileObj.origPath;
-                    fileObj.thumbPath = __WEBPACK_IMPORTED_MODULE_2__Constants__["e" /* FILE_SERVE_URL */] + fileObj.thumbPath;
-                }
-                return result.data;
-            }
-        });
-    };
-    /**
-     * 上传单张图片,只支持上传base64字符串
-     * @param fileObj 对象必须包含origPath属性
-     * @returns {FileObj}
-     */
-    FileService.prototype.uploadByBase64 = function (fileObj) {
-        var _this = this;
-        if (!fileObj.base64) {
-            return __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].never();
-        }
-        return this.httpService.post(__WEBPACK_IMPORTED_MODULE_2__Constants__["e" /* FILE_SERVE_URL */] + '/ashx/appUpload.aspx', [fileObj]).map(function (res) {
-            var result = res.json();
-            if (!result.success) {
-                _this.nativeService.showToast(result.msg, 800);
-                return [];
-            }
-            else {
-                var fileObj_1 = result.data[0];
-                fileObj_1.origPath = __WEBPACK_IMPORTED_MODULE_2__Constants__["e" /* FILE_SERVE_URL */] + fileObj_1.origPath;
-                fileObj_1.thumbPath = __WEBPACK_IMPORTED_MODULE_2__Constants__["e" /* FILE_SERVE_URL */] + fileObj_1.thumbPath;
-                return fileObj_1;
-            }
-        });
-    };
-    /**
-     * 批量上传图片
-     * @param fileObjList 数组中的对象必须包含origPath属性
-     * @returns {FileObj[]}
-     */
-    FileService.prototype.uploadMultiByFilePath = function (fileObjList) {
-        var _this = this;
-        if (fileObjList.length == 0) {
-            return __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].of([]);
-        }
-        return __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].create(function (observer) {
-            _this.nativeService.showLoading();
-            var fileObjs = [];
-            var _loop_1 = function (fileObj) {
-                _this.nativeService.convertImgToBase64(fileObj.origPath).subscribe(function (base64) {
-                    fileObjs.push({
-                        'base64': base64,
-                        'type': FileService_1.getFileType(fileObj.origPath),
-                        'parameter': fileObj.parameter
-                    });
-                    if (fileObjs.length === fileObjList.length) {
-                        _this.uploadMultiByBase64(fileObjs).subscribe(function (res) {
-                            observer.next(res);
-                            _this.nativeService.hideLoading();
-                        });
-                    }
-                });
-            };
-            for (var _i = 0, fileObjList_1 = fileObjList; _i < fileObjList_1.length; _i++) {
-                var fileObj = fileObjList_1[_i];
-                _loop_1(fileObj);
-            }
-        });
-    };
-    /**
-     * app上传单张图片
-     * @param fileObj 对象必须包含origPath属性
-     * @returns {FileObj}
-     */
-    FileService.prototype.uploadByFilePath = function (fileObj) {
-        var _this = this;
-        if (!fileObj.origPath) {
-            return __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].never();
-        }
-        return __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].create(function (observer) {
-            _this.nativeService.showLoading();
-            _this.nativeService.convertImgToBase64(fileObj.origPath).subscribe(function (base64) {
-                var file = ({
-                    'base64': base64,
-                    'type': FileService_1.getFileType(fileObj.origPath),
-                    'parameter': fileObj.parameter
-                });
-                _this.uploadByBase64(file).subscribe(function (res) {
-                    observer.next(res);
-                    _this.nativeService.hideLoading();
-                });
-            });
-        });
-    };
-    FileService.getFileType = function (path) {
-        return path.substring(path.lastIndexOf('.') + 1);
-    };
-    FileService = FileService_1 = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__HttpService__["a" /* HttpService */], __WEBPACK_IMPORTED_MODULE_4__NativeService__["a" /* NativeService */]])
-    ], FileService);
-    return FileService;
-    var FileService_1;
-}());
-
-//# sourceMappingURL=FileService.js.map
-
-/***/ }),
-
 /***/ 174:
 /***/ (function(module, exports) {
 
@@ -335,131 +400,143 @@ webpackEmptyAsyncContext.id = 174;
 var map = {
 	"../pages/account/aboutus/aboutus.module": [
 		705,
-		31
+		70
 	],
 	"../pages/account/account-edit/account-edit.module": [
 		706,
-		15
+		53
 	],
 	"../pages/account/account-passwordedit/account-passwordedit.module": [
 		707,
-		30
+		69
 	],
 	"../pages/account/account.module": [
 		708,
-		14
+		52
 	],
 	"../pages/announcement/announcement-detail/announcement-detail.module": [
 		709,
-		13
+		51
 	],
 	"../pages/announcement/announcement.module": [
 		710,
-		12
+		50
+	],
+	"../pages/car-add/car-add.module": [
+		774,
+		68
+	],
+	"../pages/car/car.module": [
+		711,
+		67
 	],
 	"../pages/contacts-popover/contacts-popover.module": [
-		711,
-		29
+		712,
+		66
 	],
 	"../pages/getmobile-popover/getmobile-popover.module": [
-		712,
-		28
+		713,
+		65
 	],
 	"../pages/home/backlog/backlog-detail/backlog-detail.module": [
 		699,
-		11
+		49
 	],
 	"../pages/home/backlog/backlog.module": [
 		700,
-		10
+		48
 	],
 	"../pages/home/contacts/contacts-detail/contacts-detail.module": [
 		701,
-		27
+		64
 	],
 	"../pages/home/contacts/contacts.module": [
 		702,
-		26
+		63
 	],
 	"../pages/home/home.module": [
-		713,
-		0
+		714,
+		36
 	],
 	"../pages/home/newwork/newwork-detail/newwork-detail.module": [
-		714,
-		25
+		715,
+		62
 	],
 	"../pages/home/newwork/newwork.module": [
-		715,
-		24
+		716,
+		61
 	],
 	"../pages/login/find-password/find-password.module": [
 		703,
-		23
+		60
 	],
 	"../pages/login/login.module": [
-		716,
-		2
+		717,
+		38
 	],
 	"../pages/mail/mail-read-outbox/mail-read-outbox.module": [
 		704,
-		22
+		59
 	],
 	"../pages/mail/mail-read/mail-read.module": [
-		717,
-		9
+		718,
+		47
 	],
 	"../pages/mail/mail-write/mail-write.module": [
-		718,
-		8
+		719,
+		46
 	],
 	"../pages/mail/mail.module": [
-		719,
-		1
+		720,
+		37
+	],
+	"../pages/meeting/meeting-edit/meeting-edit.module": [
+		721,
+		45
 	],
 	"../pages/meeting/meeting-write/meeting-write.module": [
-		720,
-		21
+		722,
+		44
 	],
 	"../pages/meeting/meeting.module": [
-		721,
-		7
+		723,
+		43
 	],
 	"../pages/message/message-read-out/message-read-out.module": [
-		722,
-		20
+		724,
+		58
 	],
 	"../pages/message/message-read/message-read.module": [
-		723,
-		19
+		725,
+		57
 	],
 	"../pages/message/message-write/message-write.module": [
-		724,
-		6
+		726,
+		42
 	],
 	"../pages/message/message.module": [
-		725,
-		5
+		727,
+		41
 	],
 	"../pages/sms/sms-read/sms-read.module": [
-		726,
-		18
+		728,
+		56
 	],
 	"../pages/sms/sms-write/sms-write.module": [
-		727,
-		4
+		729,
+		40
 	],
 	"../pages/sms/sms.module": [
-		728,
-		3
+		730,
+		39
 	],
 	"../pages/tabs/tabs.module": [
-		729,
-		17
+		731,
+		55
 	],
 	"../pages/welcome/welcome.module": [
-		730,
-		16
+		732,
+		54
 	]
 };
 function webpackAsyncContext(req) {
@@ -483,7 +560,7 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HttpInterceptHandle; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__NativeService__ = __webpack_require__(45);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -548,7 +625,7 @@ var HttpInterceptHandle = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BackButtonService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -614,9 +691,9 @@ var BackButtonService = (function () {
     };
     BackButtonService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* Platform */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* Platform */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* App */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ToastController */]])
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ToastController */]])
     ], BackButtonService);
     return BackButtonService;
 }());
@@ -647,17 +724,17 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(90);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(693);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_LoginService__ = __webpack_require__(157);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_LoginService__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__ = __webpack_require__(360);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__ = __webpack_require__(361);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_app_version__ = __webpack_require__(220);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_toast__ = __webpack_require__(225);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_file__ = __webpack_require__(160);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_file_chooser__ = __webpack_require__(161);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_transfer__ = __webpack_require__(158);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_file__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_file_chooser__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_transfer__ = __webpack_require__(91);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_in_app_browser__ = __webpack_require__(226);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_network__ = __webpack_require__(228);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_camera__ = __webpack_require__(224);
@@ -665,17 +742,17 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_photo_viewer__ = __webpack_require__(694);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_NativeService__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__providers_HttpIntercept__ = __webpack_require__(695);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_HttpService__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_HttpService__ = __webpack_require__(89);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_FileService__ = __webpack_require__(159);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__providers_Helper__ = __webpack_require__(696);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_Utils__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__angular_http__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_Utils__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__angular_http__ = __webpack_require__(137);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__providers_HttpInterceptHandle__ = __webpack_require__(362);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__providers_GlobalData__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__services_backButtonService__ = __webpack_require__(364);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__providers_Logger__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__providers_Logger__ = __webpack_require__(136);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__itransitions__ = __webpack_require__(697);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__providers_Constants__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__providers_Constants__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -786,6 +863,7 @@ var AppModule = (function () {
                         { loadChildren: '../pages/account/account.module#AccountModule', name: 'Account', segment: 'account', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/announcement/announcement-detail/announcement-detail.module#AnnouncementDetailPageModule', name: 'AnnouncementDetailPage', segment: 'announcement-detail', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/announcement/announcement.module#AnnouncementPageModule', name: 'AnnouncementPage', segment: 'announcement', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/car/car.module#CarPageModule', name: 'CarPage', segment: 'car', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/contacts-popover/contacts-popover.module#ContactsPopoverPageModule', name: 'ContactsPopoverPage', segment: 'contacts-popover', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/getmobile-popover/getmobile-popover.module#GetmobilePopoverPageModule', name: 'GetmobilePopoverPage', segment: 'getmobile-popover', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/backlog/backlog-detail/backlog-detail.module#BacklogDetailModule', name: 'BacklogDetail', segment: 'backlog-detail', priority: 'low', defaultHistory: [] },
@@ -801,6 +879,7 @@ var AppModule = (function () {
                         { loadChildren: '../pages/mail/mail-read/mail-read.module#MailReadModule', name: 'MailRead', segment: 'mail-read', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mail/mail-write/mail-write.module#MailWriteModule', name: 'MailWrite', segment: 'mail-write', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mail/mail.module#MailModule', name: 'Mail', segment: 'mail', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/meeting/meeting-edit/meeting-edit.module#MeetingEditPageModule', name: 'MeetingEditPage', segment: 'meeting-edit', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/meeting/meeting-write/meeting-write.module#MeetingWritePageModule', name: 'MeetingWritePage', segment: 'meeting-write', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/meeting/meeting.module#MeetingPageModule', name: 'MeetingPage', segment: 'meeting', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/message/message-read-out/message-read-out.module#MessageReadOutPageModule', name: 'MessageReadOutPage', segment: 'message-read-out', priority: 'low', defaultHistory: [] },
@@ -864,20 +943,20 @@ var AppModule = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NativeService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_app_version__ = __webpack_require__(220);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(224);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_toast__ = __webpack_require__(225);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(160);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_transfer__ = __webpack_require__(158);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_transfer__ = __webpack_require__(91);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_in_app_browser__ = __webpack_require__(226);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_image_picker__ = __webpack_require__(227);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_network__ = __webpack_require__(228);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_file_chooser__ = __webpack_require__(161);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_rxjs__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_file_chooser__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_rxjs__ = __webpack_require__(76);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_rxjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Logger__ = __webpack_require__(134);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__Constants__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Logger__ = __webpack_require__(136);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__Constants__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1289,8 +1368,8 @@ var NativeService = (function () {
     };
     NativeService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* Platform */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ToastController */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* Platform */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_2__ionic_native_app_version__["a" /* AppVersion */],
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */],
@@ -1301,7 +1380,7 @@ var NativeService = (function () {
             __WEBPACK_IMPORTED_MODULE_7__ionic_native_in_app_browser__["a" /* InAppBrowser */],
             __WEBPACK_IMPORTED_MODULE_8__ionic_native_image_picker__["a" /* ImagePicker */],
             __WEBPACK_IMPORTED_MODULE_9__ionic_native_network__["a" /* Network */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* LoadingController */],
             __WEBPACK_IMPORTED_MODULE_12__Logger__["a" /* Logger */]])
     ], NativeService);
     return NativeService;
@@ -1371,810 +1450,6 @@ var GlobalData = (function () {
 /***/ }),
 
 /***/ 62:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return APP_SERVE_URL; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return FILE_SERVE_URL; });
-/* unused harmony export APP_VERSION_SERVE_URL */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return IS_DEBUG; });
-/* unused harmony export DEFAULT_AVATAR */
-/* unused harmony export PAGE_SIZE */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return IMAGE_SIZE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return QUALITY_SIZE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return REQUEST_TIMEOUT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return ENABLE_FUNDEBUG; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return FUNDEBUG_API_KEY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return APK_DOWNLOAD; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return APP_DOWNLOAD; });
-/* unused harmony export CODE_PUSH_DEPLOYMENT_KEY */
-// export const APP_SERVE_URL = 'http://88.128.18.193:8080/';
-// export const FILE_SERVE_URL = 'http://88.128.18.144:3333/';
-/*----------------------------------------后台Api地址----------------------------------------*/
-var APP_SERVE_URL = 'http://192.168.0.49:8100/'; // 'http://192.168.0.49:789/';
-/*----------------------------------------文件服务器地址----------------------------------------*/
-var FILE_SERVE_URL = 'http://192.168.0.49:8100/'; // 文件服务:测试环境
-/*----------------------------------------app版本升级服务地址----------------------------------------*/
-var APP_VERSION_SERVE_URL = 'http://192.168.0.49:8100/'; // app版本升级服务;测试环境,查询app最新版本号,更新日志等信息.
-var IS_DEBUG = true; // 是否开发(调试)模式
-var DEFAULT_AVATAR = './assets/img/avatar.png'; // 用户默认头像
-var PAGE_SIZE = 5; // 默认分页大小
-var IMAGE_SIZE = 1024; // 拍照/从相册选择照片压缩大小
-var QUALITY_SIZE = 94; // 图像压缩质量，范围为0 - 100
-var REQUEST_TIMEOUT = 20000; // 请求超时时间,单位为毫秒
-var ENABLE_FUNDEBUG = false; // 是否启用fundebug日志监控
-var FUNDEBUG_API_KEY = 'ec3cba8712b00e9db075ee9debf73fdfb2233c748b737d71f69ed7fe04b9ead4'; // 去https://fundebug.com/申请key
-var APK_DOWNLOAD = 'http://omzo595hi.bkt.clouddn.com/ionic2_tabs.apk'; // android apk下载完整地址,用于android本地升级
-var APP_DOWNLOAD = 'http://omzo595hi.bkt.clouddn.com/download.html'; // app网页下载地址,用于ios升级或android本地升级失败
-// code push 部署key
-var CODE_PUSH_DEPLOYMENT_KEY = {
-    'android': {
-        'Production': 'i0LgJRugiIfjVYTgmXs9go45Xc7g26690215-d954-4697-a879-90e0c4612b59',
-        'Staging': 'WY29_Zyq_hg0eB3TSTGaKRSKPE6k26690215-d954-4697-a879-90e0c4612b59'
-    },
-    'ios': {
-        'Production': 'kn3VJ28z0hB_zQYnW-KnblldnBzN26690215-d954-4697-a879-90e0c4612b59',
-        'Staging': 'SRoxClVMoed8SgwIRxeVCPWx26Fk26690215-d954-4697-a879-90e0c4612b59'
-    }
-};
-//# sourceMappingURL=Constants.js.map
-
-/***/ }),
-
-/***/ 693:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__ = __webpack_require__(360);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(361);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_NativeService__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_GlobalData__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_login_LoginService__ = __webpack_require__(157);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_Utils__ = __webpack_require__(90);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-// import { Welcome } from '../pages/welcome/welcome';
-// import { TabsPage } from "../pages/tabs/tabs";
-
-
-// import { LoginPage } from "../pages/login/login";
-// import { Backlog } from "../pages/home/backlog/backlog";
-// import { Contacts } from "../pages/home/contacts/contacts";
-
-var MyApp = (function () {
-    function MyApp(menu, platform, statusBar, splashScreen, keyboard, ionicApp, storage, globalData, toastCtrl, modalCtrl, events, loginService, nativeService) {
-        var _this = this;
-        this.menu = menu;
-        this.platform = platform;
-        this.statusBar = statusBar;
-        this.splashScreen = splashScreen;
-        this.keyboard = keyboard;
-        this.ionicApp = ionicApp;
-        this.storage = storage;
-        this.globalData = globalData;
-        this.toastCtrl = toastCtrl;
-        this.modalCtrl = modalCtrl;
-        this.events = events;
-        this.loginService = loginService;
-        this.nativeService = nativeService;
-        this.photo = "assets/img/ben.png";
-        // set our app's pages
-        this.appPages = [
-            { title: '首页', component: "TabsPage", index: 0, icon: 'calendar' },
-            { title: '邮件', component: "TabsPage", index: 1, icon: 'ios-mail' },
-            { title: '通讯录', component: "TabsPage", index: 4, icon: 'md-call', tab1Component: "Contacts" },
-            { title: '公告管理', component: "TabsPage", index: 2, icon: 'ios-notifications' },
-            // { title: '新建工作', component: TabsPage, index: 5, icon: 'md-exit', tab1Component: Newwork },
-            { title: '待办事项', component: "TabsPage", index: 6, icon: 'ios-calendar', tab1Component: "Backlog" }
-            // ,{ title: '设置', component: TabsPage, index: 3, icon: 'ios-cog'},
-            // { title: '登陆', component: LoginPage, index: 7, icon: 'contacts' }
-        ];
-        this.rootPage = "TabsPage";
-        this.backButtonPressed = false;
-        platform.ready().then(function () {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
-            _this.storage.get('firstIn').then(function (result) {
-                // this.nativeService.showToast("不是第一次进入");
-                if (result) {
-                    // this.rootPage = TabsPage;
-                    _this.storage.get('loginInfo').then(function (loginInfo) {
-                        _this.nav.setRoot("TabsPage", { tabIndex: 0 });
-                        if (loginInfo) {
-                            _this.loginService.login(loginInfo).subscribe(function (resJson) {
-                                if (resJson.result) {
-                                    _this.globalData.Uid = resJson.Data.Uid;
-                                    _this.globalData.Name = resJson.Data.Name;
-                                    _this.globalData.token = resJson.Data.Token;
-                                    _this.events.publish('user:login', result.Data);
-                                }
-                                else {
-                                    // this.NavCtrl.push("LoginPage");
-                                    var modal = _this.modalCtrl.create("LoginPage");
-                                    modal.present();
-                                    modal.onDidDismiss(function (data) {
-                                        data && console.log(data);
-                                        _this.nav.setRoot("TabsPage", { tabIndex: 0 });
-                                    });
-                                }
-                            });
-                        }
-                        else {
-                            var modal = _this.modalCtrl.create("LoginPage");
-                            modal.present();
-                            modal.onDidDismiss(function (data) {
-                                data && console.log(data);
-                                _this.nav.setRoot("TabsPage", { tabIndex: 0 });
-                            });
-                        }
-                    });
-                }
-                else {
-                    _this.storage.set('firstIn', true);
-                    var modal = _this.modalCtrl.create("Welcome");
-                    modal.present();
-                    modal.onDidDismiss(function (data) {
-                        data && console.log(data);
-                        _this.nav.setRoot("TabsPage", { tabIndex: 0 });
-                    });
-                    // this.rootPage = Welcome;
-                }
-            });
-            statusBar.styleDefault();
-            splashScreen.hide();
-            _this.registerBackButtonAction(); // 注册返回按键事件
-            _this.assertNetwork(); // 检测网络
-            // this.nativeService.detectionUpgrade(); // 检测app是否升级
-        });
-    }
-    MyApp.prototype.openPage = function (page) {
-        // the nav component was found using @ViewChild(Nav)
-        // reset the nav to remove previous pages and only have this page
-        // we wouldn't want the back button to show in this scenario
-        this.menu.close();
-        if (page.index) {
-            if (page.tab1Component) {
-                this.nav.setRoot(page.component, { tab1Component: page.tab1Component, tabIndex: page.index });
-            }
-            else {
-                this.nav.setRoot(page.component, { tabIndex: page.index });
-            }
-        }
-        else {
-            this.nav.setRoot(page.component).catch(function () {
-                console.log("Didn't set nav root");
-            });
-        }
-    };
-    MyApp.prototype.goTo = function (name) {
-        this.menu.close();
-        if (name == "edit") {
-            this.nav.setRoot("TabsPage", { tabIndex: 3 });
-        }
-        else {
-            this.storage.clear(); // 清除缓存
-            __WEBPACK_IMPORTED_MODULE_8__providers_Utils__["a" /* Utils */].sessionStorageClear(); // 清除数据缓存
-            var modal = this.modalCtrl.create("LoginPage");
-            modal.present();
-            modal.onDidDismiss(function (data) {
-                data && console.log(data);
-            });
-        }
-    };
-    MyApp.prototype.assertNetwork = function () {
-        if (!this.nativeService.isConnecting()) {
-            this.toastCtrl.create({
-                message: '未检测到网络,请连接网络',
-                showCloseButton: true,
-                closeButtonText: '确定'
-            }).present();
-        }
-    };
-    MyApp.prototype.registerBackButtonAction = function () {
-        var _this = this;
-        if (!this.nativeService.isAndroid()) {
-            return;
-        }
-        this.platform.registerBackButtonAction(function () {
-            if (_this.keyboard.isOpen()) {
-                _this.keyboard.close();
-                return;
-            }
-            // 如果想点击返回按钮隐藏toast或loading或Overlay就把下面加上
-            // this.ionicApp._toastPortal.getActive() ||
-            //   this.ionicApp._loadingPortal.getActive()|| this.ionicApp._overlayPortal.getActive()
-            var activePortal = _this.ionicApp._modalPortal.getActive()
-                || _this.ionicApp._toastPortal.getActive() ||
-                _this.ionicApp._overlayPortal.getActive();
-            if (activePortal) {
-                activePortal.dismiss();
-                return;
-            }
-            var activeVC = _this.nav.getActive();
-            var tabs = activeVC.instance.tabs;
-            var activeNav = tabs.getSelected();
-            return activeNav.canGoBack() ?
-                activeNav.pop() :
-                // this.nativeService.minimize(); //
-                _this.showExit();
-        }, 1);
-    };
-    // 双击退出提示框
-    MyApp.prototype.showExit = function () {
-        var _this = this;
-        if (this.backButtonPressed) {
-            this.platform.exitApp();
-        }
-        else {
-            this.nativeService.showToast('再按一次退出应用');
-            this.backButtonPressed = true;
-            setTimeout(function () {
-                _this.backButtonPressed = false;
-            }, 2000);
-        }
-    };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* Nav */]),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* Nav */]) === "function" && _a || Object)
-    ], MyApp.prototype, "nav", void 0);
-    MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\app\app.html"*/`<ion-menu [content]="content">\n\n\n\n    <ion-header class="menu-header" padding-bottom>\n\n        <ion-row text-center>\n\n            <ion-col>\n\n                <a (click)="goTo(\'edit\')">\n\n                    <img [src]="photo" title="头像" />\n\n                </a>\n\n                <span>系统管理员</span>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-header>\n\n\n\n    <ion-content>\n\n        <ion-list>\n\n            <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">\n\n                <ion-icon color="positive" item-left [name]="p.icon"></ion-icon>\n\n                {{p.title}}\n\n            </button>\n\n        </ion-list>\n\n        <ion-row>\n\n            <ion-col col-6>\n\n                <button (click)="goTo()" ion-button icon-left clear>\n\n                    <ion-icon name=\'contacts\'></ion-icon>注销登录\n\n                </button>\n\n            </ion-col>\n\n            <ion-col col-6>\n\n                <button (click)="goTo(\'edit\')" ion-button icon-left clear>\n\n                    <ion-icon name=\'ios-cog\'></ion-icon>设置\n\n                </button>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-content>\n\n\n\n</ion-menu>\n\n<ion-nav #content [root]="rootPage"></ion-nav>`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\app\app.html"*/
-        }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* MenuController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* MenuController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["s" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["s" /* Platform */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* Keyboard */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* Keyboard */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* IonicApp */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* IonicApp */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_6__providers_GlobalData__["a" /* GlobalData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_GlobalData__["a" /* GlobalData */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["v" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["v" /* ToastController */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["n" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["n" /* ModalController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* Events */]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_7__pages_login_LoginService__["a" /* LoginService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__pages_login_LoginService__["a" /* LoginService */]) === "function" && _o || Object, typeof (_p = typeof __WEBPACK_IMPORTED_MODULE_5__providers_NativeService__["a" /* NativeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_NativeService__["a" /* NativeService */]) === "function" && _p || Object])
-    ], MyApp);
-    return MyApp;
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
-}());
-
-//# sourceMappingURL=app.component.js.map
-
-/***/ }),
-
-/***/ 695:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HttpIntercept; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(135);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__HttpInterceptHandle__ = __webpack_require__(362);
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-/**
- * Created by yanxiaojun617@163.com on 12-27.
- */
-
-
-
-
-var HttpIntercept = (function (_super) {
-    __extends(HttpIntercept, _super);
-    function HttpIntercept(backend, defaultOptions, _) {
-        var _this = _super.call(this, backend, defaultOptions) || this;
-        _this._ = _;
-        return _this;
-    }
-    HttpIntercept.prototype.get = function (url, options) {
-        var _this = this;
-        this._.events.publish("request:before", url, options);
-        return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].create(function (observer) {
-            _super.prototype.get.call(_this, url, options).subscribe(function (res) {
-                _this._.events.publish("request:success", url, options, res);
-                observer.next(res);
-            }, function (err) {
-                _this._.events.publish("request:error", url, options, err);
-                observer.error(err);
-            });
-        });
-    };
-    HttpIntercept.prototype.post = function (url, body, options) {
-        var _this = this;
-        this._.events.publish("request:before", url, options);
-        return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].create(function (observer) {
-            _super.prototype.post.call(_this, url, body, options).subscribe(function (res) {
-                _this._.events.publish("request:success", url, options, res);
-                observer.next(res);
-            }, function (err) {
-                _this._.events.publish("request:error", url, options, err);
-                observer.error(err);
-            });
-        });
-    };
-    HttpIntercept.prototype.put = function (url, body, options) {
-        var _this = this;
-        this._.events.publish("request:before", url, options);
-        return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].create(function (observer) {
-            _super.prototype.put.call(_this, url, body, options).subscribe(function (res) {
-                _this._.events.publish("request:success", url, options, res);
-                observer.next(res);
-            }, function (err) {
-                _this._.events.publish("request:error", url, options, err);
-                observer.error(err);
-            });
-        });
-    };
-    HttpIntercept.prototype.delete = function (url, options) {
-        var _this = this;
-        this._.events.publish("request:before", url, options);
-        return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].create(function (observer) {
-            _super.prototype.delete.call(_this, url, options).subscribe(function (res) {
-                _this._.events.publish("request:success", url, options, res);
-                observer.next(res);
-            }, function (err) {
-                _this._.events.publish("request:error", url, options, err);
-                observer.error(err);
-            });
-        });
-    };
-    HttpIntercept.prototype.patch = function (url, body, options) {
-        var _this = this;
-        this._.events.publish("request:before", url, options);
-        return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].create(function (observer) {
-            _super.prototype.patch.call(_this, url, body, options).subscribe(function (res) {
-                _this._.events.publish("request:success", url, options, res);
-                observer.next(res);
-            }, function (err) {
-                _this._.events.publish("request:error", url, options, err);
-                observer.error(err);
-            });
-        });
-    };
-    HttpIntercept.prototype.head = function (url, options) {
-        var _this = this;
-        this._.events.publish("request:before", url, options);
-        return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].create(function (observer) {
-            _super.prototype.head.call(_this, url, options).subscribe(function (res) {
-                _this._.events.publish("request:success", url, options, res);
-                observer.next(res);
-            }, function (err) {
-                _this._.events.publish("request:error", url, options, err);
-                observer.error(err);
-            });
-        });
-    };
-    HttpIntercept.prototype.options = function (url, options) {
-        var _this = this;
-        this._.events.publish("request:before", url, options);
-        return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].create(function (observer) {
-            _super.prototype.options.call(_this, url, options).subscribe(function (res) {
-                _this._.events.publish("request:success", url, options, res);
-                observer.next(res);
-            }, function (err) {
-                _this._.events.publish("request:error", url, options, err);
-                observer.error(err);
-            });
-        });
-    };
-    HttpIntercept = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* ConnectionBackend */], __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */], __WEBPACK_IMPORTED_MODULE_3__HttpInterceptHandle__["a" /* HttpInterceptHandle */]])
-    ], HttpIntercept);
-    return HttpIntercept;
-}(__WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]));
-
-//# sourceMappingURL=HttpIntercept.js.map
-
-/***/ }),
-
-/***/ 696:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Helper; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__FileService__ = __webpack_require__(159);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-/**
- * Created by yanxiaojun617@163.com on 12-27.
- */
-
-
-
-
-/**
- * Helper类存放和业务有关的公共方法
- * @description
- */
-var Helper = (function () {
-    function Helper(modalCtrl, storage, fileService) {
-        this.modalCtrl = modalCtrl;
-        this.storage = storage;
-        this.fileService = fileService;
-    }
-    Helper = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["n" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */],
-            __WEBPACK_IMPORTED_MODULE_3__FileService__["a" /* FileService */]])
-    ], Helper);
-    return Helper;
-}());
-
-//# sourceMappingURL=Helper.js.map
-
-/***/ }),
-
-/***/ 697:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalFromRightEnter; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ModalFromRightLeave; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return ModalScaleEnter; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return ModalScaleLeave; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(38);
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-var ModalFromRightEnter = (function (_super) {
-    __extends(ModalFromRightEnter, _super);
-    function ModalFromRightEnter() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    ModalFromRightEnter.prototype.init = function () {
-        _super.prototype.init.call(this);
-        var ele = this.enteringView.pageRef().nativeElement;
-        var backdrop = new __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* Animation */](this.plt, ele.querySelector('ion-backdrop'));
-        backdrop.beforeStyles({ 'z-index': 0, 'opacity': 0.3, 'visibility': 'visible' });
-        var wrapper = new __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* Animation */](this.plt, ele.querySelector('.modal-wrapper'));
-        wrapper.beforeStyles({ 'opacity': 1 });
-        wrapper.fromTo('transform', 'translateX(100%)', 'translateX(20%)');
-        var contentWrapper = new __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* Animation */](this.plt, ele.querySelector('ion-content.content'));
-        contentWrapper.beforeStyles({ 'width': '80%' });
-        this
-            .element(this.enteringView.pageRef())
-            .duration(300)
-            .easing('cubic-bezier(.25, .1, .25, 1)')
-            .add(backdrop)
-            .add(wrapper)
-            .add(contentWrapper);
-    };
-    return ModalFromRightEnter;
-}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["r" /* PageTransition */]));
-
-var ModalFromRightLeave = (function (_super) {
-    __extends(ModalFromRightLeave, _super);
-    function ModalFromRightLeave() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    ModalFromRightLeave.prototype.init = function () {
-        _super.prototype.init.call(this);
-        var ele = this.leavingView.pageRef().nativeElement;
-        var backdrop = new __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* Animation */](this.plt, ele.querySelector('ion-backdrop'));
-        backdrop.beforeStyles({ 'visibility': 'hidden' });
-        var wrapper = new __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* Animation */](this.plt, ele.querySelector('.modal-wrapper'));
-        wrapper.fromTo('transform', 'translateX(20%)', 'translateX(100%)');
-        this
-            .element(this.leavingView.pageRef())
-            .duration(300)
-            .easing('cubic-bezier(.25, .1, .25, 1)')
-            .add(backdrop)
-            .add(wrapper);
-    };
-    return ModalFromRightLeave;
-}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["r" /* PageTransition */]));
-
-var ModalScaleEnter = (function (_super) {
-    __extends(ModalScaleEnter, _super);
-    function ModalScaleEnter() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    ModalScaleEnter.prototype.init = function () {
-        _super.prototype.init.call(this);
-        var ele = this.enteringView.pageRef().nativeElement;
-        var wrapper = new __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* Animation */](this.plt, ele.querySelector('.modal-wrapper'));
-        wrapper.beforeStyles({ 'opacity': 1 });
-        wrapper.fromTo('transform', 'scale(0)', 'scale(1)');
-        this
-            .element(this.enteringView.pageRef())
-            .duration(400)
-            .easing('cubic-bezier(.1, .7, .1, 1)')
-            .add(wrapper);
-    };
-    return ModalScaleEnter;
-}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["r" /* PageTransition */]));
-
-var ModalScaleLeave = (function (_super) {
-    __extends(ModalScaleLeave, _super);
-    function ModalScaleLeave() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    ModalScaleLeave.prototype.init = function () {
-        _super.prototype.init.call(this);
-        var ele = this.leavingView.pageRef().nativeElement;
-        var wrapper = new __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* Animation */](this.plt, ele.querySelector('.modal-wrapper'));
-        wrapper.fromTo('transform', 'scale(1)', 'scale(0)');
-        this
-            .element(this.leavingView.pageRef())
-            .duration(400)
-            .easing('cubic-bezier(.1, .7, .1, 1)')
-            .add(wrapper);
-    };
-    return ModalScaleLeave;
-}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["r" /* PageTransition */]));
-
-//# sourceMappingURL=itransitions.js.map
-
-/***/ }),
-
-/***/ 88:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HttpService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(135);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(309);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Utils__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__GlobalData__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__NativeService__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Constants__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Logger__ = __webpack_require__(134);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-
-var HttpService = (function () {
-    function HttpService(http, globalData, logger, nativeService) {
-        this.http = http;
-        this.globalData = globalData;
-        this.logger = logger;
-        this.nativeService = nativeService;
-    }
-    HttpService_1 = HttpService;
-    HttpService.prototype.request = function (url, options) {
-        var _this = this;
-        url = __WEBPACK_IMPORTED_MODULE_4__Utils__["a" /* Utils */].formatUrl(url.startsWith('http') ? url : __WEBPACK_IMPORTED_MODULE_7__Constants__["c" /* APP_SERVE_URL */] + url);
-        return __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].create(function (observer) {
-            _this.nativeService.showLoading();
-            __WEBPACK_IMPORTED_MODULE_7__Constants__["h" /* IS_DEBUG */] && console.log('%c 请求前 %c', 'color:blue', '', 'url', url, 'options', options);
-            _this.http.request(url, options).timeout(__WEBPACK_IMPORTED_MODULE_7__Constants__["j" /* REQUEST_TIMEOUT */]).subscribe(function (res) {
-                _this.nativeService.hideLoading();
-                __WEBPACK_IMPORTED_MODULE_7__Constants__["h" /* IS_DEBUG */] && console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
-                if (res['_body'] == '') {
-                    res['_body'] = null;
-                }
-                observer.next(res);
-            }, function (err) {
-                _this.requestFailed(url, options, err); // 处理请求失败
-                observer.error(err);
-            });
-        });
-    };
-    HttpService.prototype.get = function (url, paramMap) {
-        if (paramMap === void 0) { paramMap = null; }
-        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
-            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Get,
-            search: HttpService_1.buildURLSearchParams(paramMap)
-        }));
-    };
-    HttpService.prototype.noTokenPostFormData = function (url, paramMap) {
-        if (paramMap === void 0) { paramMap = null; }
-        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
-            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Post,
-            // search: HttpService.buildURLSearchParams(paramMap).toString(),
-            body: HttpService_1.buildURLSearchParams(paramMap).toString(),
-            headers: new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            })
-        }));
-    };
-    HttpService.prototype.post = function (url, body) {
-        if (body === void 0) { body = {}; }
-        body.Token = this.globalData.token;
-        console.log(body);
-        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
-            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Post,
-            body: body,
-            headers: new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
-                'Content-Type': 'application/json; charset=UTF-8'
-            })
-        }));
-    };
-    HttpService.prototype.postFormData = function (url, paramMap) {
-        if (paramMap === void 0) { paramMap = null; }
-        paramMap.Token = this.globalData.token;
-        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
-            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Post,
-            // search: HttpService.buildURLSearchParams(paramMap).toString(),
-            body: HttpService_1.buildURLSearchParams(paramMap).toString(),
-            headers: new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            })
-        }));
-    };
-    HttpService.prototype.put = function (url, body) {
-        if (body === void 0) { body = {}; }
-        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
-            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Put,
-            body: body
-        }));
-    };
-    HttpService.prototype.delete = function (url, paramMap) {
-        if (paramMap === void 0) { paramMap = null; }
-        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
-            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Delete,
-            search: HttpService_1.buildURLSearchParams(paramMap).toString()
-        }));
-    };
-    HttpService.prototype.patch = function (url, body) {
-        if (body === void 0) { body = {}; }
-        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
-            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Patch,
-            body: body
-        }));
-    };
-    HttpService.prototype.head = function (url, paramMap) {
-        if (paramMap === void 0) { paramMap = null; }
-        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
-            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Head,
-            search: HttpService_1.buildURLSearchParams(paramMap).toString()
-        }));
-    };
-    HttpService.prototype.options = function (url, paramMap) {
-        if (paramMap === void 0) { paramMap = null; }
-        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
-            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Options,
-            search: HttpService_1.buildURLSearchParams(paramMap).toString()
-        }));
-    };
-    /**
-     * 将对象转为查询参数
-     * @param paramMap
-     * @returns {URLSearchParams}
-     */
-    HttpService.buildURLSearchParams = function (paramMap) {
-        var params = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["g" /* URLSearchParams */]();
-        if (!paramMap) {
-            return params;
-        }
-        for (var key in paramMap) {
-            var val = paramMap[key];
-            if (val instanceof Date) {
-                val = __WEBPACK_IMPORTED_MODULE_4__Utils__["a" /* Utils */].dateFormat(val, 'yyyy-MM-dd hh:mm:ss');
-            }
-            params.set(key, val);
-        }
-        return params;
-    };
-    /**
-     * 处理请求失败事件
-     * @param url
-     * @param options
-     * @param err
-     */
-    HttpService.prototype.requestFailed = function (url, options, err) {
-        this.nativeService.hideLoading();
-        __WEBPACK_IMPORTED_MODULE_7__Constants__["h" /* IS_DEBUG */] && console.log('%c 请求失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', err);
-        if (err instanceof __WEBPACK_IMPORTED_MODULE_3_rxjs__["TimeoutError"]) {
-            this.nativeService.showToast('请求超时,请稍后再试!');
-            return;
-        }
-        // err数据类型不确定,判断消息体是否有message字段,如果有说明是后台返回的json数据
-        var index = JSON.stringify(err['_body']).indexOf('message');
-        if (index != -1) {
-            this.nativeService.showToast(err.json().message || '请求发生异常');
-            return;
-        }
-        if (!this.nativeService.isConnecting()) {
-            this.nativeService.showToast('请连接网络');
-            return;
-        }
-        var status = err.status;
-        var msg = '请求发生异常';
-        if (status === 0) {
-            msg = '请求失败，请求响应出错';
-        }
-        else if (status === 404) {
-            msg = '请求失败，未找到请求地址';
-        }
-        else if (status === 500) {
-            msg = '请求失败，服务器出错，请稍后再试';
-        }
-        this.nativeService.showToast(msg);
-        this.logger.httpLog(err, msg, {
-            url: url,
-            status: status
-        });
-    };
-    HttpService.prototype.optionsAddToken = function (options) {
-        var token = this.globalData.token;
-        if (options.headers) {
-            options.headers.append('Token', token);
-        }
-        else {
-            options.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
-                'Token': token
-            });
-        }
-    };
-    HttpService = HttpService_1 = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */],
-            __WEBPACK_IMPORTED_MODULE_5__GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_8__Logger__["a" /* Logger */],
-            __WEBPACK_IMPORTED_MODULE_6__NativeService__["a" /* NativeService */]])
-    ], HttpService);
-    return HttpService;
-    var HttpService_1;
-}());
-
-//# sourceMappingURL=HttpService.js.map
-
-/***/ }),
-
-/***/ 90:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2385,6 +1660,821 @@ var Utils = (function () {
 }());
 
 //# sourceMappingURL=Utils.js.map
+
+/***/ }),
+
+/***/ 63:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return APP_SERVE_URL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return FILE_SERVE_URL; });
+/* unused harmony export APP_VERSION_SERVE_URL */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return IS_DEBUG; });
+/* unused harmony export DEFAULT_AVATAR */
+/* unused harmony export PAGE_SIZE */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return IMAGE_SIZE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return QUALITY_SIZE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return REQUEST_TIMEOUT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return ENABLE_FUNDEBUG; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return FUNDEBUG_API_KEY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return APK_DOWNLOAD; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return APP_DOWNLOAD; });
+/* unused harmony export CODE_PUSH_DEPLOYMENT_KEY */
+// export const APP_SERVE_URL = 'http://88.128.18.193:8080/';
+// export const FILE_SERVE_URL = 'http://88.128.18.144:3333/';
+/*----------------------------------------后台Api地址----------------------------------------*/
+var APP_SERVE_URL = 'http://192.168.0.49:8100/'; // 'http://192.168.0.49:789/';
+/*----------------------------------------文件服务器地址----------------------------------------*/
+var FILE_SERVE_URL = 'http://192.168.0.49:8100/'; // 文件服务:测试环境
+/*----------------------------------------app版本升级服务地址----------------------------------------*/
+var APP_VERSION_SERVE_URL = 'http://192.168.0.49:8100/'; // app版本升级服务;测试环境,查询app最新版本号,更新日志等信息.
+var IS_DEBUG = true; // 是否开发(调试)模式
+var DEFAULT_AVATAR = './assets/img/avatar.png'; // 用户默认头像
+var PAGE_SIZE = 5; // 默认分页大小
+var IMAGE_SIZE = 1024; // 拍照/从相册选择照片压缩大小
+var QUALITY_SIZE = 94; // 图像压缩质量，范围为0 - 100
+var REQUEST_TIMEOUT = 20000; // 请求超时时间,单位为毫秒
+var ENABLE_FUNDEBUG = false; // 是否启用fundebug日志监控
+var FUNDEBUG_API_KEY = 'ec3cba8712b00e9db075ee9debf73fdfb2233c748b737d71f69ed7fe04b9ead4'; // 去https://fundebug.com/申请key
+var APK_DOWNLOAD = 'http://omzo595hi.bkt.clouddn.com/ionic2_tabs.apk'; // android apk下载完整地址,用于android本地升级
+var APP_DOWNLOAD = 'http://omzo595hi.bkt.clouddn.com/download.html'; // app网页下载地址,用于ios升级或android本地升级失败
+// code push 部署key
+var CODE_PUSH_DEPLOYMENT_KEY = {
+    'android': {
+        'Production': 'i0LgJRugiIfjVYTgmXs9go45Xc7g26690215-d954-4697-a879-90e0c4612b59',
+        'Staging': 'WY29_Zyq_hg0eB3TSTGaKRSKPE6k26690215-d954-4697-a879-90e0c4612b59'
+    },
+    'ios': {
+        'Production': 'kn3VJ28z0hB_zQYnW-KnblldnBzN26690215-d954-4697-a879-90e0c4612b59',
+        'Staging': 'SRoxClVMoed8SgwIRxeVCPWx26Fk26690215-d954-4697-a879-90e0c4612b59'
+    }
+};
+//# sourceMappingURL=Constants.js.map
+
+/***/ }),
+
+/***/ 693:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__ = __webpack_require__(360);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(361);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_GlobalData__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_login_LoginService__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_Utils__ = __webpack_require__(62);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+// import { Welcome } from '../pages/welcome/welcome';
+// import { TabsPage } from "../pages/tabs/tabs";
+
+
+// import { LoginPage } from "../pages/login/login";
+// import { Backlog } from "../pages/home/backlog/backlog";
+// import { Contacts } from "../pages/home/contacts/contacts";
+
+var MyApp = (function () {
+    function MyApp(menu, platform, statusBar, splashScreen, keyboard, ionicApp, storage, globalData, toastCtrl, modalCtrl, events, loginService, nativeService) {
+        var _this = this;
+        this.menu = menu;
+        this.platform = platform;
+        this.statusBar = statusBar;
+        this.splashScreen = splashScreen;
+        this.keyboard = keyboard;
+        this.ionicApp = ionicApp;
+        this.storage = storage;
+        this.globalData = globalData;
+        this.toastCtrl = toastCtrl;
+        this.modalCtrl = modalCtrl;
+        this.events = events;
+        this.loginService = loginService;
+        this.nativeService = nativeService;
+        this.photo = "assets/img/ben.png";
+        // set our app's pages
+        this.appPages = [
+            { title: '首页', component: "TabsPage", index: 0, icon: 'calendar' },
+            { title: '邮件', component: "TabsPage", index: 1, icon: 'ios-mail' },
+            { title: '通讯录', component: "TabsPage", index: 4, icon: 'md-call', tab1Component: "Contacts" },
+            { title: '公告管理', component: "TabsPage", index: 2, icon: 'ios-notifications' },
+            // { title: '新建工作', component: TabsPage, index: 5, icon: 'md-exit', tab1Component: Newwork },
+            { title: '待办事项', component: "TabsPage", index: 6, icon: 'ios-calendar', tab1Component: "Backlog" }
+            // ,{ title: '设置', component: TabsPage, index: 3, icon: 'ios-cog'},
+            // { title: '登陆', component: LoginPage, index: 7, icon: 'contacts' }
+        ];
+        this.rootPage = "TabsPage";
+        this.backButtonPressed = false;
+        platform.ready().then(function () {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            _this.storage.get('firstIn').then(function (result) {
+                // this.nativeService.showToast("不是第一次进入");
+                if (result) {
+                    // this.rootPage = TabsPage;
+                    _this.storage.get('loginInfo').then(function (loginInfo) {
+                        _this.nav.setRoot("TabsPage", { tabIndex: 0 });
+                        if (loginInfo) {
+                            _this.loginService.login(loginInfo).subscribe(function (resJson) {
+                                if (resJson.result) {
+                                    _this.globalData.Uid = resJson.Data.Uid;
+                                    _this.globalData.Name = resJson.Data.Name;
+                                    _this.globalData.token = resJson.Data.Token;
+                                    _this.events.publish('user:login', result.Data);
+                                }
+                                else {
+                                    // this.NavCtrl.push("LoginPage");
+                                    var modal = _this.modalCtrl.create("LoginPage");
+                                    modal.present();
+                                    modal.onDidDismiss(function (data) {
+                                        data && console.log(data);
+                                        _this.nav.setRoot("TabsPage", { tabIndex: 0 });
+                                    });
+                                }
+                            });
+                        }
+                        else {
+                            var modal = _this.modalCtrl.create("LoginPage");
+                            modal.present();
+                            modal.onDidDismiss(function (data) {
+                                data && console.log(data);
+                                _this.nav.setRoot("TabsPage", { tabIndex: 0 });
+                            });
+                        }
+                    });
+                }
+                else {
+                    _this.storage.set('firstIn', true);
+                    var modal = _this.modalCtrl.create("Welcome");
+                    modal.present();
+                    modal.onDidDismiss(function (data) {
+                        data && console.log(data);
+                        _this.nav.setRoot("TabsPage", { tabIndex: 0 });
+                    });
+                    // this.rootPage = Welcome;
+                }
+            });
+            statusBar.styleDefault();
+            splashScreen.hide();
+            _this.registerBackButtonAction(); // 注册返回按键事件
+            _this.assertNetwork(); // 检测网络
+            // this.nativeService.detectionUpgrade(); // 检测app是否升级
+        });
+    }
+    MyApp.prototype.openPage = function (page) {
+        // the nav component was found using @ViewChild(Nav)
+        // reset the nav to remove previous pages and only have this page
+        // we wouldn't want the back button to show in this scenario
+        this.menu.close();
+        if (page.index) {
+            if (page.tab1Component) {
+                this.nav.setRoot(page.component, { tab1Component: page.tab1Component, tabIndex: page.index });
+            }
+            else {
+                this.nav.setRoot(page.component, { tabIndex: page.index });
+            }
+        }
+        else {
+            this.nav.setRoot(page.component).catch(function () {
+                console.log("Didn't set nav root");
+            });
+        }
+    };
+    MyApp.prototype.goTo = function (name) {
+        this.menu.close();
+        if (name == "edit") {
+            this.nav.setRoot("TabsPage", { tabIndex: 3 });
+        }
+        else {
+            this.storage.clear(); // 清除缓存
+            __WEBPACK_IMPORTED_MODULE_8__providers_Utils__["a" /* Utils */].sessionStorageClear(); // 清除数据缓存
+            var modal = this.modalCtrl.create("LoginPage");
+            modal.present();
+            modal.onDidDismiss(function (data) {
+                data && console.log(data);
+            });
+        }
+    };
+    MyApp.prototype.assertNetwork = function () {
+        if (!this.nativeService.isConnecting()) {
+            this.toastCtrl.create({
+                message: '未检测到网络,请连接网络',
+                showCloseButton: true,
+                closeButtonText: '确定'
+            }).present();
+        }
+    };
+    MyApp.prototype.registerBackButtonAction = function () {
+        var _this = this;
+        if (!this.nativeService.isAndroid()) {
+            return;
+        }
+        this.platform.registerBackButtonAction(function () {
+            if (_this.keyboard.isOpen()) {
+                _this.keyboard.close();
+                return;
+            }
+            // 如果想点击返回按钮隐藏toast或loading或Overlay就把下面加上
+            // this.ionicApp._toastPortal.getActive() ||
+            //   this.ionicApp._loadingPortal.getActive()|| this.ionicApp._overlayPortal.getActive()
+            var activePortal = _this.ionicApp._modalPortal.getActive()
+                || _this.ionicApp._toastPortal.getActive() ||
+                _this.ionicApp._overlayPortal.getActive();
+            if (activePortal) {
+                activePortal.dismiss();
+                return;
+            }
+            var activeVC = _this.nav.getActive();
+            var tabs = activeVC.instance.tabs;
+            var activeNav = tabs.getSelected();
+            return activeNav.canGoBack() ?
+                activeNav.pop() :
+                // this.nativeService.minimize(); //
+                _this.showExit();
+        }, 1);
+    };
+    // 双击退出提示框
+    MyApp.prototype.showExit = function () {
+        var _this = this;
+        if (this.backButtonPressed) {
+            this.platform.exitApp();
+        }
+        else {
+            this.nativeService.showToast('再按一次退出应用');
+            this.backButtonPressed = true;
+            setTimeout(function () {
+                _this.backButtonPressed = false;
+            }, 2000);
+        }
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["p" /* Nav */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["p" /* Nav */])
+    ], MyApp.prototype, "nav", void 0);
+    MyApp = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\app\app.html"*/`<ion-menu [content]="content">\n\n    <ion-header class="menu-header" padding-bottom>\n        <ion-row text-center>\n            <ion-col>\n                <a (click)="goTo(\'edit\')">\n                    <img [src]="photo" title="头像" />\n                </a>\n                <span>系统管理员</span>\n            </ion-col>\n        </ion-row>\n    </ion-header>\n\n    <ion-content>\n        <ion-list>\n            <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">\n                <ion-icon color="positive" item-left [name]="p.icon"></ion-icon>\n                {{p.title}}\n            </button>\n        </ion-list>\n        <ion-row>\n            <ion-col col-6>\n                <button (click)="goTo()" ion-button icon-left clear>\n                    <ion-icon name=\'contacts\'></ion-icon>注销登录\n                </button>\n            </ion-col>\n            <ion-col col-6>\n                <button (click)="goTo(\'edit\')" ion-button icon-left clear>\n                    <ion-icon name=\'ios-cog\'></ion-icon>设置\n                </button>\n            </ion-col>\n        </ion-row>\n    </ion-content>\n\n</ion-menu>\n<ion-nav #content [root]="rootPage"></ion-nav>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\app\app.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["n" /* MenuController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["t" /* Platform */],
+            __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__["a" /* StatusBar */],
+            __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* Keyboard */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* IonicApp */],
+            __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_6__providers_GlobalData__["a" /* GlobalData */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["w" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* Events */],
+            __WEBPACK_IMPORTED_MODULE_7__pages_login_LoginService__["a" /* LoginService */],
+            __WEBPACK_IMPORTED_MODULE_5__providers_NativeService__["a" /* NativeService */]])
+    ], MyApp);
+    return MyApp;
+}());
+
+//# sourceMappingURL=app.component.js.map
+
+/***/ }),
+
+/***/ 695:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HttpIntercept; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__HttpInterceptHandle__ = __webpack_require__(362);
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+/**
+ * Created by yanxiaojun617@163.com on 12-27.
+ */
+
+
+
+
+var HttpIntercept = (function (_super) {
+    __extends(HttpIntercept, _super);
+    function HttpIntercept(backend, defaultOptions, _) {
+        var _this = _super.call(this, backend, defaultOptions) || this;
+        _this._ = _;
+        return _this;
+    }
+    HttpIntercept.prototype.get = function (url, options) {
+        var _this = this;
+        this._.events.publish("request:before", url, options);
+        return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].create(function (observer) {
+            _super.prototype.get.call(_this, url, options).subscribe(function (res) {
+                _this._.events.publish("request:success", url, options, res);
+                observer.next(res);
+            }, function (err) {
+                _this._.events.publish("request:error", url, options, err);
+                observer.error(err);
+            });
+        });
+    };
+    HttpIntercept.prototype.post = function (url, body, options) {
+        var _this = this;
+        this._.events.publish("request:before", url, options);
+        return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].create(function (observer) {
+            _super.prototype.post.call(_this, url, body, options).subscribe(function (res) {
+                _this._.events.publish("request:success", url, options, res);
+                observer.next(res);
+            }, function (err) {
+                _this._.events.publish("request:error", url, options, err);
+                observer.error(err);
+            });
+        });
+    };
+    HttpIntercept.prototype.put = function (url, body, options) {
+        var _this = this;
+        this._.events.publish("request:before", url, options);
+        return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].create(function (observer) {
+            _super.prototype.put.call(_this, url, body, options).subscribe(function (res) {
+                _this._.events.publish("request:success", url, options, res);
+                observer.next(res);
+            }, function (err) {
+                _this._.events.publish("request:error", url, options, err);
+                observer.error(err);
+            });
+        });
+    };
+    HttpIntercept.prototype.delete = function (url, options) {
+        var _this = this;
+        this._.events.publish("request:before", url, options);
+        return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].create(function (observer) {
+            _super.prototype.delete.call(_this, url, options).subscribe(function (res) {
+                _this._.events.publish("request:success", url, options, res);
+                observer.next(res);
+            }, function (err) {
+                _this._.events.publish("request:error", url, options, err);
+                observer.error(err);
+            });
+        });
+    };
+    HttpIntercept.prototype.patch = function (url, body, options) {
+        var _this = this;
+        this._.events.publish("request:before", url, options);
+        return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].create(function (observer) {
+            _super.prototype.patch.call(_this, url, body, options).subscribe(function (res) {
+                _this._.events.publish("request:success", url, options, res);
+                observer.next(res);
+            }, function (err) {
+                _this._.events.publish("request:error", url, options, err);
+                observer.error(err);
+            });
+        });
+    };
+    HttpIntercept.prototype.head = function (url, options) {
+        var _this = this;
+        this._.events.publish("request:before", url, options);
+        return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].create(function (observer) {
+            _super.prototype.head.call(_this, url, options).subscribe(function (res) {
+                _this._.events.publish("request:success", url, options, res);
+                observer.next(res);
+            }, function (err) {
+                _this._.events.publish("request:error", url, options, err);
+                observer.error(err);
+            });
+        });
+    };
+    HttpIntercept.prototype.options = function (url, options) {
+        var _this = this;
+        this._.events.publish("request:before", url, options);
+        return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].create(function (observer) {
+            _super.prototype.options.call(_this, url, options).subscribe(function (res) {
+                _this._.events.publish("request:success", url, options, res);
+                observer.next(res);
+            }, function (err) {
+                _this._.events.publish("request:error", url, options, err);
+                observer.error(err);
+            });
+        });
+    };
+    HttpIntercept = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* ConnectionBackend */], __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */], __WEBPACK_IMPORTED_MODULE_3__HttpInterceptHandle__["a" /* HttpInterceptHandle */]])
+    ], HttpIntercept);
+    return HttpIntercept;
+}(__WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]));
+
+//# sourceMappingURL=HttpIntercept.js.map
+
+/***/ }),
+
+/***/ 696:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Helper; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__FileService__ = __webpack_require__(159);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+/**
+ * Created by yanxiaojun617@163.com on 12-27.
+ */
+
+
+
+
+/**
+ * Helper类存放和业务有关的公共方法
+ * @description
+ */
+var Helper = (function () {
+    function Helper(modalCtrl, storage, fileService) {
+        this.modalCtrl = modalCtrl;
+        this.storage = storage;
+        this.fileService = fileService;
+    }
+    Helper = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["o" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_3__FileService__["a" /* FileService */]])
+    ], Helper);
+    return Helper;
+}());
+
+//# sourceMappingURL=Helper.js.map
+
+/***/ }),
+
+/***/ 697:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalFromRightEnter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ModalFromRightLeave; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return ModalScaleEnter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return ModalScaleLeave; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(32);
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+var ModalFromRightEnter = (function (_super) {
+    __extends(ModalFromRightEnter, _super);
+    function ModalFromRightEnter() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    ModalFromRightEnter.prototype.init = function () {
+        _super.prototype.init.call(this);
+        var ele = this.enteringView.pageRef().nativeElement;
+        var backdrop = new __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* Animation */](this.plt, ele.querySelector('ion-backdrop'));
+        backdrop.beforeStyles({ 'z-index': 0, 'opacity': 0.3, 'visibility': 'visible' });
+        var wrapper = new __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* Animation */](this.plt, ele.querySelector('.modal-wrapper'));
+        wrapper.beforeStyles({ 'opacity': 1 });
+        wrapper.fromTo('transform', 'translateX(100%)', 'translateX(20%)');
+        var contentWrapper = new __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* Animation */](this.plt, ele.querySelector('ion-content.content'));
+        contentWrapper.beforeStyles({ 'width': '80%' });
+        this
+            .element(this.enteringView.pageRef())
+            .duration(300)
+            .easing('cubic-bezier(.25, .1, .25, 1)')
+            .add(backdrop)
+            .add(wrapper)
+            .add(contentWrapper);
+    };
+    return ModalFromRightEnter;
+}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["s" /* PageTransition */]));
+
+var ModalFromRightLeave = (function (_super) {
+    __extends(ModalFromRightLeave, _super);
+    function ModalFromRightLeave() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    ModalFromRightLeave.prototype.init = function () {
+        _super.prototype.init.call(this);
+        var ele = this.leavingView.pageRef().nativeElement;
+        var backdrop = new __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* Animation */](this.plt, ele.querySelector('ion-backdrop'));
+        backdrop.beforeStyles({ 'visibility': 'hidden' });
+        var wrapper = new __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* Animation */](this.plt, ele.querySelector('.modal-wrapper'));
+        wrapper.fromTo('transform', 'translateX(20%)', 'translateX(100%)');
+        this
+            .element(this.leavingView.pageRef())
+            .duration(300)
+            .easing('cubic-bezier(.25, .1, .25, 1)')
+            .add(backdrop)
+            .add(wrapper);
+    };
+    return ModalFromRightLeave;
+}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["s" /* PageTransition */]));
+
+var ModalScaleEnter = (function (_super) {
+    __extends(ModalScaleEnter, _super);
+    function ModalScaleEnter() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    ModalScaleEnter.prototype.init = function () {
+        _super.prototype.init.call(this);
+        var ele = this.enteringView.pageRef().nativeElement;
+        var wrapper = new __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* Animation */](this.plt, ele.querySelector('.modal-wrapper'));
+        wrapper.beforeStyles({ 'opacity': 1 });
+        wrapper.fromTo('transform', 'scale(0)', 'scale(1)');
+        this
+            .element(this.enteringView.pageRef())
+            .duration(400)
+            .easing('cubic-bezier(.1, .7, .1, 1)')
+            .add(wrapper);
+    };
+    return ModalScaleEnter;
+}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["s" /* PageTransition */]));
+
+var ModalScaleLeave = (function (_super) {
+    __extends(ModalScaleLeave, _super);
+    function ModalScaleLeave() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    ModalScaleLeave.prototype.init = function () {
+        _super.prototype.init.call(this);
+        var ele = this.leavingView.pageRef().nativeElement;
+        var wrapper = new __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* Animation */](this.plt, ele.querySelector('.modal-wrapper'));
+        wrapper.fromTo('transform', 'scale(1)', 'scale(0)');
+        this
+            .element(this.leavingView.pageRef())
+            .duration(400)
+            .easing('cubic-bezier(.1, .7, .1, 1)')
+            .add(wrapper);
+    };
+    return ModalScaleLeave;
+}(__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["s" /* PageTransition */]));
+
+//# sourceMappingURL=itransitions.js.map
+
+/***/ }),
+
+/***/ 89:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HttpService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Utils__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__GlobalData__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Constants__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Logger__ = __webpack_require__(136);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+var HttpService = (function () {
+    function HttpService(http, globalData, logger, nativeService) {
+        this.http = http;
+        this.globalData = globalData;
+        this.logger = logger;
+        this.nativeService = nativeService;
+    }
+    HttpService_1 = HttpService;
+    HttpService.prototype.request = function (url, options) {
+        var _this = this;
+        url = __WEBPACK_IMPORTED_MODULE_4__Utils__["a" /* Utils */].formatUrl(url.startsWith('http') ? url : __WEBPACK_IMPORTED_MODULE_7__Constants__["c" /* APP_SERVE_URL */] + url);
+        return __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].create(function (observer) {
+            _this.nativeService.showLoading();
+            __WEBPACK_IMPORTED_MODULE_7__Constants__["h" /* IS_DEBUG */] && console.log('%c 请求前 %c', 'color:blue', '', 'url', url, 'options', options);
+            _this.http.request(url, options).timeout(__WEBPACK_IMPORTED_MODULE_7__Constants__["j" /* REQUEST_TIMEOUT */]).subscribe(function (res) {
+                _this.nativeService.hideLoading();
+                __WEBPACK_IMPORTED_MODULE_7__Constants__["h" /* IS_DEBUG */] && console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
+                if (res['_body'] == '') {
+                    res['_body'] = null;
+                }
+                observer.next(res);
+            }, function (err) {
+                _this.requestFailed(url, options, err); // 处理请求失败
+                observer.error(err);
+            });
+        });
+    };
+    HttpService.prototype.get = function (url, paramMap) {
+        if (paramMap === void 0) { paramMap = null; }
+        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
+            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Get,
+            search: HttpService_1.buildURLSearchParams(paramMap)
+        }));
+    };
+    HttpService.prototype.noTokenPostFormData = function (url, paramMap) {
+        if (paramMap === void 0) { paramMap = null; }
+        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
+            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Post,
+            // search: HttpService.buildURLSearchParams(paramMap).toString(),
+            body: HttpService_1.buildURLSearchParams(paramMap).toString(),
+            headers: new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            })
+        }));
+    };
+    HttpService.prototype.post = function (url, body) {
+        if (body === void 0) { body = {}; }
+        body.Token = this.globalData.token;
+        console.log(body);
+        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
+            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Post,
+            body: body,
+            headers: new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+                'Content-Type': 'application/json; charset=UTF-8'
+            })
+        }));
+    };
+    HttpService.prototype.postFormData = function (url, paramMap) {
+        if (paramMap === void 0) { paramMap = null; }
+        paramMap.Token = this.globalData.token;
+        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
+            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Post,
+            // search: HttpService.buildURLSearchParams(paramMap).toString(),
+            body: HttpService_1.buildURLSearchParams(paramMap).toString(),
+            headers: new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            })
+        }));
+    };
+    HttpService.prototype.put = function (url, body) {
+        if (body === void 0) { body = {}; }
+        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
+            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Put,
+            body: body
+        }));
+    };
+    HttpService.prototype.delete = function (url, paramMap) {
+        if (paramMap === void 0) { paramMap = null; }
+        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
+            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Delete,
+            search: HttpService_1.buildURLSearchParams(paramMap).toString()
+        }));
+    };
+    HttpService.prototype.patch = function (url, body) {
+        if (body === void 0) { body = {}; }
+        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
+            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Patch,
+            body: body
+        }));
+    };
+    HttpService.prototype.head = function (url, paramMap) {
+        if (paramMap === void 0) { paramMap = null; }
+        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
+            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Head,
+            search: HttpService_1.buildURLSearchParams(paramMap).toString()
+        }));
+    };
+    HttpService.prototype.options = function (url, paramMap) {
+        if (paramMap === void 0) { paramMap = null; }
+        return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
+            method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Options,
+            search: HttpService_1.buildURLSearchParams(paramMap).toString()
+        }));
+    };
+    /**
+     * 将对象转为查询参数
+     * @param paramMap
+     * @returns {URLSearchParams}
+     */
+    HttpService.buildURLSearchParams = function (paramMap) {
+        var params = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["g" /* URLSearchParams */]();
+        if (!paramMap) {
+            return params;
+        }
+        for (var key in paramMap) {
+            var val = paramMap[key];
+            if (val instanceof Date) {
+                val = __WEBPACK_IMPORTED_MODULE_4__Utils__["a" /* Utils */].dateFormat(val, 'yyyy-MM-dd hh:mm:ss');
+            }
+            params.set(key, val);
+        }
+        return params;
+    };
+    /**
+     * 处理请求失败事件
+     * @param url
+     * @param options
+     * @param err
+     */
+    HttpService.prototype.requestFailed = function (url, options, err) {
+        this.nativeService.hideLoading();
+        __WEBPACK_IMPORTED_MODULE_7__Constants__["h" /* IS_DEBUG */] && console.log('%c 请求失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', err);
+        if (err instanceof __WEBPACK_IMPORTED_MODULE_3_rxjs__["TimeoutError"]) {
+            this.nativeService.showToast('请求超时,请稍后再试!');
+            return;
+        }
+        // err数据类型不确定,判断消息体是否有message字段,如果有说明是后台返回的json数据
+        var index = JSON.stringify(err['_body']).indexOf('message');
+        if (index != -1) {
+            this.nativeService.showToast(err.json().message || '请求发生异常');
+            return;
+        }
+        if (!this.nativeService.isConnecting()) {
+            this.nativeService.showToast('请连接网络');
+            return;
+        }
+        var status = err.status;
+        var msg = '请求发生异常';
+        if (status === 0) {
+            msg = '请求失败，请求响应出错';
+        }
+        else if (status === 404) {
+            msg = '请求失败，未找到请求地址';
+        }
+        else if (status === 500) {
+            msg = '请求失败，服务器出错，请稍后再试';
+        }
+        this.nativeService.showToast(msg);
+        this.logger.httpLog(err, msg, {
+            url: url,
+            status: status
+        });
+    };
+    HttpService.prototype.optionsAddToken = function (options) {
+        var token = this.globalData.token;
+        if (options.headers) {
+            options.headers.append('Token', token);
+        }
+        else {
+            options.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
+                'Token': token
+            });
+        }
+    };
+    HttpService = HttpService_1 = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */],
+            __WEBPACK_IMPORTED_MODULE_5__GlobalData__["a" /* GlobalData */],
+            __WEBPACK_IMPORTED_MODULE_8__Logger__["a" /* Logger */],
+            __WEBPACK_IMPORTED_MODULE_6__NativeService__["a" /* NativeService */]])
+    ], HttpService);
+    return HttpService;
+    var HttpService_1;
+}());
+
+//# sourceMappingURL=HttpService.js.map
 
 /***/ })
 

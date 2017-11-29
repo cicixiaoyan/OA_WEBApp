@@ -1,14 +1,14 @@
 webpackJsonp([20],{
 
-/***/ 722:
+/***/ 728:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessageReadOutPageModule", function() { return MessageReadOutPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SmsReadPageModule", function() { return SmsReadPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_read_out__ = __webpack_require__(761);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sms_read__ = __webpack_require__(769);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,34 +18,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MessageReadOutPageModule = (function () {
-    function MessageReadOutPageModule() {
+var SmsReadPageModule = (function () {
+    function SmsReadPageModule() {
     }
-    MessageReadOutPageModule = __decorate([
+    SmsReadPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__message_read_out__["a" /* MessageReadOutPage */],
+                __WEBPACK_IMPORTED_MODULE_2__sms_read__["a" /* SmsReadPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__message_read_out__["a" /* MessageReadOutPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__sms_read__["a" /* SmsReadPage */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__message_read_out__["a" /* MessageReadOutPage */]]
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__sms_read__["a" /* SmsReadPage */]
+            ]
         })
-    ], MessageReadOutPageModule);
-    return MessageReadOutPageModule;
+    ], SmsReadPageModule);
+    return SmsReadPageModule;
 }());
 
-//# sourceMappingURL=message-read-out.module.js.map
+//# sourceMappingURL=sms-read.module.js.map
 
 /***/ }),
 
-/***/ 761:
+/***/ 769:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MessageReadOutPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SmsReadPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -59,39 +61,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the MessageReadOutPage page.
+ * Generated class for the SmsReadPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var MessageReadOutPage = (function () {
-    function MessageReadOutPage(navCtrl, navParams) {
+var SmsReadPage = (function () {
+    function SmsReadPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.messageDetail = [];
+        this.detail = [];
         this.initializeItems();
     }
-    MessageReadOutPage.prototype.initializeItems = function () {
-        this.messageDetail = this.navParams.get("Params");
-        this.messageContent = this.messageDetail.Title;
-    };
-    MessageReadOutPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad MessageReadOutPage');
+    SmsReadPage.prototype.initializeItems = function () {
+        this.detail = this.navParams.get("Params");
+        console.log(this.detail);
+        this.Content = this.detail.SmsMsg;
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */]),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */])
-    ], MessageReadOutPage.prototype, "content", void 0);
-    MessageReadOutPage = __decorate([
+    ], SmsReadPage.prototype, "content", void 0);
+    SmsReadPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-message-read-out',template:/*ion-inline-start:"F:\GithubSourceCode\OA_WEBApp\src\pages\message\message-read-out\message-read-out.html"*/`<!--\n\n  Generated template for the MessageReadOutPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n      <ion-navbar>\n\n          <ion-title>消息详情</ion-title>\n\n      </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n      <div>\n\n          <ion-list>\n\n  \n\n              <ion-item>\n\n                  <ion-label>发送人&emsp;</ion-label>\n\n                  <ion-input type="text" disabled="disabled" [(ngModel)]="messageDetail.AccessPerson" placeholder="系统管理员"></ion-input>\n\n              </ion-item>\n\n  \n\n              <ion-item>\n\n                  <ion-label>发送时间</ion-label>\n\n                  <ion-input type="test" disabled="disabled" [(ngModel)]="messageDetail.MailDate" placeholder="发送时间未知"></ion-input>\n\n              </ion-item>\n\n  \n\n          </ion-list>\n\n      </div>\n\n  \n\n      <div>\n\n          <ion-scroll scrollY="true" class="message-content">\n\n              <div padding-horizontal [innerHTML]="messageContent"></div>\n\n              <!-- <ion-textarea [(ngModule)]="messageDetail.Title"  placeholder="回复: "></ion-textarea> -->\n\n              <!-- <div class="mydiv">\n\n                {{messageDetail.Title}}\n\n              </div> -->\n\n          </ion-scroll>\n\n      </div>\n\n  </ion-content>\n\n`/*ion-inline-end:"F:\GithubSourceCode\OA_WEBApp\src\pages\message\message-read-out\message-read-out.html"*/,
+            selector: 'page-sms-read',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\sms\sms-read\sms-read.html"*/`<!--\n  Generated template for the SmsReadPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>短息详情</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-list>\n    <ion-item>\n        <ion-label>接收号码&emsp;</ion-label>\n        <ion-input type="text" disabled="disabled" [(ngModel)]="detail.AccessNumber" placeholder="系统管理员"></ion-input>\n    </ion-item>\n\n    <ion-item>\n        <ion-label>发送时间</ion-label>\n        <ion-input type="test" disabled="disabled" [(ngModel)]="detail.SendDate" placeholder="发送时间未知"></ion-input>\n    </ion-item>\n\n  </ion-list>\n\n  <div>\n    <ion-scroll scrollY="true" class="sms-content">\n        <div padding-horizontal [innerHTML]="Content"></div>\n        <!-- <div class="mydiv"></div> -->\n    \n    </ion-scroll>\n  </div>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\sms\sms-read\sms-read.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
-    ], MessageReadOutPage);
-    return MessageReadOutPage;
+    ], SmsReadPage);
+    return SmsReadPage;
 }());
 
-//# sourceMappingURL=message-read-out.js.map
+//# sourceMappingURL=sms-read.js.map
 
 /***/ })
 

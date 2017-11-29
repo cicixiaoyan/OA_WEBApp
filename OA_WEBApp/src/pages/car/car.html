@@ -1,0 +1,48 @@
+<!--
+  Generated template for the CarPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>车辆</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
+      </ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-item (click)="doRead(car.Id)" *ngFor="let car of list">
+      <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>
+      <h3>管理员：何小凤&emsp;核载：4人</h3>
+      <p>启动日期：2005-11-12</p>
+    </ion-item>
+    <ion-item (click)="doRead()">
+      <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>
+      <h3>管理员：何小凤&emsp;核载：4人</h3>
+      <p>启动日期：2005-11-12</p>
+    </ion-item>
+    <ion-item (click)="doRead()">
+      <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>
+      <h3>管理员：何小凤&emsp;核载：4人</h3>
+      <p>启动日期：2005-11-12</p>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">
+      <div padding>暂无消息数据！！！</div>
+      <img src="assets/img/face/face2.png" height="100">
+  </div>
+  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <ion-fab bottom right>
+      <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

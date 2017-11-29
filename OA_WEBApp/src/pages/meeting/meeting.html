@@ -31,8 +31,8 @@
   <ion-list>
     <ion-item-sliding *ngFor="let meeting of list"  (click)="doRead(meeting.Id)">
         <ion-item>
-            <span class="status-new-dot" *ngIf="meeting.Status=='1'">●&nbsp;</span><span>我是会议主题</span>
-            <p class="font-12">地点:{{meeting.Location}}&emsp;{{meeting.StartTime}}</p>
+            <span class="status-new-dot" *ngIf="meeting.Status=='1'">●&nbsp;</span><span>{{meeting.Title}}</span>
+            <p class="font-12">地点:{{meeting.Place}}&emsp;{{meeting.StartDate}}</p>
         </ion-item>
     </ion-item-sliding>
   </ion-list>

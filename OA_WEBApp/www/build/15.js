@@ -1,14 +1,15 @@
 webpackJsonp([15],{
 
-/***/ 709:
+/***/ 724:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnnouncementDetailPageModule", function() { return AnnouncementDetailPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MeetingEditPageModule", function() { return MeetingEditPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcement_detail__ = __webpack_require__(750);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_edit__ = __webpack_require__(773);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__meeting_service__ = __webpack_require__(740);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,35 +19,40 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AnnouncementDetailPageModule = (function () {
-    function AnnouncementDetailPageModule() {
+
+var MeetingEditPageModule = (function () {
+    function MeetingEditPageModule() {
     }
-    AnnouncementDetailPageModule = __decorate([
+    MeetingEditPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */],
+                __WEBPACK_IMPORTED_MODULE_2__meeting_edit__["a" /* MeetingEditPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__meeting_edit__["a" /* MeetingEditPage */]),
             ],
+            providers: [__WEBPACK_IMPORTED_MODULE_3__meeting_service__["a" /* MeetingService */]],
+            exports: [__WEBPACK_IMPORTED_MODULE_2__meeting_edit__["a" /* MeetingEditPage */]]
         })
-    ], AnnouncementDetailPageModule);
-    return AnnouncementDetailPageModule;
+    ], MeetingEditPageModule);
+    return MeetingEditPageModule;
 }());
 
-//# sourceMappingURL=announcement-detail.module.js.map
+//# sourceMappingURL=meeting-edit.module.js.map
 
 /***/ }),
 
-/***/ 737:
+/***/ 740:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(363);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -59,52 +65,67 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the AnnouncementPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var AnnouncementService = (function () {
-    function AnnouncementService(httpService) {
+
+var MeetingService = (function () {
+    function MeetingService(httpService) {
         this.httpService = httpService;
-        this.announcementStatus = {
-            "enter": "录入",
-            "published": "已发布",
-            "all": "0" // 全部
+        this.meetingStatus = {
+            Drafting: "起草中",
+            Delivered: "送审中",
+            Approved: "已审批",
+            HasBeenReturned: "已退回",
+            completed: "已完成",
         };
     }
-    AnnouncementService.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Login');
+    MeetingService.prototype.getList = function (param) {
+        return this.httpService.postFormData("ashx/MeetLs.ashx", param).map(function (res) { return res.json(); });
     };
-    AnnouncementService.prototype.getList = function (param) {
-        return this.httpService.postFormData("ashx/Announcement.ashx", param)
-            .map(function (res) { return res.json(); });
+    MeetingService.prototype.write = function (param) {
+        return this.httpService.postFormData("ashx/MeetAdd.ashx", param).map(function (res) { return res.json(); });
     };
-    AnnouncementService.prototype.detail = function (key) {
-        return this.httpService.postFormData("ashx/AnnouncementDetail.ashx", { "attKey": key })
-            .map(function (res) { return res.json(); });
+    MeetingService.prototype.read = function (param) {
+        return this.httpService.postFormData("ashx/MeetDetail.ashx", param).map(function (res) { return res.json(); });
     };
-    AnnouncementService = __decorate([
+    MeetingService.prototype.mod = function (param) {
+        return this.httpService.postFormData("ashx/MeetMod.ashx", param).map(function (res) { return res.json(); });
+    };
+    MeetingService.prototype.MeetPlaceLs = function () {
+        return this.httpService.postFormData("ashx/MeetPlaceLs.ashx", {}).map(function (res) { return res.json(); });
+    };
+    MeetingService.prototype.MeetTypeLs = function () {
+        return this.httpService.postFormData("ashx/MeetTypeLs.ashx", {}).map(function (res) { return res.json(); });
+    };
+    MeetingService.prototype.GetMeetingPlaceAndType = function () {
+        var MeetPlaceLs = this.httpService.postFormData("ashx/MeetPlaceLs.ashx", {}).map(function (res) { return res.json(); });
+        var MeetTypeLs = this.httpService.postFormData("ashx/MeetTypeLs.ashx", {}).map(function (res) { return res.json(); });
+        return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].forkJoin([MeetPlaceLs, MeetTypeLs]);
+    };
+    MeetingService.prototype.GetDeptLs = function () {
+        return this.httpService.postFormData("ashx/BmLs.ashx", {}).map(function (res) { return res.json(); });
+    };
+    MeetingService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], AnnouncementService);
-    return AnnouncementService;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_HttpService__["a" /* HttpService */]])
+    ], MeetingService);
+    return MeetingService;
 }());
 
-//# sourceMappingURL=announcementService.js.map
+//# sourceMappingURL=meeting_service.js.map
 
 /***/ }),
 
-/***/ 750:
+/***/ 773:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementDetailPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingEditPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(737);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_FileService__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__meeting_service__ = __webpack_require__(740);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -118,54 +139,128 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
 /**
- * Generated class for the AnnouncementDetailPage page.
+ * Generated class for the MeetingEditPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var AnnouncementDetailPage = (function () {
-    function AnnouncementDetailPage(navCtrl, navParams, announcementService, nativeService) {
+var MeetingEditPage = (function () {
+    function MeetingEditPage(navCtrl, navParams, fileService, formBuilder, globalData, nativeService, meetingService) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.announcementService = announcementService;
+        this.fileService = fileService;
+        this.formBuilder = formBuilder;
+        this.globalData = globalData;
         this.nativeService = nativeService;
-        this.myDiv = '';
-        this.item = this.navParams.get('item');
-        this.initializeItems();
-    }
-    AnnouncementDetailPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad AnnouncementDetailPage');
-    };
-    AnnouncementDetailPage.prototype.initializeItems = function () {
-        var _this = this;
-        this.announcementService.detail(this.item.AnnouncementAtt).subscribe(function (resJson) {
-            if (resJson.Result && resJson !== []) {
-                _this.attObg = resJson.Data[0];
+        this.meetingService = meetingService;
+        this.FileNewName = ""; // 附件名称
+        this.MeetPlaceLs = [];
+        this.MeetTypeLs = [];
+        this.DeptLs = [];
+        this.detail = {};
+        this.writeForm = this.formBuilder.group({
+            Title: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(30)]],
+            TypeId: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
+            PlaceId: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
+            StartDate: [null, [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
+            EndDate: [null, [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
+            PersonId: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(180), __WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
+            DeptId: ["", []],
+            HostName: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(8)]],
+            Range: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(180)]],
+            Detail: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(180)]],
+            FileOldName: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(180)]],
+        });
+        var parma = { "id": this.navParams.get("Id") };
+        this.meetingService.MeetPlaceLs().subscribe(function (resJson) {
+            if (resJson.Result)
+                _this.MeetPlaceLs = resJson.Data;
+        });
+        this.meetingService.MeetTypeLs().subscribe(function (resJson) {
+            if (resJson.Result)
+                _this.MeetTypeLs = resJson.Data;
+        });
+        this.meetingService.GetDeptLs().subscribe(function (resJson) {
+            if (resJson.Result)
+                _this.DeptLs = resJson.Data;
+        });
+        this.meetingService.read(parma).subscribe(function (resJson) {
+            if (resJson.Result) {
+                _this.detail = resJson.Data;
+                _this.FileNewName = resJson.Data.FileNewName;
+                _this.writeForm.setValue({
+                    Title: _this.detail["Title"],
+                    TypeId: _this.detail["TypeId"],
+                    PlaceId: _this.detail["PlaceId"],
+                    StartDate: new Date(_this.detail["StartDate"]),
+                    EndDate: new Date(_this.detail["EndDate"]),
+                    PersonId: _this.detail["PersonId"],
+                    DeptId: _this.detail["DeptId"],
+                    HostName: _this.detail["HostName"],
+                    Range: _this.detail["Range"],
+                    Detail: _this.detail["Detail"],
+                    FileOldName: _this.detail["FileOldName"],
+                });
             }
             else {
-                _this.attObg = {};
+                _this.nativeService.showToast(resJson.Data, 800);
+                _this.navCtrl.pop();
             }
         });
-        this.myDiv = this.item.AnnouncementTitle;
+    }
+    MeetingEditPage.prototype.ionViewWillEnter = function () {
     };
-    AnnouncementDetailPage.prototype.download = function (path) {
-        var target = path.split("/").pop();
-        this.nativeService.download(path, target);
+    MeetingEditPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad MeetingWritePage');
     };
-    AnnouncementDetailPage = __decorate([
+    MeetingEditPage.prototype.save = function (data) {
+        var _this = this;
+        data.Uid = this.globalData.Uid;
+        data.FileNewName = this.FileNewName;
+        data.Id = this.detail["Id"];
+        this.meetingService.write(data).subscribe(function (resJson) {
+            if (resJson.Result) {
+                _this.nativeService.showToast("添加成功", 888);
+            }
+            else {
+                _this.nativeService.showToast(resJson.Data, 888);
+            }
+        });
+    };
+    MeetingEditPage.prototype.addAffix = function () {
+        var _this = this;
+        this.fileService.uploadAffix(1).subscribe(function (data) {
+            var resJson = JSON.parse(data.response);
+            if (data.responseCode === 200) {
+                _this.writeForm.patchValue({ 'Affix': resJson.Data[0].OldName });
+                _this.FileNewName = resJson.Data[0].NewName;
+            }
+            else {
+                _this.nativeService.showToast(resJson.Data, 800);
+            }
+        });
+    };
+    MeetingEditPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-announcement-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/`<!--\n  Generated template for the AnnouncementDetailPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  \n      <ion-navbar>\n          <ion-title>公告详情</ion-title>\n      </ion-navbar>\n  </ion-header>\n  \n  \n  <ion-content>\n      <div class="detail-header">\n          <div class="detail-title"><span color="calm">[{{item.AnnouncementType}}]</span>{{item.AnnouncementTitle}}</div>\n          <p>\n              {{item.AnnouncementPublishPerson}}\n              <span class="right">{{item.AnnouncementPublishDate|date : "yyyy年MM月dd日 hh时mm分"}}</span>\n          </p>\n      </div>\n      <div class="content">\n          <ion-scroll class="detail-content" scrollY="true" id="noticeContent">\n              <div padding>开始时间：{{item.AnnouncementStarDate|date : "yyyy年MM月dd日 hh时mm分"}}\n                  <br/>结束时间：{{item.AnnouncementEndDate|date : "yyyy年MM月dd日 hh时mm分"}}</div>\n              <div padding-horizontal [innerHTML]="myDiv"></div>\n              <div class="affix" *ngIf="attObj">\n                  <ion-grid>\n                      <ion-row align-items-center>\n                          <ion-col col-6 col-lg-4>\n                              <div (click)="download(attObj.AttNewName)">\n                                  <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                  <p>{{attObj.attName}}</p>\n                                  <p color="gray">大小未知</p>\n                                  <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n                              </div>\n                          </ion-col>\n                      </ion-row>\n                  </ion-grid>\n              </div>\n          </ion-scroll>\n      </div>\n  \n  \n  </ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/,
+            selector: 'page-meeting-edit',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-edit\meeting-edit.html"*/`<!--\n  Generated template for the MeetingEditPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  \n      <ion-navbar>\n          <ion-title>会议详情</ion-title>\n      </ion-navbar>\n  \n  </ion-header>\n  \n  \n  <ion-content>\n      <form [formGroup]="writeForm" (ngSubmit)="save(writeForm.value)">\n          <div>\n              <ion-list>\n                  <ion-item>\n                      <ion-label stacked>会议主题</ion-label>\n                      <ion-input min-rows="1" formControlName="Title" placeholder="请输入" ></ion-input>\n                  </ion-item>\n  \n                  <ion-item>\n                      <ion-label stacked>会议类型</ion-label>\n                      <ion-select formControlName="TypeId" cancelText="取消" okText="确定" placeholder="请选择">\n                          <ion-option *ngFor="let type of MeetTypeLs;let i = index" [value]="type.Id">{{type.Name}}</ion-option>\n                          <!-- <ion-option value="2">类型2</ion-option> -->\n                      </ion-select>\n                  </ion-item>\n                  <ion-item>\n                      <ion-label stacked>召开地点</ion-label>\n                      <ion-select formControlName="PlaceId" cancelText="取消" okText="确定" placeholder="请选择">\n                          <ion-option *ngFor="let place of MeetPlaceLs;let i = index" [value]="place.Id">{{place.Name}}</ion-option>\n                          <!-- <ion-option value="2">类型2</ion-option> -->\n                      </ion-select>\n                  </ion-item>\n                  <ion-item>\n                      <ion-label stacked>开始时间</ion-label>\n                      <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="StartDate" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>\n                  </ion-item>\n                  <ion-item>\n                      <ion-label stacked>结束时间</ion-label>\n                      <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="EndDate" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>\n                  </ion-item>\n                  <ion-item>\n                      <ion-label stacked>参加人员</ion-label>\n                      <ion-input type="text" formControlName="PersonId"  placeholder="点击添加"></ion-input>\n                  </ion-item>\n                  <ion-item>\n                      <ion-label stacked>参加部门</ion-label>\n                      <ion-select formControlName="DeptId" multiple="true"  cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option *ngFor="let dept of DeptLs;let i = index" [value]="dept.Id">{{dept.BmName}}</ion-option>\n                      </ion-select>\n                  </ion-item>\n                  <ion-item>\n                      <ion-label stacked>主持人</ion-label>\n                      <ion-input type="text" formControlName="HostName"  placeholder="请输入"></ion-input>\n                  </ion-item>\n                  <ion-item>\n                      <ion-label stacked>出席范围</ion-label>\n                      <ion-input type="text" formControlName="Range"  placeholder="请输入"></ion-input>\n                  </ion-item>\n                  <ion-item>\n                      <ion-label stacked>简要说明</ion-label>\n                      <ion-input type="text" formControlName="Detail"  placeholder="请输入"></ion-input>\n                  </ion-item>\n                  <ion-item>\n                      <ion-label stacked>附件</ion-label>\n                      <ion-input type="text" formControlName="FileOldName"  (click)="addAffix()" placeholder="点击添加"></ion-input>\n                  </ion-item>\n              </ion-list>\n              <div padding text-center>\n                  <button ion-button type="submit" color="danger" [disabled]="!writeForm.valid">保存</button>\n                  <button ion-button clear small navPop>取消修改</button>\n              </div>\n          </div>\n      </form>\n  </ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-edit\meeting-edit.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3__announcementService__["a" /* AnnouncementService */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */]])
-    ], AnnouncementDetailPage);
-    return AnnouncementDetailPage;
+            __WEBPACK_IMPORTED_MODULE_5__providers_FileService__["a" /* FileService */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */],
+            __WEBPACK_IMPORTED_MODULE_6__meeting_service__["a" /* MeetingService */]])
+    ], MeetingEditPage);
+    return MeetingEditPage;
 }());
 
-//# sourceMappingURL=announcement-detail.js.map
+//# sourceMappingURL=meeting-edit.js.map
 
 /***/ })
 

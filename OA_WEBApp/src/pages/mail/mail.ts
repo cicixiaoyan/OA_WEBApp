@@ -38,17 +38,17 @@ export class Mail {
         this.inboxData = {
             "PageSize": 5,
             "PageIndex": 1,
-            "MailStatus": this.mailService.Mail["inbox"],
+            "MailStatus": this.mailService.mailStatus["inbox"],
             "Uid": this.globalData.Uid,
-            "Status": this.mailService.mailStatus["unread"],
+            "Status": this.mailService.status["unread"]
         };
 
         this.outboxData = {
             "PageSize": 5,
             "PageIndex": 1,
-            "MailStatus": this.mailService.Mail["outbox"],
+            "MailStatus": this.mailService.mailStatus["outbox"],
             "Uid": this.globalData.Uid,
-            "Status": this.mailService.mailStatus["unread"]
+            "Status": this.mailService.status["unread"]
         };
         this.initializeItems();
     }
@@ -76,15 +76,15 @@ export class Mail {
         this.checkBtn[name] = true;
         if (name === "unread") {
             // 参数设置
-            this.inboxData.Status = this.mailService.mailStatus["unread"];
+            this.inboxData.Status = this.mailService.status["unread"];
         }
         else if (name === "read") {
             // 参数设置
-            this.inboxData.Status = this.mailService.mailStatus["read"];
+            this.inboxData.Status = this.mailService.status["read"];
         }
         else {
             // 参数设置
-            this.inboxData.Status = this.mailService.mailStatus["all"];
+            this.inboxData.Status = this.mailService.status["all"];
         }
         this._getInboxList(this.inboxData);
     }
@@ -105,11 +105,11 @@ export class Mail {
     }
 
     doRead(id) {
-        this.navCtrl.push("MailRead", { id: id });
+        this.navCtrl.push("MailRead", { "id": id, "MailStatus": this.mailService.mailStatus["inbox"] });
     }
 
     doReadOutBox(id) {
-        this.navCtrl.push("MailReadOutbox", { id: id });
+        this.navCtrl.push("MailRead", { "id": id, "MailStatus": this.mailService.mailStatus["outbox"] });
     }
 
     doWrite() {

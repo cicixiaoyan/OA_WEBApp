@@ -15,6 +15,11 @@ export class CarService {
     }
 
 
+    getDriverList(param?): Observable<any>{
+        return this.httpService.postFormData("", param).map((res: Response) => res.json());
+    }
+
+
 
 
 

@@ -72,7 +72,6 @@ export class MessageWritePage {
         });
         popover.onDidDismiss(data => {
             if (!!data) {
-
                 this.writeForm.patchValue({'addressee': data.addressee});
                 this.addresseeIds = data.addresseeIds;
             }

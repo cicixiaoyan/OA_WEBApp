@@ -1,15 +1,15 @@
 webpackJsonp([12],{
 
-/***/ 700:
+/***/ 727:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BacklogModule", function() { return BacklogModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MeetingRoomPageModule", function() { return MeetingRoomPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog__ = __webpack_require__(741);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(733);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_room__ = __webpack_require__(776);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__meeting_service__ = __webpack_require__(740);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,39 +20,39 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var BacklogModule = (function () {
-    function BacklogModule() {
+var MeetingRoomPageModule = (function () {
+    function MeetingRoomPageModule() {
     }
-    BacklogModule = __decorate([
+    MeetingRoomPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__backlog__["a" /* Backlog */],
+                __WEBPACK_IMPORTED_MODULE_2__meeting_room__["a" /* MeetingRoomPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__backlog__["a" /* Backlog */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__meeting_room__["a" /* MeetingRoomPage */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__backlog__["a" /* Backlog */]
-            ],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__backlogService__["a" /* BacklogService */]]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__meeting_room__["a" /* MeetingRoomPage */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_3__meeting_service__["a" /* MeetingService */]]
         })
-    ], BacklogModule);
-    return BacklogModule;
+    ], MeetingRoomPageModule);
+    return MeetingRoomPageModule;
 }());
 
-//# sourceMappingURL=backlog.module.js.map
+//# sourceMappingURL=meeting-room.module.js.map
 
 /***/ }),
 
-/***/ 733:
+/***/ 740:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(363);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -64,50 +64,64 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import {Observable} from "rxjs";
 
-var BacklogService = (function () {
-    function BacklogService(httpService) {
+
+var MeetingService = (function () {
+    function MeetingService(httpService) {
         this.httpService = httpService;
-        this.Status = {
-            notdone: 0,
-            done: 1 // 已办理
+        this.meetingStatus = {
+            Drafting: "起草中",
+            Delivered: "送审中",
+            Approved: "已审批",
+            HasBeenReturned: "已退回",
+            completed: "已完成",
         };
     }
-    BacklogService.prototype.getNotDoneList = function (param) {
-        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
+    MeetingService.prototype.getList = function (param) {
+        return this.httpService.postFormData("ashx/MeetLs.ashx", param).map(function (res) { return res.json(); });
     };
-    BacklogService.prototype.getDoneList = function (param) {
-        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
+    MeetingService.prototype.write = function (param) {
+        return this.httpService.postFormData("ashx/MeetAdd.ashx", param).map(function (res) { return res.json(); });
     };
-    BacklogService.prototype.getDone = function (param) {
-        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
+    MeetingService.prototype.read = function (param) {
+        return this.httpService.postFormData("ashx/MeetDetail.ashx", param).map(function (res) { return res.json(); });
     };
-    BacklogService.prototype.getNotDone = function (param) {
-        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
+    MeetingService.prototype.mod = function (param) {
+        return this.httpService.postFormData("ashx/MeetMod.ashx", param).map(function (res) { return res.json(); });
     };
-    BacklogService.prototype.TodoApprove = function (param) {
-        return this.httpService.postFormData('/ashx/TodoApprove.ashx', param).map(function (res) { return res.json(); });
+    MeetingService.prototype.MeetPlaceLs = function () {
+        return this.httpService.postFormData("ashx/MeetPlaceLs.ashx", {}).map(function (res) { return res.json(); });
     };
-    BacklogService = __decorate([
+    MeetingService.prototype.MeetTypeLs = function () {
+        return this.httpService.postFormData("ashx/MeetTypeLs.ashx", {}).map(function (res) { return res.json(); });
+    };
+    MeetingService.prototype.GetMeetingPlaceAndType = function () {
+        var MeetPlaceLs = this.httpService.postFormData("ashx/MeetPlaceLs.ashx", {}).map(function (res) { return res.json(); });
+        var MeetTypeLs = this.httpService.postFormData("ashx/MeetTypeLs.ashx", {}).map(function (res) { return res.json(); });
+        return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].forkJoin([MeetPlaceLs, MeetTypeLs]);
+    };
+    MeetingService.prototype.GetDeptLs = function () {
+        return this.httpService.postFormData("ashx/BmLs.ashx", {}).map(function (res) { return res.json(); });
+    };
+    MeetingService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], BacklogService);
-    return BacklogService;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_HttpService__["a" /* HttpService */]])
+    ], MeetingService);
+    return MeetingService;
 }());
 
-//# sourceMappingURL=backlogService.js.map
+//# sourceMappingURL=meeting_service.js.map
 
 /***/ }),
 
-/***/ 741:
+/***/ 776:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Backlog; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingRoomPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(733);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_service__ = __webpack_require__(740);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -119,67 +133,57 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import { BacklogDetail } from './backlog-detail/backlog-detail';
 
 /**
- * Generated class for the Backlog page.
+ * Generated class for the MeetingRoomPage page.
  *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
  */
-var Backlog = (function () {
-    function Backlog(navCtrl, navParams, backlogService) {
+var MeetingRoomPage = (function () {
+    function MeetingRoomPage(navCtrl, navParams, modalCtrl, meetingService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.backlogService = backlogService;
-        this.work = "notDone";
-        this.nxPage = "BacklogDetail";
-        this.items = [];
+        this.modalCtrl = modalCtrl;
+        this.meetingService = meetingService;
+        this.list = [];
+        this.checkBtn = {
+            Drafting: false,
+            Delivered: true,
+            Approved: false,
+            HasBeenReturned: false,
+            completed: false,
+        };
         this.moredata = true;
         this.isEmpty = false;
         this.data = {
+            "status": this.meetingService.meetingStatus["Delivered"],
+            "uid": this.meetingService.httpService.globalData.Uid,
             "PageIndex": 1,
-            "PageSize": 10,
-            "Status": this.backlogService.Status["notdone"],
-            "Uid": this.backlogService.httpService.globalData.Uid
+            "PageSize": 8
         };
-        this.getNotDoneList(this.data);
+        this.getList(this.data);
     }
-    Backlog.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Backlog');
+    MeetingRoomPage.prototype.ionViewDidLoad = function () {
     };
-    Backlog.prototype.doRefresh = function (refresher) {
-        // this.initializeItems();
-        this.moredata = true;
+    MeetingRoomPage.prototype.doRead = function (Params) {
+        this.navCtrl.push("MeetingEditPage", { "isAdd": false, "Id": Params });
+    };
+    MeetingRoomPage.prototype.doWrite = function () {
+        this.navCtrl.push("MeetingEditPage", { "isAdd": true });
+    };
+    MeetingRoomPage.prototype.doRefresh = function (refresher) {
+        this.list = [];
         this.data.PageIndex = 1;
-        this.items = [];
-        if (this.work === "notDone") {
-            // ....
-            this.data.Status = this.backlogService.Status["notdone"];
-            this.getNotDoneList(this.data);
-        }
-        else {
-            // ...
-            this.data.Status = this.backlogService.Status["done"];
-            this.getDoneList(this.data);
-        }
-        if (!!refresher) {
-            setTimeout(function () {
-                console.log('数据加载完成');
-                refresher.complete();
-            }, 1000);
-        }
+        this.getList(this.data);
+        setTimeout(function () {
+            refresher.complete();
+        }, 1000);
     };
-    Backlog.prototype.doInfinite = function () {
+    MeetingRoomPage.prototype.doInfinite = function () {
         if (this.moredata) {
-            if (this.work === "ontDone") {
-                // ....
-                this.getNotDoneList(this.data);
-            }
-            else {
-                // ...
-                this.getDoneList(this.data);
-            }
+            this.data.PageIndex++;
+            this.getList(this.data);
         }
         return new Promise(function (resolve) {
             setTimeout(function () {
@@ -187,45 +191,52 @@ var Backlog = (function () {
             }, 500);
         });
     };
-    Backlog.prototype.getNotDoneList = function (data) {
-        var _this = this;
-        this.backlogService.getNotDoneList(data).subscribe(function (resJson) {
-            if (resJson.Result && resJson.Result !== []) {
-                _this.isEmpty = false;
-                _this.items = _this.items.concat(resJson.Data);
+    MeetingRoomPage.prototype.getList = function (data) {
+        this.list = [
+            {
+                Name: '会议室1',
+                Number: '200',
+                Manager: '张三',
+                Mobile: "13111111111"
+            },
+            {
+                Name: '会议室2',
+                Number: '200',
+                Manager: '张三',
+                Mobile: "13111111111"
+            },
+            {
+                Name: '会议室3',
+                Number: '200',
+                Manager: '张三',
+                Mobile: "13111111111"
             }
-            else {
-                _this.moredata = false;
-                _this.isEmpty = _this.data.PageIndex == 1 ? true : false;
-            }
-        });
+        ];
+        // this.meetingService.getList(data).subscribe((resJson) => {
+        //   if (resJson.Result && resJson.Data !== []){
+        //     this.moredata = true;
+        //     this.isEmpty = false;
+        //     let list = resJson.Data;
+        //     this.list = [...this.list, ...list];
+        //   }else{
+        //     this.moredata = false;
+        //     this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+        //   }
+        // });
     };
-    Backlog.prototype.getDoneList = function (data) {
-        var _this = this;
-        this.backlogService.getDoneList(data).subscribe(function (resJson) {
-            if (resJson.Result && resJson.Result !== []) {
-                _this.isEmpty = false;
-                _this.items = _this.items.concat(resJson.Data);
-            }
-            else {
-                _this.moredata = false;
-                _this.isEmpty = _this.data.PageIndex == 1 ? true : false;
-            }
-        });
-    };
-    Backlog = __decorate([
+    MeetingRoomPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-backlog',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog.html"*/`<!--\n  Generated template for the Backlog page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-navbar>\n        <ion-title>待办事项</ion-title>\n    </ion-navbar>\n    <ion-toolbar no-border-top>\n        <ion-segment class="content-ios" [(ngModel)]="work" (ngModelChange)="doRefresh()">\n            <ion-segment-button value="notDone">\n                未办理\n            </ion-segment-button>\n            <ion-segment-button value="done">\n                已办理\n            </ion-segment-button>\n        </ion-segment>\n    </ion-toolbar>\n\n</ion-header>\n\n\n<ion-content>\n    <div [ngSwitch]="work">\n        <ion-refresher (ionRefresh)="doRefresh($event)">\n            <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n            </ion-refresher-content>\n        </ion-refresher>\n\n        <ion-list *ngSwitchCase="\'notDone\'">\n\n            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.Id}">\n                <span>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</span>\n                <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>\n            </button>\n\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'done\'">\n            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.Id}">\n                <span>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</span>\n                <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>\n            </button>\n        </ion-list>\n\n        <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n            <div padding>暂无此类信息！！！</div>\n            <img src="assets/img/face/face2.png" height="100">\n        </div>\n\n        <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n        </ion-infinite-scroll>\n\n    </div>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog.html"*/,
-            providers: [__WEBPACK_IMPORTED_MODULE_2__backlogService__["a" /* BacklogService */]]
+            selector: 'page-meeting-room',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-room\meeting-room.html"*/`<!--\n  Generated template for the MeetingRoomPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>会议室管理</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let room of list"  (click)="doRead(room.Id)">\n          <ion-item>\n              <ion-row>\n                  <ion-col> {{room.Name}}</ion-col>\n                  <ion-col *ngIf="room.Number" style="font-size: small;color: #488aff;text-align: right;"> 容纳人数:{{room.Number}}</ion-col>\n              </ion-row>\n              <p class="font-12">管理员:{{room.Manager}}&emsp;{{room.Mobile}}</p>\n          </ion-item>\n      </ion-item-sliding>\n    </ion-list>\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n        <div padding>暂无消息数据！！！</div>\n        <img src="assets/img/face/face2.png" height="100">\n    </div>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab></ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-room\meeting-room.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__backlogService__["a" /* BacklogService */]])
-    ], Backlog);
-    return Backlog;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_2__meeting_service__["a" /* MeetingService */]])
+    ], MeetingRoomPage);
+    return MeetingRoomPage;
 }());
 
-//# sourceMappingURL=backlog.js.map
+//# sourceMappingURL=meeting-room.js.map
 
 /***/ })
 

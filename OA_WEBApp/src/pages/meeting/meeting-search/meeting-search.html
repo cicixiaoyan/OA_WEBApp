@@ -1,0 +1,46 @@
+<!--
+  Generated template for the MeetingSearchPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>会议查询</ion-title>
+  </ion-navbar>
+  <ion-searchbar color="dark" type="text" placeholder="请输入会议主题" [(ngModel)]="searchKey"
+  [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event)"></ion-searchbar>
+  <div  class="subbox">
+      <div >
+          <button ion-button small (click)="checkRead('Drafting')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.Drafting}">起草中</button>
+          <button ion-button small (click)="checkRead('Delivered')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.Delivered}">送审中</button>
+          <button ion-button small (click)="checkRead('Approved')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.Approved}">已审批</button>
+          <button ion-button small (click)="checkRead('HasBeenReturned')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.HasBeenReturned}">已退回</button>
+          <button ion-button small (click)="checkRead('completed')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.completed}">已完成</button>
+      </div>
+    </div>
+</ion-header>
+
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-list>
+      <ion-item-sliding *ngFor="let meeting of list"  (click)="doRead(meeting.Id)">
+          <ion-item>
+              <span>{{meeting.Title}}</span>
+              <p class="font-12">地点:{{meeting.Place}}&emsp;{{meeting.StartDate}}</p>
+          </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">
+        <div padding>暂无消息数据！！！</div>
+        <img src="assets/img/face/face2.png" height="100">
+    </div>
+    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

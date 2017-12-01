@@ -51619,6 +51619,20 @@ page-home .index-row ion-col div.balanced {
   border-color: #b9fbcc;
 }
 
+page-home .list-header-ios {
+  min-height: 2rem;
+  background: #fff;
+  margin-top: 10px;
+}
+
+page-home .content-ios {
+  background: #eee;
+}
+
+page-home ion-grid {
+  background: #fff;
+}
+
 page-backlog-detail .item-ios {
   font-size: 1.4rem;
 }

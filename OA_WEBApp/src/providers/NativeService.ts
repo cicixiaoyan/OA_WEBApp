@@ -7,7 +7,8 @@ import { AppVersion } from '@ionic-native/app-version';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Toast } from '@ionic-native/toast';
 import { File, FileEntry } from '@ionic-native/file';
-import { Transfer, TransferObject } from '@ionic-native/transfer'; // FileUploadOptions
+// import { Transfer, TransferObject } from '@ionic-native/transfer'; // FileUploadOptions
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Network } from '@ionic-native/network';
@@ -41,7 +42,7 @@ export class NativeService {
                 private appVersion: AppVersion,
                 private camera: Camera,
                 private toast: Toast,
-                private transfer: Transfer,
+                private fileTransfer: FileTransfer,
                 private file: File,
                 private fileChooser: FileChooser,
                 private inAppBrowser: InAppBrowser,
@@ -103,7 +104,7 @@ export class NativeService {
         });
         alert.present();
 
-        const fileTransfer: TransferObject = this.transfer.create();
+        const fileTransfer: FileTransferObject = this.fileTransfer.create();
         target = this.file.externalRootDirectory + target; // 文件保存的目录
 
         fileTransfer.download(encodeURI(source), target).then((entry) => {
@@ -160,7 +161,7 @@ export class NativeService {
             });
             alert.present();
 
-            const fileTransfer: TransferObject = this.transfer.create();
+            const fileTransfer: FileTransferObject = this.fileTransfer.create();
             const apk = this.file.externalRootDirectory + 'android.apk'; // apk保存的目录
 
             fileTransfer.download(APK_DOWNLOAD, apk).then(() => {

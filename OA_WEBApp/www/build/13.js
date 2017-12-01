@@ -1,14 +1,15 @@
 webpackJsonp([13],{
 
-/***/ 699:
+/***/ 726:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BacklogDetailModule", function() { return BacklogDetailModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MeetingRoomSetPageModule", function() { return MeetingRoomSetPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog_detail__ = __webpack_require__(740);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_room_set__ = __webpack_require__(775);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__meeting_service__ = __webpack_require__(740);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,38 +19,40 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var BacklogDetailModule = (function () {
-    function BacklogDetailModule() {
+
+var MeetingRoomSetPageModule = (function () {
+    function MeetingRoomSetPageModule() {
     }
-    BacklogDetailModule = __decorate([
+    MeetingRoomSetPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */],
+                __WEBPACK_IMPORTED_MODULE_2__meeting_room_set__["a" /* MeetingRoomSetPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__meeting_room_set__["a" /* MeetingRoomSetPage */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */]
-            ]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__meeting_room_set__["a" /* MeetingRoomSetPage */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_3__meeting_service__["a" /* MeetingService */]]
         })
-    ], BacklogDetailModule);
-    return BacklogDetailModule;
+    ], MeetingRoomSetPageModule);
+    return MeetingRoomSetPageModule;
 }());
 
-//# sourceMappingURL=backlog-detail.module.js.map
+//# sourceMappingURL=meeting-room-set.module.js.map
 
 /***/ }),
 
-/***/ 733:
+/***/ 740:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(363);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -61,51 +64,65 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import {Observable} from "rxjs";
 
-var BacklogService = (function () {
-    function BacklogService(httpService) {
+
+var MeetingService = (function () {
+    function MeetingService(httpService) {
         this.httpService = httpService;
-        this.Status = {
-            notdone: 0,
-            done: 1 // 已办理
+        this.meetingStatus = {
+            Drafting: "起草中",
+            Delivered: "送审中",
+            Approved: "已审批",
+            HasBeenReturned: "已退回",
+            completed: "已完成",
         };
     }
-    BacklogService.prototype.getNotDoneList = function (param) {
-        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
+    MeetingService.prototype.getList = function (param) {
+        return this.httpService.postFormData("ashx/MeetLs.ashx", param).map(function (res) { return res.json(); });
     };
-    BacklogService.prototype.getDoneList = function (param) {
-        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
+    MeetingService.prototype.write = function (param) {
+        return this.httpService.postFormData("ashx/MeetAdd.ashx", param).map(function (res) { return res.json(); });
     };
-    BacklogService.prototype.getDone = function (param) {
-        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
+    MeetingService.prototype.read = function (param) {
+        return this.httpService.postFormData("ashx/MeetDetail.ashx", param).map(function (res) { return res.json(); });
     };
-    BacklogService.prototype.getNotDone = function (param) {
-        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
+    MeetingService.prototype.mod = function (param) {
+        return this.httpService.postFormData("ashx/MeetMod.ashx", param).map(function (res) { return res.json(); });
     };
-    BacklogService.prototype.TodoApprove = function (param) {
-        return this.httpService.postFormData('/ashx/TodoApprove.ashx', param).map(function (res) { return res.json(); });
+    MeetingService.prototype.MeetPlaceLs = function () {
+        return this.httpService.postFormData("ashx/MeetPlaceLs.ashx", {}).map(function (res) { return res.json(); });
     };
-    BacklogService = __decorate([
+    MeetingService.prototype.MeetTypeLs = function () {
+        return this.httpService.postFormData("ashx/MeetTypeLs.ashx", {}).map(function (res) { return res.json(); });
+    };
+    MeetingService.prototype.GetMeetingPlaceAndType = function () {
+        var MeetPlaceLs = this.httpService.postFormData("ashx/MeetPlaceLs.ashx", {}).map(function (res) { return res.json(); });
+        var MeetTypeLs = this.httpService.postFormData("ashx/MeetTypeLs.ashx", {}).map(function (res) { return res.json(); });
+        return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].forkJoin([MeetPlaceLs, MeetTypeLs]);
+    };
+    MeetingService.prototype.GetDeptLs = function () {
+        return this.httpService.postFormData("ashx/BmLs.ashx", {}).map(function (res) { return res.json(); });
+    };
+    MeetingService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], BacklogService);
-    return BacklogService;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_HttpService__["a" /* HttpService */]])
+    ], MeetingService);
+    return MeetingService;
 }());
 
-//# sourceMappingURL=backlogService.js.map
+//# sourceMappingURL=meeting_service.js.map
 
 /***/ }),
 
-/***/ 740:
+/***/ 775:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogDetail; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingRoomSetPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(733);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_service__ = __webpack_require__(740);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(26);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -120,63 +137,49 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the BacklogDetail page.
+ * Generated class for the MeetingRoomSetPage page.
  *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
  */
-var BacklogDetail = (function () {
-    function BacklogDetail(navCtrl, navParams, backlogService, nativeService) {
+var MeetingRoomSetPage = (function () {
+    function MeetingRoomSetPage(navCtrl, navParams, formBuilder, meetingService) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.backlogService = backlogService;
-        this.nativeService = nativeService;
-        this.item = [];
-        this.isComplete = false;
-        console.log(this.navParams.get("id"));
-        this.initializeItems();
-    }
-    BacklogDetail.prototype.initializeItems = function () {
-        var _this = this;
-        var data = {
-            "Id": this.navParams.get("id"),
-            "Uid": this.backlogService.httpService.globalData.Uid
-        };
-        this.backlogService.getDone(data).subscribe(function (resJson) {
-            if (resJson.Result) {
-                _this.item = resJson.Data;
-            }
-            else {
-                _this.nativeService.showToast(resJson.Data);
-                _this.navCtrl.pop();
-            }
+        this.formBuilder = formBuilder;
+        this.meetingService = meetingService;
+        this.isWrite = false;
+        this.DeptLs = [];
+        this.isWrite = !!this.navParams.get("Id") ? false : true;
+        this.setForm = this.formBuilder.group({
+            Name: ["", [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(30)]],
+            Manager: ["", [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(30)]],
+            Number: ["", [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(3)]],
+            Mobile: [null, [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(11), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(11)]],
+            HaveAttendant: [false, []],
+            DeptId: ["", [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(180)]],
+            Introduction: ["", [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(180)]]
         });
+        this.meetingService.GetDeptLs().subscribe(function (resJson) {
+            if (resJson.Result)
+                _this.DeptLs = resJson.Data;
+        });
+    }
+    MeetingRoomSetPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad MeetingRoomSetPage');
     };
-    BacklogDetail.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad BacklogDetail');
-    };
-    BacklogDetail.prototype.approved = function () {
-        console.log("审批通过");
-    };
-    BacklogDetail.prototype.overrule = function () {
-        console.log("审批驳回");
-    };
-    BacklogDetail.prototype.cancel = function () {
-        this.navCtrl.pop();
-    };
-    BacklogDetail = __decorate([
+    MeetingRoomSetPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-backlog-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog-detail\backlog-detail.html"*/`<!--\n  Generated template for the BacklogDetail page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>事项详情</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-card>\n        <ion-card-header>\n            33ee\n        </ion-card-header>\n        <ion-card-content>\n            <ion-list>\n                <ion-item>\n                    <ion-label>当前步骤：</ion-label>\n                    <ion-input type="text" placeholder="当前步骤1"></ion-input>\n                </ion-item>\n\n                <ion-item *ngIf="isComplete">\n                    <ion-label>审批模式：</ion-label>\n                    <ion-input type="text" placeholder="无"></ion-input>\n                </ion-item>\n\n                <div *ngIf="!isComplete">\n                    <ion-item>\n                        <ion-label>&emsp;流水号：<em>&emsp;1&nbsp;—</em></ion-label>\n\n                        <ion-input type="text" placeholder="请输入流水号"></ion-input>\n                    </ion-item>\n\n                    <ion-item>\n                        <ion-label>审批状态：</ion-label>\n                        <ion-input type="text" placeholder="无"></ion-input>\n                    </ion-item>\n                </div>\n\n\n                <div id="strhtm" style="min-height: 100px;overflow-x:auto;"></div>\n\n            </ion-list>\n            <ion-row>\n                <ion-col col-auto style="padding-left:12px;padding-top:5px;text-align:right;">\n                    &nbsp;相关附件：\n                </ion-col>\n                <ion-col col-lg-8 col-xl-6 style="position: relative;padding-left: 40px;background-color: #d7eaf9;">\n                    <ion-icon name="md-image" color="energized" style="position:absolute;left:.4rem;display:inline-block;font-size:3.6rem;"></ion-icon>\n                    <div>\n                        <span>text.png</span>\n                        <span ng-click="" style="position:absolute;right:10px;font-size:1.2rem">下载</span>\n                        <p style="font-size:1.2rem;">2.5M</p>\n                    </div>\n                </ion-col>\n            </ion-row>\n\n            <ion-list *ngIf="!isComplete">\n                <ion-item>\n                    <ion-label>审批记录：</ion-label>\n                    <ion-textarea type="text" placeholder="无"></ion-textarea>\n                </ion-item>\n                <ion-item>\n                    <ion-textarea placeholder="请输入本次审批意见" rows="2"></ion-textarea>\n                </ion-item>\n            </ion-list>\n\n\n        </ion-card-content>\n        <ion-row text-center>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-checkmark"></ion-icon>\n                    <div>审批通过</div>\n                </button>\n            </ion-col>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-close"></ion-icon>\n                    <div>审批驳回</div>\n                </button>\n            </ion-col>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-return-left"></ion-icon>\n                    <div>返回</div>\n                </button>\n            </ion-col>\n        </ion-row>\n    </ion-card>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog-detail\backlog-detail.html"*/,
+            selector: 'page-meeting-room-set',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-room\meeting-room-set\meeting-room-set.html"*/`<!--\n  Generated template for the MeetingRoomSetPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>{{isWrite ? "添加会议室" : "会议室详情"}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <form [formGroup]="setForm" (ngSubmit)="save(setForm.value)">\n        <div>\n            <ion-list>\n                <ion-item>\n                    <ion-label stacked>名称</ion-label>\n                    <ion-input formControlName="Name" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>管理人员</ion-label>\n                    <ion-input  formControlName="Manager" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>规模容量</ion-label>\n                    <ion-input type="number"  formControlName="Number" placeholder="请输入" ></ion-input>\n                </ion-item>\n\n                <ion-item>\n                    <ion-label stacked>联系电话</ion-label>\n                    <ion-input type="number"  formControlName="Mobile" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>是否有服务人员</ion-label>\n                    <ion-toggle [(ngModel)]="HaveAttendant"></ion-toggle>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>所属部门</ion-label>\n                    <ion-select formControlName="DeptId" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option *ngFor="let Dept of DeptLs;let i = index" [value]="Dept.Id">{{Dept.BmName}}</ion-option>\n                    </ion-select>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>简介</ion-label>\n                    <ion-input type="text" formControlName="Introduction"  placeholder="请输入"></ion-input>\n                </ion-item>\n              \n            </ion-list>\n            <div padding text-center>\n                <button ion-button type="submit" color="danger" [disabled]="!setForm.valid">保存</button>\n                <button ion-button clear small navPop>取消修改</button>\n            </div>\n        </div>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-room\meeting-room-set\meeting-room-set.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__backlogService__["a" /* BacklogService */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */]])
-    ], BacklogDetail);
-    return BacklogDetail;
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__meeting_service__["a" /* MeetingService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__meeting_service__["a" /* MeetingService */]) === "function" && _d || Object])
+    ], MeetingRoomSetPage);
+    return MeetingRoomSetPage;
+    var _a, _b, _c, _d;
 }());
 
-//# sourceMappingURL=backlog-detail.js.map
+//# sourceMappingURL=meeting-room-set.js.map
 
 /***/ })
 

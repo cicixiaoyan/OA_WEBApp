@@ -37,7 +37,7 @@ export class SmsPage {
       this.data = {
           "PageSize": 5,
           "PageIndex": 1,
-          "UserId": this.globalData.Uid,
+          "Uid": this.globalData.Uid,
           "Status": this.smsService.smsStatus["sent"],
       };
       this.initializeItems();

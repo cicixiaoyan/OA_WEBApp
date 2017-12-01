@@ -11,7 +11,7 @@ export class MeetingService {
         Delivered: "送审中", // 送审中
         Approved: "已审批", // 已审批
         HasBeenReturned: "已退回", // 已退回
-        completed: "已退回", // 已完成
+        completed: "已完成", // 已完成
     };
 
     constructor(public httpService: HttpService) {
@@ -45,6 +45,10 @@ export class MeetingService {
         let MeetPlaceLs = this.httpService.postFormData("ashx/MeetPlaceLs.ashx", {}).map((res: Response) => res.json());
         let MeetTypeLs = this.httpService.postFormData("ashx/MeetTypeLs.ashx", {}).map((res: Response) => res.json());
         return Observable.forkJoin([MeetPlaceLs, MeetTypeLs]);
+    }
+
+    GetDeptLs(): Observable<any>{
+        return this.httpService.postFormData("ashx/BmLs.ashx", {}).map((res: Response) => res.json());
     }
 
 

@@ -46,13 +46,12 @@
                   </ion-item>
                   <ion-item>
                       <ion-label stacked>参加人员</ion-label>
-                      <ion-input type="text" formControlName="PersonId"  placeholder="入职时间"></ion-input>
+                      <ion-input type="text" formControlName="PersonId"  placeholder="点击添加"></ion-input>
                   </ion-item>
                   <ion-item>
                       <ion-label stacked>参加部门</ion-label>
-                      <ion-select formControlName="DeptId"  cancelText="取消" okText="确定" placeholder="请选择">
-                          <ion-option value="1">类型1</ion-option>
-                          <ion-option value="2">类型2</ion-option>
+                      <ion-select formControlName="DeptId" multiple="true"  cancelText="取消" okText="确定" placeholder="请选择">
+                        <ion-option *ngFor="let dept of DeptLs;let i = index" [value]="dept.Id">{{dept.BmName}}</ion-option>
                       </ion-select>
                   </ion-item>
                   <ion-item>

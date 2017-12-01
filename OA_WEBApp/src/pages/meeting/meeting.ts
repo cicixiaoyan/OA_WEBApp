@@ -60,7 +60,7 @@ export class MeetingPage {
   }
 
   doRead(Params) {
-    this.navCtrl.push("MeetingWritePage", { "Id": Params });
+    this.navCtrl.push("MeetingEditPage", { "Id": Params });
     // let modal = this.modalCtrl.create("MeetingEditPage");
     // modal.present();
     // modal.onDidDismiss(data => {

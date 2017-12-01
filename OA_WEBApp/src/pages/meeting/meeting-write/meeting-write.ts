@@ -25,6 +25,7 @@ export class MeetingWritePage {
   FileNewName: string = ""; // 附件名称
   MeetPlaceLs = [];
   MeetTypeLs = [];
+  DeptLs = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private fileService: FileService,
@@ -39,6 +40,11 @@ export class MeetingWritePage {
     this.meetingService.MeetTypeLs().subscribe((resJson) => {
       if (resJson.Result)  this.MeetTypeLs = resJson.Data;
     });
+
+    this.meetingService.GetDeptLs().subscribe((resJson) => {
+      if (resJson.Result)  this.DeptLs = resJson.Data;
+    });
+
     this.writeForm = this.formBuilder.group({
         Title: ['', [Validators.required, Validators.maxLength(30)]], // 第一个参数是默认值
         TypeId: ["", [Validators.required]],

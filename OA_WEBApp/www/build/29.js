@@ -1,14 +1,14 @@
 webpackJsonp([29],{
 
-/***/ 713:
+/***/ 705:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GetmobilePopoverPageModule", function() { return GetmobilePopoverPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountEditModule", function() { return AccountEditModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__getmobile_popover__ = __webpack_require__(754);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__account_edit__ = __webpack_require__(754);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,24 +18,41 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var GetmobilePopoverPageModule = (function () {
-    function GetmobilePopoverPageModule() {
+var AccountEditModule = (function () {
+    function AccountEditModule() {
     }
-    GetmobilePopoverPageModule = __decorate([
+    AccountEditModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__getmobile_popover__["a" /* GetmobilePopoverPage */],
+                __WEBPACK_IMPORTED_MODULE_2__account_edit__["a" /* AccountEdit */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__getmobile_popover__["a" /* GetmobilePopoverPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__account_edit__["a" /* AccountEdit */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__getmobile_popover__["a" /* GetmobilePopoverPage */]]
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__account_edit__["a" /* AccountEdit */]
+            ]
         })
-    ], GetmobilePopoverPageModule);
-    return GetmobilePopoverPageModule;
+    ], AccountEditModule);
+    return AccountEditModule;
 }());
 
-//# sourceMappingURL=getmobile-popover.module.js.map
+//# sourceMappingURL=account-edit.module.js.map
+
+/***/ }),
+
+/***/ 747:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserInfo; });
+var UserInfo = (function () {
+    function UserInfo() {
+    }
+    return UserInfo;
+}());
+
+//# sourceMappingURL=UserInfo.js.map
 
 /***/ }),
 
@@ -43,13 +60,13 @@ var GetmobilePopoverPageModule = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GetmobilePopoverPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountEdit; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(363);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_UserInfo__ = __webpack_require__(747);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -64,115 +81,126 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+// import { LoginPage } from "../../login/login";
+
 /**
- * Generated class for the GetmobilePopoverPage page.
+ * Generated class for the AccountEdit page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
  */
-var GetmobilePopoverPage = (function () {
-    function GetmobilePopoverPage(navParams, viewCtrl, storage, httpService) {
+var AccountEdit = (function () {
+    function AccountEdit(navCtrl, navParams, actionSheetCtrl, storage, httpService, modalCtrl, formBuilder) {
+        this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.viewCtrl = viewCtrl;
+        this.actionSheetCtrl = actionSheetCtrl;
         this.storage = storage;
         this.httpService = httpService;
-        this.items = [];
-        this.addressee = this.navParams.get("addressee");
-        this.addresseeIds = this.navParams.get("addresseeIds");
-        console.log(this.addressee, this.addresseeIds);
-        this.initializeItems();
+        this.modalCtrl = modalCtrl;
+        this.formBuilder = formBuilder;
+        this.userInfo = new __WEBPACK_IMPORTED_MODULE_2__model_UserInfo__["a" /* UserInfo */]();
+        this.submitted = false;
+        this.editForm = this.formBuilder.group({
+            InDate: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(4)]],
+            Sex: ['男', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(2)]],
+            BirthDate: ['', []],
+            Mobile: [null, [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(11), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(11)]],
+            Mail: [null, [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].email]],
+            WorkPhone: [null, [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(11)]],
+            InlinePhone: [null, [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(11)]]
+        });
+        this.initialize();
     }
-    GetmobilePopoverPage.prototype.initializeItems = function () {
-        this.search();
-    };
-    GetmobilePopoverPage.prototype.getItems = function (ev) {
-        // Reset items back to all of the items
-        this.initializeItems();
-        // set val to the value of the ev target
-        var val = ev.target.value;
-        this.name = val;
-        // if the value is an empty string don't filter the items
-        // if (val && val.trim() != '') {
-        //   this.items = this.items.filter((item) => {
-        //     return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-        //   });
-        // }
-    };
-    GetmobilePopoverPage.prototype.getRecipientsByDept = function (id) {
+    AccountEdit.prototype.initialize = function () {
         var _this = this;
-        var data = !!id ? { DeptId: id } : {};
-        this.httpService.postFormData("ashx/UserSheet.ashx", data)
-            .map(function (res) { return res.json(); })
-            .subscribe(function (result) {
-            console.log(result);
-            if (result.Result) {
-                var idArr_1 = _this.addresseeIds.split(",");
-                _this.items = result.Data.map(function (value, index) {
-                    for (var i in idArr_1) {
-                        if (idArr_1[i] !== value.Uid) {
-                            Object.assign(value, { checked: false });
-                        }
-                        else {
-                            return Object.assign(value, { checked: true });
-                        }
-                    }
-                    return value;
+        this.storage.get("UserInfo").then(function (UserInfo) {
+            if (UserInfo) {
+                _this.userInfo = UserInfo;
+            }
+            else {
+                var modal = _this.modalCtrl.create("LoginPage");
+                modal.present();
+                modal.onDidDismiss(function (data) {
+                    data && console.log(data);
                 });
             }
         });
+        // this.userInfo.BirthDate = "1990-02-19";
+        // this.userInfo.InDate = "1990-02-19";
     };
-    GetmobilePopoverPage.prototype.search = function () {
+    AccountEdit.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad AccountEdit');
+    };
+    // 性别选择
+    AccountEdit.prototype.checkSex = function () {
         var _this = this;
-        var data = (this.name !== "") ? { name: name } : {};
-        this.httpService.postFormData("ashx/UserSheet.ashx", data)
-            .map(function (res) { return res.json(); })
-            .subscribe(function (result) {
-            console.log(result);
-            if (result.Result) {
-                var idArr_2 = _this.addresseeIds.split(",");
-                _this.items = result.Data.map(function (value, index) {
-                    for (var i in idArr_2) {
-                        if (idArr_2[i] !== value.Uid) {
-                            Object.assign(value, { checked: false });
-                        }
-                        else {
-                            return Object.assign(value, { checked: true });
-                        }
+        var actionSheet = this.actionSheetCtrl.create({
+            title: '选择性别',
+            buttons: [
+                {
+                    text: '男',
+                    role: 'destructive',
+                    handler: function () {
+                        _this.userInfo.Sex = "男";
                     }
-                    return value;
+                }, {
+                    text: '女',
+                    handler: function () {
+                        _this.userInfo.Sex = "女";
+                    }
+                }, {
+                    text: '取消',
+                    role: 'cancel',
+                    handler: function () {
+                        console.log('已取消');
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
+    };
+    AccountEdit.prototype.edit = function (value) {
+        var _this = this;
+        // this.submitted = true;
+        // console.log(value);
+        value.Uid = this.httpService.globalData.Uid;
+        this.httpService.postFormData("ashx/UserPersonMod.ashx", value)
+            .map(function (responce) { return responce.json(); })
+            .subscribe(function (Resjson) {
+            if (Resjson.Result) {
+                _this.httpService.nativeService.showToast("修改资料成功", 800);
+                _this.httpService.postFormData("ashx/UserInfo.ashx", { id: _this.httpService.globalData.Uid })
+                    .map(function (responce) { return responce.json(); }).subscribe(function (res) {
+                    if (res.Result) {
+                        _this.storage.set("UserInfo", res.Date);
+                        _this.userInfo = res.Data;
+                    }
                 });
+            }
+            else {
+                _this.httpService.nativeService.showToast("修改资料失败： " + Resjson.Data, 800);
             }
         });
     };
-    GetmobilePopoverPage.prototype.checkPeople = function (index) {
-        this.items[index].checked = !this.items[index].checked;
+    AccountEdit.prototype.return = function () {
+        this.navCtrl.pop();
     };
-    GetmobilePopoverPage.prototype.confirm = function () {
-        console.log(confirm);
-        this.addressee = "";
-        this.addresseeIds = "";
-        for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
-            var value = _a[_i];
-            if (value.checked) {
-                this.addressee += value.Name + ",";
-                this.addresseeIds += value.Uid + ",";
-            }
-        }
-        this.viewCtrl.dismiss({ addressee: this.addressee, addresseeIds: this.addresseeIds });
-    };
-    GetmobilePopoverPage = __decorate([
+    AccountEdit = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-getmobile-popover',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\getmobile-popover\getmobile-popover.html"*/`<!--\n  Generated template for the GetmobilePopoverPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    \n      <ion-navbar>\n        <ion-title>联系人选择</ion-title>\n      </ion-navbar>\n    \n    </ion-header>\n    \n    \n    <ion-content>\n      <ion-list class="checkpeople-popover">\n        <ion-searchbar color="danger" [(ngModel)]="name"  placeholder="请输入编码或姓名">\n        </ion-searchbar>\n      \n        <div text-center>\n            <button (click)="search()" icon-left ion-button small color="calm">\n            <ion-icon name="search"></ion-icon>查询</button>\n      \n            <button (click)="confirm()" icon-left ion-button small color="calm">\n            <ion-icon name="checkmark"></ion-icon>确定</button>\n        </div>\n      \n        <ion-list-header>\n            通讯录\n        </ion-list-header>\n      \n        <ion-item *ngFor="let item of items;let i = index">\n            <ion-label>\n            {{item.Name}}({{item.Uid}})<br>\n            <span>{{item.Mobile}}</span>\n            </ion-label>\n            <ion-checkbox [checked]="item.checked" (ionChange)="checkPeople(i)"></ion-checkbox>\n        </ion-item>\n      </ion-list>\n    </ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\getmobile-popover\getmobile-popover.html"*/,
+            selector: 'page-account-edit',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-edit\account-edit.html"*/`<!--\n\n  Generated template for the AccountEdit page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>修改资料</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <form [formGroup]="editForm" (ngSubmit)="edit(editForm.value)">\n\n        <ion-list>\n\n            <ion-item>\n\n                <ion-label stacked>编码</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Uid" [ngModelOptions]="{standalone: true}" placeholder="请输入编码" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>姓名</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Name" [ngModelOptions]="{standalone: true}" placeholder="请输入姓名" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>公司</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Company" [ngModelOptions]="{standalone: true}" placeholder="公司名称" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>部门</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Dept" [ngModelOptions]="{standalone: true}" placeholder="部门名称" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>职位</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Duty" [ngModelOptions]="{standalone: true}" placeholder="职位" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>入职时间</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.InDate" formControlName="InDate" placeholder="入职时间" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item (click)="checkSex()">\n\n                <ion-label stacked>性别</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Sex" formControlName="Sex" placeholder="性别"></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>出生日期</ion-label>\n\n                <ion-datetime [(ngModel)]="userInfo.BirthDate" placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="BirthDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label>移动电话</ion-label>\n\n                <ion-input type="number" [(ngModel)]="userInfo.Mobile" formControlName="Mobile" placeholder="移动电话"></ion-input>\n\n            </ion-item>\n\n            <div *ngIf="!editForm.controls.Mobile.valid && editForm.controls.Mobile.touched" class="validation-failed">请输入合法的电话号码</div>\n\n\n\n            <ion-item>\n\n                <ion-label>电子邮箱</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Mail" formControlName="Mail" placeholder="电子邮箱"></ion-input>\n\n            </ion-item>\n\n            <div *ngIf="!editForm.controls.Mail.valid && editForm.controls.Mail.touched" class="validation-failed">请输入正确的电子邮箱</div>\n\n\n\n            <ion-item>\n\n                <ion-label>办公电话</ion-label>\n\n                <ion-input type="number" [(ngModel)]="userInfo.WorkPhone" formControlName="WorkPhone" placeholder="办公电话"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label>内线电话</ion-label>\n\n                <ion-input type="number" [(ngModel)]="userInfo.InlinePhone" formControlName="InlinePhone" placeholder="内线电话"></ion-input>\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n        <div padding text-center>\n\n            <button ion-button type="submit" color="danger" [disabled]="editForm.valid">保存</button>\n\n            <button ion-button clear small navPop>取消修改</button>\n\n        </div>\n\n\n\n\n\n    </form>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-edit\account-edit.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__["a" /* HttpService */]])
-    ], GetmobilePopoverPage);
-    return GetmobilePopoverPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */],
+            __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_5__providers_HttpService__["a" /* HttpService */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]])
+    ], AccountEdit);
+    return AccountEdit;
 }());
 
-//# sourceMappingURL=getmobile-popover.js.map
+//# sourceMappingURL=account-edit.js.map
 
 /***/ })
 

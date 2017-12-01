@@ -1,15 +1,15 @@
 webpackJsonp([14],{
 
-/***/ 710:
+/***/ 725:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnnouncementPageModule", function() { return AnnouncementPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MeetingMinutesPageModule", function() { return MeetingMinutesPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcement__ = __webpack_require__(751);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(737);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_minutes__ = __webpack_require__(774);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__meeting_service__ = __webpack_require__(740);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,36 +20,39 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AnnouncementPageModule = (function () {
-    function AnnouncementPageModule() {
+var MeetingMinutesPageModule = (function () {
+    function MeetingMinutesPageModule() {
     }
-    AnnouncementPageModule = __decorate([
+    MeetingMinutesPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__announcement__["a" /* AnnouncementPage */],
+                __WEBPACK_IMPORTED_MODULE_2__meeting_minutes__["a" /* MeetingMinutesPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__announcement__["a" /* AnnouncementPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__meeting_minutes__["a" /* MeetingMinutesPage */]),
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__announcementService__["a" /* AnnouncementService */]]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__meeting_minutes__["a" /* MeetingMinutesPage */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_3__meeting_service__["a" /* MeetingService */]]
         })
-    ], AnnouncementPageModule);
-    return AnnouncementPageModule;
+    ], MeetingMinutesPageModule);
+    return MeetingMinutesPageModule;
 }());
 
-//# sourceMappingURL=announcement.module.js.map
+//# sourceMappingURL=meeting-minutes.module.js.map
 
 /***/ }),
 
-/***/ 737:
+/***/ 740:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(363);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62,51 +65,63 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the AnnouncementPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var AnnouncementService = (function () {
-    function AnnouncementService(httpService) {
+
+var MeetingService = (function () {
+    function MeetingService(httpService) {
         this.httpService = httpService;
-        this.announcementStatus = {
-            "enter": "录入",
-            "published": "已发布",
-            "all": "0" // 全部
+        this.meetingStatus = {
+            Drafting: "起草中",
+            Delivered: "送审中",
+            Approved: "已审批",
+            HasBeenReturned: "已退回",
+            completed: "已完成",
         };
     }
-    AnnouncementService.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Login');
+    MeetingService.prototype.getList = function (param) {
+        return this.httpService.postFormData("ashx/MeetLs.ashx", param).map(function (res) { return res.json(); });
     };
-    AnnouncementService.prototype.getList = function (param) {
-        return this.httpService.postFormData("ashx/Announcement.ashx", param)
-            .map(function (res) { return res.json(); });
+    MeetingService.prototype.write = function (param) {
+        return this.httpService.postFormData("ashx/MeetAdd.ashx", param).map(function (res) { return res.json(); });
     };
-    AnnouncementService.prototype.detail = function (key) {
-        return this.httpService.postFormData("ashx/AnnouncementDetail.ashx", { "attKey": key })
-            .map(function (res) { return res.json(); });
+    MeetingService.prototype.read = function (param) {
+        return this.httpService.postFormData("ashx/MeetDetail.ashx", param).map(function (res) { return res.json(); });
     };
-    AnnouncementService = __decorate([
+    MeetingService.prototype.mod = function (param) {
+        return this.httpService.postFormData("ashx/MeetMod.ashx", param).map(function (res) { return res.json(); });
+    };
+    MeetingService.prototype.MeetPlaceLs = function () {
+        return this.httpService.postFormData("ashx/MeetPlaceLs.ashx", {}).map(function (res) { return res.json(); });
+    };
+    MeetingService.prototype.MeetTypeLs = function () {
+        return this.httpService.postFormData("ashx/MeetTypeLs.ashx", {}).map(function (res) { return res.json(); });
+    };
+    MeetingService.prototype.GetMeetingPlaceAndType = function () {
+        var MeetPlaceLs = this.httpService.postFormData("ashx/MeetPlaceLs.ashx", {}).map(function (res) { return res.json(); });
+        var MeetTypeLs = this.httpService.postFormData("ashx/MeetTypeLs.ashx", {}).map(function (res) { return res.json(); });
+        return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].forkJoin([MeetPlaceLs, MeetTypeLs]);
+    };
+    MeetingService.prototype.GetDeptLs = function () {
+        return this.httpService.postFormData("ashx/BmLs.ashx", {}).map(function (res) { return res.json(); });
+    };
+    MeetingService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], AnnouncementService);
-    return AnnouncementService;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_HttpService__["a" /* HttpService */]])
+    ], MeetingService);
+    return MeetingService;
 }());
 
-//# sourceMappingURL=announcementService.js.map
+//# sourceMappingURL=meeting_service.js.map
 
 /***/ }),
 
-/***/ 751:
+/***/ 774:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingMinutesPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcementService__ = __webpack_require__(737);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_service__ = __webpack_require__(740);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -118,48 +133,47 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import { AnnouncementDetailPage } from './announcement-detail/announcement-detail';
 
 /**
- * Generated class for the AnnouncementPage page.
+ * Generated class for the MeetingMinutesPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var AnnouncementPage = (function () {
-    function AnnouncementPage(navCtrl, navParams, announcementService) {
+var MeetingMinutesPage = (function () {
+    function MeetingMinutesPage(navCtrl, navParams, modalCtrl, meetingService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.announcementService = announcementService;
-        this.nxPage = "AnnouncementDetailPage";
-        this.checkBtn = { "enter": true, "published": false, "all": false };
-        //   page: number = 1;
-        //   size: number = 1;
-        this.moredata = true; // 是否能加载更多
-        this.isEmpty = false; // 是否无数据
-        this.items = [];
+        this.modalCtrl = modalCtrl;
+        this.meetingService = meetingService;
+        this.list = [];
+        this.moredata = true;
+        this.isEmpty = false;
         this.data = {
-            "UserId": this.announcementService.httpService.globalData.Uid,
+            "status": this.meetingService.meetingStatus["completed"],
+            "uid": this.meetingService.httpService.globalData.Uid,
             "PageIndex": 1,
-            "PageSize": 10,
-            "Status": this.announcementService.announcementStatus["enter"]
+            "PageSize": 8
         };
-        this.initializeItems();
+        this.getList(this.data);
     }
-    AnnouncementPage.prototype.initializeItems = function () {
-        this.getList();
+    MeetingMinutesPage.prototype.ionViewDidLoad = function () {
     };
-    AnnouncementPage.prototype.doRefresh = function (refresher) {
-        this.initializeItems();
+    MeetingMinutesPage.prototype.doRead = function (Params) {
+        this.navCtrl.push("MeetingEditPage", { "Id": Params });
+    };
+    MeetingMinutesPage.prototype.doRefresh = function (refresher) {
+        this.list = [];
+        this.data.PageIndex = 1;
+        this.getList(this.data);
         setTimeout(function () {
-            console.log('数据加载完成');
             refresher.complete();
         }, 1000);
     };
-    AnnouncementPage.prototype.doInfinite = function () {
+    MeetingMinutesPage.prototype.doInfinite = function () {
         if (this.moredata) {
             this.data.PageIndex++;
-            this.getList();
+            this.getList(this.data);
         }
         return new Promise(function (resolve) {
             setTimeout(function () {
@@ -167,60 +181,34 @@ var AnnouncementPage = (function () {
             }, 500);
         });
     };
-    // 选择录入、已发布、全部
-    AnnouncementPage.prototype.checkRead = function (name) {
-        if (name === void 0) { name = "enter"; }
-        this.data.PageIndex = 1;
-        this.items = [];
-        this.checkBtn = { "enter": false, "published": false, "all": false };
-        this.checkBtn[name] = true;
-        if (name === "enter") {
-            // 参数设置
-            this.data.Status = this.announcementService.announcementStatus["enter"];
-        }
-        else if (name === "published") {
-            // 参数设置
-            this.data.Status = this.announcementService.announcementStatus["published"];
-        }
-        else {
-            // 参数设置
-            this.data.Status = this.announcementService.announcementStatus["all"];
-        }
-        this.getList();
-    };
-    AnnouncementPage.prototype.getList = function () {
+    MeetingMinutesPage.prototype.getList = function (data) {
         var _this = this;
-        this.announcementService.getList(this.data).subscribe(function (resJson) {
-            if (resJson.Result && resJson !== []) {
+        this.meetingService.getList(data).subscribe(function (resJson) {
+            if (resJson.Result && resJson.Data !== []) {
                 _this.moredata = true;
                 _this.isEmpty = false;
                 var list = resJson.Data;
-                _this.items = _this.items.concat(list);
+                _this.list = _this.list.concat(list);
             }
             else {
                 _this.moredata = false;
-                _this.isEmpty = _this.data.PageIndex == 1 ? true : false;
+                _this.isEmpty = (_this.data.PageIndex == 1) ? true : false;
             }
         });
-        //   return this.httpService.postFormData("ashx/Notice.ashx/noticeall", data).map(Response => Response.json());
     };
-    AnnouncementPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Notice');
-    };
-    AnnouncementPage.prototype.itemSelected = function () {
-    };
-    AnnouncementPage = __decorate([
+    MeetingMinutesPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-announcement',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement.html"*/`<!--\n  Generated template for the AnnouncementPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n      <ion-title>公告管理</ion-title>\n  </ion-navbar>\n\n  <div class="subbox">\n    <div >\n        <button ion-button small (click)="checkRead(\'enter\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.enter}">录入</button>\n        <button ion-button small (click)="checkRead(\'published\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.published}">已发布</button>\n        <button ion-button small (click)="checkRead(\'all\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.all}">全部</button>\n    </div>\n  </div>\n  <!-- <ion-searchbar color="dark" type="text" placeholder="请输入关键字" [(ngModel)]="searchKey"\n   [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event)"></ion-searchbar> -->\n</ion-header>\n\n<ion-content>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n      </ion-refresher-content>\n  </ion-refresher>\n  <ion-list inset style="margin:16px 0;">\n      <button ion-item *ngFor="let item of items" [navPush]="nxPage" [navParams]="{item:item}">\n          <span>[{{item.AnnouncementType}}]{{item.AnnouncementTitle}}</span>\n          <p>{{item.AnnouncementPublishPerson}}&emsp;{{item.AnnouncementPublishDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n      </button>\n  </ion-list>\n  <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n      <div padding>暂无公告！！！</div>\n      <img src="assets/img/face/face2.png" height="100">\n  </div>\n  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement.html"*/,
+            selector: 'page-meeting-minutes',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-minutes\meeting-minutes.html"*/`<!--\n  Generated template for the MeetingMinutesPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>会议记录</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let meeting of list"  (click)="doRead(meeting.Id)">\n          <ion-item>\n              <span class="status-new-dot" *ngIf="meeting.Status==\'1\'">●&nbsp;</span><span>{{meeting.Title}}</span>\n              <p class="font-12">地点:{{meeting.Place}}&emsp;{{meeting.StartDate}}</p>\n          </ion-item>\n      </ion-item-sliding>\n    </ion-list>\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n        <div padding>暂无消息数据！！！</div>\n        <img src="assets/img/face/face2.png" height="100">\n    </div>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-minutes\meeting-minutes.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__announcementService__["a" /* AnnouncementService */]])
-    ], AnnouncementPage);
-    return AnnouncementPage;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_2__meeting_service__["a" /* MeetingService */]])
+    ], MeetingMinutesPage);
+    return MeetingMinutesPage;
 }());
 
-//# sourceMappingURL=announcement.js.map
+//# sourceMappingURL=meeting-minutes.js.map
 
 /***/ })
 

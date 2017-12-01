@@ -1,19 +1,17 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { MailWrite, PopoverPage } from './mail-write';
-
+import { MailWrite } from './mail-write';
+import { MailService } from "../mailService";
 @NgModule({
     declarations: [
-        MailWrite,
-        PopoverPage
+        MailWrite
     ],
     imports: [
         IonicPageModule.forChild(MailWrite),
-        IonicPageModule.forChild(PopoverPage),
     ],
     exports: [
-        MailWrite,
-        PopoverPage
-    ]
+        MailWrite
+    ],
+    providers: [MailService]
 })
 export class MailWriteModule { }

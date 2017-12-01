@@ -3,31 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler, Content, Config } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
-
-// import { TabsPage } from '../pages/tabs/tabs';
-
-// import { HomeModule } from '../pages/home/home.module';
-// import { MailModule } from '../pages/mail/mail.module';
-// import { MailReadModule } from '../pages/mail/mail-read/mail-read.module';
-// import { MailWriteModule } from '../pages/mail/mail-write/mail-write.module';
-// import { MessagePageModule } from '../pages/message/message.module';
-// import { MessageReadPageModule } from '../pages/message/message-read/message-read.module';
-// import { MessageReadOutPageModule } from '../pages/message/message-read-out/message-read-out.module';
-// import { MessageWritePageModule } from '../pages/message/message-write/message-write.module';
-// import { AnnouncementPageModule } from '../pages/announcement/announcement.module';
-// import { AnnouncementDetailPageModule } from '../pages/announcement/announcement-detail/announcement-detail.module';
-// import { AccountModule } from '../pages/account/account.module';
-// import { AboutusPageModule } from '../pages/account/aboutus/aboutus.module';
-// import { AccountEditModule } from '../pages/account/account-edit/account-edit.module';
-// import { AccountPasswordeditModule } from '../pages/account/account-passwordedit/account-passwordedit.module';
-// import { LoginModule } from '../pages/login/login.module';
-// import { WelcomeModule } from '../pages/welcome/welcome.module';
-// import { SmsPageModule } from '../pages/sms/sms.module';
-// import { SmsReadPageModule } from '../pages/sms/sms-read/sms-read.module';
-// import { SmsWritePageModule } from '../pages/sms/sms-write/sms-write.module';
-// import { MeetingPageModule } from '../pages/meeting/meeting.module';
-// import { MeetingWritePageModule } from '../pages/meeting/meeting-write/meeting-write.module';
-
 import { LoginService } from '../pages/login/LoginService';
 
 import { ContactsPopoverPageModule } from '../pages/contacts-popover/contacts-popover.module';
@@ -40,7 +15,7 @@ import { AppVersion } from '@ionic-native/app-version';
 import { Toast } from '@ionic-native/toast';
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
-import { Transfer } from '@ionic-native/transfer';
+import { FileTransfer } from '@ionic-native/file-transfer';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Network } from '@ionic-native/network';
 import { Camera } from '@ionic-native/camera';
@@ -95,29 +70,6 @@ export class FunDebugErrorHandler implements ErrorHandler {
             tabsHideOnSubPages: true
         }),
         IonicStorageModule.forRoot(),
-        // HomeModule,
-        // MailModule,
-        // MailReadModule,
-        // MailWriteModule,
-        // MessagePageModule,
-        // MessageReadPageModule,
-        // MessageReadOutPageModule,
-        // MessageWritePageModule,
-        // AnnouncementPageModule,
-        // AnnouncementDetailPageModule,
-        // AccountModule,
-        // AboutusPageModule,
-        // AccountEditModule,
-        // AccountPasswordeditModule,
-        // LoginModule,
-        // WelcomeModule,
-        // SmsPageModule,
-        // SmsReadPageModule,
-        // SmsWritePageModule,
-        // ContactsPopoverPageModule,
-        // GetmobilePopoverPageModule,
-        // MeetingPageModule,
-        // MeetingWritePageModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -133,7 +85,7 @@ export class FunDebugErrorHandler implements ErrorHandler {
         Toast,
         File,
         FileChooser,
-        Transfer,
+        FileTransfer,
         InAppBrowser,
         Network,
         Camera,

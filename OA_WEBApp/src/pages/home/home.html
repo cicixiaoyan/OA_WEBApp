@@ -16,7 +16,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
     <ion-grid>
         <ion-row class="index-row">
             <ion-col col-4 *ngFor="let p of appPages" (click)="openPage(p)">
@@ -26,5 +26,37 @@
             </ion-col>
         </ion-row>
     </ion-grid>
+    <ion-list>
+        <ion-list-header><ion-icon name="ios-car" color="primary">会议管理</ion-icon></ion-list-header>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-3 col-xl-2 (click)="open('MeetingPage')">我的会议</ion-col>
+                <ion-col col-3 col-xl-2 (click)="open('MeetingMinutesPage')">会议记录</ion-col>
+                <ion-col col-3 col-xl-2 (click)="open('MeetingSearchPage')">会议查询</ion-col>
+                <ion-col col-3 col-xl-2 (click)="open('MeetingRoomPage')">会议室管理</ion-col>
+            </ion-row>
+        </ion-grid>
+        
+        <ion-list-header><ion-icon name="ios-car" color="primary">车辆管理</ion-icon></ion-list-header>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-3 col-xl-2 (click)="open('CarPage')">车辆档案</ion-col>
+                <ion-col col-3 col-xl-2 (click)="open('DriverPage')">司机档案</ion-col>
+            </ion-row>
+        </ion-grid>
+        
+        <!-- <ion-list-header><ion-icon name="ios-car" color="primary">人事管理</ion-icon></ion-list-header>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-3 col-xl-2 (click)="open('CarPage')">培训维护</ion-col>
+                <ion-col col-3 col-xl-2 (click)="open('DriverPage')">培训查询</ion-col>
+                <ion-col col-3 col-xl-2 (click)="open('DriverPage')">合同维护</ion-col>
+                <ion-col col-3 col-xl-2 (click)="open('DriverPage')">合同续签</ion-col>
+                <ion-col col-3 col-xl-2 (click)="open('DriverPage')">合同查询</ion-col>
+            </ion-row>
+        </ion-grid> -->
+
+    </ion-list>
+
 
 </ion-content>

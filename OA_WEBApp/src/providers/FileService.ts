@@ -8,8 +8,10 @@ import { Observable } from "rxjs";
 import { NativeService } from "./NativeService";
 
 import { FileChooser } from '@ionic-native/file-chooser';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+// import { Transfer, FileUploadOptions, TransferObject, } from '@ionic-native/file-transfer';
 import { Utils } from './Utils';
+import { File } from '@ionic-native/file';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 /**
  * 上传图片到文件服务器
  */
@@ -18,8 +20,10 @@ export class FileService {
   constructor(private httpService: HttpService,
               private nativeService: NativeService,
               private alertCtrl: AlertController,
-              private transfer: Transfer,
-              private fileChooser: FileChooser
+              // private transfer: Transfer,
+              private fileChooser: FileChooser,
+              private file: File,
+              private fileTransfer: FileTransfer
             ) {
   }
 
@@ -203,7 +207,7 @@ export class FileService {
           buttons: ['后台上传']
         });
         alert.present();
-        const fileTransfer: TransferObject = this.transfer.create();
+        const fileTransfer: FileTransferObject = this.fileTransfer.create();
         fileTransfer.onProgress((event: ProgressEvent) => {
           let num = Math.floor(event.loaded / event.total * 100);
           if (num === 100) {
@@ -227,5 +231,18 @@ export class FileService {
 
   }
 
+  download(url, name): Observable<any>{
+    const fileTransfer: FileTransferObject = this.fileTransfer.create();
+    return Observable.create((observer) => {
+      fileTransfer.download(url, this.file.dataDirectory + name).then((entry) => {
+        if (entry.Response == "200")
+        observer.next(entry);
+      }, (error) => {
+        observer.next(error);
+        // handle error
+      });
+    });
+
+  }
 
 }

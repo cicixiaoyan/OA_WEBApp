@@ -46,4 +46,19 @@ page-home {
             }
         }
     }
+
+    .list-header-ios{
+        min-height: 2rem;
+        background: #fff;
+        margin-top: 10px;
+    }
+
+    .content-ios{
+        background: #eee;
+    }
+
+    ion-grid{
+        background: #fff;
+    }
+
 }

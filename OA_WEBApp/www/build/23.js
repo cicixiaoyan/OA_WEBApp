@@ -1,14 +1,15 @@
 webpackJsonp([23],{
 
-/***/ 704:
+/***/ 712:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MailReadOutboxModule", function() { return MailReadOutboxModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CarPageModule", function() { return CarPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mail_read_outbox__ = __webpack_require__(745);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__car__ = __webpack_require__(761);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(741);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,37 +19,80 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MailReadOutboxModule = (function () {
-    function MailReadOutboxModule() {
+
+var CarPageModule = (function () {
+    function CarPageModule() {
     }
-    MailReadOutboxModule = __decorate([
+    CarPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__mail_read_outbox__["a" /* MailReadOutbox */],
+                __WEBPACK_IMPORTED_MODULE_2__car__["a" /* CarPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__mail_read_outbox__["a" /* MailReadOutbox */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__car__["a" /* CarPage */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__mail_read_outbox__["a" /* MailReadOutbox */]
-            ]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__car__["a" /* CarPage */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */]]
         })
-    ], MailReadOutboxModule);
-    return MailReadOutboxModule;
+    ], CarPageModule);
+    return CarPageModule;
 }());
 
-//# sourceMappingURL=mail-read-outbox.module.js.map
+//# sourceMappingURL=car.module.js.map
 
 /***/ }),
 
-/***/ 745:
+/***/ 741:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MailReadOutbox; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CarService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var CarService = (function () {
+    function CarService(httpService) {
+        this.httpService = httpService;
+    }
+    CarService.prototype.getList = function (param) {
+        return this.httpService.postFormData("ashx/MeetLs.ashx", param).map(function (res) { return res.json(); });
+    };
+    CarService.prototype.getDriverList = function (param) {
+        return this.httpService.postFormData("", param).map(function (res) { return res.json(); });
+    };
+    CarService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
+    ], CarService);
+    return CarService;
+}());
+
+//# sourceMappingURL=car_service.js.map
+
+/***/ }),
+
+/***/ 761:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CarPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(741);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62,90 +106,101 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import { MailWrite } from '../mail-write/mail-write';
 /**
- * Generated class for the MailReadOutbox page.
+ * Generated class for the CarPage page.
  *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
  */
-var MailReadOutbox = (function () {
-    function MailReadOutbox(navCtrl, navParams, nativeService, modalCtrl) {
+var CarPage = (function () {
+    function CarPage(navCtrl, navParams, globalData, modalCtrl, CarService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.nativeService = nativeService;
+        this.globalData = globalData;
         this.modalCtrl = modalCtrl;
-        this.mailContent = ""; // 消息内容
-        this.mailDetail = [];
-        this.initializeItems();
+        this.CarService = CarService;
+        this.isEmpty = false;
+        this.list = [];
+        this.moredata = true;
     }
-    MailReadOutbox.prototype.initializeItems = function () {
-        // let data={id: this.navParams.get('id'),action:"noticeById"};
-        // this.httpService.postFormData("ashx/Notice.ashx/noticeById",data)
-        //   .map(Response => Response.json())
-        //   .subscribe(list => {
-        //       if(!!list && list.length != 0 ){
-        //         this.detailNotice = list[0];
-        //         this.myDiv = this.detailNotice.ggnr;
-        //       }else{
-        //          this.toastCtrl.create({
-        //           message: '服务器出错，请稍后再试！！！',
-        //           position: 'middle',
-        //           duration: 2000
-        //         }).present();
-        //         this.navCtrl.pop();
-        //       }
-        //   });
-        this.mailDetail = {
-            jsyjid: "2",
-            jsbt: "信息主题2",
-            fsrName: "系统管理员",
-            fsrID: "121",
-            fssj: "2012-12-12 12:12:12",
-            jssj: "2012-12-12 12:12:12",
-            jsrIDs: "123,456,789",
-            jsnr: "你该交作业了2",
-            attName: "236.png",
-            yjfj: "236.png",
-            jszt: "未读",
-            msbz: "是" // 密送标志
-        };
-        this.mailContent = this.mailDetail.ggnr;
+    CarPage.prototype.initializeItems = function () {
+        var _this = this;
+        this.getList(this.data);
+        console.log(this);
+        setInterval(function () {
+            console.log(_this);
+            _this.getList(_this.data);
+        }, 50000);
     };
-    MailReadOutbox.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad MailRead');
-        this.content.resize();
+    CarPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Message');
     };
-    MailReadOutbox.prototype.ionViewWillLeave = function () {
+    CarPage.prototype.doRead = function (Params) {
+        // this.navCtrl.push("CarReadPage", { Params: Params });
+        this.navCtrl.push("CarReadPage");
     };
-    MailReadOutbox.prototype.read = function () {
-        var modal = this.modalCtrl.create("MailWrite");
-        modal.present();
-        modal.onDidDismiss(function (data) {
-            data && console.log(data);
+    CarPage.prototype.doWrite = function () {
+        // let modal = this.modalCtrl.create("CarAddPage");
+        // modal.present();
+        // modal.onDidDismiss(data => {
+        //     data && console.log(data);
+        // });
+        this.navCtrl.push("CarAddPage");
+    };
+    CarPage.prototype.doRefresh = function (refresher) {
+        console.log("加载更多");
+        this.list = [];
+        this.data.PageIndex = 1;
+        this.getList(this.data);
+        setTimeout(function () {
+            console.log('数据加载完成');
+            refresher.complete();
+        }, 1000);
+    };
+    CarPage.prototype.doInfinite = function () {
+        if (this.moredata) {
+            this.data.PageIndex++;
+            this.getList(this.data);
+        }
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve();
+            }, 500);
         });
     };
-    MailReadOutbox.prototype.download = function (path) {
-        var target = path.split("/").pop();
-        this.nativeService.download(path, target);
+    CarPage.prototype.getList = function (data) {
+        var _this = this;
+        this.CarService.getList(data).subscribe(function (resJson) {
+            if (resJson.Result && resJson.Data !== []) {
+                var list = resJson.Data;
+                _this.list = _this.list.concat(list);
+                _this.moredata = true;
+                _this.isEmpty = false;
+            }
+            else {
+                _this.moredata = false;
+                if (_this.data.PageIndex === 1) {
+                    _this.CarService.httpService.nativeService.showToast(resJson.Data);
+                    _this.isEmpty = true;
+                    _this.list = [];
+                }
+            }
+        });
     };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */])
-    ], MailReadOutbox.prototype, "content", void 0);
-    MailReadOutbox = __decorate([
+    CarPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-mail-read-outbox',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-read-outbox\mail-read-outbox.html"*/`<!--\n  Generated template for the MailReadOutbox page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>信息详情</ion-title>\n        <ion-buttons end>\n            <button ion-button (click)="read()">转发</button>\n        </ion-buttons>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n    <div>\n\n        <ion-list>\n\n            <ion-item>\n                <ion-label style="align-self:center;">收件人&emsp;</ion-label>\n                <ion-textarea disabled="disabled" [(ngModel)]="mailDetail.fsrName" #popoverContent placeholder="收件人"></ion-textarea>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>主题&emsp;&emsp;</ion-label>\n                <ion-input type="test" disabled="disabled" [(ngModel)]="mailDetail.jsbt" placeholder="主题1"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>发送时间</ion-label>\n                <ion-input type="test" disabled="disabled" [(ngModel)]="mailDetail.fssj" placeholder="发送时间未知"></ion-input>\n            </ion-item>\n\n        </ion-list>\n    </div>\n\n\n    <div>\n        <ion-scroll scrollY="true" class="mail-content">\n            <!--<div padding-horizontal [innerHTML]="mailContent"></div>-->\n            <div class="mydiv">\n                你该交作业了<br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br> 你该交作业了\n                <br>你该交作业了<br>你该交作业了<br>你该交作业了<br>\n            </div>\n            <div class="affix" *ngIf="mailDetail.attName">\n                <ion-grid>\n                    <ion-row align-items-center>\n                        <ion-col col-6 col-lg-4>\n                            <div (click)="download(mailDetail.ggfj)">\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                <p>{{mailDetail.attName}}</p>\n                                <p color="gray">大小未知</p>\n                                <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n                            </div>\n                        </ion-col>\n                    </ion-row>\n                </ion-grid>\n            </div>\n        </ion-scroll>\n    </div>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-read-outbox\mail-read-outbox.html"*/,
+            selector: 'page-car',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\car.html"*/`<!--\n  Generated template for the CarPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>车辆</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n      </ion-refresher-content>\n  </ion-refresher>\n  <ion-list>\n    <ion-item (click)="doRead(car.Id)" *ngFor="let car of list">\n      <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>\n      <h3>管理员：何小凤&emsp;核载：4人</h3>\n      <p>启动日期：2005-11-12</p>\n    </ion-item>\n    <ion-item (click)="doRead()">\n      <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>\n      <h3>管理员：何小凤&emsp;核载：4人</h3>\n      <p>启动日期：2005-11-12</p>\n    </ion-item>\n    <ion-item (click)="doRead()">\n      <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>\n      <h3>管理员：何小凤&emsp;核载：4人</h3>\n      <p>启动日期：2005-11-12</p>\n    </ion-item>\n  </ion-list>\n  <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n      <div padding>暂无消息数据！！！</div>\n      <img src="assets/img/face/face2.png" height="100">\n  </div>\n  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n  <ion-fab bottom right>\n      <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n  </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\car.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */]])
-    ], MailReadOutbox);
-    return MailReadOutbox;
+            __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */]])
+    ], CarPage);
+    return CarPage;
 }());
 
-//# sourceMappingURL=mail-read-outbox.js.map
+//# sourceMappingURL=car.js.map
 
 /***/ })
 

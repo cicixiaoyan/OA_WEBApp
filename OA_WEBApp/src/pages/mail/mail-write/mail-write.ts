@@ -8,7 +8,7 @@ import { FileService } from "../../../providers/FileService";
 import { FileObj } from "../../../model/FileObj";
 import { FILE_SERVE_URL } from "../../../providers/Constants";
 import { FileChooser } from '@ionic-native/file-chooser';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MailService } from "../mailService";
 import { Utils } from '../../../providers/Utils';
@@ -22,189 +22,12 @@ import { Utils } from '../../../providers/Utils';
  * on Ionic pages and navigation.
  */
 
-@Component({
-    template: `
-        <ion-list class="checkpeople-popover">
-        <ion-item>
-            <ion-label>部门选择</ion-label>
-            <ion-select [(ngModel)]="dept" submitText="确定" (ngModelChange)="getRecipientsByDept(dept)"
-                cancelText="取消" okText="确定">
-                <ion-option  *ngFor="let item of deptItems;let i = index" [value]="item.Id">
-                    {{item.BmName}}
-                </ion-option>
-            </ion-select>
-        </ion-item>
-        <ion-searchbar color="danger" [(ngModel)]="name"  placeholder="请输入编码或姓名">
-        </ion-searchbar>
-
-        <div text-center>
-            <button (click)="search()" icon-left ion-button small color="calm">
-            <ion-icon name="search"></ion-icon>查询</button>
-
-            <button (click)="confirm()" icon-left ion-button small color="calm">
-            <ion-icon name="checkmark"></ion-icon>确定</button>
-        </div>
-
-        <ion-list-header>
-            通讯录
-        </ion-list-header>
-
-        <ion-item *ngFor="let item of items;let i = index">
-            <ion-label>
-            {{item.Name}}({{item.Uid}})<br>
-            <span>{{item.Dept}}&emsp;{{item.Duty}}</span>
-            </ion-label>
-            <ion-checkbox [checked]="item.checked" (ionChange)="checkPeople(i)"></ion-checkbox>
-        </ion-item>
-        <ion-list>
-    `
-})
-export class PopoverPage {
-    dept: string;
-    deptItems: any = [];
-    items: any = [];
-    haveAffix: boolean = false;
-    addressee: string;
-    addresseeIds: string;
-    name: string;
-
-    constructor(private navParams: NavParams,
-                public viewCtrl: ViewController,
-                public mailService: MailService) {
-        this.addressee = this.navParams.get("addressee");
-        this.addresseeIds = this.navParams.get("addresseeIds");
-        console.log(this.addressee, this.addresseeIds);
-        this.initializeItems();
-    }
-
-    initializeItems() {
-        // const testArray = [
-        //     { ui_id: "1", ui_desc: "admin1", bianhao: "dewr1", ui_ssbm: "本部1", ui_zw: "职员" },
-        //     { ui_id: "2", ui_desc: "admin2", bianhao: "dewr2", ui_ssbm: "本部2", ui_zw: "职员" },
-        //     { ui_id: "3", ui_desc: "admin3", bianhao: "dewr3", ui_ssbm: "本部3", ui_zw: "职员" },
-        //     { ui_id: "4", ui_desc: "admin4", bianhao: "dewr4", ui_ssbm: "本部4", ui_zw: "职员" },
-        //     { ui_id: "5", ui_desc: "admin5", bianhao: "dewr5", ui_ssbm: "本部5", ui_zw: "职员" },
-        //     { ui_id: "6", ui_desc: "admin6", bianhao: "dewr6", ui_ssbm: "本部6", ui_zw: "职员" },
-        //     { ui_id: "7", ui_desc: "admin7", bianhao: "dewr7", ui_ssbm: "本部7", ui_zw: "职员" }
-        // ];
-
-        this.mailService.getDept().subscribe((resJson) => {
-            if (resJson.Result){
-                this.deptItems = resJson.Data;
-            }
-        });
-
-        this.mailService.getRecipients({}).subscribe((result) => {
-            console.log(result);
-            if (result.Result){
-                const idArr = this.addresseeIds.split(",");
-
-                this.items = result.Data.map(function (value, index) {
-                    for (let i in idArr) {
-                        if (idArr[i] !== value.Uid) {
-                            Object.assign(value, { checked: false });
-                        } else {
-                            return Object.assign(value, { checked: true });
-
-                        }
-                    }
-                    return value;
-
-                });
-            }
-
-        });
-
-
-    }
-
-    getItems(ev) {
-        // Reset items back to all of the items
-        this.initializeItems();
-
-        // set val to the value of the ev target
-        let val = ev.target.value;
-        this.name = val;
-        // if the value is an empty string don't filter the items
-        // if (val && val.trim() != '') {
-        //   this.items = this.items.filter((item) => {
-        //     return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-        //   });
-        // }
-    }
-
-    getRecipientsByDept(id){
-        this.mailService.getRecipientsByDept({DeptId: id}).subscribe((result) => {
-            console.log(result);
-            if (result.Result){
-                const idArr = this.addresseeIds.split(",");
-
-                this.items = result.Data.map(function (value, index) {
-                    for (let i in idArr) {
-                        if (idArr[i] !== value.Uid) {
-                            Object.assign(value, { checked: false });
-                        } else {
-                            return Object.assign(value, { checked: true });
-
-                        }
-                    }
-                    return value;
-
-                });
-            }
-        });
-    }
-
-
-
-    search() {
-
-        this.mailService.getRecipients({name: this.name}).subscribe((result) => {
-            console.log(result);
-            if (result.Result){
-                const idArr = this.addresseeIds.split(",");
-
-                this.items = result.Data.map(function (value, index) {
-                    for (let i in idArr) {
-                        if (idArr[i] !== value.Uid) {
-                            Object.assign(value, { checked: false });
-                        } else {
-                            return Object.assign(value, { checked: true });
-
-                        }
-                    }
-                    return value;
-
-                });
-            }
-        });
-     }
-
-    checkPeople(index: number) {
-        this.items[index].checked = !this.items[index].checked;
-    }
-
-    confirm() {
-        console.log(confirm);
-        this.addressee = "";
-        this.addresseeIds = "";
-        for (let value of this.items) {
-            if (value.checked) {
-                this.addressee += value.Name + ",";
-                this.addresseeIds += value.Uid + ",";
-            }
-        }
-        this.viewCtrl.dismiss({ addressee: this.addressee, addresseeIds: this.addresseeIds });
-    }
-}
-
 @IonicPage()
 @Component({
     selector: 'page-mail-write',
     templateUrl: 'mail-write.html',
 })
 export class MailWrite {
-    // avatarPath: string;
     imageBase64: string;
     affixPath: string;
     addressee: string = "";
@@ -214,7 +37,6 @@ export class MailWrite {
     haveAffix: boolean = false;
 
     writeForm: FormGroup;
-    // mailObj : object = {};
     @ViewChild("popoverContent", { read: ElementRef }) content: ElementRef;
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
@@ -224,7 +46,7 @@ export class MailWrite {
                 public nativeService: NativeService,
                 private fileChooser: FileChooser,
                 private alertCtrl: AlertController,
-                private transfer: Transfer,
+                private fileTransfer: FileTransfer,
                 private viewCtrl: ViewController,
                 private globalData: GlobalData,
                 private mailService: MailService,
@@ -236,7 +58,6 @@ export class MailWrite {
             Level: ["普通", []],
             Bcc: [false, []],
             Content: ["", [Validators.maxLength(180)]],
-
         });
 
         // console.log(this.navParams.get("mail"));
@@ -244,15 +65,6 @@ export class MailWrite {
         if (typeof (mail) !== "undefined") {
             this.affixPath = mail.yjfj;
             this.fsbt = mail.jsbt;
-
-
-            // Object.assign(this.mailObj,{
-            //   "fsrName":this.globaldata.ui_desc,
-            //   "fsrID":this.globaldata.ui_id,
-            //   "attName":mail.attName,
-            //   "fsbt":mail.jsbt,
-            //   "yjfj":mail.yjfj
-            // })
         }
     }
 
@@ -326,7 +138,7 @@ export class MailWrite {
                                 },
                                 "chunkedMode": false,
                                 "httpMethod" : "POST",
-                                "params": {"token": this.globalData.token}
+                                "params": {"token": this.globalData.token, "type": 1}
                             };
                             let url = encodeURI(FILE_SERVE_URL + "ashx/AttachUpload.ashx");
                             console.log(fileURL, url, pathOption, true);
@@ -348,7 +160,7 @@ export class MailWrite {
     }
 
     checkPeople(myEvent) {
-        let popover = this.popoverCtrl.create(PopoverPage,
+        let popover = this.popoverCtrl.create("ContactsPopoverPage",
             { addressee: this.addressee, addresseeIds: this.addresseeIds });
         popover.present({
             ev: myEvent
@@ -389,7 +201,7 @@ export class MailWrite {
         });
         alert.present();
 
-        const fileTransfer: TransferObject = this.transfer.create();
+        const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
         fileTransfer.onProgress((event: ProgressEvent) => {
             let num = Math.floor(event.loaded / event.total * 100);

@@ -14,53 +14,53 @@
 
 
 <ion-content>
-    <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">
+    <form [formGroup]="editForm" (ngSubmit)="sent(editForm.value)">
         <div>
             <ion-list>
                 <ion-item>
                     <ion-label stacked>车牌号</ion-label>
-                    <ion-input type="text" formControlName="Title" placeholder="请输入" ></ion-input>
+                    <ion-input type="text" formControlName="CarNum" placeholder="请输入" ></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>车辆名称</ion-label>
-                    <ion-input type="text" formControlName="Title" placeholder="请输入" ></ion-input>
+                    <ion-input type="text" formControlName="Name" placeholder="请输入" ></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>核载人数</ion-label>
-                    <ion-input type="number" formControlName="Title" placeholder="请输入" ></ion-input>
+                    <ion-input type="number" formControlName="Number" placeholder="请输入" ></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>启用时间</ion-label>
-                    <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="StartDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+                    <ion-datetime formControlName="StartDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>购买价(万)</ion-label>
-                    <ion-input type="number" formControlName="Title" placeholder="请输入" ></ion-input>
+                    <ion-input type="number" formControlName="PurchasePrice" placeholder="请输入" ></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>残值(万)</ion-label>
-                    <ion-input type="number" formControlName="Title" placeholder="请输入" ></ion-input>
+                    <ion-input type="number" formControlName="ResidualValue" placeholder="请输入" ></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>厂牌型号</ion-label>
-                    <ion-input type="text" formControlName="Title" placeholder="请输入" ></ion-input>
+                    <ion-input type="text" formControlName="BrandModel" placeholder="请输入" ></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>发动机号</ion-label>
-                    <ion-input type="text" formControlName="Title" placeholder="请输入" ></ion-input>
+                    <ion-input type="text" formControlName="EngineNumber" placeholder="请输入" ></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>车架号</ion-label>
-                    <ion-input type="text" formControlName="Title" placeholder="请输入" ></ion-input>
+                    <ion-input type="text" formControlName="FrameNumber" placeholder="请输入" ></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>行驶证号</ion-label>
-                    <ion-input type="text" formControlName="Title" placeholder="请输入" ></ion-input>
+                    <ion-input type="text" formControlName="DrivingLicenseNumber" placeholder="请输入" ></ion-input>
                 </ion-item>
 
                 <ion-item>
                     <ion-label stacked>管理人员</ion-label>
-                    <ion-select formControlName="TypeId" cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-select formControlName="manager" cancelText="取消" okText="确定" placeholder="请选择">
                         <ion-option *ngFor="let type of MeetTypeLs;let i = index" [value]="type.Id">{{type.Name}}</ion-option>
                         <!-- <ion-option value="2">类型2</ion-option> -->
                     </ion-select>
@@ -68,7 +68,7 @@
 
                 <ion-item>
                     <ion-label stacked>车辆状况</ion-label>
-                    <ion-select formControlName="PlaceId" cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-select formControlName="VehicleCondition" cancelText="取消" okText="确定" placeholder="请选择">
                         <ion-option *ngFor="let place of MeetPlaceLs;let i = index" [value]="place.Id">{{place.Name}}</ion-option>
                         <!-- <ion-option value="2">类型2</ion-option> -->
                     </ion-select>
@@ -76,25 +76,25 @@
      
                 <ion-item>
                     <ion-label stacked>年检日期</ion-label>
-                    <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="StartDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+                    <ion-datetime formControlName="AnnualinspectionDate"  placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>维保日期</ion-label>
-                    <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="StartDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+                    <ion-datetime formControlName="WarrantyDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>保险日期</ion-label>
-                    <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="StartDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+                    <ion-datetime formControlName="InsuranceDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
                 </ion-item>
 
                 <ion-item>
                     <ion-label stacked>备注</ion-label>
-                    <ion-textarea type="text" formControlName="PersonId" placeholder="请输入"></ion-textarea>
+                    <ion-textarea formControlName="Remarks" type="text" placeholder="请输入"></ion-textarea>
                 </ion-item>
 
             </ion-list>
             <div padding text-center>
-                <button ion-button type="submit" color="danger" [disabled]="!writeForm.valid">保存</button>
+                <button ion-button type="submit" color="danger" [disabled]="!editForm.valid">保存</button>
                 <button ion-button clear small navPop>取消</button>
             </div>
         </div>

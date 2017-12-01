@@ -26,6 +26,7 @@ export class MeetingEditPage {
   FileNewName: string = ""; // 附件名称
   MeetPlaceLs = [];
   MeetTypeLs = [];
+  DeptLs = [];
   detail = {};
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -34,30 +35,21 @@ export class MeetingEditPage {
               private globalData: GlobalData,
               private nativeService: NativeService,
               private meetingService: MeetingService) {
-    let parma = {"id": this.navParams.get("Id")};
-    this.meetingService.read(parma).subscribe((resJson) => {
-      if (resJson.Result){
-        this.detail = resJson.Data[0];
-        console.log(this.detail);
-        this.FileNewName = resJson.Data[0].FileNewName;
-        this.writeForm = this.formBuilder.group({
-          Title: [this.detail["Title"], [Validators.required, Validators.maxLength(30)]], // 第一个参数是默认值
-          TypeId: [this.detail["TypeId"], [Validators.required]],
-          PlaceId: [this.detail["PlaceId"], [ Validators.required]],
-          StartDate: [this.detail["StartDate"], [ Validators.required]],
-          EndDate: [this.detail["EndDate"], [Validators.required]],
-          PersonId: [this.detail["PersonId"], [Validators.maxLength(180), Validators.required]],
-          DeptId: [this.detail["DeptId"], []],
-          HostName: [this.detail["HostName"], [Validators.maxLength(8)]],
-          Range: [this.detail["Range"], [Validators.maxLength(180)]],
-          Detail: [this.detail["Detail"], [Validators.maxLength(180)]],
-          FileOldName: [this.detail["FileOldName"], [Validators.maxLength(180)]],
-        });
-      }else{
-        this.nativeService.showToast(resJson.Result, 800);
-        this.navCtrl.pop();
-      }
+    this.writeForm = this.formBuilder.group({
+      Title: ["", [Validators.required, Validators.maxLength(30)]], // 第一个参数是默认值
+      TypeId: ["", [Validators.required]],
+      PlaceId: ["", [ Validators.required]],
+      StartDate: [null, [ Validators.required]],
+      EndDate: [null, [Validators.required]],
+      PersonId: ["", [Validators.maxLength(180), Validators.required]],
+      DeptId: ["", []],
+      HostName: ["", [Validators.maxLength(8)]],
+      Range: ["", [Validators.maxLength(180)]],
+      Detail: ["", [Validators.maxLength(180)]],
+      FileOldName: ["", [Validators.maxLength(180)]],
     });
+    let parma = {"id": this.navParams.get("Id")};
+
     this.meetingService.MeetPlaceLs().subscribe((resJson) => {
       if (resJson.Result)  this.MeetPlaceLs = resJson.Data;
     });
@@ -65,6 +57,35 @@ export class MeetingEditPage {
     this.meetingService.MeetTypeLs().subscribe((resJson) => {
       if (resJson.Result)  this.MeetTypeLs = resJson.Data;
     });
+
+    this.meetingService.GetDeptLs().subscribe((resJson) => {
+      if (resJson.Result)  this.DeptLs = resJson.Data;
+    });
+
+    this.meetingService.read(parma).subscribe((resJson) => {
+      if (resJson.Result){
+        this.detail = resJson.Data;
+        this.FileNewName = resJson.Data.FileNewName;
+        this.writeForm.setValue({
+          Title: this.detail["Title"],
+          TypeId: this.detail["TypeId"],
+          PlaceId: this.detail["PlaceId"],
+          StartDate: new Date(this.detail["StartDate"]),
+          EndDate: new Date(this.detail["EndDate"]), 
+          PersonId: this.detail["PersonId"],
+          DeptId: this.detail["DeptId"],
+          HostName: this.detail["HostName"],
+          Range: this.detail["Range"],
+          Detail: this.detail["Detail"],
+          FileOldName: this.detail["FileOldName"],
+        });
+
+      }else{
+        this.nativeService.showToast(resJson.Data, 800);
+        this.navCtrl.pop();
+      }
+    });
+
 
   }
 

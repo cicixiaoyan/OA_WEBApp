@@ -19,26 +19,19 @@
         </ion-refresher-content>
     </ion-refresher>
     <ion-list>
-        <ion-item-sliding *ngFor="let item of list " (click)="doRead(item.Id)">
+        <ion-item-sliding *ngFor="let item of list;let i = index" (click)="doRead(item.Id)">
             <ion-item>
                 <span>{{item.Name}}&emsp;{{item.Sex}}</span>
-                <p class="font-12">{{item.Age}}岁&emsp;入职日期：{{item.InDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>
+                <p class="font-12"><span *ngIf="item.Age">{{item.Age}}岁&emsp;</span>入职日期：{{item.InDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>
             </ion-item>
             <ion-item-options side="right">
-                <button ion-button color="primary">
+                <button ion-button color="primary" (click)="delete(item.Id, i)">
                     <ion-icon name="md-trash"></ion-icon>删除
                 </button>
             </ion-item-options>
         </ion-item-sliding>
     </ion-list>
-    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">
-        <div padding>暂无消息数据！！！</div>
-        <img src="assets/img/face/face2.png" height="100">
-    </div>
-    <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->
-    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">
-        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+    <empty *ngIf="isEmpty"></empty>
     <ion-fab bottom right>
         <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>
     </ion-fab>

@@ -179,7 +179,7 @@ export class Mail {
 
     _getInboxList(inboxData) {
         this.mailService.getInboxList(inboxData).subscribe(resJson => {
-            if (resJson.Result && resJson.Data !== []){
+            if (resJson.Result  && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
                 this.isEmpty = false;
                 let list = resJson.Data;
                 this.inboxList = [...this.inboxList, ...list];
@@ -195,7 +195,7 @@ export class Mail {
 
     _getOutboxList(outboxData) {
         this.mailService.getOutboxList(outboxData).subscribe(resJson => {
-            if (resJson.Result && resJson.Data !== []){
+            if (resJson.Result  && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
                 this.isEmpty = false;
                 let list = resJson.Data;
                 this.outboxList = [...this.outboxList, ...list];

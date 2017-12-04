@@ -19,7 +19,12 @@
       </ion-refresher-content>
   </ion-refresher>
   <ion-list>
-    <ion-item (click)="doRead(car.Id)" *ngFor="let car of list">
+    <ion-item (click)="doRead(bus.Id)" *ngFor="let bus of list">
+      <h2 >{{bus.BusName}}</h2><ion-note item-end>{{BusStatus}}</ion-note>
+      <h3>管理员：{{bus.BusManger}}&emsp;核载：{{bus.BusPassenger}}人</h3>
+      <p>启动日期：{{bus.StartDate}}</p>
+    </ion-item>
+    <!-- <ion-item (click)="doRead()">
       <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>
       <h3>管理员：何小凤&emsp;核载：4人</h3>
       <p>启动日期：2005-11-12</p>
@@ -28,12 +33,7 @@
       <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>
       <h3>管理员：何小凤&emsp;核载：4人</h3>
       <p>启动日期：2005-11-12</p>
-    </ion-item>
-    <ion-item (click)="doRead()">
-      <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>
-      <h3>管理员：何小凤&emsp;核载：4人</h3>
-      <p>启动日期：2005-11-12</p>
-    </ion-item>
+    </ion-item> -->
   </ion-list>
   <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">
       <div padding>暂无消息数据！！！</div>

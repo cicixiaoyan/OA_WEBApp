@@ -35,6 +35,7 @@ import { GlobalData } from "../providers/GlobalData";
 
 import { BackButtonService } from '../services/backButtonService';
 
+import { ComponentsModule } from '../components/components.module';
 
 import { Logger } from "../providers/Logger";
 import { ModalFromRightEnter, ModalFromRightLeave, ModalScaleEnter, ModalScaleLeave } from "./itransitions";
@@ -70,6 +71,7 @@ export class FunDebugErrorHandler implements ErrorHandler {
             tabsHideOnSubPages: true
         }),
         IonicStorageModule.forRoot(),
+        ComponentsModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [

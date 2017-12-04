@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Refresher } from 'ionic-angular';
 import { CarService } from '../car_service';
+import { NativeService } from '../../../providers/NativeService';
 /**
  * Generated class for the DriverPage page.
  *
@@ -15,47 +16,25 @@ import { CarService } from '../car_service';
 })
 export class DriverPage {
   list: any = [];
-  data: any = {};
-  moredata: boolean = true;
   isEmpty: boolean = false;
+  data: any = {};
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              private nativeService: NativeService,
               private carService: CarService) {
+      this.data = {
+        "PageIndex": 1,
+        "PageSize": 100
+      };
+      this.initializeItems();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DriverPage');
-    this.list = [
-      { 
-        "Id": "1",
-        "Name": "张三",
-        "Sex": "男",
-        "Age": "16",
-        "InDate": '12',
-        "Remark": '11444'
-      },
-      {
-        "Id": "1",
-        "Name": "李四",
-        "Sex": "男",
-        "Age": "19",
-        "InDate": '12',
-        "Remark": '11444'
-      },
-      {
-        "Id": "2",
-        "Name": "王五",
-        "Sex": "男",
-        "Age": "20",
-        "InDate": '12',
-        "Remark": '11444'
-      },
-    ];
+  initializeItems() {
+    this.getList(this.data);
   }
 
-  doRead(Params?) {
-    // this.navCtrl.push("CarReadPage", { Params: Params });
-    this.navCtrl.push("DriverSetPage", { "isWrite": false });
+  doRead(id?) {
+    this.navCtrl.push("DriverSetPage", { "isWrite": false, "Id": id });
 }
 
   doWrite() {
@@ -63,49 +42,38 @@ export class DriverPage {
   }
 
   doRefresh(refresher: Refresher) {
-      console.log("加载更多");
       this.list = [];
-      this.data.PageIndex = 1;
+      console.log(this.data);
       this.getList(this.data);
 
-
       setTimeout(() => {
-          console.log('数据加载完成');
           refresher.complete();
       }, 1000);
   }
 
-  doInfinite(): Promise<any> {
-      if (this.moredata) {
-        this.data.PageIndex++;
-        this.getList(this.data);
-      }
-
-      return new Promise((resolve) => {
-          setTimeout(() => {
-              resolve();
-          }, 500);
+  private getList(data) {
+      this.carService.getDriverList(data).subscribe(resJson => {
+          if (resJson.Result && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
+            let list = resJson.Data;
+            this.list = [...this.list, ...list];
+            this.isEmpty = false;
+          }else{
+            this.carService.httpService.nativeService.showToast(resJson.Data);
+            this.isEmpty = true;
+            this.list = [];
+          }
       });
   }
 
-
-  private getList(data) {
-      this.carService.getDriverList(data).subscribe(resJson => {
-          if (resJson.Result && resJson.Data !== []){
-            let list = resJson.Data;
-            this.list = [...this.list, ...list];
-            this.moredata = true;
-            this.isEmpty = false;
-          }else{
-            this.moredata = false;
-            if (this.data.PageIndex === 1) {
-                this.carService.httpService.nativeService.showToast(resJson.Data);
-                this.isEmpty = true;
-                this.list = [];
-            }
-
-          }
-      });
+  delete(id, index){
+    this.carService.driverDel(id).subscribe((resJson) => {
+      if (resJson.Result){
+        this.list.splice(index, 1);    
+        this.nativeService.showToast("删除成功", 300);    
+      }else{
+        this.nativeService.showToast(resJson.Data, 800);
+      }
+    });
   }
 
 }

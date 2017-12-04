@@ -123,7 +123,11 @@ var GetmobilePopoverPage = (function () {
     };
     GetmobilePopoverPage.prototype.search = function () {
         var _this = this;
-        var data = (this.name !== "") ? { name: name } : {};
+        //   let data = (this.name !== "") ? {name: name} : {};
+        var data = {};
+        if (this.name && this.name.trim() != '')
+            data["name"] = this.name;
+        data["ISPhone"] = true;
         this.httpService.postFormData("ashx/UserSheet.ashx", data)
             .map(function (res) { return res.json(); })
             .subscribe(function (result) {

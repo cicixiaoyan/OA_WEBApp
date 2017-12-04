@@ -38,11 +38,11 @@
                   </ion-item>
                   <ion-item>
                       <ion-label stacked>开始时间</ion-label>
-                      <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="StartDate" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>
+                      <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="StartDate" displayFormat="YYYY年MM月DD日 HH:mm" pickerFormat="YYYY MM DD HH mm"></ion-datetime>
                   </ion-item>
                   <ion-item>
                       <ion-label stacked>结束时间</ion-label>
-                      <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="EndDate" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>
+                      <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="EndDate" displayFormat="YYYY年MM月DD日 HH:mm" pickerFormat="YYYY MM DD HH mm"></ion-datetime>
                   </ion-item>
                   <ion-item>
                       <ion-label stacked>参加人员</ion-label>
@@ -71,9 +71,9 @@
                       <ion-input type="text" formControlName="FileOldName"  (click)="addAffix()" placeholder="点击添加"></ion-input>
                   </ion-item>
               </ion-list>
-              <div padding text-center>
-                  <button ion-button type="submit" color="danger" [disabled]="!writeForm.valid">保存</button>
-                  <button ion-button clear small navPop>取消修改</button>
+              <div padding text-center >
+                  <button *ngIf="!readOnly"  ion-button type="submit" color="danger" [disabled]="!writeForm.valid">保存</button>
+                  <button ion-button clear small navPop>返回</button>
               </div>
           </div>
       </form>

@@ -6,6 +6,7 @@ import { NativeService } from '../../../providers/NativeService';
 import { FileObj } from "../../../model/FileObj";
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FileService } from '../../../providers/FileService';
+import { Utils } from '../../../providers/Utils';
 import { MeetingService } from '../meeting_service';
 
 /**
@@ -28,6 +29,7 @@ export class MeetingEditPage {
   MeetTypeLs = [];
   DeptLs = [];
   detail = {};
+  readOnly: boolean = false;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private fileService: FileService,
@@ -39,8 +41,8 @@ export class MeetingEditPage {
       Title: ["", [Validators.required, Validators.maxLength(30)]], // 第一个参数是默认值
       TypeId: ["", [Validators.required]],
       PlaceId: ["", [ Validators.required]],
-      StartDate: [null, [ Validators.required]],
-      EndDate: [null, [Validators.required]],
+      StartDate: ["", [ Validators.required]],
+      EndDate: ["", [Validators.required]],
       PersonId: ["", [Validators.maxLength(180), Validators.required]],
       DeptId: ["", []],
       HostName: ["", [Validators.maxLength(8)]],
@@ -48,7 +50,8 @@ export class MeetingEditPage {
       Detail: ["", [Validators.maxLength(180)]],
       FileOldName: ["", [Validators.maxLength(180)]],
     });
-    let parma = {"id": this.navParams.get("Id")};
+    let id = {"id": this.navParams.get("Id")};
+    this.readOnly = this.navParams.get("readOnly") ? true : false;
 
     this.meetingService.MeetPlaceLs().subscribe((resJson) => {
       if (resJson.Result)  this.MeetPlaceLs = resJson.Data;
@@ -62,7 +65,7 @@ export class MeetingEditPage {
       if (resJson.Result)  this.DeptLs = resJson.Data;
     });
 
-    this.meetingService.read(parma).subscribe((resJson) => {
+    this.meetingService.read(id).subscribe((resJson) => {
       if (resJson.Result){
         this.detail = resJson.Data;
         this.FileNewName = resJson.Data.FileNewName;
@@ -70,8 +73,8 @@ export class MeetingEditPage {
           Title: this.detail["Title"],
           TypeId: this.detail["TypeId"],
           PlaceId: this.detail["PlaceId"],
-          StartDate: new Date(this.detail["StartDate"]),
-          EndDate: new Date(this.detail["EndDate"]), 
+          StartDate: Utils.dateFormat(new Date(this.detail["StartDate"]), 'yyyy-MM-ddTHH:mm+08:00'),
+          EndDate: Utils.dateFormat(new Date(this.detail["EndDate"]), 'yyyy-MM-ddTHH:mm+08:00'),
           PersonId: this.detail["PersonId"],
           DeptId: this.detail["DeptId"],
           HostName: this.detail["HostName"],
@@ -90,9 +93,7 @@ export class MeetingEditPage {
   }
 
   ionViewWillEnter(){
-
-
-
+    this.writeForm.disable();
   }
 
   ionViewDidLoad() {
@@ -102,6 +103,8 @@ export class MeetingEditPage {
     data.Uid = this.globalData.Uid;
     data.FileNewName = this.FileNewName;
     data.Id = this.detail["Id"];
+    data.StartDate = Utils.dateFormat(new Date(data.StartDate), 'yyyy-MM-dd HH:mm:ss');
+    data.EndDate = Utils.dateFormat(new Date(data.EndDate), 'yyyy-MM-dd HH:mm:ss');
     this.meetingService.write(data).subscribe((resJson) => {
       if (resJson.Result){
         this.nativeService.showToast("添加成功", 888);

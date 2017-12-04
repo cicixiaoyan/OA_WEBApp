@@ -36,10 +36,7 @@
         </ion-item>
     </ion-item-sliding>
   </ion-list>
-  <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">
-      <div padding>暂无消息数据！！！</div>
-      <img src="assets/img/face/face2.png" height="100">
-  </div>
+  <empty *ngIf="isEmpty"></empty>
   <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>
   </ion-infinite-scroll>

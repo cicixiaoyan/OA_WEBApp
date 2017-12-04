@@ -73,15 +73,6 @@ export class MailWrite {
     }
 
     sent(data) {
-        // AccessPresonId= context.Request.Params["AccessPresonId"],
-        // AccessPerson= context.Request.Params["AccessPerson"],
-        // Title= context.Request.Params["Title"],
-        // Content= context.Request.Params["Content"],
-        // Level = context.Request.Params["Level"],
-        // Bcc= context.Request.Params["Bcc"],
-        // AttNo= context.Request.Params["AttNo"],
-        // UserId= context.Request.Params["UserId"],
-        // UserName = context.Request.Params["UserName"],
         let data1 =  {
             "AccessPresonId": this.addresseeIds,
             "AccessPerson": this.addressee,

@@ -14,15 +14,16 @@
 
 
 <ion-content>
+
   <ion-list>
     <ion-item>
         <ion-label>接收号码&emsp;</ion-label>
-        <ion-input type="text" disabled="disabled" [(ngModel)]="detail.AccessNumber" placeholder="系统管理员"></ion-input>
+        <ion-input type="text" disabled="disabled" [value]="detail.AccessNumber" placeholder="系统管理员"></ion-input>
     </ion-item>
 
     <ion-item>
         <ion-label>发送时间</ion-label>
-        <ion-input type="test" disabled="disabled" [(ngModel)]="detail.SendDate" placeholder="发送时间未知"></ion-input>
+        <ion-input type="test" disabled="disabled" [value]="detail.SendDate" placeholder="发送时间未知"></ion-input>
     </ion-item>
 
   </ion-list>

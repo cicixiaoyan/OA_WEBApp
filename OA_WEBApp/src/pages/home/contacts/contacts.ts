@@ -62,7 +62,7 @@ export class Contacts {
 
     initializeItems() {
         this.getList().subscribe(resJson => {
-            if (resJson.Result && resJson.Result !== []){
+            if (resJson.Result  && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
                 this.items = resJson.Data;
                 this.isEmpty = false;
             } else {
@@ -102,7 +102,7 @@ export class Contacts {
         return this.httpService.postFormData("ashx/UserSheet.ashx", {"Name": this.searchKey})
         .map(Response => Response.json())
         .subscribe((resJson) => {
-            if (resJson.Result){
+            if (resJson.Result && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
                 this.items = resJson.Data;
                 this.isEmpty = false;
             }else{

@@ -167,10 +167,10 @@ var MeetingRoomPage = (function () {
     MeetingRoomPage.prototype.ionViewDidLoad = function () {
     };
     MeetingRoomPage.prototype.doRead = function (Params) {
-        this.navCtrl.push("MeetingEditPage", { "isAdd": false, "Id": Params });
+        this.navCtrl.push("MeetingRoomSetPage", { "isAdd": false, "Id": Params });
     };
     MeetingRoomPage.prototype.doWrite = function () {
-        this.navCtrl.push("MeetingEditPage", { "isAdd": true });
+        this.navCtrl.push("MeetingRoomSetPage", { "isAdd": true });
     };
     MeetingRoomPage.prototype.doRefresh = function (refresher) {
         this.list = [];
@@ -194,22 +194,25 @@ var MeetingRoomPage = (function () {
     MeetingRoomPage.prototype.getList = function (data) {
         this.list = [
             {
-                Name: '会议室1',
-                Number: '200',
-                Manager: '张三',
-                Mobile: "13111111111"
+                "Id": '1',
+                "Name": '会议室1',
+                "Number": '200',
+                "Manager": '张三',
+                "Mobile": "13111111111"
             },
             {
-                Name: '会议室2',
-                Number: '200',
-                Manager: '张三',
-                Mobile: "13111111111"
+                "Id": '2',
+                "Name": '会议室2',
+                "Number": '200',
+                "Manager": '张三',
+                "Mobile": "13111111111"
             },
             {
-                Name: '会议室3',
-                Number: '200',
-                Manager: '张三',
-                Mobile: "13111111111"
+                "Id": '3',
+                "Name": '会议室3',
+                "Number": '200',
+                "Manager": '张三',
+                "Mobile": "13111111111"
             }
         ];
         // this.meetingService.getList(data).subscribe((resJson) => {

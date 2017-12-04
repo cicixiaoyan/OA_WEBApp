@@ -16,28 +16,13 @@ import { MeetingService } from '../meeting_service';
 export class MeetingRoomPage {
 
   list = [];
-  checkBtn: any = {
-    Drafting: false, // 起草中
-    Delivered: true, // 送审中(默认)
-    Approved: false, // 已审批
-    HasBeenReturned: false, // 已退回
-    completed: false, // 已完成
-  };
-  data: any;
-  moredata: boolean = true;
   isEmpty: boolean = false;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private modalCtrl: ModalController,
               private meetingService: MeetingService) {
-      this.data = {
-        "status": this.meetingService.meetingStatus["Delivered"],
-        "uid": this.meetingService.httpService.globalData.Uid,
-        "PageIndex": 1,
-        "PageSize": 8
-      };
-      this.getList(this.data);
+      this.getList();
   }
 
 
@@ -55,28 +40,13 @@ export class MeetingRoomPage {
 
   doRefresh(refresher: Refresher) {
     this.list = [];
-    this.data.PageIndex = 1;
-    this.getList(this.data);
+    this.getList();
     setTimeout(() => {
         refresher.complete();
     }, 1000);
   }
 
-
-  doInfinite(): Promise<any> {
-      if (this.moredata) {
-          this.data.PageIndex++;
-          this.getList(this.data);
-      }
-
-      return new Promise((resolve) => {
-          setTimeout(() => {
-              resolve();
-          }, 500);
-      });
-  }
-
-  private getList(data){
+  private getList(){
     this.list = [
       {
         "Id": '1',
@@ -100,19 +70,15 @@ export class MeetingRoomPage {
         "Mobile": "13111111111"
       }
     ];
-    // this.meetingService.getList(data).subscribe((resJson) => {
-    //   if (resJson.Result && resJson.Data !== []){
-    //     this.moredata = true;
+    // this.meetingService.MeetPlaceLs().subscribe((resJson) => {
+    //   if (resJson.Result  && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
     //     this.isEmpty = false;
     //     let list = resJson.Data;
     //     this.list = [...this.list, ...list];
     //   }else{
-    //     this.moredata = false;
-    //     this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+    //     this.isEmpty =  true;
     //   }
     // });
-    
-
   }
 
 }

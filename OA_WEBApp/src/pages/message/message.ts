@@ -164,33 +164,39 @@ export class MessagePage {
 
 
   _getInboxList(inboxData) {
+      
       this.messageService.getInboxList(inboxData).subscribe(resJson => {
-          if (resJson.Result == false  ) {
+          if (resJson.Result && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
+              this.moredata = false;
+              this.isEmpty = false;
+              let list = resJson.Data;
+              this.inboxList = [...this.inboxList, ...list];
+          }else{
               this.moredata = false;
               if (this.inboxData.PageIndex === 1) {
                    this.messageService.httpService.nativeService.showToast(resJson.Data);
+                   this.isEmpty = true;
                    this.inboxList = [];
               }
-
-          } else {
-              let list = resJson.Data;
-              this.inboxList = [...this.inboxList, ...list];
           }
       });
   }
 
   _getOutboxList(outboxData) {
       this.messageService.getOutboxList(outboxData).subscribe(resJson => {
-          if (resJson.Result == false ) {
-              this.moredata = false;
-              if (this.inboxData.PageIndex === 1) {
-                  this.messageService.httpService.nativeService.showToast(resJson.Data);
-                  this.outboxList = [];
-             }
-          } else {
-              let list = resJson.Data;
-              this.outboxList = [...this.outboxList, ...list];
-          }
+        if (resJson.Result && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
+            this.moredata = false;
+            this.isEmpty = false;
+            let list = resJson.Data;
+            this.outboxList = [...this.outboxList, ...list];
+        }else{
+            this.moredata = false;
+            if (this.outboxList.PageIndex === 1) {
+                 this.messageService.httpService.nativeService.showToast(resJson.Data);
+                 this.isEmpty = true;
+                 this.outboxList = [];
+            }
+        }
       });
   }
 

@@ -129,7 +129,7 @@ export class SmsPage {
 
     _getList(inboxData) {
             this.smsService.getList(inboxData).subscribe(resJson => {
-                if (resJson.Result && resJson.Data !== []){
+                if (resJson.Result && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
                     let list = resJson.Data;
                     this.list = [...this.list, ...list];
                 }else{

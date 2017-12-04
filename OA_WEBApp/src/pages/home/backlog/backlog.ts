@@ -83,24 +83,26 @@ export class Backlog {
 
     private getNotDoneList(data) {
         this.backlogService.getNotDoneList(data).subscribe((resJson) => {
-            if (resJson.Result && resJson.Result !== [] ){
+            if (resJson.Result  && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string" ){
+                console.log("1");
                 this.isEmpty = false;
                 this.items = this.items.concat(resJson.Data);
             } else {
+                console.log("2");
                 this.moredata = false;
-                this.isEmpty = this.data.PageIndex == 1 ? true : false;
+                this.isEmpty = this.data.PageIndex === 1 ? true : false;
             }
         });
     }
 
     private getDoneList(data) {
         this.backlogService.getDoneList(data).subscribe((resJson) => {
-            if (resJson.Result && resJson.Result !== [] ){
+            if (resJson.Result  && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
                 this.isEmpty = false;
                 this.items = this.items.concat(resJson.Data);
             } else {
                 this.moredata = false;
-                this.isEmpty = this.data.PageIndex == 1 ? true : false;
+                this.isEmpty = this.data.PageIndex === 1 ? true : false;
             }
         });
     }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { CarService } from '../car_service';
+import { NativeService } from '../../../providers/NativeService';
 /**
  * Generated class for the CarAddPage page.
  *
@@ -15,33 +17,51 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 })
 export class CarAddPage {
   addForm: FormGroup;
-
+  BusStatusLs: Array<any>;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private nativeService: NativeService,
+              private carService: CarService) {
     let today = new Date();
     this.addForm = this.formBuilder.group({
-      CarNum: ['', [Validators.required]], // 第一个参数是默认值
-      Name: ["", [Validators.maxLength(180), Validators.required]],
-      Number: ["", [Validators.maxLength(180), Validators.required]],
+      BusNumber: ['', [Validators.required]], // 第一个参数是默认值
+      BusName: ["", [Validators.maxLength(180), Validators.required]],
+      BusPassenger: ["", [Validators.maxLength(180), Validators.required]],
       StartDate: [today, [Validators.maxLength(180), Validators.required]],
-      PurchasePrice: ["", [Validators.maxLength(5)]],
-      ResidualValue: ["", [Validators.maxLength(5)]],
-      BrandModel: ["", [Validators.maxLength(180)]],
-      EngineNumber: ["", [Validators.maxLength(180)]],
-      FrameNumber: ["", [Validators.maxLength(180)]],
-      DrivingLicenseNumber: ["", [Validators.maxLength(20)]],
-      manager: ["", [Validators.maxLength(20), Validators.required, Validators.minLength(4)]],
-      VehicleCondition: ["", []],
-      AnnualinspectionDate: ["", ],
-      WarrantyDate: ["", []],
-      InsuranceDate: ["", []],
-      Remarks: ["", [Validators.maxLength(180)]],
+      BusBuyPrice: ["", [Validators.maxLength(5)]],
+      Salvage: ["", [Validators.maxLength(5)]],
+      BusLicensePlate: ["", [Validators.maxLength(180)]],
+      BusEngineNumber: ["", [Validators.maxLength(180)]],
+      BusFrameNumber: ["", [Validators.maxLength(180)]],
+      BusDrivingLicenseNumber: ["", [Validators.maxLength(20)]],
+      BusManger: ["", [Validators.maxLength(20), Validators.required, Validators.minLength(4)]],
+      BusStatus: ["", []],
+      BusAnnualInspection: ["", ],
+      BusMaintenanceDate: ["", []],
+      BusDated: ["", []],
+      BusMemo: ["", [Validators.maxLength(180)]],
     });
   }
 
   ionViewDidLoad() {
+    this.carService.geStatus().subscribe(resJson => {
+      if (resJson.Result){
+        this.BusStatusLs = resJson.Data;
+      }
+    });
     console.log('ionViewDidLoad CarAddPage');
+  }
+
+  save(value){
+    value.Uid = this.carService.httpService.globalData.Uid;
+    this.carService.add(value).subscribe((resJson) => {
+      if (resJson.Result){
+        this.nativeService.showToast("添加成功", 500);
+      }else{
+        this.nativeService.showToast(resJson.Data, 500);
+      }
+    });
   }
 
 }

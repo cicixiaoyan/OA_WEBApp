@@ -88,7 +88,7 @@ checkRead(name: string = "enter") {
 
   private getList() {
       this.announcementService.getList(this.data).subscribe((resJson) => {
-        if (resJson.Result && resJson !== []){
+        if (resJson.Result && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
             this.moredata = true;
             this.isEmpty = false;
             let list = resJson.Data;

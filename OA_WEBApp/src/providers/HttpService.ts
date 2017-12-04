@@ -69,7 +69,7 @@ export class HttpService {
     }));
   }
 
-  public postFormData(url: string, paramMap: any = null): Observable<Response> {
+  public postFormData(url: string, paramMap: any = {}): Observable<Response> {
     paramMap.Token = this.globalData.token;
     return this.request(url, new RequestOptions({
       method: RequestMethod.Post,

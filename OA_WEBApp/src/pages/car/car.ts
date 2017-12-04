@@ -20,23 +20,21 @@ export class CarPage {
   isEmpty: boolean = false;
   list: any = [];
   moredata: boolean = true;
-  data: any;
+  data: any = {};
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public globalData: GlobalData,
               private modalCtrl: ModalController,
               private CarService: CarService) {
-
+    this.data = {
+        "PageIndex": 1,
+        "PageSize": 8
+        };
+    this.initializeItems();
   }
-  initializeItems() {
+initializeItems() {
     this.getList(this.data);
-    console.log(this);
-
-    setInterval(() => {
-        console.log(this);
-        this.getList(this.data);
-   }, 50000);
 }
 
 ionViewDidLoad() {
@@ -44,9 +42,10 @@ ionViewDidLoad() {
 }
 
 
-doRead(Params?) {
+doRead(id) {
+    console.log(id, "id");
     // this.navCtrl.push("CarReadPage", { Params: Params });
-    this.navCtrl.push("CarReadPage");
+    this.navCtrl.push("CarReadPage", {"Id": id} );
 }
 
 doWrite() {
@@ -59,14 +58,12 @@ doWrite() {
 }
 
 doRefresh(refresher: Refresher) {
-    console.log("加载更多");
     this.list = [];
     this.data.PageIndex = 1;
     this.getList(this.data);
 
 
     setTimeout(() => {
-        console.log('数据加载完成');
         refresher.complete();
     }, 1000);
 }
@@ -87,7 +84,7 @@ doInfinite(): Promise<any> {
 
 private getList(data) {
     this.CarService.getList(data).subscribe(resJson => {
-        if (resJson.Result && resJson.Data !== []){
+        if (resJson.Result && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
           let list = resJson.Data;
           this.list = [...this.list, ...list];
           this.moredata = true;

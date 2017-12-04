@@ -16,7 +16,7 @@ import { MeetingService } from '../meeting_service';
 })
 export class MeetingSearchPage {
 
-  list = [];
+  list: Array<any>;
   checkBtn: any = {
     Drafting: false, // 起草中
     Delivered: true, // 送审中(默认)
@@ -97,11 +97,12 @@ export class MeetingSearchPage {
 
   private getList(data){
     this.meetingService.getList(data).subscribe((resJson) => {
-      if (resJson.Result && resJson.Data !== []){
+      if (resJson.Result  && resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
         this.moredata = true;
         this.isEmpty = false;
         let list = resJson.Data;
         this.list = [...this.list, ...list];
+        console.log(this.list);
       }else{
         this.moredata = false;
         this.isEmpty = (this.data.PageIndex == 1) ? true : false;

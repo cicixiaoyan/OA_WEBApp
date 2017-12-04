@@ -2377,7 +2377,7 @@ var HttpService = (function () {
         }));
     };
     HttpService.prototype.postFormData = function (url, paramMap) {
-        if (paramMap === void 0) { paramMap = null; }
+        if (paramMap === void 0) { paramMap = {}; }
         paramMap.Token = this.globalData.token;
         return this.request(url, new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({
             method: __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestMethod */].Post,

@@ -41,7 +41,7 @@ export class MeetingMinutesPage {
   }
 
   doRead(Params) {
-    this.navCtrl.push("MeetingEditPage", { "Id": Params });
+    this.navCtrl.push("MeetingEditPage", { "Id": Params, "readOnly": true });
   }
 
 
@@ -70,7 +70,7 @@ export class MeetingMinutesPage {
 
   private getList(data){
     this.meetingService.getList(data).subscribe((resJson) => {
-      if (resJson.Result && resJson.Data !== []){
+      if (resJson.Result && resJson.Data.length !== 0  && (resJson.Data instanceof Array)){
         this.moredata = true;
         this.isEmpty = false;
         let list = resJson.Data;

@@ -80,7 +80,10 @@ export class GetmobilePopoverPage {
   }
 
   search() {
-      let data = (this.name !== "") ? {name: name} : {};
+    //   let data = (this.name !== "") ? {name: name} : {};
+      let data = {};
+      if (this.name && this.name.trim() != '')  data["name"] = this.name;
+      data["ISPhone"] = true;      
       this.httpService.postFormData("ashx/UserSheet.ashx", data)
       .map((res: Response) => res.json())
       .subscribe((result) => {

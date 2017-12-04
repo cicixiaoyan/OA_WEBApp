@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { MeetingPage } from './meeting';
 import { MeetingService } from './meeting_service';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   declarations: [
@@ -9,6 +10,7 @@ import { MeetingService } from './meeting_service';
   ],
   imports: [
     IonicPageModule.forChild(MeetingPage),
+    ComponentsModule
   ],
   exports: [
     MeetingPage

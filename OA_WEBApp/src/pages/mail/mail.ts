@@ -37,7 +37,7 @@ export class Mail {
                 private mailService: MailService) {
         this.inboxData = {
             "PageSize": 5,
-            "PageIndex": 1,
+            "PageIndex": 0,
             "MailStatus": this.mailService.mailStatus["inbox"],
             "Uid": this.globalData.Uid,
             "Status": this.mailService.status["unread"]
@@ -45,7 +45,7 @@ export class Mail {
 
         this.outboxData = {
             "PageSize": 5,
-            "PageIndex": 1,
+            "PageIndex": 0,
             "MailStatus": this.mailService.mailStatus["outbox"],
             "Uid": this.globalData.Uid,
             "Status": this.mailService.status["unread"]
@@ -70,7 +70,7 @@ export class Mail {
 
     // 选择已读、未读、全部
     checkRead(name: string = "read") {
-        this.inboxData.PageIndex = 1;
+        this.inboxData.PageIndex = 0;
         this.inboxList = [];
         this.checkBtn = { "read": false, "unread": false, "all": false };
         this.checkBtn[name] = true;
@@ -91,7 +91,7 @@ export class Mail {
 
     // 选择草稿箱、发件箱
     checkDraft(bol: boolean = false) {
-        this.outboxData.PageIndex = 1;
+        this.outboxData.PageIndex = 0;
         this.outboxList = [];
 
         if (bol) {
@@ -135,11 +135,11 @@ export class Mail {
         this.moredata = true;
         if (this.box === "inbox") {
             this.inboxList = [];
-            this.inboxData.PageIndex = 1;
+            this.inboxData.PageIndex = 0;
             this._getInboxList(this.inboxData);
         } else {
             this.outboxList = [];
-            this.outboxData.PageIndex = 1;
+            this.outboxData.PageIndex = 0;
             this._getOutboxList(this.outboxData);
         }
     }
@@ -163,7 +163,7 @@ export class Mail {
     }
 
     getNewInboxList(inboxData){
-        inboxData.PageIndex = 1;
+        inboxData.PageIndex = 0;
         this.mailService.getInboxList(inboxData).subscribe(list => {
             if (list.Result == true ) {
                 let arr = list.Data.filter(item => {
@@ -185,7 +185,7 @@ export class Mail {
                 this.inboxList = [...this.inboxList, ...list];
             }else{
                 this.moredata = false;
-                if (this.inboxData.PageIndex === 1) {
+                if (this.inboxData.PageIndex === 0) {
                     this.isEmpty = true;
                     this.inboxList = [];
                 }
@@ -201,7 +201,7 @@ export class Mail {
                 this.outboxList = [...this.outboxList, ...list];
             }else{
                 this.moredata = false;
-                if (this.outboxData.PageIndex === 1) {
+                if (this.outboxData.PageIndex === 0) {
                     this.isEmpty = true;
                     this.outboxList = [];
                 }

@@ -9,7 +9,7 @@
     <ion-navbar>
         <ion-title>通讯录</ion-title>
     </ion-navbar>
-    <ion-searchbar color="dark" type="text" placeholder="请输入姓名" [(ngModel)]="searchKey" [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event)">
+    <ion-searchbar color="dark" type="text" placeholder="请输入姓名" [(ngModel)]="searchKey" [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event, searchKey)">
     </ion-searchbar>
 </ion-header>
 
@@ -30,8 +30,4 @@
         <div padding>未搜索到信息！！！</div>
         <img src="assets/img/face/face2.png" height="100">
     </div>
-    <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->
-    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">
-        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
 </ion-content>

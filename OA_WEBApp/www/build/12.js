@@ -1,6 +1,6 @@
 webpackJsonp([12],{
 
-/***/ 727:
+/***/ 732:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,8 +8,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MeetingRoomPageModule", function() { return MeetingRoomPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_room__ = __webpack_require__(776);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__meeting_service__ = __webpack_require__(740);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_room__ = __webpack_require__(784);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__meeting_service__ = __webpack_require__(745);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -42,13 +42,13 @@ var MeetingRoomPageModule = (function () {
 
 /***/ }),
 
-/***/ 740:
+/***/ 745:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(364);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
@@ -114,14 +114,14 @@ var MeetingService = (function () {
 
 /***/ }),
 
-/***/ 776:
+/***/ 784:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingRoomPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_service__ = __webpack_require__(740);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_service__ = __webpack_require__(745);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -147,22 +147,8 @@ var MeetingRoomPage = (function () {
         this.modalCtrl = modalCtrl;
         this.meetingService = meetingService;
         this.list = [];
-        this.checkBtn = {
-            Drafting: false,
-            Delivered: true,
-            Approved: false,
-            HasBeenReturned: false,
-            completed: false,
-        };
-        this.moredata = true;
         this.isEmpty = false;
-        this.data = {
-            "status": this.meetingService.meetingStatus["Delivered"],
-            "uid": this.meetingService.httpService.globalData.Uid,
-            "PageIndex": 1,
-            "PageSize": 8
-        };
-        this.getList(this.data);
+        this.getList();
     }
     MeetingRoomPage.prototype.ionViewDidLoad = function () {
     };
@@ -174,24 +160,12 @@ var MeetingRoomPage = (function () {
     };
     MeetingRoomPage.prototype.doRefresh = function (refresher) {
         this.list = [];
-        this.data.PageIndex = 1;
-        this.getList(this.data);
+        this.getList();
         setTimeout(function () {
             refresher.complete();
         }, 1000);
     };
-    MeetingRoomPage.prototype.doInfinite = function () {
-        if (this.moredata) {
-            this.data.PageIndex++;
-            this.getList(this.data);
-        }
-        return new Promise(function (resolve) {
-            setTimeout(function () {
-                resolve();
-            }, 500);
-        });
-    };
-    MeetingRoomPage.prototype.getList = function (data) {
+    MeetingRoomPage.prototype.getList = function () {
         this.list = [
             {
                 "Id": '1',
@@ -215,15 +189,13 @@ var MeetingRoomPage = (function () {
                 "Mobile": "13111111111"
             }
         ];
-        // this.meetingService.getList(data).subscribe((resJson) => {
-        //   if (resJson.Result && resJson.Data !== []){
-        //     this.moredata = true;
+        // this.meetingService.MeetPlaceLs().subscribe((resJson) => {
+        //   if (resJson.Result  && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
         //     this.isEmpty = false;
         //     let list = resJson.Data;
         //     this.list = [...this.list, ...list];
         //   }else{
-        //     this.moredata = false;
-        //     this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+        //     this.isEmpty =  true;
         //   }
         // });
     };

@@ -12,36 +12,29 @@
 
 </ion-header>
 
-
-<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">
-    <div>
+        
+<ion-content>
         <ion-list>
-
             <ion-item>
                 <ion-label>发送人&emsp;</ion-label>
-                <ion-input type="text" readonly="true" [value]="messageDetail.Name" placeholder="发送人"></ion-input>
+                <ion-input type="text" readonly="true"  [(ngModel)]="messageDetail.Name" [ngModelOptions]="{standalone: true}" placeholder="发送人"></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label>发送时间</ion-label>
-                <ion-input type="test" readonly="true" [value]="messageDetail.SendDate" placeholder="发送时间未知"></ion-input>
+                <ion-input type="text" readonly="true" [(ngModel)]="messageDetail.SendDate" [ngModelOptions]="{standalone: true}"  placeholder="发送时间未知"></ion-input>
             </ion-item>
             
             <ion-item>
-                <ion-textarea type="test" readonly="true" [value]="messageDetail.Content" placeholder="信息内容"></ion-textarea>
+                <ion-textarea type="text" rows="4" readonly="true" [(ngModel)]="messageDetail.Content" [ngModelOptions]="{standalone: true}"  placeholder="信息内容"></ion-textarea>
             </ion-item>
-        </ion-list>
-    </div>
 
-    <!-- <div>
-        <ion-scroll scrollY="true" class="message-content">
-            <div padding-horizontal [innerHTML]="messageContent"></div>
-        </ion-scroll>
-    </div> -->
+        </ion-list>
+        <!-- <div class="message-reply">
+            <ion-textarea  type="text" formControlName="writeContent"  placeholder="回复: "></ion-textarea>
+            <button ion-button small color="positive" type="submit">发送</button>
+        </div> -->
 </ion-content>
-<!-- <ion-footer class="message-reply">
-      <div class="item">
-          <ion-textarea [(ngModule)]="writeContent"  placeholder="回复: "></ion-textarea>
-          <button ion-button small color="positive" (click)="reply()">发送</button>
-      </div>
-  </ion-footer> -->
+<!-- <ion-footer >
+
+</ion-footer> -->

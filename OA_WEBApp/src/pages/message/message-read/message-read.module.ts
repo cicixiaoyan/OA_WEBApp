@@ -7,7 +7,7 @@ import { MessageService } from '../messageService';
     MessageReadPage,
   ],
   imports: [
-    IonicPageModule.forChild(MessageReadPage),
+    IonicPageModule.forChild(MessageReadPage)
   ],
   exports: [
     MessageReadPage

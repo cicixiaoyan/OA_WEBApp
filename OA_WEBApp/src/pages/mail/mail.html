@@ -26,7 +26,7 @@
         <div *ngSwitchCase="'inbox'">
             <button ion-button small (click)="checkRead('unread')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.unread}">未读</button>
             <button ion-button small (click)="checkRead('read')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.read}">已读</button>
-            <!-- <button ion-button small (click)="checkRead('all')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.all}">全部</button> -->
+            <button ion-button small (click)="checkRead('all')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.all}">全部</button>
         </div>
 
         <div *ngSwitchCase="'outbox'">

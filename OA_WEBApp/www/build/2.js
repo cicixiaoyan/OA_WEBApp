@@ -1,6 +1,6 @@
 webpackJsonp([2],{
 
-/***/ 737:
+/***/ 742:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,8 +8,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SmsPageModule", function() { return SmsPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sms__ = __webpack_require__(786);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smsService__ = __webpack_require__(745);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sms__ = __webpack_require__(794);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smsService__ = __webpack_require__(750);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -42,13 +42,13 @@ var SmsPageModule = (function () {
 
 /***/ }),
 
-/***/ 745:
+/***/ 750:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SmsService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(364);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -90,7 +90,7 @@ var SmsService = (function () {
 
 /***/ }),
 
-/***/ 786:
+/***/ 794:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -98,7 +98,7 @@ var SmsService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smsService__ = __webpack_require__(745);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smsService__ = __webpack_require__(750);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -135,7 +135,7 @@ var SmsPage = (function () {
         this.list = [];
         this.data = {
             "PageSize": 5,
-            "PageIndex": 1,
+            "PageIndex": 0,
             "Uid": this.globalData.Uid,
             "Status": this.smsService.smsStatus["sent"],
         };
@@ -153,7 +153,7 @@ var SmsPage = (function () {
     };
     SmsPage.prototype.checkRead = function (bol) {
         if (bol === void 0) { bol = false; }
-        this.data.PageIndex = 1;
+        this.data.PageIndex = 0;
         this.list = [];
         if (bol) {
             this.isSent = true;
@@ -169,10 +169,13 @@ var SmsPage = (function () {
         this.navCtrl.push("SmsReadPage", { "Params": parma });
     };
     SmsPage.prototype.doWrite = function () {
+        var _this = this;
         var modal = this.modalCtrl.create("SmsWritePage");
         modal.present();
         modal.onDidDismiss(function (data) {
-            data && console.log(data);
+            if (data.isRefresh) {
+                _this.doRefresh();
+            }
         });
         // this.navCtrl.push(MailWrite);
     };
@@ -181,7 +184,7 @@ var SmsPage = (function () {
         // this.initializeItems();
         this.moredata = true;
         this.list = [];
-        this.data.PageIndex = 1;
+        this.data.PageIndex = 0;
         this._getList(this.data);
         setTimeout(function () {
             console.log('数据加载完成');
@@ -201,7 +204,7 @@ var SmsPage = (function () {
     };
     SmsPage.prototype.getNewList = function (data) {
         var _this = this;
-        data.PageIndex = 1;
+        data.PageIndex = 0;
         this.smsService.getList(data).subscribe(function (list) {
             if (list.Result == true) {
                 var arr = list.Data.filter(function (item) {
@@ -216,13 +219,13 @@ var SmsPage = (function () {
     SmsPage.prototype._getList = function (inboxData) {
         var _this = this;
         this.smsService.getList(inboxData).subscribe(function (resJson) {
-            if (resJson.Result && resJson.Data !== []) {
+            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
                 var list = resJson.Data;
                 _this.list = _this.list.concat(list);
             }
             else {
                 _this.moredata = false;
-                if (_this.data.PageIndex === 1) {
+                if (_this.data.PageIndex === 0) {
                     _this.smsService.httpService.nativeService.showToast(resJson.Data);
                     _this.list = [];
                 }
@@ -233,13 +236,10 @@ var SmsPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-sms',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\sms\sms.html"*/`<!--\n  Generated template for the SmsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>短信</ion-title>\n  </ion-navbar>\n    <div class="subbox">\n        <div>\n            <button ion-button small (click)="checkRead(true)" class="button-ios-light" [ngClass]="{\'button-ios-calm\':isSent}">已发送</button>\n            <button ion-button small (click)="checkRead()" class="button-ios-light" [ngClass]="{\'button-ios-calm\':!isSent}">待发送</button>\n        </div>\n    </div>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n        <ion-item-sliding *ngFor="let sms of list" (click)="doRead(sms)">\n            <ion-item>\n                <!-- <ion-avatar item-left>\n                    <img src="assets/img/mike.png">\n                </ion-avatar> -->\n                <span style="color:#2196F3;" *ngIf="sms.Status==0">●&nbsp;</span><span>{{sms.SmsMsg}}</span>\n                <p class="font-12">发至:{{sms.AccessNumber}}&emsp;{{sms.SendDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n            </ion-item>\n            <ion-item-options side="right">\n                <button ion-button color="primary">\n                    <ion-icon name="md-trash"></ion-icon>删除\n                </button>\n            </ion-item-options>\n        </ion-item-sliding>\n    </ion-list>\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n        <div padding>暂无消息数据！！！</div>\n        <img src="assets/img/face/face2.png" height="100">\n    </div>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\sms\sms.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_3__smsService__["a" /* SmsService */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__smsService__["a" /* SmsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__smsService__["a" /* SmsService */]) === "function" && _e || Object])
     ], SmsPage);
     return SmsPage;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=sms.js.map

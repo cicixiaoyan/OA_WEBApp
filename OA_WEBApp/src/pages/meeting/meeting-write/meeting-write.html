@@ -46,7 +46,7 @@
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>参加人员</ion-label>
-                    <ion-input type="text" formControlName="PersonId" placeholder="入职时间"></ion-input>
+                    <ion-textarea type="text" #popoverContent (click)="checkPeople($event)" formControlName="Person" readonly="true" placeholder="双击点击"></ion-textarea>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>参加部门</ion-label>

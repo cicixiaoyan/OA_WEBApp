@@ -1,6 +1,6 @@
 webpackJsonp([3],{
 
-/***/ 736:
+/***/ 741:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,8 +8,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SmsWritePageModule", function() { return SmsWritePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sms_write__ = __webpack_require__(785);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smsService__ = __webpack_require__(745);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sms_write__ = __webpack_require__(793);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smsService__ = __webpack_require__(750);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -42,13 +42,13 @@ var SmsWritePageModule = (function () {
 
 /***/ }),
 
-/***/ 745:
+/***/ 750:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SmsService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(364);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -90,7 +90,7 @@ var SmsService = (function () {
 
 /***/ }),
 
-/***/ 785:
+/***/ 793:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -98,7 +98,7 @@ var SmsService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smsService__ = __webpack_require__(745);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smsService__ = __webpack_require__(750);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_NativeService__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_Utils__ = __webpack_require__(62);
@@ -150,14 +150,21 @@ var SmsWritePage = (function () {
         var _this = this;
         var data1 = {
             "CellPhone": this.CellPhones,
-            "UserId": this.globalData.Uid,
+            "Uid": this.globalData.Uid,
             "IsTimer": data.IsTimer ? 1 : 0,
-            "SendDate": data.IsTimer ? data.SendDate : new Date(),
             "Content": data.Content
         };
-        this.smsService.write(data1).subscribe(function (resJson) {
-            _this.nativeService.showToast(resJson.Data, 1000);
-        });
+        data1['SendDate'] = data.IsTimer ? __WEBPACK_IMPORTED_MODULE_6__providers_Utils__["a" /* Utils */].dateFormat(new Date(data.SendDate), 'yyyy-MM-dd HH:mm:ss') :
+            __WEBPACK_IMPORTED_MODULE_6__providers_Utils__["a" /* Utils */].dateFormat(new Date(), 'yyyy-MM-dd HH:mm:ss'),
+            this.smsService.write(data1).subscribe(function (resJson) {
+                if (resJson.Result) {
+                    _this.nativeService.showToast(resJson.Data, 500);
+                    _this.viewCtrl.dismiss({ "isRefresh": true });
+                }
+                else {
+                    _this.nativeService.showToast(resJson.Data, 800);
+                }
+            });
     };
     SmsWritePage.prototype.dismiss = function () {
         this.viewCtrl.dismiss();
@@ -180,20 +187,16 @@ var SmsWritePage = (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])("popoverContent", { read: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */] }),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */]) === "function" && _a || Object)
     ], SmsWritePage.prototype, "content", void 0);
     SmsWritePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-sms-write',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\sms\sms-write\sms-write.html"*/`<!--\n  Generated template for the SmsWritePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        \n        <button ion-button (click)="dismiss()">取消</button>\n\n        <ion-title>写短信</ion-title>\n        <ion-buttons end>\n            <button ion-button icon-left [disabled]="!writeForm.valid" (click)="sent(writeForm.value)">\n                <ion-icon name="ios-send"></ion-icon> 发送\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">\n      <ion-list>\n        <ion-item>\n          <ion-label>接收号码&emsp;</ion-label>\n          <ion-input type="text"  formControlName="CellPhone"  placeholder="手机号" #popoverContent placeholder="请选择收件人" (click)="checkPeople($event)"></ion-input>\n        </ion-item>\n\n        <div *ngIf="!writeForm.controls.CellPhone.valid && writeForm.controls.CellPhone.touched" class="validation-failed">请添加收件人</div>\n\n        <ion-item>\n            <ion-label>是否定时</ion-label>\n            <ion-toggle  formControlName="IsTimer"></ion-toggle>\n        </ion-item>\n\n        <ion-item *ngIf="writeForm.get(\'IsTimer\').value">\n            <ion-label>发送时间</ion-label>\n            <ion-datetime displayFormat="YYYY-MM-DD HH:mm" minuteValues="0,15,30,45" [min]="min" [max]="max" formControlName="SendDate" placeholder="点击选择时间"  pickerFormat="YYYY-MM-DD HH:mm" cancelText="取消" doneText="确定" ></ion-datetime>\n        </ion-item>\n        <ion-item >\n            <ion-textarea formControlName="Content" rows="6" class="write-textarea" placeholder="输入信息"></ion-textarea>\n        </ion-item>\n\n      </ion-list>\n    </form> \n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\sms\sms-write\sms-write.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_3__smsService__["a" /* SmsService */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_NativeService__["a" /* NativeService */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_5__angular_forms__["a" /* FormBuilder */]])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__smsService__["a" /* SmsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__smsService__["a" /* SmsService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__providers_NativeService__["a" /* NativeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_NativeService__["a" /* NativeService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_5__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_forms__["a" /* FormBuilder */]) === "function" && _g || Object])
     ], SmsWritePage);
     return SmsWritePage;
+    var _a, _b, _c, _d, _e, _f, _g;
 }());
 
 //# sourceMappingURL=sms-write.js.map

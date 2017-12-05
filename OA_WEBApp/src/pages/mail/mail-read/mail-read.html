@@ -39,7 +39,9 @@
                 <ion-label>发送时间</ion-label>
                 <ion-input type="test" readonly="disabled" [value]="mailDetail.MailDate" placeholder="发送时间未知"></ion-input>
             </ion-item>
-
+            <ion-item>
+                <ion-textarea  placeholder="内容: " rows="3">{{mailContent}}</ion-textarea>
+            </ion-item>
         </ion-list>
     </div>
 
@@ -67,12 +69,6 @@
         </ion-scroll>
     </div>
 </ion-content>
-<ion-footer class="message-reply">
-    <div class="item">
-        <ion-textarea  placeholder="回复: "></ion-textarea>
-        <button ion-button small color="positive" onclick="sent(replay)">发送</button>
-    </div>
-</ion-footer>
 <!--<div class="list message-reply">
 
     <div class="item">

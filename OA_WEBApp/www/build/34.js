@@ -1,14 +1,15 @@
 webpackJsonp([34],{
 
-/***/ 718:
+/***/ 723:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NewworkDetailModule", function() { return NewworkDetailModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrainingMaintenanceSetPageModule", function() { return TrainingMaintenanceSetPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__newwork_detail__ = __webpack_require__(767);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__training_maintenance_set__ = __webpack_require__(775);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__training_maintenance_service__ = __webpack_require__(758);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,36 +19,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var NewworkDetailModule = (function () {
-    function NewworkDetailModule() {
+
+var TrainingMaintenanceSetPageModule = (function () {
+    function TrainingMaintenanceSetPageModule() {
     }
-    NewworkDetailModule = __decorate([
+    TrainingMaintenanceSetPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__newwork_detail__["a" /* NewworkDetail */],
+                __WEBPACK_IMPORTED_MODULE_2__training_maintenance_set__["a" /* TrainingMaintenanceSetPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__newwork_detail__["a" /* NewworkDetail */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__training_maintenance_set__["a" /* TrainingMaintenanceSetPage */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__newwork_detail__["a" /* NewworkDetail */]
-            ]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__training_maintenance_set__["a" /* TrainingMaintenanceSetPage */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_3__training_maintenance_service__["a" /* TrainingMaintenanceService */]]
         })
-    ], NewworkDetailModule);
-    return NewworkDetailModule;
+    ], TrainingMaintenanceSetPageModule);
+    return TrainingMaintenanceSetPageModule;
 }());
 
-//# sourceMappingURL=newwork-detail.module.js.map
+//# sourceMappingURL=training-maintenance-set.module.js.map
 
 /***/ }),
 
-/***/ 767:
+/***/ 758:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewworkDetail; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrainingMaintenanceService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(364);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -59,49 +62,115 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-/**
- * Generated class for the NewworkDetail page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-var NewworkDetail = (function () {
-    function NewworkDetail(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.title = "新建工作";
-        this.firstStep = true;
-        this.phoneNotification = false;
-        this.siteNotification = false;
-        this.msgNotification = function (obj) {
-            if (obj == 'site') {
-                this.siteNotification = !this.siteNotification;
-            }
-            else {
-                this.phoneNotification = !this.phoneNotification;
-            }
-        };
-        console.log(this.navParams.get("id"));
+
+var TrainingMaintenanceService = (function () {
+    function TrainingMaintenanceService(httpService) {
+        this.httpService = httpService;
     }
-    NewworkDetail.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad NewworkDetail');
+    TrainingMaintenanceService.prototype.getList = function (param) {
+        return this.httpService.postFormData("ashx/MeetLs.ashx", param).map(function (res) { return res.json(); });
     };
-    NewworkDetail.prototype.showNextStep = function () {
-        this.firstStep = false;
+    TrainingMaintenanceService.prototype.write = function (param) {
+        return this.httpService.postFormData("ashx/MeetLs.ashx", param).map(function (res) { return res.json(); });
     };
-    NewworkDetail.prototype.showfirstStep = function () {
-        this.firstStep = true;
+    TrainingMaintenanceService.prototype.read = function (param) {
+        return this.httpService.postFormData("ashx/MeetLs.ashx", param).map(function (res) { return res.json(); });
     };
-    NewworkDetail = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-newwork-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\newwork\newwork-detail\newwork-detail.html"*/`<!--\n\n  Generated template for the NewworkDetail page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>{{title}}</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-list inset *ngIf="firstStep">\n\n\n\n        <ion-item>\n\n            <ion-label>当前步骤：</ion-label>\n\n            <ion-input type="text" placeholder="当前步骤1"></ion-input>\n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <ion-label>&emsp;流水号：<em>&emsp;1&nbsp;—</em></ion-label>\n\n\n\n            <ion-input type="text" placeholder="请输入流水号"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>工作标题：</ion-label>\n\n            <ion-input type="text" placeholder="请输入工作标题"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>紧急情况：</ion-label>\n\n            <ion-select [(ngModel)]="emergencyLevel" placeholder="请选择紧急情况" cancelText="取消" okText="确定">\n\n                <ion-option value="1">高</ion-option>\n\n                <ion-option value="2" selected="true">中</ion-option>\n\n                <ion-option value="3">低</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <!--<div id="strhtm" style="min-height: 100px;overflow-x:auto;"></div>-->\n\n        <iframe id="iframe" class="iframe" onload="this.height=\'100%\'" style="width:100%;overflow-x:auto" sandbox="allow-scripts allow-top-navigation allow-pointer-lock allow-same-origin allow-popups allow-forms" src="https://www.baidu.com">\n\n        </iframe>\n\n\n\n    </ion-list>\n\n    <ion-list inset *ngIf="!firstStep">\n\n        <ion-item>\n\n            <ion-label>审批类型：</ion-label>\n\n            <ion-select [(ngModel)]="emergencyLevel" placeholder="请选择审批类型" cancelText="取消" okText="确定">\n\n                <ion-option value="1" selected="true">上级审批</ion-option>\n\n                <ion-option value="2">领导审批</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>经办人员：</ion-label>\n\n            <ion-select [(ngModel)]="manager" multiple="true" placeholder="请选择经办人员" cancelText="取消" okText="确定">\n\n                <ion-option value="1">系统管理员1</ion-option>\n\n                <ion-option value="2">系统管理员2</ion-option>\n\n                <ion-option value="3">系统管理员3</ion-option>\n\n\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>经办部门：</ion-label>\n\n            <ion-select [(ngModel)]="department" multiple="true" placeholder="请选择经办部门" cancelText="取消" okText="确定">\n\n                <ion-option value="">请选择</ion-option>\n\n                <ion-option value="1">总部</ion-option>\n\n                <ion-option value="2">研究部</ion-option>\n\n                <ion-option value="3">设计部</ion-option>\n\n                <ion-option value="4">测试部部</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>经办角色：</ion-label>\n\n            <ion-select [(ngModel)]="role" multiple="true" placeholder="请选择经办人员" cancelText="取消" okText="确定">\n\n                <ion-option value="1">管理员</ion-option>\n\n                <ion-option value="1">总经理助理</ion-option>\n\n\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>审批人员：</ion-label>\n\n            <ion-select [(ngModel)]="review" multiple="true" placeholder="还未审批" cancelText="取消" okText="确定">\n\n                <ion-option value="1">系统管理员2</ion-option>\n\n                <ion-option value="1">系统管理员3</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n    </ion-list>\n\n    <ion-grid padding-horizontal>\n\n        <ion-row no-padding text-center *ngIf="!firstStep">\n\n            <ion-col col-6>\n\n                <button (click)="msgNotification(\'site\')" ion-button icon-left>\n\n              <ion-icon [name]=\'siteNotification?"md-checkbox-outline":"md-square-outline"\'></ion-icon>\n\n              站内消息提醒\n\n            </button>\n\n            </ion-col>\n\n            <ion-col col-6>\n\n                <button (click)="msgNotification(\'phone\')" ion-button icon-left>\n\n              <ion-icon [name]=\'phoneNotification?"md-checkbox-outline":"md-square-outline"\'></ion-icon>\n\n              手机短信提醒\n\n            </button>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n    <div padding>\n\n        <button *ngIf="firstStep" ion-button block color="calm" (click)="showNextStep()">下一步</button>\n\n        <div *ngIf="!firstStep">\n\n            <button ion-button block color="calm" (click)="showfirstStep()">上一步</button>\n\n            <button ion-button block color="danger" (click)="submit()">提交</button>\n\n        </div>\n\n\n\n    </div>\n\n\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\newwork\newwork-detail\newwork-detail.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
-    ], NewworkDetail);
-    return NewworkDetail;
+    TrainingMaintenanceService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]) === "function" && _a || Object])
+    ], TrainingMaintenanceService);
+    return TrainingMaintenanceService;
+    var _a;
 }());
 
-//# sourceMappingURL=newwork-detail.js.map
+//# sourceMappingURL=training-maintenance_service.js.map
+
+/***/ }),
+
+/***/ 775:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrainingMaintenanceSetPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__training_maintenance_service__ = __webpack_require__(758);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+/**
+ * Generated class for the TrainingMaintenanceSetPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var TrainingMaintenanceSetPage = (function () {
+    function TrainingMaintenanceSetPage(navCtrl, navParams, formBuilder, globalData, nativeService, trainingMaintenanceService) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.formBuilder = formBuilder;
+        this.globalData = globalData;
+        this.nativeService = nativeService;
+        this.trainingMaintenanceService = trainingMaintenanceService;
+        this.isWrite = false;
+        this.FileNewName = ""; // 附件名称
+        this.MeetPlaceLs = [];
+        this.MeetTypeLs = [];
+        this.DeptLs = [];
+        this.writeForm = this.formBuilder.group({
+            Title: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(30)]],
+            StartDate: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
+            EndDate: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
+            Object: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(180), __WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
+            Unit: ["", []],
+            Instructor: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(8)]],
+            Place: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(100)]],
+            Content: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(180)]],
+        });
+    }
+    TrainingMaintenanceSetPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad MeetingWritePage');
+    };
+    TrainingMaintenanceSetPage.prototype.sent = function (data) {
+        var _this = this;
+        data.Uid = this.globalData.Uid;
+        data.FileNewName = this.FileNewName;
+        this.trainingMaintenanceService.write(data).subscribe(function (resJson) {
+            if (resJson.Result) {
+                _this.nativeService.showToast("添加成功", 888);
+            }
+            else {
+                _this.nativeService.showToast(resJson.Data, 888);
+            }
+        });
+    };
+    TrainingMaintenanceSetPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-training-maintenance-set',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\training-maintenance\training-maintenance-set\training-maintenance-set.html"*/`<!--\n  Generated template for the TrainingMaintenanceSetPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>{{isWrite ? "添加培训维护" : "培训维护详情"}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">\n        <div>\n            <ion-list>\n                <ion-item>\n                    <ion-label stacked>课程主题</ion-label>\n                    <ion-input min-rows="1" formControlName="Title" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>开始时间</ion-label>\n                    <ion-datetime placeholder="点击设置" formControlName="StartDate"  cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>结束时间</ion-label>\n                    <ion-datetime placeholder="点击设置" formControlName="EndDate" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>培训对象</ion-label>\n                    <ion-input type="text" formControlName="Object" placeholder="培训对象"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>培训单位</ion-label>\n                    <ion-input type="text" formControlName="Unit" placeholder="培训单位"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>培训讲师</ion-label>\n                    <ion-input type="text" formControlName="Instructor" placeholder="培训讲师"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>培训地点</ion-label>\n                    <ion-input type="text" formControlName="Place" placeholder="培训地点"></ion-input>\n                </ion-item>\n\n                <ion-item>\n                    <ion-label stacked>课程内容</ion-label>\n                    <ion-input type="text" formControlName="Content" placeholder="请输入"></ion-input>\n                </ion-item>\n            </ion-list>\n            <div padding text-center>\n                <button ion-button type="submit" color="danger" [disabled]="!writeForm.valid">保存</button>\n                <button ion-button clear small navPop>返回</button>\n            </div>\n        </div>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\training-maintenance\training-maintenance-set\training-maintenance-set.html"*/,
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__training_maintenance_service__["a" /* TrainingMaintenanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__training_maintenance_service__["a" /* TrainingMaintenanceService */]) === "function" && _f || Object])
+    ], TrainingMaintenanceSetPage);
+    return TrainingMaintenanceSetPage;
+    var _a, _b, _c, _d, _e, _f;
+}());
+
+//# sourceMappingURL=training-maintenance-set.js.map
 
 /***/ })
 

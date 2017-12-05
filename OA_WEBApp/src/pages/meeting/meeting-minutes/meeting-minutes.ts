@@ -29,7 +29,7 @@ export class MeetingMinutesPage {
       this.data = {
         "status": this.meetingService.meetingStatus["completed"],
         "uid": this.meetingService.httpService.globalData.Uid,
-        "PageIndex": 1,
+        "PageIndex": 0,
         "PageSize": 8
       };
       this.getList(this.data);
@@ -47,7 +47,7 @@ export class MeetingMinutesPage {
 
   doRefresh(refresher: Refresher) {
     this.list = [];
-    this.data.PageIndex = 1;
+    this.data.PageIndex = 0;
     this.getList(this.data);
     setTimeout(() => {
         refresher.complete();
@@ -77,7 +77,7 @@ export class MeetingMinutesPage {
         this.list = [...this.list, ...list];
       }else{
         this.moredata = false;
-        this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+        this.isEmpty = (this.data.PageIndex == 0) ? true : false;
       }
     });
     

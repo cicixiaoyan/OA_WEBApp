@@ -1,6 +1,6 @@
 webpackJsonp([8],{
 
-/***/ 731:
+/***/ 736:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,8 +8,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessageReadOutPageModule", function() { return MessageReadOutPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_read_out__ = __webpack_require__(780);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messageService__ = __webpack_require__(743);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_read_out__ = __webpack_require__(788);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messageService__ = __webpack_require__(748);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -42,13 +42,13 @@ var MessageReadOutPageModule = (function () {
 
 /***/ }),
 
-/***/ 743:
+/***/ 748:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MessageService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(364);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -71,8 +71,8 @@ var MessageService = (function () {
             outbox: 1 // 发件箱
         };
         this.messageStatus = {
-            read: 1,
-            unread: 0,
+            read: 0,
+            unread: 1,
             all: 3 // 全部
         };
     }
@@ -94,18 +94,22 @@ var MessageService = (function () {
         // {"Data":"xxx！","Result":false}
         return this.httpService.postFormData("ashx/NewsAdd.ashx", param).map(function (res) { return res.json(); });
     };
+    MessageService.prototype.markup = function (param) {
+        return this.httpService.postFormData("ashx/NewsMarkup.ashx", param).map(function (res) { return res.json(); });
+    };
     MessageService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]) === "function" && _a || Object])
     ], MessageService);
     return MessageService;
+    var _a;
 }());
 
 //# sourceMappingURL=messageService.js.map
 
 /***/ }),
 
-/***/ 780:
+/***/ 788:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -150,7 +154,7 @@ var MessageReadOutPage = (function () {
     ], MessageReadOutPage.prototype, "content", void 0);
     MessageReadOutPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-message-read-out',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-read-out\message-read-out.html"*/`<!--\n\n  Generated template for the MessageReadOutPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n      <ion-navbar>\n\n          <ion-title>消息详情</ion-title>\n\n      </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n      <div>\n\n          <ion-list>\n\n  \n\n              <ion-item>\n\n                  <ion-label>发送人&emsp;</ion-label>\n\n                  <ion-input type="text" disabled="disabled" [(ngModel)]="messageDetail.AccessPerson" placeholder="系统管理员"></ion-input>\n\n              </ion-item>\n\n  \n\n              <ion-item>\n\n                  <ion-label>发送时间</ion-label>\n\n                  <ion-input type="test" disabled="disabled" [(ngModel)]="messageDetail.MailDate" placeholder="发送时间未知"></ion-input>\n\n              </ion-item>\n\n  \n\n          </ion-list>\n\n      </div>\n\n  \n\n      <div>\n\n          <ion-scroll scrollY="true" class="message-content">\n\n              <div padding-horizontal [innerHTML]="messageContent"></div>\n\n              <!-- <ion-textarea [(ngModule)]="messageDetail.Title"  placeholder="回复: "></ion-textarea> -->\n\n              <!-- <div class="mydiv">\n\n                {{messageDetail.Title}}\n\n              </div> -->\n\n          </ion-scroll>\n\n      </div>\n\n  </ion-content>\n\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-read-out\message-read-out.html"*/,
+            selector: 'page-message-read-out',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-read-out\message-read-out.html"*/`<!--\n\n  Generated template for the MessageReadOutPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n      <ion-navbar>\n\n          <ion-title>消息详情</ion-title>\n\n      </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n      <div>\n\n          <ion-list>\n\n  \n\n              <ion-item>\n\n                  <ion-label>发送人&emsp;</ion-label>\n\n                  <ion-input type="text" disabled="disabled" [value]="messageDetail.AccessPerson" placeholder="系统管理员"></ion-input>\n\n              </ion-item>\n\n  \n\n              <ion-item>\n\n                  <ion-label>发送时间</ion-label>\n\n                  <ion-input type="test" disabled="disabled" [value]="messageDetail.MailDate" placeholder="发送时间未知"></ion-input>\n\n              </ion-item>\n\n  \n\n          </ion-list>\n\n      </div>\n\n  \n\n      <div>\n\n          <ion-scroll scrollY="true" class="message-content">\n\n              <div padding-horizontal [innerHTML]="messageContent"></div>\n\n              <!-- <ion-textarea [(ngModule)]="messageDetail.Title"  placeholder="回复: "></ion-textarea> -->\n\n              <!-- <div class="mydiv">\n\n                {{messageDetail.Title}}\n\n              </div> -->\n\n          </ion-scroll>\n\n      </div>\n\n  </ion-content>\n\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-read-out\message-read-out.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
     ], MessageReadOutPage);

@@ -28,7 +28,7 @@ export class MessagePage {
   moredata: boolean = true;
   inboxData: any;
   outboxData: any;
-
+  timer: any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public globalData: GlobalData,
@@ -36,7 +36,7 @@ export class MessagePage {
               private messageService: MessageService) {
       this.inboxData = {
           "PageSize": 5,
-          "PageIndex": 1,
+          "PageIndex": 0,
           "NewsStatus": this.messageService.Message["inbox"],
           "Uid": this.globalData.Uid,
           "Status": this.messageService.messageStatus["unread"],
@@ -44,7 +44,7 @@ export class MessagePage {
 
       this.outboxData = {
           "PageSize": 5,
-          "PageIndex": 1,
+          "PageIndex": 0,
           "NewsStatus": this.messageService.Message["outbox"],
           "Uid": this.globalData.Uid,
           "Status": this.messageService.messageStatus["all"]
@@ -57,7 +57,7 @@ export class MessagePage {
       this._getOutboxList(this.outboxData);
       console.log(this);
 
-      setInterval(() => {
+      this.timer = setInterval(() => {
           console.log(this);
           this.getNewInboxList(this.inboxData);
      }, 50000);
@@ -69,7 +69,7 @@ export class MessagePage {
 
   // 选择已读、未读、全部
   checkRead(name: string = "read") {
-      this.inboxData.PageIndex = 1;
+      this.inboxData.PageIndex = 0;
       this.inboxList = [];
       this.checkBtn = { "read": false, "unread": false, "all": false };
       this.checkBtn[name] = true;
@@ -121,11 +121,11 @@ export class MessagePage {
     this.moredata = true;
     if (this.box === "inbox") {
         this.inboxList = [];
-        this.inboxData.PageIndex = 1;
+        this.inboxData.PageIndex = 0;
         this._getInboxList(this.inboxData);
     } else {
         this.outboxList = [];
-        this.outboxData.PageIndex = 1;
+        this.outboxData.PageIndex = 0;
         this._getOutboxList(this.outboxData);
     }
   }
@@ -149,8 +149,10 @@ export class MessagePage {
   }
 
   getNewInboxList(inboxData){
-      inboxData.PageIndex = 1;
-      this.messageService.getInboxList(inboxData).subscribe(list => {
+      let data = inboxData;
+      data.PageIndex = 1;
+      data.PageSize = 2;
+      this.messageService.getInboxList(data).subscribe(list => {
           if (list.Result == true ) {
               let arr = list.Data.filter(item => {
                   return item.Id !== this.inboxList[0].Id;
@@ -158,6 +160,8 @@ export class MessagePage {
               if (arr !== []) {
                   this.inboxList = [...this.inboxList, ...arr];
               }
+          }else{
+            clearInterval(this.timer);
           }
       });
   }
@@ -173,7 +177,7 @@ export class MessagePage {
               this.inboxList = [...this.inboxList, ...list];
           }else{
               this.moredata = false;
-              if (this.inboxData.PageIndex === 1) {
+              if (this.inboxData.PageIndex === 0) {
                    this.messageService.httpService.nativeService.showToast(resJson.Data);
                    this.isEmpty = true;
                    this.inboxList = [];

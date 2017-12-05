@@ -25,15 +25,16 @@
               <div padding>开始时间：{{item.AnnouncementStarDate|date : "yyyy年MM月dd日 hh时mm分"}}
                   <br/>结束时间：{{item.AnnouncementEndDate|date : "yyyy年MM月dd日 hh时mm分"}}</div>
               <div padding-horizontal [innerHTML]="myDiv"></div>
-              <div class="affix" *ngIf="attObj">
+              <div class="affix" *ngIf="hasAtt">
                   <ion-grid>
                       <ion-row align-items-center>
                           <ion-col col-6 col-lg-4>
-                              <div (click)="download(attObj.AttNewName)">
+                              <div (click)="download(attObj.AttNewName, attObj.AttName)">
                                   <ion-icon class="affix-icon" name="md-image"></ion-icon>
-                                  <p>{{attObj.attName}}</p>
-                                  <p color="gray">大小未知</p>
-                                  <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>
+                                  <p>{{attObj.AttName}}</p>
+                                  <!-- <p color="gray">大小未知</p> -->
+                                  <ion-icon *ngIf="!downloaded" class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>
+                                  <ion-icon *ngIf="downloaded" class="affix-open" name="ios-folder-open-outline"></ion-icon>
                               </div>
                           </ion-col>
                       </ion-row>

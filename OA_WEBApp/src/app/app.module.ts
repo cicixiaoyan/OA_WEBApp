@@ -15,6 +15,7 @@ import { AppVersion } from '@ionic-native/app-version';
 import { Toast } from '@ionic-native/toast';
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
+import { FileOpener } from '@ionic-native/file-opener';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Network } from '@ionic-native/network';
@@ -87,6 +88,7 @@ export class FunDebugErrorHandler implements ErrorHandler {
         Toast,
         File,
         FileChooser,
+        FileOpener,
         FileTransfer,
         InAppBrowser,
         Network,

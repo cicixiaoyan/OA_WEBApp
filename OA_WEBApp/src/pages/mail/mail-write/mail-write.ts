@@ -32,7 +32,7 @@ export class MailWrite {
     affixPath: string;
     addressee: string = "";
     addresseeIds: string = "";
-    attName: string = "109.png";
+    attName: string = "";
     fsbt: "主题";
     haveAffix: boolean = false;
 
@@ -73,9 +73,10 @@ export class MailWrite {
     }
 
     sent(data) {
+        console.log(data);
         let data1 =  {
             "AccessPresonId": this.addresseeIds,
-            "AccessPerson": this.addressee,
+            "AccessPerson": data.addressee,
             "Title": data.Title,
             "Content": data.Content,
             "Level": data.Level,
@@ -85,7 +86,7 @@ export class MailWrite {
             "UserName": this.globalData.Name
         };
 
-        this.mailService.write(data).subscribe((resJson) => {
+        this.mailService.write(data1).subscribe((resJson) => {
             resJson.Result ? this.nativeService.showToast("信息已发送") :
             this.nativeService.showToast(resJson.Data);
         });
@@ -160,8 +161,8 @@ export class MailWrite {
             if (!!data) {
                 console.log(data);
                 // {addressee:this.addressee,addresseeIds:this.addresseeIds}
+                this.addresseeIds = data.addresseeIds;                
                 this.writeForm.patchValue({'addressee': data.addressee});
-                this.addresseeIds = data.addresseeIds;
             }
 
         });

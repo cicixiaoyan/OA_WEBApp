@@ -12,6 +12,7 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { Utils } from './Utils';
 import { File } from '@ionic-native/file';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { FileOpener } from '@ionic-native/file-opener';
 /**
  * 上传图片到文件服务器
  */
@@ -23,7 +24,8 @@ export class FileService {
               // private transfer: Transfer,
               private fileChooser: FileChooser,
               private file: File,
-              private fileTransfer: FileTransfer
+              private fileTransfer: FileTransfer,
+              private fileOpener: FileOpener
             ) {
   }
 
@@ -244,5 +246,55 @@ export class FileService {
     });
 
   }
+
+/**
+ * 下载
+ */
+
+download1(source: string, target: string, trustAllHosts?, Optional?): Observable<any> {
+  let alert = this.alertCtrl.create({
+      title: '下载进度：0%',
+      enableBackdropDismiss: false,
+      buttons: ['后台下载']
+  });
+  alert.present();
+
+  const fileTransfer: FileTransferObject = this.fileTransfer.create();
+  // target = this.file.dataDirectory + target; // 文件保存的目录
+  target = this.file.dataDirectory + target;
+  console.log(target);
+  return Observable.create((observer) => {
+    fileTransfer.download(encodeURI(source), target).then((entry) => {
+        console.log('download complete: ' + entry.toURL());
+        observer.next(entry.toURL());
+      }, (error) => {
+        console.log(error);
+      });
+
+    fileTransfer.onProgress((event: ProgressEvent) => {
+        let num = Math.floor(event.loaded / event.total * 100);
+        if (num === 100) {
+            alert.dismiss();
+        } else {
+            let title = document.getElementsByClassName('alert-title')[0];
+            title && (title.innerHTML = '下载进度：' + num + '%');
+        }
+    });
+  });
+}
+
+/*
+** 打开文件
+*/
+
+openFile(path): Observable<any>{
+  let mimeType = path.toLowerCase().split(".").splice(-1)[0];
+  return Observable.create((observer) => {
+    this.fileOpener.open(path, Utils.getFileMimeType(mimeType))
+    .then(() => observer.next())
+    .catch(e => console.log('Error openening file', e));
+  });
+}
+
 
 }

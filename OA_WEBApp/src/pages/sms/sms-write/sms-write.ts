@@ -49,16 +49,24 @@ export class SmsWritePage {
 
   }
   sent(data){
+
     let data1 = {
       "CellPhone": this.CellPhones,
-      "UserId": this.globalData.Uid,
+      "Uid": this.globalData.Uid,
       "IsTimer": data.IsTimer ? 1 : 0,
-      "SendDate": data.IsTimer ? data.SendDate : new Date(),
       "Content": data.Content
     };
 
+    data1['SendDate'] = data.IsTimer ? Utils.dateFormat(new Date(data.SendDate), 'yyyy-MM-dd HH:mm:ss') :
+                        Utils.dateFormat(new Date(), 'yyyy-MM-dd HH:mm:ss'),
+
     this.smsService.write(data1).subscribe((resJson) => {
-        this.nativeService.showToast(resJson.Data, 1000);
+      if (resJson.Result){
+        this.nativeService.showToast(resJson.Data, 500);
+        this.viewCtrl.dismiss({"isRefresh": true});
+      }else{
+        this.nativeService.showToast(resJson.Data, 800);
+      }
     });
   }
 

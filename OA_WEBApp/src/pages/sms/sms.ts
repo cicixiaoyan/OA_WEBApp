@@ -36,7 +36,7 @@ export class SmsPage {
       this.list = [];
       this.data = {
           "PageSize": 5,
-          "PageIndex": 1,
+          "PageIndex": 0,
           "Uid": this.globalData.Uid,
           "Status": this.smsService.smsStatus["sent"],
       };
@@ -57,7 +57,7 @@ export class SmsPage {
 
 
   checkRead(bol: boolean = false) {
-    this.data.PageIndex = 1;
+    this.data.PageIndex = 0;
     this.list = [];
     if (bol) {
         this.isSent = true;
@@ -78,17 +78,19 @@ export class SmsPage {
       let modal = this.modalCtrl.create("SmsWritePage");
       modal.present();
       modal.onDidDismiss(data => {
-          data && console.log(data);
+          if (data.isRefresh) {
+            this.doRefresh();
+          }
       });
       // this.navCtrl.push(MailWrite);
   }
 
-  doRefresh(refresher: Refresher) {
+  doRefresh(refresher?: Refresher) {
       console.log("加载更多");
       // this.initializeItems();
       this.moredata = true;
       this.list = [];
-      this.data.PageIndex = 1;
+      this.data.PageIndex = 0;
       this._getList(this.data);
 
 
@@ -113,7 +115,7 @@ export class SmsPage {
   }
 
   getNewList(data){
-      data.PageIndex = 1;
+      data.PageIndex = 0;
       this.smsService.getList(data).subscribe(list => {
           if (list.Result == true ) {
               let arr = list.Data.filter(item => {
@@ -134,7 +136,7 @@ export class SmsPage {
                     this.list = [...this.list, ...list];
                 }else{
                     this.moredata = false;
-                    if (this.data.PageIndex === 1) {
+                    if (this.data.PageIndex === 0) {
                         this.smsService.httpService.nativeService.showToast(resJson.Data);
                         this.list = [];
                     }

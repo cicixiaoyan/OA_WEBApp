@@ -1,4 +1,4 @@
-webpackJsonp([41],{
+webpackJsonp([43],{
 
 /***/ 137:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -77,6 +77,7 @@ var Logger = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Utils__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_file__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_file_transfer__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_file_opener__ = __webpack_require__(321);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -97,19 +98,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
  * 上传图片到文件服务器
  */
 var FileService = (function () {
     function FileService(httpService, nativeService, alertCtrl, 
         // private transfer: Transfer,
-        fileChooser, file, fileTransfer) {
+        fileChooser, file, fileTransfer, fileOpener) {
         this.httpService = httpService;
         this.nativeService = nativeService;
         this.alertCtrl = alertCtrl;
         this.fileChooser = fileChooser;
         this.file = file;
         this.fileTransfer = fileTransfer;
+        this.fileOpener = fileOpener;
     }
     FileService_1 = FileService;
     /**
@@ -337,6 +340,51 @@ var FileService = (function () {
             });
         });
     };
+    /**
+     * 下载
+     */
+    FileService.prototype.download1 = function (source, target, trustAllHosts, Optional) {
+        var alert = this.alertCtrl.create({
+            title: '下载进度：0%',
+            enableBackdropDismiss: false,
+            buttons: ['后台下载']
+        });
+        alert.present();
+        var fileTransfer = this.fileTransfer.create();
+        // target = this.file.dataDirectory + target; // 文件保存的目录
+        target = this.file.dataDirectory + target;
+        console.log(target);
+        return __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].create(function (observer) {
+            fileTransfer.download(encodeURI(source), target).then(function (entry) {
+                console.log('download complete: ' + entry.toURL());
+                observer.next(entry.toURL());
+            }, function (error) {
+                console.log(error);
+            });
+            fileTransfer.onProgress(function (event) {
+                var num = Math.floor(event.loaded / event.total * 100);
+                if (num === 100) {
+                    alert.dismiss();
+                }
+                else {
+                    var title = document.getElementsByClassName('alert-title')[0];
+                    title && (title.innerHTML = '下载进度：' + num + '%');
+                }
+            });
+        });
+    };
+    /*
+    ** 打开文件
+    */
+    FileService.prototype.openFile = function (path) {
+        var _this = this;
+        var mimeType = path.toLowerCase().split(".").splice(-1)[0];
+        return __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].create(function (observer) {
+            _this.fileOpener.open(path, __WEBPACK_IMPORTED_MODULE_7__Utils__["a" /* Utils */].getFileMimeType(mimeType))
+                .then(function () { return observer.next(); })
+                .catch(function (e) { return console.log('Error openening file', e); });
+        });
+    };
     FileService = FileService_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__HttpService__["a" /* HttpService */],
@@ -344,7 +392,8 @@ var FileService = (function () {
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_6__ionic_native_file_chooser__["a" /* FileChooser */],
             __WEBPACK_IMPORTED_MODULE_8__ionic_native_file__["a" /* File */],
-            __WEBPACK_IMPORTED_MODULE_9__ionic_native_file_transfer__["a" /* FileTransfer */]])
+            __WEBPACK_IMPORTED_MODULE_9__ionic_native_file_transfer__["a" /* FileTransfer */],
+            __WEBPACK_IMPORTED_MODULE_10__ionic_native_file_opener__["a" /* FileOpener */]])
     ], FileService);
     return FileService;
     var FileService_1;
@@ -419,168 +468,176 @@ webpackEmptyAsyncContext.id = 174;
 
 var map = {
 	"../pages/account/aboutus/aboutus.module": [
-		704,
-		40
+		707,
+		42
 	],
 	"../pages/account/account-edit/account-edit.module": [
-		705,
-		29
+		708,
+		30
 	],
 	"../pages/account/account-passwordedit/account-passwordedit.module": [
-		706,
-		39
+		709,
+		41
 	],
 	"../pages/account/account.module": [
-		707,
-		28
+		710,
+		29
 	],
 	"../pages/announcement/announcement-detail/announcement-detail.module": [
-		708,
-		27
+		711,
+		28
 	],
 	"../pages/announcement/announcement.module": [
-		709,
-		26
+		712,
+		27
 	],
 	"../pages/car/car-add/car-add.module": [
-		710,
-		25
+		713,
+		26
 	],
 	"../pages/car/car-read/car-read.module": [
-		711,
-		24
+		714,
+		25
 	],
 	"../pages/car/car.module": [
-		712,
-		23
+		715,
+		24
 	],
 	"../pages/car/driver/driver-set/driver-set.module": [
-		713,
-		22
+		716,
+		23
 	],
 	"../pages/car/driver/driver.module": [
-		714,
-		21
+		717,
+		22
 	],
 	"../pages/contacts-popover/contacts-popover.module": [
-		715,
-		38
+		718,
+		40
 	],
 	"../pages/getmobile-popover/getmobile-popover.module": [
-		716,
-		37
+		719,
+		39
 	],
 	"../pages/home/backlog/backlog-detail/backlog-detail.module": [
-		699,
-		20
+		702,
+		21
 	],
 	"../pages/home/backlog/backlog.module": [
-		700,
-		19
+		703,
+		20
 	],
 	"../pages/home/contacts/contacts-detail/contacts-detail.module": [
-		701,
-		36
+		704,
+		38
 	],
 	"../pages/home/contacts/contacts.module": [
-		702,
-		35
+		705,
+		37
 	],
 	"../pages/home/home.module": [
-		717,
+		720,
 		0
 	],
 	"../pages/home/newwork/newwork-detail/newwork-detail.module": [
-		718,
-		34
+		721,
+		36
 	],
 	"../pages/home/newwork/newwork.module": [
-		719,
-		33
+		722,
+		35
+	],
+	"../pages/hr-management/training-maintenance/training-maintenance-set/training-maintenance-set.module": [
+		723,
+		34
+	],
+	"../pages/hr-management/training-maintenance/training-maintenance.module": [
+		724,
+		19
 	],
 	"../pages/login/find-password/find-password.module": [
-		703,
-		32
+		706,
+		33
 	],
 	"../pages/login/login.module": [
-		720,
+		725,
 		1
 	],
 	"../pages/mail/mail-read/mail-read.module": [
-		721,
+		726,
 		18
 	],
 	"../pages/mail/mail-write/mail-write.module": [
-		722,
+		727,
 		17
 	],
 	"../pages/mail/mail.module": [
-		723,
+		728,
 		16
 	],
 	"../pages/meeting/meeting-edit/meeting-edit.module": [
-		724,
+		729,
 		15
 	],
 	"../pages/meeting/meeting-minutes/meeting-minutes.module": [
-		725,
+		730,
 		14
 	],
 	"../pages/meeting/meeting-room/meeting-room-set/meeting-room-set.module": [
-		726,
+		731,
 		13
 	],
 	"../pages/meeting/meeting-room/meeting-room.module": [
-		727,
+		732,
 		12
 	],
 	"../pages/meeting/meeting-search/meeting-search.module": [
-		728,
+		733,
 		11
 	],
 	"../pages/meeting/meeting-write/meeting-write.module": [
-		729,
+		734,
 		10
 	],
 	"../pages/meeting/meeting.module": [
-		730,
+		735,
 		9
 	],
 	"../pages/message/message-read-out/message-read-out.module": [
-		731,
+		736,
 		8
 	],
 	"../pages/message/message-read/message-read.module": [
-		732,
+		737,
 		7
 	],
 	"../pages/message/message-write/message-write.module": [
-		733,
+		738,
 		6
 	],
 	"../pages/message/message.module": [
-		734,
+		739,
 		5
 	],
 	"../pages/sms/sms-read/sms-read.module": [
-		735,
+		740,
 		4
 	],
 	"../pages/sms/sms-write/sms-write.module": [
-		736,
+		741,
 		3
 	],
 	"../pages/sms/sms.module": [
-		737,
+		742,
 		2
 	],
 	"../pages/tabs/tabs.module": [
-		738,
-		31
+		743,
+		32
 	],
 	"../pages/welcome/welcome.module": [
-		739,
-		30
+		744,
+		31
 	]
 };
 function webpackAsyncContext(req) {
@@ -599,7 +656,7 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 362:
+/***/ 363:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -663,7 +720,39 @@ var HttpInterceptHandle = (function () {
 
 /***/ }),
 
-/***/ 364:
+/***/ 365:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComponentsModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__empty_empty__ = __webpack_require__(678);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+var ComponentsModule = (function () {
+    function ComponentsModule() {
+    }
+    ComponentsModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [__WEBPACK_IMPORTED_MODULE_1__empty_empty__["a" /* EmptyComponent */]],
+            imports: [],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__empty_empty__["a" /* EmptyComponent */]]
+        })
+    ], ComponentsModule);
+    return ComponentsModule;
+}());
+
+//# sourceMappingURL=components.module.js.map
+
+/***/ }),
+
+/***/ 366:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -746,13 +835,13 @@ var BackButtonService = (function () {
 
 /***/ }),
 
-/***/ 365:
+/***/ 367:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(366);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(370);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(368);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(372);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -760,7 +849,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 370:
+/***/ 372:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -770,33 +859,35 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(693);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(696);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_LoginService__ = __webpack_require__(161);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__ = __webpack_require__(360);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__ = __webpack_require__(361);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__ = __webpack_require__(361);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__ = __webpack_require__(362);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_app_version__ = __webpack_require__(220);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_toast__ = __webpack_require__(225);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_file__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_file_chooser__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_file_transfer__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_in_app_browser__ = __webpack_require__(226);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_network__ = __webpack_require__(228);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_camera__ = __webpack_require__(224);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_image_picker__ = __webpack_require__(227);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_photo_viewer__ = __webpack_require__(694);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_NativeService__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__providers_HttpIntercept__ = __webpack_require__(695);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_HttpService__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_FileService__ = __webpack_require__(160);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__providers_Helper__ = __webpack_require__(696);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_Utils__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__angular_http__ = __webpack_require__(138);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__providers_HttpInterceptHandle__ = __webpack_require__(362);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__providers_GlobalData__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__services_backButtonService__ = __webpack_require__(364);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__providers_Logger__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__itransitions__ = __webpack_require__(697);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__providers_Constants__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_file_opener__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_file_transfer__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_in_app_browser__ = __webpack_require__(226);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_network__ = __webpack_require__(228);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_camera__ = __webpack_require__(224);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_image_picker__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_photo_viewer__ = __webpack_require__(697);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__providers_NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_HttpIntercept__ = __webpack_require__(698);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_HttpService__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__providers_FileService__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_Helper__ = __webpack_require__(699);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_Utils__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__angular_http__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__providers_HttpInterceptHandle__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__providers_GlobalData__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__services_backButtonService__ = __webpack_require__(366);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_components_module__ = __webpack_require__(365);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__providers_Logger__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__itransitions__ = __webpack_require__(700);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__providers_Constants__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -836,13 +927,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 // 安装依赖:cnpm i fundebug-javascript --save
 // https://docs.fundebug.com/notifier/javascript/framework/ionic2.html
 
-var fundebug = __webpack_require__(698);
-fundebug.apikey = __WEBPACK_IMPORTED_MODULE_30__providers_Constants__["f" /* FUNDEBUG_API_KEY */];
-fundebug.releasestage = __WEBPACK_IMPORTED_MODULE_30__providers_Constants__["h" /* IS_DEBUG */] ? 'development' : 'production'; // 应用开发阶段，development:开发;production:生产
-fundebug.silent = !__WEBPACK_IMPORTED_MODULE_30__providers_Constants__["d" /* ENABLE_FUNDEBUG */]; // 如果暂时不需要使用Fundebug，将silent属性设为true
+var fundebug = __webpack_require__(701);
+fundebug.apikey = __WEBPACK_IMPORTED_MODULE_32__providers_Constants__["f" /* FUNDEBUG_API_KEY */];
+fundebug.releasestage = __WEBPACK_IMPORTED_MODULE_32__providers_Constants__["h" /* IS_DEBUG */] ? 'development' : 'production'; // 应用开发阶段，development:开发;production:生产
+fundebug.silent = !__WEBPACK_IMPORTED_MODULE_32__providers_Constants__["d" /* ENABLE_FUNDEBUG */]; // 如果暂时不需要使用Fundebug，将silent属性设为true
 var FunDebugErrorHandler = (function () {
     function FunDebugErrorHandler() {
     }
@@ -859,10 +952,10 @@ var AppModule = (function () {
         this.setCustomTransitions();
     }
     AppModule.prototype.setCustomTransitions = function () {
-        this.config.setTransition('modal-from-right-enter', __WEBPACK_IMPORTED_MODULE_29__itransitions__["a" /* ModalFromRightEnter */]);
-        this.config.setTransition('modal-from-right-leave', __WEBPACK_IMPORTED_MODULE_29__itransitions__["b" /* ModalFromRightLeave */]);
-        this.config.setTransition('modal-scale-enter', __WEBPACK_IMPORTED_MODULE_29__itransitions__["c" /* ModalScaleEnter */]);
-        this.config.setTransition('modal-scale-leave', __WEBPACK_IMPORTED_MODULE_29__itransitions__["d" /* ModalScaleLeave */]);
+        this.config.setTransition('modal-from-right-enter', __WEBPACK_IMPORTED_MODULE_31__itransitions__["a" /* ModalFromRightEnter */]);
+        this.config.setTransition('modal-from-right-leave', __WEBPACK_IMPORTED_MODULE_31__itransitions__["b" /* ModalFromRightLeave */]);
+        this.config.setTransition('modal-scale-enter', __WEBPACK_IMPORTED_MODULE_31__itransitions__["c" /* ModalScaleEnter */]);
+        this.config.setTransition('modal-scale-leave', __WEBPACK_IMPORTED_MODULE_31__itransitions__["d" /* ModalScaleLeave */]);
     };
     AppModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
@@ -871,7 +964,7 @@ var AppModule = (function () {
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
-                __WEBPACK_IMPORTED_MODULE_24__angular_http__["d" /* HttpModule */],
+                __WEBPACK_IMPORTED_MODULE_25__angular_http__["d" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */], {
                     backButtonText: '',
                     iconMode: 'ios',
@@ -899,6 +992,8 @@ var AppModule = (function () {
                         { loadChildren: '../pages/home/home.module#HomeModule', name: 'Home', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/newwork/newwork-detail/newwork-detail.module#NewworkDetailModule', name: 'NewworkDetail', segment: 'newwork-detail', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/newwork/newwork.module#NewworkModule', name: 'Newwork', segment: 'newwork', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/hr-management/training-maintenance/training-maintenance-set/training-maintenance-set.module#TrainingMaintenanceSetPageModule', name: 'TrainingMaintenanceSetPage', segment: 'training-maintenance-set', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/hr-management/training-maintenance/training-maintenance.module#TrainingMaintenancePageModule', name: 'TrainingMaintenancePage', segment: 'training-maintenance', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/find-password/find-password.module#FindPasswordModule', name: 'FindPassword', segment: 'find-password', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mail/mail-read/mail-read.module#MailReadModule', name: 'MailRead', segment: 'mail-read', priority: 'low', defaultHistory: [] },
@@ -923,6 +1018,7 @@ var AppModule = (function () {
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["a" /* IonicStorageModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_29__components_components_module__["a" /* ComponentsModule */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* IonicApp */]],
             entryComponents: [
@@ -936,24 +1032,25 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_9__ionic_native_toast__["a" /* Toast */],
                 __WEBPACK_IMPORTED_MODULE_10__ionic_native_file__["a" /* File */],
                 __WEBPACK_IMPORTED_MODULE_11__ionic_native_file_chooser__["a" /* FileChooser */],
-                __WEBPACK_IMPORTED_MODULE_12__ionic_native_file_transfer__["a" /* FileTransfer */],
-                __WEBPACK_IMPORTED_MODULE_13__ionic_native_in_app_browser__["a" /* InAppBrowser */],
-                __WEBPACK_IMPORTED_MODULE_14__ionic_native_network__["a" /* Network */],
-                __WEBPACK_IMPORTED_MODULE_15__ionic_native_camera__["a" /* Camera */],
-                __WEBPACK_IMPORTED_MODULE_16__ionic_native_image_picker__["a" /* ImagePicker */],
-                __WEBPACK_IMPORTED_MODULE_17__ionic_native_photo_viewer__["a" /* PhotoViewer */],
+                __WEBPACK_IMPORTED_MODULE_12__ionic_native_file_opener__["a" /* FileOpener */],
+                __WEBPACK_IMPORTED_MODULE_13__ionic_native_file_transfer__["a" /* FileTransfer */],
+                __WEBPACK_IMPORTED_MODULE_14__ionic_native_in_app_browser__["a" /* InAppBrowser */],
+                __WEBPACK_IMPORTED_MODULE_15__ionic_native_network__["a" /* Network */],
+                __WEBPACK_IMPORTED_MODULE_16__ionic_native_camera__["a" /* Camera */],
+                __WEBPACK_IMPORTED_MODULE_17__ionic_native_image_picker__["a" /* ImagePicker */],
+                __WEBPACK_IMPORTED_MODULE_18__ionic_native_photo_viewer__["a" /* PhotoViewer */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* Content */],
                 { provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ErrorHandler */], useClass: FunDebugErrorHandler },
-                __WEBPACK_IMPORTED_MODULE_18__providers_NativeService__["a" /* NativeService */],
-                __WEBPACK_IMPORTED_MODULE_19__providers_HttpIntercept__["a" /* HttpIntercept */],
-                __WEBPACK_IMPORTED_MODULE_20__providers_HttpService__["a" /* HttpService */],
-                __WEBPACK_IMPORTED_MODULE_21__providers_FileService__["a" /* FileService */],
-                __WEBPACK_IMPORTED_MODULE_22__providers_Helper__["a" /* Helper */],
-                __WEBPACK_IMPORTED_MODULE_23__providers_Utils__["a" /* Utils */],
-                __WEBPACK_IMPORTED_MODULE_25__providers_HttpInterceptHandle__["a" /* HttpInterceptHandle */],
-                __WEBPACK_IMPORTED_MODULE_26__providers_GlobalData__["a" /* GlobalData */],
-                __WEBPACK_IMPORTED_MODULE_28__providers_Logger__["a" /* Logger */],
-                __WEBPACK_IMPORTED_MODULE_27__services_backButtonService__["a" /* BackButtonService */]
+                __WEBPACK_IMPORTED_MODULE_19__providers_NativeService__["a" /* NativeService */],
+                __WEBPACK_IMPORTED_MODULE_20__providers_HttpIntercept__["a" /* HttpIntercept */],
+                __WEBPACK_IMPORTED_MODULE_21__providers_HttpService__["a" /* HttpService */],
+                __WEBPACK_IMPORTED_MODULE_22__providers_FileService__["a" /* FileService */],
+                __WEBPACK_IMPORTED_MODULE_23__providers_Helper__["a" /* Helper */],
+                __WEBPACK_IMPORTED_MODULE_24__providers_Utils__["a" /* Utils */],
+                __WEBPACK_IMPORTED_MODULE_26__providers_HttpInterceptHandle__["a" /* HttpInterceptHandle */],
+                __WEBPACK_IMPORTED_MODULE_27__providers_GlobalData__["a" /* GlobalData */],
+                __WEBPACK_IMPORTED_MODULE_30__providers_Logger__["a" /* Logger */],
+                __WEBPACK_IMPORTED_MODULE_28__services_backButtonService__["a" /* BackButtonService */]
                 // ,HTTP
             ]
         }),
@@ -1035,35 +1132,6 @@ var NativeService = (function () {
     NativeService.prototype.warn = function (info) {
         console.log('%cNativeService/' + info, 'color:#e8c406');
     };
-    // FileChoose( url:string, options, trustAllHosts?:boolean){
-    //   this.fileChooser.open().then(uri => {
-    //     return this.upload(uri,url,options,trustAllHosts);
-    //   }).catch(err => {
-    //     console.log(err)
-    //   })
-    // }
-    // /**
-    //  * 上传
-    //  */
-    // upload(fileUrl, url, options, trustAllHosts?:boolean) {
-    //   let alert = this.alertCtrl.create({
-    //     title: '上传进度：0%',
-    //     enableBackdropDismiss: false,
-    //     buttons: ['后台下载']
-    //   });
-    //   alert.present();
-    //   const fileTransfer: TransferObject = this.transfer.create();
-    //   fileTransfer.onProgress((event: ProgressEvent) => {
-    //       let num = Math.floor(event.loaded / event.total * 100);
-    //       if (num === 100) {
-    //         alert.dismiss();
-    //       } else {
-    //         let title = document.getElementsByClassName('alert-title')[0];
-    //         title && (title.innerHTML = '上传进度：' + num + '%');
-    //       }
-    //   });
-    //   return fileTransfer.upload(fileUrl,url, options);
-    // }
     /**
      * 下载
      */
@@ -1075,10 +1143,13 @@ var NativeService = (function () {
         });
         alert.present();
         var fileTransfer = this.fileTransfer.create();
-        target = this.file.externalRootDirectory + target; // 文件保存的目录
+        // target = this.file.dataDirectory + target; // 文件保存的目录
+        target = this.file.dataDirectory + target;
+        console.log(target);
         fileTransfer.download(encodeURI(source), target).then(function (entry) {
             console.log('download complete: ' + entry.toURL());
-            // window['install'].install(target.replace('file://', ''));
+        }, function (error) {
+            console.log(error);
         });
         fileTransfer.onProgress(function (event) {
             var num = Math.floor(event.loaded / event.total * 100);
@@ -1744,7 +1815,51 @@ var CODE_PUSH_DEPLOYMENT_KEY = {
 
 /***/ }),
 
-/***/ 693:
+/***/ 678:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EmptyComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+/**
+ * Generated class for the EmptyComponent component.
+ *
+ * See https://angular.io/api/core/Component for more info on Angular
+ * Components.
+ */
+var EmptyComponent = (function () {
+    function EmptyComponent() {
+        this.isEmpty = false;
+    }
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Boolean)
+    ], EmptyComponent.prototype, "isEmpty", void 0);
+    EmptyComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'empty',
+            template: "\n    <div  text-center padding style=\"font-size:.9em;\">\n      <div padding>\u6682\u65E0\u6D88\u606F\u6570\u636E\uFF01\uFF01\uFF01</div>\n      <img src=\"assets/img/face/face2.png\" height=\"100\">\n    </div>\n  "
+        }),
+        __metadata("design:paramtypes", [])
+    ], EmptyComponent);
+    return EmptyComponent;
+}());
+
+//# sourceMappingURL=empty.js.map
+
+/***/ }),
+
+/***/ 696:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1752,8 +1867,8 @@ var CODE_PUSH_DEPLOYMENT_KEY = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(90);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__ = __webpack_require__(360);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(361);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__ = __webpack_require__(361);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(362);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_NativeService__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_GlobalData__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_login_LoginService__ = __webpack_require__(161);
@@ -1981,7 +2096,7 @@ var MyApp = (function () {
 
 /***/ }),
 
-/***/ 695:
+/***/ 698:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1990,7 +2105,7 @@ var MyApp = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(138);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(76);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__HttpInterceptHandle__ = __webpack_require__(362);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__HttpInterceptHandle__ = __webpack_require__(363);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -2126,7 +2241,7 @@ var HttpIntercept = (function (_super) {
 
 /***/ }),
 
-/***/ 696:
+/***/ 699:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2174,7 +2289,7 @@ var Helper = (function () {
 
 /***/ }),
 
-/***/ 697:
+/***/ 700:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2508,5 +2623,5 @@ var HttpService = (function () {
 
 /***/ })
 
-},[365]);
+},[367]);
 //# sourceMappingURL=main.js.map

@@ -1,14 +1,14 @@
 webpackJsonp([40],{
 
-/***/ 704:
+/***/ 718:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AboutusPageModule", function() { return AboutusPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactsPopoverPageModule", function() { return ContactsPopoverPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__aboutus__ = __webpack_require__(753);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts_popover__ = __webpack_require__(770);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,38 +18,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AboutusPageModule = (function () {
-    function AboutusPageModule() {
+var ContactsPopoverPageModule = (function () {
+    function ContactsPopoverPageModule() {
     }
-    AboutusPageModule = __decorate([
+    ContactsPopoverPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__aboutus__["a" /* AboutusPage */],
+                __WEBPACK_IMPORTED_MODULE_2__contacts_popover__["a" /* ContactsPopoverPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__aboutus__["a" /* AboutusPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts_popover__["a" /* ContactsPopoverPage */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__aboutus__["a" /* AboutusPage */]
-            ]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__contacts_popover__["a" /* ContactsPopoverPage */]]
         })
-    ], AboutusPageModule);
-    return AboutusPageModule;
+    ], ContactsPopoverPageModule);
+    return ContactsPopoverPageModule;
 }());
 
-//# sourceMappingURL=aboutus.module.js.map
+//# sourceMappingURL=contacts-popover.module.js.map
 
 /***/ }),
 
-/***/ 753:
+/***/ 770:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutusPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactsPopoverPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_HttpService__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(364);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63,59 +63,126 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
- * Generated class for the AboutusPage page.
+ * Generated class for the ContactsPopoverPage page.
  *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
  */
-var AboutusPage = (function () {
-    function AboutusPage(navCtrl, navParams, nativeService, httpService) {
-        this.navCtrl = navCtrl;
+var ContactsPopoverPage = (function () {
+    function ContactsPopoverPage(navParams, viewCtrl, storage, httpService) {
         this.navParams = navParams;
-        this.nativeService = nativeService;
+        this.viewCtrl = viewCtrl;
+        this.storage = storage;
         this.httpService = httpService;
-        this.period = "2017";
-        this.updateStr = "检查更新";
-        this.data = {
-            "version": "V0.0.1",
-            "appName": "成都永朔科技有限公司",
-            "logo": "assets/img/logo.png",
-            "copyright": "成都永朔科技有限公司所有"
-        };
-        var thisYear = new Date().getFullYear();
-        this.period = (thisYear === 2017) ? "2017" : "2017 - " + thisYear;
+        this.deptItems = [];
+        this.items = [];
+        this.haveAffix = false;
+        this.addressee = this.navParams.get("addressee");
+        this.addresseeIds = this.navParams.get("addresseeIds");
+        console.log(this.addressee, this.addresseeIds);
+        this.initializeItems();
     }
-    AboutusPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad AboutusPage');
-    };
-    AboutusPage.prototype.detectionUpgrade = function () {
+    ContactsPopoverPage.prototype.initializeItems = function () {
         var _this = this;
-        var version = this.nativeService.getVersionNumber();
-        // 从服务器获取最新版本号
-        this.httpService.get("url").map(function (res) { return res.json; })
-            .subscribe(function (item) {
-            if (item[0].version == version) {
-                return _this.updateStr = "已是最新版";
+        this.httpService.postFormData("ashx/BmLs.ashx", {})
+            .map(function (res) { return res.json(); })
+            .subscribe(function (resJson) {
+            if (resJson.Result) {
+                _this.deptItems = resJson.Data;
             }
-            else {
-                _this.nativeService.detectionUpgrade();
+        });
+        this.search();
+    };
+    ContactsPopoverPage.prototype.getItems = function (ev) {
+        // Reset items back to all of the items
+        this.initializeItems();
+        // set val to the value of the ev target
+        var val = ev.target.value;
+        this.name = val;
+        // if the value is an empty string don't filter the items
+        // if (val && val.trim() != '') {
+        //   this.items = this.items.filter((item) => {
+        //     return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        //   });
+        // }
+    };
+    ContactsPopoverPage.prototype.getRecipientsByDept = function (id) {
+        var _this = this;
+        var data = !!id ? { DeptId: id } : {};
+        this.httpService.postFormData("ashx/UserSheet.ashx", data)
+            .map(function (res) { return res.json(); })
+            .subscribe(function (result) {
+            console.log(result);
+            if (result.Result) {
+                var idArr_1 = _this.addresseeIds.split(",");
+                _this.items = result.Data.map(function (value, index) {
+                    for (var i in idArr_1) {
+                        if (idArr_1[i] !== value.Uid) {
+                            Object.assign(value, { checked: false });
+                        }
+                        else {
+                            return Object.assign(value, { checked: true });
+                        }
+                    }
+                    return value;
+                });
             }
         });
     };
-    AboutusPage = __decorate([
+    ContactsPopoverPage.prototype.search = function () {
+        var _this = this;
+        var data = (this.name !== "") ? { name: name } : {};
+        this.httpService.postFormData("ashx/UserSheet.ashx", data)
+            .map(function (res) { return res.json(); })
+            .subscribe(function (result) {
+            console.log(result);
+            if (result.Result) {
+                var idArr_2 = _this.addresseeIds.split(",");
+                _this.items = result.Data.map(function (value, index) {
+                    for (var i in idArr_2) {
+                        if (idArr_2[i] !== value.Uid) {
+                            Object.assign(value, { checked: false });
+                        }
+                        else {
+                            return Object.assign(value, { checked: true });
+                        }
+                    }
+                    return value;
+                });
+            }
+        });
+    };
+    ContactsPopoverPage.prototype.checkPeople = function (index) {
+        this.items[index].checked = !this.items[index].checked;
+    };
+    ContactsPopoverPage.prototype.confirm = function () {
+        console.log(confirm);
+        this.addressee = "";
+        this.addresseeIds = "";
+        for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
+            var value = _a[_i];
+            if (value.checked) {
+                this.addressee += value.Name + ",";
+                this.addresseeIds += value.Uid + ",";
+            }
+        }
+        this.viewCtrl.dismiss({ addressee: this.addressee, addresseeIds: this.addresseeIds });
+    };
+    ContactsPopoverPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-aboutus',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\aboutus\aboutus.html"*/`<!--\n  Generated template for the AboutusPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>关于我们</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding text-center>\n    <img [src]="data.logo" alt="公司logo" />\n    <h2>{{data.appName}}</h2>\n    <p>{{data.version}}</p>\n    <button ion-button (click)="detectionUpgrade()">{{updateStr}}</button>\n\n</ion-content>\n<ion-footer text-center>{{data.copyright}}&copy;{{period}}</ion-footer>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\aboutus\aboutus.html"*/,
+            selector: 'page-contacts-popover',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\contacts-popover\contacts-popover.html"*/`<!--\n  Generated template for the ContactsPopoverPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>联系人选择</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-list class="checkpeople-popover">\n    <ion-item>\n        <ion-label>部门选择</ion-label>\n        <ion-select [(ngModel)]="dept" submitText="确定" (ngModelChange)="getRecipientsByDept(dept)"\n            cancelText="取消" okText="确定">\n            <ion-option  *ngFor="let item of deptItems;let i = index" [value]="item.Id">\n                {{item.BmName}}\n            </ion-option>\n        </ion-select>\n    </ion-item>\n    <ion-searchbar color="danger" [(ngModel)]="name"  placeholder="请输入编码或姓名">\n    </ion-searchbar>\n  \n    <div text-center>\n        <button (click)="search()" icon-left ion-button small color="calm">\n        <ion-icon name="search"></ion-icon>查询</button>\n  \n        <button (click)="confirm()" icon-left ion-button small color="calm">\n        <ion-icon name="checkmark"></ion-icon>确定</button>\n    </div>\n  \n    <ion-list-header>\n        通讯录\n    </ion-list-header>\n  \n    <ion-item *ngFor="let item of items;let i = index">\n        <ion-label>\n        {{item.Name}}({{item.Uid}})<br>\n        <span>{{item.Dept}}&emsp;{{item.Duty}}</span>\n        </ion-label>\n        <ion-checkbox [checked]="item.checked" (ionChange)="checkPeople(i)"></ion-checkbox>\n    </ion-item>\n  </ion-list>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\contacts-popover\contacts-popover.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_HttpService__["a" /* HttpService */]])
-    ], AboutusPage);
-    return AboutusPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__["a" /* HttpService */]])
+    ], ContactsPopoverPage);
+    return ContactsPopoverPage;
 }());
 
-//# sourceMappingURL=aboutus.js.map
+//# sourceMappingURL=contacts-popover.js.map
 
 /***/ })
 

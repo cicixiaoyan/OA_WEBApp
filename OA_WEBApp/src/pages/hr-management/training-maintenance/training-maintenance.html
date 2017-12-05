@@ -1,0 +1,38 @@
+<!--
+  Generated template for the TrainingMaintenancePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>培训维护</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-list>
+      <ion-item-sliding *ngFor="let train of list"  (click)="doRead(train.Id)">
+          <ion-item>
+              <span>{{train.Title}}</span>
+              <div class="small">讲师：{{train.Instructor}}</div>
+              <p class="small" *ngIf="train.Place !== ''">地点：{{train.Place}}</p>
+              <p class="small">时间：{{train.StartDate}}&nbsp;~&nbsp;{{train.EndDate}}</p>
+          </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+    <empty *ngIf="isEmpty"></empty>
+    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <ion-fab bottom right>
+        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+</ion-content>

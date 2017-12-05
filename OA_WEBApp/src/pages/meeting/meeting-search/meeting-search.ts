@@ -35,7 +35,7 @@ export class MeetingSearchPage {
       this.data = {
         "status": this.meetingService.meetingStatus["Delivered"],
         "uid": this.meetingService.httpService.globalData.Uid,
-        "PageIndex": 1,
+        "PageIndex": 0,
         "PageSize": 8
       };
       this.list = [
@@ -51,7 +51,7 @@ export class MeetingSearchPage {
 
   // 选择状态
   checkRead(name: string = "Delivered") {
-    this.data.PageIndex = 1;
+    this.data.PageIndex = 0;
     this.list = [];
     this.checkBtn = { Drafting: false, Delivered: false, Approved: false,
       HasBeenReturned: false, completed: false, 
@@ -74,7 +74,7 @@ export class MeetingSearchPage {
 
   doRefresh(refresher: Refresher) {
     this.list = [];
-    this.data.PageIndex = 1;
+    this.data.PageIndex = 0;
     this.getList(this.data);
     setTimeout(() => {
         refresher.complete();
@@ -105,7 +105,7 @@ export class MeetingSearchPage {
         console.log(this.list);
       }else{
         this.moredata = false;
-        this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+        this.isEmpty = (this.data.PageIndex == 0) ? true : false;
       }
     });
     

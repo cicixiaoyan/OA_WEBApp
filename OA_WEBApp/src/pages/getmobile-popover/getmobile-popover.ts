@@ -29,9 +29,8 @@ export class GetmobilePopoverPage {
               public viewCtrl: ViewController,
               public storage: Storage,
               public httpService: HttpService) {
-        this.addressee = this.navParams.get("addressee");
-        this.addresseeIds = this.navParams.get("addresseeIds");
-        console.log(this.addressee, this.addresseeIds);
+        this.addressee = this.navParams.get("addressee") ? this.navParams.get("addressee") : '';
+        this.addresseeIds = this.navParams.get("addresseeIds") ? this.navParams.get("addresseeIds") : "";
         this.initializeItems();
   }
 
@@ -56,13 +55,14 @@ export class GetmobilePopoverPage {
 
   getRecipientsByDept(id?){
       let data = !!id ? {DeptId: id} : {};
+      data["ISPhone"] = 1;
       this.httpService.postFormData("ashx/UserSheet.ashx", data)
       .map((res: Response) => res.json())
       .subscribe((result) => {
           console.log(result);
-          if (result.Result){
+          if (result.Result && (result.Data instanceof Array) && result.Data.length !== 0){
+            if (this.addresseeIds !== ""){
               const idArr = this.addresseeIds.split(",");
-
               this.items = result.Data.map(function (value, index) {
                   for (let i in idArr) {
                       if (idArr[i] !== value.Uid) {
@@ -75,6 +75,11 @@ export class GetmobilePopoverPage {
                   return value;
 
               });
+            }else{
+                this.items = result.Data;
+            }
+          }else{
+
           }
       });
   }
@@ -83,14 +88,13 @@ export class GetmobilePopoverPage {
     //   let data = (this.name !== "") ? {name: name} : {};
       let data = {};
       if (this.name && this.name.trim() != '')  data["name"] = this.name;
-      data["ISPhone"] = true;      
+      data["ISPhone"] = 1;      
       this.httpService.postFormData("ashx/UserSheet.ashx", data)
       .map((res: Response) => res.json())
       .subscribe((result) => {
-          console.log(result);
-          if (result.Result){
+          if (result.Result && (result.Data instanceof Array) && result.Data.length !== 0){
+            if (this.addresseeIds !== ""){
               const idArr = this.addresseeIds.split(",");
-
               this.items = result.Data.map(function (value, index) {
                   for (let i in idArr) {
                       if (idArr[i] !== value.Uid) {
@@ -103,6 +107,11 @@ export class GetmobilePopoverPage {
                   return value;
 
               });
+            }else{
+                this.items = result.Data;
+            }
+          }else{
+              
           }
       });
   }
@@ -112,7 +121,6 @@ export class GetmobilePopoverPage {
   }
 
   confirm() {
-      console.log(confirm);
       this.addressee = "";
       this.addresseeIds = "";
       for (let value of this.items) {

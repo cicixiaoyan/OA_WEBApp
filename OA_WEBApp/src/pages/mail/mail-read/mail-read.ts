@@ -2,8 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, ModalController, NavParams } from 'ionic-angular';
 import { Content } from 'ionic-angular';
 import { NativeService } from "../../../providers/NativeService";
-// import { MailWrite } from '../mail-write/mail-write';
-
 import { MailService } from '../mailService';
 /**
  * Generated class for the MailRead page.
@@ -64,15 +62,4 @@ export class MailRead {
     download(Path, name) {
         this.nativeService.download(Path, name);
     }
-
-    sent(value){
-        this.mailService.write(value).subscribe((resJson) => {
-            if (resJson.Result) {
-                this.nativeService.showToast("回复成功", 800);
-            }else{
-                this.nativeService.showToast(resJson.Data, 800);
-            }
-        });
-    }
-
 }

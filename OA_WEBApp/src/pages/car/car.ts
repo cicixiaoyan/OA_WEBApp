@@ -28,7 +28,7 @@ export class CarPage {
               private modalCtrl: ModalController,
               private CarService: CarService) {
     this.data = {
-        "PageIndex": 1,
+        "PageIndex": 0,
         "PageSize": 8
         };
     this.initializeItems();
@@ -59,7 +59,7 @@ doWrite() {
 
 doRefresh(refresher: Refresher) {
     this.list = [];
-    this.data.PageIndex = 1;
+    this.data.PageIndex = 0;
     this.getList(this.data);
 
 
@@ -91,7 +91,7 @@ private getList(data) {
           this.isEmpty = false;
         }else{
           this.moredata = false;
-          if (this.data.PageIndex === 1) {
+          if (this.data.PageIndex === 0) {
                this.CarService.httpService.nativeService.showToast(resJson.Data);
                this.isEmpty = true;
                this.list = [];

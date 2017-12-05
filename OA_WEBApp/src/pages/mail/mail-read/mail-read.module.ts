@@ -7,7 +7,7 @@ import { MailService } from "../mailService";
         MailRead,
     ],
     imports: [
-        IonicPageModule.forChild(MailRead)
+        IonicPageModule.forChild(MailRead),
     ],
     exports: [
         MailRead

@@ -32,7 +32,7 @@ export class AnnouncementPage {
       this.items = [];
       this.data = {
         "UserId": this.announcementService.httpService.globalData.Uid,
-        "PageIndex": 1,
+        "PageIndex": 0,
         "PageSize": 10,
         "Status": this.announcementService.announcementStatus["enter"]
       };
@@ -44,6 +44,7 @@ export class AnnouncementPage {
   }
 
   doRefresh(refresher: Refresher) {
+      this.data.PageIndex = 0;
       this.initializeItems();
       setTimeout(() => {
           console.log('数据加载完成');
@@ -67,7 +68,7 @@ export class AnnouncementPage {
 
 // 选择录入、已发布、全部
 checkRead(name: string = "enter") {
-    this.data.PageIndex = 1;
+    this.data.PageIndex = 0;
     this.items = [];
     this.checkBtn = { "enter": false, "published": false, "all": false };
     this.checkBtn[name] = true;
@@ -95,7 +96,7 @@ checkRead(name: string = "enter") {
             this.items = [...this.items, ...list];
         }else{
             this.moredata = false;
-            this.isEmpty = this.data.PageIndex == 1 ? true : false;
+            this.isEmpty = this.data.PageIndex == 0 ? true : false;
         }
       });
     //   return this.httpService.postFormData("ashx/Notice.ashx/noticeall", data).map(Response => Response.json());

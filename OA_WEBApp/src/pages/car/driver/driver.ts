@@ -23,7 +23,7 @@ export class DriverPage {
               private nativeService: NativeService,
               private carService: CarService) {
       this.data = {
-        "PageIndex": 1,
+        "PageIndex": 0,
         "PageSize": 100
       };
       this.initializeItems();

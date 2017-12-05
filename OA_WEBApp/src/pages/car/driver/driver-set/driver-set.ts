@@ -39,8 +39,8 @@ export class DriverSetPage {
   ionViewDidLoad() {
     if (!this.isWrite){
       this.carService.getDriverDetails(this.navParams.get("Id")).subscribe((resJson) => {
-        if (resJson.Resule && resJson.Data !== []){
-          let data = resJson.Data[0];
+        if (resJson.Resule && typeof(resJson.Data) !== "string"){
+          let data = resJson.Data;
           this.id = data.Id;
           this.addForm.setValue({
             Name: data.Name,

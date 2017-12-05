@@ -15,12 +15,10 @@ import { HttpService } from "../../../providers/HttpService";
     templateUrl: 'contacts.html',
 })
 export class Contacts {
-    searchKey: string;
+    searchKey: string = "";
     nxPage: any = "ContactsDetail";
-    params: any = { id: 42 };
+    params: any;
     items;
-    page: number = 1;
-    size: number = 1;
     moredata: boolean = true;
     isEmpty: boolean = false;
 
@@ -28,12 +26,9 @@ export class Contacts {
                 public navParams: NavParams,
                 public httpService: HttpService) {
         this.initializeItems();
-
     }
 
     doRefresh(refresher: Refresher) {
-        this.page = 1;
-        this.size = 1;
         this.initializeItems();
         setTimeout(() => {
             console.log('数据加载完成');
@@ -41,27 +36,10 @@ export class Contacts {
         }, 2000);
     }
 
-    doInfinite(): Promise<any> {
-        if (this.moredata) {
-            this.size++;
-            const data = { page: this.page, size: this.size };
-            this.getList(data).subscribe(resJson => {
-                if (resJson.Result && resJson.Result !== []){
-                    this.items = this.items.concat(resJson.Data);
-                } else {
-                    this.moredata = false;
-                }
-            });
-        }
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve();
-            }, 500);
-        });
-    }
-
-    initializeItems() {
-        this.getList().subscribe(resJson => {
+    private initializeItems() {
+        this.httpService.postFormData("ashx/UserSheet.ashx", {"Name": this.searchKey})
+        .map(Response => Response.json())
+        .subscribe(resJson => {
             if (resJson.Result  && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
                 this.items = resJson.Data;
                 this.isEmpty = false;
@@ -71,35 +49,11 @@ export class Contacts {
                 this.httpService.nativeService.showToast(resJson.Data || "无数据");
             }
         });
-        // let data={action: "Yh_List", page: 1, size: 1};
-        // this.httpService.postFormData("ashx/MailList.ashx/Yh_List",data)
-        //   .map(Response => Response.json())
-        //   .subscribe(list => {
-        //     this.items = list;
-        //   });
-
-        // 假数据
-        // this.items = [
-        //        {"ui_id":"admin","ui_desc":"系统管理员","ui_sex":"男","ui_lx":"总部","zwmc":"员工"},
-        //        {"ui_id":"admin1","ui_desc":"系统管理员1","ui_sex":"男","ui_lx":"总部","zwmc":"员工1"},
-        //        {"ui_id":"admin2","ui_desc":"系统管理员2","ui_sex":"男","ui_lx":"总部","zwmc":"员工2"},
-        //        {"ui_id":"admin3","ui_desc":"系统管理员3","ui_sex":"男","ui_lx":"总部","zwmc":"员工3"},
-        //     ];
     }
 
-    private getList(data?) {
-        data = !!data ? data : { page: 1, size: 1 };
-        return this.httpService.postFormData("ashx/UserSheet.ashx", data).map(Response => Response.json());
-    }
-
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad Contacts');
-    }
-
-    search(refresher: Refresher) {
-        console.log(this.searchKey);
+    search(refresher: Refresher, key) {
         this.initializeItems();
-        return this.httpService.postFormData("ashx/UserSheet.ashx", {"Name": this.searchKey})
+        return this.httpService.postFormData("ashx/UserSheet.ashx", {"Name": key})
         .map(Response => Response.json())
         .subscribe((resJson) => {
             if (resJson.Result && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){

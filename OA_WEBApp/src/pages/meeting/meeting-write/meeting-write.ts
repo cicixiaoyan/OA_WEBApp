@@ -26,11 +26,13 @@ export class MeetingWritePage {
   MeetPlaceLs = [];
   MeetTypeLs = [];
   DeptLs = [];
+  PersonId: string = "";
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private fileService: FileService,
               private formBuilder: FormBuilder,
               private globalData: GlobalData,
+              private popoverCtrl: PopoverController,
               private nativeService: NativeService,
               private meetingService: MeetingService) {
     this.meetingService.MeetPlaceLs().subscribe((resJson) => {
@@ -51,7 +53,7 @@ export class MeetingWritePage {
         PlaceId: ["", [ Validators.required]],
         StartDate: ["", [ Validators.required]],
         EndDate: ["", [Validators.required]],
-        PersonId: ["", [Validators.maxLength(180), Validators.required]],
+        Person: ["", [Validators.maxLength(180), Validators.required]],
         DeptId: ["", []],
         HostName: ["", [Validators.maxLength(8)]],
         Range: ["", [Validators.maxLength(180)]],
@@ -66,8 +68,10 @@ export class MeetingWritePage {
     console.log('ionViewDidLoad MeetingWritePage');
   }
   sent(data){
+    data.Person = null;
     data.Uid = this.globalData.Uid;
     data.FileNewName = this.FileNewName;
+    data.PersonId = this.PersonId;
     this.meetingService.write(data).subscribe((resJson) => {
       if (resJson.Result){
         this.nativeService.showToast("添加成功", 888);
@@ -89,5 +93,20 @@ export class MeetingWritePage {
 
     });
   }
+
+  checkPeople(myEvent) {
+    let popover = this.popoverCtrl.create("ContactsPopoverPage",
+        { addressee: this.writeForm.get("Person").value, addresseeIds: this.PersonId });
+    popover.present({
+        ev: myEvent
+    });
+    popover.onDidDismiss(data => {
+        if (!!data) {
+            this.PersonId = data.addresseeIds;                
+            this.writeForm.patchValue({'Person': data.addressee});
+        }
+
+    });
+}
 
 }

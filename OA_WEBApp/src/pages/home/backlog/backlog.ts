@@ -28,7 +28,7 @@ export class Backlog {
                 public navParams: NavParams,
                 private backlogService: BacklogService) {
         this.data = {
-            "PageIndex": 1,
+            "PageIndex": 0,
             "PageSize": 10,
             "Status": this.backlogService.Status["notdone"],
             "Uid": this.backlogService.httpService.globalData.Uid
@@ -43,7 +43,7 @@ export class Backlog {
     doRefresh(refresher?: Refresher) {
         // this.initializeItems();
         this.moredata = true;
-        this.data.PageIndex = 1;
+        this.data.PageIndex = 0;
         this.items = [];
         if (this.work === "notDone") {
             // ....
@@ -90,7 +90,7 @@ export class Backlog {
             } else {
                 console.log("2");
                 this.moredata = false;
-                this.isEmpty = this.data.PageIndex === 1 ? true : false;
+                this.isEmpty = this.data.PageIndex === 0 ? true : false;
             }
         });
     }
@@ -102,7 +102,7 @@ export class Backlog {
                 this.items = this.items.concat(resJson.Data);
             } else {
                 this.moredata = false;
-                this.isEmpty = this.data.PageIndex === 1 ? true : false;
+                this.isEmpty = this.data.PageIndex === 0 ? true : false;
             }
         });
     }

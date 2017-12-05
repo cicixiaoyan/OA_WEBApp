@@ -12,8 +12,8 @@ export class MessageService {
     };
 
     messageStatus: object = {
-        read: 1, // 已读
-        unread: 0, // 未读
+        read: 0, // 已读
+        unread: 1, // 未读
         all: 3 // 全部
     };
 
@@ -40,6 +40,10 @@ export class MessageService {
         // 返回json
         // {"Data":"xxx！","Result":false}
         return this.httpService.postFormData("ashx/NewsAdd.ashx", param).map((res: Response) => res.json());
+    }
+
+    markup(param?): Observable<any>{
+        return this.httpService.postFormData("ashx/NewsMarkup.ashx", param).map((res: Response) => res.json());
     }
 
 }

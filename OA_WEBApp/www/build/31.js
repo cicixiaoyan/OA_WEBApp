@@ -1,14 +1,14 @@
 webpackJsonp([31],{
 
-/***/ 738:
+/***/ 744:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabsModule", function() { return TabsModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WelcomeModule", function() { return WelcomeModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tabs__ = __webpack_require__(787);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__welcome__ = __webpack_require__(796);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,37 +18,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var TabsModule = (function () {
-    function TabsModule() {
+var WelcomeModule = (function () {
+    function WelcomeModule() {
     }
-    TabsModule = __decorate([
+    WelcomeModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__tabs__["a" /* TabsPage */],
+                __WEBPACK_IMPORTED_MODULE_2__welcome__["a" /* Welcome */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__tabs__["a" /* TabsPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__welcome__["a" /* Welcome */]),
             ],
             exports: [
-                __WEBPACK_IMPORTED_MODULE_2__tabs__["a" /* TabsPage */]
+                __WEBPACK_IMPORTED_MODULE_2__welcome__["a" /* Welcome */]
             ]
         })
-    ], TabsModule);
-    return TabsModule;
+    ], WelcomeModule);
+    return WelcomeModule;
 }());
 
-//# sourceMappingURL=tabs.module.js.map
+//# sourceMappingURL=welcome.module.js.map
 
 /***/ }),
 
-/***/ 787:
+/***/ 796:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Welcome; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_backButtonService__ = __webpack_require__(364);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -60,44 +59,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import { Home } from '../home/home';
-// import { Mail } from '../mail/mail';
-// import { MessagePage } from '../message/message';
-// import { AnnouncementPage } from '../announcement/announcement';
-// import { Account } from '../account/account';
-
-
-var TabsPage = (function () {
-    function TabsPage(navParams, platform, backButtonService) {
-        var _this = this;
-        this.platform = platform;
-        this.backButtonService = backButtonService;
-        this.tab1Root = "Home";
-        this.tab2Root = "MessagePage";
-        this.tab3Root = "AnnouncementPage";
-        this.tab4Root = "Account";
-        this.mySelectedIndex = navParams.data.tabIndex || 0;
-        this.tab1Root = navParams.data.tab1Component || "Home";
-        platform.ready().then(function () {
-            _this.backButtonService.registerBackButtonAction(_this.tabs);
-        });
+// import { TabsPage } from '../tabs/tabs';
+// import { LoginPage } from "../login/login";
+/**
+ * Generated class for the Welcome page.
+ *
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
+ */
+var Welcome = (function () {
+    function Welcome(viewCtrl, navParams, modalCtrl) {
+        this.viewCtrl = viewCtrl;
+        this.navParams = navParams;
+        this.modalCtrl = modalCtrl;
     }
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('mainTabs'),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["u" /* Tabs */])
-    ], TabsPage.prototype, "tabs", void 0);
-    TabsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\tabs\tabs.html"*/`<ion-tabs #mainTabs [selectedIndex]="mySelectedIndex">\n    <ion-tab [root]="tab1Root" tabTitle="首页" tabIcon="ios-home"></ion-tab>\n    <ion-tab [root]="tab2Root" tabTitle="信息" tabIcon="ios-mail"></ion-tab>\n    <ion-tab [root]="tab3Root" tabTitle="公告" tabIcon="ios-notifications"></ion-tab>\n    <ion-tab [root]="tab4Root" tabTitle="设置" tabIcon="ios-settings"></ion-tab>\n</ion-tabs>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\tabs\tabs.html"*/,
-            selector: 'page-tabs',
+    Welcome.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Welcome');
+    };
+    Welcome.prototype.goToHome = function () {
+        // this.navCtrl.setRoot(TabsPage, { index: 0 });
+        this.viewCtrl.dismiss();
+        var modal = this.modalCtrl.create("LoginPage");
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            data && console.log(data);
+        });
+    };
+    Welcome = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-welcome',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\welcome\welcome.html"*/`<!--\n  Generated template for the Welcome page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header class="nav-decor">\n\n    <ion-navbar>\n        <ion-title>welcome</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-slides pager>\n\n        <ion-slide>\n            <img src="assets/img/welcome/slide1.jpg" />\n        </ion-slide>\n\n        <ion-slide>\n            <img src="assets/img/welcome/slide2.png" />\n        </ion-slide>\n\n        <ion-slide>\n            <img src="assets/img/welcome/slide3.png" />\n        </ion-slide>\n\n        <ion-slide>\n            <ion-row>\n                <ion-col>\n                    <img src="assets/img/welcome/slide4.png" />\n                </ion-col>\n            </ion-row>\n            <ion-row class="start-button">\n                <ion-col>\n                    <button ion-button clear color="light" (click)="goToHome()">立即启动</button>\n                </ion-col>\n            </ion-row>\n        </ion-slide>\n\n    </ion-slides>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\welcome\welcome.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__services_backButtonService__["a" /* BackButtonService */]])
-    ], TabsPage);
-    return TabsPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */]])
+    ], Welcome);
+    return Welcome;
 }());
 
-// WEBPACK FOOTER //
-// ./src/pages/tabs/tabs.ts
-//# sourceMappingURL=tabs.js.map
+//# sourceMappingURL=welcome.js.map
 
 /***/ })
 

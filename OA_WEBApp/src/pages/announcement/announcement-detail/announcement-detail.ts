@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { NativeService } from "../../../providers/NativeService";
 import { AnnouncementService } from '../announcementService';
+import { FileService } from "../../../providers/FileService";
 
 /**
  * Generated class for the AnnouncementDetailPage page.
@@ -22,11 +23,14 @@ export class AnnouncementDetailPage {
   contentHtml: any;
   downloadProgress: any;
   item: any;
-  attObg: any;
+  attObj: any;
+  hasAtt: boolean = false;
+  downloaded: boolean = false;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public announcementService: AnnouncementService,
+              private fileService: FileService,
               private nativeService: NativeService) {
         this.item = this.navParams.get('item');
         this.initializeItems();
@@ -36,23 +40,28 @@ export class AnnouncementDetailPage {
       console.log('ionViewDidLoad AnnouncementDetailPage');
   }
 
-  initializeItems() {
-      
-      
-      this.announcementService.detail(this.item.AnnouncementAtt).subscribe((resJson) => {
-          if (resJson.Result && resJson !== []){
-            this.attObg = resJson.Data[0];
-          }else{
-            this.attObg = {};
-          }
-      });
+  initializeItems() {    
+    this.announcementService.detail(this.item.AnnouncementAtt).subscribe((resJson) => {
+        if (resJson.Result && resJson !== []){
+          this.attObj = resJson.Data[0];
+          this.hasAtt = true;
+        }else{
+          this.attObj = {};
+        }
+    });
 
-      this.myDiv = this.item.AnnouncementTitle;
+    this.myDiv = this.item.AnnouncementTitle;
   }
 
-  download(path) {
+  download(path, name) {
       const target = path.split("/").pop();
-      this.nativeService.download(path, target);
+      let url = "http://192.168.0.49:789/Attach/flow/Work/201111302315473908417.pdf";
+      this.fileService.download1(url, target).subscribe((path) => {
+        this.downloaded = true;
+        this.fileService.openFile(path).subscribe(() => {
+          
+        });
+      });
   }
 
 }

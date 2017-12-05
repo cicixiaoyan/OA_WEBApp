@@ -1,15 +1,15 @@
 webpackJsonp([24],{
 
-/***/ 711:
+/***/ 715:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CarReadPageModule", function() { return CarReadPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CarPageModule", function() { return CarPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__car_read__ = __webpack_require__(760);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(741);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__car__ = __webpack_require__(767);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(746);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,35 +20,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var CarReadPageModule = (function () {
-    function CarReadPageModule() {
+var CarPageModule = (function () {
+    function CarPageModule() {
     }
-    CarReadPageModule = __decorate([
+    CarPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__car_read__["a" /* CarReadPage */],
+                __WEBPACK_IMPORTED_MODULE_2__car__["a" /* CarPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__car_read__["a" /* CarReadPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__car__["a" /* CarPage */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__car_read__["a" /* CarReadPage */]],
+            exports: [__WEBPACK_IMPORTED_MODULE_2__car__["a" /* CarPage */]],
             providers: [__WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */]]
         })
-    ], CarReadPageModule);
-    return CarReadPageModule;
+    ], CarPageModule);
+    return CarPageModule;
 }());
 
-//# sourceMappingURL=car-read.module.js.map
+//# sourceMappingURL=car.module.js.map
 
 /***/ }),
 
-/***/ 741:
+/***/ 746:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CarService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(364);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -112,16 +112,15 @@ var CarService = (function () {
 
 /***/ }),
 
-/***/ 760:
+/***/ 767:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CarReadPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CarPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(741);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(746);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -135,99 +134,97 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 /**
- * Generated class for the CarReadPage page.
+ * Generated class for the CarPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var CarReadPage = (function () {
-    function CarReadPage(navCtrl, navParams, formBuilder, nativeService, carService) {
+var CarPage = (function () {
+    function CarPage(navCtrl, navParams, globalData, modalCtrl, CarService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.formBuilder = formBuilder;
-        this.nativeService = nativeService;
-        this.carService = carService;
-        var today = new Date();
-        this.editForm = this.formBuilder.group({
-            BusNumber: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            BusName: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            BusPassenger: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            StartDate: [today, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            BusBuyPrice: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(5)]],
-            Salvage: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(5)]],
-            BusLicensePlate: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]],
-            BusEngineNumber: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]],
-            BusFrameNumber: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]],
-            BusDrivingLicenseNumber: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(20)]],
-            BusManger: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(20), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(4)]],
-            BusStatus: ["", []],
-            BusAnnualInspection: ["",],
-            BusMaintenanceDate: ["", []],
-            BusDated: ["", []],
-            BusMemo: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]],
-        });
+        this.globalData = globalData;
+        this.modalCtrl = modalCtrl;
+        this.CarService = CarService;
+        this.isEmpty = false;
+        this.list = [];
+        this.moredata = true;
+        this.data = {};
+        this.data = {
+            "PageIndex": 0,
+            "PageSize": 8
+        };
+        this.initializeItems();
     }
-    CarReadPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        this.carService.geStatus().subscribe(function (resJson) {
-            if (resJson.Result) {
-                _this.BusStatusLs = resJson.Data;
-            }
-        });
-        this.carService.geDetail(this.navParams.get("Id")).subscribe(function (resJson) {
-            if (resJson.Result) {
-                var data = resJson.Data;
-                _this.id = data.Id;
-                _this.editForm.setValue({
-                    BusNumber: data.BusNumber,
-                    BusName: data.BusName,
-                    BusPassenger: data.BusPassenger,
-                    StartDate: data.StartDate,
-                    BusBuyPrice: data.BusBuyPrice,
-                    Salvage: data.Salvage,
-                    BusLicensePlate: data.BusLicensePlate,
-                    BusEngineNumber: data.BusEngineNumber,
-                    BusFrameNumber: data.BusFrameNumber,
-                    BusDrivingLicenseNumber: data.BusDrivingLicenseNumber,
-                    BusManger: data.BusManger,
-                    BusStatus: data.BusStatus,
-                    BusAnnualInspection: data.BusAnnualInspection,
-                    BusMaintenanceDate: data.BusMaintenanceDate,
-                    BusDated: data.BusDated,
-                    BusMemo: data.BusMemo,
-                });
-            }
+    CarPage.prototype.initializeItems = function () {
+        this.getList(this.data);
+    };
+    CarPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Message');
+    };
+    CarPage.prototype.doRead = function (id) {
+        console.log(id, "id");
+        // this.navCtrl.push("CarReadPage", { Params: Params });
+        this.navCtrl.push("CarReadPage", { "Id": id });
+    };
+    CarPage.prototype.doWrite = function () {
+        // let modal = this.modalCtrl.create("CarAddPage");
+        // modal.present();
+        // modal.onDidDismiss(data => {
+        //     data && console.log(data);
+        // });
+        this.navCtrl.push("CarAddPage");
+    };
+    CarPage.prototype.doRefresh = function (refresher) {
+        this.list = [];
+        this.data.PageIndex = 0;
+        this.getList(this.data);
+        setTimeout(function () {
+            refresher.complete();
+        }, 1000);
+    };
+    CarPage.prototype.doInfinite = function () {
+        if (this.moredata) {
+            this.data.PageIndex++;
+            this.getList(this.data);
+        }
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve();
+            }, 500);
         });
     };
-    CarReadPage.prototype.save = function (value) {
+    CarPage.prototype.getList = function (data) {
         var _this = this;
-        value.Uid = this.carService.httpService.globalData.Uid;
-        value.Id = this.id;
-        this.carService.mod(value).subscribe(function (resJson) {
-            if (resJson.Result) {
-                _this.nativeService.showToast("添加成功", 500);
+        this.CarService.getList(data).subscribe(function (resJson) {
+            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
+                var list = resJson.Data;
+                _this.list = _this.list.concat(list);
+                _this.moredata = true;
+                _this.isEmpty = false;
             }
             else {
-                _this.nativeService.showToast(resJson.Data, 500);
+                _this.moredata = false;
+                if (_this.data.PageIndex === 0) {
+                    _this.CarService.httpService.nativeService.showToast(resJson.Data);
+                    _this.isEmpty = true;
+                    _this.list = [];
+                }
             }
         });
     };
-    CarReadPage = __decorate([
+    CarPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-car-read',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\car-read\car-read.html"*/`<!--\n  Generated template for the CarReadPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>车辆详情</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="editForm" (ngSubmit)="save(editForm.value)">\n        <div>\n            <ion-list>\n                <ion-item>\n                    <ion-label stacked>车牌号</ion-label>\n                    <ion-input type="text" formControlName="BusNumber" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>车辆名称</ion-label>\n                    <ion-input type="text" formControlName="BusName" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>核载人数</ion-label>\n                    <ion-input type="number" formControlName="BusPassenger" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>启用时间</ion-label>\n                    <ion-datetime formControlName="StartDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>购买价(万)</ion-label>\n                    <ion-input type="number" formControlName="BusBuyPrice" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>残值(万)</ion-label>\n                    <ion-input type="number" formControlName="Salvage" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>厂牌型号</ion-label>\n                    <ion-input type="text" formControlName="BusLicensePlate" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>发动机号</ion-label>\n                    <ion-input type="text" formControlName="BusEngineNumber" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>车架号</ion-label>\n                    <ion-input type="text" formControlName="BusFrameNumber" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>行驶证号</ion-label>\n                    <ion-input type="text" formControlName="BusDrivingLicenseNumber" placeholder="请输入" ></ion-input>\n                </ion-item>\n\n                <ion-item>\n                    <ion-label stacked>管理人员</ion-label>\n                    <ion-select formControlName="BusManger" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option *ngFor="let type of MeetTypeLs;let i = index" [value]="type.Id">{{type.Name}}</ion-option>\n                        <!-- <ion-option value="2">类型2</ion-option> -->\n                    </ion-select>\n                </ion-item>\n\n                <ion-item>\n                    <ion-label stacked>车辆状况</ion-label>\n                    <ion-select formControlName="BusStatus" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option *ngFor="let status of BusStatusLs;let i = index" [value]="status.Status">{{status.Status}}</ion-option>\n                    </ion-select>\n                </ion-item>\n     \n                <ion-item>\n                    <ion-label stacked>年检日期</ion-label>\n                    <ion-datetime formControlName="BusAnnualInspection"  placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>维保日期</ion-label>\n                    <ion-datetime formControlName="BusMaintenanceDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>保险日期</ion-label>\n                    <ion-datetime formControlName="BusDated" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n\n                <ion-item>\n                    <ion-label stacked>备注</ion-label>\n                    <ion-textarea formControlName="BusMemo" type="text" placeholder="请输入"></ion-textarea>\n                </ion-item>\n\n            </ion-list>\n            <div padding text-center>\n                <button ion-button type="submit" color="danger" [disabled]="!editForm.valid">保存</button>\n                <button ion-button clear small navPop>取消</button>\n            </div>\n        </div>\n    </form>\n\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\car-read\car-read.html"*/,
+            selector: 'page-car',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\car.html"*/`<!--\n  Generated template for the CarPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>车辆</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n      </ion-refresher-content>\n  </ion-refresher>\n  <ion-list>\n    <ion-item (click)="doRead(bus.Id)" *ngFor="let bus of list">\n      <h2 >{{bus.BusName}}</h2><ion-note item-end>{{BusStatus}}</ion-note>\n      <h3>管理员：{{bus.BusManger}}&emsp;核载：{{bus.BusPassenger}}人</h3>\n      <p>启动日期：{{bus.StartDate}}</p>\n    </ion-item>\n    <!-- <ion-item (click)="doRead()">\n      <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>\n      <h3>管理员：何小凤&emsp;核载：4人</h3>\n      <p>启动日期：2005-11-12</p>\n    </ion-item>\n    <ion-item (click)="doRead()">\n      <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>\n      <h3>管理员：何小凤&emsp;核载：4人</h3>\n      <p>启动日期：2005-11-12</p>\n    </ion-item> -->\n  </ion-list>\n  <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n      <div padding>暂无消息数据！！！</div>\n      <img src="assets/img/face/face2.png" height="100">\n  </div>\n  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n  <ion-fab bottom right>\n      <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n  </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\car.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_NativeService__["a" /* NativeService */],
-            __WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */]])
-    ], CarReadPage);
-    return CarReadPage;
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */]) === "function" && _e || Object])
+    ], CarPage);
+    return CarPage;
+    var _a, _b, _c, _d, _e;
 }());
 
-//# sourceMappingURL=car-read.js.map
+//# sourceMappingURL=car.js.map
 
 /***/ })
 

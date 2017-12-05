@@ -45,7 +45,7 @@
     </ion-refresher>
     <div [ngSwitch]="box">
         <ion-list *ngSwitchCase="'inbox'">
-            <ion-item-sliding *ngFor="let message of inboxList " (click)="doRead(message)">
+            <ion-item-sliding *ngFor="let message of inboxList;let i = index; trackBy: index" (click)="doRead(message)">
                 <ion-item>
                     <ion-avatar item-left>
                         <img src="assets/img/mike.png">

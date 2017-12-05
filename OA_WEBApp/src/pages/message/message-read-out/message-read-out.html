@@ -19,12 +19,12 @@
   
               <ion-item>
                   <ion-label>发送人&emsp;</ion-label>
-                  <ion-input type="text" disabled="disabled" [(ngModel)]="messageDetail.AccessPerson" placeholder="系统管理员"></ion-input>
+                  <ion-input type="text" disabled="disabled" [value]="messageDetail.AccessPerson" placeholder="系统管理员"></ion-input>
               </ion-item>
   
               <ion-item>
                   <ion-label>发送时间</ion-label>
-                  <ion-input type="test" disabled="disabled" [(ngModel)]="messageDetail.MailDate" placeholder="发送时间未知"></ion-input>
+                  <ion-input type="test" disabled="disabled" [value]="messageDetail.MailDate" placeholder="发送时间未知"></ion-input>
               </ion-item>
   
           </ion-list>

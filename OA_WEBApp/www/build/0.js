@@ -1,6 +1,6 @@
-webpackJsonp([0,19,20,35,36],{
+webpackJsonp([0,20,21,37,38],{
 
-/***/ 699:
+/***/ 702:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,8 +8,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BacklogDetailModule", function() { return BacklogDetailModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog_detail__ = __webpack_require__(748);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(742);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog_detail__ = __webpack_require__(753);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(747);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -44,7 +44,7 @@ var BacklogDetailModule = (function () {
 
 /***/ }),
 
-/***/ 700:
+/***/ 703:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -52,8 +52,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BacklogModule", function() { return BacklogModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog__ = __webpack_require__(749);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(742);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog__ = __webpack_require__(754);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(747);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -88,7 +88,7 @@ var BacklogModule = (function () {
 
 /***/ }),
 
-/***/ 701:
+/***/ 704:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -96,7 +96,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactsDetailModule", function() { return ContactsDetailModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts_detail__ = __webpack_require__(750);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts_detail__ = __webpack_require__(755);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -129,7 +129,7 @@ var ContactsDetailModule = (function () {
 
 /***/ }),
 
-/***/ 702:
+/***/ 705:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -137,7 +137,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactsModule", function() { return ContactsModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts__ = __webpack_require__(751);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts__ = __webpack_require__(756);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -170,7 +170,7 @@ var ContactsModule = (function () {
 
 /***/ }),
 
-/***/ 717:
+/***/ 720:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -178,11 +178,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeModule", function() { return HomeModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home__ = __webpack_require__(766);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlog_backlog_module__ = __webpack_require__(700);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__backlog_backlog_detail_backlog_detail_module__ = __webpack_require__(699);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__contacts_contacts_module__ = __webpack_require__(702);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__contacts_contacts_detail_contacts_detail_module__ = __webpack_require__(701);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home__ = __webpack_require__(772);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlog_backlog_module__ = __webpack_require__(703);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__backlog_backlog_detail_backlog_detail_module__ = __webpack_require__(702);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__contacts_contacts_module__ = __webpack_require__(705);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__contacts_contacts_detail_contacts_detail_module__ = __webpack_require__(704);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -225,13 +225,13 @@ var HomeModule = (function () {
 
 /***/ }),
 
-/***/ 742:
+/***/ 747:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(364);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -281,14 +281,14 @@ var BacklogService = (function () {
 
 /***/ }),
 
-/***/ 748:
+/***/ 753:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogDetail; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(742);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(747);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(45);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -364,14 +364,14 @@ var BacklogDetail = (function () {
 
 /***/ }),
 
-/***/ 749:
+/***/ 754:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Backlog; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(742);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(747);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -402,7 +402,7 @@ var Backlog = (function () {
         this.moredata = true;
         this.isEmpty = false;
         this.data = {
-            "PageIndex": 1,
+            "PageIndex": 0,
             "PageSize": 10,
             "Status": this.backlogService.Status["notdone"],
             "Uid": this.backlogService.httpService.globalData.Uid
@@ -415,7 +415,7 @@ var Backlog = (function () {
     Backlog.prototype.doRefresh = function (refresher) {
         // this.initializeItems();
         this.moredata = true;
-        this.data.PageIndex = 1;
+        this.data.PageIndex = 0;
         this.items = [];
         if (this.work === "notDone") {
             // ....
@@ -454,26 +454,28 @@ var Backlog = (function () {
     Backlog.prototype.getNotDoneList = function (data) {
         var _this = this;
         this.backlogService.getNotDoneList(data).subscribe(function (resJson) {
-            if (resJson.Result && resJson.Result !== []) {
+            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
+                console.log("1");
                 _this.isEmpty = false;
                 _this.items = _this.items.concat(resJson.Data);
             }
             else {
+                console.log("2");
                 _this.moredata = false;
-                _this.isEmpty = _this.data.PageIndex == 1 ? true : false;
+                _this.isEmpty = _this.data.PageIndex === 0 ? true : false;
             }
         });
     };
     Backlog.prototype.getDoneList = function (data) {
         var _this = this;
         this.backlogService.getDoneList(data).subscribe(function (resJson) {
-            if (resJson.Result && resJson.Result !== []) {
+            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
                 _this.isEmpty = false;
                 _this.items = _this.items.concat(resJson.Data);
             }
             else {
                 _this.moredata = false;
-                _this.isEmpty = _this.data.PageIndex == 1 ? true : false;
+                _this.isEmpty = _this.data.PageIndex === 0 ? true : false;
             }
         });
     };
@@ -482,18 +484,17 @@ var Backlog = (function () {
             selector: 'page-backlog',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog.html"*/`<!--\n  Generated template for the Backlog page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-navbar>\n        <ion-title>待办事项</ion-title>\n    </ion-navbar>\n    <ion-toolbar no-border-top>\n        <ion-segment class="content-ios" [(ngModel)]="work" (ngModelChange)="doRefresh()">\n            <ion-segment-button value="notDone">\n                未办理\n            </ion-segment-button>\n            <ion-segment-button value="done">\n                已办理\n            </ion-segment-button>\n        </ion-segment>\n    </ion-toolbar>\n\n</ion-header>\n\n\n<ion-content>\n    <div [ngSwitch]="work">\n        <ion-refresher (ionRefresh)="doRefresh($event)">\n            <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n            </ion-refresher-content>\n        </ion-refresher>\n\n        <ion-list *ngSwitchCase="\'notDone\'">\n\n            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.Id}">\n                <span>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</span>\n                <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>\n            </button>\n\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'done\'">\n            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.Id}">\n                <span>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</span>\n                <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>\n            </button>\n        </ion-list>\n\n        <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n            <div padding>暂无此类信息！！！</div>\n            <img src="assets/img/face/face2.png" height="100">\n        </div>\n\n        <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n        </ion-infinite-scroll>\n\n    </div>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_2__backlogService__["a" /* BacklogService */]]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__backlogService__["a" /* BacklogService */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__backlogService__["a" /* BacklogService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__backlogService__["a" /* BacklogService */]) === "function" && _c || Object])
     ], Backlog);
     return Backlog;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=backlog.js.map
 
 /***/ }),
 
-/***/ 750:
+/***/ 755:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -564,7 +565,7 @@ var ContactsDetail = (function () {
 
 /***/ }),
 
-/***/ 751:
+/***/ 756:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -596,47 +597,25 @@ var Contacts = (function () {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.httpService = httpService;
+        this.searchKey = "";
         this.nxPage = "ContactsDetail";
-        this.params = { id: 42 };
-        this.page = 1;
-        this.size = 1;
         this.moredata = true;
         this.isEmpty = false;
         this.initializeItems();
     }
     Contacts.prototype.doRefresh = function (refresher) {
-        this.page = 1;
-        this.size = 1;
         this.initializeItems();
         setTimeout(function () {
             console.log('数据加载完成');
             refresher.complete();
         }, 2000);
     };
-    Contacts.prototype.doInfinite = function () {
-        var _this = this;
-        if (this.moredata) {
-            this.size++;
-            var data = { page: this.page, size: this.size };
-            this.getList(data).subscribe(function (resJson) {
-                if (resJson.Result && resJson.Result !== []) {
-                    _this.items = _this.items.concat(resJson.Data);
-                }
-                else {
-                    _this.moredata = false;
-                }
-            });
-        }
-        return new Promise(function (resolve) {
-            setTimeout(function () {
-                resolve();
-            }, 500);
-        });
-    };
     Contacts.prototype.initializeItems = function () {
         var _this = this;
-        this.getList().subscribe(function (resJson) {
-            if (resJson.Result && resJson.Result !== []) {
+        this.httpService.postFormData("ashx/UserSheet.ashx", { "Name": this.searchKey })
+            .map(function (Response) { return Response.json(); })
+            .subscribe(function (resJson) {
+            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
                 _this.items = resJson.Data;
                 _this.isEmpty = false;
             }
@@ -646,35 +625,14 @@ var Contacts = (function () {
                 _this.httpService.nativeService.showToast(resJson.Data || "无数据");
             }
         });
-        // let data={action: "Yh_List", page: 1, size: 1};
-        // this.httpService.postFormData("ashx/MailList.ashx/Yh_List",data)
-        //   .map(Response => Response.json())
-        //   .subscribe(list => {
-        //     this.items = list;
-        //   });
-        // 假数据
-        // this.items = [
-        //        {"ui_id":"admin","ui_desc":"系统管理员","ui_sex":"男","ui_lx":"总部","zwmc":"员工"},
-        //        {"ui_id":"admin1","ui_desc":"系统管理员1","ui_sex":"男","ui_lx":"总部","zwmc":"员工1"},
-        //        {"ui_id":"admin2","ui_desc":"系统管理员2","ui_sex":"男","ui_lx":"总部","zwmc":"员工2"},
-        //        {"ui_id":"admin3","ui_desc":"系统管理员3","ui_sex":"男","ui_lx":"总部","zwmc":"员工3"},
-        //     ];
     };
-    Contacts.prototype.getList = function (data) {
-        data = !!data ? data : { page: 1, size: 1 };
-        return this.httpService.postFormData("ashx/UserSheet.ashx", data).map(function (Response) { return Response.json(); });
-    };
-    Contacts.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Contacts');
-    };
-    Contacts.prototype.search = function (refresher) {
+    Contacts.prototype.search = function (refresher, key) {
         var _this = this;
-        console.log(this.searchKey);
         this.initializeItems();
-        return this.httpService.postFormData("ashx/UserSheet.ashx", { "Name": this.searchKey })
+        return this.httpService.postFormData("ashx/UserSheet.ashx", { "Name": key })
             .map(function (Response) { return Response.json(); })
             .subscribe(function (resJson) {
-            if (resJson.Result) {
+            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
                 _this.items = resJson.Data;
                 _this.isEmpty = false;
             }
@@ -691,20 +649,19 @@ var Contacts = (function () {
     };
     Contacts = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contacts',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts.html"*/`<!--\n\n  Generated template for the Contacts page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>通讯录</ion-title>\n\n    </ion-navbar>\n\n    <ion-searchbar color="dark" type="text" placeholder="请输入姓名" [(ngModel)]="searchKey" [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event)">\n\n    </ion-searchbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n\n        </ion-refresher-content>\n\n    </ion-refresher>\n\n    <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->\n\n    <ion-list inset style="margin:16px 0;">\n\n        <button ion-item *ngFor="let contact of items" [navPush]="nxPage" [navParams]="{id:contact.Uid}">\n\n            <span>{{contact.Name}}({{contact.Uid}})</span>\n\n            <p>{{contact.Dept}}&emsp;{{contact.Duty}}</p>\n\n        </button>\n\n    </ion-list>\n\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n\n        <div padding>未搜索到信息！！！</div>\n\n        <img src="assets/img/face/face2.png" height="100">\n\n    </div>\n\n    <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->\n\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n\n    </ion-infinite-scroll>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts.html"*/,
+            selector: 'page-contacts',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts.html"*/`<!--\n\n  Generated template for the Contacts page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>通讯录</ion-title>\n\n    </ion-navbar>\n\n    <ion-searchbar color="dark" type="text" placeholder="请输入姓名" [(ngModel)]="searchKey" [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event, searchKey)">\n\n    </ion-searchbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n\n        </ion-refresher-content>\n\n    </ion-refresher>\n\n    <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->\n\n    <ion-list inset style="margin:16px 0;">\n\n        <button ion-item *ngFor="let contact of items" [navPush]="nxPage" [navParams]="{id:contact.Uid}">\n\n            <span>{{contact.Name}}({{contact.Uid}})</span>\n\n            <p>{{contact.Dept}}&emsp;{{contact.Duty}}</p>\n\n        </button>\n\n    </ion-list>\n\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n\n        <div padding>未搜索到信息！！！</div>\n\n        <img src="assets/img/face/face2.png" height="100">\n\n    </div>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]) === "function" && _c || Object])
     ], Contacts);
     return Contacts;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=contacts.js.map
 
 /***/ }),
 
-/***/ 766:
+/***/ 772:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -769,7 +726,7 @@ var Home = (function () {
     ], Home.prototype, "nav", void 0);
     Home = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\home.html"*/`<!--\n  Generated template for the Home page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <button ion-button icon-only menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>首页</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-grid>\n        <ion-row class="index-row">\n            <ion-col col-4 *ngFor="let p of appPages" (click)="openPage(p)">\n                <div [class]="p.color">\n                    <ion-icon [name]="p.icon"></ion-icon>{{p.title}}\n                </div>\n            </ion-col>\n        </ion-row>\n    </ion-grid>\n    <ion-list>\n        <ion-list-header><ion-icon name="ios-car" color="primary">会议管理</ion-icon></ion-list-header>\n        <ion-grid>\n            <ion-row>\n                <ion-col col-3 col-xl-2 (click)="open(\'MeetingPage\')">我的会议</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'MeetingMinutesPage\')">会议记录</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'MeetingSearchPage\')">会议查询</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'MeetingRoomPage\')">会议室管理</ion-col>\n            </ion-row>\n        </ion-grid>\n        \n        <ion-list-header><ion-icon name="ios-car" color="primary">车辆管理</ion-icon></ion-list-header>\n        <ion-grid>\n            <ion-row>\n                <ion-col col-3 col-xl-2 (click)="open(\'CarPage\')">车辆档案</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'DriverPage\')">司机档案</ion-col>\n            </ion-row>\n        </ion-grid>\n        \n        <!-- <ion-list-header><ion-icon name="ios-car" color="primary">人事管理</ion-icon></ion-list-header>\n        <ion-grid>\n            <ion-row>\n                <ion-col col-3 col-xl-2 (click)="open(\'CarPage\')">培训维护</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'DriverPage\')">培训查询</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'DriverPage\')">合同维护</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'DriverPage\')">合同续签</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'DriverPage\')">合同查询</ion-col>\n            </ion-row>\n        </ion-grid> -->\n\n    </ion-list>\n\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\home.html"*/,
+            selector: 'page-home',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\home.html"*/`<!--\n  Generated template for the Home page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <button ion-button icon-only menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>首页</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-grid>\n        <ion-row class="index-row">\n            <ion-col col-4 *ngFor="let p of appPages" (click)="openPage(p)">\n                <div [class]="p.color">\n                    <ion-icon [name]="p.icon"></ion-icon>{{p.title}}\n                </div>\n            </ion-col>\n        </ion-row>\n    </ion-grid>\n    <ion-list>\n        <ion-list-header><ion-icon name="ios-car" color="primary">会议管理</ion-icon></ion-list-header>\n        <ion-grid>\n            <ion-row>\n                <ion-col col-3 col-xl-2 (click)="open(\'MeetingPage\')">我的会议</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'MeetingMinutesPage\')">会议记录</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'MeetingSearchPage\')">会议查询</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'MeetingRoomPage\')">会议室管理</ion-col>\n            </ion-row>\n        </ion-grid>\n        \n        <ion-list-header><ion-icon name="ios-car" color="primary">车辆管理</ion-icon></ion-list-header>\n        <ion-grid>\n            <ion-row>\n                <ion-col col-3 col-xl-2 (click)="open(\'CarPage\')">车辆档案</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'DriverPage\')">司机档案</ion-col>\n            </ion-row>\n        </ion-grid>\n        \n        <ion-list-header><ion-icon name="ios-car" color="primary">人事管理</ion-icon></ion-list-header>\n        <ion-grid>\n            <ion-row>\n                <ion-col col-3 col-xl-2 (click)="open(\'TrainingMaintenancePage\')">培训维护</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'DriverPage\')">培训查询</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'DriverPage\')">合同维护</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'DriverPage\')">合同续签</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'DriverPage\')">合同查询</ion-col>\n            </ion-row>\n        </ion-grid>\n\n    </ion-list>\n\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\home.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
     ], Home);

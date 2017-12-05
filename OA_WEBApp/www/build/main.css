@@ -51472,6 +51472,94 @@ ion-navbar.toolbar {
   color: #387ef5;
 }
 
+.popover-ios .popover-content {
+  min-width: 200px;
+  width: 70%;
+}
+
+.checkpeople-popover ion-item {
+  font-size: 1.4rem;
+}
+
+.checkpeople-popover ion-item ion-label span {
+  font-size: 1.2rem;
+  color: #888;
+}
+
+.affix {
+  border-top: 1px dotted #dee;
+}
+
+.affix ion-col {
+  position: relative;
+}
+
+.affix ion-col > div {
+  padding: 10px 5px;
+  text-align: center;
+  background-color: #dee;
+  height: 130px;
+}
+
+.affix ion-col > div .affix-icon {
+  font-size: 34px;
+  color: gray;
+}
+
+.affix ion-col > div .affix-dismiss {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-block;
+}
+
+.affix ion-col > div .affix-open {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-block;
+}
+
+.affix ion-col .affix-add {
+  padding-top: 26px;
+  font-size: 50px;
+  color: #888;
+  text-align: center;
+}
+
+.select-box {
+  position: relative;
+  width: 100%;
+}
+
+.select-box > div {
+  height: 34px;
+  line-height: 34px;
+  margin-bottom: 6px;
+  text-align: center;
+  /*color: #fff;
+    background: orangered;*/
+  border: 1px solid #ddd;
+  border-radius: 15px;
+}
+
+.select-box > select {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 34px;
+  opacity: 0;
+}
+
+.select-box input {
+  width: 100%;
+  padding-left: 10px;
+  margin-bottom: 6px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
 page-account .top {
   position: relative;
   padding: 20px 0 10px;
@@ -51694,6 +51782,10 @@ page-newwork-detail .button-ios {
   width: 100%;
 }
 
+page-training-maintenance .small {
+  font-size: 1rem;
+}
+
 page-login ion-content {
   background: rgba(0, 0, 0, 0.4) url(../assets/img/login-bg.jpg) no-repeat;
   background-size: cover;
@@ -51807,86 +51899,6 @@ page-mail-write .mail-content {
   right: 0;
 }
 
-.popover-ios .popover-content {
-  width: 70%;
-}
-
-.checkpeople-popover ion-item {
-  font-size: 1.4rem;
-}
-
-.checkpeople-popover ion-item ion-label span {
-  font-size: 1.2rem;
-  color: #888;
-}
-
-.affix {
-  border-top: 1px dotted #dee;
-}
-
-.affix ion-col {
-  position: relative;
-}
-
-.affix ion-col > div {
-  padding: 10px 5px;
-  text-align: center;
-  background-color: #dee;
-  height: 130px;
-}
-
-.affix ion-col > div .affix-icon {
-  font-size: 34px;
-  color: gray;
-}
-
-.affix ion-col > div .affix-dismiss {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  display: inline-block;
-}
-
-.affix ion-col .affix-add {
-  padding-top: 26px;
-  font-size: 50px;
-  color: #888;
-  text-align: center;
-}
-
-.select-box {
-  position: relative;
-  width: 100%;
-}
-
-.select-box > div {
-  height: 34px;
-  line-height: 34px;
-  margin-bottom: 6px;
-  text-align: center;
-  /*color: #fff;
-    background: orangered;*/
-  border: 1px solid #ddd;
-  border-radius: 15px;
-}
-
-.select-box > select {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 34px;
-  opacity: 0;
-}
-
-.select-box input {
-  width: 100%;
-  padding-left: 10px;
-  margin-bottom: 6px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-}
-
 page-message .subbox {
   padding: 5px;
   border-bottom: 1px solid #ddd;
@@ -51906,28 +51918,28 @@ page-message-read .message-content div.mydiv {
 }
 
 page-message-read .message-reply {
-  width: 100%;
-  border-top: 1px solid #699df7;
-}
-
-page-message-read .message-reply > div {
-  width: 100%;
-  padding-right: 60px;
-}
-
-page-message-read .message-reply > div textarea {
-  width: 100%;
-  height: 54px;
-  padding: 2px 10px;
-  border: none;
-  border-right: 1px solid #99bdfa;
-}
-
-page-message-read .message-reply > div button {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   position: absolute;
-  right: 2px;
-  bottom: 7px;
-  height: 40px;
+  bottom: 0;
+  padding-left: 5px;
+  width: 100%;
+  border-top: 2px solid #699df7;
+}
+
+page-message-read .message-reply textarea.text-input-ios {
+  border-right: 1px solid #99bdfa;
+  margin-right: 0;
+}
+
+page-message-read .message-reply button {
+  width: 4rem;
+  margin-right: 8px;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
 }
 
 page-message-read-out .message-content {

@@ -1,11 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavParams, Platform } from 'ionic-angular';
-
-// import { Home } from '../home/home';
-// import { Mail } from '../mail/mail';
-// import { MessagePage } from '../message/message';
-// import { AnnouncementPage } from '../announcement/announcement';
-// import { Account } from '../account/account';
 import { Tabs } from "ionic-angular";
 import { BackButtonService } from "../../services/backButtonService";
 @IonicPage()

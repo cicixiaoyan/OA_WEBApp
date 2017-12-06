@@ -1,6 +1,6 @@
 webpackJsonp([7],{
 
-/***/ 737:
+/***/ 747:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,8 +8,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessageReadPageModule", function() { return MessageReadPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_read__ = __webpack_require__(789);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messageService__ = __webpack_require__(748);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_read__ = __webpack_require__(809);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messageService__ = __webpack_require__(758);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -44,7 +44,7 @@ var MessageReadPageModule = (function () {
 
 /***/ }),
 
-/***/ 748:
+/***/ 758:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -101,24 +101,23 @@ var MessageService = (function () {
     };
     MessageService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
     ], MessageService);
     return MessageService;
-    var _a;
 }());
 
 //# sourceMappingURL=messageService.js.map
 
 /***/ }),
 
-/***/ 789:
+/***/ 809:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MessageReadPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__messageService__ = __webpack_require__(748);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__messageService__ = __webpack_require__(758);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(45);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -167,10 +166,12 @@ var MessageReadPage = (function () {
             selector: 'page-message-read',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-read\message-read.html"*/`<!--\n\n  Generated template for the MessageReadPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>消息详情</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n        \n\n<ion-content>\n\n        <ion-list>\n\n            <ion-item>\n\n                <ion-label>发送人&emsp;</ion-label>\n\n                <ion-input type="text" readonly="true"  [(ngModel)]="messageDetail.Name" [ngModelOptions]="{standalone: true}" placeholder="发送人"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label>发送时间</ion-label>\n\n                <ion-input type="text" readonly="true" [(ngModel)]="messageDetail.SendDate" [ngModelOptions]="{standalone: true}"  placeholder="发送时间未知"></ion-input>\n\n            </ion-item>\n\n            \n\n            <ion-item>\n\n                <ion-textarea type="text" rows="4" readonly="true" [(ngModel)]="messageDetail.Content" [ngModelOptions]="{standalone: true}"  placeholder="信息内容"></ion-textarea>\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n        <!-- <div class="message-reply">\n\n            <ion-textarea  type="text" formControlName="writeContent"  placeholder="回复: "></ion-textarea>\n\n            <button ion-button small color="positive" type="submit">发送</button>\n\n        </div> -->\n\n</ion-content>\n\n<!-- <ion-footer >\n\n\n\n</ion-footer> -->\n\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-read\message-read.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_2__messageService__["a" /* MessageService */]]
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__messageService__["a" /* MessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__messageService__["a" /* MessageService */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__messageService__["a" /* MessageService */]])
     ], MessageReadPage);
     return MessageReadPage;
-    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=message-read.js.map

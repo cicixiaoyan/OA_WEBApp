@@ -1,14 +1,14 @@
 webpackJsonp([37],{
 
-/***/ 705:
+/***/ 730:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactsModule", function() { return ContactsModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StaffFileMaintenanceWorkExperiencePageModule", function() { return StaffFileMaintenanceWorkExperiencePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts__ = __webpack_require__(756);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience__ = __webpack_require__(792);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,37 +18,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ContactsModule = (function () {
-    function ContactsModule() {
+var StaffFileMaintenanceWorkExperiencePageModule = (function () {
+    function StaffFileMaintenanceWorkExperiencePageModule() {
     }
-    ContactsModule = __decorate([
+    StaffFileMaintenanceWorkExperiencePageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */],
+                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience__["a" /* StaffFileMaintenanceWorkExperience */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience__["a" /* StaffFileMaintenanceWorkExperience */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */]
-            ]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience__["a" /* StaffFileMaintenanceWorkExperience */]]
         })
-    ], ContactsModule);
-    return ContactsModule;
+    ], StaffFileMaintenanceWorkExperiencePageModule);
+    return StaffFileMaintenanceWorkExperiencePageModule;
 }());
 
-//# sourceMappingURL=contacts.module.js.map
+//# sourceMappingURL=staff-file-maintenance-work-experience.module.js.map
 
 /***/ }),
 
-/***/ 756:
+/***/ 792:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Contacts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StaffFileMaintenanceWorkExperience; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -60,80 +57,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
-// import { ContactsDetail } from './contacts-detail/contacts-detail';
 /**
- * Generated class for the Contacts page.
+ * Generated class for the StaffFileMaintenanceWorkExperiencePage page.
  *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
  */
-var Contacts = (function () {
-    function Contacts(navCtrl, navParams, httpService) {
+var StaffFileMaintenanceWorkExperience = (function () {
+    function StaffFileMaintenanceWorkExperience(navCtrl, navParams, modalCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.httpService = httpService;
-        this.searchKey = "";
-        this.nxPage = "ContactsDetail";
-        this.moredata = true;
-        this.isEmpty = false;
-        this.initializeItems();
+        this.modalCtrl = modalCtrl;
     }
-    Contacts.prototype.doRefresh = function (refresher) {
-        this.initializeItems();
-        setTimeout(function () {
-            console.log('数据加载完成');
-            refresher.complete();
-        }, 2000);
+    StaffFileMaintenanceWorkExperience.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad StaffFileMaintenanceWorkExperiencePage');
     };
-    Contacts.prototype.initializeItems = function () {
-        var _this = this;
-        this.httpService.postFormData("ashx/UserSheet.ashx", { "Name": this.searchKey })
-            .map(function (Response) { return Response.json(); })
-            .subscribe(function (resJson) {
-            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
-                _this.items = resJson.Data;
-                _this.isEmpty = false;
-            }
-            else {
-                _this.isEmpty = true;
-                _this.moredata = false;
-                _this.httpService.nativeService.showToast(resJson.Data || "无数据");
-            }
+    StaffFileMaintenanceWorkExperience.prototype.add = function () {
+        var modal = this.modalCtrl.create("StaffFileMaintenanceWorkExperienceAdd");
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            data && console.log(data);
         });
     };
-    Contacts.prototype.search = function (refresher, key) {
-        var _this = this;
-        this.initializeItems();
-        return this.httpService.postFormData("ashx/UserSheet.ashx", { "Name": key })
-            .map(function (Response) { return Response.json(); })
-            .subscribe(function (resJson) {
-            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
-                _this.items = resJson.Data;
-                _this.isEmpty = false;
-            }
-            else {
-                _this.items = [];
-                _this.isEmpty = true;
-                _this.moredata = false;
-            }
-        });
-        // setTimeout(() => {
-        //   console.log('数据加载完成');
-        //   refresher.complete();
-        // }, 2000);
-    };
-    Contacts = __decorate([
+    StaffFileMaintenanceWorkExperience = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contacts',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts.html"*/`<!--\n\n  Generated template for the Contacts page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>通讯录</ion-title>\n\n    </ion-navbar>\n\n    <ion-searchbar color="dark" type="text" placeholder="请输入姓名" [(ngModel)]="searchKey" [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event, searchKey)">\n\n    </ion-searchbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n\n        </ion-refresher-content>\n\n    </ion-refresher>\n\n    <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->\n\n    <ion-list inset style="margin:16px 0;">\n\n        <button ion-item *ngFor="let contact of items" [navPush]="nxPage" [navParams]="{id:contact.Uid}">\n\n            <span>{{contact.Name}}({{contact.Uid}})</span>\n\n            <p>{{contact.Dept}}&emsp;{{contact.Duty}}</p>\n\n        </button>\n\n    </ion-list>\n\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n\n        <div padding>未搜索到信息！！！</div>\n\n        <img src="assets/img/face/face2.png" height="100">\n\n    </div>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts.html"*/,
+            selector: 'page-staff-file-maintenance-work-experience',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience.html"*/`<!--\n  Generated template for the StaffFileMaintenanceWorkExperiencePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>工作经历</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-list>\n        <ion-item-sliding>\n          <ion-item  *ngFor="let item of list"  (click)="doRead(item.Id)">\n            <h3>2017-12-18~2017-12-04</h3>\n            <h2>工商管理</h2>\n            <p>我是工作单位我是工作</p>\n          </ion-item>\n          <ion-item-options side="right">\n            <button ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>\n          </ion-item-options>\n        </ion-item-sliding>\n      </ion-list>\n      <div text-center>\n          <button (click)="add()" icon-left ion-button color="secondary" small outline round><ion-icon name="home"></ion-icon>添加</button>\n      </div>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]) === "function" && _c || Object])
-    ], Contacts);
-    return Contacts;
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */]) === "function" && _c || Object])
+    ], StaffFileMaintenanceWorkExperience);
+    return StaffFileMaintenanceWorkExperience;
     var _a, _b, _c;
 }());
 
-//# sourceMappingURL=contacts.js.map
+//# sourceMappingURL=staff-file-maintenance-work-experience.js.map
 
 /***/ })
 

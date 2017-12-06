@@ -51560,6 +51560,15 @@ ion-navbar.toolbar {
   border: 1px solid #ddd;
 }
 
+.light-bg {
+  background: #fff;
+}
+
+.optional {
+  color: #ffc900;
+  font-size: 1rem;
+}
+
 page-account .top {
   position: relative;
   padding: 20px 0 10px;
@@ -51780,6 +51789,59 @@ page-newwork-detail .item-select ion-select .select-text {
 page-newwork-detail .button-ios {
   padding: 0 .4em;
   width: 100%;
+}
+
+page-staff-file-maintenance ion-avatar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background: #488aff;
+  border-radius: 50%;
+  color: #fff;
+}
+
+page-staff-file-maintenance ion-avatar span {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  text-align: center;
+}
+
+page-staff-file-maintenance-basic-imfornation .item-input ion-label {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+page-staff-file-maintenance-basic-imfornation .list-header-ios {
+  border-top: 1px solid #ddd;
+  background-color: #fff;
+  font-size: 1.4rem;
+}
+
+page-staff-file-maintenance-basic-imfornation .list-ios {
+  margin-bottom: 16px;
+}
+
+page-staff-file-maintenance-basic-imfornation .hide {
+  display: none;
+}
+
+page-staff-file-maintenance-basic-imfornation .button-full-ios {
+  margin: 0;
+}
+
+page-staff-file-maintenance-basic-imfornation .photo {
+  width: 120px;
+  height: 120px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  margin-bottom: 10px;
 }
 
 page-training-maintenance .small {

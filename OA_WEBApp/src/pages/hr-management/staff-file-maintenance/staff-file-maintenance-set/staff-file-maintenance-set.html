@@ -1,0 +1,11 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>员工档案维护</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-tabs  #myTabs tabsPlacement="top" name="staff-file-maintemance-tab">
+    <ion-tab [root]="tab1Root" tabTitle="基本资料" tabIcon="ios-home"></ion-tab>
+    <ion-tab [root]="tab2Root" tabTitle="工作经历" tabIcon="ios-mail"></ion-tab>
+    <ion-tab [root]="tab3Root" tabTitle="社会关系" tabIcon="ios-notifications"></ion-tab>
+    <ion-tab [root]="tab4Root" tabTitle="教育经历" tabIcon="ios-settings"></ion-tab>
+</ion-tabs>

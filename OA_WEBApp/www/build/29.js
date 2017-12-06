@@ -1,14 +1,15 @@
 webpackJsonp([29],{
 
-/***/ 710:
+/***/ 711:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountModule", function() { return AccountModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnnouncementDetailPageModule", function() { return AnnouncementDetailPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__account__ = __webpack_require__(762);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcement_detail__ = __webpack_require__(773);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(761);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,58 +19,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AccountModule = (function () {
-    function AccountModule() {
+
+var AnnouncementDetailPageModule = (function () {
+    function AnnouncementDetailPageModule() {
     }
-    AccountModule = __decorate([
+    AnnouncementDetailPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__account__["a" /* Account */],
+                __WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__account__["a" /* Account */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__account__["a" /* Account */],
-            ]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_3__announcementService__["a" /* AnnouncementService */]]
         })
-    ], AccountModule);
-    return AccountModule;
+    ], AnnouncementDetailPageModule);
+    return AnnouncementDetailPageModule;
 }());
 
-//# sourceMappingURL=account.module.js.map
+//# sourceMappingURL=announcement-detail.module.js.map
 
 /***/ }),
 
-/***/ 752:
+/***/ 761:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserInfo; });
-var UserInfo = (function () {
-    function UserInfo() {
-    }
-    return UserInfo;
-}());
-
-//# sourceMappingURL=UserInfo.js.map
-
-/***/ }),
-
-/***/ 762:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Account; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__model_UserInfo__ = __webpack_require__(752);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_GlobalData__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_NativeService__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_FileService__ = __webpack_require__(160);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_Constants__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_Utils__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(364);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -82,155 +63,126 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import { AccountEdit } from '../account/account-edit/account-edit';
-// import { AccountPasswordedit } from '../account/account-passwordedit/account-passwordedit';
-// import { AboutusPage } from '../account/aboutus/aboutus';
+/**
+ * Generated class for the AnnouncementPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var AnnouncementService = (function () {
+    function AnnouncementService(httpService) {
+        this.httpService = httpService;
+        this.announcementStatus = {
+            "enter": "录入",
+            "published": "已发布",
+            "all": "0" // 全部
+        };
+    }
+    AnnouncementService.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Login');
+    };
+    AnnouncementService.prototype.getList = function (param) {
+        return this.httpService.postFormData("ashx/Announcement.ashx", param)
+            .map(function (res) { return res.json(); });
+    };
+    AnnouncementService.prototype.detail = function (key) {
+        return this.httpService.postFormData("ashx/AnnouncementDetail.ashx", { "attKey": key })
+            .map(function (res) { return res.json(); });
+    };
+    AnnouncementService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
+    ], AnnouncementService);
+    return AnnouncementService;
+}());
 
+//# sourceMappingURL=announcementService.js.map
 
-// import { LoginPage } from "../login/login";
+/***/ }),
+
+/***/ 773:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementDetailPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(761);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_FileService__ = __webpack_require__(160);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 
 
 
 /**
- * Generated class for the Account page.
+ * Generated class for the AnnouncementDetailPage page.
  *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
  */
-var Account = (function () {
-    function Account(navCtrl, navParams, storage, globalData, events, modalCtrl, actionSheetCtrl, fileService, nativeService) {
-        var _this = this;
+var AnnouncementDetailPage = (function () {
+    function AnnouncementDetailPage(navCtrl, navParams, announcementService, fileService, nativeService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.storage = storage;
-        this.globalData = globalData;
-        this.events = events;
-        this.modalCtrl = modalCtrl;
-        this.actionSheetCtrl = actionSheetCtrl;
+        this.announcementService = announcementService;
         this.fileService = fileService;
         this.nativeService = nativeService;
-        this.userInfo = new __WEBPACK_IMPORTED_MODULE_3__model_UserInfo__["a" /* UserInfo */]();
-        this.isChange = false; // 头像是否改变标识
-        this.userInfo.photo = "assets/img/ionic.png";
-        this.storage.get('UserInfo').then(function (userInfo) {
-            if (userInfo) {
-                userInfo.photo = userInfo.photo ? userInfo.photo : _this.userInfo.photo;
-                _this.userInfo = userInfo;
-                _this.events.publish('user:login', userInfo);
-                _this.globalData.Uid = userInfo.Uid;
-                _this.globalData.Name = userInfo.Name;
-                // this.globalData.token = userInfo.token;
+        this.myDiv = '';
+        this.hasAtt = false;
+        this.downloaded = false;
+        this.item = this.navParams.get('item');
+        this.initializeItems();
+    }
+    AnnouncementDetailPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad AnnouncementDetailPage');
+    };
+    AnnouncementDetailPage.prototype.initializeItems = function () {
+        var _this = this;
+        this.announcementService.detail(this.item.AnnouncementAtt).subscribe(function (resJson) {
+            if (resJson.Result && resJson !== []) {
+                _this.attObj = resJson.Data[0];
+                _this.hasAtt = true;
             }
             else {
-                var modal = _this.modalCtrl.create("LoginPage");
-                modal.present();
-                modal.onDidDismiss(function (data) {
-                    data && console.log(data);
-                });
+                _this.attObj = {};
             }
         });
-    }
-    Account.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Account');
+        this.myDiv = this.item.AnnouncementTitle;
     };
-    Account.prototype.edit = function () {
-        this.navCtrl.push("AccountEdit");
-    };
-    Account.prototype.getAboutus = function () {
-        this.navCtrl.push("AboutusPage");
-    };
-    Account.prototype.pwdEdit = function () {
-        // this.navCtrl.push(AccountPasswordedit);
-        var modal = this.modalCtrl.create("AccountPasswordedit");
-        modal.present();
-    };
-    Account.prototype.changePhoto = function () {
+    AnnouncementDetailPage.prototype.download = function (path, name) {
         var _this = this;
-        var options = {
-            targetWidth: 400,
-            targetHeight: 400
-        };
-        var actionSheet = this.actionSheetCtrl.create({
-            title: '修改头像',
-            buttons: [
-                {
-                    text: '从相册选择图片',
-                    handler: function () {
-                        _this.nativeService.getPictureByPhotoLibrary(options).subscribe(function (imageBase64) {
-                            _this.getPictureSuccess(imageBase64);
-                        });
-                    }
-                }, {
-                    text: '拍照',
-                    handler: function () {
-                        _this.nativeService.getPictureByCamera(options).subscribe(function (imageBase64) {
-                            _this.getPictureSuccess(imageBase64);
-                        });
-                    }
-                }, {
-                    text: '取消',
-                    role: 'cancel',
-                    handler: function () {
-                        console.log('取消修改');
-                    }
-                }
-            ]
-        });
-        actionSheet.present();
-    };
-    Account.prototype.getPictureSuccess = function (imageBase64) {
-        this.isChange = true;
-        this.imageBase64 = imageBase64;
-        this.userInfo.photo = 'data:image/jpg;base64,' + imageBase64;
-    };
-    Account.prototype.save = function () {
-        var _this = this;
-        if (this.isChange) {
-            var fileObj = { 'base64': this.imageBase64 };
-            this.fileService.uploadByBase64(fileObj).subscribe(function (result) {
-                if (result) {
-                    var origPath_1 = __WEBPACK_IMPORTED_MODULE_7__providers_Constants__["e" /* FILE_SERVE_URL */] + result[0].origPath;
-                    _this.storage.get('UserInfo').then(function (userInfo) {
-                        userInfo.photo = origPath_1;
-                        _this.storage.set('UserInfo', userInfo);
-                    });
-                    // this.viewCtrl.dismiss({avatarPath: origPath});
-                    // 这里需要保存avatar字段到用户表
-                }
+        var target = path.split("/").pop();
+        var url = "http://192.168.0.49:789/Attach/flow/Work/201111302315473908417.pdf";
+        this.fileService.download1(url, target).subscribe(function (path) {
+            _this.downloaded = true;
+            _this.fileService.openFile(path).subscribe(function () {
             });
-        }
-        else {
-            this.userInfo.photo = this.storage.get('UserInfo')["photo"];
-        }
-    };
-    Account.prototype.signOut = function () {
-        this.storage.clear(); // 清除缓存
-        __WEBPACK_IMPORTED_MODULE_8__providers_Utils__["a" /* Utils */].sessionStorageClear(); // 清除数据缓存
-        var modal = this.modalCtrl.create("LoginPage");
-        modal.present();
-        modal.onDidDismiss(function (data) {
-            data && console.log(data);
         });
     };
-    Account = __decorate([
+    AnnouncementDetailPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-account',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account.html"*/`<!--\n  Generated template for the Account page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>个人中心</ion-title>\n        <ion-buttons end *ngIf="isChange">\n            <button ion-button icon-only (click)="save()">\n                保存\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n    <div class="top">\n        <div class="top-bg"></div>\n        <div>\n            <img (click)="changePhoto()" [src]="userInfo.photo" alt="photo" height="60" />\n            <h5><span class="positive">♂</span>&nbsp;<span class="positive">{{userInfo.Name}}</span></h5>\n            <div class="row row-no-padding">\n                <div class="col col-50" style="border-right: 1px solid;">\n                    职位：{{userInfo.Duty || "无"}}\n                </div>\n                <div class="col col-50">\n                    入职时间：{{(userInfo.InDate|date:"yyyy-MM-dd") || "未设置"}}\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class="imformation">\n        <ion-scroll scrollY="true" class="tab-content">\n            <ion-list>\n                <ion-item>\n                    <ion-icon name=\'md-map\' color="positive" item-left></ion-icon>\n                    公司\n                    <ion-note item-right>{{userInfo.Company}}</ion-note>\n                </ion-item>\n                <ion-item>\n                    <ion-icon name=\'ios-analytics\' color="energized" item-left></ion-icon>\n                    部门\n                    <ion-note item-right>{{userInfo.Dept || "无"}}</ion-note>\n                </ion-item>\n                <ion-item>\n                    <ion-icon name=\'ios-phone-portrait\' color="calm" item-left></ion-icon>\n                    手机号\n                    <ion-note item-right>{{userInfo.Mobile || "无"}}</ion-note>\n                </ion-item>\n                <!-- <ion-item>\n                    <ion-icon name=\'md-mail\' color="calm" item-left></ion-icon>\n                    邮箱\n                    <ion-note item-right>{{userInfo.ui_mail}}</ion-note>\n                </ion-item> -->\n            </ion-list>\n\n            <ion-list>\n                <ion-item (click)="getAboutus()">\n                    <ion-icon name=\'ios-at-outline\' color="assertive" item-left></ion-icon>\n                    关于我们\n                    <ion-icon name=\'ios-arrow-forward\' item-right></ion-icon>\n                </ion-item>\n            </ion-list>\n\n            <ion-list>\n                <ion-item (click)="pwdEdit()">\n                    <ion-icon name=\'ios-unlock\' color="assertive" item-left></ion-icon>\n                    修改密码\n                    <ion-icon name=\'ios-arrow-forward\' item-right></ion-icon>\n                </ion-item>\n                <ion-item (click)="edit()">\n                    <ion-icon name=\'md-create\' color="balanced" item-left></ion-icon>\n                    修改资料\n                    <ion-icon name=\'ios-arrow-forward\' item-right></ion-icon>\n                </ion-item>\n            </ion-list>\n\n\n\n            <div class="padding">\n                <button ion-button block color="assertive" (click)="signOut()">退出登录</button>\n            </div>\n\n        </ion-scroll>\n    </div>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account.html"*/,
+            selector: 'page-announcement-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/`<!--\n  Generated template for the AnnouncementDetailPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  \n      <ion-navbar>\n          <ion-title>公告详情</ion-title>\n      </ion-navbar>\n  </ion-header>\n  \n  \n  <ion-content>\n      <div class="detail-header">\n          <div class="detail-title"><span color="calm">[{{item.AnnouncementType}}]</span>{{item.AnnouncementTitle}}</div>\n          <p>\n              {{item.AnnouncementPublishPerson}}\n              <span class="right">{{item.AnnouncementPublishDate|date : "yyyy年MM月dd日 hh时mm分"}}</span>\n          </p>\n      </div>\n      <div class="content">\n          <ion-scroll class="detail-content" scrollY="true" id="noticeContent">\n              <div padding>开始时间：{{item.AnnouncementStarDate|date : "yyyy年MM月dd日 hh时mm分"}}\n                  <br/>结束时间：{{item.AnnouncementEndDate|date : "yyyy年MM月dd日 hh时mm分"}}</div>\n              <div padding-horizontal [innerHTML]="myDiv"></div>\n              <div class="affix" *ngIf="hasAtt">\n                  <ion-grid>\n                      <ion-row align-items-center>\n                          <ion-col col-6 col-lg-4>\n                              <div (click)="download(attObj.AttNewName, attObj.AttName)">\n                                  <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                  <p>{{attObj.AttName}}</p>\n                                  <!-- <p color="gray">大小未知</p> -->\n                                  <ion-icon *ngIf="!downloaded" class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n                                  <ion-icon *ngIf="downloaded" class="affix-open" name="ios-folder-open-outline"></ion-icon>\n                              </div>\n                          </ion-col>\n                      </ion-row>\n                  </ion-grid>\n              </div>\n          </ion-scroll>\n      </div>\n  \n  \n  </ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Events */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */],
-            __WEBPACK_IMPORTED_MODULE_6__providers_FileService__["a" /* FileService */],
-            __WEBPACK_IMPORTED_MODULE_5__providers_NativeService__["a" /* NativeService */]])
-    ], Account);
-    return Account;
+            __WEBPACK_IMPORTED_MODULE_3__announcementService__["a" /* AnnouncementService */],
+            __WEBPACK_IMPORTED_MODULE_4__providers_FileService__["a" /* FileService */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */]])
+    ], AnnouncementDetailPage);
+    return AnnouncementDetailPage;
 }());
 
-//# sourceMappingURL=account.js.map
+//# sourceMappingURL=announcement-detail.js.map
 
 /***/ })
 

@@ -1,15 +1,15 @@
 webpackJsonp([28],{
 
-/***/ 711:
+/***/ 712:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnnouncementDetailPageModule", function() { return AnnouncementDetailPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnnouncementPageModule", function() { return AnnouncementPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcement_detail__ = __webpack_require__(763);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(751);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcement__ = __webpack_require__(774);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(761);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,29 +20,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AnnouncementDetailPageModule = (function () {
-    function AnnouncementDetailPageModule() {
+var AnnouncementPageModule = (function () {
+    function AnnouncementPageModule() {
     }
-    AnnouncementDetailPageModule = __decorate([
+    AnnouncementPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */],
+                __WEBPACK_IMPORTED_MODULE_2__announcement__["a" /* AnnouncementPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__announcement__["a" /* AnnouncementPage */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */]],
             providers: [__WEBPACK_IMPORTED_MODULE_3__announcementService__["a" /* AnnouncementService */]]
         })
-    ], AnnouncementDetailPageModule);
-    return AnnouncementDetailPageModule;
+    ], AnnouncementPageModule);
+    return AnnouncementPageModule;
 }());
 
-//# sourceMappingURL=announcement-detail.module.js.map
+//# sourceMappingURL=announcement.module.js.map
 
 /***/ }),
 
-/***/ 751:
+/***/ 761:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -100,16 +99,14 @@ var AnnouncementService = (function () {
 
 /***/ }),
 
-/***/ 763:
+/***/ 774:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementDetailPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(751);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_FileService__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcementService__ = __webpack_require__(761);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -121,68 +118,110 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
-
+// import { AnnouncementDetailPage } from './announcement-detail/announcement-detail';
 
 /**
- * Generated class for the AnnouncementDetailPage page.
+ * Generated class for the AnnouncementPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var AnnouncementDetailPage = (function () {
-    function AnnouncementDetailPage(navCtrl, navParams, announcementService, fileService, nativeService) {
+var AnnouncementPage = (function () {
+    function AnnouncementPage(navCtrl, navParams, announcementService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.announcementService = announcementService;
-        this.fileService = fileService;
-        this.nativeService = nativeService;
-        this.myDiv = '';
-        this.hasAtt = false;
-        this.downloaded = false;
-        this.item = this.navParams.get('item');
+        this.nxPage = "AnnouncementDetailPage";
+        this.checkBtn = { "enter": true, "published": false, "all": false };
+        //   page: number = 1;
+        //   size: number = 1;
+        this.moredata = true; // 是否能加载更多
+        this.isEmpty = false; // 是否无数据
+        this.items = [];
+        this.data = {
+            "UserId": this.announcementService.httpService.globalData.Uid,
+            "PageIndex": 0,
+            "PageSize": 10,
+            "Status": this.announcementService.announcementStatus["enter"]
+        };
         this.initializeItems();
     }
-    AnnouncementDetailPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad AnnouncementDetailPage');
+    AnnouncementPage.prototype.initializeItems = function () {
+        this.getList();
     };
-    AnnouncementDetailPage.prototype.initializeItems = function () {
+    AnnouncementPage.prototype.doRefresh = function (refresher) {
+        this.data.PageIndex = 0;
+        this.initializeItems();
+        setTimeout(function () {
+            console.log('数据加载完成');
+            refresher.complete();
+        }, 1000);
+    };
+    AnnouncementPage.prototype.doInfinite = function () {
+        if (this.moredata) {
+            this.data.PageIndex++;
+            this.getList();
+        }
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve();
+            }, 500);
+        });
+    };
+    // 选择录入、已发布、全部
+    AnnouncementPage.prototype.checkRead = function (name) {
+        if (name === void 0) { name = "enter"; }
+        this.data.PageIndex = 0;
+        this.items = [];
+        this.checkBtn = { "enter": false, "published": false, "all": false };
+        this.checkBtn[name] = true;
+        if (name === "enter") {
+            // 参数设置
+            this.data.Status = this.announcementService.announcementStatus["enter"];
+        }
+        else if (name === "published") {
+            // 参数设置
+            this.data.Status = this.announcementService.announcementStatus["published"];
+        }
+        else {
+            // 参数设置
+            this.data.Status = this.announcementService.announcementStatus["all"];
+        }
+        this.getList();
+    };
+    AnnouncementPage.prototype.getList = function () {
         var _this = this;
-        this.announcementService.detail(this.item.AnnouncementAtt).subscribe(function (resJson) {
-            if (resJson.Result && resJson !== []) {
-                _this.attObj = resJson.Data[0];
-                _this.hasAtt = true;
+        this.announcementService.getList(this.data).subscribe(function (resJson) {
+            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
+                _this.moredata = true;
+                _this.isEmpty = false;
+                var list = resJson.Data;
+                _this.items = _this.items.concat(list);
             }
             else {
-                _this.attObj = {};
+                _this.moredata = false;
+                _this.isEmpty = _this.data.PageIndex == 0 ? true : false;
             }
         });
-        this.myDiv = this.item.AnnouncementTitle;
+        //   return this.httpService.postFormData("ashx/Notice.ashx/noticeall", data).map(Response => Response.json());
     };
-    AnnouncementDetailPage.prototype.download = function (path, name) {
-        var _this = this;
-        var target = path.split("/").pop();
-        var url = "http://192.168.0.49:789/Attach/flow/Work/201111302315473908417.pdf";
-        this.fileService.download1(url, target).subscribe(function (path) {
-            _this.downloaded = true;
-            _this.fileService.openFile(path).subscribe(function () {
-            });
-        });
+    AnnouncementPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Notice');
     };
-    AnnouncementDetailPage = __decorate([
+    AnnouncementPage.prototype.itemSelected = function () {
+    };
+    AnnouncementPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-announcement-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/`<!--\n  Generated template for the AnnouncementDetailPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  \n      <ion-navbar>\n          <ion-title>公告详情</ion-title>\n      </ion-navbar>\n  </ion-header>\n  \n  \n  <ion-content>\n      <div class="detail-header">\n          <div class="detail-title"><span color="calm">[{{item.AnnouncementType}}]</span>{{item.AnnouncementTitle}}</div>\n          <p>\n              {{item.AnnouncementPublishPerson}}\n              <span class="right">{{item.AnnouncementPublishDate|date : "yyyy年MM月dd日 hh时mm分"}}</span>\n          </p>\n      </div>\n      <div class="content">\n          <ion-scroll class="detail-content" scrollY="true" id="noticeContent">\n              <div padding>开始时间：{{item.AnnouncementStarDate|date : "yyyy年MM月dd日 hh时mm分"}}\n                  <br/>结束时间：{{item.AnnouncementEndDate|date : "yyyy年MM月dd日 hh时mm分"}}</div>\n              <div padding-horizontal [innerHTML]="myDiv"></div>\n              <div class="affix" *ngIf="hasAtt">\n                  <ion-grid>\n                      <ion-row align-items-center>\n                          <ion-col col-6 col-lg-4>\n                              <div (click)="download(attObj.AttNewName, attObj.AttName)">\n                                  <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                  <p>{{attObj.AttName}}</p>\n                                  <!-- <p color="gray">大小未知</p> -->\n                                  <ion-icon *ngIf="!downloaded" class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n                                  <ion-icon *ngIf="downloaded" class="affix-open" name="ios-folder-open-outline"></ion-icon>\n                              </div>\n                          </ion-col>\n                      </ion-row>\n                  </ion-grid>\n              </div>\n          </ion-scroll>\n      </div>\n  \n  \n  </ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/,
+            selector: 'page-announcement',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement.html"*/`<!--\n  Generated template for the AnnouncementPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n      <ion-title>公告管理</ion-title>\n  </ion-navbar>\n\n  <div class="subbox">\n    <div >\n        <button ion-button small (click)="checkRead(\'enter\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.enter}">录入</button>\n        <button ion-button small (click)="checkRead(\'published\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.published}">已发布</button>\n        <button ion-button small (click)="checkRead(\'all\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.all}">全部</button>\n    </div>\n  </div>\n  <!-- <ion-searchbar color="dark" type="text" placeholder="请输入关键字" [(ngModel)]="searchKey"\n   [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event)"></ion-searchbar> -->\n</ion-header>\n\n<ion-content>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n      </ion-refresher-content>\n  </ion-refresher>\n  <ion-list inset style="margin:16px 0;">\n      <button ion-item *ngFor="let item of items" [navPush]="nxPage" [navParams]="{item:item}">\n          <span>[{{item.AnnouncementType}}]{{item.AnnouncementTitle}}</span>\n          <p>{{item.AnnouncementPublishPerson}}&emsp;{{item.AnnouncementPublishDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n      </button>\n  </ion-list>\n  <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n      <div padding>暂无公告！！！</div>\n      <img src="assets/img/face/face2.png" height="100">\n  </div>\n  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3__announcementService__["a" /* AnnouncementService */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_FileService__["a" /* FileService */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */]])
-    ], AnnouncementDetailPage);
-    return AnnouncementDetailPage;
+            __WEBPACK_IMPORTED_MODULE_2__announcementService__["a" /* AnnouncementService */]])
+    ], AnnouncementPage);
+    return AnnouncementPage;
 }());
 
-//# sourceMappingURL=announcement-detail.js.map
+//# sourceMappingURL=announcement.js.map
 
 /***/ })
 

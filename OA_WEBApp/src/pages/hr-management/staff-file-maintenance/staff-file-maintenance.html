@@ -1,0 +1,41 @@
+<!--
+  Generated template for the StaffFileMaintenancePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>员工档案维护</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-list>
+      <ion-item-sliding>
+        <ion-item  *ngFor="let item of list"  (click)="doRead(item.Id)">
+          <ion-avatar item-start><span>{{item.JobNumber}}</span></ion-avatar>
+          <h2>{{item.Name}}•{{item.Sex}}&emsp;<span float-right>{{item.Edu}}</span></h2>
+          <h3>部门：{{item.Dept}}</h3>
+          <p>{{item.Indate}}入职</p>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    <empty *ngIf="isEmpty"></empty>
+    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <ion-fab bottom right>
+        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+</ion-content>

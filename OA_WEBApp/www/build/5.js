@@ -1,6 +1,6 @@
 webpackJsonp([5],{
 
-/***/ 739:
+/***/ 749:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,8 +8,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessagePageModule", function() { return MessagePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message__ = __webpack_require__(791);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messageService__ = __webpack_require__(748);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message__ = __webpack_require__(811);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messageService__ = __webpack_require__(758);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -44,7 +44,7 @@ var MessagePageModule = (function () {
 
 /***/ }),
 
-/***/ 748:
+/***/ 758:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -101,17 +101,16 @@ var MessageService = (function () {
     };
     MessageService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
     ], MessageService);
     return MessageService;
-    var _a;
 }());
 
 //# sourceMappingURL=messageService.js.map
 
 /***/ }),
 
-/***/ 791:
+/***/ 811:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -119,7 +118,7 @@ var MessageService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messageService__ = __webpack_require__(748);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messageService__ = __webpack_require__(758);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -319,10 +318,13 @@ var MessagePage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-message',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message.html"*/`<!--\n\n  Generated template for the MessagePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-toolbar>\n\n        <ion-segment [(ngModel)]="box" (ngModelChange)="change()">\n\n            <ion-segment-button value="inbox">\n\n                收消息\n\n            </ion-segment-button>\n\n            <ion-segment-button value="outbox">\n\n                发消息\n\n            </ion-segment-button>\n\n        </ion-segment>\n\n\n\n    </ion-toolbar>\n\n\n\n    <!--\n\n      <ion-buttons ion-button icon-only end (click)="doWrite()">\n\n          <ion-icon name="ios-add-circle-outline"></ion-icon>\n\n      </ion-buttons>-->\n\n    <div [ngSwitch]="box" class="subbox">\n\n        <div *ngSwitchCase="\'inbox\'">\n\n            <button ion-button small (click)="checkRead(\'unread\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.unread}">未读</button>\n\n            <button ion-button small (click)="checkRead(\'read\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.read}">已读</button>\n\n        </div>\n\n\n\n        <div *ngSwitchCase="\'outbox\'">\n\n            <button ion-button small class="button-ios-light button-ios-calm">已发送</button>\n\n            <!-- <button ion-button small (click)="checkDraft(true)" class="button-ios-light" [ngClass]="{\'button-ios-calm\':isDraft}">未读</button> -->\n\n        </div>\n\n    </div>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content style="background: #f4f4f4;overflow: hidden;" overflow-scroll="true" class="has-header">\n\n    <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->\n\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n\n        </ion-refresher-content>\n\n    </ion-refresher>\n\n    <div [ngSwitch]="box">\n\n        <ion-list *ngSwitchCase="\'inbox\'">\n\n            <ion-item-sliding *ngFor="let message of inboxList;let i = index; trackBy: index" (click)="doRead(message)">\n\n                <ion-item>\n\n                    <ion-avatar item-left>\n\n                        <img src="assets/img/mike.png">\n\n                    </ion-avatar>\n\n                    <span style="color:#2196F3;" *ngIf="message.Status==\'0\'">●&nbsp;</span><span>{{message.Content}}</span>\n\n                    <p class="font-12">来至:{{message.Name}}&emsp;{{message.SendDate}}</p>\n\n                </ion-item>\n\n                <ion-item-options side="right">\n\n                    <button ion-button color="primary">\n\n                          <ion-icon name="md-trash"></ion-icon>删除\n\n                      </button>\n\n                </ion-item-options>\n\n            </ion-item-sliding>\n\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'outbox\'">\n\n            <ion-item-sliding *ngFor="let message of outboxList " (click)="doReadOutBox(message)">\n\n                <ion-item>\n\n                    <ion-avatar item-left>\n\n                        <img src="assets/img/mike.png">\n\n                    </ion-avatar>\n\n                    <span>{{message.Content}}</span>\n\n                    <p class="font-12">发至:{{message.Name}}&emsp;{{message.SendDate}}</p>\n\n                </ion-item>\n\n                <ion-item-options side="right">\n\n                    <button ion-button color="primary">\n\n                          <ion-icon name="md-trash"></ion-icon>删除\n\n                      </button>\n\n                </ion-item-options>\n\n            </ion-item-sliding>\n\n        </ion-list>\n\n    </div>\n\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n\n        <div padding>暂无消息数据！！！</div>\n\n        <img src="assets/img/face/face2.png" height="100">\n\n    </div>\n\n    <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->\n\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n\n    </ion-infinite-scroll>\n\n    <ion-fab bottom right>\n\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n\n    </ion-fab>\n\n\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__messageService__["a" /* MessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__messageService__["a" /* MessageService */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_3__messageService__["a" /* MessageService */]])
     ], MessagePage);
     return MessagePage;
-    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=message.js.map

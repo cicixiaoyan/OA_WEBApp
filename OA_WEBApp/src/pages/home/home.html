@@ -48,11 +48,11 @@
         <ion-list-header><ion-icon name="ios-car" color="primary">人事管理</ion-icon></ion-list-header>
         <ion-grid>
             <ion-row>
-                <ion-col col-3 col-xl-2 (click)="open('TrainingMaintenancePage')">培训维护</ion-col>
-                <ion-col col-3 col-xl-2 (click)="open('DriverPage')">培训查询</ion-col>
-                <ion-col col-3 col-xl-2 (click)="open('DriverPage')">合同维护</ion-col>
-                <ion-col col-3 col-xl-2 (click)="open('DriverPage')">合同续签</ion-col>
-                <ion-col col-3 col-xl-2 (click)="open('DriverPage')">合同查询</ion-col>
+                <ion-col  (click)="open('TrainingMaintenancePage')">培训维护</ion-col>
+                <ion-col  (click)="open('StaffFileMaintenance')">员工档案维护</ion-col>
+                <ion-col  (click)="open('StaffFileMaintenanceSet')">员工档案维护添加</ion-col>
+                <ion-col (click)="open('DriverPage')">合同续签</ion-col>
+                <ion-col  (click)="open('DriverPage')">合同查询</ion-col>
             </ion-row>
         </ion-grid>
 

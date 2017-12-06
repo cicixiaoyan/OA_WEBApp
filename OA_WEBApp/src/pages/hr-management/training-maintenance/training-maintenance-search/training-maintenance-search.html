@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>筛选</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <form [formGroup]="searchForm" (ngSubmit)="sent(searchForm.value)">
+        <ion-list>
+            <ion-item>
+                <ion-label floating>课程主题</ion-label>
+                <ion-input type="text" formControlName="Title"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>培训开始时间</ion-label>
+                <ion-datetime formControlName="StartDate" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>培训结束时间</ion-label>
+                <ion-datetime formControlName="EndDate" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>培训讲师</ion-label>
+                <ion-input type="text" formControlName="Instructor"></ion-input>
+            </ion-item>
+        </ion-list>
+        <div text-center>
+            <button ion-button color="energized" (click)="reset()" small outline>重置</button>
+            <button ion-button color="assertive" type="submit" small>搜索</button>
+        </div>
+    </form>
+</ion-content>

@@ -113,12 +113,12 @@ export class Mail {
     }
 
     doWrite() {
-        let modal = this.modalCtrl.create("MailWrite");
-        modal.present();
-        modal.onDidDismiss(data => {
-            data && console.log(data);
-        });
-        // this.navCtrl.push(MailWrite);
+        // let modal = this.modalCtrl.create("MailWrite");
+        // modal.present();
+        // modal.onDidDismiss(data => {
+        //     data && console.log(data);
+        // });
+        this.navCtrl.push("MailWrite");
     }
 
     doRefresh(refresher: Refresher) {

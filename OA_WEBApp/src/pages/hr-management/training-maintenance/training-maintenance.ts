@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Refresher, ModalController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, PopoverController ,
+  Refresher, ViewController } from 'ionic-angular';
 import { TrainingMaintenanceService } from './training-maintenance_service';
-
 /**
  * Generated class for the TrainingMaintenancePage page.
  *
@@ -14,16 +14,15 @@ import { TrainingMaintenanceService } from './training-maintenance_service';
   selector: 'page-training-maintenance',
   templateUrl: 'training-maintenance.html',
 })
-export class TrainingMaintenancePage {
-
+export class TrainingMaintenancePage  {
   list = [];
   data: any;
   moredata: boolean = true;
   isEmpty: boolean = false;
-
+  search: any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private modalCtrl: ModalController,
+              private popoverCtrl: PopoverController,
               private trainingMaintenanceService: TrainingMaintenanceService) {
       this.data = {
         "uid": this.trainingMaintenanceService.httpService.globalData.Uid,
@@ -31,11 +30,30 @@ export class TrainingMaintenancePage {
         "PageSize": 8
       };
       this.getList(this.data);
+
   }
 
 
   ionViewDidLoad() {
 
+  }
+
+  presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create("TrainingMaintenanceSearch", {"search": this.search});
+    popover.present({
+      ev: myEvent
+    });
+    popover.onDidDismiss(search => {
+      console.log(search);
+      if (search){
+        this.search = search.search;
+        let data = search.search;
+        data.uid =  this.trainingMaintenanceService.httpService.globalData.Uid;
+        data.PageIndex = 0;
+        data.PageSize = 8;
+        this.getList(data);
+      }
+    });
   }
 
   doRead(Params) {
@@ -111,3 +129,5 @@ export class TrainingMaintenancePage {
   }
 
 }
+
+

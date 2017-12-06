@@ -1,0 +1,10 @@
+diff a/OA_WEBApp/src/pages/mail/mail-write/mail-write.ts b/OA_WEBApp/src/pages/mail/mail-write/mail-write.ts	(rejected hunks)
+@@ -10,8 +10,6 @@
+ import { FileChooser } from '@ionic-native/file-chooser';
+ import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+-import { Storage } from '@ionic/storage';
+-
+ import { MailService } from "../mailService";
+ import { Utils } from '../../../providers/Utils';
+ 

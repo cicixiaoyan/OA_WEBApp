@@ -1,0 +1,30 @@
+page-staff-file-maintenance-basic-imfornation {
+    .item-input ion-label{
+        align-self: center;
+    }
+    .list-header-ios{
+        border-top: 1px solid #ddd;
+        background-color: #fff;
+        font-size: 1.4rem;
+    }
+
+    .list-ios{
+        margin-bottom: 16px;
+    }
+
+    .hide{
+        display: none;
+    }
+    .button-full-ios{
+        margin: 0;
+    }
+
+    .photo{
+        width: 120px;
+        height: 120px;
+        border: 1px solid #ddd;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+}
+

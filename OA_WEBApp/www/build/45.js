@@ -1,14 +1,14 @@
 webpackJsonp([45],{
 
-/***/ 722:
+/***/ 734:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NewworkModule", function() { return NewworkModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StaffFileMaintenanceSetPageModule", function() { return StaffFileMaintenanceSetPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__newwork__ = __webpack_require__(784);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_set__ = __webpack_require__(803);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,34 +18,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var NewworkModule = (function () {
-    function NewworkModule() {
+var StaffFileMaintenanceSetPageModule = (function () {
+    function StaffFileMaintenanceSetPageModule() {
     }
-    NewworkModule = __decorate([
+    StaffFileMaintenanceSetPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__newwork__["a" /* Newwork */],
+                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_set__["a" /* StaffFileMaintenanceSet */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__newwork__["a" /* Newwork */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_set__["a" /* StaffFileMaintenanceSet */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__newwork__["a" /* Newwork */]
-            ]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_set__["a" /* StaffFileMaintenanceSet */]]
         })
-    ], NewworkModule);
-    return NewworkModule;
+    ], StaffFileMaintenanceSetPageModule);
+    return StaffFileMaintenanceSetPageModule;
 }());
 
-//# sourceMappingURL=newwork.module.js.map
+//# sourceMappingURL=staff-file-maintenance-set.module.js.map
 
 /***/ }),
 
-/***/ 784:
+/***/ 803:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Newwork; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StaffFileMaintenanceSet; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -59,50 +57,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import { NewworkDetail } from './newwork-detail/newwork-detail';
 /**
- * Generated class for the Newwork page.
+ * Generated class for the StaffFileMaintenanceSetPage page.
  *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
  */
-var Newwork = (function () {
-    function Newwork(navCtrl, navParams) {
+var StaffFileMaintenanceSet = (function () {
+    function StaffFileMaintenanceSet(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.items = [{
-                wfName: "测试工作流1",
-                wfNo: "2",
-                FK_fid: "1234" // 表单id
-            },
-            {
-                wfName: "测试工作流2",
-                wfNo: "2",
-                FK_fid: "1234" // 表单id
-            },
-            {
-                wfName: "测试工作流3",
-                wfNo: "2",
-                FK_fid: "1234" // 表单id
-            }
-        ];
+        this.rootParams = {
+            "readOnly": false
+        };
+        this.tab1Root = "StaffFileMaintenanceBasicImfornation";
+        this.tab2Root = "StaffFileMaintenanceWorkExperience";
+        this.tab3Root = "StaffFileMaintenanceSocialRelationship";
+        this.tab4Root = "StaffFileMaintenanceEducation";
+        this.rootParams.readOnly = this.navParams.get("readOnly") ? true : false;
+        console.log(this.rootParams.readOnly, this.navParams.get("readOnly"));
     }
-    Newwork.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Newwork');
+    StaffFileMaintenanceSet.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad StaffFileMaintenanceSetPage');
     };
-    Newwork.prototype.addNew = function (id) {
-        this.navCtrl.push("NewworkDetail", { id: id });
-    };
-    Newwork = __decorate([
+    StaffFileMaintenanceSet = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-newwork',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\newwork\newwork.html"*/`<!--\n  Generated template for the Newwork page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>新建事项</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-list inset style="margin:16px 0;">\n        <button ion-item *ngFor="let item of items" (click)="addNew(item.FK_fid)">\n    {{item.wfName}}\n  </button>\n    </ion-list>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\newwork\newwork.html"*/,
+            selector: 'page-staff-file-maintenance-set',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-set\staff-file-maintenance-set.html"*/`<ion-header>\n    <ion-navbar>\n        <ion-title>员工档案维护</ion-title>\n    </ion-navbar>\n</ion-header>\n<ion-tabs  #myTabs tabsPlacement="top" name="staff-file-maintemance-tab">\n    <ion-tab [root]="tab1Root" [rootParams]="rootParams" tabTitle="基本资料" tabIcon="ios-cafe"></ion-tab>\n    <ion-tab [root]="tab2Root" [rootParams]="rootParams" tabTitle="工作经历" tabIcon="ios-code-working"></ion-tab>\n    <ion-tab [root]="tab3Root" [rootParams]="rootParams" tabTitle="社会关系" tabIcon="ios-contacts"></ion-tab>\n    <ion-tab [root]="tab4Root" [rootParams]="rootParams" tabTitle="教育经历" tabIcon="ios-book"></ion-tab>\n</ion-tabs>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-set\staff-file-maintenance-set.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
-    ], Newwork);
-    return Newwork;
+    ], StaffFileMaintenanceSet);
+    return StaffFileMaintenanceSet;
 }());
 
-//# sourceMappingURL=newwork.js.map
+//# sourceMappingURL=staff-file-maintenance-set.js.map
 
 /***/ })
 

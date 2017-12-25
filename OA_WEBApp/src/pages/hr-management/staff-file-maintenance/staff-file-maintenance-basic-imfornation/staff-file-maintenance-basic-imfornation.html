@@ -15,7 +15,7 @@
 
 <ion-content style="background: #f4f4f4;">
 
-    <form [formGroup]="baseForm" (ngSubmit)="sent(baseForm.value)">
+    <form [formGroup]="baseForm" (ngSubmit)="sent(baseForm.value)"  [ngClass]="{'form-readonly': readOnly}">
         <div padding text-center class="light-bg">
           <img class="photo"  src="./assets/img/logo.png" alt="" round>
           <div>
@@ -24,15 +24,15 @@
            
           </div>
         </div>
-        <ion-list>
-            <ion-list-header (click)="shrink('one')">基本信息</ion-list-header>
-            <div [ngClass]="{'hide': hideOne}">
+        <ion-list  [ngClass]="{'collapsed': hideOne, 'expanded': !hideOne}">
+            <ion-list-header (click)="shrink('one')">基本信息<ion-icon  float-right name="arrow-forward"></ion-icon></ion-list-header>
+            <div>
                 <ion-item>
-                    <ion-label style="align-self:center;">工号</ion-label>
+                    <ion-label>工号</ion-label>
                     <ion-input text-right formControlName="JobNumber" placeholder="输入工号"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label style="align-self:center;">姓名</ion-label>
+                    <ion-label>姓名</ion-label>
                     <ion-input text-right formControlName="Name" placeholder="输入姓名"></ion-input>
                 </ion-item>
                 <ion-item>
@@ -91,9 +91,9 @@
             </div>
         </ion-list>
 
-        <ion-list>
-            <ion-list-header (click)="shrink('two')">个人情况</ion-list-header>
-            <div [ngClass]="{'hide': hideTwo}">
+        <ion-list  [ngClass]="{'collapsed': hideTwo, 'expanded': !hideTwo}">
+            <ion-list-header (click)="shrink('two')">个人情况<ion-icon float-right name="arrow-forward"></ion-icon></ion-list-header>
+            <div>
                 <ion-item>
                     <ion-label>第一学历</ion-label>
                     <ion-select formControlName="FirstEdu" cancelText="取消" okText="确定" placeholder="请选择">
@@ -175,9 +175,9 @@
             </div>
         </ion-list>
 
-        <ion-list>
-            <ion-list-header (click)="shrink('three')">单位信息</ion-list-header>
-            <div [ngClass]="{'hide': hideThree}">
+        <ion-list [ngClass]="{'collapsed': hideThree, 'expanded': !hideThree}">
+            <ion-list-header (click)="shrink('three')">单位信息<ion-icon float-right name="arrow-forward"></ion-icon></ion-list-header>
+            <div >
                 <ion-item>
                     <ion-label>所属部门</ion-label>
                     <ion-select formControlName="Dept" cancelText="取消" okText="确定" placeholder="请选择">
@@ -238,15 +238,15 @@
                     <ion-input text-right formControlName="ProvidentFundAccount" placeholder="输入公积金账号"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label>备注<span class="optional">（选填）</span></ion-label>
-                    <ion-textarea text-right formControlName="Remarks" placeholder="输入备注信息"></ion-textarea>
+                    <ion-label stacked>备注<span class="optional">（选填）</span></ion-label>
+                    <ion-textarea  formControlName="Remarks" placeholder="输入备注信息"></ion-textarea>
                 </ion-item>
             </div>
         </ion-list>
 
-        <ion-list>
-            <ion-list-header (click)="shrink('four')">附件上传</ion-list-header>
-            <div [ngClass]="{'hide': hideFour}">
+        <ion-list  [ngClass]="{'collapsed': hideFour, 'expanded': !hideFour}">
+            <ion-list-header (click)="shrink('four')">附件上传<ion-icon float-right name="arrow-forward"></ion-icon></ion-list-header>
+            <div>
                 <ion-item>
                     <h2>毕业证.jpg</h2>
                     <button ion-button clear item-end>删除</button>

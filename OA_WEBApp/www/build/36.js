@@ -1,15 +1,14 @@
 webpackJsonp([36],{
 
-/***/ 731:
+/***/ 710:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StaffFileMaintenancePageModule", function() { return StaffFileMaintenancePageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountEditModule", function() { return AccountEditModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance__ = __webpack_require__(793);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_components_module__ = __webpack_require__(365);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__account_edit__ = __webpack_require__(779);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -19,36 +18,55 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-
-var StaffFileMaintenancePageModule = (function () {
-    function StaffFileMaintenancePageModule() {
+var AccountEditModule = (function () {
+    function AccountEditModule() {
     }
-    StaffFileMaintenancePageModule = __decorate([
+    AccountEditModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance__["a" /* StaffFileMaintenance */],
+                __WEBPACK_IMPORTED_MODULE_2__account_edit__["a" /* AccountEdit */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance__["a" /* StaffFileMaintenance */]),
-                __WEBPACK_IMPORTED_MODULE_3__components_components_module__["a" /* ComponentsModule */]
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__account_edit__["a" /* AccountEdit */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance__["a" /* StaffFileMaintenance */]]
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__account_edit__["a" /* AccountEdit */]
+            ]
         })
-    ], StaffFileMaintenancePageModule);
-    return StaffFileMaintenancePageModule;
+    ], AccountEditModule);
+    return AccountEditModule;
 }());
 
-//# sourceMappingURL=staff-file-maintenance.module.js.map
+//# sourceMappingURL=account-edit.module.js.map
 
 /***/ }),
 
-/***/ 793:
+/***/ 771:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StaffFileMaintenance; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserInfo; });
+var UserInfo = (function () {
+    function UserInfo() {
+    }
+    return UserInfo;
+}());
+
+//# sourceMappingURL=UserInfo.js.map
+
+/***/ }),
+
+/***/ 779:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountEdit; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_UserInfo__ = __webpack_require__(771);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -60,118 +78,129 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
+
+// import { LoginPage } from "../../login/login";
+
 /**
- * Generated class for the StaffFileMaintenancePage page.
+ * Generated class for the AccountEdit page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
  */
-var StaffFileMaintenance = (function () {
-    function StaffFileMaintenance(navCtrl, navParams, modalCtrl) {
+var AccountEdit = (function () {
+    function AccountEdit(navCtrl, navParams, actionSheetCtrl, storage, httpService, modalCtrl, formBuilder) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.actionSheetCtrl = actionSheetCtrl;
+        this.storage = storage;
+        this.httpService = httpService;
         this.modalCtrl = modalCtrl;
-        this.list = [];
-        this.checkBtn = {
-            Drafting: false,
-            Delivered: true,
-            Approved: false,
-            HasBeenReturned: false,
-            completed: false,
-        };
-        this.moredata = true;
-        this.isEmpty = false;
-        this.getList(this.data);
+        this.formBuilder = formBuilder;
+        this.userInfo = new __WEBPACK_IMPORTED_MODULE_2__model_UserInfo__["a" /* UserInfo */]();
+        this.submitted = false;
+        this.editForm = this.formBuilder.group({
+            InDate: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(4)]],
+            Sex: ['男', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(2)]],
+            BirthDate: ['', []],
+            Mobile: [null, [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(11), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(11)]],
+            Mail: [null, [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].email]],
+            WorkPhone: [null, [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(11)]],
+            InlinePhone: [null, [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(11)]]
+        });
+        this.initialize();
     }
-    StaffFileMaintenance.prototype.ionViewDidLoad = function () {
+    AccountEdit.prototype.initialize = function () {
+        var _this = this;
+        this.storage.get("UserInfo").then(function (UserInfo) {
+            if (UserInfo) {
+                _this.userInfo = UserInfo;
+            }
+            else {
+                var modal = _this.modalCtrl.create("LoginPage");
+                modal.present();
+                modal.onDidDismiss(function (data) {
+                    data && console.log(data);
+                });
+            }
+        });
+        // this.userInfo.BirthDate = "1990-02-19";
+        // this.userInfo.InDate = "1990-02-19";
     };
-    StaffFileMaintenance.prototype.doRead = function (Params) {
-        this.navCtrl.push("StaffFileMaintenanceSet", { "Id": Params, "edit": true });
-        // let modal = this.modalCtrl.create("MeetingEditPage");
-        // modal.present();
-        // modal.onDidDismiss(data => {
-        //     data && console.log(data);
-        // });
+    AccountEdit.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad AccountEdit');
     };
-    StaffFileMaintenance.prototype.doWrite = function () {
-        this.navCtrl.push("StaffFileMaintenanceSet");
+    // 性别选择
+    AccountEdit.prototype.checkSex = function () {
+        var _this = this;
+        var actionSheet = this.actionSheetCtrl.create({
+            title: '选择性别',
+            buttons: [
+                {
+                    text: '男',
+                    role: 'destructive',
+                    handler: function () {
+                        _this.userInfo.Sex = "男";
+                    }
+                }, {
+                    text: '女',
+                    handler: function () {
+                        _this.userInfo.Sex = "女";
+                    }
+                }, {
+                    text: '取消',
+                    role: 'cancel',
+                    handler: function () {
+                        console.log('已取消');
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
     };
-    StaffFileMaintenance.prototype.doRefresh = function (refresher) {
-        this.list = [];
-        this.data.PageIndex = 0;
-        this.getList(this.data);
-        setTimeout(function () {
-            refresher.complete();
-        }, 1000);
-    };
-    StaffFileMaintenance.prototype.doInfinite = function () {
-        if (this.moredata) {
-            this.data.PageIndex++;
-            this.getList(this.data);
-        }
-        return new Promise(function (resolve) {
-            setTimeout(function () {
-                resolve();
-            }, 500);
+    AccountEdit.prototype.edit = function (value) {
+        var _this = this;
+        // this.submitted = true;
+        // console.log(value);
+        value.Uid = this.httpService.globalData.Uid;
+        this.httpService.postFormData("ashx/UserPersonMod.ashx", value)
+            .map(function (responce) { return responce.json(); })
+            .subscribe(function (Resjson) {
+            if (Resjson.Result) {
+                _this.httpService.nativeService.showToast("修改资料成功", 800);
+                _this.httpService.postFormData("ashx/UserInfo.ashx", { id: _this.httpService.globalData.Uid })
+                    .map(function (responce) { return responce.json(); }).subscribe(function (res) {
+                    if (res.Result) {
+                        _this.storage.set("UserInfo", res.Date);
+                        _this.userInfo = res.Data;
+                    }
+                });
+            }
+            else {
+                _this.httpService.nativeService.showToast("修改资料失败： " + Resjson.Data, 800);
+            }
         });
     };
-    StaffFileMaintenance.prototype.getList = function (data) {
-        this.list = [
-            {
-                "Id": "70",
-                "Name": "刘展志",
-                "Birth": "2012-12-12",
-                "Dept": "检验科",
-                "Indate": "2017-07-03",
-                "Edu": "本科",
-                "Sex": "男",
-                "JobNumber": "070",
-            },
-            {
-                "Id": "69",
-                "Name": "姚美英",
-                "Birth": "2012-12-12",
-                "Dept": "其他",
-                "Indate": "2017-07-03",
-                "Edu": "高中",
-                "Sex": "女",
-                "JobNumber": "069",
-            },
-            {
-                "Id": "68",
-                "Name": "卿明月",
-                "Birth": "2012-12-12",
-                "Dept": "重大传染病防控科",
-                "Indate": "2017-07-03",
-                "Edu": "高中",
-                "Sex": "女",
-                "JobNumber": "068",
-            },
-        ];
-        // this.meetingService.getList(data).subscribe((resJson) => {
-        //   if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
-        //     this.moredata = true;
-        //     this.isEmpty = false;
-        //     let list = resJson.Data;
-        //     this.list = [...this.list, ...list];
-        //   }else{
-        //     this.moredata = false;
-        //     this.isEmpty = (this.data.PageIndex == 0) ? true : false;
-        //   }
-        // });
+    AccountEdit.prototype.return = function () {
+        this.navCtrl.pop();
     };
-    StaffFileMaintenance = __decorate([
+    AccountEdit = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-staff-file-maintenance',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance.html"*/`<!--\n  Generated template for the StaffFileMaintenancePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>员工档案维护</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding>\n        <ion-item  *ngFor="let item of list"  (click)="doRead(item.Id)">\n          <ion-avatar item-start><span>{{item.JobNumber}}</span></ion-avatar>\n          <h2>{{item.Name}}•{{item.Sex}}&emsp;<span float-right>{{item.Edu}}</span></h2>\n          <h3>部门：{{item.Dept}}</h3>\n          <p>{{item.Indate}}入职</p>\n        </ion-item>\n        <ion-item-options side="right">\n          <button ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>\n        </ion-item-options>\n      </ion-item-sliding>\n    </ion-list>\n    <empty *ngIf="isEmpty"></empty>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance.html"*/,
+            selector: 'page-account-edit',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-edit\account-edit.html"*/`<!--\n\n  Generated template for the AccountEdit page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>修改资料</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <form [formGroup]="editForm" (ngSubmit)="edit(editForm.value)">\n\n        <ion-list>\n\n            <ion-item>\n\n                <ion-label stacked>编码</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Uid" [ngModelOptions]="{standalone: true}" placeholder="请输入编码" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>姓名</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Name" [ngModelOptions]="{standalone: true}" placeholder="请输入姓名" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>公司</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Company" [ngModelOptions]="{standalone: true}" placeholder="公司名称" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>部门</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Dept" [ngModelOptions]="{standalone: true}" placeholder="部门名称" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>职位</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Duty" [ngModelOptions]="{standalone: true}" placeholder="职位" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>入职时间</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.InDate" formControlName="InDate" placeholder="入职时间" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item (click)="checkSex()">\n\n                <ion-label stacked>性别</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Sex" formControlName="Sex" placeholder="性别"></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>出生日期</ion-label>\n\n                <ion-datetime [(ngModel)]="userInfo.BirthDate" placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="BirthDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label>移动电话</ion-label>\n\n                <ion-input type="number" [(ngModel)]="userInfo.Mobile" formControlName="Mobile" placeholder="移动电话"></ion-input>\n\n            </ion-item>\n\n            <div *ngIf="!editForm.controls.Mobile.valid && editForm.controls.Mobile.touched" class="validation-failed">请输入合法的电话号码</div>\n\n\n\n            <ion-item>\n\n                <ion-label>电子邮箱</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Mail" formControlName="Mail" placeholder="电子邮箱"></ion-input>\n\n            </ion-item>\n\n            <div *ngIf="!editForm.controls.Mail.valid && editForm.controls.Mail.touched" class="validation-failed">请输入正确的电子邮箱</div>\n\n\n\n            <ion-item>\n\n                <ion-label>办公电话</ion-label>\n\n                <ion-input type="number" [(ngModel)]="userInfo.WorkPhone" formControlName="WorkPhone" placeholder="办公电话"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label>内线电话</ion-label>\n\n                <ion-input type="number" [(ngModel)]="userInfo.InlinePhone" formControlName="InlinePhone" placeholder="内线电话"></ion-input>\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n        <div padding text-center>\n\n            <button ion-button type="submit" color="danger" [disabled]="editForm.valid">保存</button>\n\n            <button ion-button clear small navPop>取消修改</button>\n\n        </div>\n\n\n\n\n\n    </form>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-edit\account-edit.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */]])
-    ], StaffFileMaintenance);
-    return StaffFileMaintenance;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */],
+            __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_5__providers_HttpService__["a" /* HttpService */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]])
+    ], AccountEdit);
+    return AccountEdit;
 }());
 
-//# sourceMappingURL=staff-file-maintenance.js.map
+//# sourceMappingURL=account-edit.js.map
 
 /***/ })
 

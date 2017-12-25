@@ -1,15 +1,14 @@
-webpackJsonp([2],{
+webpackJsonp([2,42],{
 
-/***/ 752:
+/***/ 707:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SmsPageModule", function() { return SmsPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StaffFileMaintenanceWorkExperienceAddModule", function() { return StaffFileMaintenanceWorkExperienceAddModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sms__ = __webpack_require__(814);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smsService__ = __webpack_require__(760);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience_add__ = __webpack_require__(776);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -19,86 +18,79 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-
-var SmsPageModule = (function () {
-    function SmsPageModule() {
+var StaffFileMaintenanceWorkExperienceAddModule = (function () {
+    function StaffFileMaintenanceWorkExperienceAddModule() {
     }
-    SmsPageModule = __decorate([
+    StaffFileMaintenanceWorkExperienceAddModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__sms__["a" /* SmsPage */],
+                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience_add__["a" /* StaffFileMaintenanceWorkExperienceAdd */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__sms__["a" /* SmsPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience_add__["a" /* StaffFileMaintenanceWorkExperienceAdd */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__sms__["a" /* SmsPage */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__smsService__["a" /* SmsService */]]
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience_add__["a" /* StaffFileMaintenanceWorkExperienceAdd */]
+            ]
         })
-    ], SmsPageModule);
-    return SmsPageModule;
+    ], StaffFileMaintenanceWorkExperienceAddModule);
+    return StaffFileMaintenanceWorkExperienceAddModule;
 }());
 
-//# sourceMappingURL=sms.module.js.map
+//# sourceMappingURL=staff-file-maintenance-work-experience-add.module.js.map
 
 /***/ }),
 
-/***/ 760:
+/***/ 737:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SmsService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(364);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var SmsService = (function () {
-    function SmsService(httpService) {
-        this.httpService = httpService;
-        this.smsStatus = {
-            "sent": 1,
-            "toBeSent": 0,
-        };
-    }
-    SmsService.prototype.getList = function (param) {
-        // PageIndex, PageSize, UserId, Status
-        return this.httpService.postFormData("ashx/Smsls.ashx", param).map(function (res) { return res.json(); });
-    };
-    SmsService.prototype.write = function (param) {
-        // IsTimer, SendDate, UserId, Content, CellPhone
-        return this.httpService.postFormData("ashx/SmsAdd.ashx", param).map(function (res) { return res.json(); });
-    };
-    SmsService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], SmsService);
-    return SmsService;
-}());
-
-//# sourceMappingURL=smsService.js.map
-
-/***/ }),
-
-/***/ 814:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SmsPage; });
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StaffFileMaintenanceWorkExperiencePageModule", function() { return StaffFileMaintenanceWorkExperiencePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smsService__ = __webpack_require__(760);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience__ = __webpack_require__(806);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__staff_file_maintenance_work_experience_add_staff_file_maintenance_work_experience_add_module__ = __webpack_require__(707);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+var StaffFileMaintenanceWorkExperiencePageModule = (function () {
+    function StaffFileMaintenanceWorkExperiencePageModule() {
+    }
+    StaffFileMaintenanceWorkExperiencePageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience__["a" /* StaffFileMaintenanceWorkExperience */],
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience__["a" /* StaffFileMaintenanceWorkExperience */]),
+                __WEBPACK_IMPORTED_MODULE_3__staff_file_maintenance_work_experience_add_staff_file_maintenance_work_experience_add_module__["StaffFileMaintenanceWorkExperienceAddModule"]
+            ],
+            exports: [__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience__["a" /* StaffFileMaintenanceWorkExperience */]]
+        })
+    ], StaffFileMaintenanceWorkExperiencePageModule);
+    return StaffFileMaintenanceWorkExperiencePageModule;
+}());
+
+//# sourceMappingURL=staff-file-maintenance-work-experience.module.js.map
+
+/***/ }),
+
+/***/ 776:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StaffFileMaintenanceWorkExperienceAdd; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -111,141 +103,172 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import { SmsReadPage } from '../sms/sms-read/sms-read';
-// import { SmsWritePage } from '../sms/sms-write/sms-write';
-
+// import 'rxjs/add/operator/map';
+// import { Observable } from 'rxjs/Observable';
+// import { HttpService } from "../../../providers/HttpService";
 /**
- * Generated class for the SmsPage page.
+ * Generated class for the StaffFileMaintenanceWorkExperienceAddPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var SmsPage = (function () {
-    function SmsPage(navCtrl, navParams, globalData, modalCtrl, smsService) {
+var StaffFileMaintenanceWorkExperienceAdd = (function () {
+    function StaffFileMaintenanceWorkExperienceAdd(navCtrl, navParams, 
+        // private httpService: HttpService,
+        formBuilder, viewCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.globalData = globalData;
-        this.modalCtrl = modalCtrl;
-        this.smsService = smsService;
-        this.box = "inbox";
-        this.isSent = true; // 默认为已发送
-        this.isEmpty = false;
-        this.list = [];
-        this.moredata = true;
-        this.list = [];
-        this.data = {
-            "PageSize": 5,
-            "PageIndex": 0,
-            "Uid": this.globalData.Uid,
-            "Status": this.smsService.smsStatus["sent"],
-        };
-        this.initializeItems();
+        this.formBuilder = formBuilder;
+        this.viewCtrl = viewCtrl;
+        this.isShow = true;
+        this.readOnly = false;
+        this.readOnly = this.navParams.get("readOnly") ? true : false;
+        this.addForm = this.formBuilder.group({
+            StartDate: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            EndDate: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            Dept: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            Duty: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            Company: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(80)]],
+            Remarks: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(100)]],
+        });
     }
-    SmsPage.prototype.initializeItems = function () {
-        var _this = this;
-        this._getList(this.data);
-        setInterval(function () {
-            _this.getNewList(_this.data);
-        }, 50000);
+    StaffFileMaintenanceWorkExperienceAdd.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad StaffFileMaintenanceWorkExperienceAddPage');
     };
-    SmsPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Mail');
+    StaffFileMaintenanceWorkExperienceAdd.prototype.dismiss = function () {
+        this.viewCtrl.dismiss();
     };
-    SmsPage.prototype.checkRead = function (bol) {
-        if (bol === void 0) { bol = false; }
-        this.data.PageIndex = 0;
-        this.list = [];
-        if (bol) {
-            this.isSent = true;
-            this.data.Status = this.smsService.smsStatus["sent"];
-        }
-        else {
-            this.isSent = false;
-            this.data.Status = this.smsService.smsStatus["toBeSent"];
-        }
-        this._getList(this.data);
+    StaffFileMaintenanceWorkExperienceAdd.prototype.save = function (value) {
+        // 提交
+        // this.httpService.postFormData("", value)
+        // .map((res: Response) => res.json())
+        // .subscribe((resJson) => {
+        // });
     };
-    SmsPage.prototype.doRead = function (parma) {
-        this.navCtrl.push("SmsReadPage", { "Params": parma });
-    };
-    SmsPage.prototype.doWrite = function () {
-        var _this = this;
-        var modal = this.modalCtrl.create("SmsWritePage");
-        modal.present();
-        modal.onDidDismiss(function (data) {
-            if (data.isRefresh) {
-                _this.doRefresh();
-            }
-        });
-        // this.navCtrl.push(MailWrite);
-    };
-    SmsPage.prototype.doRefresh = function (refresher) {
-        console.log("加载更多");
-        // this.initializeItems();
-        this.moredata = true;
-        this.list = [];
-        this.data.PageIndex = 0;
-        this._getList(this.data);
-        setTimeout(function () {
-            console.log('数据加载完成');
-            refresher.complete();
-        }, 1000);
-    };
-    SmsPage.prototype.doInfinite = function () {
-        if (this.moredata) {
-            this.data.PageIndex++;
-            this._getList(this.data);
-        }
-        return new Promise(function (resolve) {
-            setTimeout(function () {
-                resolve();
-            }, 500);
-        });
-    };
-    SmsPage.prototype.getNewList = function (data) {
-        var _this = this;
-        data.PageIndex = 0;
-        this.smsService.getList(data).subscribe(function (list) {
-            if (list.Result == true) {
-                var arr = list.Data.filter(function (item) {
-                    return item.Id !== _this.list[0].Id;
-                });
-                if (arr !== []) {
-                    _this.list = _this.list.concat(arr);
-                }
-            }
-        });
-    };
-    SmsPage.prototype._getList = function (inboxData) {
-        var _this = this;
-        this.smsService.getList(inboxData).subscribe(function (resJson) {
-            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
-                var list = resJson.Data;
-                _this.list = _this.list.concat(list);
-            }
-            else {
-                _this.moredata = false;
-                if (_this.data.PageIndex === 0) {
-                    _this.smsService.httpService.nativeService.showToast(resJson.Data);
-                    _this.list = [];
-                }
-            }
-        });
-    };
-    SmsPage = __decorate([
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Boolean)
+    ], StaffFileMaintenanceWorkExperienceAdd.prototype, "isShow", void 0);
+    StaffFileMaintenanceWorkExperienceAdd = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-sms',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\sms\sms.html"*/`<!--\n  Generated template for the SmsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>短信</ion-title>\n  </ion-navbar>\n    <div class="subbox">\n        <div>\n            <button ion-button small (click)="checkRead(true)" class="button-ios-light" [ngClass]="{\'button-ios-calm\':isSent}">已发送</button>\n            <button ion-button small (click)="checkRead()" class="button-ios-light" [ngClass]="{\'button-ios-calm\':!isSent}">待发送</button>\n        </div>\n    </div>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n        <ion-item-sliding *ngFor="let sms of list" (click)="doRead(sms)">\n            <ion-item>\n                <!-- <ion-avatar item-left>\n                    <img src="assets/img/mike.png">\n                </ion-avatar> -->\n                <span style="color:#2196F3;" *ngIf="sms.Status==0">●&nbsp;</span><span>{{sms.SmsMsg}}</span>\n                <p class="font-12">发至:{{sms.AccessNumber}}&emsp;{{sms.SendDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n            </ion-item>\n            <ion-item-options side="right">\n                <button ion-button color="primary">\n                    <ion-icon name="md-trash"></ion-icon>删除\n                </button>\n            </ion-item-options>\n        </ion-item-sliding>\n    </ion-list>\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n        <div padding>暂无消息数据！！！</div>\n        <img src="assets/img/face/face2.png" height="100">\n    </div>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\sms\sms.html"*/,
+            selector: 'page-staff-file-maintenance-work-experience-add',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience-add\staff-file-maintenance-work-experience-add.html"*/`<!--\n  Generated template for the StaffFileMaintenanceWorkExperienceAddPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n      <ion-buttons start>\n          <button ion-button  (click)="dismiss()">返回</button>\n      </ion-buttons>\n    <ion-title>工作经历</ion-title>\n    <ion-buttons end>\n        <button ion-button  (click)="save(addForm.value)">保存</button>\n    </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="addForm" (ngSubmit)="save(addForm.value)"   [ngClass]="{\'form-readonly\': readOnly}">\n        <ion-list style="position:relative;">\n            <ion-item>\n                <ion-label>开始时间</ion-label>\n                <ion-datetime formControlName="StartDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n            <ion-item>\n                <ion-label>结束时间</ion-label>\n                <ion-datetime formControlName="EndDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n              </ion-item>\n            <ion-item>\n                <ion-label>部门</ion-label>\n                <ion-input text-right type="text" formControlName="Dept" placeholder="输入部门名称"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>职务</ion-label>\n                <ion-input text-right type="text" formControlName="Duty" placeholder="输入职务名称"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>工作单位</ion-label>\n                <ion-input text-right type="text" formControlName="Company" placeholder="输入工作单位"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>备注<span class="optional">（选填）</span></ion-label>\n                <ion-textarea text-right formControlName="Remarks" placeholder="请输入备注"></ion-textarea>\n            </ion-item>\n        </ion-list>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience-add\staff-file-maintenance-work-experience-add.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_3__smsService__["a" /* SmsService */]])
-    ], SmsPage);
-    return SmsPage;
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */]])
+    ], StaffFileMaintenanceWorkExperienceAdd);
+    return StaffFileMaintenanceWorkExperienceAdd;
 }());
 
-//# sourceMappingURL=sms.js.map
+//# sourceMappingURL=staff-file-maintenance-work-experience-add.js.map
+
+/***/ }),
+
+/***/ 806:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StaffFileMaintenanceWorkExperience; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Generated class for the StaffFileMaintenanceWorkExperiencePage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var StaffFileMaintenanceWorkExperience = (function () {
+    function StaffFileMaintenanceWorkExperience(navCtrl, navParams, modalCtrl) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.modalCtrl = modalCtrl;
+        this.list = [];
+        this.isShowAdd = true;
+        this.getList();
+    }
+    StaffFileMaintenanceWorkExperience.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad StaffFileMaintenanceWorkExperiencePage');
+    };
+    StaffFileMaintenanceWorkExperience.prototype.add = function () {
+        var modal = this.modalCtrl.create("StaffFileMaintenanceWorkExperienceAdd");
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            data && console.log(data);
+        });
+    };
+    StaffFileMaintenanceWorkExperience.prototype.doRead = function (id) {
+        var parma = {
+            "Id": id,
+            "readOnly": (this.navParams.get("readOnly") ? true : null)
+        };
+        var modal = this.modalCtrl.create("StaffFileMaintenanceWorkExperienceAdd", parma);
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            data && console.log(data);
+        });
+    };
+    StaffFileMaintenanceWorkExperience.prototype.getList = function () {
+        this.list = [
+            {
+                "Id": '1',
+                'StartDate': '2017-08-08',
+                'EndDate': '2017-08-08',
+                'Company': '青白江疾控预防',
+                'Dept': '部门1',
+                'Duty': '我是职务',
+                'Remarks': '我是备注'
+            },
+            {
+                "Id": '2',
+                'StartDate': '2017-08-08',
+                'EndDate': '2017-08-08',
+                'Company': '青白江疾控预防',
+                'Dept': '部门1',
+                'Duty': '我是职务',
+                'Remarks': ''
+            },
+            {
+                "Id": '9',
+                'StartDate': '2017-08-08',
+                'EndDate': '2017-08-08',
+                'Company': '青白江疾控预防',
+                'Dept': '部门2',
+                'Duty': '我是职务',
+                'Remarks': ''
+            },
+            {
+                "Id": '12',
+                'StartDate': '2017-08-08',
+                'EndDate': '2017-08-08',
+                'Company': '青白江疾控预防',
+                'Dept': '部门1',
+                'Duty': '我是职务',
+                'Remarks': '我是备注'
+            },
+        ];
+    };
+    StaffFileMaintenanceWorkExperience = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-staff-file-maintenance-work-experience',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience.html"*/`<!--\n  Generated template for the StaffFileMaintenanceWorkExperiencePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>工作经历</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-list>\n        <ion-item-sliding   *ngFor="let item of list"  (click)="doRead(item.Id)">\n          <ion-item>\n            <h3>{{item.StartDate}}~{{item.EndDate}}</h3>\n            <h2>{{item.Duty}}</h2>\n            <p>{{item.Dept}}<span *ngIf="item.Company !== \'\'">|{{item.Company}}</span></p>\n            <p *ngIf="item.Remarks !== \'\'">备注：{{item.Remarks}}</p>\n            <ion-icon name="arrow-forward" item-end color="stable"></ion-icon>\n          </ion-item>\n          <ion-item-options side="right">\n            <button ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>\n          </ion-item-options>\n        </ion-item-sliding>\n      </ion-list>\n      <div text-center>\n          <button (click)="add()" icon-left ion-button color="secondary" small outline round><ion-icon name="add"></ion-icon>添加</button>\n      </div>\n</ion-content>\n\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */]])
+    ], StaffFileMaintenanceWorkExperience);
+    return StaffFileMaintenanceWorkExperience;
+}());
+
+//# sourceMappingURL=staff-file-maintenance-work-experience.js.map
 
 /***/ })
 

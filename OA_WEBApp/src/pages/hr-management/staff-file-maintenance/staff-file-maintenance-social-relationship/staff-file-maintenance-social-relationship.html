@@ -13,6 +13,23 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-list>
+      <ion-item-sliding *ngFor="let item of list"  (click)="doRead(item.Id)">
+        <ion-item  >
+          <h2>{{item.Name}}<span float-right color="royal">{{item.Relationship}}</span></h2>
+          <p>{{item.Mobile}}</p>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    <div text-center>
+        <button (click)="add()" icon-left ion-button color="secondary" small outline round><ion-icon name="add"></ion-icon>添加</button>
+    </div>
 </ion-content>

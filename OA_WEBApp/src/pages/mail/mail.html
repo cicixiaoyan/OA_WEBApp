@@ -4,9 +4,13 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-
+<ion-header>  
     <ion-toolbar>
+        <ion-buttons start>
+            <button ion-button icon-only navPop>
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
         <ion-segment [(ngModel)]="box"  (ngModelChange)="change()">
             <ion-segment-button value="inbox">
                 收件箱
@@ -51,7 +55,7 @@
                     <ion-avatar item-left>
                         <img src="assets/img/mike.png">
                     </ion-avatar>
-                    <span style="color:#2196F3;" *ngIf="mail.Status==0">●&nbsp;</span><span>{{mail.Id}}</span>
+                    <span>{{mail.Id}}</span>
                     <p class="font-12">来至:{{mail.SendPerson}}&emsp;{{mail.MailDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>
                 </ion-item>
                 <ion-item-options side="right">

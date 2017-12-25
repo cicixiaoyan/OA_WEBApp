@@ -1,0 +1,81 @@
+<!--
+  Generated template for the StaffFileMaintenanceSocialRelationshipAddPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    
+      <ion-navbar>
+          <ion-buttons start>
+              <button ion-button  (click)="dismiss()">返回</button>
+          </ion-buttons>
+        <ion-title>社会关系</ion-title>
+        <ion-buttons end>
+            <button ion-button  (click)="save(addForm.value)">保存</button>
+        </ion-buttons>
+      </ion-navbar>
+    
+    </ion-header>
+    
+    
+    <ion-content>
+        <form [formGroup]="addForm" (ngSubmit)="save(addForm.value)"   [ngClass]="{'form-readonly': readOnly}">
+            <ion-list style="position:relative;">
+                <ion-item>
+                    <ion-label>姓名</ion-label>
+                    <ion-input text-right type="text" formControlName="Name" placeholder="输入姓名"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>年龄<span class="optional">（选填）</span></ion-label>
+                    <ion-input text-right type="number" formControlName="Age" placeholder="输入年龄"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>部门<span class="optional">（选填）</span></ion-label>
+                    <ion-input text-right type="text" formControlName="Dept" placeholder="输入部门名称"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>职务<span class="optional">（选填）</span></ion-label>
+                    <ion-input text-right type="text" formControlName="Duty" placeholder="输入职务名称"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>政治面貌<span class="optional">（选填）</span></ion-label>
+                    <ion-select formControlName="PoliticalStatus" cancelText="取消" okText="确定" placeholder="请选择">
+                        <ion-option value="党员">党员</ion-option>
+                        <ion-option value="中共党员">中共党员</ion-option>
+                        <ion-option value="农工党员">农工党员</ion-option>
+                        <ion-option value="致工党员">致工党员</ion-option>
+                        <ion-option value="团员">团员</ion-option>
+                        <ion-option value="预备党员">预备党员</ion-option>
+                        <ion-option value="民主党派">民主党派</ion-option>
+                        <ion-option value="群众">群众</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label>与本人关系</ion-label>
+                    <ion-input text-right type="text" formControlName="Relationship" placeholder="请输入关系"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>工作单位<span class="optional">（选填）</span></ion-label>
+                    <ion-input text-right type="text" formControlName="Company" placeholder="输入工作单位"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>联系电话</ion-label>
+                    <ion-input text-right type="text" formControlName="Mobile" placeholder="输入联系电话"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>紧急联系人<span class="optional">（选填）</span></ion-label>
+                    <ion-select formControlName="IsEmergencyContact" cancelText="取消" okText="确定" placeholder="请选择">
+                        <ion-option value="是">是</ion-option>
+                        <ion-option value="否">否</ion-option>
+                    </ion-select>                
+                </ion-item>
+                <ion-item>
+                    <ion-label>备注<span class="optional">（选填）</span></ion-label>
+                    <ion-textarea text-right formControlName="Remarks" placeholder="请输入备注"></ion-textarea>
+                </ion-item>
+            </ion-list>
+        </form>
+    </ion-content>
+    

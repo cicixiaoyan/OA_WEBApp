@@ -1,16 +1,15 @@
 webpackJsonp([19],{
 
-/***/ 734:
+/***/ 743:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrainingMaintenancePageModule", function() { return TrainingMaintenancePageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MailReadModule", function() { return MailReadModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__training_maintenance__ = __webpack_require__(796);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__training_maintenance_service__ = __webpack_require__(762);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_components_module__ = __webpack_require__(365);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mail_read__ = __webpack_require__(812);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mailService__ = __webpack_require__(767);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -21,39 +20,39 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-
-var TrainingMaintenancePageModule = (function () {
-    function TrainingMaintenancePageModule() {
+var MailReadModule = (function () {
+    function MailReadModule() {
     }
-    TrainingMaintenancePageModule = __decorate([
+    MailReadModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__training_maintenance__["a" /* TrainingMaintenancePage */],
+                __WEBPACK_IMPORTED_MODULE_2__mail_read__["a" /* MailRead */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__training_maintenance__["a" /* TrainingMaintenancePage */]),
-                __WEBPACK_IMPORTED_MODULE_4__components_components_module__["a" /* ComponentsModule */]
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__mail_read__["a" /* MailRead */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__training_maintenance__["a" /* TrainingMaintenancePage */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__training_maintenance_service__["a" /* TrainingMaintenanceService */]]
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__mail_read__["a" /* MailRead */]
+            ],
+            providers: [__WEBPACK_IMPORTED_MODULE_3__mailService__["a" /* MailService */]]
         })
-    ], TrainingMaintenancePageModule);
-    return TrainingMaintenancePageModule;
+    ], MailReadModule);
+    return MailReadModule;
 }());
 
-//# sourceMappingURL=training-maintenance.module.js.map
+//# sourceMappingURL=mail-read.module.js.map
 
 /***/ }),
 
-/***/ 762:
+/***/ 767:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrainingMaintenanceService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MailService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(364);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -66,38 +65,75 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var TrainingMaintenanceService = (function () {
-    function TrainingMaintenanceService(httpService) {
+var MailService = (function () {
+    function MailService(httpService) {
         this.httpService = httpService;
+        this.mailStatus = {
+            inbox: 0,
+            outbox: 1 // 发件箱
+        };
+        this.status = {
+            read: 1,
+            unread: 0,
+            all: 2 // 全部
+        };
     }
-    TrainingMaintenanceService.prototype.getList = function (param) {
-        return this.httpService.postFormData("ashx/MeetLs.ashx", param).map(function (res) { return res.json(); });
+    MailService.prototype.getInboxList = function (param) {
+        console.log(12, param);
+        return this.httpService.postFormData("ashx/MailList.ashx", param).map(function (res) { return res.json(); });
     };
-    TrainingMaintenanceService.prototype.write = function (param) {
-        return this.httpService.postFormData("ashx/MeetLs.ashx", param).map(function (res) { return res.json(); });
+    MailService.prototype.getOutboxList = function (param) {
+        return this.httpService.postFormData("ashx/MailList.ashx", param).map(function (res) { return res.json(); });
     };
-    TrainingMaintenanceService.prototype.read = function (param) {
-        return this.httpService.postFormData("ashx/MeetLs.ashx", param).map(function (res) { return res.json(); });
+    MailService.prototype.read = function (param) {
+        return this.httpService.postFormData("ashx/MailGetDetail.ashx", param).map(function (res) { return res.json(); });
     };
-    TrainingMaintenanceService = __decorate([
+    MailService.prototype.write = function (param) {
+        // Uid 当前用户账号id
+        // AcceptUid 接收账号id
+        // Content 发送内容
+        // 返回json
+        // {"Data":"xxx！","Result":false}
+        return this.httpService.postFormData("ashx/MailAdd.ashx", param).map(function (res) { return res.json(); });
+    };
+    MailService.prototype.AttachUpload = function (param) {
+        return this.httpService.postFormData("ashx/AttachUpload.ashx", param).map(function (res) { return res.json(); });
+    };
+    MailService.prototype.getRecipients = function (param) {
+        // 输入参数
+        // Name 输入查询用户名称
+        // 返回json
+        return this.httpService.postFormData("ashx/UserSheet.ashx", param).map(function (res) { return res.json(); });
+    };
+    MailService.prototype.getRecipientsByDept = function (id) {
+        // 输入参数
+        // Name 输入查询用户名称
+        // 返回json
+        return this.httpService.postFormData("ashx/UserSheet.ashx", { DeptId: id }).map(function (res) { return res.json(); });
+    };
+    MailService.prototype.getDept = function () {
+        return this.httpService.postFormData("ashx/BmLs.ashx", {}).map(function (res) { return res.json(); });
+    };
+    MailService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], TrainingMaintenanceService);
-    return TrainingMaintenanceService;
+    ], MailService);
+    return MailService;
 }());
 
-//# sourceMappingURL=training-maintenance_service.js.map
+//# sourceMappingURL=mailService.js.map
 
 /***/ }),
 
-/***/ 796:
+/***/ 812:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrainingMaintenancePage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MailRead; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__training_maintenance_service__ = __webpack_require__(762);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mailService__ = __webpack_require__(767);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -107,127 +143,79 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
+
 
 
 
 /**
- * Generated class for the TrainingMaintenancePage page.
+ * Generated class for the MailRead page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
  */
-var TrainingMaintenancePage = (function () {
-    function TrainingMaintenancePage(navCtrl, navParams, popoverCtrl, trainingMaintenanceService) {
+var MailRead = (function () {
+    function MailRead(navCtrl, navParams, nativeService, modalCtrl, mailService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.popoverCtrl = popoverCtrl;
-        this.trainingMaintenanceService = trainingMaintenanceService;
-        this.list = [];
-        this.moredata = true;
-        this.isEmpty = false;
-        this.data = {
-            "uid": this.trainingMaintenanceService.httpService.globalData.Uid,
-            "PageIndex": 0,
-            "PageSize": 8
-        };
-        this.getList(this.data);
+        this.nativeService = nativeService;
+        this.modalCtrl = modalCtrl;
+        this.mailService = mailService;
+        this.mailContent = ""; // 消息内容
+        this.mailDetail = {};
+        this.IsInbox = true; // 默认为收件箱详情
+        this.initializeItems();
     }
-    TrainingMaintenancePage.prototype.ionViewDidLoad = function () {
-    };
-    TrainingMaintenancePage.prototype.presentPopover = function (myEvent) {
+    MailRead.prototype.initializeItems = function () {
         var _this = this;
-        var popover = this.popoverCtrl.create("TrainingMaintenanceSearch", { "search": this.search });
-        popover.present({
-            ev: myEvent
-        });
-        popover.onDidDismiss(function (search) {
-            console.log(search);
-            if (search) {
-                _this.search = search.search;
-                var data = search.search;
-                data.uid = _this.trainingMaintenanceService.httpService.globalData.Uid;
-                data.PageIndex = 0;
-                data.PageSize = 8;
-                _this.getList(data);
+        var data = {
+            "id": this.navParams.get('id'),
+            "MailStatus": this.navParams.get("MailStatus")
+        };
+        if (data.MailStatus == this.mailService.mailStatus["outbox"])
+            this.IsInbox = false;
+        this.mailService.read(data).subscribe(function (resJson) {
+            if (resJson.Result) {
+                _this.mailDetail = resJson.Data;
+                console.log(resJson);
+                _this.mailDetail.Name = _this.mailDetail.Name.split(":")[1];
             }
         });
     };
-    TrainingMaintenancePage.prototype.doRead = function (Params) {
-        this.navCtrl.push("TrainingMaintenanceSetPage", { "Id": Params });
+    MailRead.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad MailRead');
+        this.content.resize();
     };
-    TrainingMaintenancePage.prototype.doWrite = function () {
-        this.navCtrl.push("TrainingMaintenanceSetPage");
-        // let modal = this.modalCtrl.create("TrainingMaintenanceSetPage");
-        // modal.present();
-        // modal.onDidDismiss(data => {
-        //     data && console.log(data);
-        // });
+    MailRead.prototype.ionViewWillLeave = function () {
     };
-    TrainingMaintenancePage.prototype.doRefresh = function (refresher) {
-        this.list = [];
-        this.data.PageIndex = 1;
-        this.getList(this.data);
-        setTimeout(function () {
-            refresher.complete();
-        }, 1000);
-    };
-    TrainingMaintenancePage.prototype.doInfinite = function () {
-        if (this.moredata) {
-            this.data.PageIndex++;
-            this.getList(this.data);
-        }
-        return new Promise(function (resolve) {
-            setTimeout(function () {
-                resolve();
-            }, 500);
+    MailRead.prototype.read = function () {
+        var modal = this.modalCtrl.create("MailWrite", { mail: this.mailDetail });
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            data && console.log(data);
         });
     };
-    TrainingMaintenancePage.prototype.getList = function (data) {
-        this.list = [
-            {
-                Id: "1",
-                Title: "dfwsef",
-                StartDate: '2017-12-05',
-                EndDate: '2017-12-05',
-                Object: '',
-                Instructor: '李老师',
-                Place: '222'
-            },
-            {
-                Id: "2",
-                Title: "dfwsef",
-                StartDate: '2017-12-05',
-                EndDate: '2017-12-05',
-                Object: '',
-                Instructor: '李老师',
-                Place: ''
-            },
-        ];
-        // this.trainingMaintenanceService.getList(data).subscribe((resJson) => {
-        //   if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
-        //     this.moredata = true;
-        //     this.isEmpty = false;
-        //     let list = resJson.Data;
-        //     this.list = [...this.list, ...list];
-        //   }else{
-        //     this.moredata = false;
-        //     this.isEmpty = (this.data.PageIndex == 1) ? true : false;
-        //   }
-        // });
+    MailRead.prototype.download = function (Path, name) {
+        this.nativeService.download(Path, name);
     };
-    TrainingMaintenancePage = __decorate([
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */])
+    ], MailRead.prototype, "content", void 0);
+    MailRead = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-training-maintenance',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\training-maintenance\training-maintenance.html"*/`<!--\n  Generated template for the TrainingMaintenancePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>培训维护</ion-title>\n    <ion-buttons end  (click)="presentPopover($event)">\n        <button ion-button icon-only>\n          <ion-icon name="search"></ion-icon>\n        </button>\n      </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let train of list"  (click)="doRead(train.Id)">\n          <ion-item>\n              <span>{{train.Title}}</span>\n              <div class="small">讲师：{{train.Instructor}}</div>\n              <p class="small" *ngIf="train.Place !== \'\'">地点：{{train.Place}}</p>\n              <p class="small">时间：{{train.StartDate}}&nbsp;~&nbsp;{{train.EndDate}}</p>\n          </ion-item>\n      </ion-item-sliding>\n    </ion-list>\n    <empty *ngIf="isEmpty"></empty>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\training-maintenance\training-maintenance.html"*/,
+            selector: 'page-mail-read',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-read\mail-read.html"*/`<!--\n  Generated template for the MailRead page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>信息详情</ion-title>\n        <!-- <ion-buttons end>\n            <button ion-button (click)="read()">转发</button>\n        </ion-buttons> -->\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n    <div>\n        <ion-list>\n\n            <ion-item *ngIf="isInbox">\n                <ion-label>接收人&emsp;</ion-label>\n                <ion-input type="text" readonly="disabled" [value]="mailDetail.AccessPerson" placeholder="系统管理员"></ion-input>\n            </ion-item>\n\n            <ion-item *ngIf="!inbox">\n                <ion-label>发送人&emsp;</ion-label>\n                <ion-input type="text" readonly="disabled" [value]="mailDetail.AccessPerson" placeholder="系统管理员"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>主题&emsp;&emsp;</ion-label>\n                <ion-input type="test" readonly="disabled" [value]="mailDetail.Title" placeholder="主题1"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>发送时间</ion-label>\n                <ion-input type="test" readonly="disabled" [value]="mailDetail.MailDate" placeholder="发送时间未知"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-textarea  placeholder="内容: " rows="3">{{mailContent}}</ion-textarea>\n            </ion-item>\n        </ion-list>\n    </div>\n\n\n    <div>\n        <ion-scroll scrollY="true" class="mail-content">\n            <!--<div padding-horizontal [innerHTML]="mailContent"></div>-->\n            <div class="mydiv">\n                {{mailDetail.MailDate}}\n            </div>\n            <div class="affix" *ngIf="mailDetail.attName">\n                <ion-grid>\n                    <ion-row align-items-center>\n                        <ion-col col-6 col-lg-4>\n                            <div (click)="download(mailDetail.attNewName, mailDetail.attName)">\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                <p>{{mailDetail.attName}}</p>\n                                <p color="gray">大小未知</p>\n                                <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n                            </div>\n                        </ion-col>\n                    </ion-row>\n                </ion-grid>\n            </div>\n        </ion-scroll>\n    </div>\n</ion-content>\n<!--<div class="list message-reply">\n\n    <div class="item">\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n        <button ion-button small color="positive">发送</button>\n    </div>\n\n</div>-->`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-read\mail-read.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */],
-            __WEBPACK_IMPORTED_MODULE_2__training_maintenance_service__["a" /* TrainingMaintenanceService */]])
-    ], TrainingMaintenancePage);
-    return TrainingMaintenancePage;
+            __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_3__mailService__["a" /* MailService */]])
+    ], MailRead);
+    return MailRead;
 }());
 
-//# sourceMappingURL=training-maintenance.js.map
+//# sourceMappingURL=mail-read.js.map
 
 /***/ })
 

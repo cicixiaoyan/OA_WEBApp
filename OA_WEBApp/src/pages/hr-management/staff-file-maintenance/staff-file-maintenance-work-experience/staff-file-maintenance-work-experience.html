@@ -15,11 +15,13 @@
 
 <ion-content>
     <ion-list>
-        <ion-item-sliding>
-          <ion-item  *ngFor="let item of list"  (click)="doRead(item.Id)">
-            <h3>2017-12-18~2017-12-04</h3>
-            <h2>工商管理</h2>
-            <p>我是工作单位我是工作</p>
+        <ion-item-sliding   *ngFor="let item of list"  (click)="doRead(item.Id)">
+          <ion-item>
+            <h3>{{item.StartDate}}~{{item.EndDate}}</h3>
+            <h2>{{item.Duty}}</h2>
+            <p>{{item.Dept}}<span *ngIf="item.Company !== ''">|{{item.Company}}</span></p>
+            <p *ngIf="item.Remarks !== ''">备注：{{item.Remarks}}</p>
+            <ion-icon name="arrow-forward" item-end color="stable"></ion-icon>
           </ion-item>
           <ion-item-options side="right">
             <button ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>
@@ -27,6 +29,7 @@
         </ion-item-sliding>
       </ion-list>
       <div text-center>
-          <button (click)="add()" icon-left ion-button color="secondary" small outline round><ion-icon name="home"></ion-icon>添加</button>
+          <button (click)="add()" icon-left ion-button color="secondary" small outline round><ion-icon name="add"></ion-icon>添加</button>
       </div>
 </ion-content>
+

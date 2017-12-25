@@ -1,15 +1,15 @@
 webpackJsonp([26],{
 
-/***/ 714:
+/***/ 704:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CarReadPageModule", function() { return CarReadPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BacklogModule", function() { return BacklogModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__car_read__ = __webpack_require__(776);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(756);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog__ = __webpack_require__(773);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(764);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,37 +20,39 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var CarReadPageModule = (function () {
-    function CarReadPageModule() {
+var BacklogModule = (function () {
+    function BacklogModule() {
     }
-    CarReadPageModule = __decorate([
+    BacklogModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__car_read__["a" /* CarReadPage */],
+                __WEBPACK_IMPORTED_MODULE_2__backlog__["a" /* Backlog */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__car_read__["a" /* CarReadPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__backlog__["a" /* Backlog */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__car_read__["a" /* CarReadPage */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */]]
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__backlog__["a" /* Backlog */]
+            ],
+            providers: [__WEBPACK_IMPORTED_MODULE_3__backlogService__["a" /* BacklogService */]]
         })
-    ], CarReadPageModule);
-    return CarReadPageModule;
+    ], BacklogModule);
+    return BacklogModule;
 }());
 
-//# sourceMappingURL=car-read.module.js.map
+//# sourceMappingURL=backlog.module.js.map
 
 /***/ }),
 
-/***/ 756:
+/***/ 764:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CarService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(364);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62,66 +64,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+// import {Observable} from "rxjs";
 
-var CarService = (function () {
-    function CarService(httpService) {
+var BacklogService = (function () {
+    function BacklogService(httpService) {
         this.httpService = httpService;
+        this.Status = {
+            notdone: 0,
+            done: 1 // 已办理
+        };
     }
-    CarService.prototype.getList = function (param) {
-        return this.httpService.postFormData("ashx/BusVehicleLs.ashx", param).map(function (res) { return res.json(); });
+    BacklogService.prototype.getNotDoneList = function (param) {
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
     };
-    CarService.prototype.geDetail = function (id) {
-        return this.httpService.postFormData("ashx/BusVehicleDetail.ashx", { "Id": id })
-            .map(function (res) { return res.json(); });
+    BacklogService.prototype.getDoneList = function (param) {
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
     };
-    CarService.prototype.add = function (param) {
-        return this.httpService.postFormData("ashx/BusVehicleLsAdd.ashx", param).map(function (res) { return res.json(); });
+    BacklogService.prototype.getDone = function (param) {
+        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
     };
-    CarService.prototype.mod = function (param) {
-        return this.httpService.postFormData("ashx/BusVehicleLsMod.ashx", param).map(function (res) { return res.json(); });
+    BacklogService.prototype.getNotDone = function (param) {
+        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
     };
-    CarService.prototype.geStatus = function (status) {
-        return this.httpService.postFormData("ashx/BusQuery.ashx", { "Status": status })
-            .map(function (res) { return res.json(); });
+    BacklogService.prototype.TodoApprove = function (param) {
+        return this.httpService.postFormData('/ashx/TodoApprove.ashx', param).map(function (res) { return res.json(); });
     };
-    CarService.prototype.getDriverList = function (param) {
-        return this.httpService.postFormData("ashx/DriverLs.ashx", param).map(function (res) { return res.json(); });
-    };
-    CarService.prototype.getDriverDetails = function (id) {
-        return this.httpService.postFormData("ashx/DriverDetails.ashx", { "Id": id })
-            .map(function (res) { return res.json(); });
-    };
-    CarService.prototype.driverAdd = function (param) {
-        return this.httpService.postFormData("ashx/DriverAdd.ashx", param).map(function (res) { return res.json(); });
-    };
-    CarService.prototype.driverMod = function (param) {
-        return this.httpService.postFormData("ashx/DriverMod.ashx", param).map(function (res) { return res.json(); });
-    };
-    CarService.prototype.driverDel = function (id) {
-        return this.httpService.postFormData("ashx/DriverDel.ashx", { "Id": id })
-            .map(function (res) { return res.json(); });
-    };
-    CarService = __decorate([
+    BacklogService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], CarService);
-    return CarService;
+    ], BacklogService);
+    return BacklogService;
 }());
 
-//# sourceMappingURL=car_service.js.map
+//# sourceMappingURL=backlogService.js.map
 
 /***/ }),
 
-/***/ 776:
+/***/ 773:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CarReadPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Backlog; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(756);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(764);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -133,101 +119,115 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
-
+// import { BacklogDetail } from './backlog-detail/backlog-detail';
 
 /**
- * Generated class for the CarReadPage page.
+ * Generated class for the Backlog page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
  */
-var CarReadPage = (function () {
-    function CarReadPage(navCtrl, navParams, formBuilder, nativeService, carService) {
+var Backlog = (function () {
+    function Backlog(navCtrl, navParams, backlogService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.formBuilder = formBuilder;
-        this.nativeService = nativeService;
-        this.carService = carService;
-        var today = new Date();
-        this.editForm = this.formBuilder.group({
-            BusNumber: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            BusName: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            BusPassenger: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            StartDate: [today, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            BusBuyPrice: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(5)]],
-            Salvage: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(5)]],
-            BusLicensePlate: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]],
-            BusEngineNumber: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]],
-            BusFrameNumber: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]],
-            BusDrivingLicenseNumber: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(20)]],
-            BusManger: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(20), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(4)]],
-            BusStatus: ["", []],
-            BusAnnualInspection: ["",],
-            BusMaintenanceDate: ["", []],
-            BusDated: ["", []],
-            BusMemo: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]],
-        });
+        this.backlogService = backlogService;
+        this.work = "notDone";
+        this.nxPage = "BacklogDetail";
+        this.items = [];
+        this.moredata = true;
+        this.isEmpty = false;
+        this.data = {
+            "PageIndex": 0,
+            "PageSize": 10,
+            "Status": this.backlogService.Status["notdone"],
+            "Uid": this.backlogService.httpService.globalData.Uid
+        };
+        this.getNotDoneList(this.data);
     }
-    CarReadPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        this.carService.geStatus().subscribe(function (resJson) {
-            if (resJson.Result) {
-                _this.BusStatusLs = resJson.Data;
-            }
-        });
-        this.carService.geDetail(this.navParams.get("Id")).subscribe(function (resJson) {
-            if (resJson.Result) {
-                var data = resJson.Data;
-                _this.id = data.Id;
-                _this.editForm.setValue({
-                    BusNumber: data.BusNumber,
-                    BusName: data.BusName,
-                    BusPassenger: data.BusPassenger,
-                    StartDate: data.StartDate,
-                    BusBuyPrice: data.BusBuyPrice,
-                    Salvage: data.Salvage,
-                    BusLicensePlate: data.BusLicensePlate,
-                    BusEngineNumber: data.BusEngineNumber,
-                    BusFrameNumber: data.BusFrameNumber,
-                    BusDrivingLicenseNumber: data.BusDrivingLicenseNumber,
-                    BusManger: data.BusManger,
-                    BusStatus: data.BusStatus,
-                    BusAnnualInspection: data.BusAnnualInspection,
-                    BusMaintenanceDate: data.BusMaintenanceDate,
-                    BusDated: data.BusDated,
-                    BusMemo: data.BusMemo,
-                });
-            }
-        });
+    Backlog.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Backlog');
     };
-    CarReadPage.prototype.save = function (value) {
-        var _this = this;
-        value.Uid = this.carService.httpService.globalData.Uid;
-        value.Id = this.id;
-        this.carService.mod(value).subscribe(function (resJson) {
-            if (resJson.Result) {
-                _this.nativeService.showToast("添加成功", 500);
+    Backlog.prototype.doRefresh = function (refresher) {
+        // this.initializeItems();
+        this.moredata = true;
+        this.data.PageIndex = 0;
+        this.items = [];
+        if (this.work === "notDone") {
+            // ....
+            this.data.Status = this.backlogService.Status["notdone"];
+            this.getNotDoneList(this.data);
+        }
+        else {
+            // ...
+            this.data.Status = this.backlogService.Status["done"];
+            this.getDoneList(this.data);
+        }
+        if (!!refresher) {
+            setTimeout(function () {
+                console.log('数据加载完成');
+                refresher.complete();
+            }, 1000);
+        }
+    };
+    Backlog.prototype.doInfinite = function () {
+        if (this.moredata) {
+            if (this.work === "ontDone") {
+                // ....
+                this.getNotDoneList(this.data);
             }
             else {
-                _this.nativeService.showToast(resJson.Data, 500);
+                // ...
+                this.getDoneList(this.data);
+            }
+        }
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve();
+            }, 500);
+        });
+    };
+    Backlog.prototype.getNotDoneList = function (data) {
+        var _this = this;
+        this.backlogService.getNotDoneList(data).subscribe(function (resJson) {
+            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
+                console.log("1");
+                _this.isEmpty = false;
+                _this.items = _this.items.concat(resJson.Data);
+            }
+            else {
+                console.log("2");
+                _this.moredata = false;
+                _this.isEmpty = _this.data.PageIndex === 0 ? true : false;
             }
         });
     };
-    CarReadPage = __decorate([
+    Backlog.prototype.getDoneList = function (data) {
+        var _this = this;
+        this.backlogService.getDoneList(data).subscribe(function (resJson) {
+            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
+                _this.isEmpty = false;
+                _this.items = _this.items.concat(resJson.Data);
+            }
+            else {
+                _this.moredata = false;
+                _this.isEmpty = _this.data.PageIndex === 0 ? true : false;
+            }
+        });
+    };
+    Backlog = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-car-read',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\car-read\car-read.html"*/`<!--\n  Generated template for the CarReadPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>车辆详情</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="editForm" (ngSubmit)="save(editForm.value)">\n        <div>\n            <ion-list>\n                <ion-item>\n                    <ion-label stacked>车牌号</ion-label>\n                    <ion-input type="text" formControlName="BusNumber" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>车辆名称</ion-label>\n                    <ion-input type="text" formControlName="BusName" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>核载人数</ion-label>\n                    <ion-input type="number" formControlName="BusPassenger" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>启用时间</ion-label>\n                    <ion-datetime formControlName="StartDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>购买价(万)</ion-label>\n                    <ion-input type="number" formControlName="BusBuyPrice" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>残值(万)</ion-label>\n                    <ion-input type="number" formControlName="Salvage" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>厂牌型号</ion-label>\n                    <ion-input type="text" formControlName="BusLicensePlate" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>发动机号</ion-label>\n                    <ion-input type="text" formControlName="BusEngineNumber" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>车架号</ion-label>\n                    <ion-input type="text" formControlName="BusFrameNumber" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>行驶证号</ion-label>\n                    <ion-input type="text" formControlName="BusDrivingLicenseNumber" placeholder="请输入" ></ion-input>\n                </ion-item>\n\n                <ion-item>\n                    <ion-label stacked>管理人员</ion-label>\n                    <ion-select formControlName="BusManger" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option *ngFor="let type of MeetTypeLs;let i = index" [value]="type.Id">{{type.Name}}</ion-option>\n                        <!-- <ion-option value="2">类型2</ion-option> -->\n                    </ion-select>\n                </ion-item>\n\n                <ion-item>\n                    <ion-label stacked>车辆状况</ion-label>\n                    <ion-select formControlName="BusStatus" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option *ngFor="let status of BusStatusLs;let i = index" [value]="status.Status">{{status.Status}}</ion-option>\n                    </ion-select>\n                </ion-item>\n     \n                <ion-item>\n                    <ion-label stacked>年检日期</ion-label>\n                    <ion-datetime formControlName="BusAnnualInspection"  placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>维保日期</ion-label>\n                    <ion-datetime formControlName="BusMaintenanceDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>保险日期</ion-label>\n                    <ion-datetime formControlName="BusDated" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n\n                <ion-item>\n                    <ion-label stacked>备注</ion-label>\n                    <ion-textarea formControlName="BusMemo" type="text" placeholder="请输入"></ion-textarea>\n                </ion-item>\n\n            </ion-list>\n            <div padding text-center>\n                <button ion-button type="submit" color="danger" [disabled]="!editForm.valid">保存</button>\n                <button ion-button clear small navPop>取消</button>\n            </div>\n        </div>\n    </form>\n\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\car-read\car-read.html"*/,
+            selector: 'page-backlog',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog.html"*/`<!--\n  Generated template for the Backlog page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-navbar>\n        <ion-title>待办事项</ion-title>\n    </ion-navbar>\n    <ion-toolbar no-border-top>\n        <ion-segment class="content-ios" [(ngModel)]="work" (ngModelChange)="doRefresh()">\n            <ion-segment-button value="notDone">\n                未办理\n            </ion-segment-button>\n            <ion-segment-button value="done">\n                已办理\n            </ion-segment-button>\n        </ion-segment>\n    </ion-toolbar>\n\n</ion-header>\n\n\n<ion-content>\n    <div [ngSwitch]="work">\n        <ion-refresher (ionRefresh)="doRefresh($event)">\n            <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n            </ion-refresher-content>\n        </ion-refresher>\n\n        <ion-list *ngSwitchCase="\'notDone\'">\n\n            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.Id}">\n                <span>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</span>\n                <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>\n            </button>\n\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'done\'">\n            <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.Id}">\n                <span>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</span>\n                <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>\n            </button>\n        </ion-list>\n\n        <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n            <div padding>暂无此类信息！！！</div>\n            <img src="assets/img/face/face2.png" height="100">\n        </div>\n\n        <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n        </ion-infinite-scroll>\n\n    </div>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog.html"*/,
+            providers: [__WEBPACK_IMPORTED_MODULE_2__backlogService__["a" /* BacklogService */]]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_NativeService__["a" /* NativeService */],
-            __WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */]])
-    ], CarReadPage);
-    return CarReadPage;
+            __WEBPACK_IMPORTED_MODULE_2__backlogService__["a" /* BacklogService */]])
+    ], Backlog);
+    return Backlog;
 }());
 
-//# sourceMappingURL=car-read.js.map
+//# sourceMappingURL=backlog.js.map
 
 /***/ })
 

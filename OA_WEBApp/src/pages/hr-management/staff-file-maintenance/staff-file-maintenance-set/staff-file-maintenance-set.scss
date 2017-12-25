@@ -1,3 +1,12 @@
 page-staff-file-maintenance-set {
+    .tabs-ios[tabsPlacement=top] .tabbar{
+        border-bottom: none;
+    }
 
+    .tabs-ios .tab-button{
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    }
+    .tabs-ios .tab-button:hover:not(.disable-hover), .tabs-ios .tab-button[aria-selected=true]{
+        border-bottom: 1px solid color($colors, primary);
+    }
 }

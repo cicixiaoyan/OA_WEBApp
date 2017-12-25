@@ -1,0 +1,63 @@
+page-contract-setting {
+  .item-input ion-label{
+      align-self: center;
+  }
+  .list-header-ios{
+      border-top: 1px solid #ddd;
+      background-color: #fff;
+      font-size: 1.4rem;
+      color: #406ebf;
+  }
+
+  .list-ios{
+      margin-bottom: 16px;
+  }
+
+  .button-full-ios{
+      margin: 0;
+  }
+
+  .photo{
+      width: 120px;
+      height: 120px;
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      margin-bottom: 10px;
+  }
+
+  .list-header-ios .icon{
+      transition: -webkit-transform .15s;
+      transition: transform .15s;
+      transition: transform .15s,-webkit-transform .15s;
+      transition-timing-function: ease-in-out;
+      transform-origin: left;
+  }
+  .collapsed{
+      .list-header-ios .icon{
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+      }
+      >div{
+          visibility: hidden;
+          opacity: 0;
+          max-height: 1px;
+          transition: visibility 275ms,opacity 275ms,max-height .28s;
+          transition-timing-function: ease-out;
+      }
+  }
+
+  .expanded  {
+
+      .list-header-ios .icon{
+          -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+      }
+      >div{
+          visibility: visible;
+          opacity: 1;
+          max-height: 4000px;
+          transition: visibility .5s,opacity .5s,max-height .5s;
+          transition-timing-function: ease-in-out;
+      }
+  }
+}

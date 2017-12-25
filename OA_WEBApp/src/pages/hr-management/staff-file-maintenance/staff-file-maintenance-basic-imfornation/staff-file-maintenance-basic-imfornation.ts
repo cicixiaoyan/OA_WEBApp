@@ -13,10 +13,12 @@ export class StaffFileMaintenanceBasicImfornation {
   hideTwo: boolean = true;
   hideThree: boolean = true;
   hideFour: boolean = true;
+  readOnly: boolean = false;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private FormBuilder: FormBuilder
             ) {
+      this.readOnly = this.navParams.get("readOnly") ? true : false;
       this.baseForm = this.FormBuilder.group({
         JobNumber: ['', []],
         Name: ['', []],

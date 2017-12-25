@@ -38,17 +38,17 @@ export class MeetingEditPage {
               private nativeService: NativeService,
               private meetingService: MeetingService) {
     this.writeForm = this.formBuilder.group({
-      Title: ["", [Validators.required, Validators.maxLength(30)]], // 第一个参数是默认值
-      TypeId: ["", [Validators.required]],
-      PlaceId: ["", [ Validators.required]],
-      StartDate: ["", [ Validators.required]],
-      EndDate: ["", [Validators.required]],
-      PersonId: ["", [Validators.maxLength(180), Validators.required]],
-      DeptId: ["", []],
-      HostName: ["", [Validators.maxLength(8)]],
-      Range: ["", [Validators.maxLength(180)]],
-      Detail: ["", [Validators.maxLength(180)]],
-      FileOldName: ["", [Validators.maxLength(180)]],
+        Title: ['', [Validators.required, Validators.maxLength(30), Validators.maxLength(2)]], // 第一个参数是默认值
+        TypeId: ["", [Validators.required]],
+        PlaceId: ["", [ Validators.required]],
+        StartDate: ["", [ Validators.required]],
+        EndDate: ["", [Validators.required]],
+        Person: ["", [Validators.maxLength(180), Validators.required]],
+        DeptId: ["", []],
+        HostName: ["", [Validators.maxLength(20)]],
+        Range: ["", [Validators.maxLength(180)]],
+        Detail: ["", [Validators.maxLength(180)]],
+        FileOldName: ["", [Validators.maxLength(180)]],
     });
     let id = {"id": this.navParams.get("Id")};
     this.readOnly = this.navParams.get("readOnly") ? true : false;
@@ -93,7 +93,7 @@ export class MeetingEditPage {
   }
 
   ionViewWillEnter(){
-    this.writeForm.disable();
+    // this.writeForm.disable();
   }
 
   ionViewDidLoad() {

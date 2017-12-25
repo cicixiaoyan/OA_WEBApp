@@ -36,7 +36,7 @@
         margin: 0 auto;
         width: 100px;
         height: 100px;
-        border: 2px solid color($colors, positive); 
+        border: 2px solid color($colors, positive);
         border-radius: 50%;
         margin: 3px auto;
         overflow: hidden;
@@ -54,6 +54,7 @@
 
 .validation-failed {
     color: color($colors, danger);
+    text-align: center;
 }
 
 .status-new-dot{
@@ -61,7 +62,7 @@
     // top:-10px;
     // left:-2px;
     // font-size:small;
-    color: color($colors, positive);   
+    color: color($colors, positive);
 }
 
 .popover-ios {
@@ -117,7 +118,7 @@
             text-align: center;
         }
 
-        
+
     }
 }
 
@@ -159,4 +160,42 @@
 .optional{
     color: #ffc900;
     font-size: 1rem;
+}
+
+.form-readonly ::-webkit-input-placeholder{
+    opacity: 0;
+}
+.form-readonly ::-moz-placeholder{
+    opacity: 0;
+}
+.form-readonly ::-ms-input-placeholder{
+    opacity: 0;
+}
+
+
+
+.form-readonly {
+    .optional{
+        display: none;
+    }
+
+    ion-input{
+        pointer-events: none;
+    }
+
+    .select-placeholder{
+        opacity: 0;
+    }
+
+    .datetime-placeholder{
+        opacity: 0;
+    }
+}
+
+.item-ios {
+    font-size: 1.4rem;
+}
+
+.item-label-floating .select-ios .select-placeholder{
+  text-align: right;
 }

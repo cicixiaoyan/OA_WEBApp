@@ -24,10 +24,10 @@ export class MeetingRoomSetPage {
               private meetingService: MeetingService) {
     this.isWrite = !!this.navParams.get("Id") ? false : true; 
     this.setForm = this.formBuilder.group({
-      Name: ["", [Validators.required, Validators.maxLength(30)]], // 第一个参数是默认值
-      Manager: ["", [Validators.required, Validators.maxLength(30)]],
-      Number: ["", [ Validators.maxLength(3)]],
-      Mobile: [null, [Validators.minLength(11), Validators.maxLength(11)]],
+      Name: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)]], // 第一个参数是默认值
+      Manager: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)]],
+      Number: ["", [Validators.required, Validators.max(10000)]],
+      Mobile: [null, [Validators.minLength(7), Validators.maxLength(11)]],
       HaveAttendant: [false, [] ],
       DeptId: ["", [Validators.maxLength(180)]],
       Introduction: ["", [Validators.maxLength(180)]]

@@ -1,15 +1,16 @@
 webpackJsonp([10],{
 
-/***/ 744:
+/***/ 752:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MeetingWritePageModule", function() { return MeetingWritePageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MeetingPageModule", function() { return MeetingPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_write__ = __webpack_require__(806);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__meeting_service__ = __webpack_require__(755);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting__ = __webpack_require__(821);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__meeting_service__ = __webpack_require__(762);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_components_module__ = __webpack_require__(365);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,39 +21,43 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MeetingWritePageModule = (function () {
-    function MeetingWritePageModule() {
+
+var MeetingPageModule = (function () {
+    function MeetingPageModule() {
     }
-    MeetingWritePageModule = __decorate([
+    MeetingPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__meeting_write__["a" /* MeetingWritePage */],
+                __WEBPACK_IMPORTED_MODULE_2__meeting__["a" /* MeetingPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__meeting_write__["a" /* MeetingWritePage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__meeting__["a" /* MeetingPage */]),
+                __WEBPACK_IMPORTED_MODULE_4__components_components_module__["a" /* ComponentsModule */]
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__meeting_write__["a" /* MeetingWritePage */]],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__meeting__["a" /* MeetingPage */]
+            ],
             providers: [__WEBPACK_IMPORTED_MODULE_3__meeting_service__["a" /* MeetingService */]]
         })
-    ], MeetingWritePageModule);
-    return MeetingWritePageModule;
+    ], MeetingPageModule);
+    return MeetingPageModule;
 }());
 
-//# sourceMappingURL=meeting-write.module.js.map
+//# sourceMappingURL=meeting.module.js.map
 
 /***/ }),
 
-/***/ 755:
+/***/ 762:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(364);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_HttpService__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -114,18 +119,14 @@ var MeetingService = (function () {
 
 /***/ }),
 
-/***/ 806:
+/***/ 821:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingWritePage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_FileService__ = __webpack_require__(160);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__meeting_service__ = __webpack_require__(755);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_service__ = __webpack_require__(762);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -138,119 +139,114 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-
-
-
 /**
- * Generated class for the MeetingWritePage page.
+ * Generated class for the MeetingPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var MeetingWritePage = (function () {
-    function MeetingWritePage(navCtrl, navParams, fileService, formBuilder, globalData, popoverCtrl, nativeService, meetingService) {
-        var _this = this;
+var MeetingPage = (function () {
+    function MeetingPage(navCtrl, navParams, modalCtrl, meetingService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.fileService = fileService;
-        this.formBuilder = formBuilder;
-        this.globalData = globalData;
-        this.popoverCtrl = popoverCtrl;
-        this.nativeService = nativeService;
+        this.modalCtrl = modalCtrl;
         this.meetingService = meetingService;
-        this.FileNewName = ""; // 附件名称
-        this.MeetPlaceLs = [];
-        this.MeetTypeLs = [];
-        this.DeptLs = [];
-        this.PersonId = "";
-        this.meetingService.MeetPlaceLs().subscribe(function (resJson) {
-            if (resJson.Result)
-                _this.MeetPlaceLs = resJson.Data;
-        });
-        this.meetingService.MeetTypeLs().subscribe(function (resJson) {
-            if (resJson.Result)
-                _this.MeetTypeLs = resJson.Data;
-        });
-        this.meetingService.GetDeptLs().subscribe(function (resJson) {
-            if (resJson.Result)
-                _this.DeptLs = resJson.Data;
-        });
-        this.writeForm = this.formBuilder.group({
-            Title: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(30)]],
-            TypeId: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
-            PlaceId: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
-            StartDate: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
-            EndDate: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
-            Person: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(180), __WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
-            DeptId: ["", []],
-            HostName: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(8)]],
-            Range: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(180)]],
-            Detail: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(180)]],
-            FileOldName: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(180)]],
-        });
+        this.list = [];
+        this.checkBtn = {
+            Drafting: false,
+            Delivered: true,
+            Approved: false,
+            HasBeenReturned: false,
+            completed: false,
+        };
+        this.moredata = true;
+        this.isEmpty = false;
+        this.data = {
+            "status": this.meetingService.meetingStatus["Delivered"],
+            "uid": this.meetingService.httpService.globalData.Uid,
+            "PageIndex": 0,
+            "PageSize": 8
+        };
+        this.getList(this.data);
     }
-    MeetingWritePage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad MeetingWritePage');
+    MeetingPage.prototype.ionViewDidLoad = function () {
     };
-    MeetingWritePage.prototype.sent = function (data) {
+    // 选择状态
+    MeetingPage.prototype.checkRead = function (name) {
+        if (name === void 0) { name = "Delivered"; }
+        this.data.PageIndex = 0;
+        this.list = [];
+        this.checkBtn = { Drafting: false, Delivered: false, Approved: false,
+            HasBeenReturned: false, completed: false,
+        };
+        this.checkBtn[name] = true;
+        this.data.status = this.meetingService.meetingStatus[name];
+        console.log(this.data);
+        this.getList(this.data);
+    };
+    MeetingPage.prototype.doRead = function (Params) {
+        this.navCtrl.push("MeetingEditPage", { "Id": Params });
+        // let modal = this.modalCtrl.create("MeetingEditPage");
+        // modal.present();
+        // modal.onDidDismiss(data => {
+        //     data && console.log(data);
+        // });
+    };
+    MeetingPage.prototype.doWrite = function () {
+        var modal = this.modalCtrl.create("MeetingWritePage");
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            data && console.log(data);
+        });
+        // this.navCtrl.push(MailWrite);
+    };
+    MeetingPage.prototype.doRefresh = function (refresher) {
+        this.list = [];
+        this.data.PageIndex = 0;
+        this.getList(this.data);
+        setTimeout(function () {
+            refresher.complete();
+        }, 1000);
+    };
+    MeetingPage.prototype.doInfinite = function () {
+        if (this.moredata) {
+            this.data.PageIndex++;
+            this.getList(this.data);
+        }
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve();
+            }, 500);
+        });
+    };
+    MeetingPage.prototype.getList = function (data) {
         var _this = this;
-        data.Person = null;
-        data.Uid = this.globalData.Uid;
-        data.FileNewName = this.FileNewName;
-        data.PersonId = this.PersonId;
-        this.meetingService.write(data).subscribe(function (resJson) {
-            if (resJson.Result) {
-                _this.nativeService.showToast("添加成功", 888);
+        this.meetingService.getList(data).subscribe(function (resJson) {
+            if (resJson.Result && resJson.Data.length !== 0 && (resJson.Data instanceof Array)) {
+                _this.moredata = true;
+                _this.isEmpty = false;
+                var list = resJson.Data;
+                _this.list = _this.list.concat(list);
             }
             else {
-                _this.nativeService.showToast(resJson.Data, 888);
+                _this.moredata = false;
+                _this.isEmpty = (_this.data.PageIndex == 0) ? true : false;
             }
         });
     };
-    MeetingWritePage.prototype.addAffix = function () {
-        var _this = this;
-        this.fileService.uploadAffix(1).subscribe(function (data) {
-            var resJson = JSON.parse(data.response);
-            if (data.responseCode === 200) {
-                _this.writeForm.patchValue({ 'Affix': resJson.Data[0].OldName });
-                _this.FileNewName = resJson.Data[0].NewName;
-            }
-            else {
-                _this.nativeService.showToast(resJson.Data, 800);
-            }
-        });
-    };
-    MeetingWritePage.prototype.checkPeople = function (myEvent) {
-        var _this = this;
-        var popover = this.popoverCtrl.create("ContactsPopoverPage", { addressee: this.writeForm.get("Person").value, addresseeIds: this.PersonId });
-        popover.present({
-            ev: myEvent
-        });
-        popover.onDidDismiss(function (data) {
-            if (!!data) {
-                _this.PersonId = data.addresseeIds;
-                _this.writeForm.patchValue({ 'Person': data.addressee });
-            }
-        });
-    };
-    MeetingWritePage = __decorate([
+    MeetingPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-meeting-write',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-write\meeting-write.html"*/`<!--\n\n  Generated template for the MeetingWritePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>添加会议</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">\n\n        <div>\n\n            <ion-list>\n\n                <ion-item>\n\n                    <ion-label stacked>会议主题</ion-label>\n\n                    <ion-input min-rows="1" formControlName="Title" placeholder="请输入" ></ion-input>\n\n                </ion-item>\n\n\n\n                <ion-item>\n\n                    <ion-label stacked>会议类型</ion-label>\n\n                    <ion-select formControlName="TypeId" cancelText="取消" okText="确定" placeholder="请选择">\n\n                        <ion-option *ngFor="let type of MeetTypeLs;let i = index" [value]="type.Id">{{type.Name}}</ion-option>\n\n                        <!-- <ion-option value="2">类型2</ion-option> -->\n\n                    </ion-select>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-label stacked>召开地点</ion-label>\n\n                    <ion-select formControlName="PlaceId" cancelText="取消" okText="确定" placeholder="请选择">\n\n                        <ion-option *ngFor="let place of MeetPlaceLs;let i = index" [value]="place.Id">{{place.Name}}</ion-option>\n\n                        <!-- <ion-option value="2">类型2</ion-option> -->\n\n                    </ion-select>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-label stacked>开始时间</ion-label>\n\n                    <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="StartDate" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-label stacked>结束时间</ion-label>\n\n                    <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="EndDate" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-label stacked>参加人员</ion-label>\n\n                    <ion-textarea type="text" #popoverContent (click)="checkPeople($event)" formControlName="Person" readonly="true" placeholder="双击点击"></ion-textarea>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-label stacked>参加部门</ion-label>\n\n                    <ion-select formControlName="DeptId" multiple="true" cancelText="取消" okText="确定" placeholder="请选择">\n\n                        <ion-option *ngFor="let dept of DeptLs;let i = index" [value]="dept.Id">{{dept.BmName}}</ion-option>\n\n                    </ion-select>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-label stacked>主持人</ion-label>\n\n                    <ion-input type="text" formControlName="HostName" placeholder="请输入"></ion-input>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-label stacked>出席范围</ion-label>\n\n                    <ion-input type="text" formControlName="Range" placeholder="请输入"></ion-input>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-label stacked>简要说明</ion-label>\n\n                    <ion-input type="text" formControlName="Detail" placeholder="请输入"></ion-input>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-label stacked>附件</ion-label>\n\n                    <ion-input type="text" formControlName="FileOldName"  (click)="addAffix()" placeholder="点击添加"></ion-input>\n\n                </ion-item>\n\n            </ion-list>\n\n            <div padding text-center>\n\n                <button ion-button type="submit" color="danger" [disabled]="!writeForm.valid">保存</button>\n\n                <button ion-button clear small navPop>取消修改</button>\n\n            </div>\n\n        </div>\n\n    </form>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-write\meeting-write.html"*/,
+            selector: 'page-meeting',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting.html"*/`<!--\n  Generated template for the MeetingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>会议</ion-title>\n  </ion-navbar>\n\n  <div  class="subbox">\n    <div >\n        <button ion-button small (click)="checkRead(\'Drafting\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.Drafting}">起草中</button>\n        <button ion-button small (click)="checkRead(\'Delivered\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.Delivered}">送审中</button>\n        <button ion-button small (click)="checkRead(\'Approved\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.Approved}">已审批</button>\n        <button ion-button small (click)="checkRead(\'HasBeenReturned\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.HasBeenReturned}">已退回</button>\n        <button ion-button small (click)="checkRead(\'completed\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.completed}">已完成</button>\n    </div>\n  </div>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n      </ion-refresher-content>\n  </ion-refresher>\n  <ion-list>\n    <ion-item-sliding *ngFor="let meeting of list"  (click)="doRead(meeting.Id)">\n        <ion-item>\n            <span class="status-new-dot" *ngIf="meeting.Status==\'1\'">●&nbsp;</span><span>{{meeting.Title}}</span>\n            <p class="font-12">地点:{{meeting.Place}}&emsp;{{meeting.StartDate}}</p>\n        </ion-item>\n    </ion-item-sliding>\n  </ion-list>\n  <empty *ngIf="isEmpty"></empty>\n  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n  <ion-fab bottom right>\n      <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n  </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_5__providers_FileService__["a" /* FileService */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */],
-            __WEBPACK_IMPORTED_MODULE_6__meeting_service__["a" /* MeetingService */]])
-    ], MeetingWritePage);
-    return MeetingWritePage;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_2__meeting_service__["a" /* MeetingService */]])
+    ], MeetingPage);
+    return MeetingPage;
 }());
 
-//# sourceMappingURL=meeting-write.js.map
+//# sourceMappingURL=meeting.js.map
 
 /***/ })
 

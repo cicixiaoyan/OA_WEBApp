@@ -13,41 +13,65 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
     <form [formGroup]="setForm" (ngSubmit)="save(setForm.value)">
         <div>
             <ion-list>
                 <ion-item>
-                    <ion-label stacked>名称</ion-label>
-                    <ion-input formControlName="Name" placeholder="请输入" ></ion-input>
+                    <ion-label>名称</ion-label>
+                    <ion-input text-right formControlName="Name" placeholder="请输入" ></ion-input>
                 </ion-item>
-                <ion-item>
-                    <ion-label stacked>管理人员</ion-label>
-                    <ion-input  formControlName="Manager" placeholder="请输入" ></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label stacked>规模容量</ion-label>
-                    <ion-input type="number"  formControlName="Number" placeholder="请输入" ></ion-input>
-                </ion-item>
+                <div *ngIf="!setForm.controls.Name.valid && (setForm.controls.Name.touched || setForm.controls.Name.dirty )" class="validation-failed">
+                    <div *ngIf="setForm.get('Name').errors.required">名称必填</div>
+                    <div *ngIf="setForm.get('Name').errors.minlength">最少输入2个字</div>
+                    <div *ngIf="setForm.get('Name').errors.maxlength">最多输入20个字</div>
+                </div> 
 
                 <ion-item>
-                    <ion-label stacked>联系电话</ion-label>
-                    <ion-input type="number"  formControlName="Mobile" placeholder="请输入" ></ion-input>
+                    <ion-label>管理人员</ion-label>
+                    <ion-input text-right  formControlName="Manager" placeholder="请输入" ></ion-input>
+                </ion-item>
+                <div *ngIf="!setForm.controls.Manager.valid && (setForm.controls.Manager.touched || setForm.controls.Manager.dirty )" class="validation-failed">
+                    <div *ngIf="setForm.get('Manager').errors.required">管理人员必填</div>
+                    <div *ngIf="setForm.get('Manager').errors.minlength">最少输入2个字</div>
+                    <div *ngIf="setForm.get('Manager').errors.maxlength">最多输入20个字</div>
+                </div> 
+
+
+                <ion-item>
+                    <ion-label>规模容量</ion-label>
+                    <ion-input text-right type="number" formControlName="Number" placeholder="请输入" ></ion-input>
+                </ion-item>
+                <div *ngIf="!setForm.controls.Number.valid && (setForm.controls.Number.touched || setForm.controls.Number.dirty)" class="validation-failed">
+                    <div *ngIf="setForm.get('Number').errors.required">必填项</div>
+                    <div *ngIf="setForm.get('Number').errors.max">最大容量10000</div>
+                </div> 
+
+                <ion-item>
+                    <ion-label>联系电话<span class="optional">（选填）</span></ion-label>
+                    <ion-input text-right type="number"  formControlName="Mobile" placeholder="请输入" ></ion-input>
+                </ion-item>
+                <div *ngIf="!setForm.controls.Mobile.valid && (setForm.controls.Mobile.touched || setForm.controls.Mobile.dirty)" class="validation-failed">
+                    请输入合法的联系电话
+                </div> 
+
+                <ion-item>
+                    <ion-label>是否有服务人员<span class="optional">（选填）</span></ion-label>
+                    <ion-toggle formControlName="HaveAttendant"></ion-toggle>
                 </ion-item>
                 <ion-item>
-                    <ion-label>是否有服务人员</ion-label>
-                    <ion-toggle [(ngModel)]="HaveAttendant"></ion-toggle>
-                </ion-item>
-                <ion-item>
-                    <ion-label stacked>所属部门</ion-label>
+                    <ion-label>所属部门<span class="optional">（选填）</span></ion-label>
                     <ion-select formControlName="DeptId" cancelText="取消" okText="确定" placeholder="请选择">
                         <ion-option *ngFor="let Dept of DeptLs;let i = index" [value]="Dept.Id">{{Dept.BmName}}</ion-option>
                     </ion-select>
                 </ion-item>
                 <ion-item>
-                    <ion-label stacked>简介</ion-label>
-                    <ion-input type="text" formControlName="Introduction"  placeholder="请输入"></ion-input>
+                    <ion-label stacked>简介<span class="optional">（选填）</span></ion-label>
+                    <ion-textarea  formControlName="Introduction"  placeholder="请输入"></ion-textarea>
                 </ion-item>
+                <div *ngIf="!setForm.controls.Introduction.valid && (setForm.controls.Introduction.touched || setForm.controls.Introduction.dirty)" class="validation-failed">
+                    最多可输入180个字
+                </div> 
               
             </ion-list>
             <div padding text-center>

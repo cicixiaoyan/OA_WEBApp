@@ -21,6 +21,11 @@
                     <ion-label stacked>会议主题</ion-label>
                     <ion-input min-rows="1" formControlName="Title" placeholder="请输入" ></ion-input>
                 </ion-item>
+                <div *ngIf="!writeForm.controls.Title.valid && (writeForm.controls.Title.touched || writeForm.controls.Title.dirty )" class="validation-failed">
+                    <div *ngIf="writeForm.get('Title').errors.required">会议主题必填</div>
+                    <div *ngIf="writeForm.get('Title').errors.minlength">最少输入2个字</div>
+                    <div *ngIf="writeForm.get('Title').errors.maxlength">最多输入30个字</div>
+                </div> 
 
                 <ion-item>
                     <ion-label stacked>会议类型</ion-label>
@@ -29,6 +34,10 @@
                         <!-- <ion-option value="2">类型2</ion-option> -->
                     </ion-select>
                 </ion-item>
+                <div *ngIf="!writeForm.controls.TypeId.valid && (writeForm.controls.TypeId.touched || writeForm.controls.TypeId.dirty )" class="validation-failed">
+                    会议类型必选
+                </div> 
+
                 <ion-item>
                     <ion-label stacked>召开地点</ion-label>
                     <ion-select formControlName="PlaceId" cancelText="取消" okText="确定" placeholder="请选择">
@@ -36,18 +45,35 @@
                         <!-- <ion-option value="2">类型2</ion-option> -->
                     </ion-select>
                 </ion-item>
+                <div *ngIf="!writeForm.controls.PlaceId.valid && (writeForm.controls.PlaceId.touched || writeForm.controls.PlaceId.dirty )" class="validation-failed">
+                    召开地点必选
+                </div> 
+
                 <ion-item>
                     <ion-label stacked>开始时间</ion-label>
                     <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="StartDate" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>
                 </ion-item>
+                <div *ngIf="!writeForm.controls.StartDate.valid && (writeForm.controls.StartDate.touched || writeForm.controls.StartDate.dirty )" class="validation-failed">
+                    开始时间必填
+                </div> 
+
                 <ion-item>
                     <ion-label stacked>结束时间</ion-label>
                     <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="EndDate" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>
                 </ion-item>
+                <div *ngIf="!writeForm.controls.EndDate.valid && (writeForm.controls.EndDate.touched || writeForm.controls.EndDate.dirty )" class="validation-failed">
+                    结束时间必填
+                </div> 
+                 
                 <ion-item>
                     <ion-label stacked>参加人员</ion-label>
                     <ion-textarea type="text" #popoverContent (click)="checkPeople($event)" formControlName="Person" readonly="true" placeholder="双击点击"></ion-textarea>
                 </ion-item>
+                <div *ngIf="!writeForm.controls.Person.valid && (writeForm.controls.Person.touched || writeForm.controls.Person.dirty )" class="validation-failed">
+                    <div *ngIf="writeForm.get('Title').errors.required">参加人员必填</div>
+                    <div *ngIf="writeForm.get('Title').errors.maxlength">最多输入180个字</div>
+                </div> 
+                
                 <ion-item>
                     <ion-label stacked>参加部门</ion-label>
                     <ion-select formControlName="DeptId" multiple="true" cancelText="取消" okText="确定" placeholder="请选择">
@@ -58,14 +84,26 @@
                     <ion-label stacked>主持人</ion-label>
                     <ion-input type="text" formControlName="HostName" placeholder="请输入"></ion-input>
                 </ion-item>
+                <div *ngIf="!writeForm.controls.HostName.valid && (writeForm.controls.HostName.touched || writeForm.controls.HostName.dirty )" class="validation-failed">
+                    最多输入20个字
+                </div>
+                
                 <ion-item>
                     <ion-label stacked>出席范围</ion-label>
                     <ion-input type="text" formControlName="Range" placeholder="请输入"></ion-input>
                 </ion-item>
+                <div *ngIf="!writeForm.controls.Range.valid && (writeForm.controls.Range.touched || writeForm.controls.Range.dirty )" class="validation-failed">
+                    最多输入180个字
+                </div>
+
                 <ion-item>
                     <ion-label stacked>简要说明</ion-label>
                     <ion-input type="text" formControlName="Detail" placeholder="请输入"></ion-input>
                 </ion-item>
+                <div *ngIf="!writeForm.controls.Detail.valid && (writeForm.controls.Detail.touched || writeForm.controls.Detail.dirty )" class="validation-failed">
+                    最多输入180个字
+                </div>
+
                 <ion-item>
                     <ion-label stacked>附件</ion-label>
                     <ion-input type="text" formControlName="FileOldName"  (click)="addAffix()" placeholder="点击添加"></ion-input>

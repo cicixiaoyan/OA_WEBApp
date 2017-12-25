@@ -40,7 +40,7 @@ export class StaffFileMaintenance {
   }
 
   doRead(Params) {
-    this.navCtrl.push("StaffFileMaintenanceSet", { "Id": Params, "edit": true });
+    this.navCtrl.push("StaffFileMaintenanceSet", { "Id": Params, "readOnly": true });
     // let modal = this.modalCtrl.create("MeetingEditPage");
     // modal.present();
     // modal.onDidDismiss(data => {

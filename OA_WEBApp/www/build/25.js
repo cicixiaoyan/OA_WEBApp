@@ -1,15 +1,16 @@
 webpackJsonp([25],{
 
-/***/ 715:
+/***/ 725:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CarPageModule", function() { return CarPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContractMaintenancePageModule", function() { return ContractMaintenancePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__car__ = __webpack_require__(777);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(756);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_maintenance__ = __webpack_require__(794);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contract_service__ = __webpack_require__(766);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_components_module__ = __webpack_require__(365);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,37 +21,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var CarPageModule = (function () {
-    function CarPageModule() {
+
+var ContractMaintenancePageModule = (function () {
+    function ContractMaintenancePageModule() {
     }
-    CarPageModule = __decorate([
+    ContractMaintenancePageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__car__["a" /* CarPage */],
+                __WEBPACK_IMPORTED_MODULE_2__contract_maintenance__["a" /* ContractMaintenancePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__car__["a" /* CarPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contract_maintenance__["a" /* ContractMaintenancePage */]),
+                __WEBPACK_IMPORTED_MODULE_4__components_components_module__["a" /* ComponentsModule */]
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__car__["a" /* CarPage */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_3__contract_service__["a" /* ContractService */]],
+            exports: [__WEBPACK_IMPORTED_MODULE_2__contract_maintenance__["a" /* ContractMaintenancePage */]]
         })
-    ], CarPageModule);
-    return CarPageModule;
+    ], ContractMaintenancePageModule);
+    return ContractMaintenancePageModule;
 }());
 
-//# sourceMappingURL=car.module.js.map
+//# sourceMappingURL=contract-maintenance.module.js.map
 
 /***/ }),
 
-/***/ 756:
+/***/ 766:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CarService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(364);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62,65 +63,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
-var CarService = (function () {
-    function CarService(httpService) {
+// import { UserInfo } from "../../model/UserInfo";
+var ContractService = (function () {
+    function ContractService(httpService) {
         this.httpService = httpService;
     }
-    CarService.prototype.getList = function (param) {
-        return this.httpService.postFormData("ashx/BusVehicleLs.ashx", param).map(function (res) { return res.json(); });
-    };
-    CarService.prototype.geDetail = function (id) {
-        return this.httpService.postFormData("ashx/BusVehicleDetail.ashx", { "Id": id })
-            .map(function (res) { return res.json(); });
-    };
-    CarService.prototype.add = function (param) {
-        return this.httpService.postFormData("ashx/BusVehicleLsAdd.ashx", param).map(function (res) { return res.json(); });
-    };
-    CarService.prototype.mod = function (param) {
-        return this.httpService.postFormData("ashx/BusVehicleLsMod.ashx", param).map(function (res) { return res.json(); });
-    };
-    CarService.prototype.geStatus = function (status) {
-        return this.httpService.postFormData("ashx/BusQuery.ashx", { "Status": status })
-            .map(function (res) { return res.json(); });
-    };
-    CarService.prototype.getDriverList = function (param) {
-        return this.httpService.postFormData("ashx/DriverLs.ashx", param).map(function (res) { return res.json(); });
-    };
-    CarService.prototype.getDriverDetails = function (id) {
-        return this.httpService.postFormData("ashx/DriverDetails.ashx", { "Id": id })
-            .map(function (res) { return res.json(); });
-    };
-    CarService.prototype.driverAdd = function (param) {
-        return this.httpService.postFormData("ashx/DriverAdd.ashx", param).map(function (res) { return res.json(); });
-    };
-    CarService.prototype.driverMod = function (param) {
-        return this.httpService.postFormData("ashx/DriverMod.ashx", param).map(function (res) { return res.json(); });
-    };
-    CarService.prototype.driverDel = function (id) {
-        return this.httpService.postFormData("ashx/DriverDel.ashx", { "Id": id })
-            .map(function (res) { return res.json(); });
-    };
-    CarService = __decorate([
+    ContractService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], CarService);
-    return CarService;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_HttpService__["a" /* HttpService */]])
+    ], ContractService);
+    return ContractService;
 }());
 
-//# sourceMappingURL=car_service.js.map
+//# sourceMappingURL=contract-service.js.map
 
 /***/ }),
 
-/***/ 777:
+/***/ 794:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CarPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractMaintenancePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(756);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_service__ = __webpack_require__(766);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -133,58 +99,62 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-/**
- * Generated class for the CarPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var CarPage = (function () {
-    function CarPage(navCtrl, navParams, globalData, modalCtrl, CarService) {
+var ContractMaintenancePage = (function () {
+    function ContractMaintenancePage(navCtrl, navParams, popoverCtrl, contractService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.globalData = globalData;
-        this.modalCtrl = modalCtrl;
-        this.CarService = CarService;
-        this.isEmpty = false;
+        this.popoverCtrl = popoverCtrl;
+        this.contractService = contractService;
         this.list = [];
         this.moredata = true;
-        this.data = {};
+        this.isEmpty = false;
         this.data = {
+            "uid": this.contractService.httpService.globalData.Uid,
             "PageIndex": 0,
             "PageSize": 8
         };
-        this.initializeItems();
-    }
-    CarPage.prototype.initializeItems = function () {
         this.getList(this.data);
+    }
+    ContractMaintenancePage.prototype.ionViewDidLoad = function () {
     };
-    CarPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Message');
+    ContractMaintenancePage.prototype.presentPopover = function (myEvent) {
+        var _this = this;
+        var popover = this.popoverCtrl.create("ContractSearchPage", { "search": this.search });
+        popover.present({
+            ev: myEvent
+        });
+        popover.onDidDismiss(function (search) {
+            console.log(search);
+            if (search) {
+                _this.search = search.search;
+                var data = search.search;
+                data.uid = _this.contractService.httpService.globalData.Uid;
+                data.PageIndex = 0;
+                data.PageSize = 8;
+                _this.getList(data);
+            }
+        });
     };
-    CarPage.prototype.doRead = function (id) {
-        console.log(id, "id");
-        // this.navCtrl.push("CarReadPage", { Params: Params });
-        this.navCtrl.push("CarReadPage", { "Id": id });
+    ContractMaintenancePage.prototype.doRead = function (Params) {
+        this.navCtrl.push("ContractSettingPage", { "Id": Params });
     };
-    CarPage.prototype.doWrite = function () {
-        // let modal = this.modalCtrl.create("CarAddPage");
+    ContractMaintenancePage.prototype.doWrite = function () {
+        this.navCtrl.push("ContractSettingPage");
+        // let modal = this.modalCtrl.create("TrainingMaintenanceSetPage");
         // modal.present();
         // modal.onDidDismiss(data => {
         //     data && console.log(data);
         // });
-        this.navCtrl.push("CarAddPage");
     };
-    CarPage.prototype.doRefresh = function (refresher) {
+    ContractMaintenancePage.prototype.doRefresh = function (refresher) {
         this.list = [];
-        this.data.PageIndex = 0;
+        this.data.PageIndex = 1;
         this.getList(this.data);
         setTimeout(function () {
             refresher.complete();
         }, 1000);
     };
-    CarPage.prototype.doInfinite = function () {
+    ContractMaintenancePage.prototype.doInfinite = function () {
         if (this.moredata) {
             this.data.PageIndex++;
             this.getList(this.data);
@@ -195,39 +165,52 @@ var CarPage = (function () {
             }, 500);
         });
     };
-    CarPage.prototype.getList = function (data) {
-        var _this = this;
-        this.CarService.getList(data).subscribe(function (resJson) {
-            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
-                var list = resJson.Data;
-                _this.list = _this.list.concat(list);
-                _this.moredata = true;
-                _this.isEmpty = false;
+    ContractMaintenancePage.prototype.getList = function (data) {
+        this.list = [
+            {
+                "Id": "1",
+                "Type": '劳动合同',
+                "Dept": '检验科',
+                "Code": "A012345677",
+                "Name": '张三',
+                "TurnPositive": 'false',
+                "Status": '生效中'
+            },
+            {
+                "Id": "2",
+                "Type": '保密协议',
+                "Dept": '检验科',
+                "Code": "A0123456789",
+                "Name": '李四',
+                "TurnPositive": 'false',
+                "Status": '试用中'
             }
-            else {
-                _this.moredata = false;
-                if (_this.data.PageIndex === 0) {
-                    _this.CarService.httpService.nativeService.showToast(resJson.Data);
-                    _this.isEmpty = true;
-                    _this.list = [];
-                }
-            }
-        });
+        ];
+        // this.contractService.getList(data).subscribe((resJson) => {
+        //   if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
+        //     this.moredata = true;
+        //     this.isEmpty = false;
+        //     let list = resJson.Data;
+        //     this.list = [...this.list, ...list];
+        //   }else{
+        //     this.moredata = false;
+        //     this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+        //   }
+        // });
     };
-    CarPage = __decorate([
+    ContractMaintenancePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-car',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\car.html"*/`<!--\n  Generated template for the CarPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>车辆</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n      </ion-refresher-content>\n  </ion-refresher>\n  <ion-list>\n    <ion-item (click)="doRead(bus.Id)" *ngFor="let bus of list">\n      <h2 >{{bus.BusName}}</h2><ion-note item-end>{{BusStatus}}</ion-note>\n      <h3>管理员：{{bus.BusManger}}&emsp;核载：{{bus.BusPassenger}}人</h3>\n      <p>启动日期：{{bus.StartDate}}</p>\n    </ion-item>\n    <!-- <ion-item (click)="doRead()">\n      <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>\n      <h3>管理员：何小凤&emsp;核载：4人</h3>\n      <p>启动日期：2005-11-12</p>\n    </ion-item>\n    <ion-item (click)="doRead()">\n      <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>\n      <h3>管理员：何小凤&emsp;核载：4人</h3>\n      <p>启动日期：2005-11-12</p>\n    </ion-item> -->\n  </ion-list>\n  <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n      <div padding>暂无消息数据！！！</div>\n      <img src="assets/img/face/face2.png" height="100">\n  </div>\n  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n  <ion-fab bottom right>\n      <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n  </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\car.html"*/,
+            selector: 'page-contract-maintenance',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-maintenance\contract-maintenance.html"*/`<!--\n  Generated template for the ContractMaintenancePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>合同维护</ion-title>\n    <ion-buttons end  (click)="presentPopover($event)">\n        <button ion-button icon-only>\n          <ion-icon name="search"></ion-icon>\n        </button>\n      </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let item of list"  (click)="doRead(item.Id)">\n          <ion-item>\n              <h2>{{item.Name}}[{{item.Code}}]</h2>\n              <div class="small">类型：{{item.Type}}&emsp;{{item.Status}} <span float-right color=\'energized\'>{{item.TurnPositive == \'false\' ? \'未转正\' : \'已转正\'}}</span></div>\n              <p class="small">部门：{{item.Dept}}&emsp;</p>\n          </ion-item>\n      </ion-item-sliding>\n    </ion-list>\n    <empty *ngIf="isEmpty"></empty>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-maintenance\contract-maintenance.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */]])
-    ], CarPage);
-    return CarPage;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */],
+            __WEBPACK_IMPORTED_MODULE_2__contract_service__["a" /* ContractService */]])
+    ], ContractMaintenancePage);
+    return ContractMaintenancePage;
 }());
 
-//# sourceMappingURL=car.js.map
+//# sourceMappingURL=contract-maintenance.js.map
 
 /***/ })
 

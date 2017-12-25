@@ -33,6 +33,7 @@ import { Utils } from "../providers/Utils";
 import { Http, HttpModule } from "@angular/http";
 import { HttpInterceptHandle } from "../providers/HttpInterceptHandle";
 import { GlobalData } from "../providers/GlobalData";
+import { PublicService } from '../providers/PublicService'
 
 import { BackButtonService } from '../services/backButtonService';
 
@@ -105,6 +106,7 @@ export class FunDebugErrorHandler implements ErrorHandler {
         Utils,
         HttpInterceptHandle,
         GlobalData,
+        PublicService,
         Logger,
         BackButtonService
 

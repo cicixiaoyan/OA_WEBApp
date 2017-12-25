@@ -1,14 +1,14 @@
 webpackJsonp([37],{
 
-/***/ 730:
+/***/ 761:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StaffFileMaintenanceWorkExperiencePageModule", function() { return StaffFileMaintenanceWorkExperiencePageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WelcomeModule", function() { return WelcomeModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience__ = __webpack_require__(792);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__welcome__ = __webpack_require__(830);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,32 +18,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var StaffFileMaintenanceWorkExperiencePageModule = (function () {
-    function StaffFileMaintenanceWorkExperiencePageModule() {
+var WelcomeModule = (function () {
+    function WelcomeModule() {
     }
-    StaffFileMaintenanceWorkExperiencePageModule = __decorate([
+    WelcomeModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience__["a" /* StaffFileMaintenanceWorkExperience */],
+                __WEBPACK_IMPORTED_MODULE_2__welcome__["a" /* Welcome */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience__["a" /* StaffFileMaintenanceWorkExperience */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__welcome__["a" /* Welcome */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience__["a" /* StaffFileMaintenanceWorkExperience */]]
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__welcome__["a" /* Welcome */]
+            ]
         })
-    ], StaffFileMaintenanceWorkExperiencePageModule);
-    return StaffFileMaintenanceWorkExperiencePageModule;
+    ], WelcomeModule);
+    return WelcomeModule;
 }());
 
-//# sourceMappingURL=staff-file-maintenance-work-experience.module.js.map
+//# sourceMappingURL=welcome.module.js.map
 
 /***/ }),
 
-/***/ 792:
+/***/ 830:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StaffFileMaintenanceWorkExperience; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Welcome; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -57,39 +59,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+// import { TabsPage } from '../tabs/tabs';
+// import { LoginPage } from "../login/login";
 /**
- * Generated class for the StaffFileMaintenanceWorkExperiencePage page.
+ * Generated class for the Welcome page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
  */
-var StaffFileMaintenanceWorkExperience = (function () {
-    function StaffFileMaintenanceWorkExperience(navCtrl, navParams, modalCtrl) {
-        this.navCtrl = navCtrl;
+var Welcome = (function () {
+    function Welcome(viewCtrl, navParams, modalCtrl) {
+        this.viewCtrl = viewCtrl;
         this.navParams = navParams;
         this.modalCtrl = modalCtrl;
     }
-    StaffFileMaintenanceWorkExperience.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad StaffFileMaintenanceWorkExperiencePage');
+    Welcome.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Welcome');
     };
-    StaffFileMaintenanceWorkExperience.prototype.add = function () {
-        var modal = this.modalCtrl.create("StaffFileMaintenanceWorkExperienceAdd");
+    Welcome.prototype.goToHome = function () {
+        // this.navCtrl.setRoot(TabsPage, { index: 0 });
+        this.viewCtrl.dismiss();
+        var modal = this.modalCtrl.create("LoginPage");
         modal.present();
         modal.onDidDismiss(function (data) {
             data && console.log(data);
         });
     };
-    StaffFileMaintenanceWorkExperience = __decorate([
+    Welcome = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-staff-file-maintenance-work-experience',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience.html"*/`<!--\n  Generated template for the StaffFileMaintenanceWorkExperiencePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>工作经历</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-list>\n        <ion-item-sliding>\n          <ion-item  *ngFor="let item of list"  (click)="doRead(item.Id)">\n            <h3>2017-12-18~2017-12-04</h3>\n            <h2>工商管理</h2>\n            <p>我是工作单位我是工作</p>\n          </ion-item>\n          <ion-item-options side="right">\n            <button ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>\n          </ion-item-options>\n        </ion-item-sliding>\n      </ion-list>\n      <div text-center>\n          <button (click)="add()" icon-left ion-button color="secondary" small outline round><ion-icon name="home"></ion-icon>添加</button>\n      </div>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience.html"*/,
+            selector: 'page-welcome',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\welcome\welcome.html"*/`<!--\n  Generated template for the Welcome page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header class="nav-decor">\n\n    <ion-navbar>\n        <ion-title>welcome</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-slides pager>\n\n        <ion-slide>\n            <img src="assets/img/welcome/slide1.jpg" />\n        </ion-slide>\n\n        <ion-slide>\n            <img src="assets/img/welcome/slide2.png" />\n        </ion-slide>\n\n        <ion-slide>\n            <img src="assets/img/welcome/slide3.png" />\n        </ion-slide>\n\n        <ion-slide>\n            <ion-row>\n                <ion-col>\n                    <img src="assets/img/welcome/slide4.png" />\n                </ion-col>\n            </ion-row>\n            <ion-row class="start-button">\n                <ion-col>\n                    <button ion-button clear color="light" (click)="goToHome()">立即启动</button>\n                </ion-col>\n            </ion-row>\n        </ion-slide>\n\n    </ion-slides>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\welcome\welcome.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */]) === "function" && _c || Object])
-    ], StaffFileMaintenanceWorkExperience);
-    return StaffFileMaintenanceWorkExperience;
-    var _a, _b, _c;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */]])
+    ], Welcome);
+    return Welcome;
 }());
 
-//# sourceMappingURL=staff-file-maintenance-work-experience.js.map
+//# sourceMappingURL=welcome.js.map
 
 /***/ })
 

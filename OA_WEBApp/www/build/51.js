@@ -1,14 +1,14 @@
 webpackJsonp([51],{
 
-/***/ 709:
+/***/ 724:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountPasswordeditModule", function() { return AccountPasswordeditModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NewworkModule", function() { return NewworkModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__account_passwordedit__ = __webpack_require__(771);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__newwork__ = __webpack_require__(793);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,38 +18,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AccountPasswordeditModule = (function () {
-    function AccountPasswordeditModule() {
+var NewworkModule = (function () {
+    function NewworkModule() {
     }
-    AccountPasswordeditModule = __decorate([
+    NewworkModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__account_passwordedit__["a" /* AccountPasswordedit */],
+                __WEBPACK_IMPORTED_MODULE_2__newwork__["a" /* Newwork */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__account_passwordedit__["a" /* AccountPasswordedit */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__newwork__["a" /* Newwork */]),
             ],
             exports: [
-                __WEBPACK_IMPORTED_MODULE_2__account_passwordedit__["a" /* AccountPasswordedit */]
+                __WEBPACK_IMPORTED_MODULE_2__newwork__["a" /* Newwork */]
             ]
         })
-    ], AccountPasswordeditModule);
-    return AccountPasswordeditModule;
+    ], NewworkModule);
+    return NewworkModule;
 }());
 
-//# sourceMappingURL=account-passwordedit.module.js.map
+//# sourceMappingURL=newwork.module.js.map
 
 /***/ }),
 
-/***/ 771:
+/***/ 793:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountPasswordedit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Newwork; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_HttpService__ = __webpack_require__(89);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -61,64 +59,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
-// import { LoginPage } from '../../login/login';
-
+// import { NewworkDetail } from './newwork-detail/newwork-detail';
 /**
- * Generated class for the AccountPasswordedit page.
+ * Generated class for the Newwork page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-var AccountPasswordedit = (function () {
-    function AccountPasswordedit(navCtrl, viewCtrl, modalCtrl, httpService, formBuilder) {
+var Newwork = (function () {
+    function Newwork(navCtrl, navParams) {
         this.navCtrl = navCtrl;
-        this.viewCtrl = viewCtrl;
-        this.modalCtrl = modalCtrl;
-        this.httpService = httpService;
-        this.formBuilder = formBuilder;
-        this.editPasswordForm = this.formBuilder.group({
-            "oldPwd": [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(3)]],
-            "newPwd": [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(3)]],
-            "confirmPassword": [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(3)]]
-        });
+        this.navParams = navParams;
+        this.items = [{
+                wfName: "测试工作流1",
+                wfNo: "2",
+                FK_fid: "1234" // 表单id
+            },
+            {
+                wfName: "测试工作流2",
+                wfNo: "2",
+                FK_fid: "1234" // 表单id
+            },
+            {
+                wfName: "测试工作流3",
+                wfNo: "2",
+                FK_fid: "1234" // 表单id
+            }
+        ];
     }
-    AccountPasswordedit.prototype.confirm = function () {
-        var _this = this;
-        var param = { oldPwd: this.oldPwd, newPwd: this.newPwd, Uid: this.httpService.globalData.Uid };
-        this.httpService.postFormData("ashx/PwdMod.ashx", param)
-            .map(function (responce) { return responce.json(); })
-            .subscribe(function (Resjson) {
-            if (Resjson.Result) {
-                _this.httpService.nativeService.showToast("修改密码成功", 800);
-                var modal = _this.modalCtrl.create("LoginPage");
-                modal.present();
-                modal.onDidDismiss(function (data) {
-                    data && console.log(data);
-                });
-            }
-            else {
-                _this.httpService.nativeService.showToast("修改密码失败： " + Resjson.Data, 800);
-            }
-        });
+    Newwork.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Newwork');
     };
-    AccountPasswordedit.prototype.dismiss = function () {
-        this.viewCtrl.dismiss();
+    Newwork.prototype.addNew = function (id) {
+        this.navCtrl.push("NewworkDetail", { id: id });
     };
-    AccountPasswordedit = __decorate([
+    Newwork = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-account-passwordedit',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-passwordedit\account-passwordedit.html"*/`<ion-header>\n\n    <ion-toolbar>\n\n        <ion-title>\n\n            修改\n\n        </ion-title>\n\n        <ion-buttons>\n\n            <button ion-button (click)="dismiss()">关闭</button>\n\n        </ion-buttons>\n\n    </ion-toolbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n    <form [formGroup]="editPasswordForm" (ngSubmit)="confirm()">\n\n        <ion-list>\n\n            <ion-item>\n\n                <ion-label>&emsp;原密码：</ion-label>\n\n                <ion-input placeholder="请输入原密码" [(ngModel)]="oldPwd" type="password" formControlName="oldPwd"></ion-input>\n\n            </ion-item>\n\n            <div padding-left *ngIf="!editPasswordForm.controls.oldPwd.valid && editPasswordForm.controls.oldPwd.touched" class="validation-failed">请输入原密码</div>\n\n            <ion-item>\n\n                <ion-label>&emsp;新密码：</ion-label>\n\n                <ion-input placeholder="请输入新密码" [(ngModel)]="newPwd" type="password" formControlName="newPwd"></ion-input>\n\n            </ion-item>\n\n            <div padding-left *ngIf="!editPasswordForm.controls.newPwd.valid && editPasswordForm.controls.newPwd.touched" class="validation-failed">请输入新密码</div>\n\n            <ion-item>\n\n                <ion-label>确认密码：</ion-label>\n\n                <ion-input placeholder="请再次输入新密码" type="password" formControlName="confirmPassword"></ion-input>\n\n            </ion-item>\n\n            <div padding-left *ngIf="!editPasswordForm.controls.confirmPassword.valid && editPasswordForm.controls.confirmPassword.touched" class="validation-failed">请确认新密码</div>\n\n        </ion-list>\n\n        <div padding-horizontal>\n\n            <button color="danger" ion-button block type="submit" [disabled]="!editPasswordForm.valid">确　认</button>\n\n        </div>\n\n    </form>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-passwordedit\account-passwordedit.html"*/,
+            selector: 'page-newwork',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\newwork\newwork.html"*/`<!--\n  Generated template for the Newwork page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>新建事项</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-list inset style="margin:16px 0;">\n        <button ion-item *ngFor="let item of items" (click)="addNew(item.FK_fid)">\n    {{item.wfName}}\n  </button>\n    </ion-list>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\newwork\newwork.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_HttpService__["a" /* HttpService */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
-    ], AccountPasswordedit);
-    return AccountPasswordedit;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
+    ], Newwork);
+    return Newwork;
 }());
 
-//# sourceMappingURL=account-passwordedit.js.map
+//# sourceMappingURL=newwork.js.map
 
 /***/ })
 

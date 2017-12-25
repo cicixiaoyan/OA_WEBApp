@@ -4,8 +4,8 @@
     </ion-navbar>
 </ion-header>
 <ion-tabs  #myTabs tabsPlacement="top" name="staff-file-maintemance-tab">
-    <ion-tab [root]="tab1Root" tabTitle="基本资料" tabIcon="ios-home"></ion-tab>
-    <ion-tab [root]="tab2Root" tabTitle="工作经历" tabIcon="ios-mail"></ion-tab>
-    <ion-tab [root]="tab3Root" tabTitle="社会关系" tabIcon="ios-notifications"></ion-tab>
-    <ion-tab [root]="tab4Root" tabTitle="教育经历" tabIcon="ios-settings"></ion-tab>
+    <ion-tab [root]="tab1Root" [rootParams]="rootParams" tabTitle="基本资料" tabIcon="ios-cafe"></ion-tab>
+    <ion-tab [root]="tab2Root" [rootParams]="rootParams" tabTitle="工作经历" tabIcon="ios-code-working"></ion-tab>
+    <ion-tab [root]="tab3Root" [rootParams]="rootParams" tabTitle="社会关系" tabIcon="ios-contacts"></ion-tab>
+    <ion-tab [root]="tab4Root" [rootParams]="rootParams" tabTitle="教育经历" tabIcon="ios-book"></ion-tab>
 </ion-tabs>

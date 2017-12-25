@@ -1,15 +1,15 @@
 webpackJsonp([29],{
 
-/***/ 711:
+/***/ 718:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnnouncementDetailPageModule", function() { return AnnouncementDetailPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DriverSetPageModule", function() { return DriverSetPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcement_detail__ = __webpack_require__(773);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(761);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__driver_set__ = __webpack_require__(787);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(763);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,37 +20,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AnnouncementDetailPageModule = (function () {
-    function AnnouncementDetailPageModule() {
+var DriverSetPageModule = (function () {
+    function DriverSetPageModule() {
     }
-    AnnouncementDetailPageModule = __decorate([
+    DriverSetPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */],
+                __WEBPACK_IMPORTED_MODULE_2__driver_set__["a" /* DriverSetPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__driver_set__["a" /* DriverSetPage */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__announcementService__["a" /* AnnouncementService */]]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__driver_set__["a" /* DriverSetPage */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */]]
         })
-    ], AnnouncementDetailPageModule);
-    return AnnouncementDetailPageModule;
+    ], DriverSetPageModule);
+    return DriverSetPageModule;
 }());
 
-//# sourceMappingURL=announcement-detail.module.js.map
+//# sourceMappingURL=driver-set.module.js.map
 
 /***/ }),
 
-/***/ 761:
+/***/ 763:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CarService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(364);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63,53 +63,65 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the AnnouncementPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var AnnouncementService = (function () {
-    function AnnouncementService(httpService) {
+var CarService = (function () {
+    function CarService(httpService) {
         this.httpService = httpService;
-        this.announcementStatus = {
-            "enter": "录入",
-            "published": "已发布",
-            "all": "0" // 全部
-        };
     }
-    AnnouncementService.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Login');
+    CarService.prototype.getList = function (param) {
+        return this.httpService.postFormData("ashx/BusVehicleLs.ashx", param).map(function (res) { return res.json(); });
     };
-    AnnouncementService.prototype.getList = function (param) {
-        return this.httpService.postFormData("ashx/Announcement.ashx", param)
+    CarService.prototype.geDetail = function (id) {
+        return this.httpService.postFormData("ashx/BusVehicleDetail.ashx", { "Id": id })
             .map(function (res) { return res.json(); });
     };
-    AnnouncementService.prototype.detail = function (key) {
-        return this.httpService.postFormData("ashx/AnnouncementDetail.ashx", { "attKey": key })
+    CarService.prototype.add = function (param) {
+        return this.httpService.postFormData("ashx/BusVehicleLsAdd.ashx", param).map(function (res) { return res.json(); });
+    };
+    CarService.prototype.mod = function (param) {
+        return this.httpService.postFormData("ashx/BusVehicleLsMod.ashx", param).map(function (res) { return res.json(); });
+    };
+    CarService.prototype.geStatus = function (status) {
+        return this.httpService.postFormData("ashx/BusQuery.ashx", { "Status": status })
             .map(function (res) { return res.json(); });
     };
-    AnnouncementService = __decorate([
+    CarService.prototype.getDriverList = function (param) {
+        return this.httpService.postFormData("ashx/DriverLs.ashx", param).map(function (res) { return res.json(); });
+    };
+    CarService.prototype.getDriverDetails = function (id) {
+        return this.httpService.postFormData("ashx/DriverDetails.ashx", { "Id": id })
+            .map(function (res) { return res.json(); });
+    };
+    CarService.prototype.driverAdd = function (param) {
+        return this.httpService.postFormData("ashx/DriverAdd.ashx", param).map(function (res) { return res.json(); });
+    };
+    CarService.prototype.driverMod = function (param) {
+        return this.httpService.postFormData("ashx/DriverMod.ashx", param).map(function (res) { return res.json(); });
+    };
+    CarService.prototype.driverDel = function (id) {
+        return this.httpService.postFormData("ashx/DriverDel.ashx", { "Id": id })
+            .map(function (res) { return res.json(); });
+    };
+    CarService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], AnnouncementService);
-    return AnnouncementService;
+    ], CarService);
+    return CarService;
 }());
 
-//# sourceMappingURL=announcementService.js.map
+//# sourceMappingURL=car_service.js.map
 
 /***/ }),
 
-/***/ 773:
+/***/ 787:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementDetailPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DriverSetPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(761);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_FileService__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(763);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_NativeService__ = __webpack_require__(45);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -125,64 +137,90 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the AnnouncementDetailPage page.
+ * Generated class for the DriverSetPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var AnnouncementDetailPage = (function () {
-    function AnnouncementDetailPage(navCtrl, navParams, announcementService, fileService, nativeService) {
+var DriverSetPage = (function () {
+    function DriverSetPage(navCtrl, navParams, carService, nativeService, formBuilder) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.announcementService = announcementService;
-        this.fileService = fileService;
+        this.carService = carService;
         this.nativeService = nativeService;
-        this.myDiv = '';
-        this.hasAtt = false;
-        this.downloaded = false;
-        this.item = this.navParams.get('item');
-        this.initializeItems();
+        this.formBuilder = formBuilder;
+        this.isWrite = false;
+        this.isWrite = this.navParams.get("isWrite");
+        var today = new Date();
+        this.addForm = this.formBuilder.group({
+            Name: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(10), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            Sex: ["", []],
+            Age: [today, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(3)]],
+            InDate: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(5), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            Memo: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]]
+            // Archives: ["2017/10/9 系统管理员", [Validators.maxLength(180)]],
+        });
     }
-    AnnouncementDetailPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad AnnouncementDetailPage');
-    };
-    AnnouncementDetailPage.prototype.initializeItems = function () {
+    DriverSetPage.prototype.ionViewDidLoad = function () {
         var _this = this;
-        this.announcementService.detail(this.item.AnnouncementAtt).subscribe(function (resJson) {
-            if (resJson.Result && resJson !== []) {
-                _this.attObj = resJson.Data[0];
-                _this.hasAtt = true;
-            }
-            else {
-                _this.attObj = {};
-            }
-        });
-        this.myDiv = this.item.AnnouncementTitle;
-    };
-    AnnouncementDetailPage.prototype.download = function (path, name) {
-        var _this = this;
-        var target = path.split("/").pop();
-        var url = "http://192.168.0.49:789/Attach/flow/Work/201111302315473908417.pdf";
-        this.fileService.download1(url, target).subscribe(function (path) {
-            _this.downloaded = true;
-            _this.fileService.openFile(path).subscribe(function () {
+        if (!this.isWrite) {
+            this.carService.getDriverDetails(this.navParams.get("Id")).subscribe(function (resJson) {
+                if (resJson.Resule && typeof (resJson.Data) !== "string") {
+                    var data = resJson.Data;
+                    _this.id = data.Id;
+                    _this.addForm.setValue({
+                        Name: data.Name,
+                        Sex: data.Sex,
+                        Age: data.Age,
+                        InDate: data.InDate,
+                        Memo: data.Memo
+                    });
+                }
+                else {
+                    _this.nativeService.showToast(resJson.Data, 800);
+                    _this.navCtrl.pop();
+                }
             });
-        });
+        }
     };
-    AnnouncementDetailPage = __decorate([
+    DriverSetPage.prototype.save = function (value) {
+        var _this = this;
+        if (this.isWrite) {
+            this.carService.driverAdd(value).subscribe(function (resJson) {
+                if (resJson.Resule) {
+                    _this.nativeService.showToast("添加成功", 500);
+                }
+                else {
+                    _this.nativeService.showToast(resJson.Data, 800);
+                }
+            });
+        }
+        else {
+            value.Id = this.id;
+            this.carService.driverMod(value).subscribe(function (resJson) {
+                if (resJson.Resule) {
+                    _this.nativeService.showToast("修改成功", 500);
+                }
+                else {
+                    _this.nativeService.showToast(resJson.Data, 800);
+                }
+            });
+        }
+    };
+    DriverSetPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-announcement-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/`<!--\n  Generated template for the AnnouncementDetailPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  \n      <ion-navbar>\n          <ion-title>公告详情</ion-title>\n      </ion-navbar>\n  </ion-header>\n  \n  \n  <ion-content>\n      <div class="detail-header">\n          <div class="detail-title"><span color="calm">[{{item.AnnouncementType}}]</span>{{item.AnnouncementTitle}}</div>\n          <p>\n              {{item.AnnouncementPublishPerson}}\n              <span class="right">{{item.AnnouncementPublishDate|date : "yyyy年MM月dd日 hh时mm分"}}</span>\n          </p>\n      </div>\n      <div class="content">\n          <ion-scroll class="detail-content" scrollY="true" id="noticeContent">\n              <div padding>开始时间：{{item.AnnouncementStarDate|date : "yyyy年MM月dd日 hh时mm分"}}\n                  <br/>结束时间：{{item.AnnouncementEndDate|date : "yyyy年MM月dd日 hh时mm分"}}</div>\n              <div padding-horizontal [innerHTML]="myDiv"></div>\n              <div class="affix" *ngIf="hasAtt">\n                  <ion-grid>\n                      <ion-row align-items-center>\n                          <ion-col col-6 col-lg-4>\n                              <div (click)="download(attObj.AttNewName, attObj.AttName)">\n                                  <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                  <p>{{attObj.AttName}}</p>\n                                  <!-- <p color="gray">大小未知</p> -->\n                                  <ion-icon *ngIf="!downloaded" class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n                                  <ion-icon *ngIf="downloaded" class="affix-open" name="ios-folder-open-outline"></ion-icon>\n                              </div>\n                          </ion-col>\n                      </ion-row>\n                  </ion-grid>\n              </div>\n          </ion-scroll>\n      </div>\n  \n  \n  </ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/,
+            selector: 'page-driver-set',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\driver\driver-set\driver-set.html"*/`<!--\n  Generated template for the DriverSetPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>{{isWrite ? "添加驾驶员" : "驾驶员详情"}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="addForm" (ngSubmit)="save(addForm.value)">\n        <div>\n            <ion-list>\n                <ion-item>\n                    <ion-label stacked>姓名</ion-label>\n                    <ion-input type="text" formControlName="Name" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>年龄</ion-label>\n                    <ion-input type="number" formControlName="Age" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>性别</ion-label>\n                    <ion-select formControlName="Sex" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option  value="男">男</ion-option>\n                        <ion-option  value="女">女</ion-option>\n                    </ion-select>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>入职时间</ion-label>\n                    <ion-datetime formControlName="InDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>备注</ion-label>\n                    <ion-textarea formControlName="Memo" type="text" placeholder="请输入"></ion-textarea>\n                </ion-item>\n                <ion-item  *ngIf="!isWrite">\n                    <ion-label stacked>建档</ion-label>\n                    <ion-input value="2017/10/9 系统管理员"  type="text" placeholder="无"></ion-input>\n                </ion-item>\n\n            </ion-list>\n            <div padding text-center>\n                <button ion-button type="submit" color="danger" [disabled]="!addForm.valid">保存</button>\n                <button *ngIf="!isWrite" ion-button type="submit" color="danger" [disabled]="!addForm.valid">删除</button>\n                <button ion-button clear small navPop>关闭</button>\n            </div>\n        </div>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\driver\driver-set\driver-set.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3__announcementService__["a" /* AnnouncementService */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_FileService__["a" /* FileService */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */]])
-    ], AnnouncementDetailPage);
-    return AnnouncementDetailPage;
+            __WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */],
+            __WEBPACK_IMPORTED_MODULE_4__providers_NativeService__["a" /* NativeService */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
+    ], DriverSetPage);
+    return DriverSetPage;
 }());
 
-//# sourceMappingURL=announcement-detail.js.map
+//# sourceMappingURL=driver-set.js.map
 
 /***/ })
 

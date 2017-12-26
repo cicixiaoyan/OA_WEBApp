@@ -1,14 +1,14 @@
 webpackJsonp([43],{
 
-/***/ 736:
+/***/ 707:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StaffFileMaintenanceSocialRelationshipPageModule", function() { return StaffFileMaintenanceSocialRelationshipPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StaffFileMaintenanceWorkExperienceAddModule", function() { return StaffFileMaintenanceWorkExperienceAddModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_social_relationship__ = __webpack_require__(805);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience_add__ = __webpack_require__(777);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,34 +18,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var StaffFileMaintenanceSocialRelationshipPageModule = (function () {
-    function StaffFileMaintenanceSocialRelationshipPageModule() {
+var StaffFileMaintenanceWorkExperienceAddModule = (function () {
+    function StaffFileMaintenanceWorkExperienceAddModule() {
     }
-    StaffFileMaintenanceSocialRelationshipPageModule = __decorate([
+    StaffFileMaintenanceWorkExperienceAddModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_social_relationship__["a" /* StaffFileMaintenanceSocialRelationship */],
+                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience_add__["a" /* StaffFileMaintenanceWorkExperienceAdd */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_social_relationship__["a" /* StaffFileMaintenanceSocialRelationship */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience_add__["a" /* StaffFileMaintenanceWorkExperienceAdd */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_social_relationship__["a" /* StaffFileMaintenanceSocialRelationship */]]
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience_add__["a" /* StaffFileMaintenanceWorkExperienceAdd */]
+            ]
         })
-    ], StaffFileMaintenanceSocialRelationshipPageModule);
-    return StaffFileMaintenanceSocialRelationshipPageModule;
+    ], StaffFileMaintenanceWorkExperienceAddModule);
+    return StaffFileMaintenanceWorkExperienceAddModule;
 }());
 
-//# sourceMappingURL=staff-file-maintenance-social-relationship.module.js.map
+//# sourceMappingURL=staff-file-maintenance-work-experience-add.module.js.map
 
 /***/ }),
 
-/***/ 805:
+/***/ 777:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StaffFileMaintenanceSocialRelationship; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StaffFileMaintenanceWorkExperienceAdd; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -57,68 +60,66 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+// import 'rxjs/add/operator/map';
+// import { Observable } from 'rxjs/Observable';
+// import { HttpService } from "../../../providers/HttpService";
 /**
- * Generated class for the StaffFileMaintenanceSocialRelationshipPage page.
+ * Generated class for the StaffFileMaintenanceWorkExperienceAddPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var StaffFileMaintenanceSocialRelationship = (function () {
-    function StaffFileMaintenanceSocialRelationship(navCtrl, modalCtrl, navParams) {
+var StaffFileMaintenanceWorkExperienceAdd = (function () {
+    function StaffFileMaintenanceWorkExperienceAdd(navCtrl, navParams, 
+        // private httpService: HttpService,
+        formBuilder, viewCtrl) {
         this.navCtrl = navCtrl;
-        this.modalCtrl = modalCtrl;
         this.navParams = navParams;
-        this.getList();
+        this.formBuilder = formBuilder;
+        this.viewCtrl = viewCtrl;
+        this.isShow = true;
+        this.readOnly = false;
+        this.readOnly = this.navParams.get("readOnly") ? true : false;
+        this.addForm = this.formBuilder.group({
+            StartDate: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            EndDate: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            Dept: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            Duty: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            Company: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(80)]],
+            Remarks: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(100)]],
+        });
     }
-    StaffFileMaintenanceSocialRelationship.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad StaffFileMaintenanceSocialRelationshipPage');
+    StaffFileMaintenanceWorkExperienceAdd.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad StaffFileMaintenanceWorkExperienceAddPage');
     };
-    StaffFileMaintenanceSocialRelationship.prototype.add = function () {
-        var modal = this.modalCtrl.create("StaffFileMaintenanceSocialRelationshipAddPage");
-        modal.present();
-        modal.onDidDismiss(function (data) {
-            data && console.log(data);
-        });
+    StaffFileMaintenanceWorkExperienceAdd.prototype.dismiss = function () {
+        this.viewCtrl.dismiss();
     };
-    StaffFileMaintenanceSocialRelationship.prototype.doRead = function (id) {
-        var parma = {
-            "Id": id,
-            "readOnly": (this.navParams.get("readOnly") ? true : null)
-        };
-        var modal = this.modalCtrl.create("StaffFileMaintenanceSocialRelationshipAddPage", parma);
-        modal.present();
-        modal.onDidDismiss(function (data) {
-            data && console.log(data);
-        });
+    StaffFileMaintenanceWorkExperienceAdd.prototype.save = function (value) {
+        // 提交
+        // this.httpService.postFormData("", value)
+        // .map((res: Response) => res.json())
+        // .subscribe((resJson) => {
+        // });
     };
-    StaffFileMaintenanceSocialRelationship.prototype.getList = function () {
-        this.list = [
-            {
-                'Id': '1',
-                'Name': '父亲',
-                'Relationship': '父子',
-                'Mobile': '1311111111',
-            },
-            {
-                'Id': '2',
-                'Name': '母亲',
-                'Relationship': '母子',
-                'Mobile': '1311111111'
-            },
-        ];
-    };
-    StaffFileMaintenanceSocialRelationship = __decorate([
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Boolean)
+    ], StaffFileMaintenanceWorkExperienceAdd.prototype, "isShow", void 0);
+    StaffFileMaintenanceWorkExperienceAdd = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-staff-file-maintenance-social-relationship',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-social-relationship\staff-file-maintenance-social-relationship.html"*/`<!--\n  Generated template for the StaffFileMaintenanceSocialRelationshipPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>社会关系</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let item of list"  (click)="doRead(item.Id)">\n        <ion-item  >\n          <h2>{{item.Name}}<span float-right color="royal">{{item.Relationship}}</span></h2>\n          <p>{{item.Mobile}}</p>\n        </ion-item>\n        <ion-item-options side="right">\n          <button ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>\n        </ion-item-options>\n      </ion-item-sliding>\n    </ion-list>\n    <div text-center>\n        <button (click)="add()" icon-left ion-button color="secondary" small outline round><ion-icon name="add"></ion-icon>添加</button>\n    </div>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-social-relationship\staff-file-maintenance-social-relationship.html"*/,
+            selector: 'page-staff-file-maintenance-work-experience-add',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience-add\staff-file-maintenance-work-experience-add.html"*/`<!--\n  Generated template for the StaffFileMaintenanceWorkExperienceAddPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n      <ion-buttons start>\n          <button ion-button  (click)="dismiss()">返回</button>\n      </ion-buttons>\n    <ion-title>工作经历</ion-title>\n    <ion-buttons end>\n        <button ion-button  (click)="save(addForm.value)">保存</button>\n    </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="addForm" (ngSubmit)="save(addForm.value)"   [ngClass]="{\'form-readonly\': readOnly}">\n        <ion-list style="position:relative;">\n            <ion-item>\n                <ion-label>开始时间</ion-label>\n                <ion-datetime formControlName="StartDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n            <ion-item>\n                <ion-label>结束时间</ion-label>\n                <ion-datetime formControlName="EndDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n              </ion-item>\n            <ion-item>\n                <ion-label>部门</ion-label>\n                <ion-input text-right type="text" formControlName="Dept" placeholder="输入部门名称"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>职务</ion-label>\n                <ion-input text-right type="text" formControlName="Duty" placeholder="输入职务名称"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>工作单位</ion-label>\n                <ion-input text-right type="text" formControlName="Company" placeholder="输入工作单位"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>备注<span class="optional">（选填）</span></ion-label>\n                <ion-textarea text-right formControlName="Remarks" placeholder="请输入备注"></ion-textarea>\n            </ion-item>\n        </ion-list>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience-add\staff-file-maintenance-work-experience-add.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
-    ], StaffFileMaintenanceSocialRelationship);
-    return StaffFileMaintenanceSocialRelationship;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */]])
+    ], StaffFileMaintenanceWorkExperienceAdd);
+    return StaffFileMaintenanceWorkExperienceAdd;
 }());
 
-//# sourceMappingURL=staff-file-maintenance-social-relationship.js.map
+//# sourceMappingURL=staff-file-maintenance-work-experience-add.js.map
 
 /***/ })
 

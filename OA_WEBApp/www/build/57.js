@@ -1,14 +1,14 @@
 webpackJsonp([57],{
 
-/***/ 711:
+/***/ 720:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountPasswordeditModule", function() { return AccountPasswordeditModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactsPopoverPageModule", function() { return ContactsPopoverPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__account_passwordedit__ = __webpack_require__(780);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts_popover__ = __webpack_require__(790);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,38 +18,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AccountPasswordeditModule = (function () {
-    function AccountPasswordeditModule() {
+var ContactsPopoverPageModule = (function () {
+    function ContactsPopoverPageModule() {
     }
-    AccountPasswordeditModule = __decorate([
+    ContactsPopoverPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__account_passwordedit__["a" /* AccountPasswordedit */],
+                __WEBPACK_IMPORTED_MODULE_2__contacts_popover__["a" /* ContactsPopoverPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__account_passwordedit__["a" /* AccountPasswordedit */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts_popover__["a" /* ContactsPopoverPage */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__account_passwordedit__["a" /* AccountPasswordedit */]
-            ]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__contacts_popover__["a" /* ContactsPopoverPage */]]
         })
-    ], AccountPasswordeditModule);
-    return AccountPasswordeditModule;
+    ], ContactsPopoverPageModule);
+    return ContactsPopoverPageModule;
 }());
 
-//# sourceMappingURL=account-passwordedit.module.js.map
+//# sourceMappingURL=contacts-popover.module.js.map
 
 /***/ }),
 
-/***/ 780:
+/***/ 790:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountPasswordedit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactsPopoverPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62,63 +62,127 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import { LoginPage } from '../../login/login';
+
 
 /**
- * Generated class for the AccountPasswordedit page.
+ * Generated class for the ContactsPopoverPage page.
  *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
  */
-var AccountPasswordedit = (function () {
-    function AccountPasswordedit(navCtrl, viewCtrl, modalCtrl, httpService, formBuilder) {
-        this.navCtrl = navCtrl;
+var ContactsPopoverPage = (function () {
+    function ContactsPopoverPage(navParams, viewCtrl, storage, httpService) {
+        this.navParams = navParams;
         this.viewCtrl = viewCtrl;
-        this.modalCtrl = modalCtrl;
+        this.storage = storage;
         this.httpService = httpService;
-        this.formBuilder = formBuilder;
-        this.editPasswordForm = this.formBuilder.group({
-            "oldPwd": [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(3)]],
-            "newPwd": [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(3)]],
-            "confirmPassword": [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(3)]]
-        });
+        this.deptItems = [];
+        this.items = [];
+        this.haveAffix = false;
+        this.addressee = this.navParams.get("addressee");
+        this.addresseeIds = this.navParams.get("addresseeIds");
+        console.log(this.addressee, this.addresseeIds);
+        this.initializeItems();
     }
-    AccountPasswordedit.prototype.confirm = function () {
+    ContactsPopoverPage.prototype.initializeItems = function () {
         var _this = this;
-        var param = { oldPwd: this.oldPwd, newPwd: this.newPwd, Uid: this.httpService.globalData.Uid };
-        this.httpService.postFormData("ashx/PwdMod.ashx", param)
-            .map(function (responce) { return responce.json(); })
-            .subscribe(function (Resjson) {
-            if (Resjson.Result) {
-                _this.httpService.nativeService.showToast("修改密码成功", 800);
-                var modal = _this.modalCtrl.create("LoginPage");
-                modal.present();
-                modal.onDidDismiss(function (data) {
-                    data && console.log(data);
+        this.httpService.postFormData("ashx/BmLs.ashx", {})
+            .map(function (res) { return res.json(); })
+            .subscribe(function (resJson) {
+            if (resJson.Result) {
+                _this.deptItems = resJson.Data;
+            }
+        });
+        this.search();
+    };
+    ContactsPopoverPage.prototype.getItems = function (ev) {
+        // Reset items back to all of the items
+        this.initializeItems();
+        // set val to the value of the ev target
+        var val = ev.target.value;
+        this.name = val;
+        // if the value is an empty string don't filter the items
+        // if (val && val.trim() != '') {
+        //   this.items = this.items.filter((item) => {
+        //     return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        //   });
+        // }
+    };
+    ContactsPopoverPage.prototype.getRecipientsByDept = function (id) {
+        var _this = this;
+        var data = !!id ? { DeptId: id } : {};
+        this.httpService.postFormData("ashx/UserSheet.ashx", data)
+            .map(function (res) { return res.json(); })
+            .subscribe(function (result) {
+            console.log(result);
+            if (result.Result) {
+                var idArr_1 = _this.addresseeIds.split(",");
+                _this.items = result.Data.map(function (value, index) {
+                    for (var i in idArr_1) {
+                        if (idArr_1[i] !== value.Uid) {
+                            Object.assign(value, { checked: false });
+                        }
+                        else {
+                            return Object.assign(value, { checked: true });
+                        }
+                    }
+                    return value;
                 });
             }
-            else {
-                _this.httpService.nativeService.showToast("修改密码失败： " + Resjson.Data, 800);
+        });
+    };
+    ContactsPopoverPage.prototype.search = function () {
+        var _this = this;
+        var data = (this.name !== "") ? { name: name } : {};
+        this.httpService.postFormData("ashx/UserSheet.ashx", data)
+            .map(function (res) { return res.json(); })
+            .subscribe(function (result) {
+            console.log(result);
+            if (result.Result) {
+                var idArr_2 = _this.addresseeIds.split(",");
+                _this.items = result.Data.map(function (value, index) {
+                    for (var i in idArr_2) {
+                        if (idArr_2[i] !== value.Uid) {
+                            Object.assign(value, { checked: false });
+                        }
+                        else {
+                            return Object.assign(value, { checked: true });
+                        }
+                    }
+                    return value;
+                });
             }
         });
     };
-    AccountPasswordedit.prototype.dismiss = function () {
-        this.viewCtrl.dismiss();
+    ContactsPopoverPage.prototype.checkPeople = function (index) {
+        this.items[index].checked = !this.items[index].checked;
     };
-    AccountPasswordedit = __decorate([
+    ContactsPopoverPage.prototype.confirm = function () {
+        console.log(confirm);
+        this.addressee = "";
+        this.addresseeIds = "";
+        for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
+            var value = _a[_i];
+            if (value.checked) {
+                this.addressee += value.Name + ",";
+                this.addresseeIds += value.Uid + ",";
+            }
+        }
+        this.viewCtrl.dismiss({ addressee: this.addressee, addresseeIds: this.addresseeIds });
+    };
+    ContactsPopoverPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-account-passwordedit',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-passwordedit\account-passwordedit.html"*/`<ion-header>\n\n    <ion-toolbar>\n\n        <ion-title>\n\n            修改\n\n        </ion-title>\n\n        <ion-buttons>\n\n            <button ion-button (click)="dismiss()">关闭</button>\n\n        </ion-buttons>\n\n    </ion-toolbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n    <form [formGroup]="editPasswordForm" (ngSubmit)="confirm()">\n\n        <ion-list>\n\n            <ion-item>\n\n                <ion-label>&emsp;原密码：</ion-label>\n\n                <ion-input placeholder="请输入原密码" [(ngModel)]="oldPwd" type="password" formControlName="oldPwd"></ion-input>\n\n            </ion-item>\n\n            <div padding-left *ngIf="!editPasswordForm.controls.oldPwd.valid && editPasswordForm.controls.oldPwd.touched" class="validation-failed">请输入原密码</div>\n\n            <ion-item>\n\n                <ion-label>&emsp;新密码：</ion-label>\n\n                <ion-input placeholder="请输入新密码" [(ngModel)]="newPwd" type="password" formControlName="newPwd"></ion-input>\n\n            </ion-item>\n\n            <div padding-left *ngIf="!editPasswordForm.controls.newPwd.valid && editPasswordForm.controls.newPwd.touched" class="validation-failed">请输入新密码</div>\n\n            <ion-item>\n\n                <ion-label>确认密码：</ion-label>\n\n                <ion-input placeholder="请再次输入新密码" type="password" formControlName="confirmPassword"></ion-input>\n\n            </ion-item>\n\n            <div padding-left *ngIf="!editPasswordForm.controls.confirmPassword.valid && editPasswordForm.controls.confirmPassword.touched" class="validation-failed">请确认新密码</div>\n\n        </ion-list>\n\n        <div padding-horizontal>\n\n            <button color="danger" ion-button block type="submit" [disabled]="!editPasswordForm.valid">确　认</button>\n\n        </div>\n\n    </form>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-passwordedit\account-passwordedit.html"*/,
+            selector: 'page-contacts-popover',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\contacts-popover\contacts-popover.html"*/`<!--\n  Generated template for the ContactsPopoverPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>联系人选择</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-list class="checkpeople-popover">\n    <ion-item>\n        <ion-label>部门选择</ion-label>\n        <ion-select [(ngModel)]="dept" submitText="确定" (ngModelChange)="getRecipientsByDept(dept)"\n            cancelText="取消" okText="确定">\n            <ion-option  *ngFor="let item of deptItems;let i = index" [value]="item.Id">\n                {{item.BmName}}\n            </ion-option>\n        </ion-select>\n    </ion-item>\n    <ion-searchbar color="danger" [(ngModel)]="name"  placeholder="请输入编码或姓名">\n    </ion-searchbar>\n  \n    <div text-center>\n        <button (click)="search()" icon-left ion-button small color="calm">\n        <ion-icon name="search"></ion-icon>查询</button>\n  \n        <button (click)="confirm()" icon-left ion-button small color="calm">\n        <ion-icon name="checkmark"></ion-icon>确定</button>\n    </div>\n  \n    <ion-list-header>\n        通讯录\n    </ion-list-header>\n  \n    <ion-item *ngFor="let item of items;let i = index">\n        <ion-label>\n        {{item.Name}}({{item.Uid}})<br>\n        <span>{{item.Dept}}&emsp;{{item.Duty}}</span>\n        </ion-label>\n        <ion-checkbox [checked]="item.checked" (ionChange)="checkPeople(i)"></ion-checkbox>\n    </ion-item>\n  </ion-list>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\contacts-popover\contacts-popover.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_HttpService__["a" /* HttpService */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
-    ], AccountPasswordedit);
-    return AccountPasswordedit;
+            __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__["a" /* HttpService */]])
+    ], ContactsPopoverPage);
+    return ContactsPopoverPage;
 }());
 
-//# sourceMappingURL=account-passwordedit.js.map
+//# sourceMappingURL=contacts-popover.js.map
 
 /***/ })
 

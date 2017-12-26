@@ -1,0 +1,23 @@
+page-staff-popover {
+  .button-ios{
+    margin: 0;
+  }
+
+}
+.popoverW88 .popover-content{
+  width: 80%;
+  left: 20%!important;
+
+  .popover-viewport{
+    height: 100%;
+
+    .list-ios{
+      height: 100%;
+      overflow: auto;
+      padding-bottom: 44px;
+    }
+    .searchbar-ios-cancel{
+      color: #fff;
+    }
+  }
+}

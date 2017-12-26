@@ -51832,12 +51832,6 @@ page-newwork-detail .button-ios {
   width: 100%;
 }
 
-page-contract-setting .item-input ion-label {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
-}
-
 page-contract-setting .list-header-ios {
   border-top: 1px solid #ddd;
   background-color: #fff;
@@ -52204,6 +52198,29 @@ page-sms-read .sms-content {
 page-sms-read .sms-content div.mydiv {
   width: 100%;
   padding: 10px;
+}
+
+page-staff-popover .button-ios {
+  margin: 0;
+}
+
+.popoverW88 .popover-content {
+  width: 80%;
+  left: 20% !important;
+}
+
+.popoverW88 .popover-content .popover-viewport {
+  height: 100%;
+}
+
+.popoverW88 .popover-content .popover-viewport .list-ios {
+  height: 100%;
+  overflow: auto;
+  padding-bottom: 44px;
+}
+
+.popoverW88 .popover-content .popover-viewport .searchbar-ios-cancel {
+  color: #fff;
 }
 
 page-welcome ion-slide {

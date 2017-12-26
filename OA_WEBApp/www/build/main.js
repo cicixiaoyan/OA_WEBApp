@@ -1,4 +1,4 @@
-webpackJsonp([59],{
+webpackJsonp([60],{
 
 /***/ 137:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -469,7 +469,7 @@ webpackEmptyAsyncContext.id = 175;
 var map = {
 	"../pages/account/aboutus/aboutus.module": [
 		709,
-		58
+		59
 	],
 	"../pages/account/account-edit/account-edit.module": [
 		710,
@@ -477,7 +477,7 @@ var map = {
 	],
 	"../pages/account/account-passwordedit/account-passwordedit.module": [
 		711,
-		57
+		58
 	],
 	"../pages/account/account.module": [
 		712,
@@ -513,11 +513,11 @@ var map = {
 	],
 	"../pages/contacts-popover/contacts-popover.module": [
 		720,
-		56
+		57
 	],
 	"../pages/getmobile-popover/getmobile-popover.module": [
 		721,
-		55
+		56
 	],
 	"../pages/home/backlog/backlog-detail/backlog-detail.module": [
 		703,
@@ -529,11 +529,11 @@ var map = {
 	],
 	"../pages/home/contacts/contacts-detail/contacts-detail.module": [
 		705,
-		54
+		55
 	],
 	"../pages/home/contacts/contacts.module": [
 		706,
-		53
+		54
 	],
 	"../pages/home/home.module": [
 		722,
@@ -541,11 +541,11 @@ var map = {
 	],
 	"../pages/home/newwork/newwork-detail/newwork-detail.module": [
 		723,
-		52
+		53
 	],
 	"../pages/home/newwork/newwork.module": [
 		724,
-		51
+		52
 	],
 	"../pages/hr-management/contract/contract-maintenance/contract-maintenance.module": [
 		725,
@@ -565,39 +565,39 @@ var map = {
 	],
 	"../pages/hr-management/job-types-set/job-types-set-add/job-types-set-add.module": [
 		729,
-		50
+		51
 	],
 	"../pages/hr-management/job-types-set/job-types-set.module": [
 		730,
-		49
+		50
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance-basic-imfornation/staff-file-maintenance-basic-imfornation.module": [
 		731,
-		48
+		49
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance-education/staff-file-maintenance-education-add/staff-file-maintenance-education-add.module": [
 		732,
-		47
+		48
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance-education/staff-file-maintenance-education.module": [
 		733,
-		46
+		47
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance-set/staff-file-maintenance-set.module": [
 		734,
-		45
+		46
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance-social-relationship/staff-file-maintenance-social-relationship-add/staff-file-maintenance-social-relationship-add.module": [
 		735,
-		44
+		45
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance-social-relationship/staff-file-maintenance-social-relationship.module": [
 		736,
-		43
+		44
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance-work-experience/staff-file-maintenance-work-experience-add/staff-file-maintenance-work-experience-add.module": [
 		707,
-		42
+		43
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance-work-experience/staff-file-maintenance-work-experience.module": [
 		737,
@@ -605,11 +605,11 @@ var map = {
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance.module": [
 		738,
-		41
+		42
 	],
 	"../pages/hr-management/training-maintenance/training-maintenance-search/training-maintenance-search.module": [
 		739,
-		40
+		41
 	],
 	"../pages/hr-management/training-maintenance/training-maintenance-set/training-maintenance-set.module": [
 		740,
@@ -621,7 +621,7 @@ var map = {
 	],
 	"../pages/login/find-password/find-password.module": [
 		708,
-		39
+		40
 	],
 	"../pages/login/login.module": [
 		742,
@@ -695,12 +695,16 @@ var map = {
 		759,
 		3
 	],
-	"../pages/tabs/tabs.module": [
+	"../pages/staff-popover/staff-popover.module": [
 		760,
+		39
+	],
+	"../pages/tabs/tabs.module": [
+		761,
 		38
 	],
 	"../pages/welcome/welcome.module": [
-		761,
+		762,
 		37
 	]
 };
@@ -1135,6 +1139,7 @@ var AppModule = (function () {
                         { loadChildren: '../pages/sms/sms-read/sms-read.module#SmsReadPageModule', name: 'SmsReadPage', segment: 'sms-read', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sms/sms-write/sms-write.module#SmsWritePageModule', name: 'SmsWritePage', segment: 'sms-write', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sms/sms.module#SmsPageModule', name: 'SmsPage', segment: 'sms', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/staff-popover/staff-popover.module#StaffPopoverPageModule', name: 'StaffPopoverPage', segment: 'staff-popover', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/tabs/tabs.module#TabsModule', name: 'TabsPage', segment: 'tabs', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/welcome/welcome.module#WelcomeModule', name: 'Welcome', segment: 'welcome', priority: 'low', defaultHistory: [] }
                     ]

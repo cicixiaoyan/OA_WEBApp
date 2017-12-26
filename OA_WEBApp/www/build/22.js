@@ -8,8 +8,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContractSettingPageModule", function() { return ContractSettingPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_setting__ = __webpack_require__(797);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contract_service__ = __webpack_require__(766);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_setting__ = __webpack_require__(798);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contract_service__ = __webpack_require__(767);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -41,7 +41,7 @@ var ContractSettingPageModule = (function () {
 
 /***/ }),
 
-/***/ 766:
+/***/ 767:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -75,7 +75,7 @@ var ContractService = (function () {
 
 /***/ }),
 
-/***/ 797:
+/***/ 798:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -83,6 +83,7 @@ var ContractService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contract_service__ = __webpack_require__(767);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -95,63 +96,47 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the ContractSettingPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 var ContractSettingPage = (function () {
-    function ContractSettingPage(navCtrl, navParams, FormBuilder) {
+    function ContractSettingPage(navCtrl, navParams, popoverCtrl, FormBuilder, contractService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.popoverCtrl = popoverCtrl;
         this.FormBuilder = FormBuilder;
-        this.hideOne = true;
+        this.contractService = contractService;
+        this.hideOne = false;
         this.hideTwo = true;
         this.hideThree = true;
         this.hideFour = true;
         this.readOnly = false;
+        this.Uid = '';
+        this.DeptId = '';
         this.readOnly = this.navParams.get("readOnly") ? true : false;
         this.baseForm = this.FormBuilder.group({
-            JobNumber: ['', []],
+            JobNumber: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(20), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
             Name: ['', []],
             Sex: ['', []],
-            BirthDate: ['', []],
-            NativePlace: ['', []],
-            Ethnic: ['', []],
-            JoinPartyTime: ['', []],
-            PoliticalStatus: ['', []],
             IDC: ['', []],
-            StaffStatus: ['', []],
-            FirstEdu: ['', []],
-            GraduationDate: ['', []],
-            GraduatedSchool: ['', []],
-            profession: ['', []],
-            SecondEdu: ['', []],
-            SecondGraduatedSchool: ['', []],
-            Degree: ['', []],
-            AccountLocation: ['', []],
-            FamilyAddress: ['', []],
-            Telephone: ['', []],
-            Mobile: ['', []],
-            Email: ['', []],
-            CertificateObtained: ['', []],
             Dept: ['', []],
             Duty: ['', []],
-            JobTitle: ['', []],
-            ProfessionalQualification: ['', []],
-            StaffFileNumber: ['', []],
-            Workday: ['', []],
-            Indate: ['', []],
-            EmployeeNature: ['', []],
-            MedicareNumber: ['', []],
-            PensionBookNumber: ['', []],
-            ProvidentFundAccount: ['', []],
-            Remarks: ['', []]
+            ContractCode: ['', []],
+            ContractName: ['', []],
+            ContractType: ['', []],
+            HavePeriod: ['有', []],
+            IsPositive: ['已转正', []],
+            SigningDate: ['', []],
+            ContractYear: ['', []],
+            ContractStatus: ['', []],
+            TrialPeriod: ['', []],
+            TrialBasicSalary: ['', []],
+            TrialEffectiveDate: ['', []],
+            TrialExpirationDate: ['', []],
+            Remarks: ['', []] // 备注
         });
     }
     ContractSettingPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad StaffFileMaintenanceBasicImfornationPage');
+        if (!this.navParams.get('Id')) {
+        }
     };
     ContractSettingPage.prototype.shrink = function (parma) {
         if (parma === 'one')
@@ -163,18 +148,40 @@ var ContractSettingPage = (function () {
         if (parma === 'four')
             this.hideFour = !this.hideFour;
     };
-    ContractSettingPage.prototype.sent = function (value) {
+    ContractSettingPage.prototype.submit = function (value) {
         console.log(value);
+    };
+    ContractSettingPage.prototype.checkPeople = function (myEvent) {
+        var _this = this;
+        var popover = this.popoverCtrl.create("StaffPopoverPage", { 'Uid': this.Uid }, { cssClass: 'popoverW88' });
+        popover.present({
+            ev: myEvent
+        });
+        popover.onDidDismiss(function (data) {
+            if (!!data) {
+                console.log(data);
+                // {addressee:this.addressee,addresseeIds:this.addresseeIds}
+                _this.Uid = data.Uid;
+                _this.DeptId = data.DeptId;
+                _this.baseForm.patchValue({
+                    "JobNumber": data.JobNumber,
+                    "Name": data.Name,
+                    "Sex": data.Sex,
+                    "IDC": data.IDC,
+                    "Dept": data.Dept,
+                    "Duty": data.Duty,
+                });
+            }
+        });
     };
     ContractSettingPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contract-setting',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-setting\contract-setting.html"*/`<ion-header>\n    <ion-navbar>\n        <ion-title>合同详情</ion-title>\n    </ion-navbar>\n</ion-header>\n<ion-content style="background: #f4f4f4;">\n\n    <form [formGroup]="baseForm" (ngSubmit)="sent(baseForm.value)"  [ngClass]="{\'form-readonly\': readOnly}">\n        <ion-list  [ngClass]="{\'collapsed\': hideOne, \'expanded\': !hideOne}">\n            <ion-list-header (click)="shrink(\'one\')">员工信息<ion-icon  float-right name="arrow-forward"></ion-icon></ion-list-header>\n            <div>\n                <ion-item>\n                    <ion-label>工号</ion-label>\n                    <ion-input text-right formControlName="JobNumber" placeholder="输入工号"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>姓名<span class="optional">（选填）</span></ion-label>\n                    <ion-input text-right formControlName="Name" placeholder="输入姓名"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>性别<span class="optional">（选填）</span></ion-label>\n                    <ion-select formControlName="Sex" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option value="男">男</ion-option>\n                        <ion-option value="女">女</ion-option>\n                    </ion-select>\n                </ion-item>\n                <ion-item>\n                    <ion-label>身份证号<span class="optional">（选填）</span></ion-label>\n                    <ion-input text-right formControlName="IDC" placeholder="输入身份证号"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>所属部门</ion-label>\n                    <ion-select formControlName="Dept" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option value="1">青白江疾病预防控制中心</ion-option>\n                        <ion-option value="2">部门2</ion-option>\n                        <ion-option value="3">部门3</ion-option>\n                    </ion-select>\n                </ion-item>\n                <ion-item>\n                    <ion-label>职务</ion-label>\n                    <ion-select formControlName="Duty" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option value="1">职务1</ion-option>\n                        <ion-option value="2">职务2</ion-option>\n                        <ion-option value="3">职务3</ion-option>\n                    </ion-select>\n                </ion-item>\n            </div>\n        </ion-list>\n\n        <ion-list  [ngClass]="{\'collapsed\': hideTwo, \'expanded\': !hideTwo}">\n            <ion-list-header (click)="shrink(\'two\')">个人情况<ion-icon float-right name="arrow-forward"></ion-icon></ion-list-header>\n            <div>\n              <ion-item>\n                  <ion-label>出生日期</ion-label>\n                  <ion-datetime formControlName="BirthDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n              </ion-item>\n              <ion-item>\n                  <ion-label>籍贯<span class="optional">（选填）</span></ion-label>\n                  <ion-input text-right formControlName="NativePlace" placeholder="输入籍贯"></ion-input>\n              </ion-item>\n              <ion-item>\n                  <ion-label>民族</ion-label>\n                  <ion-select formControlName="Ethnic" cancelText="取消" okText="确定" placeholder="请选择">\n                      <ion-option value="汉族">汉族</ion-option>\n                      <ion-option value="傣族">傣族</ion-option>\n                      <ion-option value="土家">土家</ion-option>\n                      <ion-option value="苗族">苗族</ion-option>\n                      <ion-option value="其他">其他</ion-option>\n                  </ion-select>\n              </ion-item>\n              <ion-item>\n                  <ion-label>入党时间<span class="optional">（选填）</span></ion-label>\n                  <ion-datetime formControlName="JoinPartyTime" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n              </ion-item>\n              <ion-item>\n                  <ion-label>政治面貌<span class="optional">（选填）</span></ion-label>\n                  <ion-select formControlName="PoliticalStatus" cancelText="取消" okText="确定" placeholder="请选择">\n                      <ion-option value="党员">党员</ion-option>\n                      <ion-option value="中共党员">中共党员</ion-option>\n                      <ion-option value="农工党员">农工党员</ion-option>\n                      <ion-option value="致工党员">致工党员</ion-option>\n                      <ion-option value="团员">团员</ion-option>\n                      <ion-option value="预备党员">预备党员</ion-option>\n                      <ion-option value="民主党派">民主党派</ion-option>\n                      <ion-option value="群众">群众</ion-option>\n                  </ion-select>\n              </ion-item>\n\n              <ion-item>\n                  <ion-label>员工状态<span class="optional">（选填）</span></ion-label>\n                  <ion-select formControlName="StaffStatus" cancelText="取消" okText="确定" placeholder="请选择">\n                      <ion-option value="在职">在职</ion-option>\n                      <ion-option value="离职">离职</ion-option>\n                  </ion-select>\n              </ion-item>\n\n                <ion-item>\n                    <ion-label>第一学历</ion-label>\n                    <ion-select formControlName="FirstEdu" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option value="小学">小学</ion-option>\n                        <ion-option value="初中">初中</ion-option>\n                        <ion-option value="高中">高中</ion-option>\n                        <ion-option value="中专">中专</ion-option>\n                        <ion-option value="大专">大专</ion-option>\n                        <ion-option value="本科">本科</ion-option>\n                        <ion-option value="硕士研究生">硕士研究生</ion-option>\n                        <ion-option value="博士研究生">博士研究生</ion-option>\n                    </ion-select>\n                </ion-item>\n                <ion-item>\n                    <ion-label>毕业日期<span class="optional">（选填）</span></ion-label>\n                    <ion-datetime formControlName="GraduationDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label>毕业学校<span class="optional">（选填）</span></ion-label>\n                    <ion-input text-right formControlName="GraduatedSchool" placeholder="输入毕业学校"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>专业<span class="optional">（选填）</span></ion-label>\n                    <ion-select formControlName="profession" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option value="专业1">专业1</ion-option>\n                        <ion-option value="专业2">专业2</ion-option>\n                        <ion-option value="专业3">专业3</ion-option>\n                    </ion-select>\n                </ion-item>\n                <ion-item>\n                    <ion-label>第二学历<span class="optional">（选填）</span></ion-label>\n                    <ion-select formControlName="SecondEdu" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option value="小学">小学</ion-option>\n                        <ion-option value="初中">初中</ion-option>\n                        <ion-option value="高中">高中</ion-option>\n                        <ion-option value="中专">中专</ion-option>\n                        <ion-option value="大专">大专</ion-option>\n                        <ion-option value="本科">本科</ion-option>\n                        <ion-option value="硕士研究生">硕士研究生</ion-option>\n                        <ion-option value="博士研究生">博士研究生</ion-option>\n                    </ion-select>\n                </ion-item>\n                <ion-item>\n                    <ion-label>毕业学校<span class="optional">（选填）</span></ion-label>\n                    <ion-input text-right formControlName="SecondGraduatedSchool" placeholder="输入第二学历毕业学校"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>学位<span class="optional">（选填）</span></ion-label>\n                    <ion-select formControlName="Degree" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option value="学士">学士</ion-option>\n                        <ion-option value="硕士">硕士</ion-option>\n                        <ion-option value="博士">博士</ion-option>\n                    </ion-select>\n                </ion-item>\n                <ion-item>\n                    <ion-label>户口所在地<span class="optional">（选填）</span></ion-label>\n                    <ion-input text-right formControlName="AccountLocation" placeholder="输入户口所在地"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>家庭地址<span class="optional">（选填）</span></ion-label>\n                    <ion-textarea rows="2" text-right formControlName="FamilyAddress" placeholder="输入家庭地址"></ion-textarea>\n                </ion-item>\n                <ion-item>\n                    <ion-label>联系电话<span class="optional">（选填）</span></ion-label>\n                    <ion-input text-right formControlName="Telephone" placeholder="输入联系电话"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>手机<span class="optional">（选填）</span></ion-label>\n                    <ion-input text-right formControlName="Mobile" placeholder="输入手机号码"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>电子邮箱<span class="optional">（选填）</span></ion-label>\n                    <ion-input type="email" text-right formControlName="Email" placeholder="输入邮箱"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>所获证书<span class="optional">（选填）</span></ion-label>\n                    <ion-input text-right formControlName="CertificateObtained" placeholder="输入所获证书"></ion-input>\n                </ion-item>\n            </div>\n        </ion-list>\n\n        <ion-list [ngClass]="{\'collapsed\': hideThree, \'expanded\': !hideThree}">\n            <ion-list-header (click)="shrink(\'three\')">单位信息<ion-icon float-right name="arrow-forward"></ion-icon></ion-list-header>\n            <div >\n\n                <ion-item>\n                    <ion-label>职称<span class="optional">（选填）</span></ion-label>\n                    <ion-select formControlName="JobTitle" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option value="1">职务1</ion-option>\n                        <ion-option value="2">职务2</ion-option>\n                        <ion-option value="3">职务3</ion-option>\n                    </ion-select>\n                </ion-item>\n                <ion-item>\n                    <ion-label>职业资格<span class="optional">（选填）</span></ion-label>\n                    <ion-input text-right formControlName="ProfessionalQualification" placeholder="输入职业资格"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>员工档案号<span class="optional">（选填）</span></ion-label>\n                    <ion-input text-right formControlName="StaffFileNumber" placeholder="输入员工档案号"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>参加工作日</ion-label>\n                    <ion-datetime formControlName="Workday" placeholder="点击添加" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label>入职日期<span class="optional">（选填）</span></ion-label>\n                    <ion-datetime formControlName="Indate" placeholder="点击添加" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label>员工性质</ion-label>\n                    <ion-select formControlName="EmployeeNature" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option value="在编">在编</ion-option>\n                        <ion-option value="非在编">非在编</ion-option>\n                    </ion-select>\n                </ion-item>\n                <ion-item>\n                    <ion-label>医疗保险号<span class="optional">（选填）</span></ion-label>\n                    <ion-input text-right formControlName="MedicareNumber" placeholder="输入医疗保险号"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>养老手册号<span class="optional">（选填）</span></ion-label>\n                    <ion-input text-right formControlName="PensionBookNumber" placeholder="输入养老手册号"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>公积金账号<span class="optional">（选填）</span></ion-label>\n                    <ion-input text-right formControlName="ProvidentFundAccount" placeholder="输入公积金账号"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>备注<span class="optional">（选填）</span></ion-label>\n                    <ion-textarea  formControlName="Remarks" placeholder="输入备注信息"></ion-textarea>\n                </ion-item>\n            </div>\n        </ion-list>\n\n        <ion-list  [ngClass]="{\'collapsed\': hideFour, \'expanded\': !hideFour}">\n            <ion-list-header (click)="shrink(\'four\')">附件上传<ion-icon float-right name="arrow-forward"></ion-icon></ion-list-header>\n            <div>\n                <ion-item>\n                    <h2>毕业证.jpg</h2>\n                    <button ion-button clear item-end>删除</button>\n                </ion-item>\n                <ion-item>\n                    <h2>身份证.jpg</h2>\n                    <button ion-button clear item-end>删除</button>\n                </ion-item>\n                <ion-item text-center>\n                    <button icon-left ion-button color="secondary" small outline round><ion-icon name="home"></ion-icon>添加附件</button>\n                </ion-item>\n            </div>\n        </ion-list>\n\n    </form>\n\n</ion-content>\n<ion-footer>\n    <button ion-button full color="danger" [disabled]="!baseForm.valid" (click)=sent(baseForm.value)>保存</button>\n</ion-footer>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-setting\contract-setting.html"*/,
+            selector: 'page-contract-setting',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-setting\contract-setting.html"*/`<ion-header>\n    <ion-navbar>\n        <ion-title>合同详情</ion-title>\n    </ion-navbar>\n</ion-header>\n<ion-content style="background: #f4f4f4;">\n\n    <form [formGroup]="baseForm" (ngSubmit)="submit(baseForm.value)"  [ngClass]="{\'form-readonly\': readOnly}">\n        <ion-list  [ngClass]="{\'collapsed\': hideOne, \'expanded\': !hideOne}">\n            <ion-list-header (click)="shrink(\'one\')">员工信息<ion-icon  float-right name="arrow-forward"></ion-icon></ion-list-header>\n            <div>\n                <ion-item #popoverContent  (click)="checkPeople($event)">\n                    <ion-label>工号</ion-label>\n                    <ion-note item-end>{{baseForm.value.JobNumber || \'双击选择收件人\'}}</ion-note>\n                    <!-- <ion-input styel=\'display:none\' text-right readonly=\'true\' formControlName="JobNumber" ></ion-input> -->\n                </ion-item>\n\n                <div class="" *ngIf=\'baseForm.value.JobNumber != ""\'>\n\n                    <ion-item>\n                        <ion-label>姓名</ion-label>\n                        <ion-input text-right formControlName="Name" readonly="true"></ion-input>\n                    </ion-item>\n                    <ion-item>\n                        <ion-label>性别</ion-label>\n                        <ion-input text-right formControlName="Sex" readonly="true"></ion-input>\n                    </ion-item>\n                    <ion-item>\n                        <ion-label>身份证号</ion-label>\n                        <ion-input text-right formControlName="IDC" readonly="true"></ion-input>\n                    </ion-item>\n                    <ion-item>\n                        <ion-label>所在部门</ion-label>\n                        <ion-input text-right formControlName="Dept" readonly="true"></ion-input>\n                    </ion-item>\n                    <ion-item>\n                        <ion-label>职务</ion-label>\n                        <ion-input text-right formControlName="Duty" readonly="true"></ion-input>\n                    </ion-item>\n                </div>\n            </div>\n        </ion-list>\n\n        <ion-list  [ngClass]="{\'collapsed\': hideTwo, \'expanded\': !hideTwo}">\n            <ion-list-header (click)="shrink(\'two\')">合同信息<ion-icon float-right name="arrow-forward"></ion-icon></ion-list-header>\n            <div>\n              <ion-item>\n                  <ion-label>合同编号</ion-label>\n                  <ion-input text-right formControlName="ContractCode" placeholder="请输入合同编号"></ion-input>\n              </ion-item>\n              <ion-item>\n                  <ion-label>合同名称<span class="optional">（选填）</span></ion-label>\n                  <ion-input text-right formControlName="ContractName" placeholder="请输入合同名称"></ion-input>\n              </ion-item>\n              <ion-item>\n                  <ion-label>合同类型</ion-label>\n                  <ion-select formControlName="ContractType" cancelText="取消" okText="确定" placeholder="请选择">\n                      <ion-option value="1">类型1</ion-option>\n                      <ion-option value="2">类型2</ion-option>\n                      <ion-option value="3">类型3</ion-option>\n                  </ion-select>\n              </ion-item>\n              <ion-item>\n                  <ion-label>有无期限</ion-label>\n                  <ion-select formControlName="HavePeriod" cancelText="取消" okText="确定" placeholder="请选择">\n                      <ion-option value="有">有</ion-option>\n                      <ion-option value="无">无</ion-option>\n                  </ion-select>\n              </ion-item>\n              <ion-item>\n                  <ion-label>是否转正</ion-label>\n                  <ion-select formControlName="IsPositive" cancelText="取消" okText="确定" placeholder="请选择">\n                      <ion-option value="已转正">已转正</ion-option>\n                      <ion-option value="未转正">未转正</ion-option>\n                  </ion-select>\n              </ion-item>\n\n              <ion-item>\n                  <ion-label>签约时间</ion-label>\n                  <ion-datetime formControlName="SigningDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n              </ion-item>\n              <ion-item>\n                  <ion-label>合同年份<span class="optional">（选填）</span></ion-label>\n                  <ion-select formControlName="ContractYear" cancelText="取消" okText="确定" placeholder="请选择">\n                      <ion-option value="2013">2013</ion-option>\n                      <ion-option value="2014">2014</ion-option>\n                  </ion-select>\n              </ion-item>\n              <ion-item>\n                  <ion-label>合同状态</ion-label>\n                  <ion-select formControlName="ContractStatus" cancelText="取消" okText="确定" placeholder="请选择">\n                      <ion-option value="试用中">试用中</ion-option>\n                      <ion-option value="试用到期">试用到期</ion-option>\n                      <ion-option value="生效中">生效中</ion-option>\n                      <ion-option value="已到期">已到期</ion-option>\n                      <ion-option value="已解除">已解除</ion-option>\n                  </ion-select>\n              </ion-item>\n            </div>\n        </ion-list>\n\n        <ion-list [ngClass]="{\'collapsed\': hideThree, \'expanded\': !hideThree}">\n            <ion-list-header (click)="shrink(\'three\')">试用期信息<ion-icon float-right name="arrow-forward"></ion-icon></ion-list-header>\n            <div >\n                <ion-item>\n                    <ion-label>试用期限<span class="optional">（选填）</span></ion-label>\n                    <ion-input text-right formControlName="TrialPeriod" placeholder="请输入试用期限"></ion-input>\n                </ion-item>\n                <ion-item>\n                  <ion-label>试用基本工资<span class="optional">（选填）</span></ion-label>\n                  <ion-input text-right formControlName="TrialBasicSalary" placeholder="请输入试用期限"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>试用生效日期</ion-label>\n                    <ion-datetime formControlName="TrialEffectiveDate" placeholder="点击添加" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label>试用到期日期</ion-label>\n                    <ion-datetime formControlName="TrialExpirationDate" placeholder="点击添加" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n            </div>\n        </ion-list>\n\n        <ion-list  [ngClass]="{\'collapsed\': hideFour, \'expanded\': !hideFour}">\n            <ion-list-header (click)="shrink(\'four\')">附件<ion-icon float-right name="arrow-forward"></ion-icon></ion-list-header>\n            <div>\n                <ion-item>\n                    <h2>毕业证.jpg</h2>\n                    <button ion-button clear item-end>删除</button>\n                </ion-item>\n                <ion-item text-center>\n                    <button icon-left ion-button color="secondary" small outline round><ion-icon name="home"></ion-icon>添加附件</button>\n                </ion-item>\n            </div>\n        </ion-list>\n\n        <ion-list>\n          <ion-item>\n              <ion-label stacked text-left>备注<span class="optional">（选填）</span></ion-label>\n              <ion-textarea  formControlName="Remarks" placeholder="输入备注信息"></ion-textarea>\n          </ion-item>\n        </ion-list>\n\n    </form>\n\n</ion-content>\n<ion-footer>\n    <button ion-button full color="danger" [disabled]="!baseForm.valid" (click)=submit(baseForm.value)>保存</button>\n</ion-footer>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-setting\contract-setting.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__contract_service__["a" /* ContractService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__contract_service__["a" /* ContractService */]) === "function" && _e || Object])
     ], ContractSettingPage);
     return ContractSettingPage;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=contract-setting.js.map

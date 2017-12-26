@@ -1,14 +1,15 @@
 webpackJsonp([40],{
 
-/***/ 739:
+/***/ 708:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrainingMaintenancePageModule", function() { return TrainingMaintenancePageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FindPasswordModule", function() { return FindPasswordModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__training_maintenance_search__ = __webpack_require__(808);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__find_password__ = __webpack_require__(778);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LoginService__ = __webpack_require__(162);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,32 +19,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var TrainingMaintenancePageModule = (function () {
-    function TrainingMaintenancePageModule() {
+
+var FindPasswordModule = (function () {
+    function FindPasswordModule() {
     }
-    TrainingMaintenancePageModule = __decorate([
+    FindPasswordModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__training_maintenance_search__["a" /* TrainingMaintenanceSearch */]
+                __WEBPACK_IMPORTED_MODULE_2__find_password__["a" /* FindPassword */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__training_maintenance_search__["a" /* TrainingMaintenanceSearch */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__find_password__["a" /* FindPassword */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__training_maintenance_search__["a" /* TrainingMaintenanceSearch */]],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__find_password__["a" /* FindPassword */]
+            ],
+            providers: [__WEBPACK_IMPORTED_MODULE_3__LoginService__["a" /* LoginService */]]
         })
-    ], TrainingMaintenancePageModule);
-    return TrainingMaintenancePageModule;
+    ], FindPasswordModule);
+    return FindPasswordModule;
 }());
 
-//# sourceMappingURL=training-maintenance-search.module.js.map
+//# sourceMappingURL=find-password.module.js.map
 
 /***/ }),
 
-/***/ 808:
+/***/ 778:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrainingMaintenanceSearch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FindPassword; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
@@ -59,55 +64,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the TrainingMaintenanceSearchComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
-var TrainingMaintenanceSearch = (function () {
-    function TrainingMaintenanceSearch(navCtrl, navParams, viewCtrl, formBuilder) {
+// import { LoginPage } from '../login';
+var FindPassword = (function () {
+    function FindPassword(navCtrl, viewCtrl, formBuilder) {
         this.navCtrl = navCtrl;
-        this.navParams = navParams;
         this.viewCtrl = viewCtrl;
         this.formBuilder = formBuilder;
-        this.search = this.navParams.get("search");
-        this.searchForm = this.formBuilder.group({
-            Title: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(30)]],
-            StartDate: ["", []],
-            EndDate: ["", []],
-            Instructor: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(8)]],
+        this.findPasswordForm = this.formBuilder.group({
+            phone: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(11), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].pattern('1[0-9]{10}')]],
+            verificationCode: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(6), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].pattern('[0-9]{6}')]],
+            newPassword: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(6)]]
         });
-        if (this.search) {
-            this.searchForm.setValue({
-                Title: this.search.Title,
-                StartDate: this.search.StartDate,
-                EndDate: this.search.EndDate,
-                Instructor: this.search.Instructor,
-            });
-        }
     }
-    TrainingMaintenanceSearch.prototype.sent = function (value) {
-        this.viewCtrl.dismiss({ "search": value });
+    FindPassword.prototype.confirm = function () {
+        this.navCtrl.setRoot("LoginPage");
     };
-    TrainingMaintenanceSearch.prototype.reset = function () {
-        this.searchForm.reset();
-        this.searchForm.setValidators(null);
-        this.searchForm.updateValueAndValidity();
+    FindPassword.prototype.dismiss = function () {
+        this.viewCtrl.dismiss();
     };
-    TrainingMaintenanceSearch = __decorate([
+    FindPassword = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'training-maintenance-search',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\training-maintenance\training-maintenance-search\training-maintenance-search.html"*/`<ion-header>\n\n    <ion-navbar>\n\n        <ion-title>筛选</ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n    <form [formGroup]="searchForm" (ngSubmit)="sent(searchForm.value)">\n\n        <ion-list>\n\n            <ion-item>\n\n                <ion-label floating>课程主题</ion-label>\n\n                <ion-input type="text" formControlName="Title"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label floating>培训开始时间</ion-label>\n\n                <ion-datetime formControlName="StartDate" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label floating>培训结束时间</ion-label>\n\n                <ion-datetime formControlName="EndDate" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label floating>培训讲师</ion-label>\n\n                <ion-input type="text" formControlName="Instructor"></ion-input>\n\n            </ion-item>\n\n        </ion-list>\n\n        <div text-center>\n\n            <button ion-button color="energized" (click)="reset()" small outline>重置</button>\n\n            <button ion-button color="assertive" type="submit" small>搜索</button>\n\n        </div>\n\n    </form>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\training-maintenance\training-maintenance-search\training-maintenance-search.html"*/
+            selector: 'page-find-password',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\find-password\find-password.html"*/`<!--\n  Generated template for the FindPassword page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            找回密码\n        </ion-title>\n        <ion-buttons>\n            <button ion-button (click)="dismiss()">关闭</button>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <form [formGroup]="findPasswordForm" (ngSubmit)="confirm()">\n        <ion-list>\n            <ion-item>\n                <ion-label>手机号</ion-label>\n                <ion-input type="number" formControlName="phone"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.phone.valid&& findPasswordForm.controls.phone.touched" color="danger">请输入手机号码</span>\n            <ion-item>\n                <ion-label>验证码</ion-label>\n                <ion-input type="number" formControlName="verificationCode"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.verificationCode.valid&& findPasswordForm.controls.verificationCode.touched" color="danger">请输入验证码</span>\n            <ion-item>\n                <ion-label>新密码</ion-label>\n                <ion-input type="password" formControlName="newPassword"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.newPassword.valid&& findPasswordForm.controls.newPassword.touched" color="danger">请输入新密码</span>\n        </ion-list>\n        <div padding-horizontal>\n            <button ion-button block type="submit" [disabled]="!findPasswordForm.valid">确　认</button>\n        </div>\n        <button class="verification" ion-button small color="secondary" *ngIf="findPasswordForm.controls.phone.valid">获取验证码</button>\n    </form>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\find-password\find-password.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
-    ], TrainingMaintenanceSearch);
-    return TrainingMaintenanceSearch;
+    ], FindPassword);
+    return FindPassword;
 }());
 
-//# sourceMappingURL=training-maintenance-search.js.map
+//# sourceMappingURL=find-password.js.map
 
 /***/ })
 

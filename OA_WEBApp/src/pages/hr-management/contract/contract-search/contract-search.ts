@@ -26,11 +26,11 @@ export class ContractSearchPage {
               private formBuilder: FormBuilder) {
     this.search =  this.navParams.get("search");
     this.searchForm = this.formBuilder.group({
-      DeptId: ["", [ ]], // 第一个参数是默认值
-      StartDate: ["", []],
-      EndDate: ["", []],
-      ContractYear: ["", []],
-      ContractType: ["", []],
+      "DeptId": ["", []], // 第一个参数是默认值
+      "StartDate": ["", []],
+      "EndDate": ["", []],
+      "ContractYear": ["", []],
+      "ContractType": ["", []],
     });
 
     this.publicService.GetDeptLs().subscribe((resJson) => {
@@ -39,10 +39,11 @@ export class ContractSearchPage {
 
     if (this.search){
       this.searchForm.setValue({
-        Title: this.search.Title, // 第一个参数是默认值
-        StartDate: this.search.StartDate,
-        EndDate: this.search.EndDate,
-        Instructor: this.search.Instructor,
+        "DeptId": this.search.DeptId,
+        "StartDate": this.search.StartDate,
+        "EndDate": this.search.EndDate,
+        "ContractYear": this.search.ContractYear,
+        "ContractType": this.search.ContractType
       });
     }
   }

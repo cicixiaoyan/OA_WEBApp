@@ -51606,6 +51606,37 @@ ion-navbar.toolbar {
   text-align: right;
 }
 
+.search-dattime .input-wrapper {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.search-dattime .input-wrapper ion-label {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 100%;
+  -ms-flex: 1 1 100%;
+  flex: 1 1 100%;
+}
+
+.search-dattime .input-wrapper .datetime-ios {
+  position: relative;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 50%;
+  -ms-flex: 1 1 50%;
+  flex: 1 1 50%;
+  text-align: center;
+}
+
+.search-dattime .input-wrapper .datetime-ios + .datetime-ios {
+  border-left: 1px solid #efefef;
+}
+
 page-account .top {
   position: relative;
   padding: 20px 0 10px;
@@ -51830,6 +51861,71 @@ page-newwork-detail .item-select ion-select .select-text {
 page-newwork-detail .button-ios {
   padding: 0 .4em;
   width: 100%;
+}
+
+page-contract-renew-view .list-header-ios {
+  border-top: 1px solid #ddd;
+  background-color: #fff;
+  font-size: 1.4rem;
+  color: #406ebf;
+}
+
+page-contract-renew-view .list-ios {
+  margin-bottom: 16px;
+}
+
+page-contract-renew-view .button-full-ios {
+  margin: 0;
+}
+
+page-contract-renew-view .photo {
+  width: 120px;
+  height: 120px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+page-contract-renew-view .list-header-ios .icon {
+  transition: -webkit-transform .15s;
+  -webkit-transition: -webkit-transform .15s;
+  transition: transform .15s;
+  transition: transform .15s, -webkit-transform .15s;
+  transition: transform .15s,-webkit-transform .15s;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+  -webkit-transform-origin: left;
+  transform-origin: left;
+}
+
+page-contract-renew-view .collapsed .list-header-ios .icon {
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+page-contract-renew-view .collapsed > div {
+  visibility: hidden;
+  opacity: 0;
+  max-height: 1px;
+  -webkit-transition: visibility 275ms,opacity 275ms,max-height .28s;
+  transition: visibility 275ms,opacity 275ms,max-height .28s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+page-contract-renew-view .expanded .list-header-ios .icon {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+page-contract-renew-view .expanded > div {
+  visibility: visible;
+  opacity: 1;
+  max-height: 4000px;
+  -webkit-transition: visibility .5s,opacity .5s,max-height .5s;
+  transition: visibility .5s,opacity .5s,max-height .5s;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
 }
 
 page-contract-setting .list-header-ios {

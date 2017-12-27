@@ -1,14 +1,15 @@
 webpackJsonp([52],{
 
-/***/ 724:
+/***/ 736:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NewworkModule", function() { return NewworkModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "JobTypesSetPageModule", function() { return JobTypesSetPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__newwork__ = __webpack_require__(794);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__job_types_set__ = __webpack_require__(810);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_components_module__ = __webpack_require__(365);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,34 +19,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var NewworkModule = (function () {
-    function NewworkModule() {
+
+var JobTypesSetPageModule = (function () {
+    function JobTypesSetPageModule() {
     }
-    NewworkModule = __decorate([
+    JobTypesSetPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__newwork__["a" /* Newwork */],
+                __WEBPACK_IMPORTED_MODULE_2__job_types_set__["a" /* JobTypesSetPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__newwork__["a" /* Newwork */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__job_types_set__["a" /* JobTypesSetPage */]),
+                __WEBPACK_IMPORTED_MODULE_3__components_components_module__["a" /* ComponentsModule */]
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__newwork__["a" /* Newwork */]
-            ]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__job_types_set__["a" /* JobTypesSetPage */]]
         })
-    ], NewworkModule);
-    return NewworkModule;
+    ], JobTypesSetPageModule);
+    return JobTypesSetPageModule;
 }());
 
-//# sourceMappingURL=newwork.module.js.map
+//# sourceMappingURL=job-types-set.module.js.map
 
 /***/ }),
 
-/***/ 794:
+/***/ 810:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Newwork; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JobTypesSetPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -59,50 +60,108 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import { NewworkDetail } from './newwork-detail/newwork-detail';
+// import 'rxjs/add/operator/map';
+// import { Observable } from 'rxjs/Observable';
+// import { HttpService } from "../../../providers/HttpService";
 /**
- * Generated class for the Newwork page.
+ * Generated class for the JobTypesSetPage page.
  *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
  */
-var Newwork = (function () {
-    function Newwork(navCtrl, navParams) {
+var JobTypesSetPage = (function () {
+    function JobTypesSetPage(navCtrl, navParams, 
+        // private httpService: HttpService,
+        modalCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.items = [{
-                wfName: "测试工作流1",
-                wfNo: "2",
-                FK_fid: "1234" // 表单id
-            },
-            {
-                wfName: "测试工作流2",
-                wfNo: "2",
-                FK_fid: "1234" // 表单id
-            },
-            {
-                wfName: "测试工作流3",
-                wfNo: "2",
-                FK_fid: "1234" // 表单id
-            }
-        ];
+        this.modalCtrl = modalCtrl;
+        this.list = [];
+        this.moredata = true;
+        this.isEmpty = false;
+        this.data = {
+            "PageIndex": 0,
+            "PageSize": 8
+        };
+        this.getList(this.data);
     }
-    Newwork.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Newwork');
+    JobTypesSetPage.prototype.ionViewDidLoad = function () {
     };
-    Newwork.prototype.addNew = function (id) {
-        this.navCtrl.push("NewworkDetail", { id: id });
+    JobTypesSetPage.prototype.doRead = function (Params) {
+        var modal = this.modalCtrl.create("JobTypesSetAddPage", { "id": Params });
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            data && console.log(data);
+        });
     };
-    Newwork = __decorate([
+    JobTypesSetPage.prototype.doWrite = function () {
+        var modal = this.modalCtrl.create("JobTypesSetAddPage");
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            data && console.log(data);
+        });
+        // this.navCtrl.push(MailWrite);
+    };
+    JobTypesSetPage.prototype.doRefresh = function (refresher) {
+        this.list = [];
+        this.data.PageIndex = 0;
+        this.getList(this.data);
+        setTimeout(function () {
+            refresher.complete();
+        }, 1000);
+    };
+    JobTypesSetPage.prototype.doInfinite = function () {
+        if (this.moredata) {
+            this.data.PageIndex++;
+            this.getList(this.data);
+        }
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve();
+            }, 500);
+        });
+    };
+    JobTypesSetPage.prototype.getList = function (data) {
+        this.list = [
+            {
+                "Id": 1,
+                "Name": '工种名称1',
+                "Category": '教务人员	',
+                "Remarks": ''
+            },
+            {
+                "Id": 2,
+                "Name": '工种名称2',
+                "Category": '后勤人员	',
+                "Remarks": '我是备注'
+            },
+        ];
+        // this.httpService.postFormData("", data)
+        // .map((res: Response) => res.json())
+        // .subscribe((resJson) => {
+        //   if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
+        //     this.moredata = true;
+        //     this.isEmpty = false;
+        //     let list = resJson.Data;
+        //     this.list = [...this.list, ...list];
+        //   }else{
+        //     this.moredata = false;
+        //     this.isEmpty = (this.data.PageIndex == 0) ? true : false;
+        //   }
+        // });
+    };
+    JobTypesSetPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-newwork',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\newwork\newwork.html"*/`<!--\n  Generated template for the Newwork page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>新建事项</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-list inset style="margin:16px 0;">\n        <button ion-item *ngFor="let item of items" (click)="addNew(item.FK_fid)">\n    {{item.wfName}}\n  </button>\n    </ion-list>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\newwork\newwork.html"*/,
+            selector: 'page-job-types-set',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\job-types-set\job-types-set.html"*/`<ion-header>\n\n    <ion-navbar>\n        <ion-title>工种设置</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n        <ion-item *ngFor="let item of list " (click)="doRead(item.Id)">\n            <span>{{item.Name}}</span>\n            <p class="font-12">所属分类：{{item.Category}}	</p>\n            <p class="font-12" *ngIf="item.Remarks !== \'\'">{{item.Remarks}}</p>\n        </ion-item>\n    </ion-list>\n    <empty *ngIf="isEmpty"></empty>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\job-types-set\job-types-set.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
-    ], Newwork);
-    return Newwork;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */]])
+    ], JobTypesSetPage);
+    return JobTypesSetPage;
 }());
 
-//# sourceMappingURL=newwork.js.map
+//# sourceMappingURL=job-types-set.js.map
 
 /***/ })
 

@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{name}}筛选</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <form [formGroup]="searchForm" (ngSubmit)="sent(searchForm.value)">
+        <ion-list>
+            <ion-item>
+                <ion-label floating>员工部门</ion-label>
+                <ion-select formControlName="DeptId" cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-option *ngFor="let Dept of DeptLs;let i = index" [value]="Dept.Id">{{Dept.BmName}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>{{name}}开始时间</ion-label>
+                <ion-datetime formControlName="StartDate" cancelText="取消"  placeholder="请选择" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>{{name}}结束时间</ion-label>
+                <ion-datetime formControlName="EndDate" cancelText="取消"  placeholder="请选择" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+            </ion-item>
+        </ion-list>
+        <div text-center>
+            <button ion-button color="energized" (click)="reset()" small outline>重置</button>
+            <button ion-button color="assertive" type="submit" small>搜索</button>
+        </div>
+    </form>
+</ion-content>

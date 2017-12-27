@@ -1,15 +1,15 @@
 webpackJsonp([29],{
 
-/***/ 718:
+/***/ 704:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DriverSetPageModule", function() { return DriverSetPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BacklogDetailModule", function() { return BacklogDetailModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__driver_set__ = __webpack_require__(788);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(764);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog_detail__ = __webpack_require__(778);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(770);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,33 +20,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var DriverSetPageModule = (function () {
-    function DriverSetPageModule() {
+var BacklogDetailModule = (function () {
+    function BacklogDetailModule() {
     }
-    DriverSetPageModule = __decorate([
+    BacklogDetailModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__driver_set__["a" /* DriverSetPage */],
+                __WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__driver_set__["a" /* DriverSetPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__driver_set__["a" /* DriverSetPage */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */]]
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */]
+            ],
+            providers: [__WEBPACK_IMPORTED_MODULE_3__backlogService__["a" /* BacklogService */]]
         })
-    ], DriverSetPageModule);
-    return DriverSetPageModule;
+    ], BacklogDetailModule);
+    return BacklogDetailModule;
 }());
 
-//# sourceMappingURL=driver-set.module.js.map
+//# sourceMappingURL=backlog-detail.module.js.map
 
 /***/ }),
 
-/***/ 764:
+/***/ 770:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CarService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
@@ -62,66 +64,51 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+// import {Observable} from "rxjs";
 
-var CarService = (function () {
-    function CarService(httpService) {
+var BacklogService = (function () {
+    function BacklogService(httpService) {
         this.httpService = httpService;
+        this.Status = {
+            notdone: 0,
+            done: 1 // 已办理
+        };
     }
-    CarService.prototype.getList = function (param) {
-        return this.httpService.postFormData("ashx/BusVehicleLs.ashx", param).map(function (res) { return res.json(); });
+    BacklogService.prototype.getNotDoneList = function (param) {
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
     };
-    CarService.prototype.geDetail = function (id) {
-        return this.httpService.postFormData("ashx/BusVehicleDetail.ashx", { "Id": id })
-            .map(function (res) { return res.json(); });
+    BacklogService.prototype.getDoneList = function (param) {
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
     };
-    CarService.prototype.add = function (param) {
-        return this.httpService.postFormData("ashx/BusVehicleLsAdd.ashx", param).map(function (res) { return res.json(); });
+    BacklogService.prototype.getDone = function (param) {
+        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
     };
-    CarService.prototype.mod = function (param) {
-        return this.httpService.postFormData("ashx/BusVehicleLsMod.ashx", param).map(function (res) { return res.json(); });
+    BacklogService.prototype.getNotDone = function (param) {
+        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
     };
-    CarService.prototype.geStatus = function (status) {
-        return this.httpService.postFormData("ashx/BusQuery.ashx", { "Status": status })
-            .map(function (res) { return res.json(); });
+    BacklogService.prototype.TodoApprove = function (param) {
+        return this.httpService.postFormData('/ashx/TodoApprove.ashx', param).map(function (res) { return res.json(); });
     };
-    CarService.prototype.getDriverList = function (param) {
-        return this.httpService.postFormData("ashx/DriverLs.ashx", param).map(function (res) { return res.json(); });
-    };
-    CarService.prototype.getDriverDetails = function (id) {
-        return this.httpService.postFormData("ashx/DriverDetails.ashx", { "Id": id })
-            .map(function (res) { return res.json(); });
-    };
-    CarService.prototype.driverAdd = function (param) {
-        return this.httpService.postFormData("ashx/DriverAdd.ashx", param).map(function (res) { return res.json(); });
-    };
-    CarService.prototype.driverMod = function (param) {
-        return this.httpService.postFormData("ashx/DriverMod.ashx", param).map(function (res) { return res.json(); });
-    };
-    CarService.prototype.driverDel = function (id) {
-        return this.httpService.postFormData("ashx/DriverDel.ashx", { "Id": id })
-            .map(function (res) { return res.json(); });
-    };
-    CarService = __decorate([
+    BacklogService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], CarService);
-    return CarService;
+    ], BacklogService);
+    return BacklogService;
 }());
 
-//# sourceMappingURL=car_service.js.map
+//# sourceMappingURL=backlogService.js.map
 
 /***/ }),
 
-/***/ 788:
+/***/ 778:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DriverSetPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogDetail; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(764);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(770);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(45);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -135,92 +122,64 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 /**
- * Generated class for the DriverSetPage page.
+ * Generated class for the BacklogDetail page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
  */
-var DriverSetPage = (function () {
-    function DriverSetPage(navCtrl, navParams, carService, nativeService, formBuilder) {
+var BacklogDetail = (function () {
+    function BacklogDetail(navCtrl, navParams, backlogService, nativeService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.carService = carService;
+        this.backlogService = backlogService;
         this.nativeService = nativeService;
-        this.formBuilder = formBuilder;
-        this.isWrite = false;
-        this.isWrite = this.navParams.get("isWrite");
-        var today = new Date();
-        this.addForm = this.formBuilder.group({
-            Name: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(10), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            Sex: ["", []],
-            Age: [today, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(3)]],
-            InDate: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(5), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            Memo: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]]
-            // Archives: ["2017/10/9 系统管理员", [Validators.maxLength(180)]],
-        });
+        this.item = [];
+        this.isComplete = false;
+        console.log(this.navParams.get("id"));
+        this.initializeItems();
     }
-    DriverSetPage.prototype.ionViewDidLoad = function () {
+    BacklogDetail.prototype.initializeItems = function () {
         var _this = this;
-        if (!this.isWrite) {
-            this.carService.getDriverDetails(this.navParams.get("Id")).subscribe(function (resJson) {
-                if (resJson.Resule && typeof (resJson.Data) !== "string") {
-                    var data = resJson.Data;
-                    _this.id = data.Id;
-                    _this.addForm.setValue({
-                        Name: data.Name,
-                        Sex: data.Sex,
-                        Age: data.Age,
-                        InDate: data.InDate,
-                        Memo: data.Memo
-                    });
-                }
-                else {
-                    _this.nativeService.showToast(resJson.Data, 800);
-                    _this.navCtrl.pop();
-                }
-            });
-        }
+        var data = {
+            "Id": this.navParams.get("id"),
+            "Uid": this.backlogService.httpService.globalData.Uid
+        };
+        this.backlogService.getDone(data).subscribe(function (resJson) {
+            if (resJson.Result) {
+                _this.item = resJson.Data;
+            }
+            else {
+                _this.nativeService.showToast(resJson.Data);
+                _this.navCtrl.pop();
+            }
+        });
     };
-    DriverSetPage.prototype.save = function (value) {
-        var _this = this;
-        if (this.isWrite) {
-            this.carService.driverAdd(value).subscribe(function (resJson) {
-                if (resJson.Resule) {
-                    _this.nativeService.showToast("添加成功", 500);
-                }
-                else {
-                    _this.nativeService.showToast(resJson.Data, 800);
-                }
-            });
-        }
-        else {
-            value.Id = this.id;
-            this.carService.driverMod(value).subscribe(function (resJson) {
-                if (resJson.Resule) {
-                    _this.nativeService.showToast("修改成功", 500);
-                }
-                else {
-                    _this.nativeService.showToast(resJson.Data, 800);
-                }
-            });
-        }
+    BacklogDetail.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad BacklogDetail');
     };
-    DriverSetPage = __decorate([
+    BacklogDetail.prototype.approved = function () {
+        console.log("审批通过");
+    };
+    BacklogDetail.prototype.overrule = function () {
+        console.log("审批驳回");
+    };
+    BacklogDetail.prototype.cancel = function () {
+        this.navCtrl.pop();
+    };
+    BacklogDetail = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-driver-set',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\driver\driver-set\driver-set.html"*/`<!--\n  Generated template for the DriverSetPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>{{isWrite ? "添加驾驶员" : "驾驶员详情"}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="addForm" (ngSubmit)="save(addForm.value)">\n        <div>\n            <ion-list>\n                <ion-item>\n                    <ion-label stacked>姓名</ion-label>\n                    <ion-input type="text" formControlName="Name" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>年龄</ion-label>\n                    <ion-input type="number" formControlName="Age" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>性别</ion-label>\n                    <ion-select formControlName="Sex" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option  value="男">男</ion-option>\n                        <ion-option  value="女">女</ion-option>\n                    </ion-select>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>入职时间</ion-label>\n                    <ion-datetime formControlName="InDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>备注</ion-label>\n                    <ion-textarea formControlName="Memo" type="text" placeholder="请输入"></ion-textarea>\n                </ion-item>\n                <ion-item  *ngIf="!isWrite">\n                    <ion-label stacked>建档</ion-label>\n                    <ion-input value="2017/10/9 系统管理员"  type="text" placeholder="无"></ion-input>\n                </ion-item>\n\n            </ion-list>\n            <div padding text-center>\n                <button ion-button type="submit" color="danger" [disabled]="!addForm.valid">保存</button>\n                <button *ngIf="!isWrite" ion-button type="submit" color="danger" [disabled]="!addForm.valid">删除</button>\n                <button ion-button clear small navPop>关闭</button>\n            </div>\n        </div>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\driver\driver-set\driver-set.html"*/,
+            selector: 'page-backlog-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog-detail\backlog-detail.html"*/`<!--\n  Generated template for the BacklogDetail page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>事项详情</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-card>\n        <ion-card-header>\n            33ee\n        </ion-card-header>\n        <ion-card-content>\n            <ion-list>\n                <ion-item>\n                    <ion-label>当前步骤：</ion-label>\n                    <ion-input type="text" placeholder="当前步骤1"></ion-input>\n                </ion-item>\n\n                <ion-item *ngIf="isComplete">\n                    <ion-label>审批模式：</ion-label>\n                    <ion-input type="text" placeholder="无"></ion-input>\n                </ion-item>\n\n                <div *ngIf="!isComplete">\n                    <ion-item>\n                        <ion-label>&emsp;流水号：<em>&emsp;1&nbsp;—</em></ion-label>\n\n                        <ion-input type="text" placeholder="请输入流水号"></ion-input>\n                    </ion-item>\n\n                    <ion-item>\n                        <ion-label>审批状态：</ion-label>\n                        <ion-input type="text" placeholder="无"></ion-input>\n                    </ion-item>\n                </div>\n\n\n                <div id="strhtm" style="min-height: 100px;overflow-x:auto;"></div>\n\n            </ion-list>\n            <ion-row>\n                <ion-col col-auto style="padding-left:12px;padding-top:5px;text-align:right;">\n                    &nbsp;相关附件：\n                </ion-col>\n                <ion-col col-lg-8 col-xl-6 style="position: relative;padding-left: 40px;background-color: #d7eaf9;">\n                    <ion-icon name="md-image" color="energized" style="position:absolute;left:.4rem;display:inline-block;font-size:3.6rem;"></ion-icon>\n                    <div>\n                        <span>text.png</span>\n                        <span ng-click="" style="position:absolute;right:10px;font-size:1.2rem">下载</span>\n                        <p style="font-size:1.2rem;">2.5M</p>\n                    </div>\n                </ion-col>\n            </ion-row>\n\n            <ion-list *ngIf="!isComplete">\n                <ion-item>\n                    <ion-label>审批记录：</ion-label>\n                    <ion-textarea type="text" placeholder="无"></ion-textarea>\n                </ion-item>\n                <ion-item>\n                    <ion-textarea placeholder="请输入本次审批意见" rows="2"></ion-textarea>\n                </ion-item>\n            </ion-list>\n\n\n        </ion-card-content>\n        <ion-row text-center>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-checkmark"></ion-icon>\n                    <div>审批通过</div>\n                </button>\n            </ion-col>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-close"></ion-icon>\n                    <div>审批驳回</div>\n                </button>\n            </ion-col>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-return-left"></ion-icon>\n                    <div>返回</div>\n                </button>\n            </ion-col>\n        </ion-row>\n    </ion-card>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog-detail\backlog-detail.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_NativeService__["a" /* NativeService */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
-    ], DriverSetPage);
-    return DriverSetPage;
+            __WEBPACK_IMPORTED_MODULE_2__backlogService__["a" /* BacklogService */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */]])
+    ], BacklogDetail);
+    return BacklogDetail;
 }());
 
-//# sourceMappingURL=driver-set.js.map
+//# sourceMappingURL=backlog-detail.js.map
 
 /***/ })
 

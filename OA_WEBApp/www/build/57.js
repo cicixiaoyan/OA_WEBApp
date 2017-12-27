@@ -1,14 +1,14 @@
 webpackJsonp([57],{
 
-/***/ 720:
+/***/ 722:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactsPopoverPageModule", function() { return ContactsPopoverPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NewworkDetailModule", function() { return NewworkDetailModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts_popover__ = __webpack_require__(790);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__newwork_detail__ = __webpack_require__(796);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,38 +18,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ContactsPopoverPageModule = (function () {
-    function ContactsPopoverPageModule() {
+var NewworkDetailModule = (function () {
+    function NewworkDetailModule() {
     }
-    ContactsPopoverPageModule = __decorate([
+    NewworkDetailModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__contacts_popover__["a" /* ContactsPopoverPage */],
+                __WEBPACK_IMPORTED_MODULE_2__newwork_detail__["a" /* NewworkDetail */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts_popover__["a" /* ContactsPopoverPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__newwork_detail__["a" /* NewworkDetail */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__contacts_popover__["a" /* ContactsPopoverPage */]]
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__newwork_detail__["a" /* NewworkDetail */]
+            ]
         })
-    ], ContactsPopoverPageModule);
-    return ContactsPopoverPageModule;
+    ], NewworkDetailModule);
+    return NewworkDetailModule;
 }());
 
-//# sourceMappingURL=contacts-popover.module.js.map
+//# sourceMappingURL=newwork-detail.module.js.map
 
 /***/ }),
 
-/***/ 790:
+/***/ 796:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactsPopoverPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewworkDetail; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(160);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -61,128 +59,49 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
-
-
 /**
- * Generated class for the ContactsPopoverPage page.
+ * Generated class for the NewworkDetail page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
  */
-var ContactsPopoverPage = (function () {
-    function ContactsPopoverPage(navParams, viewCtrl, storage, httpService) {
+var NewworkDetail = (function () {
+    function NewworkDetail(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.viewCtrl = viewCtrl;
-        this.storage = storage;
-        this.httpService = httpService;
-        this.deptItems = [];
-        this.items = [];
-        this.haveAffix = false;
-        this.addressee = this.navParams.get("addressee");
-        this.addresseeIds = this.navParams.get("addresseeIds");
-        console.log(this.addressee, this.addresseeIds);
-        this.initializeItems();
+        this.title = "新建工作";
+        this.firstStep = true;
+        this.phoneNotification = false;
+        this.siteNotification = false;
+        this.msgNotification = function (obj) {
+            if (obj == 'site') {
+                this.siteNotification = !this.siteNotification;
+            }
+            else {
+                this.phoneNotification = !this.phoneNotification;
+            }
+        };
+        console.log(this.navParams.get("id"));
     }
-    ContactsPopoverPage.prototype.initializeItems = function () {
-        var _this = this;
-        this.httpService.postFormData("ashx/BmLs.ashx", {})
-            .map(function (res) { return res.json(); })
-            .subscribe(function (resJson) {
-            if (resJson.Result) {
-                _this.deptItems = resJson.Data;
-            }
-        });
-        this.search();
+    NewworkDetail.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad NewworkDetail');
     };
-    ContactsPopoverPage.prototype.getItems = function (ev) {
-        // Reset items back to all of the items
-        this.initializeItems();
-        // set val to the value of the ev target
-        var val = ev.target.value;
-        this.name = val;
-        // if the value is an empty string don't filter the items
-        // if (val && val.trim() != '') {
-        //   this.items = this.items.filter((item) => {
-        //     return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-        //   });
-        // }
+    NewworkDetail.prototype.showNextStep = function () {
+        this.firstStep = false;
     };
-    ContactsPopoverPage.prototype.getRecipientsByDept = function (id) {
-        var _this = this;
-        var data = !!id ? { DeptId: id } : {};
-        this.httpService.postFormData("ashx/UserSheet.ashx", data)
-            .map(function (res) { return res.json(); })
-            .subscribe(function (result) {
-            console.log(result);
-            if (result.Result) {
-                var idArr_1 = _this.addresseeIds.split(",");
-                _this.items = result.Data.map(function (value, index) {
-                    for (var i in idArr_1) {
-                        if (idArr_1[i] !== value.Uid) {
-                            Object.assign(value, { checked: false });
-                        }
-                        else {
-                            return Object.assign(value, { checked: true });
-                        }
-                    }
-                    return value;
-                });
-            }
-        });
+    NewworkDetail.prototype.showfirstStep = function () {
+        this.firstStep = true;
     };
-    ContactsPopoverPage.prototype.search = function () {
-        var _this = this;
-        var data = (this.name !== "") ? { name: name } : {};
-        this.httpService.postFormData("ashx/UserSheet.ashx", data)
-            .map(function (res) { return res.json(); })
-            .subscribe(function (result) {
-            console.log(result);
-            if (result.Result) {
-                var idArr_2 = _this.addresseeIds.split(",");
-                _this.items = result.Data.map(function (value, index) {
-                    for (var i in idArr_2) {
-                        if (idArr_2[i] !== value.Uid) {
-                            Object.assign(value, { checked: false });
-                        }
-                        else {
-                            return Object.assign(value, { checked: true });
-                        }
-                    }
-                    return value;
-                });
-            }
-        });
-    };
-    ContactsPopoverPage.prototype.checkPeople = function (index) {
-        this.items[index].checked = !this.items[index].checked;
-    };
-    ContactsPopoverPage.prototype.confirm = function () {
-        console.log(confirm);
-        this.addressee = "";
-        this.addresseeIds = "";
-        for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
-            var value = _a[_i];
-            if (value.checked) {
-                this.addressee += value.Name + ",";
-                this.addresseeIds += value.Uid + ",";
-            }
-        }
-        this.viewCtrl.dismiss({ addressee: this.addressee, addresseeIds: this.addresseeIds });
-    };
-    ContactsPopoverPage = __decorate([
+    NewworkDetail = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contacts-popover',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\contacts-popover\contacts-popover.html"*/`<!--\n  Generated template for the ContactsPopoverPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>联系人选择</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-list class="checkpeople-popover">\n    <ion-item>\n        <ion-label>部门选择</ion-label>\n        <ion-select [(ngModel)]="dept" submitText="确定" (ngModelChange)="getRecipientsByDept(dept)"\n            cancelText="取消" okText="确定">\n            <ion-option  *ngFor="let item of deptItems;let i = index" [value]="item.Id">\n                {{item.BmName}}\n            </ion-option>\n        </ion-select>\n    </ion-item>\n    <ion-searchbar color="danger" [(ngModel)]="name"  placeholder="请输入编码或姓名">\n    </ion-searchbar>\n  \n    <div text-center>\n        <button (click)="search()" icon-left ion-button small color="calm">\n        <ion-icon name="search"></ion-icon>查询</button>\n  \n        <button (click)="confirm()" icon-left ion-button small color="calm">\n        <ion-icon name="checkmark"></ion-icon>确定</button>\n    </div>\n  \n    <ion-list-header>\n        通讯录\n    </ion-list-header>\n  \n    <ion-item *ngFor="let item of items;let i = index">\n        <ion-label>\n        {{item.Name}}({{item.Uid}})<br>\n        <span>{{item.Dept}}&emsp;{{item.Duty}}</span>\n        </ion-label>\n        <ion-checkbox [checked]="item.checked" (ionChange)="checkPeople(i)"></ion-checkbox>\n    </ion-item>\n  </ion-list>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\contacts-popover\contacts-popover.html"*/,
+            selector: 'page-newwork-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\newwork\newwork-detail\newwork-detail.html"*/`<!--\n\n  Generated template for the NewworkDetail page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>{{title}}</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-list inset *ngIf="firstStep">\n\n\n\n        <ion-item>\n\n            <ion-label>当前步骤：</ion-label>\n\n            <ion-input type="text" placeholder="当前步骤1"></ion-input>\n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <ion-label>&emsp;流水号：<em>&emsp;1&nbsp;—</em></ion-label>\n\n\n\n            <ion-input type="text" placeholder="请输入流水号"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>工作标题：</ion-label>\n\n            <ion-input type="text" placeholder="请输入工作标题"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>紧急情况：</ion-label>\n\n            <ion-select [(ngModel)]="emergencyLevel" placeholder="请选择紧急情况" cancelText="取消" okText="确定">\n\n                <ion-option value="1">高</ion-option>\n\n                <ion-option value="2" selected="true">中</ion-option>\n\n                <ion-option value="3">低</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <!--<div id="strhtm" style="min-height: 100px;overflow-x:auto;"></div>-->\n\n        <iframe id="iframe" class="iframe" onload="this.height=\'100%\'" style="width:100%;overflow-x:auto" sandbox="allow-scripts allow-top-navigation allow-pointer-lock allow-same-origin allow-popups allow-forms" src="https://www.baidu.com">\n\n        </iframe>\n\n\n\n    </ion-list>\n\n    <ion-list inset *ngIf="!firstStep">\n\n        <ion-item>\n\n            <ion-label>审批类型：</ion-label>\n\n            <ion-select [(ngModel)]="emergencyLevel" placeholder="请选择审批类型" cancelText="取消" okText="确定">\n\n                <ion-option value="1" selected="true">上级审批</ion-option>\n\n                <ion-option value="2">领导审批</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>经办人员：</ion-label>\n\n            <ion-select [(ngModel)]="manager" multiple="true" placeholder="请选择经办人员" cancelText="取消" okText="确定">\n\n                <ion-option value="1">系统管理员1</ion-option>\n\n                <ion-option value="2">系统管理员2</ion-option>\n\n                <ion-option value="3">系统管理员3</ion-option>\n\n\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>经办部门：</ion-label>\n\n            <ion-select [(ngModel)]="department" multiple="true" placeholder="请选择经办部门" cancelText="取消" okText="确定">\n\n                <ion-option value="">请选择</ion-option>\n\n                <ion-option value="1">总部</ion-option>\n\n                <ion-option value="2">研究部</ion-option>\n\n                <ion-option value="3">设计部</ion-option>\n\n                <ion-option value="4">测试部部</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>经办角色：</ion-label>\n\n            <ion-select [(ngModel)]="role" multiple="true" placeholder="请选择经办人员" cancelText="取消" okText="确定">\n\n                <ion-option value="1">管理员</ion-option>\n\n                <ion-option value="1">总经理助理</ion-option>\n\n\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>审批人员：</ion-label>\n\n            <ion-select [(ngModel)]="review" multiple="true" placeholder="还未审批" cancelText="取消" okText="确定">\n\n                <ion-option value="1">系统管理员2</ion-option>\n\n                <ion-option value="1">系统管理员3</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n    </ion-list>\n\n    <ion-grid padding-horizontal>\n\n        <ion-row no-padding text-center *ngIf="!firstStep">\n\n            <ion-col col-6>\n\n                <button (click)="msgNotification(\'site\')" ion-button icon-left>\n\n              <ion-icon [name]=\'siteNotification?"md-checkbox-outline":"md-square-outline"\'></ion-icon>\n\n              站内消息提醒\n\n            </button>\n\n            </ion-col>\n\n            <ion-col col-6>\n\n                <button (click)="msgNotification(\'phone\')" ion-button icon-left>\n\n              <ion-icon [name]=\'phoneNotification?"md-checkbox-outline":"md-square-outline"\'></ion-icon>\n\n              手机短信提醒\n\n            </button>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n    <div padding>\n\n        <button *ngIf="firstStep" ion-button block color="calm" (click)="showNextStep()">下一步</button>\n\n        <div *ngIf="!firstStep">\n\n            <button ion-button block color="calm" (click)="showfirstStep()">上一步</button>\n\n            <button ion-button block color="danger" (click)="submit()">提交</button>\n\n        </div>\n\n\n\n    </div>\n\n\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\newwork\newwork-detail\newwork-detail.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__["a" /* HttpService */]])
-    ], ContactsPopoverPage);
-    return ContactsPopoverPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
+    ], NewworkDetail);
+    return NewworkDetail;
 }());
 
-//# sourceMappingURL=contacts-popover.js.map
+//# sourceMappingURL=newwork-detail.js.map
 
 /***/ })
 

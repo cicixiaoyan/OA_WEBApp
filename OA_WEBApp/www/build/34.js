@@ -5,11 +5,11 @@ webpackJsonp([34],{
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnnouncementDetailPageModule", function() { return AnnouncementDetailPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CarAddPageModule", function() { return CarAddPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcement_detail__ = __webpack_require__(783);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(770);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__car_add__ = __webpack_require__(787);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(769);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,33 +20,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AnnouncementDetailPageModule = (function () {
-    function AnnouncementDetailPageModule() {
+var CarAddPageModule = (function () {
+    function CarAddPageModule() {
     }
-    AnnouncementDetailPageModule = __decorate([
+    CarAddPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */],
+                __WEBPACK_IMPORTED_MODULE_2__car_add__["a" /* CarAddPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__car_add__["a" /* CarAddPage */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__announcement_detail__["a" /* AnnouncementDetailPage */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__announcementService__["a" /* AnnouncementService */]]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__car_add__["a" /* CarAddPage */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */]]
         })
-    ], AnnouncementDetailPageModule);
-    return AnnouncementDetailPageModule;
+    ], CarAddPageModule);
+    return CarAddPageModule;
 }());
 
-//# sourceMappingURL=announcement-detail.module.js.map
+//# sourceMappingURL=car-add.module.js.map
 
 /***/ }),
 
-/***/ 770:
+/***/ 769:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CarService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
@@ -63,53 +63,65 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the AnnouncementPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var AnnouncementService = (function () {
-    function AnnouncementService(httpService) {
+var CarService = (function () {
+    function CarService(httpService) {
         this.httpService = httpService;
-        this.announcementStatus = {
-            "enter": "录入",
-            "published": "已发布",
-            "all": "0" // 全部
-        };
     }
-    AnnouncementService.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Login');
+    CarService.prototype.getList = function (param) {
+        return this.httpService.postFormData("ashx/BusVehicleLs.ashx", param).map(function (res) { return res.json(); });
     };
-    AnnouncementService.prototype.getList = function (param) {
-        return this.httpService.postFormData("ashx/Announcement.ashx", param)
+    CarService.prototype.geDetail = function (id) {
+        return this.httpService.postFormData("ashx/BusVehicleDetail.ashx", { "Id": id })
             .map(function (res) { return res.json(); });
     };
-    AnnouncementService.prototype.detail = function (key) {
-        return this.httpService.postFormData("ashx/AnnouncementDetail.ashx", { "attKey": key })
+    CarService.prototype.add = function (param) {
+        return this.httpService.postFormData("ashx/BusVehicleLsAdd.ashx", param).map(function (res) { return res.json(); });
+    };
+    CarService.prototype.mod = function (param) {
+        return this.httpService.postFormData("ashx/BusVehicleLsMod.ashx", param).map(function (res) { return res.json(); });
+    };
+    CarService.prototype.geStatus = function (status) {
+        return this.httpService.postFormData("ashx/BusQuery.ashx", { "Status": status })
             .map(function (res) { return res.json(); });
     };
-    AnnouncementService = __decorate([
+    CarService.prototype.getDriverList = function (param) {
+        return this.httpService.postFormData("ashx/DriverLs.ashx", param).map(function (res) { return res.json(); });
+    };
+    CarService.prototype.getDriverDetails = function (id) {
+        return this.httpService.postFormData("ashx/DriverDetails.ashx", { "Id": id })
+            .map(function (res) { return res.json(); });
+    };
+    CarService.prototype.driverAdd = function (param) {
+        return this.httpService.postFormData("ashx/DriverAdd.ashx", param).map(function (res) { return res.json(); });
+    };
+    CarService.prototype.driverMod = function (param) {
+        return this.httpService.postFormData("ashx/DriverMod.ashx", param).map(function (res) { return res.json(); });
+    };
+    CarService.prototype.driverDel = function (id) {
+        return this.httpService.postFormData("ashx/DriverDel.ashx", { "Id": id })
+            .map(function (res) { return res.json(); });
+    };
+    CarService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], AnnouncementService);
-    return AnnouncementService;
+    ], CarService);
+    return CarService;
 }());
 
-//# sourceMappingURL=announcementService.js.map
+//# sourceMappingURL=car_service.js.map
 
 /***/ }),
 
-/***/ 783:
+/***/ 787:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementDetailPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CarAddPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(770);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_FileService__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(769);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_NativeService__ = __webpack_require__(45);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -125,64 +137,73 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the AnnouncementDetailPage page.
+ * Generated class for the CarAddPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var AnnouncementDetailPage = (function () {
-    function AnnouncementDetailPage(navCtrl, navParams, announcementService, fileService, nativeService) {
+var CarAddPage = (function () {
+    function CarAddPage(navCtrl, navParams, formBuilder, nativeService, carService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.announcementService = announcementService;
-        this.fileService = fileService;
+        this.formBuilder = formBuilder;
         this.nativeService = nativeService;
-        this.myDiv = '';
-        this.hasAtt = false;
-        this.downloaded = false;
-        this.item = this.navParams.get('item');
-        this.initializeItems();
+        this.carService = carService;
+        var today = new Date();
+        this.addForm = this.formBuilder.group({
+            BusNumber: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            BusName: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            BusPassenger: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            StartDate: [today, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            BusBuyPrice: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(5)]],
+            Salvage: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(5)]],
+            BusLicensePlate: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]],
+            BusEngineNumber: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]],
+            BusFrameNumber: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]],
+            BusDrivingLicenseNumber: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(20)]],
+            BusManger: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(20), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(4)]],
+            BusStatus: ["", []],
+            BusAnnualInspection: ["",],
+            BusMaintenanceDate: ["", []],
+            BusDated: ["", []],
+            BusMemo: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]],
+        });
     }
-    AnnouncementDetailPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad AnnouncementDetailPage');
-    };
-    AnnouncementDetailPage.prototype.initializeItems = function () {
+    CarAddPage.prototype.ionViewDidLoad = function () {
         var _this = this;
-        this.announcementService.detail(this.item.AnnouncementAtt).subscribe(function (resJson) {
-            if (resJson.Result && resJson !== []) {
-                _this.attObj = resJson.Data[0];
-                _this.hasAtt = true;
+        this.carService.geStatus().subscribe(function (resJson) {
+            if (resJson.Result) {
+                _this.BusStatusLs = resJson.Data;
+            }
+        });
+        console.log('ionViewDidLoad CarAddPage');
+    };
+    CarAddPage.prototype.save = function (value) {
+        var _this = this;
+        value.Uid = this.carService.httpService.globalData.Uid;
+        this.carService.add(value).subscribe(function (resJson) {
+            if (resJson.Result) {
+                _this.nativeService.showToast("添加成功", 500);
             }
             else {
-                _this.attObj = {};
+                _this.nativeService.showToast(resJson.Data, 500);
             }
         });
-        this.myDiv = this.item.AnnouncementTitle;
     };
-    AnnouncementDetailPage.prototype.download = function (path, name) {
-        var _this = this;
-        var target = path.split("/").pop();
-        var url = "http://192.168.0.49:789/Attach/flow/Work/201111302315473908417.pdf";
-        this.fileService.download1(url, target).subscribe(function (path) {
-            _this.downloaded = true;
-            _this.fileService.openFile(path).subscribe(function () {
-            });
-        });
-    };
-    AnnouncementDetailPage = __decorate([
+    CarAddPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-announcement-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/`<!--\n  Generated template for the AnnouncementDetailPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  \n      <ion-navbar>\n          <ion-title>公告详情</ion-title>\n      </ion-navbar>\n  </ion-header>\n  \n  \n  <ion-content>\n      <div class="detail-header">\n          <div class="detail-title"><span color="calm">[{{item.AnnouncementType}}]</span>{{item.AnnouncementTitle}}</div>\n          <p>\n              {{item.AnnouncementPublishPerson}}\n              <span class="right">{{item.AnnouncementPublishDate|date : "yyyy年MM月dd日 hh时mm分"}}</span>\n          </p>\n      </div>\n      <div class="content">\n          <ion-scroll class="detail-content" scrollY="true" id="noticeContent">\n              <div padding>开始时间：{{item.AnnouncementStarDate|date : "yyyy年MM月dd日 hh时mm分"}}\n                  <br/>结束时间：{{item.AnnouncementEndDate|date : "yyyy年MM月dd日 hh时mm分"}}</div>\n              <div padding-horizontal [innerHTML]="myDiv"></div>\n              <div class="affix" *ngIf="hasAtt">\n                  <ion-grid>\n                      <ion-row align-items-center>\n                          <ion-col col-6 col-lg-4>\n                              <div (click)="download(attObj.AttNewName, attObj.AttName)">\n                                  <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                  <p>{{attObj.AttName}}</p>\n                                  <!-- <p color="gray">大小未知</p> -->\n                                  <ion-icon *ngIf="!downloaded" class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n                                  <ion-icon *ngIf="downloaded" class="affix-open" name="ios-folder-open-outline"></ion-icon>\n                              </div>\n                          </ion-col>\n                      </ion-row>\n                  </ion-grid>\n              </div>\n          </ion-scroll>\n      </div>\n  \n  \n  </ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/,
+            selector: 'page-car-add',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\car-add\car-add.html"*/`<!--\n  Generated template for the CarAddPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>新增车辆</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n    <form [formGroup]="addForm" (ngSubmit)="save(addForm.value)">\n        <div>\n            <ion-list>\n                <ion-item>\n                    <ion-label stacked>车牌号</ion-label>\n                    <ion-input type="text" formControlName="BusNumber" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>车辆名称</ion-label>\n                    <ion-input type="text" formControlName="BusName" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>核载人数</ion-label>\n                    <ion-input type="number" formControlName="BusPassenger" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>启用时间</ion-label>\n                    <ion-datetime formControlName="StartDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>购买价(万)</ion-label>\n                    <ion-input type="number" formControlName="BusBuyPrice" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>残值(万)</ion-label>\n                    <ion-input type="number" formControlName="Salvage" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>厂牌型号</ion-label>\n                    <ion-input type="text" formControlName="BusLicensePlate" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>发动机号</ion-label>\n                    <ion-input type="text" formControlName="BusEngineNumber" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>车架号</ion-label>\n                    <ion-input type="text" formControlName="BusFrameNumber" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>行驶证号</ion-label>\n                    <ion-input type="text" formControlName="BusDrivingLicenseNumber" placeholder="请输入" ></ion-input>\n                </ion-item>\n\n                <ion-item>\n                    <ion-label stacked>管理人员</ion-label>\n                    <ion-select formControlName="BusManger" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option *ngFor="let type of MeetTypeLs;let i = index" [value]="type.Id">{{type.Name}}</ion-option>\n                        <!-- <ion-option value="2">类型2</ion-option> -->\n                    </ion-select>\n                </ion-item>\n\n                <ion-item>\n                    <ion-label stacked>车辆状况</ion-label>\n                    <ion-select formControlName="BusStatus" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option *ngFor="let status of BusStatusLs;let i = index" [value]="status.Status">{{status.Status}}</ion-option>\n                    </ion-select>\n                </ion-item>\n     \n                <ion-item>\n                    <ion-label stacked>年检日期</ion-label>\n                    <ion-datetime formControlName="BusAnnualInspection"  placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>维保日期</ion-label>\n                    <ion-datetime formControlName="BusMaintenanceDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>保险日期</ion-label>\n                    <ion-datetime formControlName="BusDated" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n\n                <ion-item>\n                    <ion-label stacked>备注</ion-label>\n                    <ion-textarea formControlName="BusMemo" type="text" placeholder="请输入"></ion-textarea>\n                </ion-item>\n\n            </ion-list>\n            <div padding text-center>\n                <button ion-button type="submit" color="danger"  [disabled]="!addForm.valid">保存</button>\n                <button ion-button clear small navPop>取消</button>\n            </div>\n        </div>\n    </form>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\car-add\car-add.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3__announcementService__["a" /* AnnouncementService */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_FileService__["a" /* FileService */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */]])
-    ], AnnouncementDetailPage);
-    return AnnouncementDetailPage;
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_4__providers_NativeService__["a" /* NativeService */],
+            __WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */]])
+    ], CarAddPage);
+    return CarAddPage;
 }());
 
-//# sourceMappingURL=announcement-detail.js.map
+//# sourceMappingURL=car-add.js.map
 
 /***/ })
 

@@ -1,14 +1,14 @@
 webpackJsonp([55],{
 
-/***/ 705:
+/***/ 724:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactsDetailModule", function() { return ContactsDetailModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContractChoosePageModule", function() { return ContractChoosePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts_detail__ = __webpack_require__(775);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_choose__ = __webpack_require__(798);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,37 +18,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ContactsDetailModule = (function () {
-    function ContactsDetailModule() {
+var ContractChoosePageModule = (function () {
+    function ContractChoosePageModule() {
     }
-    ContactsDetailModule = __decorate([
+    ContractChoosePageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__contacts_detail__["a" /* ContactsDetail */],
+                __WEBPACK_IMPORTED_MODULE_2__contract_choose__["a" /* ContractChoosePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts_detail__["a" /* ContactsDetail */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contract_choose__["a" /* ContractChoosePage */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__contacts_detail__["a" /* ContactsDetail */]
-            ]
         })
-    ], ContactsDetailModule);
-    return ContactsDetailModule;
+    ], ContractChoosePageModule);
+    return ContractChoosePageModule;
 }());
 
-//# sourceMappingURL=contacts-detail.module.js.map
+//# sourceMappingURL=contract-choose.module.js.map
 
 /***/ }),
 
-/***/ 775:
+/***/ 798:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactsDetail; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractChoosePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -60,55 +60,166 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import { UserInfo } from "../../../../model/UserInfo";
 
-/**
- * Generated class for the ContactsDetail page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-var ContactsDetail = (function () {
-    function ContactsDetail(navCtrl, navParams, httpService) {
-        this.navCtrl = navCtrl;
+
+
+var ContractChoosePage = (function () {
+    function ContractChoosePage(navParams, viewCtrl, storage, httpService) {
         this.navParams = navParams;
+        this.viewCtrl = viewCtrl;
+        this.storage = storage;
         this.httpService = httpService;
-        // checkman: UserInfo = new UserInfo();
-        this.checkman = {};
+        this.deptItems = [];
+        this.items = [];
+        this.haveAffix = false;
+        this.Result = {}; // 最终返回结果
+        this.ContactId = this.navParams.get("ContactId");
         this.initializeItems();
     }
-    ContactsDetail.prototype.initializeItems = function () {
+    ContractChoosePage.prototype.initializeItems = function () {
         var _this = this;
-        return this.httpService.postFormData("ashx/UserInfo.ashx", { "Id": this.navParams.get("id") })
-            .map(function (Response) { return Response.json(); })
+        this.httpService.postFormData("ashx/BmLs.ashx", {})
+            .map(function (res) { return res.json(); })
             .subscribe(function (resJson) {
             if (resJson.Result) {
-                _this.checkman = resJson.Data;
-                console.log(resJson.Data);
-            }
-            else {
-                _this.checkman = {};
+                _this.deptItems = resJson.Data;
             }
         });
+        this.search();
     };
-    ContactsDetail.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ContactsDetail');
+    ContractChoosePage.prototype.getItems = function (ev) {
+        // Reset items back to all of the items
+        this.initializeItems();
+        // set val to the value of the ev target
+        var val = ev.target.value;
+        this.name = val;
+        // if the value is an empty string don't filter the items
+        // if (val && val.trim() != '') {
+        //   this.items = this.items.filter((item) => {
+        //     return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        //   });
+        // }
     };
-    ContactsDetail.prototype.call = function (num) {
-        window.location.href = "tel:" + num;
+    ContractChoosePage.prototype.getRecipientsByDept = function (id) {
+        var data = !!id ? { DeptId: id } : {};
+        this.httpService.postFormData("ashx/UserSheet.ashx", data)
+            .map(function (res) { return res.json(); })
+            .subscribe(function (result) {
+            console.log(result);
+            // if (result.Result){
+            //     const idArr = this.addresseeIds.split(",");
+            //
+            //     this.items = result.Data.map(function (value, index) {
+            //         for (let i in idArr) {
+            //             if (idArr[i] !== value.ContactId) {
+            //                 Object.assign(value, { checked: false });
+            //             } else {
+            //                 return Object.assign(value, { checked: true });
+            //
+            //             }
+            //         }
+            //         return value;
+            //
+            //     });
+            // }
+        });
     };
-    ContactsDetail = __decorate([
+    ContractChoosePage.prototype.search = function () {
+        console.log('change');
+        var that = this;
+        var data = [
+            {
+                "ContactId": '1',
+                "ContractNumber": '1',
+                "ContractName": '',
+                "LastValidDate": '2017-12-12',
+                "LastExpirationDate": '2017-12-12',
+                "SigningDate": '12345',
+                'StaffId': '1',
+                "StaffNumber": '123456',
+                'Name': '张三',
+                'Sex': '男',
+                'IDC': '511324198910121111',
+                'Dept': '部门名称1',
+                'DeptId': '部门名称1',
+                'Duty': '职务1',
+            },
+            {
+                "ContactId": '2',
+                "ContractNumber": '1',
+                "ContractName": '',
+                "LastValidDate": '2017-12-12',
+                "LastExpirationDate": '2017-12-12',
+                "SigningDate": '12345',
+                'StaffId': '1',
+                "StaffNumber": '123456',
+                'Name': '张三',
+                'Sex': '男',
+                'IDC': '511324198910121111',
+                'Dept': '部门名称1',
+                'DeptId': '部门名称1',
+                'Duty': '职务1',
+            },
+        ];
+        this.items = data.map(function (value, index) {
+            if (value.ContactId == that.ContactId)
+                Object.assign(value, { checked: true });
+            else
+                Object.assign(value, { checked: false });
+            return value;
+        });
+        // let data = (this.name !== "") ? {name: name} : {};
+        // this.httpService.postFormData("ashx/UserSheet.ashx", data)
+        // .map((res: Response) => res.json())
+        // .subscribe((result) => {
+        //     console.log(result);
+        //     if (result.Result){
+        //         const idArr = this.addresseeIds.split(",");
+        //
+        //         this.items = result.Data.map(function (value, index) {
+        //             for (let i in idArr) {
+        //                 if (idArr[i] !== value.Uid) {
+        //                     Object.assign(value, { checked: false });
+        //                 } else {
+        //                     return Object.assign(value, { checked: true });
+        //
+        //                 }
+        //             }
+        //             return value;
+        //
+        //         });
+        //     }
+        // });
+    };
+    ContractChoosePage.prototype.checkContract = function (Index) {
+        this.items.forEach(function (value, index) {
+            if (Index === index)
+                value.checked = true;
+            else
+                value.checked = false;
+        });
+    };
+    ContractChoosePage.prototype.confirm = function () {
+        console.log(confirm);
+        for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
+            var value = _a[_i];
+            if (value.checked) {
+                this.Result = value;
+            }
+        }
+        this.viewCtrl.dismiss(this.Result);
+    };
+    ContractChoosePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contacts-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts-detail\contacts-detail.html"*/`<!--\n  Generated template for the ContactsDetail page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>详细信息</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-grid>\n        <ion-row style="border-bottom: 2px solid #ddd;padding-bottom: 0;">\n            <ion-col col-4 text-center style="border-right:1px solid #ddd;">\n                <img src="../assets/img/ben.png" alt="photo" style="height: 70px;width: 70px;border-radius: 50%;">\n                <div>{{checkman.Name}}&nbsp;·<span class="royal">&nbsp;{{checkman.Sex}}</span></div>\n            </ion-col>\n            <ion-col col-8>\n                <p>账号：{{checkman.Uid || "未知"}}</p>\n                <p>职位：{{checkman.Duty}}</p>\n                <p>公司：{{checkman.Company}}</p>\n            </ion-col>\n        </ion-row>\n    </ion-grid>\n    <ion-list>\n        <ion-item>\n            <ion-icon color="energized" name="ios-analytics" item-left></ion-icon>\n            部门\n            <ion-note item-right>{{checkman.Dept}}</ion-note>\n\n        </ion-item>\n        <ion-item (click)="call(checkman.tel)">\n            <ion-icon color="danger" name="md-call" item-left></ion-icon>\n            电话\n            <ion-note item-right>{{checkman.InlinePhone}}</ion-note>\n        </ion-item>\n        <ion-item (click)="call(checkman.mobile)">\n            <ion-icon color="calm" name="md-phone-portrait" item-left></ion-icon>\n            手机\n            <ion-note item-right>{{checkman.Mobile}}</ion-note>\n        </ion-item>\n        <!-- <ion-item>\n            <ion-icon color="balanced" name="md-send" item-left></ion-icon>\n            传真\n            <ion-note item-right>{{checkman.fax}}</ion-note>\n        </ion-item> -->\n        <ion-item>\n            <ion-icon color="royal" name="md-mail" item-left></ion-icon>\n            邮件\n            <ion-note item-right>{{checkman.Mail}}</ion-note>\n        </ion-item>\n\n\n    </ion-list>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts-detail\contacts-detail.html"*/,
+            selector: 'page-contract-choose',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-choose\contract-choose.html"*/`<!-- <ion-content> -->\n<ion-list class="checkpeople-popover">\n    <ion-item>\n        <ion-label>部门选择</ion-label>\n        <ion-select [(ngModel)]="dept" submitText="确定" (ngModelChange)="getRecipientsByDept(dept)" cancelText="取消" okText="确定">\n            <ion-option *ngFor="let item of deptItems;let i = index" [value]="item.Id">\n                {{item.BmName}}\n            </ion-option>\n        </ion-select>\n    </ion-item>\n    <ion-searchbar color="danger" cancelButtonText=\'搜索\' showCancelButton="true" (ionCancel)="search()" [(ngModel)]="name" placeholder="请输入编码或姓名">\n    </ion-searchbar>\n\n    <ion-list-header >员工列表</ion-list-header>\n    <div class="">\n        <ion-scroll scrollY="true">\n          <ion-item *ngFor="let item of items;let i = index">\n            <ion-label>\n              {{item.ContractNumber}}{{item.ContractName == \'\' ? \'\' : \'(\'+item.ContractName+\')\' }}<br>\n              <span>{{item.Name}}</span>\n            </ion-label>\n            <ion-checkbox [checked]="item.checked" (click)="checkContract(i)"></ion-checkbox>\n          </ion-item>\n        </ion-scroll>\n    </div>\n</ion-list>\n<!-- </ion-content> -->\n<ion-footer>\n    <button (click)="confirm()" icon-left ion-button full color="calm">\n  <ion-icon name="checkmark"></ion-icon>确定</button>\n</ion-footer>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-choose\contract-choose.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], ContactsDetail);
-    return ContactsDetail;
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__["a" /* HttpService */]) === "function" && _d || Object])
+    ], ContractChoosePage);
+    return ContractChoosePage;
+    var _a, _b, _c, _d;
 }());
 
-//# sourceMappingURL=contacts-detail.js.map
+//# sourceMappingURL=contract-choose.js.map
 
 /***/ })
 

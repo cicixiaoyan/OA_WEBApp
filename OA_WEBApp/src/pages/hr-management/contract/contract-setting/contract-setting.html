@@ -11,11 +11,11 @@
             <div>
                 <ion-item #popoverContent  (click)="checkPeople($event)">
                     <ion-label>工号</ion-label>
-                    <ion-note item-end>{{baseForm.value.JobNumber || '双击选择收件人'}}</ion-note>
-                    <!-- <ion-input styel='display:none' text-right readonly='true' formControlName="JobNumber" ></ion-input> -->
+                    <ion-note item-end>{{baseForm.value.StaffNumber || '点击选择员工'}}</ion-note>
+                    <!-- <ion-input styel='display:none' text-right readonly='true' formControlName="StaffNumber" ></ion-input> -->
                 </ion-item>
 
-                <div class="" *ngIf='baseForm.value.JobNumber != ""'>
+                <div class="" *ngIf='baseForm.value.StaffNumber != ""'>
 
                     <ion-item>
                         <ion-label>姓名</ion-label>
@@ -46,7 +46,7 @@
             <div>
               <ion-item>
                   <ion-label>合同编号</ion-label>
-                  <ion-input text-right formControlName="ContractCode" placeholder="请输入合同编号"></ion-input>
+                  <ion-input text-right formControlName="ContractNumber" placeholder="请输入合同编号"></ion-input>
               </ion-item>
               <ion-item>
                   <ion-label>合同名称<span class="optional">（选填）</span></ion-label>
@@ -122,28 +122,36 @@
         </ion-list>
 
         <ion-list  [ngClass]="{'collapsed': hideFour, 'expanded': !hideFour}">
-            <ion-list-header (click)="shrink('four')">附件<ion-icon float-right name="arrow-forward"></ion-icon></ion-list-header>
+            <ion-list-header (click)="shrink('four')">{{Id !='' ?'合同内容及':''}}附件<ion-icon float-right name="arrow-forward"></ion-icon></ion-list-header>
             <div>
+                <div *ngIf="Id !=''">
+                  <div *ngIf="ContactContent != '';else elseBlock">
+                    <iframe   [srcdoc]='ContactContent' id="iframe" class="iframe" onload="this.height='100%'" style="width:100%;overflow-x:auto" sandbox="allow-scripts allow-top-navigation allow-pointer-lock allow-same-origin allow-popups allow-forms">
+                    </iframe>
+                  </div>
+                  <ng-template #elseBlock><div style='background: #fff;color: red;padding: 1em;}'>合同内容未添加</div></ng-template>
+                </div>
+
                 <ion-item>
                     <h2>毕业证.jpg</h2>
-                    <button ion-button clear item-end>删除</button>
+                    <button ion-button clear item-end *ngIf="!readOnly">删除</button>
+                    <button ion-button clear item-end>下载</button>
                 </ion-item>
-                <ion-item text-center>
+                <ion-item text-center *ngIf="!readOnly">
                     <button icon-left ion-button color="secondary" small outline round><ion-icon name="home"></ion-icon>添加附件</button>
                 </ion-item>
             </div>
         </ion-list>
-
         <ion-list>
           <ion-item>
               <ion-label stacked text-left>备注<span class="optional">（选填）</span></ion-label>
               <ion-textarea  formControlName="Remarks" placeholder="输入备注信息"></ion-textarea>
           </ion-item>
         </ion-list>
-
+        <div class='text-ios-danger' *ngIf="!readOnly">&emsp;注：合同内容请到PC端进行添加或修改</div>
     </form>
 
 </ion-content>
-<ion-footer>
+<ion-footer *ngIf="!readOnly">
     <button ion-button full color="danger" [disabled]="!baseForm.valid" (click)=submit(baseForm.value)>保存</button>
 </ion-footer>

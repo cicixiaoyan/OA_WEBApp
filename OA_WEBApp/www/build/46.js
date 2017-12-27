@@ -1,14 +1,14 @@
 webpackJsonp([46],{
 
-/***/ 734:
+/***/ 738:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StaffFileMaintenanceSetPageModule", function() { return StaffFileMaintenanceSetPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StaffFileMaintenanceSocialRelationshipPageModule", function() { return StaffFileMaintenanceSocialRelationshipPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_set__ = __webpack_require__(804);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_social_relationship__ = __webpack_require__(812);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,32 +18,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var StaffFileMaintenanceSetPageModule = (function () {
-    function StaffFileMaintenanceSetPageModule() {
+var StaffFileMaintenanceSocialRelationshipPageModule = (function () {
+    function StaffFileMaintenanceSocialRelationshipPageModule() {
     }
-    StaffFileMaintenanceSetPageModule = __decorate([
+    StaffFileMaintenanceSocialRelationshipPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_set__["a" /* StaffFileMaintenanceSet */],
+                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_social_relationship__["a" /* StaffFileMaintenanceSocialRelationship */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_set__["a" /* StaffFileMaintenanceSet */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_social_relationship__["a" /* StaffFileMaintenanceSocialRelationship */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_set__["a" /* StaffFileMaintenanceSet */]]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_social_relationship__["a" /* StaffFileMaintenanceSocialRelationship */]]
         })
-    ], StaffFileMaintenanceSetPageModule);
-    return StaffFileMaintenanceSetPageModule;
+    ], StaffFileMaintenanceSocialRelationshipPageModule);
+    return StaffFileMaintenanceSocialRelationshipPageModule;
 }());
 
-//# sourceMappingURL=staff-file-maintenance-set.module.js.map
+//# sourceMappingURL=staff-file-maintenance-social-relationship.module.js.map
 
 /***/ }),
 
-/***/ 804:
+/***/ 812:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StaffFileMaintenanceSet; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StaffFileMaintenanceSocialRelationship; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -58,38 +58,67 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the StaffFileMaintenanceSetPage page.
+ * Generated class for the StaffFileMaintenanceSocialRelationshipPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var StaffFileMaintenanceSet = (function () {
-    function StaffFileMaintenanceSet(navCtrl, navParams) {
+var StaffFileMaintenanceSocialRelationship = (function () {
+    function StaffFileMaintenanceSocialRelationship(navCtrl, modalCtrl, navParams) {
         this.navCtrl = navCtrl;
+        this.modalCtrl = modalCtrl;
         this.navParams = navParams;
-        this.rootParams = {
-            "readOnly": false
-        };
-        this.tab1Root = "StaffFileMaintenanceBasicImfornation";
-        this.tab2Root = "StaffFileMaintenanceWorkExperience";
-        this.tab3Root = "StaffFileMaintenanceSocialRelationship";
-        this.tab4Root = "StaffFileMaintenanceEducation";
-        this.rootParams.readOnly = this.navParams.get("readOnly") ? true : false;
-        console.log(this.rootParams.readOnly, this.navParams.get("readOnly"));
+        this.getList();
     }
-    StaffFileMaintenanceSet.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad StaffFileMaintenanceSetPage');
+    StaffFileMaintenanceSocialRelationship.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad StaffFileMaintenanceSocialRelationshipPage');
     };
-    StaffFileMaintenanceSet = __decorate([
+    StaffFileMaintenanceSocialRelationship.prototype.add = function () {
+        var modal = this.modalCtrl.create("StaffFileMaintenanceSocialRelationshipAddPage");
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            data && console.log(data);
+        });
+    };
+    StaffFileMaintenanceSocialRelationship.prototype.doRead = function (id) {
+        var parma = {
+            "Id": id,
+            "readOnly": (this.navParams.get("readOnly") ? true : null)
+        };
+        var modal = this.modalCtrl.create("StaffFileMaintenanceSocialRelationshipAddPage", parma);
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            data && console.log(data);
+        });
+    };
+    StaffFileMaintenanceSocialRelationship.prototype.getList = function () {
+        this.list = [
+            {
+                'Id': '1',
+                'Name': '父亲',
+                'Relationship': '父子',
+                'Mobile': '1311111111',
+            },
+            {
+                'Id': '2',
+                'Name': '母亲',
+                'Relationship': '母子',
+                'Mobile': '1311111111'
+            },
+        ];
+    };
+    StaffFileMaintenanceSocialRelationship = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-staff-file-maintenance-set',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-set\staff-file-maintenance-set.html"*/`<ion-header>\n    <ion-navbar>\n        <ion-title>员工档案维护</ion-title>\n    </ion-navbar>\n</ion-header>\n<ion-tabs  #myTabs tabsPlacement="top" name="staff-file-maintemance-tab">\n    <ion-tab [root]="tab1Root" [rootParams]="rootParams" tabTitle="基本资料" tabIcon="ios-cafe"></ion-tab>\n    <ion-tab [root]="tab2Root" [rootParams]="rootParams" tabTitle="工作经历" tabIcon="ios-code-working"></ion-tab>\n    <ion-tab [root]="tab3Root" [rootParams]="rootParams" tabTitle="社会关系" tabIcon="ios-contacts"></ion-tab>\n    <ion-tab [root]="tab4Root" [rootParams]="rootParams" tabTitle="教育经历" tabIcon="ios-book"></ion-tab>\n</ion-tabs>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-set\staff-file-maintenance-set.html"*/,
+            selector: 'page-staff-file-maintenance-social-relationship',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-social-relationship\staff-file-maintenance-social-relationship.html"*/`<!--\n  Generated template for the StaffFileMaintenanceSocialRelationshipPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>社会关系</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let item of list"  (click)="doRead(item.Id)">\n        <ion-item  >\n          <h2>{{item.Name}}<span float-right color="royal">{{item.Relationship}}</span></h2>\n          <p>{{item.Mobile}}</p>\n        </ion-item>\n        <ion-item-options side="right">\n          <button ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>\n        </ion-item-options>\n      </ion-item-sliding>\n    </ion-list>\n    <div text-center>\n        <button (click)="add()" icon-left ion-button color="secondary" small outline round><ion-icon name="add"></ion-icon>添加</button>\n    </div>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-social-relationship\staff-file-maintenance-social-relationship.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
-    ], StaffFileMaintenanceSet);
-    return StaffFileMaintenanceSet;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
+    ], StaffFileMaintenanceSocialRelationship);
+    return StaffFileMaintenanceSocialRelationship;
 }());
 
-//# sourceMappingURL=staff-file-maintenance-set.js.map
+//# sourceMappingURL=staff-file-maintenance-social-relationship.js.map
 
 /***/ })
 

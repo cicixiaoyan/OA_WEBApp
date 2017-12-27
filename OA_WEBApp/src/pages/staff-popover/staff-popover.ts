@@ -99,7 +99,7 @@ export class StaffPopoverPage {
             'IDC': '511324198910121111',
             'Dept': '部门名称1',
             'Duty': '职务1',
-            "JobNumber": '123456'
+            "StaffNumber": '123456'
           },
           {
             "Uid": '2',
@@ -108,7 +108,7 @@ export class StaffPopoverPage {
             'IDC': '511324198910121111',
             'Dept': '部门名称2',
             'Duty': '职务2',
-            "JobNumber": '123455'
+            "StaffNumber": '123455'
           },
           {
             "Uid": '4',
@@ -117,7 +117,7 @@ export class StaffPopoverPage {
             'IDC': '511324198910121111',
             'Dept': '部门名称2',
             'Duty': '职务2',
-            "JobNumber": '123455'
+            "StaffNumber": '123455'
           },
           {
             "Uid": '5',
@@ -126,7 +126,7 @@ export class StaffPopoverPage {
             'IDC': '511324198910121111',
             'Dept': '部门名称2',
             'Duty': '职务2',
-            "JobNumber": '123455'
+            "StaffNumber": '123455'
           },
           {
             "Uid": '6',
@@ -135,7 +135,7 @@ export class StaffPopoverPage {
             'IDC': '511324198910121111',
             'Dept': '部门名称2',
             'Duty': '职务2',
-            "JobNumber": '123455'
+            "StaffNumber": '123455'
           },
           {
             "Uid": '7',
@@ -144,7 +144,7 @@ export class StaffPopoverPage {
             'IDC': '511324198910121111',
             'Dept': '部门名称2',
             'Duty': '职务2',
-            "JobNumber": '123455'
+            "StaffNumber": '123455'
           },
           {
             "Uid": '3',
@@ -153,7 +153,7 @@ export class StaffPopoverPage {
             'IDC': '511324198910121111',
             'Dept': '部门名称3',
             'Duty': '职务3',
-            "JobNumber": '123454'
+            "StaffNumber": '123454'
           }
         ];
         this.items = data.map(function (value, index) {

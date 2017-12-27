@@ -1,15 +1,16 @@
 webpackJsonp([30],{
 
-/***/ 717:
+/***/ 719:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CarPageModule", function() { return CarPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DriverPageModule", function() { return DriverPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__car__ = __webpack_require__(787);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(764);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__driver__ = __webpack_require__(793);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(769);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_components_module__ = __webpack_require__(365);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,29 +21,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var CarPageModule = (function () {
-    function CarPageModule() {
+
+var DriverPageModule = (function () {
+    function DriverPageModule() {
     }
-    CarPageModule = __decorate([
+    DriverPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__car__["a" /* CarPage */],
+                __WEBPACK_IMPORTED_MODULE_2__driver__["a" /* DriverPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__car__["a" /* CarPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__driver__["a" /* DriverPage */]),
+                __WEBPACK_IMPORTED_MODULE_4__components_components_module__["a" /* ComponentsModule */]
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__car__["a" /* CarPage */]],
+            exports: [__WEBPACK_IMPORTED_MODULE_2__driver__["a" /* DriverPage */]],
             providers: [__WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */]]
         })
-    ], CarPageModule);
-    return CarPageModule;
+    ], DriverPageModule);
+    return DriverPageModule;
 }());
 
-//# sourceMappingURL=car.module.js.map
+//# sourceMappingURL=driver.module.js.map
 
 /***/ }),
 
-/***/ 764:
+/***/ 769:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -112,15 +115,15 @@ var CarService = (function () {
 
 /***/ }),
 
-/***/ 787:
+/***/ 793:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CarPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DriverPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(764);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__car_service__ = __webpack_require__(769);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(45);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -135,99 +138,83 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the CarPage page.
+ * Generated class for the DriverPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var CarPage = (function () {
-    function CarPage(navCtrl, navParams, globalData, modalCtrl, CarService) {
+var DriverPage = (function () {
+    function DriverPage(navCtrl, navParams, nativeService, carService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.globalData = globalData;
-        this.modalCtrl = modalCtrl;
-        this.CarService = CarService;
-        this.isEmpty = false;
+        this.nativeService = nativeService;
+        this.carService = carService;
         this.list = [];
-        this.moredata = true;
+        this.isEmpty = false;
         this.data = {};
         this.data = {
             "PageIndex": 0,
-            "PageSize": 8
+            "PageSize": 100
         };
         this.initializeItems();
     }
-    CarPage.prototype.initializeItems = function () {
+    DriverPage.prototype.initializeItems = function () {
         this.getList(this.data);
     };
-    CarPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Message');
+    DriverPage.prototype.doRead = function (id) {
+        this.navCtrl.push("DriverSetPage", { "isWrite": false, "Id": id });
     };
-    CarPage.prototype.doRead = function (id) {
-        console.log(id, "id");
-        // this.navCtrl.push("CarReadPage", { Params: Params });
-        this.navCtrl.push("CarReadPage", { "Id": id });
+    DriverPage.prototype.doWrite = function () {
+        this.navCtrl.push("DriverSetPage", { "isWrite": true });
     };
-    CarPage.prototype.doWrite = function () {
-        // let modal = this.modalCtrl.create("CarAddPage");
-        // modal.present();
-        // modal.onDidDismiss(data => {
-        //     data && console.log(data);
-        // });
-        this.navCtrl.push("CarAddPage");
-    };
-    CarPage.prototype.doRefresh = function (refresher) {
+    DriverPage.prototype.doRefresh = function (refresher) {
         this.list = [];
-        this.data.PageIndex = 0;
+        console.log(this.data);
         this.getList(this.data);
         setTimeout(function () {
             refresher.complete();
         }, 1000);
     };
-    CarPage.prototype.doInfinite = function () {
-        if (this.moredata) {
-            this.data.PageIndex++;
-            this.getList(this.data);
-        }
-        return new Promise(function (resolve) {
-            setTimeout(function () {
-                resolve();
-            }, 500);
-        });
-    };
-    CarPage.prototype.getList = function (data) {
+    DriverPage.prototype.getList = function (data) {
         var _this = this;
-        this.CarService.getList(data).subscribe(function (resJson) {
+        this.carService.getDriverList(data).subscribe(function (resJson) {
             if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
                 var list = resJson.Data;
                 _this.list = _this.list.concat(list);
-                _this.moredata = true;
                 _this.isEmpty = false;
             }
             else {
-                _this.moredata = false;
-                if (_this.data.PageIndex === 0) {
-                    _this.CarService.httpService.nativeService.showToast(resJson.Data);
-                    _this.isEmpty = true;
-                    _this.list = [];
-                }
+                _this.carService.httpService.nativeService.showToast(resJson.Data);
+                _this.isEmpty = true;
+                _this.list = [];
             }
         });
     };
-    CarPage = __decorate([
+    DriverPage.prototype.delete = function (id, index) {
+        var _this = this;
+        this.carService.driverDel(id).subscribe(function (resJson) {
+            if (resJson.Result) {
+                _this.list.splice(index, 1);
+                _this.nativeService.showToast("删除成功", 300);
+            }
+            else {
+                _this.nativeService.showToast(resJson.Data, 800);
+            }
+        });
+    };
+    DriverPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-car',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\car.html"*/`<!--\n  Generated template for the CarPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>车辆</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n      </ion-refresher-content>\n  </ion-refresher>\n  <ion-list>\n    <ion-item (click)="doRead(bus.Id)" *ngFor="let bus of list">\n      <h2 >{{bus.BusName}}</h2><ion-note item-end>{{BusStatus}}</ion-note>\n      <h3>管理员：{{bus.BusManger}}&emsp;核载：{{bus.BusPassenger}}人</h3>\n      <p>启动日期：{{bus.StartDate}}</p>\n    </ion-item>\n    <!-- <ion-item (click)="doRead()">\n      <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>\n      <h3>管理员：何小凤&emsp;核载：4人</h3>\n      <p>启动日期：2005-11-12</p>\n    </ion-item>\n    <ion-item (click)="doRead()">\n      <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>\n      <h3>管理员：何小凤&emsp;核载：4人</h3>\n      <p>启动日期：2005-11-12</p>\n    </ion-item> -->\n  </ion-list>\n  <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n      <div padding>暂无消息数据！！！</div>\n      <img src="assets/img/face/face2.png" height="100">\n  </div>\n  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n  <ion-fab bottom right>\n      <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n  </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\car.html"*/,
+            selector: 'page-driver',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\driver\driver.html"*/`<!--\n  Generated template for the DriverPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>驾驶员档案</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n        <ion-item-sliding *ngFor="let item of list;let i = index" (click)="doRead(item.Id)">\n            <ion-item>\n                <span>{{item.Name}}&emsp;{{item.Sex}}</span>\n                <p class="font-12"><span *ngIf="item.Age">{{item.Age}}岁&emsp;</span>入职日期：{{item.InDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n            </ion-item>\n            <ion-item-options side="right">\n                <button ion-button color="primary" (click)="delete(item.Id, i)">\n                    <ion-icon name="md-trash"></ion-icon>删除\n                </button>\n            </ion-item-options>\n        </ion-item-sliding>\n    </ion-list>\n    <empty *ngIf="isEmpty"></empty>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab>\n\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\driver\driver.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_3__car_service__["a" /* CarService */]])
-    ], CarPage);
-    return CarPage;
+            __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */],
+            __WEBPACK_IMPORTED_MODULE_2__car_service__["a" /* CarService */]])
+    ], DriverPage);
+    return DriverPage;
 }());
 
-//# sourceMappingURL=car.js.map
+//# sourceMappingURL=driver.js.map
 
 /***/ })
 

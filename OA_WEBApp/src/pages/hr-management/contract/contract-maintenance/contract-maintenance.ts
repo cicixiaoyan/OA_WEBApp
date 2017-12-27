@@ -35,7 +35,7 @@ export class ContractMaintenancePage {
   }
 
   presentPopover(myEvent) {
-    let popover = this.popoverCtrl.create("ContractSearchPage", {"search": this.search});
+    let popover = this.popoverCtrl.create("ContractSearchSeparatePage", {"search": this.search, "name": '签约'});
     popover.present({
       ev: myEvent
     });
@@ -92,22 +92,23 @@ export class ContractMaintenancePage {
     this.list = [
       {
         "Id": "1",
-        "Type": '劳动合同',
-        "Dept": '检验科',
-        "Code": "A012345677",
-        "Name": '张三',
-        "TurnPositive": 'false',
-        "Status": '生效中'
+        "Name": '张三', // 员工姓名
+        "Dept": '检验科', // 员工部门
+        "Type": '劳动合同', // 合同类型
+        "ContractNumber": "A012345677", // 合同编号
+        "TurnPositive": '已转正', // 是否转正
+        "Status": '生效中' // 合同状态
       },
       {
         "Id": "2",
-        "Type": '保密协议',
-        "Dept": '检验科',
-        "Code": "A0123456789",
-        "Name": '李四',
-        "TurnPositive": 'false',
-        "Status": '试用中'
-      }
+        "Name": '李四', // 员工姓名
+        "Dept": '其他', // 员工部门
+        "Type": '劳动合同', // 合同类型
+        "ContractNumber": "A012345688", // 合同编号
+        "TurnPositive": '已转正', // 是否转正
+        "Status": '试用中' // 合同状态
+      },
+
     ];
     // this.contractService.getList(data).subscribe((resJson) => {
     //   if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){

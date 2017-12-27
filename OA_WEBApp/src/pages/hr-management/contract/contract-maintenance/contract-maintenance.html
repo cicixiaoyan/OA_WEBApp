@@ -25,11 +25,15 @@
     </ion-refresher>
     <ion-list>
       <ion-item-sliding *ngFor="let item of list"  (click)="doRead(item.Id)">
-          <ion-item>
-              <h2>{{item.Name}}[{{item.Code}}]</h2>
-              <div class="small">类型：{{item.Type}}&emsp;{{item.Status}} <span float-right color='energized'>{{item.TurnPositive == 'false' ? '未转正' : '已转正'}}</span></div>
-              <p class="small">部门：{{item.Dept}}&emsp;</p>
-          </ion-item>
+        <ion-item>
+            <h2>{{item.Name}}[{{item.ContractNumber}}]</h2>
+            <div class="small">
+              类型：{{item.Type}}&emsp;{{item.Status}}
+              <span float-right [ngClass]="{'text-ios-secondary':(item.TurnPositive == '已转正'),'text-ios-energized':(item.TurnPositive != '已转正')}">{{item.TurnPositive}}</span>
+            </div>
+            <p class="small">部门：{{item.Dept}}&emsp;</p>
+        </ion-item>
+
       </ion-item-sliding>
     </ion-list>
     <empty *ngIf="isEmpty"></empty>

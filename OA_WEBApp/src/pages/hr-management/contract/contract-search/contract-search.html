@@ -7,15 +7,15 @@
     <form [formGroup]="searchForm" (ngSubmit)="sent(searchForm.value)">
         <ion-list>
             <ion-item>
-                <ion-label floating>员工部门</ion-label>
-                <ion-select formControlName="DeptId" cancelText="取消" okText="确定" placeholder="请选择">
+                <ion-label>员工部门</ion-label>
+                <ion-select text-right formControlName="DeptId" cancelText="取消" okText="确定" placeholder="请选择">
                     <ion-option *ngFor="let Dept of DeptLs;let i = index" [value]="Dept.Id">{{Dept.BmName}}</ion-option>
                 </ion-select>
             </ion-item>
 
             <ion-item>
-                <ion-label floating>合同年份</ion-label>
-                <ion-select formControlName="ContractYear" cancelText="取消" okText="确定" placeholder="请选择">
+                <ion-label>合同年份</ion-label>
+                <ion-select text-right formControlName="ContractYear" cancelText="取消" okText="确定" placeholder="请选择">
                   <ion-option value="2014">2014</ion-option>
                   <ion-option value="2015">2015</ion-option>
                   <ion-option value="2016">2016</ion-option>
@@ -23,20 +23,22 @@
                 </ion-select>
               </ion-item>
             <ion-item>
-                <ion-label floating>合同类型</ion-label>
+                <ion-label>合同类型</ion-label>
                 <ion-select formControlName="ContractType" cancelText="取消" okText="确定" placeholder="请选择">
                     <ion-option value="701">保密协议</ion-option>
                     <ion-option value="700">劳动合同</ion-option>
                 </ion-select>
             </ion-item>
-            <ion-item>
-                <ion-label floating>签约开始时间</ion-label>
-                <ion-datetime formControlName="StartDate" cancelText="取消"  placeholder="请选择" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+            <ion-item class="search-dattime">
+                <ion-label>签约时间</ion-label>
+                <ion-datetime formControlName="StartDate" cancelText="取消" [max]="searchForm.value.EndDate==''?null:searchForm.value.EndDate"  placeholder="开始时间" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+                <ion-datetime formControlName="EndDate" cancelText="取消" [min]="searchForm.value.StartDate==''?null:searchForm.value.StartDate"  placeholder="结束时间" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
             </ion-item>
-            <ion-item>
-                <ion-label floating>签约结束时间</ion-label>
+            <!-- <ion-item>
+                <ion-label>签约结束时间</ion-label>
                 <ion-datetime formControlName="EndDate" cancelText="取消"  placeholder="请选择" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
-            </ion-item>
+            </ion-item> -->
+
         </ion-list>
         <div text-center>
             <button ion-button color="energized" (click)="reset()" small outline>重置</button>

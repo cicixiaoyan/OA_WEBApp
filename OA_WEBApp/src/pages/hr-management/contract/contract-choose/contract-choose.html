@@ -1,0 +1,31 @@
+<!-- <ion-content> -->
+<ion-list class="checkpeople-popover">
+    <ion-item>
+        <ion-label>部门选择</ion-label>
+        <ion-select [(ngModel)]="dept" submitText="确定" (ngModelChange)="getRecipientsByDept(dept)" cancelText="取消" okText="确定">
+            <ion-option *ngFor="let item of deptItems;let i = index" [value]="item.Id">
+                {{item.BmName}}
+            </ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-searchbar color="danger" cancelButtonText='搜索' showCancelButton="true" (ionCancel)="search()" [(ngModel)]="name" placeholder="请输入编码或姓名">
+    </ion-searchbar>
+
+    <ion-list-header >员工列表</ion-list-header>
+    <div class="">
+        <ion-scroll scrollY="true">
+          <ion-item *ngFor="let item of items;let i = index">
+            <ion-label>
+              {{item.ContractNumber}}{{item.ContractName == '' ? '' : '('+item.ContractName+')' }}<br>
+              <span>{{item.Name}}</span>
+            </ion-label>
+            <ion-checkbox [checked]="item.checked" (click)="checkContract(i)"></ion-checkbox>
+          </ion-item>
+        </ion-scroll>
+    </div>
+</ion-list>
+<!-- </ion-content> -->
+<ion-footer>
+    <button (click)="confirm()" icon-left ion-button full color="calm">
+  <ion-icon name="checkmark"></ion-icon>确定</button>
+</ion-footer>

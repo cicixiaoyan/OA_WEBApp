@@ -1,4 +1,4 @@
-webpackJsonp([60],{
+webpackJsonp([64],{
 
 /***/ 137:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -469,243 +469,259 @@ webpackEmptyAsyncContext.id = 175;
 var map = {
 	"../pages/account/aboutus/aboutus.module": [
 		709,
-		59
+		63
 	],
 	"../pages/account/account-edit/account-edit.module": [
-		710,
-		36
+		715,
+		38
 	],
 	"../pages/account/account-passwordedit/account-passwordedit.module": [
-		711,
-		58
+		710,
+		62
 	],
 	"../pages/account/account.module": [
+		716,
+		37
+	],
+	"../pages/announcement/announcement-detail/announcement-detail.module": [
+		711,
+		36
+	],
+	"../pages/announcement/announcement.module": [
 		712,
 		35
 	],
-	"../pages/announcement/announcement-detail/announcement-detail.module": [
+	"../pages/car/car-add/car-add.module": [
 		713,
 		34
 	],
-	"../pages/announcement/announcement.module": [
-		714,
+	"../pages/car/car-read/car-read.module": [
+		720,
 		33
 	],
-	"../pages/car/car-add/car-add.module": [
-		715,
+	"../pages/car/car.module": [
+		714,
 		32
 	],
-	"../pages/car/car-read/car-read.module": [
-		716,
-		31
-	],
-	"../pages/car/car.module": [
-		717,
-		30
-	],
 	"../pages/car/driver/driver-set/driver-set.module": [
-		718,
-		29
+		717,
+		31
 	],
 	"../pages/car/driver/driver.module": [
 		719,
-		28
+		30
 	],
 	"../pages/contacts-popover/contacts-popover.module": [
-		720,
-		57
+		721,
+		61
 	],
 	"../pages/getmobile-popover/getmobile-popover.module": [
-		721,
-		56
+		718,
+		60
 	],
 	"../pages/home/backlog/backlog-detail/backlog-detail.module": [
-		703,
-		27
+		704,
+		29
 	],
 	"../pages/home/backlog/backlog.module": [
-		704,
-		26
+		703,
+		28
 	],
 	"../pages/home/contacts/contacts-detail/contacts-detail.module": [
 		705,
-		55
+		59
 	],
 	"../pages/home/contacts/contacts.module": [
 		706,
-		54
+		58
 	],
 	"../pages/home/home.module": [
-		722,
+		723,
 		0
 	],
 	"../pages/home/newwork/newwork-detail/newwork-detail.module": [
-		723,
-		53
+		722,
+		57
 	],
 	"../pages/home/newwork/newwork.module": [
+		725,
+		56
+	],
+	"../pages/hr-management/contract/contract-choose/contract-choose.module": [
 		724,
-		52
+		55
+	],
+	"../pages/hr-management/contract/contract-list/contract-list.module": [
+		741,
+		27
 	],
 	"../pages/hr-management/contract/contract-maintenance/contract-maintenance.module": [
-		725,
+		730,
+		26
+	],
+	"../pages/hr-management/contract/contract-renew/contract-renew-view/contract-renew-view.module": [
+		726,
 		25
 	],
 	"../pages/hr-management/contract/contract-renew/contract-renew.module": [
-		726,
+		727,
 		24
 	],
+	"../pages/hr-management/contract/contract-search-separate/contract-search-separate.module": [
+		729,
+		54
+	],
 	"../pages/hr-management/contract/contract-search/contract-search.module": [
-		727,
+		728,
 		23
 	],
 	"../pages/hr-management/contract/contract-setting/contract-setting.module": [
-		728,
+		732,
 		22
 	],
 	"../pages/hr-management/job-types-set/job-types-set-add/job-types-set-add.module": [
-		729,
-		51
+		731,
+		53
 	],
 	"../pages/hr-management/job-types-set/job-types-set.module": [
-		730,
-		50
+		736,
+		52
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance-basic-imfornation/staff-file-maintenance-basic-imfornation.module": [
-		731,
-		49
+		733,
+		51
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance-education/staff-file-maintenance-education-add/staff-file-maintenance-education-add.module": [
-		732,
-		48
+		734,
+		50
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance-education/staff-file-maintenance-education.module": [
-		733,
-		47
+		735,
+		49
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance-set/staff-file-maintenance-set.module": [
-		734,
-		46
+		737,
+		48
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance-social-relationship/staff-file-maintenance-social-relationship-add/staff-file-maintenance-social-relationship-add.module": [
-		735,
-		45
+		739,
+		47
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance-social-relationship/staff-file-maintenance-social-relationship.module": [
-		736,
-		44
+		738,
+		46
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance-work-experience/staff-file-maintenance-work-experience-add/staff-file-maintenance-work-experience-add.module": [
 		707,
-		43
+		45
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance-work-experience/staff-file-maintenance-work-experience.module": [
-		737,
+		740,
 		2
 	],
 	"../pages/hr-management/staff-file-maintenance/staff-file-maintenance.module": [
-		738,
-		42
+		744,
+		44
 	],
 	"../pages/hr-management/training-maintenance/training-maintenance-search/training-maintenance-search.module": [
-		739,
-		41
+		745,
+		43
 	],
 	"../pages/hr-management/training-maintenance/training-maintenance-set/training-maintenance-set.module": [
-		740,
+		742,
 		21
 	],
 	"../pages/hr-management/training-maintenance/training-maintenance.module": [
-		741,
+		750,
 		20
 	],
 	"../pages/login/find-password/find-password.module": [
 		708,
-		40
+		42
 	],
 	"../pages/login/login.module": [
-		742,
+		743,
 		1
 	],
 	"../pages/mail/mail-read/mail-read.module": [
-		743,
+		755,
 		19
 	],
 	"../pages/mail/mail-write/mail-write.module": [
-		744,
+		746,
 		18
 	],
 	"../pages/mail/mail.module": [
-		745,
+		747,
 		17
 	],
 	"../pages/meeting/meeting-edit/meeting-edit.module": [
-		746,
+		748,
 		16
 	],
 	"../pages/meeting/meeting-minutes/meeting-minutes.module": [
-		747,
+		749,
 		15
 	],
 	"../pages/meeting/meeting-room/meeting-room-set/meeting-room-set.module": [
-		748,
+		752,
 		14
 	],
 	"../pages/meeting/meeting-room/meeting-room.module": [
-		749,
+		751,
 		13
 	],
 	"../pages/meeting/meeting-search/meeting-search.module": [
-		750,
+		757,
 		12
 	],
 	"../pages/meeting/meeting-write/meeting-write.module": [
-		751,
+		753,
 		11
 	],
 	"../pages/meeting/meeting.module": [
-		752,
+		754,
 		10
 	],
 	"../pages/message/message-read-out/message-read-out.module": [
-		753,
+		762,
 		9
 	],
 	"../pages/message/message-read/message-read.module": [
-		754,
+		756,
 		8
 	],
 	"../pages/message/message-write/message-write.module": [
-		755,
+		759,
 		7
 	],
 	"../pages/message/message.module": [
-		756,
+		758,
 		6
 	],
 	"../pages/sms/sms-read/sms-read.module": [
-		757,
+		763,
 		5
 	],
 	"../pages/sms/sms-write/sms-write.module": [
-		758,
+		761,
 		4
 	],
 	"../pages/sms/sms.module": [
-		759,
+		760,
 		3
 	],
 	"../pages/staff-popover/staff-popover.module": [
-		760,
-		39
+		765,
+		41
 	],
 	"../pages/tabs/tabs.module": [
-		761,
-		38
+		766,
+		40
 	],
 	"../pages/welcome/welcome.module": [
-		762,
-		37
+		764,
+		39
 	]
 };
 function webpackAsyncContext(req) {
@@ -1083,65 +1099,69 @@ var AppModule = (function () {
                 }, {
                     links: [
                         { loadChildren: '../pages/account/aboutus/aboutus.module#AboutusPageModule', name: 'AboutusPage', segment: 'aboutus', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/account/account-edit/account-edit.module#AccountEditModule', name: 'AccountEdit', segment: 'account-edit', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/account/account-passwordedit/account-passwordedit.module#AccountPasswordeditModule', name: 'AccountPasswordedit', segment: 'account-passwordedit', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/account/account.module#AccountModule', name: 'Account', segment: 'account', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/announcement/announcement-detail/announcement-detail.module#AnnouncementDetailPageModule', name: 'AnnouncementDetailPage', segment: 'announcement-detail', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/announcement/announcement.module#AnnouncementPageModule', name: 'AnnouncementPage', segment: 'announcement', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/car/car-add/car-add.module#CarAddPageModule', name: 'CarAddPage', segment: 'car-add', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/car/car-read/car-read.module#CarReadPageModule', name: 'CarReadPage', segment: 'car-read', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/car/car.module#CarPageModule', name: 'CarPage', segment: 'car', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/account/account-edit/account-edit.module#AccountEditModule', name: 'AccountEdit', segment: 'account-edit', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/account/account.module#AccountModule', name: 'Account', segment: 'account', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/car/driver/driver-set/driver-set.module#DriverSetPageModule', name: 'DriverSetPage', segment: 'driver-set', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/car/driver/driver.module#DriverPageModule', name: 'DriverPage', segment: 'driver', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/contacts-popover/contacts-popover.module#ContactsPopoverPageModule', name: 'ContactsPopoverPage', segment: 'contacts-popover', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/getmobile-popover/getmobile-popover.module#GetmobilePopoverPageModule', name: 'GetmobilePopoverPage', segment: 'getmobile-popover', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/home/backlog/backlog-detail/backlog-detail.module#BacklogDetailModule', name: 'BacklogDetail', segment: 'backlog-detail', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/car/driver/driver.module#DriverPageModule', name: 'DriverPage', segment: 'driver', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/car/car-read/car-read.module#CarReadPageModule', name: 'CarReadPage', segment: 'car-read', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/backlog/backlog.module#BacklogModule', name: 'Backlog', segment: 'backlog', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/contacts-popover/contacts-popover.module#ContactsPopoverPageModule', name: 'ContactsPopoverPage', segment: 'contacts-popover', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/home/backlog/backlog-detail/backlog-detail.module#BacklogDetailModule', name: 'BacklogDetail', segment: 'backlog-detail', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/contacts/contacts-detail/contacts-detail.module#ContactsDetailModule', name: 'ContactsDetail', segment: 'contacts-detail', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/home/contacts/contacts.module#ContactsModule', name: 'Contacts', segment: 'contacts', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/home/home.module#HomeModule', name: 'Home', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/newwork/newwork-detail/newwork-detail.module#NewworkDetailModule', name: 'NewworkDetail', segment: 'newwork-detail', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/home/home.module#HomeModule', name: 'Home', segment: 'home', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/hr-management/contract/contract-choose/contract-choose.module#ContractChoosePageModule', name: 'ContractChoosePage', segment: 'contract-choose', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/newwork/newwork.module#NewworkModule', name: 'Newwork', segment: 'newwork', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/hr-management/contract/contract-maintenance/contract-maintenance.module#ContractMaintenancePageModule', name: 'ContractMaintenancePage', segment: 'contract-maintenance', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/hr-management/contract/contract-renew/contract-renew-view/contract-renew-view.module#ContractRenewViewPageModule', name: 'ContractRenewViewPage', segment: 'contract-renew-view', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/hr-management/contract/contract-renew/contract-renew.module#ContractRenewPageModule', name: 'ContractRenewPage', segment: 'contract-renew', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/home/contacts/contacts.module#ContactsModule', name: 'Contacts', segment: 'contacts', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/hr-management/contract/contract-search/contract-search.module#ContractSearchPageModule', name: 'ContractSearchPage', segment: 'contract-search', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/hr-management/contract/contract-setting/contract-setting.module#ContractSettingPageModule', name: 'ContractSettingPage', segment: 'contract-setting', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/hr-management/contract/contract-search-separate/contract-search-separate.module#ContractSearchSeparatePageModule', name: 'ContractSearchSeparatePage', segment: 'contract-search-separate', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/hr-management/contract/contract-maintenance/contract-maintenance.module#ContractMaintenancePageModule', name: 'ContractMaintenancePage', segment: 'contract-maintenance', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/hr-management/job-types-set/job-types-set-add/job-types-set-add.module#JobTypesSetAddPageModule', name: 'JobTypesSetAddPage', segment: 'job-types-set-add', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/hr-management/job-types-set/job-types-set.module#JobTypesSetPageModule', name: 'JobTypesSetPage', segment: 'job-types-set', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/hr-management/contract/contract-setting/contract-setting.module#ContractSettingPageModule', name: 'ContractSettingPage', segment: 'contract-setting', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/hr-management/staff-file-maintenance/staff-file-maintenance-basic-imfornation/staff-file-maintenance-basic-imfornation.module#StaffFileMaintenanceBasicImfornationPageModule', name: 'StaffFileMaintenanceBasicImfornation', segment: 'staff-file-maintenance-basic-imfornation', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/hr-management/staff-file-maintenance/staff-file-maintenance-education/staff-file-maintenance-education-add/staff-file-maintenance-education-add.module#StaffFileMaintenanceEducationAddPageModule', name: 'StaffFileMaintenanceEducationAddPage', segment: 'staff-file-maintenance-education-add', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/hr-management/staff-file-maintenance/staff-file-maintenance-education/staff-file-maintenance-education.module#StaffFileMaintenanceEducationPageModule', name: 'StaffFileMaintenanceEducation', segment: 'staff-file-maintenance-education', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/hr-management/job-types-set/job-types-set.module#JobTypesSetPageModule', name: 'JobTypesSetPage', segment: 'job-types-set', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/hr-management/staff-file-maintenance/staff-file-maintenance-set/staff-file-maintenance-set.module#StaffFileMaintenanceSetPageModule', name: 'StaffFileMaintenanceSet', segment: 'staff-file-maintenance-set', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/hr-management/staff-file-maintenance/staff-file-maintenance-social-relationship/staff-file-maintenance-social-relationship-add/staff-file-maintenance-social-relationship-add.module#StaffFileMaintenanceSocialRelationshipAddPageModule', name: 'StaffFileMaintenanceSocialRelationshipAddPage', segment: 'staff-file-maintenance-social-relationship-add', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/hr-management/staff-file-maintenance/staff-file-maintenance-social-relationship/staff-file-maintenance-social-relationship.module#StaffFileMaintenanceSocialRelationshipPageModule', name: 'StaffFileMaintenanceSocialRelationship', segment: 'staff-file-maintenance-social-relationship', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/hr-management/staff-file-maintenance/staff-file-maintenance-social-relationship/staff-file-maintenance-social-relationship-add/staff-file-maintenance-social-relationship-add.module#StaffFileMaintenanceSocialRelationshipAddPageModule', name: 'StaffFileMaintenanceSocialRelationshipAddPage', segment: 'staff-file-maintenance-social-relationship-add', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/hr-management/staff-file-maintenance/staff-file-maintenance-work-experience/staff-file-maintenance-work-experience-add/staff-file-maintenance-work-experience-add.module#StaffFileMaintenanceWorkExperienceAddModule', name: 'StaffFileMaintenanceWorkExperienceAdd', segment: 'staff-file-maintenance-work-experience-add', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/hr-management/staff-file-maintenance/staff-file-maintenance-work-experience/staff-file-maintenance-work-experience.module#StaffFileMaintenanceWorkExperiencePageModule', name: 'StaffFileMaintenanceWorkExperience', segment: 'staff-file-maintenance-work-experience', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/hr-management/staff-file-maintenance/staff-file-maintenance.module#StaffFileMaintenancePageModule', name: 'StaffFileMaintenance', segment: 'staff-file-maintenance', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/hr-management/training-maintenance/training-maintenance-search/training-maintenance-search.module#TrainingMaintenancePageModule', name: 'TrainingMaintenanceSearch', segment: 'training-maintenance-search', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/hr-management/contract/contract-list/contract-list.module#ContractListPageModule', name: 'ContractListPage', segment: 'contract-list', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/hr-management/training-maintenance/training-maintenance-set/training-maintenance-set.module#TrainingMaintenanceSetPageModule', name: 'TrainingMaintenanceSetPage', segment: 'training-maintenance-set', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/hr-management/training-maintenance/training-maintenance.module#TrainingMaintenancePageModule', name: 'TrainingMaintenancePage', segment: 'training-maintenance', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/find-password/find-password.module#FindPasswordModule', name: 'FindPassword', segment: 'find-password', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/mail/mail-read/mail-read.module#MailReadModule', name: 'MailRead', segment: 'mail-read', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/hr-management/staff-file-maintenance/staff-file-maintenance.module#StaffFileMaintenancePageModule', name: 'StaffFileMaintenance', segment: 'staff-file-maintenance', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/hr-management/training-maintenance/training-maintenance-search/training-maintenance-search.module#TrainingMaintenancePageModule', name: 'TrainingMaintenanceSearch', segment: 'training-maintenance-search', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mail/mail-write/mail-write.module#MailWriteModule', name: 'MailWrite', segment: 'mail-write', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mail/mail.module#MailModule', name: 'Mail', segment: 'mail', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/meeting/meeting-edit/meeting-edit.module#MeetingEditPageModule', name: 'MeetingEditPage', segment: 'meeting-edit', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/meeting/meeting-minutes/meeting-minutes.module#MeetingMinutesPageModule', name: 'MeetingMinutesPage', segment: 'meeting-minutes', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/meeting/meeting-room/meeting-room-set/meeting-room-set.module#MeetingRoomSetPageModule', name: 'MeetingRoomSetPage', segment: 'meeting-room-set', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/hr-management/training-maintenance/training-maintenance.module#TrainingMaintenancePageModule', name: 'TrainingMaintenancePage', segment: 'training-maintenance', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/meeting/meeting-room/meeting-room.module#MeetingRoomPageModule', name: 'MeetingRoomPage', segment: 'meeting-room', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/meeting/meeting-search/meeting-search.module#MeetingSearchPageModule', name: 'MeetingSearchPage', segment: 'meeting-search', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/meeting/meeting-room/meeting-room-set/meeting-room-set.module#MeetingRoomSetPageModule', name: 'MeetingRoomSetPage', segment: 'meeting-room-set', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/meeting/meeting-write/meeting-write.module#MeetingWritePageModule', name: 'MeetingWritePage', segment: 'meeting-write', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/meeting/meeting.module#MeetingPageModule', name: 'MeetingPage', segment: 'meeting', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/message/message-read-out/message-read-out.module#MessageReadOutPageModule', name: 'MessageReadOutPage', segment: 'message-read-out', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/mail/mail-read/mail-read.module#MailReadModule', name: 'MailRead', segment: 'mail-read', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/message/message-read/message-read.module#MessageReadPageModule', name: 'MessageReadPage', segment: 'message-read', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/message/message-write/message-write.module#MessageWritePageModule', name: 'MessageWritePage', segment: 'message-write', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/meeting/meeting-search/meeting-search.module#MeetingSearchPageModule', name: 'MeetingSearchPage', segment: 'meeting-search', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/message/message.module#MessagePageModule', name: 'MessagePage', segment: 'message', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/sms/sms-read/sms-read.module#SmsReadPageModule', name: 'SmsReadPage', segment: 'sms-read', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/sms/sms-write/sms-write.module#SmsWritePageModule', name: 'SmsWritePage', segment: 'sms-write', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/message/message-write/message-write.module#MessageWritePageModule', name: 'MessageWritePage', segment: 'message-write', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sms/sms.module#SmsPageModule', name: 'SmsPage', segment: 'sms', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/sms/sms-write/sms-write.module#SmsWritePageModule', name: 'SmsWritePage', segment: 'sms-write', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/message/message-read-out/message-read-out.module#MessageReadOutPageModule', name: 'MessageReadOutPage', segment: 'message-read-out', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/sms/sms-read/sms-read.module#SmsReadPageModule', name: 'SmsReadPage', segment: 'sms-read', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/welcome/welcome.module#WelcomeModule', name: 'Welcome', segment: 'welcome', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/staff-popover/staff-popover.module#StaffPopoverPageModule', name: 'StaffPopoverPage', segment: 'staff-popover', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/tabs/tabs.module#TabsModule', name: 'TabsPage', segment: 'tabs', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/welcome/welcome.module#WelcomeModule', name: 'Welcome', segment: 'welcome', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/tabs/tabs.module#TabsModule', name: 'TabsPage', segment: 'tabs', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["a" /* IonicStorageModule */].forRoot(),

@@ -1,6 +1,6 @@
 webpackJsonp([23],{
 
-/***/ 727:
+/***/ 728:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,8 +8,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContractSearchPageModule", function() { return ContractSearchPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_search__ = __webpack_require__(797);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contract_service__ = __webpack_require__(767);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_search__ = __webpack_require__(802);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contract_service__ = __webpack_require__(768);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -41,7 +41,7 @@ var ContractSearchPageModule = (function () {
 
 /***/ }),
 
-/***/ 767:
+/***/ 768:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -75,7 +75,7 @@ var ContractService = (function () {
 
 /***/ }),
 
-/***/ 797:
+/***/ 802:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -114,11 +114,11 @@ var ContractSearchPage = (function () {
         this.DeptLs = [];
         this.search = this.navParams.get("search");
         this.searchForm = this.formBuilder.group({
-            DeptId: ["", []],
-            StartDate: ["", []],
-            EndDate: ["", []],
-            ContractYear: ["", []],
-            ContractType: ["", []],
+            "DeptId": ["", []],
+            "StartDate": ["", []],
+            "EndDate": ["", []],
+            "ContractYear": ["", []],
+            "ContractType": ["", []],
         });
         this.publicService.GetDeptLs().subscribe(function (resJson) {
             if (resJson.Result)
@@ -126,10 +126,11 @@ var ContractSearchPage = (function () {
         });
         if (this.search) {
             this.searchForm.setValue({
-                Title: this.search.Title,
-                StartDate: this.search.StartDate,
-                EndDate: this.search.EndDate,
-                Instructor: this.search.Instructor,
+                "DeptId": this.search.DeptId,
+                "StartDate": this.search.StartDate,
+                "EndDate": this.search.EndDate,
+                "ContractYear": this.search.ContractYear,
+                "ContractType": this.search.ContractType
             });
         }
     }
@@ -143,15 +144,12 @@ var ContractSearchPage = (function () {
     };
     ContractSearchPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contract-search',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-search\contract-search.html"*/`<ion-header>\n    <ion-navbar>\n        <ion-title>筛选</ion-title>\n    </ion-navbar>\n</ion-header>\n<ion-content>\n    <form [formGroup]="searchForm" (ngSubmit)="sent(searchForm.value)">\n        <ion-list>\n            <ion-item>\n                <ion-label floating>员工部门</ion-label>\n                <ion-select formControlName="DeptId" cancelText="取消" okText="确定" placeholder="请选择">\n                    <ion-option *ngFor="let Dept of DeptLs;let i = index" [value]="Dept.Id">{{Dept.BmName}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item>\n                <ion-label floating>合同年份</ion-label>\n                <ion-select formControlName="ContractYear" cancelText="取消" okText="确定" placeholder="请选择">\n                  <ion-option value="2014">2014</ion-option>\n                  <ion-option value="2015">2015</ion-option>\n                  <ion-option value="2016">2016</ion-option>\n                  <ion-option value="2017">2017</ion-option>\n                </ion-select>\n              </ion-item>\n            <ion-item>\n                <ion-label floating>合同类型</ion-label>\n                <ion-select formControlName="ContractType" cancelText="取消" okText="确定" placeholder="请选择">\n                    <ion-option value="701">保密协议</ion-option>\n                    <ion-option value="700">劳动合同</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item>\n                <ion-label floating>签约开始时间</ion-label>\n                <ion-datetime formControlName="StartDate" cancelText="取消"  placeholder="请选择" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n            <ion-item>\n                <ion-label floating>签约结束时间</ion-label>\n                <ion-datetime formControlName="EndDate" cancelText="取消"  placeholder="请选择" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n        </ion-list>\n        <div text-center>\n            <button ion-button color="energized" (click)="reset()" small outline>重置</button>\n            <button ion-button color="assertive" type="submit" small>搜索</button>\n        </div>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-search\contract-search.html"*/,
+            selector: 'page-contract-search',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-search\contract-search.html"*/`<ion-header>\n    <ion-navbar>\n        <ion-title>筛选</ion-title>\n    </ion-navbar>\n</ion-header>\n<ion-content>\n    <form [formGroup]="searchForm" (ngSubmit)="sent(searchForm.value)">\n        <ion-list>\n            <ion-item>\n                <ion-label>员工部门</ion-label>\n                <ion-select text-right formControlName="DeptId" cancelText="取消" okText="确定" placeholder="请选择">\n                    <ion-option *ngFor="let Dept of DeptLs;let i = index" [value]="Dept.Id">{{Dept.BmName}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>合同年份</ion-label>\n                <ion-select text-right formControlName="ContractYear" cancelText="取消" okText="确定" placeholder="请选择">\n                  <ion-option value="2014">2014</ion-option>\n                  <ion-option value="2015">2015</ion-option>\n                  <ion-option value="2016">2016</ion-option>\n                  <ion-option value="2017">2017</ion-option>\n                </ion-select>\n              </ion-item>\n            <ion-item>\n                <ion-label>合同类型</ion-label>\n                <ion-select formControlName="ContractType" cancelText="取消" okText="确定" placeholder="请选择">\n                    <ion-option value="701">保密协议</ion-option>\n                    <ion-option value="700">劳动合同</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item class="search-dattime">\n                <ion-label>签约时间</ion-label>\n                <ion-datetime formControlName="StartDate" cancelText="取消" [max]="searchForm.value.EndDate==\'\'?null:searchForm.value.EndDate"  placeholder="开始时间" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                <ion-datetime formControlName="EndDate" cancelText="取消" [min]="searchForm.value.StartDate==\'\'?null:searchForm.value.StartDate"  placeholder="结束时间" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n            <!-- <ion-item>\n                <ion-label>签约结束时间</ion-label>\n                <ion-datetime formControlName="EndDate" cancelText="取消"  placeholder="请选择" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item> -->\n\n        </ion-list>\n        <div text-center>\n            <button ion-button color="energized" (click)="reset()" small outline>重置</button>\n            <button ion-button color="assertive" type="submit" small>搜索</button>\n        </div>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-search\contract-search.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_PublicService__["a" /* PublicService */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__providers_PublicService__["a" /* PublicService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_PublicService__["a" /* PublicService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]) === "function" && _e || Object])
     ], ContractSearchPage);
     return ContractSearchPage;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=contract-search.js.map

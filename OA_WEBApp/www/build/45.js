@@ -1,14 +1,14 @@
 webpackJsonp([45],{
 
-/***/ 707:
+/***/ 768:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StaffFileMaintenanceWorkExperienceAddModule", function() { return StaffFileMaintenanceWorkExperienceAddModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StaffPopoverPageModule", function() { return StaffPopoverPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience_add__ = __webpack_require__(781);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_popover__ = __webpack_require__(849);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,37 +18,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var StaffFileMaintenanceWorkExperienceAddModule = (function () {
-    function StaffFileMaintenanceWorkExperienceAddModule() {
+var StaffPopoverPageModule = (function () {
+    function StaffPopoverPageModule() {
     }
-    StaffFileMaintenanceWorkExperienceAddModule = __decorate([
+    StaffPopoverPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience_add__["a" /* StaffFileMaintenanceWorkExperienceAdd */],
+                __WEBPACK_IMPORTED_MODULE_2__staff_popover__["a" /* StaffPopoverPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience_add__["a" /* StaffFileMaintenanceWorkExperienceAdd */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__staff_popover__["a" /* StaffPopoverPage */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience_add__["a" /* StaffFileMaintenanceWorkExperienceAdd */]
-            ]
         })
-    ], StaffFileMaintenanceWorkExperienceAddModule);
-    return StaffFileMaintenanceWorkExperienceAddModule;
+    ], StaffPopoverPageModule);
+    return StaffPopoverPageModule;
 }());
 
-//# sourceMappingURL=staff-file-maintenance-work-experience-add.module.js.map
+//# sourceMappingURL=staff-popover.module.js.map
 
 /***/ }),
 
-/***/ 781:
+/***/ 849:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StaffFileMaintenanceWorkExperienceAdd; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StaffPopoverPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -61,65 +61,204 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import 'rxjs/add/operator/map';
-// import { Observable } from 'rxjs/Observable';
-// import { HttpService } from "../../../providers/HttpService";
+
+
 /**
- * Generated class for the StaffFileMaintenanceWorkExperienceAddPage page.
+ * Generated class for the StaffPopoverPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var StaffFileMaintenanceWorkExperienceAdd = (function () {
-    function StaffFileMaintenanceWorkExperienceAdd(navCtrl, navParams, 
-        // private httpService: HttpService,
-        formBuilder, viewCtrl) {
-        this.navCtrl = navCtrl;
+var StaffPopoverPage = (function () {
+    function StaffPopoverPage(navParams, viewCtrl, storage, httpService) {
         this.navParams = navParams;
-        this.formBuilder = formBuilder;
         this.viewCtrl = viewCtrl;
-        this.isShow = true;
-        this.readOnly = false;
-        this.readOnly = this.navParams.get("readOnly") ? true : false;
-        this.addForm = this.formBuilder.group({
-            StartDate: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            EndDate: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            Dept: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            Duty: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            Company: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(80)]],
-            Remarks: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(100)]],
-        });
+        this.storage = storage;
+        this.httpService = httpService;
+        this.deptItems = [];
+        this.items = [];
+        this.haveAffix = false;
+        this.Result = {}; // 最终返回结果
+        this.Uid = this.navParams.get("Uid");
+        this.initializeItems();
     }
-    StaffFileMaintenanceWorkExperienceAdd.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad StaffFileMaintenanceWorkExperienceAddPage');
+    StaffPopoverPage.prototype.initializeItems = function () {
+        var _this = this;
+        this.httpService.postFormData("ashx/BmLs.ashx", {})
+            .map(function (res) { return res.json(); })
+            .subscribe(function (resJson) {
+            if (resJson.Result) {
+                _this.deptItems = resJson.Data;
+            }
+        });
+        this.search();
     };
-    StaffFileMaintenanceWorkExperienceAdd.prototype.dismiss = function () {
-        this.viewCtrl.dismiss();
+    StaffPopoverPage.prototype.getItems = function (ev) {
+        // Reset items back to all of the items
+        this.initializeItems();
+        // set val to the value of the ev target
+        var val = ev.target.value;
+        this.name = val;
+        // if the value is an empty string don't filter the items
+        // if (val && val.trim() != '') {
+        //   this.items = this.items.filter((item) => {
+        //     return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        //   });
+        // }
     };
-    StaffFileMaintenanceWorkExperienceAdd.prototype.save = function (value) {
-        // 提交
-        // this.httpService.postFormData("", value)
+    StaffPopoverPage.prototype.getRecipientsByDept = function (id) {
+        var data = !!id ? { DeptId: id } : {};
+        this.httpService.postFormData("ashx/UserSheet.ashx", data)
+            .map(function (res) { return res.json(); })
+            .subscribe(function (result) {
+            console.log(result);
+            // if (result.Result){
+            //     const idArr = this.addresseeIds.split(",");
+            //
+            //     this.items = result.Data.map(function (value, index) {
+            //         for (let i in idArr) {
+            //             if (idArr[i] !== value.Uid) {
+            //                 Object.assign(value, { checked: false });
+            //             } else {
+            //                 return Object.assign(value, { checked: true });
+            //
+            //             }
+            //         }
+            //         return value;
+            //
+            //     });
+            // }
+        });
+    };
+    StaffPopoverPage.prototype.search = function () {
+        console.log('change');
+        var that = this;
+        var data = [
+            {
+                "Uid": '1',
+                'Name': '张三',
+                'Sex': '男',
+                'IDC': '511324198910121111',
+                'Dept': '部门名称1',
+                'Duty': '职务1',
+                "StaffNumber": '123456'
+            },
+            {
+                "Uid": '2',
+                'Name': '李四',
+                'Sex': '男',
+                'IDC': '511324198910121111',
+                'Dept': '部门名称2',
+                'Duty': '职务2',
+                "StaffNumber": '123455'
+            },
+            {
+                "Uid": '4',
+                'Name': '李四',
+                'Sex': '男',
+                'IDC': '511324198910121111',
+                'Dept': '部门名称2',
+                'Duty': '职务2',
+                "StaffNumber": '123455'
+            },
+            {
+                "Uid": '5',
+                'Name': '李四',
+                'Sex': '男',
+                'IDC': '511324198910121111',
+                'Dept': '部门名称2',
+                'Duty': '职务2',
+                "StaffNumber": '123455'
+            },
+            {
+                "Uid": '6',
+                'Name': '李四',
+                'Sex': '男',
+                'IDC': '511324198910121111',
+                'Dept': '部门名称2',
+                'Duty': '职务2',
+                "StaffNumber": '123455'
+            },
+            {
+                "Uid": '7',
+                'Name': '李四',
+                'Sex': '男',
+                'IDC': '511324198910121111',
+                'Dept': '部门名称2',
+                'Duty': '职务2',
+                "StaffNumber": '123455'
+            },
+            {
+                "Uid": '3',
+                'Name': '王五',
+                'Sex': '男',
+                'IDC': '511324198910121111',
+                'Dept': '部门名称3',
+                'Duty': '职务3',
+                "StaffNumber": '123454'
+            }
+        ];
+        this.items = data.map(function (value, index) {
+            if (value.Uid == that.Uid)
+                Object.assign(value, { checked: true });
+            else
+                Object.assign(value, { checked: false });
+            return value;
+        });
+        // let data = (this.name !== "") ? {name: name} : {};
+        // this.httpService.postFormData("ashx/UserSheet.ashx", data)
         // .map((res: Response) => res.json())
-        // .subscribe((resJson) => {
+        // .subscribe((result) => {
+        //     console.log(result);
+        //     if (result.Result){
+        //         const idArr = this.addresseeIds.split(",");
+        //
+        //         this.items = result.Data.map(function (value, index) {
+        //             for (let i in idArr) {
+        //                 if (idArr[i] !== value.Uid) {
+        //                     Object.assign(value, { checked: false });
+        //                 } else {
+        //                     return Object.assign(value, { checked: true });
+        //
+        //                 }
+        //             }
+        //             return value;
+        //
+        //         });
+        //     }
         // });
     };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
-        __metadata("design:type", Boolean)
-    ], StaffFileMaintenanceWorkExperienceAdd.prototype, "isShow", void 0);
-    StaffFileMaintenanceWorkExperienceAdd = __decorate([
+    StaffPopoverPage.prototype.checkPeople = function (Index) {
+        this.items.forEach(function (value, index) {
+            if (Index === index)
+                value.checked = true;
+            else
+                value.checked = false;
+        });
+    };
+    StaffPopoverPage.prototype.confirm = function () {
+        console.log(confirm);
+        for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
+            var value = _a[_i];
+            if (value.checked) {
+                this.Result = value;
+            }
+        }
+        this.viewCtrl.dismiss(this.Result);
+    };
+    StaffPopoverPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-staff-file-maintenance-work-experience-add',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience-add\staff-file-maintenance-work-experience-add.html"*/`<!--\n  Generated template for the StaffFileMaintenanceWorkExperienceAddPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n      <ion-buttons start>\n          <button ion-button  (click)="dismiss()">返回</button>\n      </ion-buttons>\n    <ion-title>工作经历</ion-title>\n    <ion-buttons end>\n        <button ion-button  (click)="save(addForm.value)">保存</button>\n    </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="addForm" (ngSubmit)="save(addForm.value)"   [ngClass]="{\'form-readonly\': readOnly}">\n        <ion-list style="position:relative;">\n            <ion-item>\n                <ion-label>开始时间</ion-label>\n                <ion-datetime formControlName="StartDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n            <ion-item>\n                <ion-label>结束时间</ion-label>\n                <ion-datetime formControlName="EndDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n              </ion-item>\n            <ion-item>\n                <ion-label>部门</ion-label>\n                <ion-input text-right type="text" formControlName="Dept" placeholder="输入部门名称"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>职务</ion-label>\n                <ion-input text-right type="text" formControlName="Duty" placeholder="输入职务名称"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>工作单位</ion-label>\n                <ion-input text-right type="text" formControlName="Company" placeholder="输入工作单位"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>备注<span class="optional">（选填）</span></ion-label>\n                <ion-textarea text-right formControlName="Remarks" placeholder="请输入备注"></ion-textarea>\n            </ion-item>\n        </ion-list>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience-add\staff-file-maintenance-work-experience-add.html"*/,
+            selector: 'page-staff-popover',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\staff-popover\staff-popover.html"*/`<!-- <ion-content> -->\n<ion-list class="checkpeople-popover">\n    <ion-item>\n        <ion-label>部门选择</ion-label>\n        <ion-select [(ngModel)]="dept" submitText="确定" (ngModelChange)="getRecipientsByDept(dept)" cancelText="取消" okText="确定">\n            <ion-option *ngFor="let item of deptItems;let i = index" [value]="item.Id">\n                {{item.BmName}}\n            </ion-option>\n        </ion-select>\n    </ion-item>\n    <ion-searchbar color="danger" cancelButtonText=\'搜索\' showCancelButton="true" (ionCancel)="search()" [(ngModel)]="name" placeholder="请输入编码或姓名">\n    </ion-searchbar>\n\n    <ion-list-header >员工列表</ion-list-header>\n    <div class="">\n        <ion-scroll scrollY="true">\n          <ion-item *ngFor="let item of items;let i = index">\n            <ion-label>\n              {{item.Name}}({{item.Uid}})<br>\n              <span>{{item.Dept}}&emsp;{{item.Duty}}</span>\n            </ion-label>\n            <ion-checkbox [checked]="item.checked" (click)="checkPeople(i)"></ion-checkbox>\n          </ion-item>\n        </ion-scroll>\n    </div>\n</ion-list>\n<!-- </ion-content> -->\n<ion-footer>\n    <button (click)="confirm()" icon-left ion-button full color="calm">\n  <ion-icon name="checkmark"></ion-icon>确定</button>\n</ion-footer>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\staff-popover\staff-popover.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */]])
-    ], StaffFileMaintenanceWorkExperienceAdd);
-    return StaffFileMaintenanceWorkExperienceAdd;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__["a" /* HttpService */]])
+    ], StaffPopoverPage);
+    return StaffPopoverPage;
 }());
 
-//# sourceMappingURL=staff-file-maintenance-work-experience-add.js.map
+//# sourceMappingURL=staff-popover.js.map
 
 /***/ })
 

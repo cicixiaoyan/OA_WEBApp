@@ -1,14 +1,15 @@
 webpackJsonp([39],{
 
-/***/ 764:
+/***/ 714:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WelcomeModule", function() { return WelcomeModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnnouncementPageModule", function() { return AnnouncementPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__welcome__ = __webpack_require__(838);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcement__ = __webpack_require__(793);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(779);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,36 +19,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var WelcomeModule = (function () {
-    function WelcomeModule() {
+
+var AnnouncementPageModule = (function () {
+    function AnnouncementPageModule() {
     }
-    WelcomeModule = __decorate([
+    AnnouncementPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__welcome__["a" /* Welcome */],
+                __WEBPACK_IMPORTED_MODULE_2__announcement__["a" /* AnnouncementPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__welcome__["a" /* Welcome */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__announcement__["a" /* AnnouncementPage */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__welcome__["a" /* Welcome */]
-            ]
+            providers: [__WEBPACK_IMPORTED_MODULE_3__announcementService__["a" /* AnnouncementService */]]
         })
-    ], WelcomeModule);
-    return WelcomeModule;
+    ], AnnouncementPageModule);
+    return AnnouncementPageModule;
 }());
 
-//# sourceMappingURL=welcome.module.js.map
+//# sourceMappingURL=announcement.module.js.map
 
 /***/ }),
 
-/***/ 838:
+/***/ 779:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Welcome; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -59,42 +61,167 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import { TabsPage } from '../tabs/tabs';
-// import { LoginPage } from "../login/login";
+
 /**
- * Generated class for the Welcome page.
+ * Generated class for the AnnouncementPage page.
  *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
  */
-var Welcome = (function () {
-    function Welcome(viewCtrl, navParams, modalCtrl) {
-        this.viewCtrl = viewCtrl;
-        this.navParams = navParams;
-        this.modalCtrl = modalCtrl;
+var AnnouncementService = (function () {
+    function AnnouncementService(httpService) {
+        this.httpService = httpService;
+        this.announcementStatus = {
+            "enter": "录入",
+            "published": "已发布",
+            "all": "0" // 全部
+        };
     }
-    Welcome.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Welcome');
+    AnnouncementService.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Login');
     };
-    Welcome.prototype.goToHome = function () {
-        // this.navCtrl.setRoot(TabsPage, { index: 0 });
-        this.viewCtrl.dismiss();
-        var modal = this.modalCtrl.create("LoginPage");
-        modal.present();
-        modal.onDidDismiss(function (data) {
-            data && console.log(data);
-        });
+    AnnouncementService.prototype.getList = function (param) {
+        return this.httpService.postFormData("ashx/Announcement.ashx", param)
+            .map(function (res) { return res.json(); });
     };
-    Welcome = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-welcome',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\welcome\welcome.html"*/`<!--\n  Generated template for the Welcome page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header class="nav-decor">\n\n    <ion-navbar>\n        <ion-title>welcome</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-slides pager>\n\n        <ion-slide>\n            <img src="assets/img/welcome/slide1.jpg" />\n        </ion-slide>\n\n        <ion-slide>\n            <img src="assets/img/welcome/slide2.png" />\n        </ion-slide>\n\n        <ion-slide>\n            <img src="assets/img/welcome/slide3.png" />\n        </ion-slide>\n\n        <ion-slide>\n            <ion-row>\n                <ion-col>\n                    <img src="assets/img/welcome/slide4.png" />\n                </ion-col>\n            </ion-row>\n            <ion-row class="start-button">\n                <ion-col>\n                    <button ion-button clear color="light" (click)="goToHome()">立即启动</button>\n                </ion-col>\n            </ion-row>\n        </ion-slide>\n\n    </ion-slides>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\welcome\welcome.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */]])
-    ], Welcome);
-    return Welcome;
+    AnnouncementService.prototype.detail = function (key) {
+        return this.httpService.postFormData("ashx/AnnouncementDetail.ashx", { "attKey": key })
+            .map(function (res) { return res.json(); });
+    };
+    AnnouncementService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
+    ], AnnouncementService);
+    return AnnouncementService;
 }());
 
-//# sourceMappingURL=welcome.js.map
+//# sourceMappingURL=announcementService.js.map
+
+/***/ }),
+
+/***/ 793:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcementService__ = __webpack_require__(779);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+// import { AnnouncementDetailPage } from './announcement-detail/announcement-detail';
+
+/**
+ * Generated class for the AnnouncementPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var AnnouncementPage = (function () {
+    function AnnouncementPage(navCtrl, navParams, announcementService) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.announcementService = announcementService;
+        this.nxPage = "AnnouncementDetailPage";
+        this.checkBtn = { "enter": true, "published": false, "all": false };
+        //   page: number = 1;
+        //   size: number = 1;
+        this.moredata = true; // 是否能加载更多
+        this.isEmpty = false; // 是否无数据
+        this.items = [];
+        this.data = {
+            "UserId": this.announcementService.httpService.globalData.Uid,
+            "PageIndex": 0,
+            "PageSize": 10,
+            "Status": this.announcementService.announcementStatus["enter"]
+        };
+        this.initializeItems();
+    }
+    AnnouncementPage.prototype.initializeItems = function () {
+        this.getList();
+    };
+    AnnouncementPage.prototype.doRefresh = function (refresher) {
+        this.data.PageIndex = 0;
+        this.initializeItems();
+        setTimeout(function () {
+            console.log('数据加载完成');
+            refresher.complete();
+        }, 1000);
+    };
+    AnnouncementPage.prototype.doInfinite = function () {
+        if (this.moredata) {
+            this.data.PageIndex++;
+            this.getList();
+        }
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve();
+            }, 500);
+        });
+    };
+    // 选择录入、已发布、全部
+    AnnouncementPage.prototype.checkRead = function (name) {
+        if (name === void 0) { name = "enter"; }
+        this.data.PageIndex = 0;
+        this.items = [];
+        this.checkBtn = { "enter": false, "published": false, "all": false };
+        this.checkBtn[name] = true;
+        if (name === "enter") {
+            // 参数设置
+            this.data.Status = this.announcementService.announcementStatus["enter"];
+        }
+        else if (name === "published") {
+            // 参数设置
+            this.data.Status = this.announcementService.announcementStatus["published"];
+        }
+        else {
+            // 参数设置
+            this.data.Status = this.announcementService.announcementStatus["all"];
+        }
+        this.getList();
+    };
+    AnnouncementPage.prototype.getList = function () {
+        var _this = this;
+        this.announcementService.getList(this.data).subscribe(function (resJson) {
+            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
+                _this.moredata = true;
+                _this.isEmpty = false;
+                var list = resJson.Data;
+                _this.items = _this.items.concat(list);
+            }
+            else {
+                _this.moredata = false;
+                _this.isEmpty = _this.data.PageIndex == 0 ? true : false;
+            }
+        });
+        //   return this.httpService.postFormData("ashx/Notice.ashx/noticeall", data).map(Response => Response.json());
+    };
+    AnnouncementPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Notice');
+    };
+    AnnouncementPage.prototype.itemSelected = function () {
+    };
+    AnnouncementPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-announcement',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement.html"*/`<!--\n  Generated template for the AnnouncementPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n      <ion-title>公告管理</ion-title>\n  </ion-navbar>\n\n  <div class="subbox">\n    <div >\n        <button ion-button small (click)="checkRead(\'enter\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.enter}">录入</button>\n        <button ion-button small (click)="checkRead(\'published\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.published}">已发布</button>\n        <button ion-button small (click)="checkRead(\'all\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.all}">全部</button>\n    </div>\n  </div>\n  <!-- <ion-searchbar color="dark" type="text" placeholder="请输入关键字" [(ngModel)]="searchKey"\n   [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event)"></ion-searchbar> -->\n</ion-header>\n\n<ion-content>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n      </ion-refresher-content>\n  </ion-refresher>\n  <ion-list inset style="margin:16px 0;">\n      <button ion-item *ngFor="let item of items" [navPush]="nxPage" [navParams]="{item:item}">\n          <span>[{{item.AnnouncementType}}]{{item.AnnouncementTitle}}</span>\n          <p>{{item.AnnouncementPublishPerson}}&emsp;{{item.AnnouncementPublishDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n      </button>\n  </ion-list>\n  <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n      <div padding>暂无公告！！！</div>\n      <img src="assets/img/face/face2.png" height="100">\n  </div>\n  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__announcementService__["a" /* AnnouncementService */]])
+    ], AnnouncementPage);
+    return AnnouncementPage;
+}());
+
+//# sourceMappingURL=announcement.js.map
 
 /***/ })
 

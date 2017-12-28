@@ -1,14 +1,14 @@
 webpackJsonp([62],{
 
-/***/ 710:
+/***/ 706:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountPasswordeditModule", function() { return AccountPasswordeditModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactsModule", function() { return ContactsModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__account_passwordedit__ = __webpack_require__(784);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts__ = __webpack_require__(785);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,38 +18,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AccountPasswordeditModule = (function () {
-    function AccountPasswordeditModule() {
+var ContactsModule = (function () {
+    function ContactsModule() {
     }
-    AccountPasswordeditModule = __decorate([
+    ContactsModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__account_passwordedit__["a" /* AccountPasswordedit */],
+                __WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__account_passwordedit__["a" /* AccountPasswordedit */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */]),
             ],
             exports: [
-                __WEBPACK_IMPORTED_MODULE_2__account_passwordedit__["a" /* AccountPasswordedit */]
+                __WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */]
             ]
         })
-    ], AccountPasswordeditModule);
-    return AccountPasswordeditModule;
+    ], ContactsModule);
+    return ContactsModule;
 }());
 
-//# sourceMappingURL=account-passwordedit.module.js.map
+//# sourceMappingURL=contacts.module.js.map
 
 /***/ }),
 
-/***/ 784:
+/***/ 785:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountPasswordedit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Contacts; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62,63 +61,80 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import { LoginPage } from '../../login/login';
-
+// import { ContactsDetail } from './contacts-detail/contacts-detail';
 /**
- * Generated class for the AccountPasswordedit page.
+ * Generated class for the Contacts page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-var AccountPasswordedit = (function () {
-    function AccountPasswordedit(navCtrl, viewCtrl, modalCtrl, httpService, formBuilder) {
+var Contacts = (function () {
+    function Contacts(navCtrl, navParams, httpService) {
         this.navCtrl = navCtrl;
-        this.viewCtrl = viewCtrl;
-        this.modalCtrl = modalCtrl;
+        this.navParams = navParams;
         this.httpService = httpService;
-        this.formBuilder = formBuilder;
-        this.editPasswordForm = this.formBuilder.group({
-            "oldPwd": [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(3)]],
-            "newPwd": [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(3)]],
-            "confirmPassword": [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(3)]]
-        });
+        this.searchKey = "";
+        this.nxPage = "ContactsDetail";
+        this.moredata = true;
+        this.isEmpty = false;
+        this.initializeItems();
     }
-    AccountPasswordedit.prototype.confirm = function () {
+    Contacts.prototype.doRefresh = function (refresher) {
+        this.initializeItems();
+        setTimeout(function () {
+            console.log('数据加载完成');
+            refresher.complete();
+        }, 2000);
+    };
+    Contacts.prototype.initializeItems = function () {
         var _this = this;
-        var param = { oldPwd: this.oldPwd, newPwd: this.newPwd, Uid: this.httpService.globalData.Uid };
-        this.httpService.postFormData("ashx/PwdMod.ashx", param)
-            .map(function (responce) { return responce.json(); })
-            .subscribe(function (Resjson) {
-            if (Resjson.Result) {
-                _this.httpService.nativeService.showToast("修改密码成功", 800);
-                var modal = _this.modalCtrl.create("LoginPage");
-                modal.present();
-                modal.onDidDismiss(function (data) {
-                    data && console.log(data);
-                });
+        this.httpService.postFormData("ashx/UserSheet.ashx", { "Name": this.searchKey })
+            .map(function (Response) { return Response.json(); })
+            .subscribe(function (resJson) {
+            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
+                _this.items = resJson.Data;
+                _this.isEmpty = false;
             }
             else {
-                _this.httpService.nativeService.showToast("修改密码失败： " + Resjson.Data, 800);
+                _this.isEmpty = true;
+                _this.moredata = false;
+                _this.httpService.nativeService.showToast(resJson.Data || "无数据");
             }
         });
     };
-    AccountPasswordedit.prototype.dismiss = function () {
-        this.viewCtrl.dismiss();
+    Contacts.prototype.search = function (refresher, key) {
+        var _this = this;
+        this.initializeItems();
+        return this.httpService.postFormData("ashx/UserSheet.ashx", { "Name": key })
+            .map(function (Response) { return Response.json(); })
+            .subscribe(function (resJson) {
+            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
+                _this.items = resJson.Data;
+                _this.isEmpty = false;
+            }
+            else {
+                _this.items = [];
+                _this.isEmpty = true;
+                _this.moredata = false;
+            }
+        });
+        // setTimeout(() => {
+        //   console.log('数据加载完成');
+        //   refresher.complete();
+        // }, 2000);
     };
-    AccountPasswordedit = __decorate([
+    Contacts = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-account-passwordedit',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-passwordedit\account-passwordedit.html"*/`<ion-header>\n\n    <ion-toolbar>\n\n        <ion-title>\n\n            修改\n\n        </ion-title>\n\n        <ion-buttons>\n\n            <button ion-button (click)="dismiss()">关闭</button>\n\n        </ion-buttons>\n\n    </ion-toolbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n    <form [formGroup]="editPasswordForm" (ngSubmit)="confirm()">\n\n        <ion-list>\n\n            <ion-item>\n\n                <ion-label>&emsp;原密码：</ion-label>\n\n                <ion-input placeholder="请输入原密码" [(ngModel)]="oldPwd" type="password" formControlName="oldPwd"></ion-input>\n\n            </ion-item>\n\n            <div padding-left *ngIf="!editPasswordForm.controls.oldPwd.valid && editPasswordForm.controls.oldPwd.touched" class="validation-failed">请输入原密码</div>\n\n            <ion-item>\n\n                <ion-label>&emsp;新密码：</ion-label>\n\n                <ion-input placeholder="请输入新密码" [(ngModel)]="newPwd" type="password" formControlName="newPwd"></ion-input>\n\n            </ion-item>\n\n            <div padding-left *ngIf="!editPasswordForm.controls.newPwd.valid && editPasswordForm.controls.newPwd.touched" class="validation-failed">请输入新密码</div>\n\n            <ion-item>\n\n                <ion-label>确认密码：</ion-label>\n\n                <ion-input placeholder="请再次输入新密码" type="password" formControlName="confirmPassword"></ion-input>\n\n            </ion-item>\n\n            <div padding-left *ngIf="!editPasswordForm.controls.confirmPassword.valid && editPasswordForm.controls.confirmPassword.touched" class="validation-failed">请确认新密码</div>\n\n        </ion-list>\n\n        <div padding-horizontal>\n\n            <button color="danger" ion-button block type="submit" [disabled]="!editPasswordForm.valid">确　认</button>\n\n        </div>\n\n    </form>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-passwordedit\account-passwordedit.html"*/,
+            selector: 'page-contacts',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts.html"*/`<!--\n\n  Generated template for the Contacts page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>通讯录</ion-title>\n\n    </ion-navbar>\n\n    <ion-searchbar color="dark" type="text" placeholder="请输入姓名" [(ngModel)]="searchKey" [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event, searchKey)">\n\n    </ion-searchbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n\n        </ion-refresher-content>\n\n    </ion-refresher>\n\n    <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->\n\n    <ion-list inset style="margin:16px 0;">\n\n        <button ion-item *ngFor="let contact of items" [navPush]="nxPage" [navParams]="{id:contact.Uid}">\n\n            <span>{{contact.Name}}({{contact.Uid}})</span>\n\n            <p>{{contact.Dept}}&emsp;{{contact.Duty}}</p>\n\n        </button>\n\n    </ion-list>\n\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n\n        <div padding>未搜索到信息！！！</div>\n\n        <img src="assets/img/face/face2.png" height="100">\n\n    </div>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_HttpService__["a" /* HttpService */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
-    ], AccountPasswordedit);
-    return AccountPasswordedit;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
+    ], Contacts);
+    return Contacts;
 }());
 
-//# sourceMappingURL=account-passwordedit.js.map
+//# sourceMappingURL=contacts.js.map
 
 /***/ })
 

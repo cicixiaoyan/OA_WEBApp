@@ -1,15 +1,15 @@
 webpackJsonp([29],{
 
-/***/ 704:
+/***/ 728:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BacklogDetailModule", function() { return BacklogDetailModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContractRenewViewPageModule", function() { return ContractRenewViewPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog_detail__ = __webpack_require__(778);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(770);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_renew_view__ = __webpack_require__(807);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contract_service__ = __webpack_require__(772);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,39 +20,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var BacklogDetailModule = (function () {
-    function BacklogDetailModule() {
+var ContractRenewViewPageModule = (function () {
+    function ContractRenewViewPageModule() {
     }
-    BacklogDetailModule = __decorate([
+    ContractRenewViewPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */],
+                __WEBPACK_IMPORTED_MODULE_2__contract_renew_view__["a" /* ContractRenewViewPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contract_renew_view__["a" /* ContractRenewViewPage */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */]
-            ],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__backlogService__["a" /* BacklogService */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_3__contract_service__["a" /* ContractService */]],
+            exports: [__WEBPACK_IMPORTED_MODULE_2__contract_renew_view__["a" /* ContractRenewViewPage */]]
         })
-    ], BacklogDetailModule);
-    return BacklogDetailModule;
+    ], ContractRenewViewPageModule);
+    return ContractRenewViewPageModule;
 }());
 
-//# sourceMappingURL=backlog-detail.module.js.map
+//# sourceMappingURL=contract-renew-view.module.js.map
 
 /***/ }),
 
-/***/ 770:
+/***/ 772:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -64,51 +60,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import {Observable} from "rxjs";
-
-var BacklogService = (function () {
-    function BacklogService(httpService) {
+// import { UserInfo } from "../../model/UserInfo";
+var ContractService = (function () {
+    function ContractService(httpService) {
         this.httpService = httpService;
-        this.Status = {
-            notdone: 0,
-            done: 1 // 已办理
-        };
     }
-    BacklogService.prototype.getNotDoneList = function (param) {
-        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
-    };
-    BacklogService.prototype.getDoneList = function (param) {
-        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
-    };
-    BacklogService.prototype.getDone = function (param) {
-        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
-    };
-    BacklogService.prototype.getNotDone = function (param) {
-        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
-    };
-    BacklogService.prototype.TodoApprove = function (param) {
-        return this.httpService.postFormData('/ashx/TodoApprove.ashx', param).map(function (res) { return res.json(); });
-    };
-    BacklogService = __decorate([
+    ContractService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], BacklogService);
-    return BacklogService;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_HttpService__["a" /* HttpService */]])
+    ], ContractService);
+    return ContractService;
 }());
 
-//# sourceMappingURL=backlogService.js.map
+//# sourceMappingURL=contract-service.js.map
 
 /***/ }),
 
-/***/ 778:
+/***/ 807:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogDetail; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractRenewViewPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(770);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contract_service__ = __webpack_require__(772);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -122,64 +98,103 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the BacklogDetail page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-var BacklogDetail = (function () {
-    function BacklogDetail(navCtrl, navParams, backlogService, nativeService) {
+var ContractRenewViewPage = (function () {
+    function ContractRenewViewPage(navCtrl, navParams, popoverCtrl, FormBuilder, contractService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.backlogService = backlogService;
-        this.nativeService = nativeService;
-        this.item = [];
-        this.isComplete = false;
-        console.log(this.navParams.get("id"));
-        this.initializeItems();
+        this.popoverCtrl = popoverCtrl;
+        this.FormBuilder = FormBuilder;
+        this.contractService = contractService;
+        this.Id = '';
+        this.readOnly = false;
+        this.hideOne = false;
+        this.hideTwo = true;
+        this.hideThree = true;
+        this.hideFour = true;
+        this.Uid = '';
+        this.DeptId = '';
+        this.ContactId = '';
+        this.ContactContent = '';
+        this.readOnly = this.navParams.get("readOnly") ? true : false;
+        this.Id = this.navParams.get("Id") || '';
+        this.baseForm = this.FormBuilder.group({
+            "ContractNumber": ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            "ContractName": ['', []],
+            "LastValidDate": [],
+            "LastExpirationDate": [],
+            "SigningDate": ['', []],
+            "StaffNumber": ['', []],
+            "Name": ['', []],
+            "Sex": ['', []],
+            "IDC": ['', []],
+            "Dept": ['', []],
+            "Duty": ['', []],
+            "RenewDate": ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            "RenewType": ['', []],
+            "RenewValidDate": ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            "RenewExpirationDate": ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+        });
     }
-    BacklogDetail.prototype.initializeItems = function () {
+    ContractRenewViewPage.prototype.ionViewDidLoad = function () {
+    };
+    ContractRenewViewPage.prototype.shrink = function (parma) {
+        if (parma === 'one')
+            this.hideOne = !this.hideOne;
+        if (parma === 'two')
+            this.hideTwo = !this.hideTwo;
+        if (parma === 'three')
+            this.hideThree = !this.hideThree;
+        if (parma === 'four')
+            this.hideFour = !this.hideFour;
+    };
+    ContractRenewViewPage.prototype.submit = function (value) {
+        value.Uid = this.Uid;
+        value.DeptId = this.DeptId;
+        value.ContactId = this.ContactId;
+        console.log(value);
+    };
+    ContractRenewViewPage.prototype.chooseContract = function (myEvent) {
         var _this = this;
-        var data = {
-            "Id": this.navParams.get("id"),
-            "Uid": this.backlogService.httpService.globalData.Uid
-        };
-        this.backlogService.getDone(data).subscribe(function (resJson) {
-            if (resJson.Result) {
-                _this.item = resJson.Data;
-            }
-            else {
-                _this.nativeService.showToast(resJson.Data);
-                _this.navCtrl.pop();
+        var popover = this.popoverCtrl.create("ContractChoosePage", { 'ContactId': this.ContactId }, { cssClass: 'popoverW88' });
+        popover.present({
+            ev: myEvent
+        });
+        popover.onDidDismiss(function (data) {
+            if (!!data) {
+                console.log(data);
+                _this.Uid = data.StaffId;
+                _this.DeptId = data.DeptId;
+                _this.ContactId = data.ContactId;
+                _this.baseForm.patchValue({
+                    "ContractNumber": data.ContractNumber,
+                    "ContractName": data.ContractName,
+                    "LastValidDate": data.LastValidDate,
+                    "LastExpirationDate": data.LastExpirationDate,
+                    "SigningDate": data.SigningDate,
+                    "StaffNumber": data.StaffNumber,
+                    "Name": data.Name,
+                    "Sex": data.Sex,
+                    "IDC": data.IDC,
+                    "Dept": data.Dept,
+                    "Duty": data.Duty,
+                });
             }
         });
     };
-    BacklogDetail.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad BacklogDetail');
-    };
-    BacklogDetail.prototype.approved = function () {
-        console.log("审批通过");
-    };
-    BacklogDetail.prototype.overrule = function () {
-        console.log("审批驳回");
-    };
-    BacklogDetail.prototype.cancel = function () {
-        this.navCtrl.pop();
-    };
-    BacklogDetail = __decorate([
+    ContractRenewViewPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-backlog-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog-detail\backlog-detail.html"*/`<!--\n  Generated template for the BacklogDetail page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>事项详情</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-card>\n        <ion-card-header>\n            33ee\n        </ion-card-header>\n        <ion-card-content>\n            <ion-list>\n                <ion-item>\n                    <ion-label>当前步骤：</ion-label>\n                    <ion-input type="text" placeholder="当前步骤1"></ion-input>\n                </ion-item>\n\n                <ion-item *ngIf="isComplete">\n                    <ion-label>审批模式：</ion-label>\n                    <ion-input type="text" placeholder="无"></ion-input>\n                </ion-item>\n\n                <div *ngIf="!isComplete">\n                    <ion-item>\n                        <ion-label>&emsp;流水号：<em>&emsp;1&nbsp;—</em></ion-label>\n\n                        <ion-input type="text" placeholder="请输入流水号"></ion-input>\n                    </ion-item>\n\n                    <ion-item>\n                        <ion-label>审批状态：</ion-label>\n                        <ion-input type="text" placeholder="无"></ion-input>\n                    </ion-item>\n                </div>\n\n\n                <div id="strhtm" style="min-height: 100px;overflow-x:auto;"></div>\n\n            </ion-list>\n            <ion-row>\n                <ion-col col-auto style="padding-left:12px;padding-top:5px;text-align:right;">\n                    &nbsp;相关附件：\n                </ion-col>\n                <ion-col col-lg-8 col-xl-6 style="position: relative;padding-left: 40px;background-color: #d7eaf9;">\n                    <ion-icon name="md-image" color="energized" style="position:absolute;left:.4rem;display:inline-block;font-size:3.6rem;"></ion-icon>\n                    <div>\n                        <span>text.png</span>\n                        <span ng-click="" style="position:absolute;right:10px;font-size:1.2rem">下载</span>\n                        <p style="font-size:1.2rem;">2.5M</p>\n                    </div>\n                </ion-col>\n            </ion-row>\n\n            <ion-list *ngIf="!isComplete">\n                <ion-item>\n                    <ion-label>审批记录：</ion-label>\n                    <ion-textarea type="text" placeholder="无"></ion-textarea>\n                </ion-item>\n                <ion-item>\n                    <ion-textarea placeholder="请输入本次审批意见" rows="2"></ion-textarea>\n                </ion-item>\n            </ion-list>\n\n\n        </ion-card-content>\n        <ion-row text-center>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-checkmark"></ion-icon>\n                    <div>审批通过</div>\n                </button>\n            </ion-col>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-close"></ion-icon>\n                    <div>审批驳回</div>\n                </button>\n            </ion-col>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-return-left"></ion-icon>\n                    <div>返回</div>\n                </button>\n            </ion-col>\n        </ion-row>\n    </ion-card>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog-detail\backlog-detail.html"*/,
+            selector: 'page-contract-renew-view',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-renew\contract-renew-view\contract-renew-view.html"*/`<ion-header>\n\n  <ion-navbar>\n    <ion-title>合同续签详情</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content style="background: #f4f4f4;">\n\n    <form [formGroup]="baseForm" (ngSubmit)="submit(baseForm.value)"  [ngClass]="{\'form-readonly\': readOnly}">\n        <ion-list  [ngClass]="{\'collapsed\': hideOne, \'expanded\': !hideOne}">\n            <ion-list-header (click)="shrink(\'one\')">合同信息<ion-icon  float-right name="arrow-forward"></ion-icon></ion-list-header>\n            <div>\n              <ion-item  #popoverContent  (click)="chooseContract($event)">\n                  <ion-label>合同编号</ion-label>\n                  <ion-note item-end>{{baseForm.value.ContractNumber || \'点击选择合同\'}}</ion-note>\n                  <!-- <ion-input text-right formControlName="ContractCode" placeholder="请输入合同编号"></ion-input> -->\n              </ion-item>\n              <div *ngIf="ContactId != \'\'">\n                <ion-item>\n                    <ion-label>合同名称</ion-label>\n                    <ion-input text-right formControlName="ContractName" placeholder="未填写"></ion-input>\n                </ion-item>\n\n                <ion-item>\n                    <ion-label>上次生效时间</ion-label>\n                    <ion-datetime formControlName="LastValidDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label>上次到期时间</ion-label>\n                    <ion-datetime formControlName="LastExpirationDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label>签约时间</ion-label>\n                    <ion-datetime formControlName="SigningDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n              </div>\n            </div>\n        </ion-list>\n\n        <ion-list *ngIf="ContactId != \'\'"   [ngClass]="{\'collapsed\': hideTwo, \'expanded\': !hideTwo}">\n            <ion-list-header (click)="shrink(\'two\')">员工信息<ion-icon float-right name="arrow-forward"></ion-icon></ion-list-header>\n            <div>\n                <ion-item>\n                    <ion-label>工号</ion-label>\n                    <ion-input  text-right readonly=\'true\' formControlName="StaffNumber" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>姓名</ion-label>\n                    <ion-input text-right formControlName="Name" readonly="true"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>性别</ion-label>\n                    <ion-input text-right formControlName="Sex" readonly="true"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>身份证号</ion-label>\n                    <ion-input text-right formControlName="IDC" readonly="true"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>所在部门</ion-label>\n                    <ion-input text-right formControlName="Dept" readonly="true"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>职务</ion-label>\n                    <ion-input text-right formControlName="Duty" readonly="true"></ion-input>\n                </ion-item>\n            </div>\n        </ion-list>\n\n        <ion-list [ngClass]="{\'collapsed\': hideThree, \'expanded\': !hideThree}">\n            <ion-list-header (click)="shrink(\'three\')">合同续签信息<ion-icon float-right name="arrow-forward"></ion-icon></ion-list-header>\n            <div >\n                <ion-item>\n                    <ion-label>续签时间</ion-label>\n                    <ion-datetime formControlName="RenewDate" placeholder="点击添加" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                  <ion-label>续签类别<span class="optional">（选填）</span></ion-label>\n                  <ion-input text-right formControlName="RenewType" placeholder="请输入试用期限"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label>续签生效日期</ion-label>\n                    <ion-datetime formControlName="RenewValidDate" placeholder="点击添加" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label>续签到期日期</ion-label>\n                    <ion-datetime formControlName="RenewExpirationDate" placeholder="点击添加" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n            </div>\n        </ion-list>\n\n        <ion-list  *ngIf="Id != \'\'"  [ngClass]="{\'collapsed\': hideFour, \'expanded\': !hideFour}">\n          <ion-list-header (click)="shrink(\'four\')">续约内容{{ContactContent == \'\' ? \'(未添加)\' : \'\'}}<ion-icon float-right name="arrow-forward"></ion-icon></ion-list-header>\n          <div *ngIf="ContactContent != \'\'">\n            <iframe [srcdoc]=\'ContactContent\' id="iframe" class="iframe" onload="this.height=\'100%\'" style="width:100%;overflow-x:auto" sandbox="allow-scripts allow-top-navigation allow-pointer-lock allow-same-origin allow-popups allow-forms">\n            </iframe>\n          </div>\n        </ion-list>\n        <div class=\'text-ios-danger\'>&emsp;注：续签内容请到PC端添加或修改</div>\n\n    </form>\n\n</ion-content>\n<ion-footer>\n    <button ion-button full color="danger" [disabled]="!baseForm.valid" (click)=submit(baseForm.value)>保存</button>\n</ion-footer>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-renew\contract-renew-view\contract-renew-view.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__backlogService__["a" /* BacklogService */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */]])
-    ], BacklogDetail);
-    return BacklogDetail;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_3__contract_service__["a" /* ContractService */]])
+    ], ContractRenewViewPage);
+    return ContractRenewViewPage;
 }());
 
-//# sourceMappingURL=backlog-detail.js.map
+//# sourceMappingURL=contract-renew-view.js.map
 
 /***/ })
 

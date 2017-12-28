@@ -1,16 +1,15 @@
 webpackJsonp([27],{
 
-/***/ 741:
+/***/ 731:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContractListPageModule", function() { return ContractListPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContractSearchPageModule", function() { return ContractSearchPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_list__ = __webpack_require__(815);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contract_service__ = __webpack_require__(768);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_components_module__ = __webpack_require__(365);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_search__ = __webpack_require__(810);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contract_service__ = __webpack_require__(772);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -21,31 +20,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-
-var ContractListPageModule = (function () {
-    function ContractListPageModule() {
+var ContractSearchPageModule = (function () {
+    function ContractSearchPageModule() {
     }
-    ContractListPageModule = __decorate([
+    ContractSearchPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__contract_list__["a" /* ContractListPage */],
+                __WEBPACK_IMPORTED_MODULE_2__contract_search__["a" /* ContractSearchPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contract_list__["a" /* ContractListPage */]),
-                __WEBPACK_IMPORTED_MODULE_4__components_components_module__["a" /* ComponentsModule */]
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contract_search__["a" /* ContractSearchPage */]),
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__contract_service__["a" /* ContractService */]],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__contract_list__["a" /* ContractListPage */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_3__contract_service__["a" /* ContractService */]]
         })
-    ], ContractListPageModule);
-    return ContractListPageModule;
+    ], ContractSearchPageModule);
+    return ContractSearchPageModule;
 }());
 
-//# sourceMappingURL=contract-list.module.js.map
+//# sourceMappingURL=contract-search.module.js.map
 
 /***/ }),
 
-/***/ 768:
+/***/ 772:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79,14 +75,15 @@ var ContractService = (function () {
 
 /***/ }),
 
-/***/ 815:
+/***/ 810:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractListPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractSearchPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_service__ = __webpack_require__(768);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_PublicService__ = __webpack_require__(366);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -99,108 +96,66 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ContractListPage = (function () {
-    function ContractListPage(navCtrl, navParams, popoverCtrl, contractService) {
+
+/**
+ * Generated class for the ContractSearchPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var ContractSearchPage = (function () {
+    function ContractSearchPage(navCtrl, navParams, viewCtrl, publicService, formBuilder) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.popoverCtrl = popoverCtrl;
-        this.contractService = contractService;
-        this.list = [];
-        this.moredata = true;
-        this.isEmpty = false;
-        this.data = {
-            "uid": this.contractService.httpService.globalData.Uid,
-            "PageIndex": 0,
-            "PageSize": 8
-        };
-        this.getList(this.data);
-    }
-    ContractListPage.prototype.ionViewDidLoad = function () {
-    };
-    ContractListPage.prototype.presentPopover = function (myEvent) {
-        var _this = this;
-        var popover = this.popoverCtrl.create("ContractSearchPage", { "search": this.search });
-        popover.present({
-            ev: myEvent
+        this.viewCtrl = viewCtrl;
+        this.publicService = publicService;
+        this.formBuilder = formBuilder;
+        this.DeptLs = [];
+        this.search = this.navParams.get("search");
+        this.searchForm = this.formBuilder.group({
+            "DeptId": ["", []],
+            "StartDate": ["", []],
+            "EndDate": ["", []],
+            "ContractYear": ["", []],
+            "ContractType": ["", []],
         });
-        popover.onDidDismiss(function (search) {
-            console.log(search);
-            if (search) {
-                _this.search = search.search;
-                var data = search.search;
-                data.uid = _this.contractService.httpService.globalData.Uid;
-                data.PageIndex = 0;
-                data.PageSize = 8;
-                _this.getList(data);
-            }
+        this.publicService.GetDeptLs().subscribe(function (resJson) {
+            if (resJson.Result)
+                _this.DeptLs = resJson.Data;
         });
-    };
-    ContractListPage.prototype.doRead = function (id) {
-        this.navCtrl.push("ContractSettingPage", { "Id": id, 'readOnly': true });
-    };
-    ContractListPage.prototype.doRefresh = function (refresher) {
-        this.list = [];
-        this.data.PageIndex = 1;
-        this.getList(this.data);
-        setTimeout(function () {
-            refresher.complete();
-        }, 1000);
-    };
-    ContractListPage.prototype.doInfinite = function () {
-        if (this.moredata) {
-            this.data.PageIndex++;
-            this.getList(this.data);
+        if (this.search) {
+            this.searchForm.setValue({
+                "DeptId": this.search.DeptId,
+                "StartDate": this.search.StartDate,
+                "EndDate": this.search.EndDate,
+                "ContractYear": this.search.ContractYear,
+                "ContractType": this.search.ContractType
+            });
         }
-        return new Promise(function (resolve) {
-            setTimeout(function () {
-                resolve();
-            }, 500);
-        });
+    }
+    ContractSearchPage.prototype.sent = function (value) {
+        this.viewCtrl.dismiss({ "search": value });
     };
-    ContractListPage.prototype.getList = function (data) {
-        this.list = [
-            {
-                "Id": "1",
-                "Name": '张三',
-                "Dept": '检验科',
-                "Type": '劳动合同',
-                "ContractNumber": "A012345677",
-                "TurnPositive": '已转正',
-                "Status": '生效中' // 合同状态
-            },
-            {
-                "Id": "2",
-                "Name": '李四',
-                "Dept": '其他',
-                "Type": '劳动合同',
-                "ContractNumber": "A012345688",
-                "TurnPositive": '未转正',
-                "Status": '试用中' // 合同状态
-            },
-        ];
-        // this.contractService.getList(data).subscribe((resJson) => {
-        //   if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
-        //     this.moredata = true;
-        //     this.isEmpty = false;
-        //     let list = resJson.Data;
-        //     this.list = [...this.list, ...list];
-        //   }else{
-        //     this.moredata = false;
-        //     this.isEmpty = (this.data.PageIndex == 1) ? true : false;
-        //   }
-        // });
+    ContractSearchPage.prototype.reset = function () {
+        this.searchForm.reset();
+        this.searchForm.setValidators(null);
+        this.searchForm.updateValueAndValidity();
     };
-    ContractListPage = __decorate([
+    ContractSearchPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contract-list',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-list\contract-list.html"*/`<ion-header>\n\n  <ion-navbar>\n    <ion-title>合同查询</ion-title>\n    <ion-buttons end  (click)="presentPopover($event)">\n        <button ion-button icon-only>\n          <ion-icon name="search"></ion-icon>\n        </button>\n      </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let item of list"  (click)="doRead(item.Id)">\n          <ion-item>\n              <h2>{{item.Name}}[{{item.ContractNumber}}]</h2>\n              <div class="small">类型：{{item.Type}}&emsp;{{item.Status}}\n                <span float-right [ngClass]="{\'text-ios-secondary\':(item.TurnPositive == \'已转正\'),\'text-ios-energized\':(item.TurnPositive != \'已转正\')}">{{item.TurnPositive}}</span>\n              </div>\n              <p class="small">部门：{{item.Dept}}&emsp;</p>\n          </ion-item>\n      </ion-item-sliding>\n    </ion-list>\n    <empty *ngIf="isEmpty"></empty>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-list\contract-list.html"*/,
+            selector: 'page-contract-search',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-search\contract-search.html"*/`<ion-header>\n    <ion-navbar>\n        <ion-title>筛选</ion-title>\n    </ion-navbar>\n</ion-header>\n<ion-content>\n    <form [formGroup]="searchForm" (ngSubmit)="sent(searchForm.value)">\n        <ion-list>\n            <ion-item>\n                <ion-label>员工部门</ion-label>\n                <ion-select text-right formControlName="DeptId" cancelText="取消" okText="确定" placeholder="请选择">\n                    <ion-option *ngFor="let Dept of DeptLs;let i = index" [value]="Dept.Id">{{Dept.BmName}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>合同年份</ion-label>\n                <ion-select text-right formControlName="ContractYear" cancelText="取消" okText="确定" placeholder="请选择">\n                  <ion-option value="2014">2014</ion-option>\n                  <ion-option value="2015">2015</ion-option>\n                  <ion-option value="2016">2016</ion-option>\n                  <ion-option value="2017">2017</ion-option>\n                </ion-select>\n              </ion-item>\n            <ion-item>\n                <ion-label>合同类型</ion-label>\n                <ion-select formControlName="ContractType" cancelText="取消" okText="确定" placeholder="请选择">\n                    <ion-option value="701">保密协议</ion-option>\n                    <ion-option value="700">劳动合同</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item class="search-dattime">\n                <ion-label>签约时间</ion-label>\n                <ion-datetime formControlName="StartDate" cancelText="取消" [max]="searchForm.value.EndDate==\'\'?null:searchForm.value.EndDate"  placeholder="开始时间" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                <ion-datetime formControlName="EndDate" cancelText="取消" [min]="searchForm.value.StartDate==\'\'?null:searchForm.value.StartDate"  placeholder="结束时间" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n            <!-- <ion-item>\n                <ion-label>签约结束时间</ion-label>\n                <ion-datetime formControlName="EndDate" cancelText="取消"  placeholder="请选择" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item> -->\n\n        </ion-list>\n        <div text-center>\n            <button ion-button color="energized" (click)="reset()" small outline>重置</button>\n            <button ion-button color="assertive" type="submit" small>搜索</button>\n        </div>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-search\contract-search.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__contract_service__["a" /* ContractService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__contract_service__["a" /* ContractService */]) === "function" && _d || Object])
-    ], ContractListPage);
-    return ContractListPage;
-    var _a, _b, _c, _d;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_PublicService__["a" /* PublicService */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
+    ], ContractSearchPage);
+    return ContractSearchPage;
 }());
 
-//# sourceMappingURL=contract-list.js.map
+//# sourceMappingURL=contract-search.js.map
 
 /***/ })
 

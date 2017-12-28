@@ -51637,6 +51637,29 @@ ion-navbar.toolbar {
   border-left: 1px solid #efefef;
 }
 
+tab-slide .slide-title {
+  width: 100%;
+  height: 40px;
+  color: #666666;
+  padding: 0;
+}
+
+tab-slide .slide-title-unit {
+  padding-bottom: 8px;
+  font-size: 14px;
+}
+
+tab-slide .itab-item {
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid #ddd;
+}
+
+tab-slide .itab-item.slide-title-active {
+  color: #488aff;
+  border-bottom: 1px solid #488aff;
+}
+
 page-account .top {
   position: relative;
   padding: 20px 0 10px;
@@ -51991,6 +52014,62 @@ page-contract-setting .expanded > div {
   transition: visibility .5s,opacity .5s,max-height .5s;
   -webkit-transition-timing-function: ease-in-out;
   transition-timing-function: ease-in-out;
+}
+
+page-file-application-list .item-ios ion-avatar,
+page-file-application-review .item-ios ion-avatar {
+  min-width: 4em;
+  min-height: 4em;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 50%;
+  color: #ffc900;
+  border: 2px solid #ffc900;
+}
+
+page-file-application-list .item-ios ion-avatar.danger,
+page-file-application-review .item-ios ion-avatar.danger {
+  color: #f53d3d;
+  border: 2px solid #f53d3d;
+}
+
+page-file-application-list .item-ios ion-avatar.success,
+page-file-application-review .item-ios ion-avatar.success {
+  color: #32db64;
+  border: 2px solid #32db64;
+}
+
+page-file-application-list .item-ios ion-avatar span,
+page-file-application-review .item-ios ion-avatar span {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  text-align: center;
+}
+
+page-file-application-list em,
+page-file-application-review em {
+  font-family: fantasy, -apple-system, "Helvetica Neue";
+}
+
+page-file-application-review-view .text-input-ios {
+  margin: 0;
+  padding: 5px;
+  border: 1px solid #ddd;
+}
+
+page-file-application-review-view .right-info {
+  color: #4f6475;
+}
+
+page-file-application-review-view .idivider {
+  border-top: 2px solid #ddd;
 }
 
 page-staff-file-maintenance ion-avatar {

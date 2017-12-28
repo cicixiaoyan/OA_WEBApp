@@ -33,8 +33,7 @@ import { Utils } from "../providers/Utils";
 import { Http, HttpModule } from "@angular/http";
 import { HttpInterceptHandle } from "../providers/HttpInterceptHandle";
 import { GlobalData } from "../providers/GlobalData";
-import { PublicService } from '../providers/PublicService'
-
+import { PublicService } from '../providers/PublicService';
 import { BackButtonService } from '../services/backButtonService';
 
 import { ComponentsModule } from '../components/components.module';

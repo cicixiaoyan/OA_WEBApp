@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>个人档案申请</ion-title>
+        <ion-buttons end>
+            <button ion-button [disabled]="!baseForm.valid" (click)="submit(baseForm.value)">提交</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <form [formGroup]="baseForm" (ngSubmit)="submit(baseForm.value)">
+        <ion-list>
+            <ion-item>
+                <ion-label>申请日期</ion-label>
+                <ion-datetime formControlName="ApplicationDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label>申请理由</ion-label>
+                <ion-textarea text-right rows='3' formControlName="Remarks" placeholder="请输入申请理由"></ion-textarea>
+            </ion-item>
+            <ion-item>
+                <ion-label>审批人员选择</ion-label>
+                <ion-select formControlName="Approver" cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-option value="008">温春梅</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>通知审批人员方式</ion-label>
+                <ion-select formControlName="InforMemethod" cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-option value="1">站内消息通知</ion-option>
+                    <ion-option value="2">手机短信通知</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>

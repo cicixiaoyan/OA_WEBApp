@@ -1,0 +1,40 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>档案申请查看</ion-title>
+    </ion-navbar>
+    <div class="subbox">
+        <div>
+            <button ion-button small (click)="checkRead('审批中')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn['审批中']}">审批中</button>
+            <button ion-button small (click)="checkRead('已同意')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn['已同意']}">已同意</button>
+            <button ion-button small (click)="checkRead('已拒绝')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn['已拒绝']}">已拒绝</button>
+        </div>
+    </div>
+</ion-header>
+
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-list>
+        <ion-item-sliding *ngFor="let item of list">
+            <ion-item>
+                <ion-avatar item-start [ngClass]="{'success': (item.ApplicationStatus == '已同意'), 'danger': (item.ApplicationStatus == '已拒绝')}"><span>{{item.ApplicationStatus}}</span></ion-avatar>
+                <h2>{{item.Name}}
+                  <small float-end	 class="text-ios-primary" *ngIf="item.ApplicationStatus != '审批中'"><em>{{item.AuditDate}}审</em></small>
+                </h2>
+                <h3 class="small">申请日期：{{item.ApplicationDate}}</h3>
+                <p class='small'>理由：{{item.ApplicationReason}}</p>
+            </ion-item>
+        </ion-item-sliding>
+    </ion-list>
+    <empty *ngIf="isEmpty"></empty>
+    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <ion-fab bottom right>
+        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+</ion-content>

@@ -1,15 +1,16 @@
 webpackJsonp([21],{
 
-/***/ 742:
+/***/ 749:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrainingMaintenanceSetPageModule", function() { return TrainingMaintenanceSetPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrainingMaintenancePageModule", function() { return TrainingMaintenancePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__training_maintenance_set__ = __webpack_require__(816);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__training_maintenance_service__ = __webpack_require__(775);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__training_maintenance__ = __webpack_require__(830);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__training_maintenance_service__ = __webpack_require__(780);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_components_module__ = __webpack_require__(365);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,29 +21,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var TrainingMaintenanceSetPageModule = (function () {
-    function TrainingMaintenanceSetPageModule() {
+
+var TrainingMaintenancePageModule = (function () {
+    function TrainingMaintenancePageModule() {
     }
-    TrainingMaintenanceSetPageModule = __decorate([
+    TrainingMaintenancePageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__training_maintenance_set__["a" /* TrainingMaintenanceSetPage */],
+                __WEBPACK_IMPORTED_MODULE_2__training_maintenance__["a" /* TrainingMaintenancePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__training_maintenance_set__["a" /* TrainingMaintenanceSetPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__training_maintenance__["a" /* TrainingMaintenancePage */]),
+                __WEBPACK_IMPORTED_MODULE_4__components_components_module__["a" /* ComponentsModule */]
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__training_maintenance_set__["a" /* TrainingMaintenanceSetPage */]],
+            exports: [__WEBPACK_IMPORTED_MODULE_2__training_maintenance__["a" /* TrainingMaintenancePage */]],
             providers: [__WEBPACK_IMPORTED_MODULE_3__training_maintenance_service__["a" /* TrainingMaintenanceService */]]
         })
-    ], TrainingMaintenanceSetPageModule);
-    return TrainingMaintenanceSetPageModule;
+    ], TrainingMaintenancePageModule);
+    return TrainingMaintenancePageModule;
 }());
 
-//# sourceMappingURL=training-maintenance-set.module.js.map
+//# sourceMappingURL=training-maintenance.module.js.map
 
 /***/ }),
 
-/***/ 775:
+/***/ 780:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -87,17 +90,14 @@ var TrainingMaintenanceService = (function () {
 
 /***/ }),
 
-/***/ 816:
+/***/ 830:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrainingMaintenanceSetPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrainingMaintenancePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__training_maintenance_service__ = __webpack_require__(775);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__training_maintenance_service__ = __webpack_require__(780);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -110,70 +110,124 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-
-
 /**
- * Generated class for the TrainingMaintenanceSetPage page.
+ * Generated class for the TrainingMaintenancePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var TrainingMaintenanceSetPage = (function () {
-    function TrainingMaintenanceSetPage(navCtrl, navParams, formBuilder, globalData, nativeService, trainingMaintenanceService) {
+var TrainingMaintenancePage = (function () {
+    function TrainingMaintenancePage(navCtrl, navParams, popoverCtrl, trainingMaintenanceService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.formBuilder = formBuilder;
-        this.globalData = globalData;
-        this.nativeService = nativeService;
+        this.popoverCtrl = popoverCtrl;
         this.trainingMaintenanceService = trainingMaintenanceService;
-        this.isWrite = false;
-        this.FileNewName = ""; // 附件名称
-        this.MeetPlaceLs = [];
-        this.MeetTypeLs = [];
-        this.DeptLs = [];
-        this.writeForm = this.formBuilder.group({
-            Title: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(30)]],
-            StartDate: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
-            EndDate: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
-            Object: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(180), __WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
-            Unit: ["", []],
-            Instructor: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(8)]],
-            Place: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(100)]],
-            Content: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(180)]],
-        });
+        this.list = [];
+        this.moredata = true;
+        this.isEmpty = false;
+        this.data = {
+            "uid": this.trainingMaintenanceService.httpService.globalData.Uid,
+            "PageIndex": 0,
+            "PageSize": 8
+        };
+        this.getList(this.data);
     }
-    TrainingMaintenanceSetPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad MeetingWritePage');
+    TrainingMaintenancePage.prototype.ionViewDidLoad = function () {
     };
-    TrainingMaintenanceSetPage.prototype.sent = function (data) {
+    TrainingMaintenancePage.prototype.presentPopover = function (myEvent) {
         var _this = this;
-        data.Uid = this.globalData.Uid;
-        data.FileNewName = this.FileNewName;
-        this.trainingMaintenanceService.write(data).subscribe(function (resJson) {
-            if (resJson.Result) {
-                _this.nativeService.showToast("添加成功", 888);
-            }
-            else {
-                _this.nativeService.showToast(resJson.Data, 888);
+        var popover = this.popoverCtrl.create("TrainingMaintenanceSearch", { "search": this.search });
+        popover.present({
+            ev: myEvent
+        });
+        popover.onDidDismiss(function (search) {
+            console.log(search);
+            if (search) {
+                _this.search = search.search;
+                var data = search.search;
+                data.uid = _this.trainingMaintenanceService.httpService.globalData.Uid;
+                data.PageIndex = 0;
+                data.PageSize = 8;
+                _this.getList(data);
             }
         });
     };
-    TrainingMaintenanceSetPage = __decorate([
+    TrainingMaintenancePage.prototype.doRead = function (Params) {
+        this.navCtrl.push("TrainingMaintenanceSetPage", { "Id": Params });
+    };
+    TrainingMaintenancePage.prototype.doWrite = function () {
+        this.navCtrl.push("TrainingMaintenanceSetPage");
+        // let modal = this.modalCtrl.create("TrainingMaintenanceSetPage");
+        // modal.present();
+        // modal.onDidDismiss(data => {
+        //     data && console.log(data);
+        // });
+    };
+    TrainingMaintenancePage.prototype.doRefresh = function (refresher) {
+        this.list = [];
+        this.data.PageIndex = 1;
+        this.getList(this.data);
+        setTimeout(function () {
+            refresher.complete();
+        }, 1000);
+    };
+    TrainingMaintenancePage.prototype.doInfinite = function () {
+        if (this.moredata) {
+            this.data.PageIndex++;
+            this.getList(this.data);
+        }
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve();
+            }, 500);
+        });
+    };
+    TrainingMaintenancePage.prototype.getList = function (data) {
+        this.list = [
+            {
+                Id: "1",
+                Title: "dfwsef",
+                StartDate: '2017-12-05',
+                EndDate: '2017-12-05',
+                Object: '',
+                Instructor: '李老师',
+                Place: '222'
+            },
+            {
+                Id: "2",
+                Title: "dfwsef",
+                StartDate: '2017-12-05',
+                EndDate: '2017-12-05',
+                Object: '',
+                Instructor: '李老师',
+                Place: ''
+            },
+        ];
+        // this.trainingMaintenanceService.getList(data).subscribe((resJson) => {
+        //   if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
+        //     this.moredata = true;
+        //     this.isEmpty = false;
+        //     let list = resJson.Data;
+        //     this.list = [...this.list, ...list];
+        //   }else{
+        //     this.moredata = false;
+        //     this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+        //   }
+        // });
+    };
+    TrainingMaintenancePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-training-maintenance-set',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\training-maintenance\training-maintenance-set\training-maintenance-set.html"*/`<!--\n  Generated template for the TrainingMaintenanceSetPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>{{isWrite ? "添加培训维护" : "培训维护详情"}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">\n        <div>\n            <ion-list>\n                <ion-item>\n                    <ion-label stacked>课程主题</ion-label>\n                    <ion-input min-rows="1" formControlName="Title" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>开始时间</ion-label>\n                    <ion-datetime placeholder="点击设置" formControlName="StartDate"  cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>结束时间</ion-label>\n                    <ion-datetime placeholder="点击设置" formControlName="EndDate" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>培训对象</ion-label>\n                    <ion-input type="text" formControlName="Object" placeholder="培训对象"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>培训单位</ion-label>\n                    <ion-input type="text" formControlName="Unit" placeholder="培训单位"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>培训讲师</ion-label>\n                    <ion-input type="text" formControlName="Instructor" placeholder="培训讲师"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>培训地点</ion-label>\n                    <ion-input type="text" formControlName="Place" placeholder="培训地点"></ion-input>\n                </ion-item>\n\n                <ion-item>\n                    <ion-label stacked>课程内容</ion-label>\n                    <ion-input type="text" formControlName="Content" placeholder="请输入"></ion-input>\n                </ion-item>\n            </ion-list>\n            <div padding text-center>\n                <button ion-button type="submit" color="danger" [disabled]="!writeForm.valid">保存</button>\n                <button ion-button clear small navPop>返回</button>\n            </div>\n        </div>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\training-maintenance\training-maintenance-set\training-maintenance-set.html"*/,
+            selector: 'page-training-maintenance',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\training-maintenance\training-maintenance.html"*/`<!--\n  Generated template for the TrainingMaintenancePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>培训维护</ion-title>\n    <ion-buttons end  (click)="presentPopover($event)">\n        <button ion-button icon-only>\n          <ion-icon name="search"></ion-icon>\n        </button>\n      </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let train of list"  (click)="doRead(train.Id)">\n          <ion-item>\n              <span>{{train.Title}}</span>\n              <div class="small">讲师：{{train.Instructor}}</div>\n              <p class="small" *ngIf="train.Place !== \'\'">地点：{{train.Place}}</p>\n              <p class="small">时间：{{train.StartDate}}&nbsp;~&nbsp;{{train.EndDate}}</p>\n          </ion-item>\n      </ion-item-sliding>\n    </ion-list>\n    <empty *ngIf="isEmpty"></empty>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\training-maintenance\training-maintenance.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */],
-            __WEBPACK_IMPORTED_MODULE_5__training_maintenance_service__["a" /* TrainingMaintenanceService */]])
-    ], TrainingMaintenanceSetPage);
-    return TrainingMaintenanceSetPage;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */],
+            __WEBPACK_IMPORTED_MODULE_2__training_maintenance_service__["a" /* TrainingMaintenanceService */]])
+    ], TrainingMaintenancePage);
+    return TrainingMaintenancePage;
 }());
 
-//# sourceMappingURL=training-maintenance-set.js.map
+//# sourceMappingURL=training-maintenance.js.map
 
 /***/ })
 

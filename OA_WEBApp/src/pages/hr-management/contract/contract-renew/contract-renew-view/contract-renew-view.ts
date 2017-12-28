@@ -64,7 +64,7 @@ export class ContractRenewViewPage {
   }
 
   submit(value){
-    value.Uid = this.StaffId;
+    value.Uid = this.Uid;
     value.DeptId = this.DeptId;
     value.ContactId = this.ContactId;
     console.log(value);

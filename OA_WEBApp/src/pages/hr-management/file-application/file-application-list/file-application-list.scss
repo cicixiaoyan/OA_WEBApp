@@ -1,0 +1,28 @@
+page-file-application-list,
+page-file-application-review {
+
+  .item-ios ion-avatar{
+    min-width: 4em;
+    min-height: 4em;
+    display: flex;
+    border-radius: 50%;
+    color: color($colors, energized);
+    border: 2px solid color($colors, energized);
+    &.danger{
+      color:  color($colors, danger);
+      border: 2px solid color($colors, danger);
+    }
+    &.success{
+      color: color($colors, secondary);
+      border: 2px solid color($colors, secondary);
+    }
+    span{
+        flex: 1;
+        align-self: center;
+        text-align: center;
+    }
+  }
+  em{
+    font-family: fantasy, -apple-system, "Helvetica Neue";
+  }
+}

@@ -1,15 +1,15 @@
 webpackJsonp([14],{
 
-/***/ 752:
+/***/ 757:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MeetingRoomSetPageModule", function() { return MeetingRoomSetPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MeetingRoomPageModule", function() { return MeetingRoomPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_room_set__ = __webpack_require__(826);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__meeting_service__ = __webpack_require__(767);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_room__ = __webpack_require__(838);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__meeting_service__ = __webpack_require__(771);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,29 +20,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MeetingRoomSetPageModule = (function () {
-    function MeetingRoomSetPageModule() {
+var MeetingRoomPageModule = (function () {
+    function MeetingRoomPageModule() {
     }
-    MeetingRoomSetPageModule = __decorate([
+    MeetingRoomPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__meeting_room_set__["a" /* MeetingRoomSetPage */],
+                __WEBPACK_IMPORTED_MODULE_2__meeting_room__["a" /* MeetingRoomPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__meeting_room_set__["a" /* MeetingRoomSetPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__meeting_room__["a" /* MeetingRoomPage */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__meeting_room_set__["a" /* MeetingRoomSetPage */]],
+            exports: [__WEBPACK_IMPORTED_MODULE_2__meeting_room__["a" /* MeetingRoomPage */]],
             providers: [__WEBPACK_IMPORTED_MODULE_3__meeting_service__["a" /* MeetingService */]]
         })
-    ], MeetingRoomSetPageModule);
-    return MeetingRoomSetPageModule;
+    ], MeetingRoomPageModule);
+    return MeetingRoomPageModule;
 }());
 
-//# sourceMappingURL=meeting-room-set.module.js.map
+//# sourceMappingURL=meeting-room.module.js.map
 
 /***/ }),
 
-/***/ 767:
+/***/ 771:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -114,15 +114,14 @@ var MeetingService = (function () {
 
 /***/ }),
 
-/***/ 826:
+/***/ 838:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingRoomSetPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingRoomPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_service__ = __webpack_require__(767);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_service__ = __webpack_require__(771);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -135,53 +134,84 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 /**
- * Generated class for the MeetingRoomSetPage page.
+ * Generated class for the MeetingRoomPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var MeetingRoomSetPage = (function () {
-    function MeetingRoomSetPage(navCtrl, navParams, formBuilder, meetingService) {
-        var _this = this;
+var MeetingRoomPage = (function () {
+    function MeetingRoomPage(navCtrl, navParams, modalCtrl, meetingService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.formBuilder = formBuilder;
+        this.modalCtrl = modalCtrl;
         this.meetingService = meetingService;
-        this.isWrite = false;
-        this.DeptLs = [];
-        this.isWrite = !!this.navParams.get("Id") ? false : true;
-        this.setForm = this.formBuilder.group({
-            Name: ["", [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(20), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(2)]],
-            Manager: ["", [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(20), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(2)]],
-            Number: ["", [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].max(10000)]],
-            Mobile: [null, [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(7), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(11)]],
-            HaveAttendant: [false, []],
-            DeptId: ["", [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(180)]],
-            Introduction: ["", [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(180)]]
-        });
-        this.meetingService.GetDeptLs().subscribe(function (resJson) {
-            if (resJson.Result)
-                _this.DeptLs = resJson.Data;
-        });
+        this.list = [];
+        this.isEmpty = false;
+        this.getList();
     }
-    MeetingRoomSetPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad MeetingRoomSetPage');
+    MeetingRoomPage.prototype.ionViewDidLoad = function () {
     };
-    MeetingRoomSetPage = __decorate([
+    MeetingRoomPage.prototype.doRead = function (Params) {
+        this.navCtrl.push("MeetingRoomSetPage", { "isAdd": false, "Id": Params });
+    };
+    MeetingRoomPage.prototype.doWrite = function () {
+        this.navCtrl.push("MeetingRoomSetPage", { "isAdd": true });
+    };
+    MeetingRoomPage.prototype.doRefresh = function (refresher) {
+        this.list = [];
+        this.getList();
+        setTimeout(function () {
+            refresher.complete();
+        }, 1000);
+    };
+    MeetingRoomPage.prototype.getList = function () {
+        this.list = [
+            {
+                "Id": '1',
+                "Name": '会议室1',
+                "Number": '200',
+                "Manager": '张三',
+                "Mobile": "13111111111"
+            },
+            {
+                "Id": '2',
+                "Name": '会议室2',
+                "Number": '200',
+                "Manager": '张三',
+                "Mobile": "13111111111"
+            },
+            {
+                "Id": '3',
+                "Name": '会议室3',
+                "Number": '200',
+                "Manager": '张三',
+                "Mobile": "13111111111"
+            }
+        ];
+        // this.meetingService.MeetPlaceLs().subscribe((resJson) => {
+        //   if (resJson.Result  && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
+        //     this.isEmpty = false;
+        //     let list = resJson.Data;
+        //     this.list = [...this.list, ...list];
+        //   }else{
+        //     this.isEmpty =  true;
+        //   }
+        // });
+    };
+    MeetingRoomPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-meeting-room-set',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-room\meeting-room-set\meeting-room-set.html"*/`<!--\n  Generated template for the MeetingRoomSetPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>{{isWrite ? "添加会议室" : "会议室详情"}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="setForm" (ngSubmit)="save(setForm.value)">\n        <div>\n            <ion-list>\n                <ion-item>\n                    <ion-label>名称</ion-label>\n                    <ion-input text-right formControlName="Name" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <div *ngIf="!setForm.controls.Name.valid && (setForm.controls.Name.touched || setForm.controls.Name.dirty )" class="validation-failed">\n                    <div *ngIf="setForm.get(\'Name\').errors.required">名称必填</div>\n                    <div *ngIf="setForm.get(\'Name\').errors.minlength">最少输入2个字</div>\n                    <div *ngIf="setForm.get(\'Name\').errors.maxlength">最多输入20个字</div>\n                </div> \n\n                <ion-item>\n                    <ion-label>管理人员</ion-label>\n                    <ion-input text-right  formControlName="Manager" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <div *ngIf="!setForm.controls.Manager.valid && (setForm.controls.Manager.touched || setForm.controls.Manager.dirty )" class="validation-failed">\n                    <div *ngIf="setForm.get(\'Manager\').errors.required">管理人员必填</div>\n                    <div *ngIf="setForm.get(\'Manager\').errors.minlength">最少输入2个字</div>\n                    <div *ngIf="setForm.get(\'Manager\').errors.maxlength">最多输入20个字</div>\n                </div> \n\n\n                <ion-item>\n                    <ion-label>规模容量</ion-label>\n                    <ion-input text-right type="number" formControlName="Number" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <div *ngIf="!setForm.controls.Number.valid && (setForm.controls.Number.touched || setForm.controls.Number.dirty)" class="validation-failed">\n                    <div *ngIf="setForm.get(\'Number\').errors.required">必填项</div>\n                    <div *ngIf="setForm.get(\'Number\').errors.max">最大容量10000</div>\n                </div> \n\n                <ion-item>\n                    <ion-label>联系电话<span class="optional">（选填）</span></ion-label>\n                    <ion-input text-right type="number"  formControlName="Mobile" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <div *ngIf="!setForm.controls.Mobile.valid && (setForm.controls.Mobile.touched || setForm.controls.Mobile.dirty)" class="validation-failed">\n                    请输入合法的联系电话\n                </div> \n\n                <ion-item>\n                    <ion-label>是否有服务人员<span class="optional">（选填）</span></ion-label>\n                    <ion-toggle formControlName="HaveAttendant"></ion-toggle>\n                </ion-item>\n                <ion-item>\n                    <ion-label>所属部门<span class="optional">（选填）</span></ion-label>\n                    <ion-select formControlName="DeptId" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option *ngFor="let Dept of DeptLs;let i = index" [value]="Dept.Id">{{Dept.BmName}}</ion-option>\n                    </ion-select>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>简介<span class="optional">（选填）</span></ion-label>\n                    <ion-textarea  formControlName="Introduction"  placeholder="请输入"></ion-textarea>\n                </ion-item>\n                <div *ngIf="!setForm.controls.Introduction.valid && (setForm.controls.Introduction.touched || setForm.controls.Introduction.dirty)" class="validation-failed">\n                    最多可输入180个字\n                </div> \n              \n            </ion-list>\n            <div padding text-center>\n                <button ion-button type="submit" color="danger" [disabled]="!setForm.valid">保存</button>\n                <button ion-button clear small navPop>取消修改</button>\n            </div>\n        </div>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-room\meeting-room-set\meeting-room-set.html"*/,
+            selector: 'page-meeting-room',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-room\meeting-room.html"*/`<!--\n  Generated template for the MeetingRoomPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>会议室管理</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let room of list"  (click)="doRead(room.Id)">\n          <ion-item>\n              <ion-row>\n                  <ion-col> {{room.Name}}</ion-col>\n                  <ion-col *ngIf="room.Number" style="font-size: small;color: #488aff;text-align: right;"> 容纳人数:{{room.Number}}</ion-col>\n              </ion-row>\n              <p class="font-12">管理员:{{room.Manager}}&emsp;{{room.Mobile}}</p>\n          </ion-item>\n      </ion-item-sliding>\n    </ion-list>\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n        <div padding>暂无消息数据！！！</div>\n        <img src="assets/img/face/face2.png" height="100">\n    </div>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab></ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-room\meeting-room.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_2__meeting_service__["a" /* MeetingService */]])
-    ], MeetingRoomSetPage);
-    return MeetingRoomSetPage;
+    ], MeetingRoomPage);
+    return MeetingRoomPage;
 }());
 
-//# sourceMappingURL=meeting-room-set.js.map
+//# sourceMappingURL=meeting-room.js.map
 
 /***/ })
 

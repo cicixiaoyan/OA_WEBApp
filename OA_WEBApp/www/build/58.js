@@ -1,14 +1,14 @@
 webpackJsonp([58],{
 
-/***/ 706:
+/***/ 730:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactsModule", function() { return ContactsModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContractSearchSeparatePageModule", function() { return ContractSearchSeparatePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts__ = __webpack_require__(780);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_search_separate__ = __webpack_require__(809);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,37 +18,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ContactsModule = (function () {
-    function ContactsModule() {
+var ContractSearchSeparatePageModule = (function () {
+    function ContractSearchSeparatePageModule() {
     }
-    ContactsModule = __decorate([
+    ContractSearchSeparatePageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */],
+                __WEBPACK_IMPORTED_MODULE_2__contract_search_separate__["a" /* ContractSearchSeparatePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contract_search_separate__["a" /* ContractSearchSeparatePage */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */]
-            ]
         })
-    ], ContactsModule);
-    return ContactsModule;
+    ], ContractSearchSeparatePageModule);
+    return ContractSearchSeparatePageModule;
 }());
 
-//# sourceMappingURL=contacts.module.js.map
+//# sourceMappingURL=contract-search-separate.module.js.map
 
 /***/ }),
 
-/***/ 780:
+/***/ 809:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Contacts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractSearchSeparatePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_PublicService__ = __webpack_require__(366);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -61,80 +59,58 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import { ContactsDetail } from './contacts-detail/contacts-detail';
-/**
- * Generated class for the Contacts page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-var Contacts = (function () {
-    function Contacts(navCtrl, navParams, httpService) {
+
+var ContractSearchSeparatePage = (function () {
+    function ContractSearchSeparatePage(navCtrl, navParams, viewCtrl, publicService, formBuilder) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.httpService = httpService;
-        this.searchKey = "";
-        this.nxPage = "ContactsDetail";
-        this.moredata = true;
-        this.isEmpty = false;
-        this.initializeItems();
+        this.viewCtrl = viewCtrl;
+        this.publicService = publicService;
+        this.formBuilder = formBuilder;
+        this.DeptLs = [];
+        this.name = '签约';
+        this.search = this.navParams.get("search");
+        this.name = this.navParams.get("name");
+        this.searchForm = this.formBuilder.group({
+            "DeptId": ["", []],
+            "StartDate": ["", []],
+            "EndDate": ["", []]
+        });
+        this.publicService.GetDeptLs().subscribe(function (resJson) {
+            if (resJson.Result)
+                _this.DeptLs = resJson.Data;
+        });
+        if (this.search) {
+            this.searchForm.setValue({
+                "DeptId": this.search.DeptId,
+                "StartDate": this.search.StartDate,
+                "EndDate": this.search.EndDate,
+            });
+        }
     }
-    Contacts.prototype.doRefresh = function (refresher) {
-        this.initializeItems();
-        setTimeout(function () {
-            console.log('数据加载完成');
-            refresher.complete();
-        }, 2000);
+    ContractSearchSeparatePage.prototype.sent = function (value) {
+        this.viewCtrl.dismiss({ "search": value });
     };
-    Contacts.prototype.initializeItems = function () {
-        var _this = this;
-        this.httpService.postFormData("ashx/UserSheet.ashx", { "Name": this.searchKey })
-            .map(function (Response) { return Response.json(); })
-            .subscribe(function (resJson) {
-            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
-                _this.items = resJson.Data;
-                _this.isEmpty = false;
-            }
-            else {
-                _this.isEmpty = true;
-                _this.moredata = false;
-                _this.httpService.nativeService.showToast(resJson.Data || "无数据");
-            }
-        });
+    ContractSearchSeparatePage.prototype.reset = function () {
+        this.searchForm.reset();
+        this.searchForm.setValidators(null);
+        this.searchForm.updateValueAndValidity();
     };
-    Contacts.prototype.search = function (refresher, key) {
-        var _this = this;
-        this.initializeItems();
-        return this.httpService.postFormData("ashx/UserSheet.ashx", { "Name": key })
-            .map(function (Response) { return Response.json(); })
-            .subscribe(function (resJson) {
-            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
-                _this.items = resJson.Data;
-                _this.isEmpty = false;
-            }
-            else {
-                _this.items = [];
-                _this.isEmpty = true;
-                _this.moredata = false;
-            }
-        });
-        // setTimeout(() => {
-        //   console.log('数据加载完成');
-        //   refresher.complete();
-        // }, 2000);
-    };
-    Contacts = __decorate([
+    ContractSearchSeparatePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contacts',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts.html"*/`<!--\n\n  Generated template for the Contacts page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>通讯录</ion-title>\n\n    </ion-navbar>\n\n    <ion-searchbar color="dark" type="text" placeholder="请输入姓名" [(ngModel)]="searchKey" [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event, searchKey)">\n\n    </ion-searchbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n\n        </ion-refresher-content>\n\n    </ion-refresher>\n\n    <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->\n\n    <ion-list inset style="margin:16px 0;">\n\n        <button ion-item *ngFor="let contact of items" [navPush]="nxPage" [navParams]="{id:contact.Uid}">\n\n            <span>{{contact.Name}}({{contact.Uid}})</span>\n\n            <p>{{contact.Dept}}&emsp;{{contact.Duty}}</p>\n\n        </button>\n\n    </ion-list>\n\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n\n        <div padding>未搜索到信息！！！</div>\n\n        <img src="assets/img/face/face2.png" height="100">\n\n    </div>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts.html"*/,
+            selector: 'page-contract-search-separate',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-search-separate\contract-search-separate.html"*/`<ion-header>\n    <ion-navbar>\n        <ion-title>{{name}}筛选</ion-title>\n    </ion-navbar>\n</ion-header>\n<ion-content>\n    <form [formGroup]="searchForm" (ngSubmit)="sent(searchForm.value)">\n        <ion-list>\n            <ion-item>\n                <ion-label floating>员工部门</ion-label>\n                <ion-select formControlName="DeptId" cancelText="取消" okText="确定" placeholder="请选择">\n                    <ion-option *ngFor="let Dept of DeptLs;let i = index" [value]="Dept.Id">{{Dept.BmName}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item>\n                <ion-label floating>{{name}}开始时间</ion-label>\n                <ion-datetime formControlName="StartDate" cancelText="取消"  placeholder="请选择" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n            <ion-item>\n                <ion-label floating>{{name}}结束时间</ion-label>\n                <ion-datetime formControlName="EndDate" cancelText="取消"  placeholder="请选择" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n        </ion-list>\n        <div text-center>\n            <button ion-button color="energized" (click)="reset()" small outline>重置</button>\n            <button ion-button color="assertive" type="submit" small>搜索</button>\n        </div>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-search-separate\contract-search-separate.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], Contacts);
-    return Contacts;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_PublicService__["a" /* PublicService */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
+    ], ContractSearchSeparatePage);
+    return ContractSearchSeparatePage;
 }());
 
-//# sourceMappingURL=contacts.js.map
+//# sourceMappingURL=contract-search-separate.js.map
 
 /***/ })
 

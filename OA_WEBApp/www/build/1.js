@@ -1,60 +1,17 @@
-webpackJsonp([1,42],{
+webpackJsonp([1],{
 
-/***/ 708:
+/***/ 736:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FindPasswordModule", function() { return FindPasswordModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FileApplicationReviewPageModule", function() { return FileApplicationReviewPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__find_password__ = __webpack_require__(782);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LoginService__ = __webpack_require__(162);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-
-var FindPasswordModule = (function () {
-    function FindPasswordModule() {
-    }
-    FindPasswordModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__find_password__["a" /* FindPassword */],
-            ],
-            imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__find_password__["a" /* FindPassword */]),
-            ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__find_password__["a" /* FindPassword */]
-            ],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__LoginService__["a" /* LoginService */]]
-        })
-    ], FindPasswordModule);
-    return FindPasswordModule;
-}());
-
-//# sourceMappingURL=find-password.module.js.map
-
-/***/ }),
-
-/***/ 743:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginModule", function() { return LoginModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(817);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__find_password_find_password_module__ = __webpack_require__(708);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__LoginService__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__file_application_review__ = __webpack_require__(815);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fileApplicationService__ = __webpack_require__(775);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_components_module__ = __webpack_require__(365);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_tab_slide_tab_slide_module__ = __webpack_require__(816);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -66,39 +23,39 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var LoginModule = (function () {
-    function LoginModule() {
+
+var FileApplicationReviewPageModule = (function () {
+    function FileApplicationReviewPageModule() {
     }
-    LoginModule = __decorate([
+    FileApplicationReviewPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]
+                __WEBPACK_IMPORTED_MODULE_2__file_application_review__["a" /* FileApplicationReviewPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]),
-                __WEBPACK_IMPORTED_MODULE_3__find_password_find_password_module__["FindPasswordModule"]
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__file_application_review__["a" /* FileApplicationReviewPage */]),
+                __WEBPACK_IMPORTED_MODULE_4__components_components_module__["a" /* ComponentsModule */],
+                __WEBPACK_IMPORTED_MODULE_5__components_tab_slide_tab_slide_module__["a" /* TabSlideModule */]
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]
-            ],
-            providers: [__WEBPACK_IMPORTED_MODULE_4__LoginService__["a" /* LoginService */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_3__fileApplicationService__["a" /* FileApplicationService */]]
         })
-    ], LoginModule);
-    return LoginModule;
+    ], FileApplicationReviewPageModule);
+    return FileApplicationReviewPageModule;
 }());
 
-//# sourceMappingURL=login.module.js.map
+//# sourceMappingURL=file-application-review.module.js.map
 
 /***/ }),
 
-/***/ 782:
+/***/ 775:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FindPassword; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FileApplicationService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -111,36 +68,193 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import { LoginPage } from '../login';
-var FindPassword = (function () {
-    function FindPassword(navCtrl, viewCtrl, formBuilder) {
-        this.navCtrl = navCtrl;
-        this.viewCtrl = viewCtrl;
-        this.formBuilder = formBuilder;
-        this.findPasswordForm = this.formBuilder.group({
-            phone: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(11), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].pattern('1[0-9]{10}')]],
-            verificationCode: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(6), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].pattern('[0-9]{6}')]],
-            newPassword: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(6)]]
-        });
+var FileApplicationService = (function () {
+    function FileApplicationService(httpService) {
+        this.httpService = httpService;
+        this.status = {
+            "审批中": '审批中',
+            "已同意": '已同意',
+            "已拒绝": '已拒绝',
+        };
     }
-    FindPassword.prototype.confirm = function () {
-        this.navCtrl.setRoot("LoginPage");
-    };
-    FindPassword.prototype.dismiss = function () {
-        this.viewCtrl.dismiss();
-    };
-    FindPassword = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-find-password',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\find-password\find-password.html"*/`<!--\n  Generated template for the FindPassword page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            找回密码\n        </ion-title>\n        <ion-buttons>\n            <button ion-button (click)="dismiss()">关闭</button>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <form [formGroup]="findPasswordForm" (ngSubmit)="confirm()">\n        <ion-list>\n            <ion-item>\n                <ion-label>手机号</ion-label>\n                <ion-input type="number" formControlName="phone"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.phone.valid&& findPasswordForm.controls.phone.touched" color="danger">请输入手机号码</span>\n            <ion-item>\n                <ion-label>验证码</ion-label>\n                <ion-input type="number" formControlName="verificationCode"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.verificationCode.valid&& findPasswordForm.controls.verificationCode.touched" color="danger">请输入验证码</span>\n            <ion-item>\n                <ion-label>新密码</ion-label>\n                <ion-input type="password" formControlName="newPassword"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.newPassword.valid&& findPasswordForm.controls.newPassword.touched" color="danger">请输入新密码</span>\n        </ion-list>\n        <div padding-horizontal>\n            <button ion-button block type="submit" [disabled]="!findPasswordForm.valid">确　认</button>\n        </div>\n        <button class="verification" ion-button small color="secondary" *ngIf="findPasswordForm.controls.phone.valid">获取验证码</button>\n    </form>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\find-password\find-password.html"*/
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
-    ], FindPassword);
-    return FindPassword;
+    FileApplicationService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
+    ], FileApplicationService);
+    return FileApplicationService;
 }());
 
-//# sourceMappingURL=find-password.js.map
+//# sourceMappingURL=fileApplicationService.js.map
+
+/***/ }),
+
+/***/ 815:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FileApplicationReviewPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fileApplicationService__ = __webpack_require__(775);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var FileApplicationReviewPage = (function () {
+    function FileApplicationReviewPage(navCtrl, navParams, popoverCtrl, fileApplicationService) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.popoverCtrl = popoverCtrl;
+        this.fileApplicationService = fileApplicationService;
+        this.list = [];
+        this.moredata = true;
+        this.isEmpty = false;
+        this.pageSlides = ["审批中", "已同意", "已拒绝"];
+        this.data = {
+            "uid": this.fileApplicationService.httpService.globalData.Uid,
+            "Status": this.fileApplicationService.status['审批中'],
+            "PageIndex": 0,
+            "PageSize": 8
+        };
+        this.getList(this.data);
+    }
+    FileApplicationReviewPage.prototype.onSlideClick = function (i) {
+        this.data.PageIndex = 0;
+        this.list = [];
+        if (i === 0) {
+            // 参数设置
+            this.data.Status = this.fileApplicationService.status["审批中"];
+        }
+        else if (i === 1) {
+            // 参数设置
+            this.data.Status = this.fileApplicationService.status["已同意"];
+        }
+        else {
+            // 参数设置
+            this.data.Status = this.fileApplicationService.status["all"];
+        }
+        this.getList(this.data);
+    };
+    FileApplicationReviewPage.prototype.doRead = function (id) {
+        this.navCtrl.push("FileApplicationReviewViewPage", { "Id": id });
+    };
+    FileApplicationReviewPage.prototype.doRefresh = function (refresher) {
+        this.list = [];
+        this.data.PageIndex = 1;
+        this.getList(this.data);
+        setTimeout(function () {
+            refresher.complete();
+        }, 1000);
+    };
+    FileApplicationReviewPage.prototype.doInfinite = function () {
+        if (this.moredata) {
+            this.data.PageIndex++;
+            this.getList(this.data);
+        }
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve();
+            }, 500);
+        });
+    };
+    FileApplicationReviewPage.prototype.getList = function (data) {
+        this.list = [
+            {
+                "Id": "1",
+                "Name": '张三',
+                "ApplicationDate": '2017-10-12',
+                "ApplicationReason": '我是申请理由',
+                "ApplicationStatus": '审批中',
+                "AuditDate": "2017-12-12",
+            },
+            {
+                "Id": "2",
+                "Name": '李四',
+                "ApplicationDate": '2017-10-12',
+                "ApplicationReason": '我是申请理由',
+                "ApplicationStatus": '已同意',
+                "AuditDate": "2017-12-12",
+            },
+            {
+                "Id": "3",
+                "Name": '李四',
+                "ApplicationDate": '2017-10-12',
+                "ApplicationReason": '我是申请理由',
+                "ApplicationStatus": '已拒绝',
+                "AuditDate": "2017-12-12",
+            }
+        ];
+        // this.fileApplicationService.getList(data).subscribe((resJson) => {
+        //   if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
+        //     this.moredata = true;
+        //     this.isEmpty = false;
+        //     let list = resJson.Data;
+        //     this.list = [...this.list, ...list];
+        //   }else{
+        //     this.moredata = false;
+        //     this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+        //   }
+        // });
+    };
+    FileApplicationReviewPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-file-application-review',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\file-application\file-application-review\file-application-review.html"*/`<ion-header>\n\n    <ion-navbar>\n        <ion-title>档案申请审批</ion-title>\n    </ion-navbar>\n    <!-- <div class="subbox">\n        <div>\n            <button ion-button small (click)="checkRead(\'审批中\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn[\'审批中\']}">审批中</button>\n            <button ion-button small (click)="checkRead(\'已同意\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn[\'已同意\']}">已同意</button>\n            <button ion-button small (click)="checkRead(\'已拒绝\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn[\'已拒绝\']}">已拒绝</button>\n        </div>\n    </div> -->\n    <div>\n        <tab-slide (slideClick)="onSlideClick($event)" [slides]="pageSlides" [pageNumber]="3"></tab-slide>\n    </div>\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n        <ion-item-sliding *ngFor="let item of list" (click)=\'doRead(item.Id)\'>\n            <ion-item>\n                <ion-avatar item-start [ngClass]="{\'success\': (item.ApplicationStatus == \'已同意\'), \'danger\': (item.ApplicationStatus == \'已拒绝\')}"><span>{{item.ApplicationStatus}}</span></ion-avatar>\n                <h2>{{item.Name}}\n                  <small float-end	 class="text-ios-primary" *ngIf="item.ApplicationStatus != \'审批中\'"><em>{{item.AuditDate}}审</em></small>\n                </h2>\n                <h3 class="small">申请日期：{{item.ApplicationDate}}</h3>\n                <p class=\'small\'>理由：{{item.ApplicationReason}}</p>\n            </ion-item>\n        </ion-item-sliding>\n    </ion-list>\n    <empty *ngIf="isEmpty"></empty>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\file-application\file-application-review\file-application-review.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */],
+            __WEBPACK_IMPORTED_MODULE_2__fileApplicationService__["a" /* FileApplicationService */]])
+    ], FileApplicationReviewPage);
+    return FileApplicationReviewPage;
+}());
+
+//# sourceMappingURL=file-application-review.js.map
+
+/***/ }),
+
+/***/ 816:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabSlideModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tab_slide__ = __webpack_require__(817);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var TabSlideModule = (function () {
+    function TabSlideModule() {
+    }
+    TabSlideModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__tab_slide__["a" /* TabSlideComponent */]
+            ],
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicModule */]],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__tab_slide__["a" /* TabSlideComponent */]
+            ]
+        })
+    ], TabSlideModule);
+    return TabSlideModule;
+}());
+
+//# sourceMappingURL=tab-slide.module.js.map
 
 /***/ }),
 
@@ -148,14 +262,8 @@ var FindPassword = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabSlideComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__LoginService__ = __webpack_require__(162);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_GlobalData__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -166,115 +274,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-
-
-
-
-// import { FindPassword } from './find-password/find-password';
-// import {UserInfo} from "../../model/UserInfo";
-
-// import { TabsPage } from '../tabs/tabs';
-
-var LoginPage = (function () {
-    function LoginPage(viewCtrl, events, formBuilder, storage, modalCtrl, platform, alertCtrl, globalData, loginService, httpService) {
-        this.viewCtrl = viewCtrl;
-        this.events = events;
-        this.formBuilder = formBuilder;
-        this.storage = storage;
-        this.modalCtrl = modalCtrl;
-        this.platform = platform;
-        this.alertCtrl = alertCtrl;
-        this.globalData = globalData;
-        this.loginService = loginService;
-        this.httpService = httpService;
-        this.submitted = false;
-        this.canLeave = false;
-        this.loginForm = this.formBuilder.group({
-            UserName: ['admin', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(4)]],
-            UserPass: ['123', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(2)]]
-        });
+var TabSlideComponent = (function () {
+    function TabSlideComponent() {
+        this.slides = []; // 显示类型的字符串数组
+        this.pageNumber = 3; // 表示当前屏幕可以显示的类型数目，默认为3。
+        this.slideClick = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */](); // 当点击某个类型时，将点击的index返回给使用者
+        this.selectedIndex = 0;
     }
-    LoginPage.prototype.ionViewWillEnter = function () {
-        var _this = this;
-        this.canLeave = false;
-        this.storage.get('UserInfo').then(function (userInfo) {
-            _this.userInfo = userInfo && userInfo.user ? userInfo.user : null;
-        });
+    TabSlideComponent.prototype.ngOnInit = function () {
+        this.mySlideOptions = {
+            loop: false,
+            autoplay: false,
+            initialSlide: 0,
+            pager: false,
+            slidesPerView: this.pageNumber,
+            paginationHide: true,
+            paginationClickable: true
+        };
     };
-    LoginPage.prototype.ionViewCanLeave = function () {
-        var _this = this;
-        var bool = !!this.userInfo;
-        if (this.canLeave || bool) {
-            return true;
-        }
-        else {
-            this.alertCtrl.create({
-                title: '确认退出软件？',
-                buttons: [{ text: '取消' },
-                    {
-                        text: '确定',
-                        handler: function () {
-                            _this.platform.exitApp();
-                        }
-                    }
-                ]
-            }).present();
-            return false;
-        }
+    TabSlideComponent.prototype.onClick = function (index) {
+        this.selectedIndex = index;
+        this.slideClick.emit(index);
     };
-    LoginPage.prototype.login = function (user) {
-        var _this = this;
-        this.submitted = true;
-        // this.httpService.postFormData("ashx/Login.ashx/LoginInfo",user)
-        //  .map(responce => responce.json())
-        this.loginService.login(user).subscribe(function (userInfo) {
-            console.log(userInfo);
-            _this.submitted = false;
-            // userInfo.token = 'xx122a9Wf';//从后台获取token,暂时写死
-            _this.userInfo = userInfo.Data;
-            _this.globalData.Uid = userInfo.Data.Uid;
-            _this.globalData.Name = userInfo.Data.Name;
-            _this.globalData.token = userInfo.Data.Token;
-            // alert(this.globalData.token);
-            _this.storage.set('UserInfo', userInfo.Data);
-            _this.storage.set('LoginInfo', user);
-            // alert(this.storage.get('UserInfo'));
-            _this.events.publish('user:login', userInfo);
-            _this.viewCtrl.dismiss(userInfo.Data);
-        });
-    };
-    LoginPage.prototype.findPassword = function () {
-        var _this = this;
-        this.canLeave = true;
-        var modal = this.modalCtrl.create("FindPassword");
-        modal.present();
-        modal.onDidDismiss(function (data) {
-            _this.canLeave = false;
-        });
-    };
-    LoginPage.prototype.dismiss = function () {
-        this.viewCtrl.dismiss();
-    };
-    LoginPage = __decorate([
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])("slides"),
+        __metadata("design:type", Array)
+    ], TabSlideComponent.prototype, "slides", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])("pageNumber"),
+        __metadata("design:type", Number)
+    ], TabSlideComponent.prototype, "pageNumber", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["O" /* Output */])("slideClick"),
+        __metadata("design:type", Object)
+    ], TabSlideComponent.prototype, "slideClick", void 0);
+    TabSlideComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-login',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\login.html"*/`<!--\n  Generated template for the Login page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<!--.nav-decor隐藏头部-->\n<ion-header class="nav-decor">\n\n    <ion-navbar>\n        <ion-title>登录</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <div class="login-header">登录</div>\n    <div class="login-top">\n        <img src="assets/img/logo.png" alt="公司logo" />\n    </div>\n    <form padding [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">\n        <ion-list>\n            <ion-item>\n                <ion-label color="primary">用户名</ion-label>\n                <ion-input type="text" formControlName="UserName" clearInput></ion-input>\n            </ion-item>\n            <div *ngIf="!loginForm.controls.UserName.valid && loginForm.controls.UserName.touched" class="validation-failed"> 请输入正确用户名</div>\n\n            <ion-item>\n                <ion-label color="primary">密　码</ion-label>\n                <ion-input type="password" formControlName="UserPass" clearInput></ion-input>\n            </ion-item>\n            <div *ngIf="!loginForm.controls.UserPass.valid" class="validation-failed">请输入密码</div>\n\n        </ion-list>\n        <div padding-horizontal>\n            <button ion-button block type="submit" [disabled]="!loginForm.valid||submitted">登　录</button>\n        </div>\n    </form>\n    <!-- <ion-grid>\n        <ion-row>\n            <ion-col text-center (click)="findPassword()">\n                <button ion-button small clear color="primary">找回密码</button>\n            </ion-col>\n        </ion-row>\n    </ion-grid> -->\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\login.html"*/,
-            providers: [__WEBPACK_IMPORTED_MODULE_4__LoginService__["a" /* LoginService */]]
+            selector: 'tab-slide',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\components\tab-slide\tab-slide.html"*/`\n\n<ion-slides class="slide-title" [slidesPerView]="pageNumber" [pager]="false">\n\n  <ion-slide *ngFor="let slide of slides; let i = index;">\n\n    <div (click)="onClick(i)" class="itab-item" [ngClass]="{\'slide-title-active\': selectedIndex == i}">\n\n      <span class="slide-title-unit" >{{slide}}</span>\n\n    </div>\n\n  </ion-slide>\n\n</ion-slides>\n\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\components\tab-slide\tab-slide.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Events */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* Platform */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_5__providers_GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_4__LoginService__["a" /* LoginService */],
-            __WEBPACK_IMPORTED_MODULE_6__providers_HttpService__["a" /* HttpService */]])
-    ], LoginPage);
-    return LoginPage;
+        __metadata("design:paramtypes", [])
+    ], TabSlideComponent);
+    return TabSlideComponent;
 }());
 
-//# sourceMappingURL=login.js.map
+//# sourceMappingURL=tab-slide.js.map
 
 /***/ })
 

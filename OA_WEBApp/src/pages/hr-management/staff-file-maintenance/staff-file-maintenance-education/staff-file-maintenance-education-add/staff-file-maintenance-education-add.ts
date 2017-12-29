@@ -1,16 +1,11 @@
 import { Component,  Input } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Validators } from '../../../../../providers/Validators';
 // import 'rxjs/add/operator/map';
 // import { Observable } from 'rxjs/Observable';
 // import { HttpService } from "../../../providers/HttpService";
 
-/**
- * Generated class for the StaffFileMaintenanceEducationAddPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -20,8 +15,9 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 export class StaffFileMaintenanceEducationAddPage {
   readOnly: boolean = false;
   addForm: FormGroup;
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
+  formCtrls: any;
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
               // private httpService: HttpService,
               private formBuilder: FormBuilder,
               private viewCtrl: ViewController) {
@@ -30,9 +26,10 @@ export class StaffFileMaintenanceEducationAddPage {
         StartDate: ['', [Validators.required]], // 第一个参数是默认值
         EndDate: ['', [Validators.required]],
         School: ['', [Validators.required, Validators.maxLength(30)]],
-        Major: ['', [Validators.required, Validators.maxLength(30)]], 
+        Major: ['', [Validators.required, Validators.maxLength(30)]],
         Remarks: ["", [Validators.maxLength(100)]],
-    });
+      });
+      this.formCtrls = this.addForm.controls;
   }
 
   ionViewDidLoad() {

@@ -51467,6 +51467,7 @@ ion-navbar.toolbar {
 .validation-failed {
   color: #f53d3d;
   text-align: center;
+  background-color: #fff;
 }
 
 .status-new-dot {
@@ -51583,6 +51584,10 @@ ion-navbar.toolbar {
 }
 
 .form-readonly .optional {
+  display: none;
+}
+
+.form-readonly .validation-failed {
   display: none;
 }
 
@@ -52091,12 +52096,6 @@ page-staff-file-maintenance ion-avatar span {
   -ms-flex-item-align: center;
   align-self: center;
   text-align: center;
-}
-
-page-staff-file-maintenance-basic-imfornation .item-input ion-label {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
 }
 
 page-staff-file-maintenance-basic-imfornation .list-header-ios {

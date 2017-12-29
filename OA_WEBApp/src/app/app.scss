@@ -55,6 +55,7 @@
 .validation-failed {
     color: color($colors, danger);
     text-align: center;
+    background-color: #fff;
 }
 
 .status-new-dot{
@@ -177,6 +178,10 @@
 .form-readonly {
     .optional{
         display: none;
+    }
+
+    .validation-failed{
+      display: none;
     }
 
     ion-input{

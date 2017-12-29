@@ -4,12 +4,6 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 // import 'rxjs/add/operator/map';
 // import { Observable } from 'rxjs/Observable';
 // import { HttpService } from "../../../providers/HttpService";
-/**
- * Generated class for the StaffFileMaintenanceWorkExperienceAddPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -20,8 +14,9 @@ export class StaffFileMaintenanceWorkExperienceAdd {
   @Input() isShow: boolean = true;
   addForm: FormGroup;
   readOnly: boolean = false;
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
+  formCtrls: any;
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
               // private httpService: HttpService,
               private formBuilder: FormBuilder,
               private viewCtrl: ViewController) {
@@ -29,11 +24,12 @@ export class StaffFileMaintenanceWorkExperienceAdd {
       this.addForm = this.formBuilder.group({
         StartDate: ['', [Validators.required]], // 第一个参数是默认值
         EndDate: ['', [Validators.required]],
-        Dept: ['', [Validators.required]],
-        Duty: ['', [Validators.required]], 
-        Company: ['', [Validators.maxLength(80)]], 
-        Remarks: ["", [Validators.maxLength(100)]],
-    });
+        Dept: ['', [Validators.required, Validators.maxLength(20)]],
+        Duty: ['', [Validators.required, Validators.maxLength(30)]],
+        Company: ['', [Validators.required, Validators.maxLength(20)]],
+        Remarks: ["", [Validators.maxLength(180)]],
+      });
+      this.formCtrls = this.addForm.controls;
   }
 
   ionViewDidLoad() {

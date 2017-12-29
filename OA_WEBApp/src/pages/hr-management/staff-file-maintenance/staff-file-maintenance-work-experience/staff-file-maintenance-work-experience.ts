@@ -48,12 +48,12 @@ export class StaffFileMaintenanceWorkExperience {
     this.list = [
       {
         "Id": '1',
-        'StartDate': '2017-08-08',
-        'EndDate': '2017-08-08',
-        'Company': '青白江疾控预防',
-        'Dept': '部门1',
-        'Duty': '我是职务',
-        'Remarks': '我是备注'
+        'StartDate': '2017-08-08', // 开始时间
+        'EndDate': '2017-08-08', // 结束时间
+        'Company': '青白江疾控预防', // 公司
+        'Dept': '部门1', // 部门
+        'Duty': '我是职务', // 职务
+        'Remarks': '我是备注' // 备注
       },
       {
         "Id": '2',

@@ -49,11 +49,11 @@ export class StaffFileMaintenanceEducation {
     this.list = [
       {
         "Id": '1',
-        'StartDate': '2017-08-08',
-        'EndDate': '2017-08-08',
-        'School': '我是学校1',
-        'Major': '专业1',
-        'Remarks': '我是备注'
+        'StartDate': '2017-08-08', // 开始时间
+        'EndDate': '2017-08-08', // 结束时间
+        'School': '我是学校1', // 学校
+        'Major': '专业1', // 专业
+        'Remarks': '我是备注' // 备注
       },
       {
         "Id": '2',

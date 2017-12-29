@@ -38,7 +38,7 @@
                     class="validation-failed">
                     会议类型必选
                 </div>
-                
+
                 <ion-item>
                     <ion-label>召开地点</ion-label>
                     <ion-select formControlName="PlaceId" cancelText="取消" okText="确定" placeholder="请选择">
@@ -94,10 +94,10 @@
                     <ion-label>参加人员</ion-label>
                     <ion-input text-right type="text" formControlName="PersonId" placeholder="点击添加"></ion-input>
                 </ion-item>
-                <div *ngIf="!writeForm.controls.Person.valid && (writeForm.controls.Person.touched || writeForm.controls.Person.dirty )"
+                <div *ngIf="!writeForm.controls.PersonId.valid && (writeForm.controls.PersonId.touched || writeForm.controls.PersonId.dirty )"
                     class="validation-failed">
-                    <div *ngIf="writeForm.get('Title').errors.required">参加人员必填</div>
-                    <div *ngIf="writeForm.get('Title').errors.maxlength">最多输入180个字</div>
+                    <div *ngIf="writeForm.get('PersonId').errors.required">参加人员必填</div>
+                    <div *ngIf="writeForm.get('PersonId').errors.maxlength">最多输入180个字</div>
                 </div>
 
                 <ion-item>
@@ -135,4 +135,3 @@
         </div>
     </form>
 </ion-content>
-

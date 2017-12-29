@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>筛选</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <form [formGroup]="searchForm" (ngSubmit)="sent(searchForm.value)">
+        <ion-list>
+            <ion-item>
+                <ion-label>工号</ion-label>
+                <ion-input text-right formControlName="StaffNumber" placeholder="输入工号"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>姓名</ion-label>
+                <ion-input text-right formControlName="Name" placeholder="输入姓名"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>证件号</ion-label>
+                <ion-select text-right formControlName="IDC" cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-option *ngFor="let Dept of DeptLs;let i = index" [value]="Dept.Id">{{Dept.BmName}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>员工部门</ion-label>
+                <ion-select text-right formControlName="DeptId" cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-option *ngFor="let Dept of DeptLs;let i = index" [value]="Dept.Id">{{Dept.BmName}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>学历</ion-label>
+                <ion-select text-right formControlName="FirstEdu" cancelText="取消" okText="确定" placeholder="请选择">
+                  <ion-option value="高中">高中</ion-option>
+                  <ion-option value="大学">大学</ion-option>
+                </ion-select>
+              </ion-item>
+            <ion-item>
+                <ion-label>是否在职</ion-label>
+                <ion-toggle formControlName="StaffStatus"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label>入职时间</ion-label>
+                <ion-datetime formControlName="StartDate" cancelText="取消" [max]="searchForm.value.EndDate==''?null:searchForm.value.EndDate"  placeholder="开始时间" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+            </ion-item>
+
+        </ion-list>
+        <div text-center>
+            <button ion-button color="energized" (click)="reset()" small outline>重置</button>
+            <button ion-button color="assertive" type="submit" small>搜索</button>
+        </div>
+    </form>
+</ion-content>

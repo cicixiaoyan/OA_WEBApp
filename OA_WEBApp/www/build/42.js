@@ -1,14 +1,15 @@
 webpackJsonp([42],{
 
-/***/ 710:
+/***/ 714:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountEditModule", function() { return AccountEditModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnnouncementPageModule", function() { return AnnouncementPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__account_edit__ = __webpack_require__(789);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcement__ = __webpack_require__(795);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__announcementService__ = __webpack_require__(780);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,55 +19,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AccountEditModule = (function () {
-    function AccountEditModule() {
+
+var AnnouncementPageModule = (function () {
+    function AnnouncementPageModule() {
     }
-    AccountEditModule = __decorate([
+    AnnouncementPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__account_edit__["a" /* AccountEdit */],
+                __WEBPACK_IMPORTED_MODULE_2__announcement__["a" /* AnnouncementPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__account_edit__["a" /* AccountEdit */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__announcement__["a" /* AnnouncementPage */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__account_edit__["a" /* AccountEdit */]
-            ]
+            providers: [__WEBPACK_IMPORTED_MODULE_3__announcementService__["a" /* AnnouncementService */]]
         })
-    ], AccountEditModule);
-    return AccountEditModule;
+    ], AnnouncementPageModule);
+    return AnnouncementPageModule;
 }());
 
-//# sourceMappingURL=account-edit.module.js.map
+//# sourceMappingURL=announcement.module.js.map
 
 /***/ }),
 
-/***/ 781:
+/***/ 780:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserInfo; });
-var UserInfo = (function () {
-    function UserInfo() {
-    }
-    return UserInfo;
-}());
-
-//# sourceMappingURL=UserInfo.js.map
-
-/***/ }),
-
-/***/ 789:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountEdit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model_UserInfo__ = __webpack_require__(781);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -79,128 +62,166 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+/**
+ * Generated class for the AnnouncementPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var AnnouncementService = (function () {
+    function AnnouncementService(httpService) {
+        this.httpService = httpService;
+        this.announcementStatus = {
+            "enter": "录入",
+            "published": "已发布",
+            "all": "0" // 全部
+        };
+    }
+    AnnouncementService.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Login');
+    };
+    AnnouncementService.prototype.getList = function (param) {
+        return this.httpService.postFormData("ashx/Announcement.ashx", param)
+            .map(function (res) { return res.json(); });
+    };
+    AnnouncementService.prototype.detail = function (key) {
+        return this.httpService.postFormData("ashx/AnnouncementDetail.ashx", { "attKey": key })
+            .map(function (res) { return res.json(); });
+    };
+    AnnouncementService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
+    ], AnnouncementService);
+    return AnnouncementService;
+}());
+
+//# sourceMappingURL=announcementService.js.map
+
+/***/ }),
+
+/***/ 795:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnnouncementPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__announcementService__ = __webpack_require__(780);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 
 
-// import { LoginPage } from "../../login/login";
+// import { AnnouncementDetailPage } from './announcement-detail/announcement-detail';
 
 /**
- * Generated class for the AccountEdit page.
+ * Generated class for the AnnouncementPage page.
  *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
  */
-var AccountEdit = (function () {
-    function AccountEdit(navCtrl, navParams, actionSheetCtrl, storage, httpService, modalCtrl, formBuilder) {
+var AnnouncementPage = (function () {
+    function AnnouncementPage(navCtrl, navParams, announcementService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.actionSheetCtrl = actionSheetCtrl;
-        this.storage = storage;
-        this.httpService = httpService;
-        this.modalCtrl = modalCtrl;
-        this.formBuilder = formBuilder;
-        this.userInfo = new __WEBPACK_IMPORTED_MODULE_2__model_UserInfo__["a" /* UserInfo */]();
-        this.submitted = false;
-        this.editForm = this.formBuilder.group({
-            InDate: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(4)]],
-            Sex: ['男', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(2)]],
-            BirthDate: ['', []],
-            Mobile: [null, [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(11), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(11)]],
-            Mail: [null, [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].email]],
-            WorkPhone: [null, [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(11)]],
-            InlinePhone: [null, [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(11)]]
-        });
-        this.initialize();
+        this.announcementService = announcementService;
+        this.nxPage = "AnnouncementDetailPage";
+        this.checkBtn = { "enter": true, "published": false, "all": false };
+        //   page: number = 1;
+        //   size: number = 1;
+        this.moredata = true; // 是否能加载更多
+        this.isEmpty = false; // 是否无数据
+        this.items = [];
+        this.data = {
+            "UserId": this.announcementService.httpService.globalData.Uid,
+            "PageIndex": 0,
+            "PageSize": 10,
+            "Status": this.announcementService.announcementStatus["enter"]
+        };
+        this.initializeItems();
     }
-    AccountEdit.prototype.initialize = function () {
+    AnnouncementPage.prototype.initializeItems = function () {
+        this.getList();
+    };
+    AnnouncementPage.prototype.doRefresh = function (refresher) {
+        this.data.PageIndex = 0;
+        this.initializeItems();
+        setTimeout(function () {
+            console.log('数据加载完成');
+            refresher.complete();
+        }, 1000);
+    };
+    AnnouncementPage.prototype.doInfinite = function () {
+        if (this.moredata) {
+            this.data.PageIndex++;
+            this.getList();
+        }
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve();
+            }, 500);
+        });
+    };
+    // 选择录入、已发布、全部
+    AnnouncementPage.prototype.checkRead = function (name) {
+        if (name === void 0) { name = "enter"; }
+        this.data.PageIndex = 0;
+        this.items = [];
+        this.checkBtn = { "enter": false, "published": false, "all": false };
+        this.checkBtn[name] = true;
+        if (name === "enter") {
+            // 参数设置
+            this.data.Status = this.announcementService.announcementStatus["enter"];
+        }
+        else if (name === "published") {
+            // 参数设置
+            this.data.Status = this.announcementService.announcementStatus["published"];
+        }
+        else {
+            // 参数设置
+            this.data.Status = this.announcementService.announcementStatus["all"];
+        }
+        this.getList();
+    };
+    AnnouncementPage.prototype.getList = function () {
         var _this = this;
-        this.storage.get("UserInfo").then(function (UserInfo) {
-            if (UserInfo) {
-                _this.userInfo = UserInfo;
+        this.announcementService.getList(this.data).subscribe(function (resJson) {
+            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
+                _this.moredata = true;
+                _this.isEmpty = false;
+                var list = resJson.Data;
+                _this.items = _this.items.concat(list);
             }
             else {
-                var modal = _this.modalCtrl.create("LoginPage");
-                modal.present();
-                modal.onDidDismiss(function (data) {
-                    data && console.log(data);
-                });
+                _this.moredata = false;
+                _this.isEmpty = _this.data.PageIndex == 0 ? true : false;
             }
         });
-        // this.userInfo.BirthDate = "1990-02-19";
-        // this.userInfo.InDate = "1990-02-19";
+        //   return this.httpService.postFormData("ashx/Notice.ashx/noticeall", data).map(Response => Response.json());
     };
-    AccountEdit.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad AccountEdit');
+    AnnouncementPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Notice');
     };
-    // 性别选择
-    AccountEdit.prototype.checkSex = function () {
-        var _this = this;
-        var actionSheet = this.actionSheetCtrl.create({
-            title: '选择性别',
-            buttons: [
-                {
-                    text: '男',
-                    role: 'destructive',
-                    handler: function () {
-                        _this.userInfo.Sex = "男";
-                    }
-                }, {
-                    text: '女',
-                    handler: function () {
-                        _this.userInfo.Sex = "女";
-                    }
-                }, {
-                    text: '取消',
-                    role: 'cancel',
-                    handler: function () {
-                        console.log('已取消');
-                    }
-                }
-            ]
-        });
-        actionSheet.present();
+    AnnouncementPage.prototype.itemSelected = function () {
     };
-    AccountEdit.prototype.edit = function (value) {
-        var _this = this;
-        // this.submitted = true;
-        // console.log(value);
-        value.Uid = this.httpService.globalData.Uid;
-        this.httpService.postFormData("ashx/UserPersonMod.ashx", value)
-            .map(function (responce) { return responce.json(); })
-            .subscribe(function (Resjson) {
-            if (Resjson.Result) {
-                _this.httpService.nativeService.showToast("修改资料成功", 800);
-                _this.httpService.postFormData("ashx/UserInfo.ashx", { id: _this.httpService.globalData.Uid })
-                    .map(function (responce) { return responce.json(); }).subscribe(function (res) {
-                    if (res.Result) {
-                        _this.storage.set("UserInfo", res.Date);
-                        _this.userInfo = res.Data;
-                    }
-                });
-            }
-            else {
-                _this.httpService.nativeService.showToast("修改资料失败： " + Resjson.Data, 800);
-            }
-        });
-    };
-    AccountEdit.prototype.return = function () {
-        this.navCtrl.pop();
-    };
-    AccountEdit = __decorate([
+    AnnouncementPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-account-edit',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-edit\account-edit.html"*/`<!--\n\n  Generated template for the AccountEdit page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>修改资料</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <form [formGroup]="editForm" (ngSubmit)="edit(editForm.value)">\n\n        <ion-list>\n\n            <ion-item>\n\n                <ion-label stacked>编码</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Uid" [ngModelOptions]="{standalone: true}" placeholder="请输入编码" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>姓名</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Name" [ngModelOptions]="{standalone: true}" placeholder="请输入姓名" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>公司</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Company" [ngModelOptions]="{standalone: true}" placeholder="公司名称" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>部门</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Dept" [ngModelOptions]="{standalone: true}" placeholder="部门名称" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>职位</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Duty" [ngModelOptions]="{standalone: true}" placeholder="职位" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>入职时间</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.InDate" formControlName="InDate" placeholder="入职时间" disabled></ion-input>\n\n            </ion-item>\n\n            <ion-item (click)="checkSex()">\n\n                <ion-label stacked>性别</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Sex" formControlName="Sex" placeholder="性别"></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>出生日期</ion-label>\n\n                <ion-datetime [(ngModel)]="userInfo.BirthDate" placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="BirthDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label>移动电话</ion-label>\n\n                <ion-input type="number" [(ngModel)]="userInfo.Mobile" formControlName="Mobile" placeholder="移动电话"></ion-input>\n\n            </ion-item>\n\n            <div *ngIf="!editForm.controls.Mobile.valid && editForm.controls.Mobile.touched" class="validation-failed">请输入合法的电话号码</div>\n\n\n\n            <ion-item>\n\n                <ion-label>电子邮箱</ion-label>\n\n                <ion-input type="text" [(ngModel)]="userInfo.Mail" formControlName="Mail" placeholder="电子邮箱"></ion-input>\n\n            </ion-item>\n\n            <div *ngIf="!editForm.controls.Mail.valid && editForm.controls.Mail.touched" class="validation-failed">请输入正确的电子邮箱</div>\n\n\n\n            <ion-item>\n\n                <ion-label>办公电话</ion-label>\n\n                <ion-input type="number" [(ngModel)]="userInfo.WorkPhone" formControlName="WorkPhone" placeholder="办公电话"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label>内线电话</ion-label>\n\n                <ion-input type="number" [(ngModel)]="userInfo.InlinePhone" formControlName="InlinePhone" placeholder="内线电话"></ion-input>\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n        <div padding text-center>\n\n            <button ion-button type="submit" color="danger" [disabled]="editForm.valid">保存</button>\n\n            <button ion-button clear small navPop>取消修改</button>\n\n        </div>\n\n\n\n\n\n    </form>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account-edit\account-edit.html"*/,
+            selector: 'page-announcement',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement.html"*/`<!--\n  Generated template for the AnnouncementPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n      <ion-title>公告管理</ion-title>\n  </ion-navbar>\n\n  <div class="subbox">\n    <div >\n        <button ion-button small (click)="checkRead(\'enter\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.enter}">录入</button>\n        <button ion-button small (click)="checkRead(\'published\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.published}">已发布</button>\n        <button ion-button small (click)="checkRead(\'all\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.all}">全部</button>\n    </div>\n  </div>\n  <!-- <ion-searchbar color="dark" type="text" placeholder="请输入关键字" [(ngModel)]="searchKey"\n   [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event)"></ion-searchbar> -->\n</ion-header>\n\n<ion-content>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n      </ion-refresher-content>\n  </ion-refresher>\n  <ion-list inset style="margin:16px 0;">\n      <button ion-item *ngFor="let item of items" [navPush]="nxPage" [navParams]="{item:item}">\n          <span>[{{item.AnnouncementType}}]{{item.AnnouncementTitle}}</span>\n          <p>{{item.AnnouncementPublishPerson}}&emsp;{{item.AnnouncementPublishDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n      </button>\n  </ion-list>\n  <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n      <div padding>暂无公告！！！</div>\n      <img src="assets/img/face/face2.png" height="100">\n  </div>\n  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */],
-            __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */],
-            __WEBPACK_IMPORTED_MODULE_5__providers_HttpService__["a" /* HttpService */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]])
-    ], AccountEdit);
-    return AccountEdit;
+            __WEBPACK_IMPORTED_MODULE_2__announcementService__["a" /* AnnouncementService */]])
+    ], AnnouncementPage);
+    return AnnouncementPage;
 }());
 
-//# sourceMappingURL=account-edit.js.map
+//# sourceMappingURL=announcement.js.map
 
 /***/ })
 

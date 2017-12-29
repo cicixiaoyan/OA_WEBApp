@@ -21,8 +21,8 @@
     <ion-list>
       <ion-item-sliding  *ngFor="let item of list"  (click)="doRead(item.Id)">
         <ion-item >
-          <ion-avatar item-start><span>{{item.JobNumber}}</span></ion-avatar>
-          <h2>{{item.Name}}•{{item.Sex}}&emsp;<span float-right>{{item.Edu}}</span></h2>
+          <ion-avatar item-start><span>{{item.StaffNumber}}</span></ion-avatar>
+          <h2>{{item.Name}}•{{item.Sex}}&emsp;<span float-right>{{item.FirstEdu}}</span></h2>
           <h3>部门：{{item.Dept}}</h3>
           <p>{{item.Indate}}入职</p>
         </ion-item>

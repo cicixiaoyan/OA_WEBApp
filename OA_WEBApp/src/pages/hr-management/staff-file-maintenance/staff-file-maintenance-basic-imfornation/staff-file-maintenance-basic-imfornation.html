@@ -1,9 +1,3 @@
-<!--
-  Generated template for the StaffFileMaintenanceBasicImfornationPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
     <ion-navbar>
@@ -21,7 +15,6 @@
           <div>
              <button ion-button color="energized" small outline>修改</button>
              <button ion-button color="danger" small outline>删除</button>
-           
           </div>
         </div>
         <ion-list  [ngClass]="{'collapsed': hideOne, 'expanded': !hideOne}">
@@ -29,12 +22,20 @@
             <div>
                 <ion-item>
                     <ion-label>工号</ion-label>
-                    <ion-input text-right formControlName="JobNumber" placeholder="输入工号"></ion-input>
+                    <ion-input text-right formControlName="StaffNumber" placeholder="请输入工号"></ion-input>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.StaffNumber.invalid && (formCtrls.StaffNumber.touched || formCtrls.StaffNumber.dirty )">
+                  <div *ngIf="baseForm.get('StaffNumber').errors.required">员工工号必填</div>
+                  <div *ngIf="baseForm.get('StaffNumber').errors.maxlength">最多输入20个字</div>
+                </div>
                 <ion-item>
                     <ion-label>姓名</ion-label>
-                    <ion-input text-right formControlName="Name" placeholder="输入姓名"></ion-input>
+                    <ion-input text-right formControlName="Name" placeholder="请输入姓名"></ion-input>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.Name.invalid && (formCtrls.Name.touched || formCtrls.Name.dirty )">
+                  <div *ngIf="baseForm.get('Name').errors.required">姓名必填</div>
+                  <div *ngIf="baseForm.get('Name').errors.maxlength">最多输入10个字</div>
+                </div>
                 <ion-item>
                     <ion-label>性别</ion-label>
                     <ion-select formControlName="Sex" cancelText="取消" okText="确定" placeholder="请选择">
@@ -46,10 +47,14 @@
                     <ion-label>出生日期</ion-label>
                     <ion-datetime formControlName="BirthDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.BirthDate.invalid && formCtrls.BirthDate.touched">出生日期必选</div>
                 <ion-item>
                     <ion-label>籍贯<span class="optional">（选填）</span></ion-label>
                     <ion-input text-right formControlName="NativePlace" placeholder="输入籍贯"></ion-input>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.NativePlace.invalid && (formCtrls.NativePlace.touched || formCtrls.NativePlace.dirty )">
+                  最多可输入12个字
+                </div>
                 <ion-item>
                     <ion-label>民族</ion-label>
                     <ion-select formControlName="Ethnic" cancelText="取消" okText="确定" placeholder="请选择">
@@ -60,6 +65,7 @@
                         <ion-option value="其他">其他</ion-option>
                     </ion-select>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.Ethnic.invalid && formCtrls.Ethnic.touched">民族必选</div>
                 <ion-item>
                     <ion-label>入党时间<span class="optional">（选填）</span></ion-label>
                     <ion-datetime formControlName="JoinPartyTime" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
@@ -81,6 +87,9 @@
                     <ion-label>身份证号<span class="optional">（选填）</span></ion-label>
                     <ion-input text-right formControlName="IDC" placeholder="输入身份证号"></ion-input>
                 </ion-item>
+                <div class="validation-failed" *ngIf="baseForm.controls.IDC.invalid && (baseForm.controls.IDC.touched || baseForm.controls.IDC.dirty )">
+                  请输入合法的身份证号
+                </div>
                 <ion-item>
                     <ion-label>员工状态<span class="optional">（选填）</span></ion-label>
                     <ion-select formControlName="StaffStatus" cancelText="取消" okText="确定" placeholder="请选择">
@@ -107,6 +116,7 @@
                         <ion-option value="博士研究生">博士研究生</ion-option>
                     </ion-select>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.FirstEdu.invalid && formCtrls.Name.touched">第一学历必填</div>
                 <ion-item>
                     <ion-label>毕业日期<span class="optional">（选填）</span></ion-label>
                     <ion-datetime formControlName="GraduationDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
@@ -115,6 +125,7 @@
                     <ion-label>毕业学校<span class="optional">（选填）</span></ion-label>
                     <ion-input text-right formControlName="GraduatedSchool" placeholder="输入毕业学校"></ion-input>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.GraduatedSchool.invalid && (formCtrls.GraduatedSchool.touched || formCtrls.GraduatedSchool.dirty )">最多可输入30个字</div>
                 <ion-item>
                     <ion-label>专业<span class="optional">（选填）</span></ion-label>
                     <ion-select formControlName="profession" cancelText="取消" okText="确定" placeholder="请选择">
@@ -140,6 +151,7 @@
                     <ion-label>毕业学校<span class="optional">（选填）</span></ion-label>
                     <ion-input text-right formControlName="SecondGraduatedSchool" placeholder="输入第二学历毕业学校"></ion-input>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.SecondGraduatedSchool.invalid && (formCtrls.SecondGraduatedSchool.touched || formCtrls.SecondGraduatedSchool.dirty )">最多可输入30个字</div>
                 <ion-item>
                     <ion-label>学位<span class="optional">（选填）</span></ion-label>
                     <ion-select formControlName="Degree" cancelText="取消" okText="确定" placeholder="请选择">
@@ -152,26 +164,44 @@
                     <ion-label>户口所在地<span class="optional">（选填）</span></ion-label>
                     <ion-input text-right formControlName="AccountLocation" placeholder="输入户口所在地"></ion-input>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.AccountLocation.invalid && (formCtrls.AccountLocation.touched || formCtrls.AccountLocation.dirty )">
+                  最多输入40个字
+                </div>
                 <ion-item>
                     <ion-label>家庭地址<span class="optional">（选填）</span></ion-label>
                     <ion-textarea rows="2" text-right formControlName="FamilyAddress" placeholder="输入家庭地址"></ion-textarea>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.FamilyAddress.invalid && (formCtrls.FamilyAddress.touched || formCtrls.FamilyAddress.dirty )">
+                  最多输入40个字
+                </div>
                 <ion-item>
                     <ion-label>联系电话<span class="optional">（选填）</span></ion-label>
                     <ion-input text-right formControlName="Telephone" placeholder="输入联系电话"></ion-input>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.Telephone.invalid && (formCtrls.Telephone.touched || formCtrls.Telephone.dirty )">
+                  请输入合法的电话号码
+                </div>
                 <ion-item>
                     <ion-label>手机<span class="optional">（选填）</span></ion-label>
                     <ion-input text-right formControlName="Mobile" placeholder="输入手机号码"></ion-input>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.Mobile.invalid && (formCtrls.Mobile.touched || formCtrls.Mobile.dirty )">
+                  请输入合法的手机号
+                </div>
                 <ion-item>
                     <ion-label>电子邮箱<span class="optional">（选填）</span></ion-label>
                     <ion-input type="email" text-right formControlName="Email" placeholder="输入邮箱"></ion-input>
                 </ion-item>
+                <div class="validation-failed" *ngIf="baseForm.controls.Email.invalid && (baseForm.controls.Email.touched || baseForm.controls.Email.dirty )">
+                  请输入合法的邮件
+                </div>
                 <ion-item>
                     <ion-label>所获证书<span class="optional">（选填）</span></ion-label>
                     <ion-input text-right formControlName="CertificateObtained" placeholder="输入所获证书"></ion-input>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.CertificateObtained.invalid && (formCtrls.CertificateObtained.touched || formCtrls.CertificateObtained.dirty )">
+                  最多输入180个字
+                </div>
             </div>
         </ion-list>
 
@@ -180,12 +210,15 @@
             <div >
                 <ion-item>
                     <ion-label>所属部门</ion-label>
-                    <ion-select formControlName="Dept" cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-select formControlName="DeptId" cancelText="取消" okText="确定" placeholder="请选择">
                         <ion-option value="1">青白江疾病预防控制中心</ion-option>
                         <ion-option value="2">部门2</ion-option>
                         <ion-option value="3">部门3</ion-option>
                     </ion-select>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.DeptId.invalid && (formCtrls.DeptId.touched || formCtrls.DeptId.dirty )">
+                  部门必选
+                </div>
                 <ion-item>
                     <ion-label>职务</ion-label>
                     <ion-select formControlName="Duty" cancelText="取消" okText="确定" placeholder="请选择">
@@ -194,6 +227,9 @@
                         <ion-option value="3">职务3</ion-option>
                     </ion-select>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.Duty.invalid && (formCtrls.Duty.touched || formCtrls.Duty.dirty )">
+                  职务必选
+                </div>
                 <ion-item>
                     <ion-label>职称<span class="optional">（选填）</span></ion-label>
                     <ion-select formControlName="JobTitle" cancelText="取消" okText="确定" placeholder="请选择">
@@ -214,10 +250,16 @@
                     <ion-label>参加工作日</ion-label>
                     <ion-datetime formControlName="Workday" placeholder="点击添加" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.Workday.invalid && formCtrls.Workday.touched">
+                  参加工作时间必填
+                </div>
                 <ion-item>
                     <ion-label>入职日期<span class="optional">（选填）</span></ion-label>
                     <ion-datetime formControlName="Indate" placeholder="点击添加" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.Indate.invalid && formCtrls.Indate.touched">
+                  入职时间必填
+                </div>
                 <ion-item>
                     <ion-label>员工性质</ion-label>
                     <ion-select formControlName="EmployeeNature" cancelText="取消" okText="确定" placeholder="请选择">
@@ -229,18 +271,30 @@
                     <ion-label>医疗保险号<span class="optional">（选填）</span></ion-label>
                     <ion-input text-right formControlName="MedicareNumber" placeholder="输入医疗保险号"></ion-input>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.MedicareNumber.invalid && (formCtrls.MedicareNumber.touched || formCtrls.MedicareNumber.dirty )">
+                  最多可输入16位
+                </div>
                 <ion-item>
                     <ion-label>养老手册号<span class="optional">（选填）</span></ion-label>
                     <ion-input text-right formControlName="PensionBookNumber" placeholder="输入养老手册号"></ion-input>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.PensionBookNumber.invalid && (formCtrls.PensionBookNumber.touched || formCtrls.PensionBookNumber.dirty )">
+                  最多可输入20位
+                </div>
                 <ion-item>
                     <ion-label>公积金账号<span class="optional">（选填）</span></ion-label>
                     <ion-input text-right formControlName="ProvidentFundAccount" placeholder="输入公积金账号"></ion-input>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.ProvidentFundAccount.invalid && (formCtrls.ProvidentFundAccount.touched || formCtrls.ProvidentFundAccount.dirty )">
+                  最多可输入20位
+                </div>
                 <ion-item>
-                    <ion-label stacked>备注<span class="optional">（选填）</span></ion-label>
+                    <ion-label stacked text-left>备注<span class="optional">（选填）</span></ion-label>
                     <ion-textarea  formControlName="Remarks" placeholder="输入备注信息"></ion-textarea>
                 </ion-item>
+                <div class="validation-failed" *ngIf="formCtrls.Remarks.invalid && (formCtrls.Remarks.touched || formCtrls.Remarks.dirty )">
+                  最多可输入180位
+                </div>
             </div>
         </ion-list>
 
@@ -265,5 +319,5 @@
 
 </ion-content>
 <ion-footer>
-    <button ion-button full color="danger" [disabled]="!baseForm.valid" (click)=sent(baseForm.value)>保存</button>
+    <button ion-button full color="danger" [disabled]="baseForm.invalid" (click)=sent(baseForm.value)>保存</button>
 </ion-footer>

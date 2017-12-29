@@ -43,7 +43,7 @@ export class MeetingEditPage {
         PlaceId: ["", [ Validators.required]],
         StartDate: ["", [ Validators.required]],
         EndDate: ["", [Validators.required]],
-        Person: ["", [Validators.maxLength(180), Validators.required]],
+        PersonId: ["", [Validators.maxLength(180), Validators.required]],
         DeptId: ["", []],
         HostName: ["", [Validators.maxLength(20)]],
         Range: ["", [Validators.maxLength(180)]],

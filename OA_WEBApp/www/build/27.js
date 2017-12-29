@@ -1,15 +1,16 @@
 webpackJsonp([27],{
 
-/***/ 731:
+/***/ 734:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContractSearchPageModule", function() { return ContractSearchPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FileApplicationListPageModule", function() { return FileApplicationListPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_search__ = __webpack_require__(810);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contract_service__ = __webpack_require__(772);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__file_application_list__ = __webpack_require__(815);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fileApplicationService__ = __webpack_require__(776);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_components_module__ = __webpack_require__(365);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,34 +21,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ContractSearchPageModule = (function () {
-    function ContractSearchPageModule() {
+
+var FileApplicationListPageModule = (function () {
+    function FileApplicationListPageModule() {
     }
-    ContractSearchPageModule = __decorate([
+    FileApplicationListPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__contract_search__["a" /* ContractSearchPage */],
+                __WEBPACK_IMPORTED_MODULE_2__file_application_list__["a" /* FileApplicationListPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contract_search__["a" /* ContractSearchPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__file_application_list__["a" /* FileApplicationListPage */]),
+                __WEBPACK_IMPORTED_MODULE_4__components_components_module__["a" /* ComponentsModule */]
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__contract_service__["a" /* ContractService */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_3__fileApplicationService__["a" /* FileApplicationService */]]
         })
-    ], ContractSearchPageModule);
-    return ContractSearchPageModule;
+    ], FileApplicationListPageModule);
+    return FileApplicationListPageModule;
 }());
 
-//# sourceMappingURL=contract-search.module.js.map
+//# sourceMappingURL=file-application-list.module.js.map
 
 /***/ }),
 
-/***/ 772:
+/***/ 776:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FileApplicationService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -59,31 +64,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import { UserInfo } from "../../model/UserInfo";
-var ContractService = (function () {
-    function ContractService(httpService) {
+
+var FileApplicationService = (function () {
+    function FileApplicationService(httpService) {
         this.httpService = httpService;
+        this.status = {
+            "审批中": '审批中',
+            "已同意": '已同意',
+            "已拒绝": '已拒绝',
+        };
     }
-    ContractService = __decorate([
+    FileApplicationService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_HttpService__["a" /* HttpService */]])
-    ], ContractService);
-    return ContractService;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
+    ], FileApplicationService);
+    return FileApplicationService;
 }());
 
-//# sourceMappingURL=contract-service.js.map
+//# sourceMappingURL=fileApplicationService.js.map
 
 /***/ }),
 
-/***/ 810:
+/***/ 815:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractSearchPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FileApplicationListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_PublicService__ = __webpack_require__(366);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fileApplicationService__ = __webpack_require__(776);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -96,66 +105,119 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-/**
- * Generated class for the ContractSearchPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var ContractSearchPage = (function () {
-    function ContractSearchPage(navCtrl, navParams, viewCtrl, publicService, formBuilder) {
-        var _this = this;
+var FileApplicationListPage = (function () {
+    function FileApplicationListPage(navCtrl, navParams, popoverCtrl, fileApplicationService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.viewCtrl = viewCtrl;
-        this.publicService = publicService;
-        this.formBuilder = formBuilder;
-        this.DeptLs = [];
-        this.search = this.navParams.get("search");
-        this.searchForm = this.formBuilder.group({
-            "DeptId": ["", []],
-            "StartDate": ["", []],
-            "EndDate": ["", []],
-            "ContractYear": ["", []],
-            "ContractType": ["", []],
-        });
-        this.publicService.GetDeptLs().subscribe(function (resJson) {
-            if (resJson.Result)
-                _this.DeptLs = resJson.Data;
-        });
-        if (this.search) {
-            this.searchForm.setValue({
-                "DeptId": this.search.DeptId,
-                "StartDate": this.search.StartDate,
-                "EndDate": this.search.EndDate,
-                "ContractYear": this.search.ContractYear,
-                "ContractType": this.search.ContractType
-            });
-        }
+        this.popoverCtrl = popoverCtrl;
+        this.fileApplicationService = fileApplicationService;
+        this.list = [];
+        this.moredata = true;
+        this.isEmpty = false;
+        this.checkBtn = { "审批中": true, "已同意": false, "已拒绝": false };
+        this.data = {
+            "uid": this.fileApplicationService.httpService.globalData.Uid,
+            "Status": this.fileApplicationService.status['审批中'],
+            "PageIndex": 0,
+            "PageSize": 8
+        };
+        this.getList(this.data);
     }
-    ContractSearchPage.prototype.sent = function (value) {
-        this.viewCtrl.dismiss({ "search": value });
+    // 选择
+    FileApplicationListPage.prototype.checkRead = function (name) {
+        if (name === void 0) { name = "审批中"; }
+        this.data.PageIndex = 0;
+        this.list = [];
+        this.checkBtn = { "审批中": false, "已同意": false, "已拒绝": false };
+        this.checkBtn[name] = true;
+        if (name === "审批中") {
+            // 参数设置
+            this.data.Status = this.fileApplicationService.status["审批中"];
+        }
+        else if (name === "已同意") {
+            // 参数设置
+            this.data.Status = this.fileApplicationService.status["已同意"];
+        }
+        else {
+            // 参数设置
+            this.data.Status = this.fileApplicationService.status["all"];
+        }
+        this.getList(this.data);
     };
-    ContractSearchPage.prototype.reset = function () {
-        this.searchForm.reset();
-        this.searchForm.setValidators(null);
-        this.searchForm.updateValueAndValidity();
+    FileApplicationListPage.prototype.doWrite = function () {
+        this.navCtrl.push("FileApplicationAddPage");
     };
-    ContractSearchPage = __decorate([
+    FileApplicationListPage.prototype.doRefresh = function (refresher) {
+        this.list = [];
+        this.data.PageIndex = 1;
+        this.getList(this.data);
+        setTimeout(function () {
+            refresher.complete();
+        }, 1000);
+    };
+    FileApplicationListPage.prototype.doInfinite = function () {
+        if (this.moredata) {
+            this.data.PageIndex++;
+            this.getList(this.data);
+        }
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve();
+            }, 500);
+        });
+    };
+    FileApplicationListPage.prototype.getList = function (data) {
+        this.list = [
+            {
+                "Id": "1",
+                "Name": '张三',
+                "ApplicationDate": '2017-10-12',
+                "ApplicationReason": '我是申请理由',
+                "ApplicationStatus": '审批中',
+                "AuditDate": "2017-12-12",
+            },
+            {
+                "Id": "2",
+                "Name": '李四',
+                "ApplicationDate": '2017-10-12',
+                "ApplicationReason": '我是申请理由',
+                "ApplicationStatus": '已同意',
+                "AuditDate": "2017-12-12",
+            },
+            {
+                "Id": "3",
+                "Name": '李四',
+                "ApplicationDate": '2017-10-12',
+                "ApplicationReason": '我是申请理由',
+                "ApplicationStatus": '已拒绝',
+                "AuditDate": "2017-12-12",
+            }
+        ];
+        // this.fileApplicationService.getList(data).subscribe((resJson) => {
+        //   if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
+        //     this.moredata = true;
+        //     this.isEmpty = false;
+        //     let list = resJson.Data;
+        //     this.list = [...this.list, ...list];
+        //   }else{
+        //     this.moredata = false;
+        //     this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+        //   }
+        // });
+    };
+    FileApplicationListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contract-search',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-search\contract-search.html"*/`<ion-header>\n    <ion-navbar>\n        <ion-title>筛选</ion-title>\n    </ion-navbar>\n</ion-header>\n<ion-content>\n    <form [formGroup]="searchForm" (ngSubmit)="sent(searchForm.value)">\n        <ion-list>\n            <ion-item>\n                <ion-label>员工部门</ion-label>\n                <ion-select text-right formControlName="DeptId" cancelText="取消" okText="确定" placeholder="请选择">\n                    <ion-option *ngFor="let Dept of DeptLs;let i = index" [value]="Dept.Id">{{Dept.BmName}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>合同年份</ion-label>\n                <ion-select text-right formControlName="ContractYear" cancelText="取消" okText="确定" placeholder="请选择">\n                  <ion-option value="2014">2014</ion-option>\n                  <ion-option value="2015">2015</ion-option>\n                  <ion-option value="2016">2016</ion-option>\n                  <ion-option value="2017">2017</ion-option>\n                </ion-select>\n              </ion-item>\n            <ion-item>\n                <ion-label>合同类型</ion-label>\n                <ion-select formControlName="ContractType" cancelText="取消" okText="确定" placeholder="请选择">\n                    <ion-option value="701">保密协议</ion-option>\n                    <ion-option value="700">劳动合同</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item class="search-dattime">\n                <ion-label>签约时间</ion-label>\n                <ion-datetime formControlName="StartDate" cancelText="取消" [max]="searchForm.value.EndDate==\'\'?null:searchForm.value.EndDate"  placeholder="开始时间" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                <ion-datetime formControlName="EndDate" cancelText="取消" [min]="searchForm.value.StartDate==\'\'?null:searchForm.value.StartDate"  placeholder="结束时间" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n            <!-- <ion-item>\n                <ion-label>签约结束时间</ion-label>\n                <ion-datetime formControlName="EndDate" cancelText="取消"  placeholder="请选择" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item> -->\n\n        </ion-list>\n        <div text-center>\n            <button ion-button color="energized" (click)="reset()" small outline>重置</button>\n            <button ion-button color="assertive" type="submit" small>搜索</button>\n        </div>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-search\contract-search.html"*/,
+            selector: 'page-file-application-list',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\file-application\file-application-list\file-application-list.html"*/`<ion-header>\n\n    <ion-navbar>\n        <ion-title>档案申请查看</ion-title>\n    </ion-navbar>\n    <div class="subbox">\n        <div>\n            <button ion-button small (click)="checkRead(\'审批中\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn[\'审批中\']}">审批中</button>\n            <button ion-button small (click)="checkRead(\'已同意\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn[\'已同意\']}">已同意</button>\n            <button ion-button small (click)="checkRead(\'已拒绝\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn[\'已拒绝\']}">已拒绝</button>\n        </div>\n    </div>\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n        <ion-item-sliding *ngFor="let item of list">\n            <ion-item>\n                <ion-avatar item-start [ngClass]="{\'success\': (item.ApplicationStatus == \'已同意\'), \'danger\': (item.ApplicationStatus == \'已拒绝\')}"><span>{{item.ApplicationStatus}}</span></ion-avatar>\n                <h2>{{item.Name}}\n                  <small float-end	 class="text-ios-primary" *ngIf="item.ApplicationStatus != \'审批中\'"><em>{{item.AuditDate}}审</em></small>\n                </h2>\n                <h3 class="small">申请日期：{{item.ApplicationDate}}</h3>\n                <p class=\'small\'>理由：{{item.ApplicationReason}}</p>\n            </ion-item>\n        </ion-item-sliding>\n    </ion-list>\n    <empty *ngIf="isEmpty"></empty>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\file-application\file-application-list\file-application-list.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_PublicService__["a" /* PublicService */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
-    ], ContractSearchPage);
-    return ContractSearchPage;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */],
+            __WEBPACK_IMPORTED_MODULE_2__fileApplicationService__["a" /* FileApplicationService */]])
+    ], FileApplicationListPage);
+    return FileApplicationListPage;
 }());
 
-//# sourceMappingURL=contract-search.js.map
+//# sourceMappingURL=file-application-list.js.map
 
 /***/ })
 

@@ -1,15 +1,16 @@
 webpackJsonp([33],{
 
-/***/ 703:
+/***/ 729:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BacklogDetailModule", function() { return BacklogDetailModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContractMaintenancePageModule", function() { return ContractMaintenancePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog_detail__ = __webpack_require__(782);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(774);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_maintenance__ = __webpack_require__(810);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contract_service__ = __webpack_require__(773);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_components_module__ = __webpack_require__(365);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,39 +21,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var BacklogDetailModule = (function () {
-    function BacklogDetailModule() {
+
+var ContractMaintenancePageModule = (function () {
+    function ContractMaintenancePageModule() {
     }
-    BacklogDetailModule = __decorate([
+    ContractMaintenancePageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */],
+                __WEBPACK_IMPORTED_MODULE_2__contract_maintenance__["a" /* ContractMaintenancePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contract_maintenance__["a" /* ContractMaintenancePage */]),
+                __WEBPACK_IMPORTED_MODULE_4__components_components_module__["a" /* ComponentsModule */]
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__backlog_detail__["a" /* BacklogDetail */]
-            ],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__backlogService__["a" /* BacklogService */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_3__contract_service__["a" /* ContractService */]],
+            exports: [__WEBPACK_IMPORTED_MODULE_2__contract_maintenance__["a" /* ContractMaintenancePage */]]
         })
-    ], BacklogDetailModule);
-    return BacklogDetailModule;
+    ], ContractMaintenancePageModule);
+    return ContractMaintenancePageModule;
 }());
 
-//# sourceMappingURL=backlog-detail.module.js.map
+//# sourceMappingURL=contract-maintenance.module.js.map
 
 /***/ }),
 
-/***/ 774:
+/***/ 773:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -64,51 +63,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import {Observable} from "rxjs";
-
-var BacklogService = (function () {
-    function BacklogService(httpService) {
+// import { UserInfo } from "../../model/UserInfo";
+var ContractService = (function () {
+    function ContractService(httpService) {
         this.httpService = httpService;
-        this.Status = {
-            notdone: 0,
-            done: 1 // 已办理
-        };
     }
-    BacklogService.prototype.getNotDoneList = function (param) {
-        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
-    };
-    BacklogService.prototype.getDoneList = function (param) {
-        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map(function (res) { return res.json(); });
-    };
-    BacklogService.prototype.getDone = function (param) {
-        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
-    };
-    BacklogService.prototype.getNotDone = function (param) {
-        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map(function (res) { return res.json(); });
-    };
-    BacklogService.prototype.TodoApprove = function (param) {
-        return this.httpService.postFormData('/ashx/TodoApprove.ashx', param).map(function (res) { return res.json(); });
-    };
-    BacklogService = __decorate([
+    ContractService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], BacklogService);
-    return BacklogService;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_HttpService__["a" /* HttpService */]])
+    ], ContractService);
+    return ContractService;
 }());
 
-//# sourceMappingURL=backlogService.js.map
+//# sourceMappingURL=contract-service.js.map
 
 /***/ }),
 
-/***/ 782:
+/***/ 810:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogDetail; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractMaintenancePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(774);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_service__ = __webpack_require__(773);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -121,65 +99,118 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-/**
- * Generated class for the BacklogDetail page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-var BacklogDetail = (function () {
-    function BacklogDetail(navCtrl, navParams, backlogService, nativeService) {
+var ContractMaintenancePage = (function () {
+    function ContractMaintenancePage(navCtrl, navParams, popoverCtrl, contractService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.backlogService = backlogService;
-        this.nativeService = nativeService;
-        this.item = [];
-        this.isComplete = false;
-        console.log(this.navParams.get("id"));
-        this.initializeItems();
-    }
-    BacklogDetail.prototype.initializeItems = function () {
-        var _this = this;
-        var data = {
-            "Id": this.navParams.get("id"),
-            "Uid": this.backlogService.httpService.globalData.Uid
+        this.popoverCtrl = popoverCtrl;
+        this.contractService = contractService;
+        this.list = [];
+        this.moredata = true;
+        this.isEmpty = false;
+        this.data = {
+            "uid": this.contractService.httpService.globalData.Uid,
+            "PageIndex": 0,
+            "PageSize": 8
         };
-        this.backlogService.getDone(data).subscribe(function (resJson) {
-            if (resJson.Result) {
-                _this.item = resJson.Data;
-            }
-            else {
-                _this.nativeService.showToast(resJson.Data);
-                _this.navCtrl.pop();
+        this.getList(this.data);
+    }
+    ContractMaintenancePage.prototype.ionViewDidLoad = function () {
+    };
+    ContractMaintenancePage.prototype.presentPopover = function (myEvent) {
+        var _this = this;
+        var popover = this.popoverCtrl.create("ContractSearchSeparatePage", { "search": this.search, "name": '签约' });
+        popover.present({
+            ev: myEvent
+        });
+        popover.onDidDismiss(function (search) {
+            console.log(search);
+            if (search) {
+                _this.search = search.search;
+                var data = search.search;
+                data.uid = _this.contractService.httpService.globalData.Uid;
+                data.PageIndex = 0;
+                data.PageSize = 8;
+                _this.getList(data);
             }
         });
     };
-    BacklogDetail.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad BacklogDetail');
+    ContractMaintenancePage.prototype.doRead = function (Params) {
+        this.navCtrl.push("ContractSettingPage", { "Id": Params });
     };
-    BacklogDetail.prototype.approved = function () {
-        console.log("审批通过");
+    ContractMaintenancePage.prototype.doWrite = function () {
+        this.navCtrl.push("ContractSettingPage");
+        // let modal = this.modalCtrl.create("TrainingMaintenanceSetPage");
+        // modal.present();
+        // modal.onDidDismiss(data => {
+        //     data && console.log(data);
+        // });
     };
-    BacklogDetail.prototype.overrule = function () {
-        console.log("审批驳回");
+    ContractMaintenancePage.prototype.doRefresh = function (refresher) {
+        this.list = [];
+        this.data.PageIndex = 1;
+        this.getList(this.data);
+        setTimeout(function () {
+            refresher.complete();
+        }, 1000);
     };
-    BacklogDetail.prototype.cancel = function () {
-        this.navCtrl.pop();
+    ContractMaintenancePage.prototype.doInfinite = function () {
+        if (this.moredata) {
+            this.data.PageIndex++;
+            this.getList(this.data);
+        }
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve();
+            }, 500);
+        });
     };
-    BacklogDetail = __decorate([
+    ContractMaintenancePage.prototype.getList = function (data) {
+        this.list = [
+            {
+                "Id": "1",
+                "Name": '张三',
+                "Dept": '检验科',
+                "Type": '劳动合同',
+                "ContractNumber": "A012345677",
+                "TurnPositive": '已转正',
+                "Status": '生效中' // 合同状态
+            },
+            {
+                "Id": "2",
+                "Name": '李四',
+                "Dept": '其他',
+                "Type": '劳动合同',
+                "ContractNumber": "A012345688",
+                "TurnPositive": '已转正',
+                "Status": '试用中' // 合同状态
+            },
+        ];
+        // this.contractService.getList(data).subscribe((resJson) => {
+        //   if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
+        //     this.moredata = true;
+        //     this.isEmpty = false;
+        //     let list = resJson.Data;
+        //     this.list = [...this.list, ...list];
+        //   }else{
+        //     this.moredata = false;
+        //     this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+        //   }
+        // });
+    };
+    ContractMaintenancePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-backlog-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog-detail\backlog-detail.html"*/`<!--\n  Generated template for the BacklogDetail page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>事项详情</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-card>\n        <ion-card-header>\n            33ee\n        </ion-card-header>\n        <ion-card-content>\n            <ion-list>\n                <ion-item>\n                    <ion-label>当前步骤：</ion-label>\n                    <ion-input type="text" placeholder="当前步骤1"></ion-input>\n                </ion-item>\n\n                <ion-item *ngIf="isComplete">\n                    <ion-label>审批模式：</ion-label>\n                    <ion-input type="text" placeholder="无"></ion-input>\n                </ion-item>\n\n                <div *ngIf="!isComplete">\n                    <ion-item>\n                        <ion-label>&emsp;流水号：<em>&emsp;1&nbsp;—</em></ion-label>\n\n                        <ion-input type="text" placeholder="请输入流水号"></ion-input>\n                    </ion-item>\n\n                    <ion-item>\n                        <ion-label>审批状态：</ion-label>\n                        <ion-input type="text" placeholder="无"></ion-input>\n                    </ion-item>\n                </div>\n\n\n                <div id="strhtm" style="min-height: 100px;overflow-x:auto;"></div>\n\n            </ion-list>\n            <ion-row>\n                <ion-col col-auto style="padding-left:12px;padding-top:5px;text-align:right;">\n                    &nbsp;相关附件：\n                </ion-col>\n                <ion-col col-lg-8 col-xl-6 style="position: relative;padding-left: 40px;background-color: #d7eaf9;">\n                    <ion-icon name="md-image" color="energized" style="position:absolute;left:.4rem;display:inline-block;font-size:3.6rem;"></ion-icon>\n                    <div>\n                        <span>text.png</span>\n                        <span ng-click="" style="position:absolute;right:10px;font-size:1.2rem">下载</span>\n                        <p style="font-size:1.2rem;">2.5M</p>\n                    </div>\n                </ion-col>\n            </ion-row>\n\n            <ion-list *ngIf="!isComplete">\n                <ion-item>\n                    <ion-label>审批记录：</ion-label>\n                    <ion-textarea type="text" placeholder="无"></ion-textarea>\n                </ion-item>\n                <ion-item>\n                    <ion-textarea placeholder="请输入本次审批意见" rows="2"></ion-textarea>\n                </ion-item>\n            </ion-list>\n\n\n        </ion-card-content>\n        <ion-row text-center>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-checkmark"></ion-icon>\n                    <div>审批通过</div>\n                </button>\n            </ion-col>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-close"></ion-icon>\n                    <div>审批驳回</div>\n                </button>\n            </ion-col>\n            <ion-col col-4>\n                <button ion-button icon-left clear small>\n                    <ion-icon name="md-return-left"></ion-icon>\n                    <div>返回</div>\n                </button>\n            </ion-col>\n        </ion-row>\n    </ion-card>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\backlog\backlog-detail\backlog-detail.html"*/,
+            selector: 'page-contract-maintenance',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-maintenance\contract-maintenance.html"*/`<!--\n  Generated template for the ContractMaintenancePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>合同维护</ion-title>\n    <ion-buttons end  (click)="presentPopover($event)">\n        <button ion-button icon-only>\n          <ion-icon name="search"></ion-icon>\n        </button>\n      </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let item of list"  (click)="doRead(item.Id)">\n        <ion-item>\n            <h2>{{item.Name}}[{{item.ContractNumber}}]</h2>\n            <div class="small">\n              类型：{{item.Type}}&emsp;{{item.Status}}\n              <span float-right [ngClass]="{\'text-ios-secondary\':(item.TurnPositive == \'已转正\'),\'text-ios-energized\':(item.TurnPositive != \'已转正\')}">{{item.TurnPositive}}</span>\n            </div>\n            <p class="small">部门：{{item.Dept}}&emsp;</p>\n        </ion-item>\n\n      </ion-item-sliding>\n    </ion-list>\n    <empty *ngIf="isEmpty"></empty>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-maintenance\contract-maintenance.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__backlogService__["a" /* BacklogService */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */]])
-    ], BacklogDetail);
-    return BacklogDetail;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */],
+            __WEBPACK_IMPORTED_MODULE_2__contract_service__["a" /* ContractService */]])
+    ], ContractMaintenancePage);
+    return ContractMaintenancePage;
 }());
 
-//# sourceMappingURL=backlog-detail.js.map
+//# sourceMappingURL=contract-maintenance.js.map
 
 /***/ })
 

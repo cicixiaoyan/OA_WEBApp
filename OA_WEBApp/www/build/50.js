@@ -1,14 +1,14 @@
 webpackJsonp([50],{
 
-/***/ 744:
+/***/ 747:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StaffFileMaintenanceSocialRelationshipPageModule", function() { return StaffFileMaintenanceSocialRelationshipPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrainingMaintenancePageModule", function() { return TrainingMaintenancePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_social_relationship__ = __webpack_require__(825);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__training_maintenance_search__ = __webpack_require__(830);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,34 +18,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var StaffFileMaintenanceSocialRelationshipPageModule = (function () {
-    function StaffFileMaintenanceSocialRelationshipPageModule() {
+var TrainingMaintenancePageModule = (function () {
+    function TrainingMaintenancePageModule() {
     }
-    StaffFileMaintenanceSocialRelationshipPageModule = __decorate([
+    TrainingMaintenancePageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_social_relationship__["a" /* StaffFileMaintenanceSocialRelationship */],
+                __WEBPACK_IMPORTED_MODULE_2__training_maintenance_search__["a" /* TrainingMaintenanceSearch */]
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_social_relationship__["a" /* StaffFileMaintenanceSocialRelationship */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__training_maintenance_search__["a" /* TrainingMaintenanceSearch */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_social_relationship__["a" /* StaffFileMaintenanceSocialRelationship */]]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__training_maintenance_search__["a" /* TrainingMaintenanceSearch */]],
         })
-    ], StaffFileMaintenanceSocialRelationshipPageModule);
-    return StaffFileMaintenanceSocialRelationshipPageModule;
+    ], TrainingMaintenancePageModule);
+    return TrainingMaintenancePageModule;
 }());
 
-//# sourceMappingURL=staff-file-maintenance-social-relationship.module.js.map
+//# sourceMappingURL=training-maintenance-search.module.js.map
 
 /***/ }),
 
-/***/ 825:
+/***/ 830:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StaffFileMaintenanceSocialRelationship; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrainingMaintenanceSearch; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -57,68 +58,56 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 /**
- * Generated class for the StaffFileMaintenanceSocialRelationshipPage page.
+ * Generated class for the TrainingMaintenanceSearchComponent component.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * See https://angular.io/api/core/Component for more info on Angular
+ * Components.
  */
-var StaffFileMaintenanceSocialRelationship = (function () {
-    function StaffFileMaintenanceSocialRelationship(navCtrl, modalCtrl, navParams) {
+var TrainingMaintenanceSearch = (function () {
+    function TrainingMaintenanceSearch(navCtrl, navParams, viewCtrl, formBuilder) {
         this.navCtrl = navCtrl;
-        this.modalCtrl = modalCtrl;
         this.navParams = navParams;
-        this.getList();
+        this.viewCtrl = viewCtrl;
+        this.formBuilder = formBuilder;
+        this.search = this.navParams.get("search");
+        this.searchForm = this.formBuilder.group({
+            Title: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(30)]],
+            StartDate: ["", []],
+            EndDate: ["", []],
+            Instructor: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(8)]],
+        });
+        if (this.search) {
+            this.searchForm.setValue({
+                Title: this.search.Title,
+                StartDate: this.search.StartDate,
+                EndDate: this.search.EndDate,
+                Instructor: this.search.Instructor,
+            });
+        }
     }
-    StaffFileMaintenanceSocialRelationship.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad StaffFileMaintenanceSocialRelationshipPage');
+    TrainingMaintenanceSearch.prototype.sent = function (value) {
+        this.viewCtrl.dismiss({ "search": value });
     };
-    StaffFileMaintenanceSocialRelationship.prototype.add = function () {
-        var modal = this.modalCtrl.create("StaffFileMaintenanceSocialRelationshipAddPage");
-        modal.present();
-        modal.onDidDismiss(function (data) {
-            data && console.log(data);
-        });
+    TrainingMaintenanceSearch.prototype.reset = function () {
+        this.searchForm.reset();
+        this.searchForm.setValidators(null);
+        this.searchForm.updateValueAndValidity();
     };
-    StaffFileMaintenanceSocialRelationship.prototype.doRead = function (id) {
-        var parma = {
-            "Id": id,
-            "readOnly": (this.navParams.get("readOnly") ? true : null)
-        };
-        var modal = this.modalCtrl.create("StaffFileMaintenanceSocialRelationshipAddPage", parma);
-        modal.present();
-        modal.onDidDismiss(function (data) {
-            data && console.log(data);
-        });
-    };
-    StaffFileMaintenanceSocialRelationship.prototype.getList = function () {
-        this.list = [
-            {
-                'Id': '1',
-                'Name': '父亲',
-                'Relationship': '父子',
-                'Mobile': '1311111111',
-            },
-            {
-                'Id': '2',
-                'Name': '母亲',
-                'Relationship': '母子',
-                'Mobile': '1311111111'
-            },
-        ];
-    };
-    StaffFileMaintenanceSocialRelationship = __decorate([
+    TrainingMaintenanceSearch = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-staff-file-maintenance-social-relationship',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-social-relationship\staff-file-maintenance-social-relationship.html"*/`<!--\n  Generated template for the StaffFileMaintenanceSocialRelationshipPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>社会关系</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let item of list"  (click)="doRead(item.Id)">\n        <ion-item  >\n          <h2>{{item.Name}}<span float-right color="royal">{{item.Relationship}}</span></h2>\n          <p>{{item.Mobile}}</p>\n        </ion-item>\n        <ion-item-options side="right">\n          <button ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>\n        </ion-item-options>\n      </ion-item-sliding>\n    </ion-list>\n    <div text-center>\n        <button (click)="add()" icon-left ion-button color="secondary" small outline round><ion-icon name="add"></ion-icon>添加</button>\n    </div>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-social-relationship\staff-file-maintenance-social-relationship.html"*/,
+            selector: 'training-maintenance-search',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\training-maintenance\training-maintenance-search\training-maintenance-search.html"*/`<ion-header>\n\n    <ion-navbar>\n\n        <ion-title>筛选</ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n    <form [formGroup]="searchForm" (ngSubmit)="sent(searchForm.value)">\n\n        <ion-list>\n\n            <ion-item>\n\n                <ion-label floating>课程主题</ion-label>\n\n                <ion-input type="text" formControlName="Title"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label floating>培训开始时间</ion-label>\n\n                <ion-datetime formControlName="StartDate" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label floating>培训结束时间</ion-label>\n\n                <ion-datetime formControlName="EndDate" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label floating>培训讲师</ion-label>\n\n                <ion-input type="text" formControlName="Instructor"></ion-input>\n\n            </ion-item>\n\n        </ion-list>\n\n        <div text-center>\n\n            <button ion-button color="energized" (click)="reset()" small outline>重置</button>\n\n            <button ion-button color="assertive" type="submit" small>搜索</button>\n\n        </div>\n\n    </form>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\training-maintenance\training-maintenance-search\training-maintenance-search.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
-    ], StaffFileMaintenanceSocialRelationship);
-    return StaffFileMaintenanceSocialRelationship;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
+    ], TrainingMaintenanceSearch);
+    return TrainingMaintenanceSearch;
 }());
 
-//# sourceMappingURL=staff-file-maintenance-social-relationship.js.map
+//# sourceMappingURL=training-maintenance-search.js.map
 
 /***/ })
 

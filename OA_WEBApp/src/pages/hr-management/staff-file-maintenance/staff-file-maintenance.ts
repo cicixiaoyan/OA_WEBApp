@@ -79,33 +79,30 @@ export class StaffFileMaintenance {
     this.list = [
       {
         "Id": "70",
-        "Name": "刘展志",
-        "Birth": "2012-12-12",
-        "Dept": "检验科",
-        "Indate": "2017-07-03",
-        "Edu": "本科",
-        "Sex": "男",
-        "JobNumber": "070",
+        "StaffNumber": "070", // 工号
+        "Name": "刘展志", // 姓名
+        "Sex": "男", // 性别
+        "FirstEdu": "本科", // 学历
+        "Dept": "检验科", // 部门名称
+        "Indate": "2017-07-03", // 入职时间
       },
       {
         "Id": "69",
         "Name": "姚美英",
-        "Birth": "2012-12-12",
         "Dept": "其他",
         "Indate": "2017-07-03",
-        "Edu": "高中",
+        "FirstEdu": "高中",
         "Sex": "女",
-        "JobNumber": "069",
+        "StaffNumber": "069",
       },
       {
         "Id": "68",
         "Name": "卿明月",
-        "Birth": "2012-12-12",
         "Dept": "重大传染病防控科",
         "Indate": "2017-07-03",
-        "Edu": "高中",
+        "FirstEdu": "高中",
         "Sex": "女",
-        "JobNumber": "068",
+        "StaffNumber": "068",
       },
     ];
     // this.meetingService.getList(data).subscribe((resJson) => {
@@ -119,7 +116,7 @@ export class StaffFileMaintenance {
     //     this.isEmpty = (this.data.PageIndex == 0) ? true : false;
     //   }
     // });
-    
+
 
   }
 

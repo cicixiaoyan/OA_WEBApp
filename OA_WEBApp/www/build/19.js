@@ -5,11 +5,11 @@ webpackJsonp([19],{
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MailWriteModule", function() { return MailWriteModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MailModule", function() { return MailModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mail_write__ = __webpack_require__(833);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mailService__ = __webpack_require__(777);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mail__ = __webpack_require__(837);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mailService__ = __webpack_require__(778);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,31 +20,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MailWriteModule = (function () {
-    function MailWriteModule() {
+var MailModule = (function () {
+    function MailModule() {
     }
-    MailWriteModule = __decorate([
+    MailModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__mail_write__["a" /* MailWrite */]
+                __WEBPACK_IMPORTED_MODULE_2__mail__["a" /* Mail */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__mail_write__["a" /* MailWrite */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__mail__["a" /* Mail */])
             ],
             exports: [
-                __WEBPACK_IMPORTED_MODULE_2__mail_write__["a" /* MailWrite */]
+                __WEBPACK_IMPORTED_MODULE_2__mail__["a" /* Mail */]
             ],
             providers: [__WEBPACK_IMPORTED_MODULE_3__mailService__["a" /* MailService */]]
         })
-    ], MailWriteModule);
-    return MailWriteModule;
+    ], MailModule);
+    return MailModule;
 }());
 
-//# sourceMappingURL=mail-write.module.js.map
+//# sourceMappingURL=mail.module.js.map
 
 /***/ }),
 
-/***/ 777:
+/***/ 778:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -125,22 +125,15 @@ var MailService = (function () {
 
 /***/ }),
 
-/***/ 833:
+/***/ 837:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MailWrite; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Mail; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_FileService__ = __webpack_require__(161);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_Constants__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file_chooser__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_transfer__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_forms__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__mailService__ = __webpack_require__(777);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_Utils__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mailService__ = __webpack_require__(778);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -153,221 +146,211 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-
-
-
-
-
-
+// import { MailRead } from '../mail/mail-read/mail-read';
+// import { MailWrite } from '../mail/mail-write/mail-write';
+// import { MailReadOutbox } from '../mail/mail-read-outbox/mail-read-outbox';
 
 /**
- * Generated class for the MailWrite page.
+ * Generated class for the Mail page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-var MailWrite = (function () {
-    function MailWrite(navCtrl, navParams, actionSheetCtrl, popoverCtrl, fileService, nativeService, fileChooser, alertCtrl, fileTransfer, viewCtrl, globalData, mailService, formBuilder) {
+var Mail = (function () {
+    function Mail(navCtrl, navParams, globalData, modalCtrl, mailService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.actionSheetCtrl = actionSheetCtrl;
-        this.popoverCtrl = popoverCtrl;
-        this.fileService = fileService;
-        this.nativeService = nativeService;
-        this.fileChooser = fileChooser;
-        this.alertCtrl = alertCtrl;
-        this.fileTransfer = fileTransfer;
-        this.viewCtrl = viewCtrl;
         this.globalData = globalData;
+        this.modalCtrl = modalCtrl;
         this.mailService = mailService;
-        this.formBuilder = formBuilder;
-        this.addressee = "";
-        this.addresseeIds = "";
-        this.attName = "";
-        this.haveAffix = false;
-        this.writeForm = this.formBuilder.group({
-            addressee: ['', [__WEBPACK_IMPORTED_MODULE_8__angular_forms__["f" /* Validators */].required]],
-            Title: ['', []],
-            Level: ["普通", []],
-            Bcc: [false, []],
-            Content: ["", [__WEBPACK_IMPORTED_MODULE_8__angular_forms__["f" /* Validators */].maxLength(180)]],
-        });
-        // console.log(this.navParams.get("mail"));
-        var mail = this.navParams.get("mail");
-        if (typeof (mail) !== "undefined") {
-            this.affixPath = mail.yjfj;
-            this.fsbt = mail.jsbt;
-        }
+        this.box = "inbox";
+        this.inbox = true; // 默认为收件箱
+        this.isDraft = false; // 默认为发件箱
+        this.isEmpty = false;
+        this.checkBtn = { "read": false, "unread": true, "all": false };
+        this.inboxList = [];
+        this.outboxList = [];
+        this.moredata = true;
+        this.inboxData = {
+            "PageSize": 5,
+            "PageIndex": 0,
+            "MailStatus": this.mailService.mailStatus["inbox"],
+            "Uid": this.globalData.Uid,
+            "Status": this.mailService.status["unread"]
+        };
+        this.outboxData = {
+            "PageSize": 5,
+            "PageIndex": 0,
+            "MailStatus": this.mailService.mailStatus["outbox"],
+            "Uid": this.globalData.Uid,
+            "Status": this.mailService.status["unread"]
+        };
+        this.initializeItems();
     }
-    MailWrite.prototype.ionViewDidLoad = function () {
-        console.log("ionViewDidLoad MailWrite");
-    };
-    MailWrite.prototype.sent = function (data) {
+    Mail.prototype.initializeItems = function () {
         var _this = this;
-        console.log(data);
-        var data1 = {
-            "AccessPresonId": this.addresseeIds,
-            "AccessPerson": data.addressee,
-            "Title": data.Title,
-            "Content": data.Content,
-            "Level": data.Level,
-            "Bcc": data.Bcc,
-            "AttNo": this.attName,
-            "UserId": this.globalData.Uid,
-            "UserName": this.globalData.Name
-        };
-        this.mailService.write(data1).subscribe(function (resJson) {
-            resJson.Result ? _this.nativeService.showToast("信息已发送") :
-                _this.nativeService.showToast(resJson.Data);
-        });
+        this._getInboxList(this.inboxData);
+        this._getOutboxList(this.outboxData);
+        console.log(this);
+        setInterval(function () {
+            console.log(_this);
+            _this.getNewInboxList(_this.inboxData);
+        }, 50000);
     };
-    MailWrite.prototype.addAffix = function () {
-        var _this = this;
-        var options = {
-            targetWidth: 400,
-            targetHeight: 400
-        };
-        var actionSheet = this.actionSheetCtrl.create({
-            title: '添加附件选择',
-            buttons: [
-                {
-                    text: '相册',
-                    handler: function () {
-                        _this.nativeService.getPictureByPhotoLibrary(options).subscribe(function (imageBase64) {
-                            _this.getPictureSuccess(imageBase64);
-                        });
-                    }
-                }, {
-                    text: '拍照',
-                    handler: function () {
-                        _this.nativeService.getPictureByCamera(options).subscribe(function (imageBase64) {
-                            _this.getPictureSuccess(imageBase64);
-                        });
-                    }
-                }, {
-                    text: '文件',
-                    handler: function () {
-                        _this.fileChooser.open().then(function (fileURL) {
-                            var mimeType = fileURL.toLowerCase().split(".").splice(-1)[0];
-                            var pathOption = {
-                                "fileKey": "file",
-                                "fileName": fileURL.substr(fileURL.lastIndexOf('/') + 1),
-                                "mimeType": __WEBPACK_IMPORTED_MODULE_10__providers_Utils__["a" /* Utils */].getFileMimeType(mimeType),
-                                "headers": {
-                                    "Connection": "close"
-                                },
-                                "chunkedMode": false,
-                                "httpMethod": "POST",
-                                "params": { "token": _this.globalData.token, "type": 1 }
-                            };
-                            var url = encodeURI(__WEBPACK_IMPORTED_MODULE_5__providers_Constants__["e" /* FILE_SERVE_URL */] + "ashx/AttachUpload.ashx");
-                            console.log(fileURL, url, pathOption, true);
-                            return _this.upload(fileURL, url, pathOption, true);
-                        }).catch(function (err) {
-                            console.log(err);
-                        });
-                    }
-                }, {
-                    text: '取消',
-                    role: 'cancel',
-                    handler: function () {
-                        console.log('Cancel clicked');
-                    }
-                }
-            ]
-        });
-        actionSheet.present();
+    Mail.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad Mail');
     };
-    MailWrite.prototype.checkPeople = function (myEvent) {
-        var _this = this;
-        var popover = this.popoverCtrl.create("ContactsPopoverPage", { addressee: this.addressee, addresseeIds: this.addresseeIds });
-        popover.present({
-            ev: myEvent
-        });
-        popover.onDidDismiss(function (data) {
-            if (!!data) {
-                console.log(data);
-                // {addressee:this.addressee,addresseeIds:this.addresseeIds}
-                _this.addresseeIds = data.addresseeIds;
-                _this.writeForm.patchValue({ 'addressee': data.addressee });
-            }
-        });
+    // 选择已读、未读、全部
+    Mail.prototype.checkRead = function (name) {
+        if (name === void 0) { name = "read"; }
+        this.inboxData.PageIndex = 0;
+        this.inboxList = [];
+        this.checkBtn = { "read": false, "unread": false, "all": false };
+        this.checkBtn[name] = true;
+        if (name === "unread") {
+            // 参数设置
+            this.inboxData.Status = this.mailService.status["unread"];
+        }
+        else if (name === "read") {
+            // 参数设置
+            this.inboxData.Status = this.mailService.status["read"];
+        }
+        else {
+            // 参数设置
+            this.inboxData.Status = this.mailService.status["all"];
+        }
+        this._getInboxList(this.inboxData);
     };
-    MailWrite.prototype.getPictureSuccess = function (imageBase64) {
-        this.imageBase64 = imageBase64;
-        this.affixPath = "data:image/jpg;base64," + imageBase64;
-        var fileObj = { "base64": this.imageBase64 };
-        this.fileService.uploadByBase64(fileObj).subscribe(function (result) {
-            if (result) {
-                var origPath = __WEBPACK_IMPORTED_MODULE_5__providers_Constants__["e" /* FILE_SERVE_URL */] + result.origPath;
-                console.log(origPath);
-            }
-        });
+    // 选择草稿箱、发件箱
+    Mail.prototype.checkDraft = function (bol) {
+        if (bol === void 0) { bol = false; }
+        this.outboxData.PageIndex = 0;
+        this.outboxList = [];
+        if (bol) {
+            this.isDraft = true;
+            // 参数设置
+        }
+        else {
+            this.isDraft = false;
+            // 参数设置
+        }
+        this._getOutboxList(this.outboxData);
     };
-    /**
-     * 上传
-     */
-    MailWrite.prototype.upload = function (fileUrl, url, options, trustAllHosts) {
-        var _this = this;
-        var alert = this.alertCtrl.create({
-            title: '上传进度：0%',
-            enableBackdropDismiss: false,
-            buttons: ['后台上传']
-        });
-        alert.present();
-        var fileTransfer = this.fileTransfer.create();
-        fileTransfer.onProgress(function (event) {
-            var num = Math.floor(event.loaded / event.total * 100);
-            if (num === 100) {
-                alert.dismiss();
+    Mail.prototype.doRead = function (id) {
+        this.navCtrl.push("MailRead", { "id": id, "MailStatus": this.mailService.mailStatus["inbox"] });
+    };
+    Mail.prototype.doReadOutBox = function (id) {
+        this.navCtrl.push("MailRead", { "id": id, "MailStatus": this.mailService.mailStatus["outbox"] });
+    };
+    Mail.prototype.doWrite = function () {
+        // let modal = this.modalCtrl.create("MailWrite");
+        // modal.present();
+        // modal.onDidDismiss(data => {
+        //     data && console.log(data);
+        // });
+        this.navCtrl.push("MailWrite");
+    };
+    Mail.prototype.doRefresh = function (refresher) {
+        console.log("加载更多");
+        // this.initializeItems();
+        this.change();
+        setTimeout(function () {
+            console.log('数据加载完成');
+            refresher.complete();
+        }, 1000);
+    };
+    Mail.prototype.change = function () {
+        this.moredata = true;
+        if (this.box === "inbox") {
+            this.inboxList = [];
+            this.inboxData.PageIndex = 0;
+            this._getInboxList(this.inboxData);
+        }
+        else {
+            this.outboxList = [];
+            this.outboxData.PageIndex = 0;
+            this._getOutboxList(this.outboxData);
+        }
+    };
+    Mail.prototype.doInfinite = function () {
+        if (this.moredata) {
+            if (this.box === "inbox") {
+                this.inboxData.PageIndex++;
+                this._getInboxList(this.inboxData);
             }
             else {
-                var title = document.getElementsByClassName('alert-title')[0];
-                title && (title.innerHTML = '上传进度：' + url + event.loaded + " " + event.total + '%');
+                this.outboxData.PageIndex++;
+                this._getOutboxList(this.outboxData);
+            }
+        }
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve();
+            }, 500);
+        });
+    };
+    Mail.prototype.getNewInboxList = function (inboxData) {
+        var _this = this;
+        inboxData.PageIndex = 0;
+        this.mailService.getInboxList(inboxData).subscribe(function (list) {
+            if (list.Result == true) {
+                var arr = list.Data.filter(function (item) {
+                    return item.Id !== _this.inboxList[0].Id;
+                });
+                if (arr !== []) {
+                    _this.inboxList = _this.inboxList.concat(arr);
+                }
             }
         });
-        return fileTransfer.upload(fileUrl, url, options, trustAllHosts).then(function (data) {
-            console.log(data);
-            _this.haveAffix = true;
-        }, function (err) {
-            // error
-            console.log(err);
-        }).catch(function (err) {
-            console.log(err);
-            alert.dismiss();
-            _this.nativeService.showToast(err);
+    };
+    Mail.prototype._getInboxList = function (inboxData) {
+        var _this = this;
+        this.mailService.getInboxList(inboxData).subscribe(function (resJson) {
+            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
+                _this.isEmpty = false;
+                var list = resJson.Data;
+                _this.inboxList = _this.inboxList.concat(list);
+            }
+            else {
+                _this.moredata = false;
+                if (_this.inboxData.PageIndex === 0) {
+                    _this.isEmpty = true;
+                    _this.inboxList = [];
+                }
+            }
         });
     };
-    MailWrite.prototype.dismiss = function () {
-        this.viewCtrl.dismiss();
+    Mail.prototype._getOutboxList = function (outboxData) {
+        var _this = this;
+        this.mailService.getOutboxList(outboxData).subscribe(function (resJson) {
+            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
+                _this.isEmpty = false;
+                var list = resJson.Data;
+                _this.outboxList = _this.outboxList.concat(list);
+            }
+            else {
+                _this.moredata = false;
+                if (_this.outboxData.PageIndex === 0) {
+                    _this.isEmpty = true;
+                    _this.outboxList = [];
+                }
+            }
+        });
     };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])("popoverContent", { read: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */] }),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
-    ], MailWrite.prototype, "content", void 0);
-    MailWrite = __decorate([
+    Mail = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-mail-write',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-write\mail-write.html"*/`<!--\n\n  Generated template for the MailRead page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n\n\n        <button ion-button (click)="dismiss()">取消</button>\n\n\n\n        <ion-title>写信</ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-left (click)="sent(writeForm.value)">\n\n                <ion-icon name="ios-send"></ion-icon> 发送\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n    <div>\n\n        <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">\n\n            <ion-list style="position:relative;">\n\n\n\n                <ion-item>\n\n                    <ion-label style="align-self:center;">收件人&emsp;</ion-label>\n\n                    <ion-textarea min-rows="1" readonly="true" formControlName="addressee" #popoverContent placeholder="双击选择收件人" (click)="checkPeople($event)"></ion-textarea>\n\n                </ion-item>\n\n\n\n                <ion-item>\n\n                    <ion-label>主&emsp;题&emsp;</ion-label>\n\n                    <ion-input type="test" formControlName="Title" placeholder="主题1"></ion-input>\n\n                </ion-item>\n\n                <button ion-button clear class="share-btn" type="button" (click)="addAffix()">\n\n                    <ion-icon name="share"></ion-icon>0\n\n                </button>\n\n                <ion-item>\n\n                    <ion-label>密&emsp;送&emsp;</ion-label>\n\n                    <ion-toggle formControlName="Bcc"></ion-toggle>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-label>紧急程度</ion-label>\n\n                    <ion-select formControlName="Level" cancelText="取消" okText="确定" placeholder="请选择">\n\n                        <ion-option value="普通">普通邮件</ion-option>\n\n                        <ion-option value="重要">重要邮件</ion-option>\n\n                    </ion-select>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-textarea formControlName="Content" rows="6" class="write-textarea" placeholder="输入信息"></ion-textarea>\n\n                </ion-item>\n\n\n\n                <div class="affix" *ngIf="haveAffix">\n\n                    <ion-grid>\n\n                        <ion-row align-items-center>\n\n                            <ion-col col-6>\n\n                                <div>\n\n                                    <ion-icon class="affix-icon" name="md-image"></ion-icon>\n\n                                    <p>{{attName}}</p>\n\n                                    <p color="gray">5.00MB</p>\n\n                                    <ion-icon class="affix-dismiss" name="ios-close-circle-outline"></ion-icon>\n\n                                </div>\n\n                            </ion-col>\n\n                            <ion-col col-6 text-center>\n\n                                <div>\n\n                                    <ion-icon name="add" class="affix-add"></ion-icon>\n\n                                </div>\n\n                            </ion-col>\n\n                        </ion-row>\n\n                    </ion-grid>\n\n                </div>\n\n\n\n            </ion-list>\n\n        </form>\n\n    </div>\n\n\n\n\n\n    <!-- <div>\n\n        <ion-scroll scrollY="true" class="mail-content">\n\n            <div class="message-textarea" contenteditable="true" data-text="输入信息"></div>\n\n            <div class="affix" *ngIf="haveAffix">\n\n                <ion-grid>\n\n                    <ion-row align-items-center>\n\n                        <ion-col col-6>\n\n                            <div>\n\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n\n                                <p>{{attName}}</p>\n\n                                <p color="gray">5.00MB</p>\n\n                                <ion-icon class="affix-dismiss" name="ios-close-circle-outline"></ion-icon>\n\n                            </div>\n\n                        </ion-col>\n\n                        <ion-col col-6 text-center>\n\n                            <div>\n\n                                <ion-icon name="add" class="affix-add"></ion-icon>\n\n                            </div>\n\n                        </ion-col>\n\n                    </ion-row>\n\n                </ion-grid>\n\n            </div>\n\n        </ion-scroll>\n\n    </div> -->\n\n</ion-content>\n\n<!-- <div class="list message-reply">\n\n\n\n    <div class="item">\n\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n\n        <button ion-button small color="positive">发送</button>\n\n    </div>\n\n\n\n</div> -->`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-write\mail-write.html"*/,
+            selector: 'page-mail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail.html"*/`<!--\n  Generated template for the Mail page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>  \n    <ion-toolbar>\n        <ion-buttons start>\n            <button ion-button icon-only navPop>\n                <ion-icon name="arrow-back"></ion-icon>\n            </button>\n        </ion-buttons>\n        <ion-segment [(ngModel)]="box"  (ngModelChange)="change()">\n            <ion-segment-button value="inbox">\n                收件箱\n            </ion-segment-button>\n            <ion-segment-button value="outbox">\n                发件箱\n            </ion-segment-button>\n        </ion-segment>\n\n    </ion-toolbar>\n\n    <!--\n    <ion-buttons ion-button icon-only end (click)="doWrite()">\n        <ion-icon name="ios-add-circle-outline"></ion-icon>\n    </ion-buttons>-->\n    <div [ngSwitch]="box" class="subbox">\n        <div *ngSwitchCase="\'inbox\'">\n            <button ion-button small (click)="checkRead(\'unread\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.unread}">未读</button>\n            <button ion-button small (click)="checkRead(\'read\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.read}">已读</button>\n            <button ion-button small (click)="checkRead(\'all\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.all}">全部</button>\n        </div>\n\n        <div *ngSwitchCase="\'outbox\'">\n            <button ion-button small (click)="checkDraft()" class="button-ios-light" [ngClass]="{\'button-ios-calm\':!isDraft}">已发送</button>\n            <button ion-button small (click)="checkDraft(true)" class="button-ios-light" [ngClass]="{\'button-ios-calm\':isDraft}">草稿箱</button>\n        </div>\n    </div>\n\n</ion-header>\n\n\n<ion-content style="background: #f4f4f4;overflow: hidden;" overflow-scroll="true" class="has-header">\n    <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <div [ngSwitch]="box">\n        <ion-list *ngSwitchCase="\'inbox\'">\n            <ion-item-sliding *ngFor="let mail of inboxList " (click)="doRead(mail.Id)">\n                <ion-item>\n                    <ion-avatar item-left>\n                        <img src="assets/img/mike.png">\n                    </ion-avatar>\n                    <span>{{mail.Id}}</span>\n                    <p class="font-12">来至:{{mail.SendPerson}}&emsp;{{mail.MailDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n                </ion-item>\n                <ion-item-options side="right">\n                    <button ion-button color="primary">\n                        <ion-icon name="md-trash"></ion-icon>删除\n                    </button>\n                </ion-item-options>\n            </ion-item-sliding>\n        </ion-list>\n        <ion-list *ngSwitchCase="\'outbox\'">\n            <ion-item-sliding *ngFor="let mail of outboxList " (click)="doReadOutBox(mail.Id)">\n                <ion-item>\n                    <ion-avatar item-left>\n                        <img src="assets/img/mike.png">\n                    </ion-avatar>\n                    <span>{{mail.Title}}</span>\n                    <p class="font-12">发至:{{mail.AccessPerson}}&emsp;{{mail.MailDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n                </ion-item>\n                <ion-item-options side="right">\n                    <button ion-button color="primary">\n                        <ion-icon name="md-trash"></ion-icon>删除\n                    </button>\n                </ion-item-options>\n            </ion-item-sliding>\n        </ion-list>\n    </div>\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n        <div padding>暂无消息数据！！！</div>\n        <img src="assets/img/face/face2.png" height="100">\n    </div>\n    <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_FileService__["a" /* FileService */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_file_chooser__["a" /* FileChooser */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_transfer__["a" /* FileTransfer */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
             __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_9__mailService__["a" /* MailService */],
-            __WEBPACK_IMPORTED_MODULE_8__angular_forms__["a" /* FormBuilder */]])
-    ], MailWrite);
-    return MailWrite;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_3__mailService__["a" /* MailService */]])
+    ], Mail);
+    return Mail;
 }());
 
-//# sourceMappingURL=mail-write.js.map
+//# sourceMappingURL=mail.js.map
 
 /***/ })
 

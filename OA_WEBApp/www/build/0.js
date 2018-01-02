@@ -1,4 +1,4 @@
-webpackJsonp([0,35,36,63,64],{
+webpackJsonp([0,36,37,68,69],{
 
 /***/ 703:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -8,8 +8,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BacklogDetailModule", function() { return BacklogDetailModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog_detail__ = __webpack_require__(784);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(775);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog_detail__ = __webpack_require__(791);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(779);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -52,8 +52,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BacklogModule", function() { return BacklogModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog__ = __webpack_require__(785);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(775);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlog__ = __webpack_require__(792);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlogService__ = __webpack_require__(779);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -93,51 +93,10 @@ var BacklogModule = (function () {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactsModule", function() { return ContactsModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts__ = __webpack_require__(786);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-var ContactsModule = (function () {
-    function ContactsModule() {
-    }
-    ContactsModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */],
-            ],
-            imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */]),
-            ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */]
-            ]
-        })
-    ], ContactsModule);
-    return ContactsModule;
-}());
-
-//# sourceMappingURL=contacts.module.js.map
-
-/***/ }),
-
-/***/ 706:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactsDetailModule", function() { return ContactsDetailModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts_detail__ = __webpack_require__(787);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts_detail__ = __webpack_require__(793);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -170,7 +129,48 @@ var ContactsDetailModule = (function () {
 
 /***/ }),
 
-/***/ 722:
+/***/ 706:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactsModule", function() { return ContactsModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts__ = __webpack_require__(794);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var ContactsModule = (function () {
+    function ContactsModule() {
+    }
+    ContactsModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */],
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */]),
+            ],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */]
+            ]
+        })
+    ], ContactsModule);
+    return ContactsModule;
+}());
+
+//# sourceMappingURL=contacts.module.js.map
+
+/***/ }),
+
+/***/ 724:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -178,11 +178,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeModule", function() { return HomeModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home__ = __webpack_require__(803);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home__ = __webpack_require__(813);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__backlog_backlog_module__ = __webpack_require__(704);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__backlog_backlog_detail_backlog_detail_module__ = __webpack_require__(703);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__contacts_contacts_module__ = __webpack_require__(705);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__contacts_contacts_detail_contacts_detail_module__ = __webpack_require__(706);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__contacts_contacts_module__ = __webpack_require__(706);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__contacts_contacts_detail_contacts_detail_module__ = __webpack_require__(705);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -225,7 +225,7 @@ var HomeModule = (function () {
 
 /***/ }),
 
-/***/ 775:
+/***/ 779:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -281,14 +281,14 @@ var BacklogService = (function () {
 
 /***/ }),
 
-/***/ 784:
+/***/ 791:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BacklogDetail; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(775);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(779);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(45);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -364,14 +364,14 @@ var BacklogDetail = (function () {
 
 /***/ }),
 
-/***/ 785:
+/***/ 792:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Backlog; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(775);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__backlogService__ = __webpack_require__(779);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -495,7 +495,78 @@ var Backlog = (function () {
 
 /***/ }),
 
-/***/ 786:
+/***/ 793:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactsDetail; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+// import { UserInfo } from "../../../../model/UserInfo";
+
+/**
+ * Generated class for the ContactsDetail page.
+ *
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
+ */
+var ContactsDetail = (function () {
+    function ContactsDetail(navCtrl, navParams, httpService) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.httpService = httpService;
+        // checkman: UserInfo = new UserInfo();
+        this.checkman = {};
+        this.initializeItems();
+    }
+    ContactsDetail.prototype.initializeItems = function () {
+        var _this = this;
+        return this.httpService.postFormData("ashx/UserInfo.ashx", { "Id": this.navParams.get("id") })
+            .map(function (Response) { return Response.json(); })
+            .subscribe(function (resJson) {
+            if (resJson.Result) {
+                _this.checkman = resJson.Data;
+                console.log(resJson.Data);
+            }
+            else {
+                _this.checkman = {};
+            }
+        });
+    };
+    ContactsDetail.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ContactsDetail');
+    };
+    ContactsDetail.prototype.call = function (num) {
+        window.location.href = "tel:" + num;
+    };
+    ContactsDetail = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-contacts-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts-detail\contacts-detail.html"*/`<!--\n  Generated template for the ContactsDetail page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>详细信息</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-grid>\n        <ion-row style="border-bottom: 2px solid #ddd;padding-bottom: 0;">\n            <ion-col col-4 text-center style="border-right:1px solid #ddd;">\n                <img src="../assets/img/ben.png" alt="photo" style="height: 70px;width: 70px;border-radius: 50%;">\n                <div>{{checkman.Name}}&nbsp;·<span class="royal">&nbsp;{{checkman.Sex}}</span></div>\n            </ion-col>\n            <ion-col col-8>\n                <p>账号：{{checkman.Uid || "未知"}}</p>\n                <p>职位：{{checkman.Duty}}</p>\n                <p>公司：{{checkman.Company}}</p>\n            </ion-col>\n        </ion-row>\n    </ion-grid>\n    <ion-list>\n        <ion-item>\n            <ion-icon color="energized" name="ios-analytics" item-left></ion-icon>\n            部门\n            <ion-note item-right>{{checkman.Dept}}</ion-note>\n\n        </ion-item>\n        <ion-item (click)="call(checkman.tel)">\n            <ion-icon color="danger" name="md-call" item-left></ion-icon>\n            电话\n            <ion-note item-right>{{checkman.InlinePhone}}</ion-note>\n        </ion-item>\n        <ion-item (click)="call(checkman.mobile)">\n            <ion-icon color="calm" name="md-phone-portrait" item-left></ion-icon>\n            手机\n            <ion-note item-right>{{checkman.Mobile}}</ion-note>\n        </ion-item>\n        <!-- <ion-item>\n            <ion-icon color="balanced" name="md-send" item-left></ion-icon>\n            传真\n            <ion-note item-right>{{checkman.fax}}</ion-note>\n        </ion-item> -->\n        <ion-item>\n            <ion-icon color="royal" name="md-mail" item-left></ion-icon>\n            邮件\n            <ion-note item-right>{{checkman.Mail}}</ion-note>\n        </ion-item>\n\n\n    </ion-list>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts-detail\contacts-detail.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
+    ], ContactsDetail);
+    return ContactsDetail;
+}());
+
+//# sourceMappingURL=contacts-detail.js.map
+
+/***/ }),
+
+/***/ 794:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -592,78 +663,7 @@ var Contacts = (function () {
 
 /***/ }),
 
-/***/ 787:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactsDetail; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-// import { UserInfo } from "../../../../model/UserInfo";
-
-/**
- * Generated class for the ContactsDetail page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-var ContactsDetail = (function () {
-    function ContactsDetail(navCtrl, navParams, httpService) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.httpService = httpService;
-        // checkman: UserInfo = new UserInfo();
-        this.checkman = {};
-        this.initializeItems();
-    }
-    ContactsDetail.prototype.initializeItems = function () {
-        var _this = this;
-        return this.httpService.postFormData("ashx/UserInfo.ashx", { "Id": this.navParams.get("id") })
-            .map(function (Response) { return Response.json(); })
-            .subscribe(function (resJson) {
-            if (resJson.Result) {
-                _this.checkman = resJson.Data;
-                console.log(resJson.Data);
-            }
-            else {
-                _this.checkman = {};
-            }
-        });
-    };
-    ContactsDetail.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ContactsDetail');
-    };
-    ContactsDetail.prototype.call = function (num) {
-        window.location.href = "tel:" + num;
-    };
-    ContactsDetail = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contacts-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts-detail\contacts-detail.html"*/`<!--\n  Generated template for the ContactsDetail page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>详细信息</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-grid>\n        <ion-row style="border-bottom: 2px solid #ddd;padding-bottom: 0;">\n            <ion-col col-4 text-center style="border-right:1px solid #ddd;">\n                <img src="../assets/img/ben.png" alt="photo" style="height: 70px;width: 70px;border-radius: 50%;">\n                <div>{{checkman.Name}}&nbsp;·<span class="royal">&nbsp;{{checkman.Sex}}</span></div>\n            </ion-col>\n            <ion-col col-8>\n                <p>账号：{{checkman.Uid || "未知"}}</p>\n                <p>职位：{{checkman.Duty}}</p>\n                <p>公司：{{checkman.Company}}</p>\n            </ion-col>\n        </ion-row>\n    </ion-grid>\n    <ion-list>\n        <ion-item>\n            <ion-icon color="energized" name="ios-analytics" item-left></ion-icon>\n            部门\n            <ion-note item-right>{{checkman.Dept}}</ion-note>\n\n        </ion-item>\n        <ion-item (click)="call(checkman.tel)">\n            <ion-icon color="danger" name="md-call" item-left></ion-icon>\n            电话\n            <ion-note item-right>{{checkman.InlinePhone}}</ion-note>\n        </ion-item>\n        <ion-item (click)="call(checkman.mobile)">\n            <ion-icon color="calm" name="md-phone-portrait" item-left></ion-icon>\n            手机\n            <ion-note item-right>{{checkman.Mobile}}</ion-note>\n        </ion-item>\n        <!-- <ion-item>\n            <ion-icon color="balanced" name="md-send" item-left></ion-icon>\n            传真\n            <ion-note item-right>{{checkman.fax}}</ion-note>\n        </ion-item> -->\n        <ion-item>\n            <ion-icon color="royal" name="md-mail" item-left></ion-icon>\n            邮件\n            <ion-note item-right>{{checkman.Mail}}</ion-note>\n        </ion-item>\n\n\n    </ion-list>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts-detail\contacts-detail.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], ContactsDetail);
-    return ContactsDetail;
-}());
-
-//# sourceMappingURL=contacts-detail.js.map
-
-/***/ }),
-
-/***/ 803:
+/***/ 813:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -728,7 +728,7 @@ var Home = (function () {
     ], Home.prototype, "nav", void 0);
     Home = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\home.html"*/`<ion-header>\n\n    <ion-navbar>\n        <button ion-button icon-only menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>首页</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-grid>\n        <ion-row class="index-row">\n            <ion-col col-4 *ngFor="let p of appPages" (click)="openPage(p)">\n                <div [class]="p.color">\n                    <ion-icon [name]="p.icon"></ion-icon>{{p.title}}\n                </div>\n            </ion-col>\n        </ion-row>\n    </ion-grid>\n    <ion-list>\n        <ion-list-header><ion-icon name="ios-car" color="primary">会议管理</ion-icon></ion-list-header>\n        <ion-grid>\n            <ion-row>\n                <ion-col col-3 col-xl-2 (click)="open(\'MeetingPage\')">我的会议</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'MeetingMinutesPage\')">会议记录</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'MeetingSearchPage\')">会议查询</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'MeetingRoomPage\')">会议室管理</ion-col>\n            </ion-row>\n        </ion-grid>\n\n        <ion-list-header><ion-icon name="ios-car" color="primary">车辆管理</ion-icon></ion-list-header>\n        <ion-grid>\n            <ion-row>\n                <ion-col col-3 col-xl-2 (click)="open(\'CarPage\')">车辆档案</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'DriverPage\')">司机档案</ion-col>\n            </ion-row>\n        </ion-grid>\n\n        <ion-list-header><ion-icon name="ios-car" color="primary">人事管理</ion-icon></ion-list-header>\n        <ion-grid>\n            <ion-row>\n                <ion-col  col-3 col-xl-2   (click)="open(\'TrainingMaintenancePage\')">培训维护</ion-col>\n                <ion-col  (click)="open(\'StaffFileMaintenance\')">员工档案维护</ion-col>\n                <ion-col  (click)="open(\'StaffFileMaintenanceSet\')">员工档案维护添加</ion-col>\n                <ion-col  col-3 col-xl-2  (click)="open(\'JobTypesSetPage\')">工种设置</ion-col>\n                <ion-col  col-3 col-xl-2  (click)="open(\'ContractListPage\')">合同查询</ion-col>\n                <ion-col  col-3 col-xl-2  (click)="open(\'ContractMaintenancePage\')">合同维护</ion-col>\n                <ion-col  col-3 col-xl-2  (click)="open(\'ContractRenewPage\')">合同续签</ion-col>\n                <ion-col  col-3 col-xl-2  (click)="open(\'ContractSettingPage\')">合同详情</ion-col>\n                <ion-col  (click)="open(\'FileApplicationListPage\')">申请档案查看</ion-col>\n                <ion-col  (click)="open(\'FileApplicationReviewPage\')">申请档案审批</ion-col>\n            </ion-row>\n        </ion-grid>\n\n    </ion-list>\n\n\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\home.html"*/,
+            selector: 'page-home',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\home.html"*/`<ion-header>\n\n    <ion-navbar>\n        <button ion-button icon-only menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>首页</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-grid>\n        <ion-row class="index-row">\n            <ion-col col-4 *ngFor="let p of appPages" (click)="openPage(p)">\n                <div [class]="p.color">\n                    <ion-icon [name]="p.icon"></ion-icon>{{p.title}}\n                </div>\n            </ion-col>\n        </ion-row>\n    </ion-grid>\n    <ion-list>\n        <ion-list-header><ion-icon name="ios-car" color="primary">会议管理</ion-icon></ion-list-header>\n        <ion-grid>\n            <ion-row>\n                <ion-col col-3 col-xl-2 (click)="open(\'MeetingPage\')">我的会议</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'MeetingMinutesPage\')">会议记录</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'MeetingSearchPage\')">会议查询</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'MeetingRoomPage\')">会议室管理</ion-col>\n            </ion-row>\n        </ion-grid>\n\n        <ion-list-header><ion-icon name="ios-car" color="primary">车辆管理</ion-icon></ion-list-header>\n        <ion-grid>\n            <ion-row>\n                <ion-col col-3 col-xl-2 (click)="open(\'CarPage\')">车辆档案</ion-col>\n                <ion-col col-3 col-xl-2 (click)="open(\'DriverPage\')">司机档案</ion-col>\n            </ion-row>\n        </ion-grid>\n\n        <ion-list-header><ion-icon name="ios-car" color="primary">人事管理</ion-icon></ion-list-header>\n        <ion-grid>\n            <ion-row>\n                <ion-col  col-3 col-xl-2   (click)="open(\'TrainingMaintenancePage\')">培训维护</ion-col>\n                <ion-col  (click)="open(\'StaffFileMaintenance\')">员工档案维护</ion-col>\n                <ion-col  (click)="open(\'StaffFileMaintenanceSet\')">员工档案维护添加</ion-col>\n                <ion-col  col-3 col-xl-2  (click)="open(\'JobTypesSetPage\')">工种设置</ion-col>\n                <ion-col  col-3 col-xl-2  (click)="open(\'ContractListPage\')">合同查询</ion-col>\n                <ion-col  col-3 col-xl-2  (click)="open(\'ContractMaintenancePage\')">合同维护</ion-col>\n                <ion-col  col-3 col-xl-2  (click)="open(\'ContractRenewPage\')">合同续签</ion-col>\n                <ion-col  col-3 col-xl-2  (click)="open(\'ContractSettingPage\')">合同详情</ion-col>\n                <ion-col  (click)="open(\'FileApplicationListPage\')">申请档案查看</ion-col>\n                <ion-col  (click)="open(\'FileApplicationReviewPage\')">申请档案审批</ion-col>\n            </ion-row>\n        </ion-grid>\n\n        <ion-list-header><ion-icon name="ios-car" color="primary">考勤管理</ion-icon></ion-list-header>\n        <ion-grid>\n            <ion-row>\n                <ion-col  col-3 col-xl-2   (click)="open(\'HolidayGroupSettingsPage\')">假期分组设定</ion-col>\n                <ion-col  (click)="open(\'StaffAttendanceSettingsPage\')">员工考勤设定</ion-col>\n            </ion-row>\n        </ion-grid>\n\n    </ion-list>\n\n\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\home.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
     ], Home);

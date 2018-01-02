@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 import { Response } from "@angular/http";
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
-import { HttpService } from '../../providers/HttpService';
+import { HttpService } from '../../../providers/HttpService';
 
 /**
  * Generated class for the GetmobilePopoverPage page.
@@ -88,7 +88,7 @@ export class GetmobilePopoverPage {
     //   let data = (this.name !== "") ? {name: name} : {};
       let data = {};
       if (this.name && this.name.trim() != '')  data["name"] = this.name;
-      data["ISPhone"] = 1;      
+      data["ISPhone"] = 1;
       this.httpService.postFormData("ashx/UserSheet.ashx", data)
       .map((res: Response) => res.json())
       .subscribe((result) => {
@@ -111,7 +111,7 @@ export class GetmobilePopoverPage {
                 this.items = result.Data;
             }
           }else{
-              
+
           }
       });
   }

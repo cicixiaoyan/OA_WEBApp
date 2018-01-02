@@ -1,15 +1,15 @@
 webpackJsonp([34],{
 
-/***/ 725:
+/***/ 729:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContractListPageModule", function() { return ContractListPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContractMaintenancePageModule", function() { return ContractMaintenancePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_list__ = __webpack_require__(806);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contract_service__ = __webpack_require__(773);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_maintenance__ = __webpack_require__(818);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contract_service__ = __webpack_require__(777);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_components_module__ = __webpack_require__(365);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ContractListPageModule = (function () {
-    function ContractListPageModule() {
+var ContractMaintenancePageModule = (function () {
+    function ContractMaintenancePageModule() {
     }
-    ContractListPageModule = __decorate([
+    ContractMaintenancePageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__contract_list__["a" /* ContractListPage */],
+                __WEBPACK_IMPORTED_MODULE_2__contract_maintenance__["a" /* ContractMaintenancePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contract_list__["a" /* ContractListPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contract_maintenance__["a" /* ContractMaintenancePage */]),
                 __WEBPACK_IMPORTED_MODULE_4__components_components_module__["a" /* ComponentsModule */]
             ],
             providers: [__WEBPACK_IMPORTED_MODULE_3__contract_service__["a" /* ContractService */]],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__contract_list__["a" /* ContractListPage */]]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__contract_maintenance__["a" /* ContractMaintenancePage */]]
         })
-    ], ContractListPageModule);
-    return ContractListPageModule;
+    ], ContractMaintenancePageModule);
+    return ContractMaintenancePageModule;
 }());
 
-//# sourceMappingURL=contract-list.module.js.map
+//# sourceMappingURL=contract-maintenance.module.js.map
 
 /***/ }),
 
-/***/ 773:
+/***/ 777:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79,14 +79,14 @@ var ContractService = (function () {
 
 /***/ }),
 
-/***/ 806:
+/***/ 818:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractListPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractMaintenancePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_service__ = __webpack_require__(773);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_service__ = __webpack_require__(777);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -99,8 +99,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ContractListPage = (function () {
-    function ContractListPage(navCtrl, navParams, popoverCtrl, contractService) {
+var ContractMaintenancePage = (function () {
+    function ContractMaintenancePage(navCtrl, navParams, popoverCtrl, contractService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.popoverCtrl = popoverCtrl;
@@ -115,11 +115,11 @@ var ContractListPage = (function () {
         };
         this.getList(this.data);
     }
-    ContractListPage.prototype.ionViewDidLoad = function () {
+    ContractMaintenancePage.prototype.ionViewDidLoad = function () {
     };
-    ContractListPage.prototype.presentPopover = function (myEvent) {
+    ContractMaintenancePage.prototype.presentPopover = function (myEvent) {
         var _this = this;
-        var popover = this.popoverCtrl.create("ContractSearchPage", { "search": this.search });
+        var popover = this.popoverCtrl.create("ContractSearchSeparatePage", { "search": this.search, "name": '签约' });
         popover.present({
             ev: myEvent
         });
@@ -135,10 +135,18 @@ var ContractListPage = (function () {
             }
         });
     };
-    ContractListPage.prototype.doRead = function (id) {
-        this.navCtrl.push("ContractSettingPage", { "Id": id, 'readOnly': true });
+    ContractMaintenancePage.prototype.doRead = function (Params) {
+        this.navCtrl.push("ContractSettingPage", { "Id": Params });
     };
-    ContractListPage.prototype.doRefresh = function (refresher) {
+    ContractMaintenancePage.prototype.doWrite = function () {
+        this.navCtrl.push("ContractSettingPage");
+        // let modal = this.modalCtrl.create("TrainingMaintenanceSetPage");
+        // modal.present();
+        // modal.onDidDismiss(data => {
+        //     data && console.log(data);
+        // });
+    };
+    ContractMaintenancePage.prototype.doRefresh = function (refresher) {
         this.list = [];
         this.data.PageIndex = 1;
         this.getList(this.data);
@@ -146,7 +154,7 @@ var ContractListPage = (function () {
             refresher.complete();
         }, 1000);
     };
-    ContractListPage.prototype.doInfinite = function () {
+    ContractMaintenancePage.prototype.doInfinite = function () {
         if (this.moredata) {
             this.data.PageIndex++;
             this.getList(this.data);
@@ -157,7 +165,7 @@ var ContractListPage = (function () {
             }, 500);
         });
     };
-    ContractListPage.prototype.getList = function (data) {
+    ContractMaintenancePage.prototype.getList = function (data) {
         this.list = [
             {
                 "Id": "1",
@@ -174,7 +182,7 @@ var ContractListPage = (function () {
                 "Dept": '其他',
                 "Type": '劳动合同',
                 "ContractNumber": "A012345688",
-                "TurnPositive": '未转正',
+                "TurnPositive": '已转正',
                 "Status": '试用中' // 合同状态
             },
         ];
@@ -190,19 +198,19 @@ var ContractListPage = (function () {
         //   }
         // });
     };
-    ContractListPage = __decorate([
+    ContractMaintenancePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contract-list',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-list\contract-list.html"*/`<ion-header>\n\n  <ion-navbar>\n    <ion-title>合同查询</ion-title>\n    <ion-buttons end  (click)="presentPopover($event)">\n        <button ion-button icon-only>\n          <ion-icon name="search"></ion-icon>\n        </button>\n      </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let item of list"  (click)="doRead(item.Id)">\n          <ion-item>\n              <h2>{{item.Name}}[{{item.ContractNumber}}]</h2>\n              <div class="small">类型：{{item.Type}}&emsp;{{item.Status}}\n                <span float-right [ngClass]="{\'text-ios-secondary\':(item.TurnPositive == \'已转正\'),\'text-ios-energized\':(item.TurnPositive != \'已转正\')}">{{item.TurnPositive}}</span>\n              </div>\n              <p class="small">部门：{{item.Dept}}&emsp;</p>\n          </ion-item>\n      </ion-item-sliding>\n    </ion-list>\n    <empty *ngIf="isEmpty"></empty>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-list\contract-list.html"*/,
+            selector: 'page-contract-maintenance',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-maintenance\contract-maintenance.html"*/`<!--\n  Generated template for the ContractMaintenancePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>合同维护</ion-title>\n    <ion-buttons end  (click)="presentPopover($event)">\n        <button ion-button icon-only>\n          <ion-icon name="search"></ion-icon>\n        </button>\n      </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let item of list"  (click)="doRead(item.Id)">\n        <ion-item>\n            <h2>{{item.Name}}[{{item.ContractNumber}}]</h2>\n            <div class="small">\n              类型：{{item.Type}}&emsp;{{item.Status}}\n              <span float-right [ngClass]="{\'text-ios-secondary\':(item.TurnPositive == \'已转正\'),\'text-ios-energized\':(item.TurnPositive != \'已转正\')}">{{item.TurnPositive}}</span>\n            </div>\n            <p class="small">部门：{{item.Dept}}&emsp;</p>\n        </ion-item>\n\n      </ion-item-sliding>\n    </ion-list>\n    <empty *ngIf="isEmpty"></empty>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-maintenance\contract-maintenance.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */],
             __WEBPACK_IMPORTED_MODULE_2__contract_service__["a" /* ContractService */]])
-    ], ContractListPage);
-    return ContractListPage;
+    ], ContractMaintenancePage);
+    return ContractMaintenancePage;
 }());
 
-//# sourceMappingURL=contract-list.js.map
+//# sourceMappingURL=contract-maintenance.js.map
 
 /***/ })
 

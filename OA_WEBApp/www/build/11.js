@@ -1,15 +1,15 @@
 webpackJsonp([11],{
 
-/***/ 768:
+/***/ 766:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessageReadOutPageModule", function() { return MessageReadOutPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessageWritePageModule", function() { return MessageWritePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_read_out__ = __webpack_require__(853);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messageService__ = __webpack_require__(777);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__message_write__ = __webpack_require__(857);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messageService__ = __webpack_require__(781);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,29 +20,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MessageReadOutPageModule = (function () {
-    function MessageReadOutPageModule() {
+var MessageWritePageModule = (function () {
+    function MessageWritePageModule() {
     }
-    MessageReadOutPageModule = __decorate([
+    MessageWritePageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__message_read_out__["a" /* MessageReadOutPage */],
+                __WEBPACK_IMPORTED_MODULE_2__message_write__["a" /* MessageWritePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__message_read_out__["a" /* MessageReadOutPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__message_write__["a" /* MessageWritePage */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__message_read_out__["a" /* MessageReadOutPage */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__messageService__["a" /* MessageService */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_3__messageService__["a" /* MessageService */]],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__message_write__["a" /* MessageWritePage */]
+            ]
         })
-    ], MessageReadOutPageModule);
-    return MessageReadOutPageModule;
+    ], MessageWritePageModule);
+    return MessageWritePageModule;
 }());
 
-//# sourceMappingURL=message-read-out.module.js.map
+//# sourceMappingURL=message-write.module.js.map
 
 /***/ }),
 
-/***/ 777:
+/***/ 781:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -108,13 +110,16 @@ var MessageService = (function () {
 
 /***/ }),
 
-/***/ 853:
+/***/ 857:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MessageReadOutPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MessageWritePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__messageService__ = __webpack_require__(781);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -127,40 +132,81 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+// import { ContactsPopoverPage } from '../../contacts-popover/contacts-popover';
 /**
- * Generated class for the MessageReadOutPage page.
+ * Generated class for the MessageWritePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var MessageReadOutPage = (function () {
-    function MessageReadOutPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
+var MessageWritePage = (function () {
+    function MessageWritePage(navParams, nativeService, popoverCtrl, viewCtrl, messageService, formBuilder) {
         this.navParams = navParams;
-        this.messageDetail = [];
-        this.initializeItems();
+        this.nativeService = nativeService;
+        this.popoverCtrl = popoverCtrl;
+        this.viewCtrl = viewCtrl;
+        this.messageService = messageService;
+        this.formBuilder = formBuilder;
+        this.addressee = "";
+        this.addresseeIds = "";
+        this.attName = "109.png";
+        this.writeForm = this.formBuilder.group({
+            addressee: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required]],
+            Content: ["", [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].maxLength(180), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required]],
+        });
     }
-    MessageReadOutPage.prototype.initializeItems = function () {
-        this.messageDetail = this.navParams.get("Params");
-        this.messageContent = this.messageDetail.Title;
+    MessageWritePage.prototype.ionViewDidLoad = function () {
+        console.log("ionViewDidLoad MailWrite");
     };
-    MessageReadOutPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad MessageReadOutPage');
+    MessageWritePage.prototype.sent = function (data) {
+        var _this = this;
+        var data1 = {
+            "Uid": this.messageService.httpService.globalData.Uid,
+            "AcceptUid": this.addresseeIds,
+            "Content": data.Content
+        };
+        this.messageService.write(data1).subscribe(function (resJson) {
+            resJson.Result ? _this.nativeService.showToast("信息已发送") :
+                _this.nativeService.showToast(resJson.Data);
+        });
+    };
+    MessageWritePage.prototype.checkPeople = function (myEvent) {
+        var _this = this;
+        var popover = this.popoverCtrl.create("ContactsPopoverPage", { addressee: this.addressee, addresseeIds: this.addresseeIds });
+        popover.present({
+            ev: myEvent
+        });
+        popover.onDidDismiss(function (data) {
+            if (!!data) {
+                _this.writeForm.patchValue({ 'addressee': data.addressee });
+                _this.addresseeIds = data.addresseeIds;
+            }
+        });
+    };
+    MessageWritePage.prototype.dismiss = function () {
+        this.viewCtrl.dismiss();
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Content */])
-    ], MessageReadOutPage.prototype, "content", void 0);
-    MessageReadOutPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])("popoverContent", { read: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */] }),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
+    ], MessageWritePage.prototype, "content", void 0);
+    MessageWritePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-message-read-out',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-read-out\message-read-out.html"*/`<!--\n\n  Generated template for the MessageReadOutPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n      <ion-navbar>\n\n          <ion-title>消息详情</ion-title>\n\n      </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n      <div>\n\n          <ion-list>\n\n  \n\n              <ion-item>\n\n                  <ion-label>发送人&emsp;</ion-label>\n\n                  <ion-input type="text" disabled="disabled" [value]="messageDetail.AccessPerson" placeholder="系统管理员"></ion-input>\n\n              </ion-item>\n\n  \n\n              <ion-item>\n\n                  <ion-label>发送时间</ion-label>\n\n                  <ion-input type="test" disabled="disabled" [value]="messageDetail.MailDate" placeholder="发送时间未知"></ion-input>\n\n              </ion-item>\n\n  \n\n          </ion-list>\n\n      </div>\n\n  \n\n      <div>\n\n          <ion-scroll scrollY="true" class="message-content">\n\n              <div padding-horizontal [innerHTML]="messageContent"></div>\n\n              <!-- <ion-textarea [(ngModule)]="messageDetail.Title"  placeholder="回复: "></ion-textarea> -->\n\n              <!-- <div class="mydiv">\n\n                {{messageDetail.Title}}\n\n              </div> -->\n\n          </ion-scroll>\n\n      </div>\n\n  </ion-content>\n\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-read-out\message-read-out.html"*/,
+            selector: 'page-message-write',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-write\message-write.html"*/`<!--\n\n  Generated template for the MessageWritePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n    \n\n        <ion-navbar>\n\n    \n\n            <button ion-button (click)="dismiss()">取消</button>\n\n    \n\n            <ion-title>写信</ion-title>\n\n            <ion-buttons end>\n\n                <button ion-button icon-left [disabled]="!writeForm.valid" (click)="sent(writeForm.value)">\n\n                    <ion-icon name="ios-send"></ion-icon> 发送\n\n                </button>\n\n            </ion-buttons>\n\n        </ion-navbar>\n\n    </ion-header>\n\n    \n\n    \n\n    <ion-content>\n\n        <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">\n\n            <div>\n\n                <ion-list style="position:relative;">\n\n                    <ion-item>\n\n                        <ion-label style="align-self:center;">收件人&emsp;</ion-label>\n\n                        <ion-input min-rows="1" formControlName="addressee"  #popoverContent placeholder="请选择收件人" (click)="checkPeople($event)"></ion-input>\n\n                    </ion-item>\n\n                    <ion-item >\n\n                        <ion-textarea formControlName="Content" rows="6" class="write-textarea" placeholder="输入消息..."></ion-textarea>\n\n                    </ion-item>\n\n                </ion-list>\n\n            </div>\n\n        </form>\n\n    </ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-write\message-write.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
-    ], MessageReadOutPage);
-    return MessageReadOutPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_NativeService__["a" /* NativeService */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_4__messageService__["a" /* MessageService */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]])
+    ], MessageWritePage);
+    return MessageWritePage;
 }());
 
-//# sourceMappingURL=message-read-out.js.map
+//# sourceMappingURL=message-write.js.map
 
 /***/ })
 

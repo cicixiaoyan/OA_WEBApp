@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 import { Response } from "@angular/http";
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
-import { HttpService } from '../../providers/HttpService';
+import { HttpService } from '../../../providers/HttpService';
 
 /**
  * Generated class for the StaffPopoverPage page.

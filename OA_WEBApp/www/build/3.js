@@ -1,60 +1,16 @@
-webpackJsonp([3,49],{
+webpackJsonp([3],{
 
-/***/ 708:
+/***/ 716:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FindPasswordModule", function() { return FindPasswordModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HolidayGroupSettingsViewPageModule", function() { return HolidayGroupSettingsViewPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__find_password__ = __webpack_require__(789);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LoginService__ = __webpack_require__(162);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-
-var FindPasswordModule = (function () {
-    function FindPasswordModule() {
-    }
-    FindPasswordModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__find_password__["a" /* FindPassword */],
-            ],
-            imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__find_password__["a" /* FindPassword */]),
-            ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__find_password__["a" /* FindPassword */]
-            ],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__LoginService__["a" /* LoginService */]]
-        })
-    ], FindPasswordModule);
-    return FindPasswordModule;
-}());
-
-//# sourceMappingURL=find-password.module.js.map
-
-/***/ }),
-
-/***/ 750:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginModule", function() { return LoginModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(833);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__find_password_find_password_module__ = __webpack_require__(708);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__LoginService__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__holiday_group_settings_view__ = __webpack_require__(804);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__holiday_group_settings_service__ = __webpack_require__(785);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__directives_directives_module__ = __webpack_require__(786);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -66,39 +22,166 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var LoginModule = (function () {
-    function LoginModule() {
+var HolidayGroupSettingsViewPageModule = (function () {
+    function HolidayGroupSettingsViewPageModule() {
     }
-    LoginModule = __decorate([
+    HolidayGroupSettingsViewPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]
+                __WEBPACK_IMPORTED_MODULE_2__holiday_group_settings_view__["a" /* HolidayGroupSettingsViewPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]),
-                __WEBPACK_IMPORTED_MODULE_3__find_password_find_password_module__["FindPasswordModule"]
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__holiday_group_settings_view__["a" /* HolidayGroupSettingsViewPage */]),
+                __WEBPACK_IMPORTED_MODULE_4__directives_directives_module__["a" /* DirectivesModule */]
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]
-            ],
-            providers: [__WEBPACK_IMPORTED_MODULE_4__LoginService__["a" /* LoginService */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_3__holiday_group_settings_service__["a" /* HolidayGroupSettingsService */]]
         })
-    ], LoginModule);
-    return LoginModule;
+    ], HolidayGroupSettingsViewPageModule);
+    return HolidayGroupSettingsViewPageModule;
 }());
 
-//# sourceMappingURL=login.module.js.map
+//# sourceMappingURL=holiday-group-settings-view.module.js.map
 
 /***/ }),
 
-/***/ 789:
+/***/ 785:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FindPassword; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HolidayGroupSettingsService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var HolidayGroupSettingsService = (function () {
+    function HolidayGroupSettingsService(httpService) {
+        this.httpService = httpService;
+    }
+    HolidayGroupSettingsService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
+    ], HolidayGroupSettingsService);
+    return HolidayGroupSettingsService;
+}());
+
+//# sourceMappingURL=holiday-group-settings-service.js.map
+
+/***/ }),
+
+/***/ 786:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DirectivesModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__autotextarea_autotextarea__ = __webpack_require__(787);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+var DirectivesModule = (function () {
+    function DirectivesModule() {
+    }
+    DirectivesModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [__WEBPACK_IMPORTED_MODULE_1__autotextarea_autotextarea__["a" /* AutotextareaDirective */]],
+            imports: [],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__autotextarea_autotextarea__["a" /* AutotextareaDirective */]]
+        })
+    ], DirectivesModule);
+    return DirectivesModule;
+}());
+
+//# sourceMappingURL=directives.module.js.map
+
+/***/ }),
+
+/***/ 787:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AutotextareaDirective; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var AutotextareaDirective = (function () {
+    function AutotextareaDirective(element) {
+        this.element = element;
+        console.log('Hello AutosizeDirective Directive');
+    }
+    AutotextareaDirective.prototype.onInput = function (textArea) {
+        this.adjust();
+    };
+    // @HostListener('change', ['$event.target']) onChange(textArea: HTMLTextAreaElement): void {
+    //   console.log(1234);
+    //   this.adjust();
+    // }
+    AutotextareaDirective.prototype.ngOnChanges = function (changes) {
+        console.log(1234);
+        this.adjust();
+    };
+    AutotextareaDirective.prototype.ngOnInit = function () {
+        var _this = this;
+        setTimeout(function () { return _this.adjust(); }, 0);
+    };
+    AutotextareaDirective.prototype.adjust = function () {
+        var textArea = this.element.nativeElement.getElementsByTagName('textarea')[0];
+        textArea.style.overflow = 'hidden';
+        textArea.style.height = 'auto';
+        textArea.style.height = textArea.scrollHeight + 'px';
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["y" /* HostListener */])('input', ['$event.target']),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [HTMLTextAreaElement]),
+        __metadata("design:returntype", void 0)
+    ], AutotextareaDirective.prototype, "onInput", null);
+    AutotextareaDirective = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* Directive */])({
+            selector: '[autotextarea]' // Attribute selector
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */]])
+    ], AutotextareaDirective);
+    return AutotextareaDirective;
+}());
+
+//# sourceMappingURL=autotextarea.js.map
+
+/***/ }),
+
+/***/ 804:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HolidayGroupSettingsViewPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__holiday_group_settings_service__ = __webpack_require__(785);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -111,170 +194,57 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import { LoginPage } from '../login';
-var FindPassword = (function () {
-    function FindPassword(navCtrl, viewCtrl, formBuilder) {
+
+var HolidayGroupSettingsViewPage = (function () {
+    function HolidayGroupSettingsViewPage(navCtrl, navParams, formBuilder, popoverCtrl, holidayGroupSettingsService) {
         this.navCtrl = navCtrl;
-        this.viewCtrl = viewCtrl;
+        this.navParams = navParams;
         this.formBuilder = formBuilder;
-        this.findPasswordForm = this.formBuilder.group({
-            phone: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(11), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].pattern('1[0-9]{10}')]],
-            verificationCode: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(6), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].pattern('[0-9]{6}')]],
-            newPassword: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(6)]]
+        this.popoverCtrl = popoverCtrl;
+        this.holidayGroupSettingsService = holidayGroupSettingsService;
+        this.FileNewName = ""; // 附件名称
+        this.PersonId = "";
+        this.readOnly = false;
+        this.readOnly = this.navParams.get("readOnly") ? true : false;
+        this.writeForm = this.formBuilder.group({
+            "Years": ['', []],
+            "GroupName": ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(12)]],
+            "LeaveDays": ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].max(365)]],
+            "TuneOffDays": ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].max(365)]],
+            "SickLeaveDays": ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].max(365)]],
+            "Person": ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            "Description": ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]],
         });
     }
-    FindPassword.prototype.confirm = function () {
-        this.navCtrl.setRoot("LoginPage");
+    HolidayGroupSettingsViewPage.prototype.sent = function (data) {
     };
-    FindPassword.prototype.dismiss = function () {
-        this.viewCtrl.dismiss();
+    HolidayGroupSettingsViewPage.prototype.checkPeople = function (myEvent) {
+        var _this = this;
+        var popover = this.popoverCtrl.create("ContactsPopoverPage", { addressee: this.writeForm.get("Person").value, addresseeIds: this.PersonId });
+        popover.present({
+            ev: myEvent
+        });
+        popover.onDidDismiss(function (data) {
+            if (!!data) {
+                _this.PersonId = data.addresseeIds;
+                _this.writeForm.patchValue({ 'Person': data.addressee });
+            }
+        });
     };
-    FindPassword = __decorate([
+    HolidayGroupSettingsViewPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-find-password',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\find-password\find-password.html"*/`<!--\n  Generated template for the FindPassword page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            找回密码\n        </ion-title>\n        <ion-buttons>\n            <button ion-button (click)="dismiss()">关闭</button>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <form [formGroup]="findPasswordForm" (ngSubmit)="confirm()">\n        <ion-list>\n            <ion-item>\n                <ion-label>手机号</ion-label>\n                <ion-input type="number" formControlName="phone"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.phone.valid&& findPasswordForm.controls.phone.touched" color="danger">请输入手机号码</span>\n            <ion-item>\n                <ion-label>验证码</ion-label>\n                <ion-input type="number" formControlName="verificationCode"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.verificationCode.valid&& findPasswordForm.controls.verificationCode.touched" color="danger">请输入验证码</span>\n            <ion-item>\n                <ion-label>新密码</ion-label>\n                <ion-input type="password" formControlName="newPassword"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.newPassword.valid&& findPasswordForm.controls.newPassword.touched" color="danger">请输入新密码</span>\n        </ion-list>\n        <div padding-horizontal>\n            <button ion-button block type="submit" [disabled]="!findPasswordForm.valid">确　认</button>\n        </div>\n        <button class="verification" ion-button small color="secondary" *ngIf="findPasswordForm.controls.phone.valid">获取验证码</button>\n    </form>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\find-password\find-password.html"*/
+            selector: 'page-holiday-group-settings-view',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\attendance-management\holiday-group-settings\holiday-group-settings-view\holiday-group-settings-view.html"*/`<ion-header>\n\n  <ion-navbar>\n    <ion-title>假期分组信息</ion-title>\n    <ion-buttons end>\n       <button ion-button end (click)="doWrite()">保存</button>\n   </ion-buttons>\n </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)"   [ngClass]="{\'form-readonly\': readOnly}">\n        <ion-list>\n            <ion-item>\n                <ion-label>分组年份</ion-label>\n                <ion-input text-right *ngIf="readonly" type="text" formControlName="Years" placeholder="未设置" disabled></ion-input>\n                <ion-datetime *ngIf="!readonly" placeholder="点击设置" min=\'2018\' cancelText="取消" doneText="确定" formControlName="Years" displayFormat="YYYY" pickerFormat="YYYY"></ion-datetime>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>分组名称</ion-label>\n                <ion-input text-right  type="text" formControlName="GroupName" placeholder="未设置"></ion-input>\n            </ion-item>\n            <div *ngIf="!writeForm.controls.GroupName.valid && (writeForm.controls.GroupName.touched || writeForm.controls.GroupName.dirty )" class="validation-failed">\n                <div *ngIf="writeForm.get(\'GroupName\').errors.required">会议主题必填</div>\n                <div *ngIf="writeForm.get(\'GroupName\').errors.maxlength">最多输入12个字</div>\n            </div>\n            <ion-item>\n                <ion-label>事假天数(天)</ion-label>\n                <ion-input text-right  type="number" formControlName="LeaveDays" placeholder="未设置"></ion-input>\n            </ion-item>\n            <div *ngIf="!writeForm.controls.LeaveDays.valid && (writeForm.controls.LeaveDays.touched || writeForm.controls.SickLeaveDays.dirty )" class="validation-failed">\n                <div *ngIf="writeForm.get(\'LeaveDays\').errors.required">事假天数必填</div>\n                <div *ngIf="writeForm.get(\'LeaveDays\').errors.maxlength">最大请假天数365</div>\n            </div>\n            <ion-item>\n                <ion-label>调休天数(天)</ion-label>\n                <ion-input text-right  type="number" formControlName="TuneOffDays" placeholder="未设置"></ion-input>\n            </ion-item>\n            <div *ngIf="!writeForm.controls.TuneOffDays.valid && (writeForm.controls.TuneOffDays.touched || writeForm.controls.TuneOffDays.dirty )" class="validation-failed">\n                <div *ngIf="writeForm.get(\'TuneOffDays\').errors.required">调休天数必填</div>\n                <div *ngIf="writeForm.get(\'TuneOffDays\').errors.maxlength">最大请假天数365</div>\n            </div>\n            <ion-item>\n                <ion-label>病假天数(天)</ion-label>\n                <ion-input text-right  type="number" formControlName="SickLeaveDays" placeholder="未设置"></ion-input>\n            </ion-item>\n            <div *ngIf="!writeForm.controls.SickLeaveDays.valid && (writeForm.controls.SickLeaveDays.touched || writeForm.controls.SickLeaveDays.dirty )" class="validation-failed">\n                <div *ngIf="writeForm.get(\'SickLeaveDays\').errors.required">病假天数必填</div>\n                <div *ngIf="writeForm.get(\'SickLeaveDays\').errors.maxlength">最大请假天数365</div>\n            </div>\n            <ion-item #popoverContent (click)="checkPeople($event)">\n                <ion-label col-1 stacked>参加人员</ion-label>\n                <ion-note item-end>{{writeForm.value.Person || \'点击选择员工\'}}</ion-note>\n                <!-- <p text-right>{{writeForm.value.Person || \'点击选择\'}}</p> -->\n                <!-- <ion-textarea autotextarea type="text"  formControlName="Person" readonly="true" placeholder="点击添加"></ion-textarea> -->\n            </ion-item>\n            <div *ngIf="!writeForm.controls.Person.valid && (writeForm.controls.Person.touched || writeForm.controls.Person.dirty )" class="validation-failed">\n                <div *ngIf="writeForm.get(\'Person\').errors.required">参加人员必填</div>\n                <div *ngIf="writeForm.get(\'Person\').errors.maxlength">最多输入180个字</div>\n            </div>\n            <ion-item>\n                <ion-label stacked style="flex: 1">分组说明</ion-label>\n                <ion-textarea   autotextarea type="text"  formControlName="Description"placeholder="请输入"></ion-textarea>\n            </ion-item>\n            <div *ngIf="!writeForm.controls.Description.valid && (writeForm.controls.Description.touched || writeForm.controls.Description.dirty )" class="validation-failed">\n                最多输入180个字\n            </div>\n        </ion-list>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\attendance-management\holiday-group-settings\holiday-group-settings-view\holiday-group-settings-view.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
-    ], FindPassword);
-    return FindPassword;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */],
+            __WEBPACK_IMPORTED_MODULE_3__holiday_group_settings_service__["a" /* HolidayGroupSettingsService */]])
+    ], HolidayGroupSettingsViewPage);
+    return HolidayGroupSettingsViewPage;
 }());
 
-//# sourceMappingURL=find-password.js.map
-
-/***/ }),
-
-/***/ 833:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__LoginService__ = __webpack_require__(162);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_GlobalData__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_HttpService__ = __webpack_require__(61);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-// import { FindPassword } from './find-password/find-password';
-// import {UserInfo} from "../../model/UserInfo";
-
-// import { TabsPage } from '../tabs/tabs';
-
-var LoginPage = (function () {
-    function LoginPage(viewCtrl, events, formBuilder, storage, modalCtrl, platform, alertCtrl, globalData, loginService, httpService) {
-        this.viewCtrl = viewCtrl;
-        this.events = events;
-        this.formBuilder = formBuilder;
-        this.storage = storage;
-        this.modalCtrl = modalCtrl;
-        this.platform = platform;
-        this.alertCtrl = alertCtrl;
-        this.globalData = globalData;
-        this.loginService = loginService;
-        this.httpService = httpService;
-        this.submitted = false;
-        this.canLeave = false;
-        this.loginForm = this.formBuilder.group({
-            UserName: ['admin', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(4)]],
-            UserPass: ['123', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(2)]]
-        });
-    }
-    LoginPage.prototype.ionViewWillEnter = function () {
-        var _this = this;
-        this.canLeave = false;
-        this.storage.get('UserInfo').then(function (userInfo) {
-            _this.userInfo = userInfo && userInfo.user ? userInfo.user : null;
-        });
-    };
-    LoginPage.prototype.ionViewCanLeave = function () {
-        var _this = this;
-        var bool = !!this.userInfo;
-        if (this.canLeave || bool) {
-            return true;
-        }
-        else {
-            this.alertCtrl.create({
-                title: '确认退出软件？',
-                buttons: [{ text: '取消' },
-                    {
-                        text: '确定',
-                        handler: function () {
-                            _this.platform.exitApp();
-                        }
-                    }
-                ]
-            }).present();
-            return false;
-        }
-    };
-    LoginPage.prototype.login = function (user) {
-        var _this = this;
-        this.submitted = true;
-        // this.httpService.postFormData("ashx/Login.ashx/LoginInfo",user)
-        //  .map(responce => responce.json())
-        this.loginService.login(user).subscribe(function (userInfo) {
-            console.log(userInfo);
-            _this.submitted = false;
-            // userInfo.token = 'xx122a9Wf';//从后台获取token,暂时写死
-            _this.userInfo = userInfo.Data;
-            _this.globalData.Uid = userInfo.Data.Uid;
-            _this.globalData.Name = userInfo.Data.Name;
-            _this.globalData.token = userInfo.Data.Token;
-            // alert(this.globalData.token);
-            _this.storage.set('UserInfo', userInfo.Data);
-            _this.storage.set('LoginInfo', user);
-            // alert(this.storage.get('UserInfo'));
-            _this.events.publish('user:login', userInfo);
-            _this.viewCtrl.dismiss(userInfo.Data);
-        });
-    };
-    LoginPage.prototype.findPassword = function () {
-        var _this = this;
-        this.canLeave = true;
-        var modal = this.modalCtrl.create("FindPassword");
-        modal.present();
-        modal.onDidDismiss(function (data) {
-            _this.canLeave = false;
-        });
-    };
-    LoginPage.prototype.dismiss = function () {
-        this.viewCtrl.dismiss();
-    };
-    LoginPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-login',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\login.html"*/`<!--\n  Generated template for the Login page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<!--.nav-decor隐藏头部-->\n<ion-header class="nav-decor">\n\n    <ion-navbar>\n        <ion-title>登录</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <div class="login-header">登录</div>\n    <div class="login-top">\n        <img src="assets/img/logo.png" alt="公司logo" />\n    </div>\n    <form padding [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">\n        <ion-list>\n            <ion-item>\n                <ion-label color="primary">用户名</ion-label>\n                <ion-input type="text" formControlName="UserName" clearInput></ion-input>\n            </ion-item>\n            <div *ngIf="!loginForm.controls.UserName.valid && loginForm.controls.UserName.touched" class="validation-failed"> 请输入正确用户名</div>\n\n            <ion-item>\n                <ion-label color="primary">密　码</ion-label>\n                <ion-input type="password" formControlName="UserPass" clearInput></ion-input>\n            </ion-item>\n            <div *ngIf="!loginForm.controls.UserPass.valid" class="validation-failed">请输入密码</div>\n\n        </ion-list>\n        <div padding-horizontal>\n            <button ion-button block type="submit" [disabled]="!loginForm.valid||submitted">登　录</button>\n        </div>\n    </form>\n    <!-- <ion-grid>\n        <ion-row>\n            <ion-col text-center (click)="findPassword()">\n                <button ion-button small clear color="primary">找回密码</button>\n            </ion-col>\n        </ion-row>\n    </ion-grid> -->\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\login.html"*/,
-            providers: [__WEBPACK_IMPORTED_MODULE_4__LoginService__["a" /* LoginService */]]
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Events */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* Platform */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_5__providers_GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_4__LoginService__["a" /* LoginService */],
-            __WEBPACK_IMPORTED_MODULE_6__providers_HttpService__["a" /* HttpService */]])
-    ], LoginPage);
-    return LoginPage;
-}());
-
-//# sourceMappingURL=login.js.map
+//# sourceMappingURL=holiday-group-settings-view.js.map
 
 /***/ })
 

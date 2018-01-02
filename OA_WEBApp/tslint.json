@@ -1,9 +1,8 @@
 {
     "rules": {
         "no-duplicate-variable": true,
-        "no-unused-variable": [
-            true
-        ],
+        "no-unused-variable": [true],
+        "no-unused-expression": [false],
         "class-name": true,
         "comment-format": [true,
             "check-space"
@@ -54,7 +53,5 @@
         "no-namespace": [true, "allow-declarations"],
         "max-line-length": [ true, 120 ]
     },
-    "rulesDirectory": [
-        "node_modules/tslint-eslint-rules/dist/rules"
-    ]
+    "extends": "tslint-ionic-rules"
 }

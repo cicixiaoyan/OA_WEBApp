@@ -1,16 +1,15 @@
 webpackJsonp([28],{
 
-/***/ 731:
+/***/ 737:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FileApplicationAddPageModule", function() { return FileApplicationAddPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FileApplicationReviewViewPageModule", function() { return FileApplicationReviewViewPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__file_application_add__ = __webpack_require__(812);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fileApplicationService__ = __webpack_require__(776);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__directives_directives_module__ = __webpack_require__(835);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__file_application_review_view__ = __webpack_require__(826);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fileApplicationService__ = __webpack_require__(780);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -21,30 +20,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-
-var FileApplicationAddPageModule = (function () {
-    function FileApplicationAddPageModule() {
+var FileApplicationReviewViewPageModule = (function () {
+    function FileApplicationReviewViewPageModule() {
     }
-    FileApplicationAddPageModule = __decorate([
+    FileApplicationReviewViewPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__file_application_add__["a" /* FileApplicationAddPage */],
+                __WEBPACK_IMPORTED_MODULE_2__file_application_review_view__["a" /* FileApplicationReviewViewPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__file_application_add__["a" /* FileApplicationAddPage */]),
-                __WEBPACK_IMPORTED_MODULE_4__directives_directives_module__["a" /* DirectivesModule */]
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__file_application_review_view__["a" /* FileApplicationReviewViewPage */]),
             ],
             providers: [__WEBPACK_IMPORTED_MODULE_3__fileApplicationService__["a" /* FileApplicationService */]]
         })
-    ], FileApplicationAddPageModule);
-    return FileApplicationAddPageModule;
+    ], FileApplicationReviewViewPageModule);
+    return FileApplicationReviewViewPageModule;
 }());
 
-//# sourceMappingURL=file-application-add.module.js.map
+//# sourceMappingURL=file-application-review-view.module.js.map
 
 /***/ }),
 
-/***/ 776:
+/***/ 780:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -85,15 +82,13 @@ var FileApplicationService = (function () {
 
 /***/ }),
 
-/***/ 812:
+/***/ 826:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FileApplicationAddPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FileApplicationReviewViewPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__fileApplicationService__ = __webpack_require__(776);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -105,133 +100,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
-
-/**
- * Generated class for the FileApplicationAddPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var FileApplicationAddPage = (function () {
-    function FileApplicationAddPage(navCtrl, navParams, popoverCtrl, FormBuilder, fileApplicationService) {
+var FileApplicationReviewViewPage = (function () {
+    function FileApplicationReviewViewPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.popoverCtrl = popoverCtrl;
-        this.FormBuilder = FormBuilder;
-        this.fileApplicationService = fileApplicationService;
-        this.baseForm = this.FormBuilder.group({
-            "ApplicationDate": ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            "Approver": ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]],
-            "Remarks": ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            "InforMemethod": ['1', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]] // 消息通知方式
-        });
+        this.Id = '';
+        this.ApprovalComments = '我是审核意见';
+        this.readOnly = false;
+        this.Id = this.navParams.get('Id');
     }
-    FileApplicationAddPage.prototype.ionViewDidLoad = function () {
+    FileApplicationReviewViewPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad FileApplicationReviewViewPage');
     };
-    FileApplicationAddPage.prototype.submit = function (value) {
-        value.Uid = this.fileApplicationService.httpService.globalData.Uid;
-        console.log(value);
+    FileApplicationReviewViewPage.prototype.agree = function () {
+        // 审核通过
+        console.log(this.Id, this.ApprovalComments);
     };
-    FileApplicationAddPage = __decorate([
+    FileApplicationReviewViewPage.prototype.oppose = function () {
+        // 审核不通过
+        console.log(this.Id, this.ApprovalComments);
+    };
+    FileApplicationReviewViewPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-file-application-add',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\file-application\file-application-list\file-application-add\file-application-add.html"*/`<ion-header>\n    <ion-navbar>\n        <ion-title>个人档案申请</ion-title>\n        <ion-buttons end>\n            <button ion-button [disabled]="!baseForm.valid" (click)="submit(baseForm.value)">提交</button>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="baseForm" (ngSubmit)="submit(baseForm.value)">\n        <ion-list>\n            <ion-item>\n                <ion-label>申请日期</ion-label>\n                <ion-datetime formControlName="ApplicationDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n            <ion-item>\n                <ion-label>申请理由</ion-label>\n                <ion-textarea autotextarea text-right rows=\'2\' formControlName="Remarks" placeholder="请输入申请理由"></ion-textarea>\n            </ion-item>\n            <ion-item>\n                <ion-label>审批人员选择</ion-label>\n                <ion-select formControlName="Approver" cancelText="取消" okText="确定" placeholder="请选择">\n                    <ion-option value="008">温春梅</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item>\n                <ion-label>通知审批人员方式</ion-label>\n                <ion-select formControlName="InforMemethod" cancelText="取消" okText="确定" placeholder="请选择">\n                    <ion-option value="1">站内消息通知</ion-option>\n                    <ion-option value="2">手机短信通知</ion-option>\n                </ion-select>\n            </ion-item>\n        </ion-list>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\file-application\file-application-list\file-application-add\file-application-add.html"*/,
+            selector: 'page-file-application-review-view',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\file-application\file-application-review\file-application-review-view\file-application-review-view.html"*/`<ion-header>\n\n  <ion-navbar>\n    <ion-title>档案申请基本信息</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-card>\n    <ion-card-content>\n      <ion-grid>\n        <ion-row>\n          <ion-col col-auto>&emsp;申请人：</ion-col>\n          <ion-col class=\'right-info\'>张三</ion-col>\n        </ion-row>\n        <ion-row>\n          <ion-col col-auto>申请日期：</ion-col>\n          <ion-col class=\'right-info\'>2017-12-12</ion-col>\n        </ion-row>\n        <ion-row>\n          <ion-col col-auto>申请理由：</ion-col>\n          <ion-col class=\'right-info\'>我是申请理由我是申请理由我是申请理由我是申请理由我是申请理由我是申请理由</ion-col>\n        </ion-row>\n        <ion-row padding-top margin-top class=\'idivider\'>\n          <ion-col col-auto>审批意见：</ion-col>\n          <ion-col  class=\'right-info\' *ngIf="!readOnly">\n            <ion-textarea rows=\'5\'  [(ngModel)]="ApprovalComments"></ion-textarea>\n          </ion-col>\n          <ion-col  class=\'right-info\' *ngIf="readOnly">{{ApprovalComments}}</ion-col>\n        </ion-row>\n\n\n      </ion-grid>\n      <div padding-top text-center>\n        <button (click)=\'agree()\' ion-button small icon-left color="secondary"><ion-icon name="md-checkmark"></ion-icon>同意使用</button>\n        <button (click)=\'oppose()\' ion-button small icon-left color="danger" outline><ion-icon name="md-close"></ion-icon>拒绝使用</button>\n      </div>\n    </ion-card-content>\n\n</ion-card>\n\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\file-application\file-application-review\file-application-review-view\file-application-review-view.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* PopoverController */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_3__fileApplicationService__["a" /* FileApplicationService */]])
-    ], FileApplicationAddPage);
-    return FileApplicationAddPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
+    ], FileApplicationReviewViewPage);
+    return FileApplicationReviewViewPage;
 }());
 
-//# sourceMappingURL=file-application-add.js.map
-
-/***/ }),
-
-/***/ 835:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DirectivesModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__autotextarea_autotextarea__ = __webpack_require__(836);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-var DirectivesModule = (function () {
-    function DirectivesModule() {
-    }
-    DirectivesModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [__WEBPACK_IMPORTED_MODULE_1__autotextarea_autotextarea__["a" /* AutotextareaDirective */]],
-            imports: [],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__autotextarea_autotextarea__["a" /* AutotextareaDirective */]]
-        })
-    ], DirectivesModule);
-    return DirectivesModule;
-}());
-
-//# sourceMappingURL=directives.module.js.map
-
-/***/ }),
-
-/***/ 836:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AutotextareaDirective; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var AutotextareaDirective = (function () {
-    function AutotextareaDirective(element) {
-        this.element = element;
-        console.log('Hello AutosizeDirective Directive');
-    }
-    AutotextareaDirective.prototype.onInput = function (textArea) {
-        this.adjust();
-    };
-    AutotextareaDirective.prototype.ngOnInit = function () {
-        var _this = this;
-        setTimeout(function () { return _this.adjust(); }, 0);
-    };
-    AutotextareaDirective.prototype.adjust = function () {
-        var textArea = this.element.nativeElement.getElementsByTagName('textarea')[0];
-        textArea.style.overflow = 'hidden';
-        textArea.style.height = 'auto';
-        textArea.style.height = textArea.scrollHeight + 'px';
-    };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["y" /* HostListener */])('input', ['$event.target']),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [HTMLTextAreaElement]),
-        __metadata("design:returntype", void 0)
-    ], AutotextareaDirective.prototype, "onInput", null);
-    AutotextareaDirective = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* Directive */])({
-            selector: '[autotextarea]' // Attribute selector
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */]])
-    ], AutotextareaDirective);
-    return AutotextareaDirective;
-}());
-
-//# sourceMappingURL=autotextarea.js.map
+//# sourceMappingURL=file-application-review-view.js.map
 
 /***/ })
 

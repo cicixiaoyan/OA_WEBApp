@@ -1,14 +1,14 @@
 webpackJsonp([52],{
 
-/***/ 707:
+/***/ 769:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StaffFileMaintenanceWorkExperienceAddModule", function() { return StaffFileMaintenanceWorkExperienceAddModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GetmobilePopoverPageModule", function() { return GetmobilePopoverPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience_add__ = __webpack_require__(788);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__getmobile_popover__ = __webpack_require__(860);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,37 +18,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var StaffFileMaintenanceWorkExperienceAddModule = (function () {
-    function StaffFileMaintenanceWorkExperienceAddModule() {
+var GetmobilePopoverPageModule = (function () {
+    function GetmobilePopoverPageModule() {
     }
-    StaffFileMaintenanceWorkExperienceAddModule = __decorate([
+    GetmobilePopoverPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience_add__["a" /* StaffFileMaintenanceWorkExperienceAdd */],
+                __WEBPACK_IMPORTED_MODULE_2__getmobile_popover__["a" /* GetmobilePopoverPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience_add__["a" /* StaffFileMaintenanceWorkExperienceAdd */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__getmobile_popover__["a" /* GetmobilePopoverPage */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience_add__["a" /* StaffFileMaintenanceWorkExperienceAdd */]
-            ]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__getmobile_popover__["a" /* GetmobilePopoverPage */]]
         })
-    ], StaffFileMaintenanceWorkExperienceAddModule);
-    return StaffFileMaintenanceWorkExperienceAddModule;
+    ], GetmobilePopoverPageModule);
+    return GetmobilePopoverPageModule;
 }());
 
-//# sourceMappingURL=staff-file-maintenance-work-experience-add.module.js.map
+//# sourceMappingURL=getmobile-popover.module.js.map
 
 /***/ }),
 
-/***/ 788:
+/***/ 860:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StaffFileMaintenanceWorkExperienceAdd; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GetmobilePopoverPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -61,58 +62,133 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import 'rxjs/add/operator/map';
-// import { Observable } from 'rxjs/Observable';
-// import { HttpService } from "../../../providers/HttpService";
-var StaffFileMaintenanceWorkExperienceAdd = (function () {
-    function StaffFileMaintenanceWorkExperienceAdd(navCtrl, navParams, 
-        // private httpService: HttpService,
-        formBuilder, viewCtrl) {
-        this.navCtrl = navCtrl;
+
+
+/**
+ * Generated class for the GetmobilePopoverPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var GetmobilePopoverPage = (function () {
+    function GetmobilePopoverPage(navParams, viewCtrl, storage, httpService) {
         this.navParams = navParams;
-        this.formBuilder = formBuilder;
         this.viewCtrl = viewCtrl;
-        this.isShow = true;
-        this.readOnly = false;
-        this.readOnly = this.navParams.get("readOnly") ? true : false;
-        this.addForm = this.formBuilder.group({
-            StartDate: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            EndDate: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
-            Dept: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(20)]],
-            Duty: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(30)]],
-            Company: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(20)]],
-            Remarks: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]],
-        });
-        this.formCtrls = this.addForm.controls;
+        this.storage = storage;
+        this.httpService = httpService;
+        this.items = [];
+        this.addressee = this.navParams.get("addressee") ? this.navParams.get("addressee") : '';
+        this.addresseeIds = this.navParams.get("addresseeIds") ? this.navParams.get("addresseeIds") : "";
+        this.initializeItems();
     }
-    StaffFileMaintenanceWorkExperienceAdd.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad StaffFileMaintenanceWorkExperienceAddPage');
+    GetmobilePopoverPage.prototype.initializeItems = function () {
+        this.search();
     };
-    StaffFileMaintenanceWorkExperienceAdd.prototype.dismiss = function () {
-        this.viewCtrl.dismiss();
+    GetmobilePopoverPage.prototype.getItems = function (ev) {
+        // Reset items back to all of the items
+        this.initializeItems();
+        // set val to the value of the ev target
+        var val = ev.target.value;
+        this.name = val;
+        // if the value is an empty string don't filter the items
+        // if (val && val.trim() != '') {
+        //   this.items = this.items.filter((item) => {
+        //     return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        //   });
+        // }
     };
-    StaffFileMaintenanceWorkExperienceAdd.prototype.save = function (value) {
-        // 提交
-        // this.httpService.postFormData("", value)
-        // .map((res: Response) => res.json())
-        // .subscribe((resJson) => {
-        // });
+    GetmobilePopoverPage.prototype.getRecipientsByDept = function (id) {
+        var _this = this;
+        var data = !!id ? { DeptId: id } : {};
+        data["ISPhone"] = 1;
+        this.httpService.postFormData("ashx/UserSheet.ashx", data)
+            .map(function (res) { return res.json(); })
+            .subscribe(function (result) {
+            console.log(result);
+            if (result.Result && (result.Data instanceof Array) && result.Data.length !== 0) {
+                if (_this.addresseeIds !== "") {
+                    var idArr_1 = _this.addresseeIds.split(",");
+                    _this.items = result.Data.map(function (value, index) {
+                        for (var i in idArr_1) {
+                            if (idArr_1[i] !== value.Uid) {
+                                Object.assign(value, { checked: false });
+                            }
+                            else {
+                                return Object.assign(value, { checked: true });
+                            }
+                        }
+                        return value;
+                    });
+                }
+                else {
+                    _this.items = result.Data;
+                }
+            }
+            else {
+            }
+        });
     };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
-        __metadata("design:type", Boolean)
-    ], StaffFileMaintenanceWorkExperienceAdd.prototype, "isShow", void 0);
-    StaffFileMaintenanceWorkExperienceAdd = __decorate([
+    GetmobilePopoverPage.prototype.search = function () {
+        var _this = this;
+        //   let data = (this.name !== "") ? {name: name} : {};
+        var data = {};
+        if (this.name && this.name.trim() != '')
+            data["name"] = this.name;
+        data["ISPhone"] = 1;
+        this.httpService.postFormData("ashx/UserSheet.ashx", data)
+            .map(function (res) { return res.json(); })
+            .subscribe(function (result) {
+            if (result.Result && (result.Data instanceof Array) && result.Data.length !== 0) {
+                if (_this.addresseeIds !== "") {
+                    var idArr_2 = _this.addresseeIds.split(",");
+                    _this.items = result.Data.map(function (value, index) {
+                        for (var i in idArr_2) {
+                            if (idArr_2[i] !== value.Uid) {
+                                Object.assign(value, { checked: false });
+                            }
+                            else {
+                                return Object.assign(value, { checked: true });
+                            }
+                        }
+                        return value;
+                    });
+                }
+                else {
+                    _this.items = result.Data;
+                }
+            }
+            else {
+            }
+        });
+    };
+    GetmobilePopoverPage.prototype.checkPeople = function (index) {
+        this.items[index].checked = !this.items[index].checked;
+    };
+    GetmobilePopoverPage.prototype.confirm = function () {
+        this.addressee = "";
+        this.addresseeIds = "";
+        for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
+            var value = _a[_i];
+            if (value.checked) {
+                this.addressee += value.Name + ",";
+                this.addresseeIds += value.Uid + ",";
+            }
+        }
+        this.viewCtrl.dismiss({ addressee: this.addressee, addresseeIds: this.addresseeIds });
+    };
+    GetmobilePopoverPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-staff-file-maintenance-work-experience-add',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience-add\staff-file-maintenance-work-experience-add.html"*/`<ion-header>\n\n  <ion-navbar>\n      <ion-buttons start>\n          <button ion-button  (click)="dismiss()">返回</button>\n      </ion-buttons>\n    <ion-title>工作经历</ion-title>\n    <ion-buttons end>\n        <button ion-button [disabled]=\'addForm.invalid\'  (click)="save(addForm.value)">保存</button>\n    </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="addForm" (ngSubmit)="save(addForm.value)"   [ngClass]="{\'form-readonly\': readOnly}">\n        <ion-list style="position:relative;">\n            <ion-item>\n                <ion-label>开始时间</ion-label>\n                <ion-datetime formControlName="StartDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.StartDate.invalid && formCtrls.StartDate.touched">\n              开始时间必填\n            </div>\n            <ion-item>\n                <ion-label>结束时间</ion-label>\n                <ion-datetime formControlName="EndDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.EndDate.invalid && formCtrls.EndDate.touched">\n              结束时间必填\n            </div>\n            <ion-item>\n                <ion-label>部门</ion-label>\n                <ion-input text-right type="text" formControlName="Dept" placeholder="输入部门名称"></ion-input>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.Dept.invalid && (formCtrls.Dept.touched || formCtrls.Dept.dirty )">\n              <div *ngIf="addForm.get(\'Dept\').errors.required">部门必填</div>\n              <div *ngIf="addForm.get(\'Dept\').errors.maxlength">最多输入20个字</div>\n            </div>\n            <ion-item>\n                <ion-label>职务</ion-label>\n                <ion-input text-right type="text" formControlName="Duty" placeholder="输入职务名称"></ion-input>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.Duty.invalid && (formCtrls.Duty.touched || formCtrls.Duty.dirty )">\n              <div *ngIf="addForm.get(\'Duty\').errors.required">职务必填</div>\n              <div *ngIf="addForm.get(\'Duty\').errors.maxlength">最多输入30个字</div>\n            </div>\n            <ion-item>\n                <ion-label>工作单位</ion-label>\n                <ion-input text-right type="text" formControlName="Company" placeholder="输入工作单位"></ion-input>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.Company.invalid && (formCtrls.Company.touched || formCtrls.Company.dirty )">\n              <div *ngIf="addForm.get(\'Company\').errors.required">工作单位必填</div>\n              <div *ngIf="addForm.get(\'Company\').errors.maxlength">最多输入20个字</div>\n            </div>\n            <ion-item>\n                <ion-label stacked>备注<span class="optional">（选填）</span></ion-label>\n                <ion-textarea  formControlName="Remarks" placeholder="请输入备注"></ion-textarea>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.Remarks.invalid && (formCtrls.Remarks.touched || formCtrls.Remarks.dirty )">\n              最多输入180个字\n            </div>\n        </ion-list>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience-add\staff-file-maintenance-work-experience-add.html"*/,
+            selector: 'page-getmobile-popover',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\popover\getmobile-popover\getmobile-popover.html"*/`<!--\n  Generated template for the GetmobilePopoverPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    \n      <ion-navbar>\n        <ion-title>联系人选择</ion-title>\n      </ion-navbar>\n    \n    </ion-header>\n    \n    \n    <ion-content>\n      <ion-list class="checkpeople-popover">\n        <ion-searchbar color="danger" [(ngModel)]="name"  placeholder="请输入编码或姓名">\n        </ion-searchbar>\n      \n        <div text-center>\n            <button (click)="search()" icon-left ion-button small color="calm">\n            <ion-icon name="search"></ion-icon>查询</button>\n      \n            <button (click)="confirm()" icon-left ion-button small color="calm">\n            <ion-icon name="checkmark"></ion-icon>确定</button>\n        </div>\n      \n        <ion-list-header>\n            通讯录\n        </ion-list-header>\n      \n        <ion-item *ngFor="let item of items;let i = index">\n            <ion-label>\n            {{item.Name}}({{item.Uid}})<br>\n            <span>{{item.Mobile}}</span>\n            </ion-label>\n            <ion-checkbox [checked]="item.checked" (ionChange)="checkPeople(i)"></ion-checkbox>\n        </ion-item>\n      </ion-list>\n    </ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\popover\getmobile-popover\getmobile-popover.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */]) === "function" && _d || Object])
-    ], StaffFileMaintenanceWorkExperienceAdd);
-    return StaffFileMaintenanceWorkExperienceAdd;
-    var _a, _b, _c, _d;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__["a" /* HttpService */]])
+    ], GetmobilePopoverPage);
+    return GetmobilePopoverPage;
 }());
 
-//# sourceMappingURL=staff-file-maintenance-work-experience-add.js.map
+//# sourceMappingURL=getmobile-popover.js.map
 
 /***/ })
 

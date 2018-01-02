@@ -1,14 +1,14 @@
 webpackJsonp([50],{
 
-/***/ 747:
+/***/ 774:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrainingMaintenancePageModule", function() { return TrainingMaintenancePageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabsModule", function() { return TabsModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__training_maintenance_search__ = __webpack_require__(830);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tabs__ = __webpack_require__(865);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,35 +18,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var TrainingMaintenancePageModule = (function () {
-    function TrainingMaintenancePageModule() {
+var TabsModule = (function () {
+    function TabsModule() {
     }
-    TrainingMaintenancePageModule = __decorate([
+    TabsModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__training_maintenance_search__["a" /* TrainingMaintenanceSearch */]
+                __WEBPACK_IMPORTED_MODULE_2__tabs__["a" /* TabsPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__training_maintenance_search__["a" /* TrainingMaintenanceSearch */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__tabs__["a" /* TabsPage */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__training_maintenance_search__["a" /* TrainingMaintenanceSearch */]],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__tabs__["a" /* TabsPage */]
+            ]
         })
-    ], TrainingMaintenancePageModule);
-    return TrainingMaintenancePageModule;
+    ], TabsModule);
+    return TabsModule;
 }());
 
-//# sourceMappingURL=training-maintenance-search.module.js.map
+//# sourceMappingURL=tabs.module.js.map
 
 /***/ }),
 
-/***/ 830:
+/***/ 865:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrainingMaintenanceSearch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_backButtonService__ = __webpack_require__(367);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -59,55 +61,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the TrainingMaintenanceSearchComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
-var TrainingMaintenanceSearch = (function () {
-    function TrainingMaintenanceSearch(navCtrl, navParams, viewCtrl, formBuilder) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.viewCtrl = viewCtrl;
-        this.formBuilder = formBuilder;
-        this.search = this.navParams.get("search");
-        this.searchForm = this.formBuilder.group({
-            Title: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(30)]],
-            StartDate: ["", []],
-            EndDate: ["", []],
-            Instructor: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(8)]],
+
+var TabsPage = (function () {
+    function TabsPage(navParams, platform, backButtonService) {
+        var _this = this;
+        this.platform = platform;
+        this.backButtonService = backButtonService;
+        this.tab1Root = "Home";
+        this.tab2Root = "MessagePage";
+        this.tab3Root = "AnnouncementPage";
+        this.tab4Root = "Account";
+        this.mySelectedIndex = navParams.data.tabIndex || 0;
+        this.tab1Root = navParams.data.tab1Component || "Home";
+        platform.ready().then(function () {
+            _this.backButtonService.registerBackButtonAction(_this.tabs);
         });
-        if (this.search) {
-            this.searchForm.setValue({
-                Title: this.search.Title,
-                StartDate: this.search.StartDate,
-                EndDate: this.search.EndDate,
-                Instructor: this.search.Instructor,
-            });
-        }
     }
-    TrainingMaintenanceSearch.prototype.sent = function (value) {
-        this.viewCtrl.dismiss({ "search": value });
-    };
-    TrainingMaintenanceSearch.prototype.reset = function () {
-        this.searchForm.reset();
-        this.searchForm.setValidators(null);
-        this.searchForm.updateValueAndValidity();
-    };
-    TrainingMaintenanceSearch = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'training-maintenance-search',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\training-maintenance\training-maintenance-search\training-maintenance-search.html"*/`<ion-header>\n\n    <ion-navbar>\n\n        <ion-title>筛选</ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n    <form [formGroup]="searchForm" (ngSubmit)="sent(searchForm.value)">\n\n        <ion-list>\n\n            <ion-item>\n\n                <ion-label floating>课程主题</ion-label>\n\n                <ion-input type="text" formControlName="Title"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label floating>培训开始时间</ion-label>\n\n                <ion-datetime formControlName="StartDate" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label floating>培训结束时间</ion-label>\n\n                <ion-datetime formControlName="EndDate" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label floating>培训讲师</ion-label>\n\n                <ion-input type="text" formControlName="Instructor"></ion-input>\n\n            </ion-item>\n\n        </ion-list>\n\n        <div text-center>\n\n            <button ion-button color="energized" (click)="reset()" small outline>重置</button>\n\n            <button ion-button color="assertive" type="submit" small>搜索</button>\n\n        </div>\n\n    </form>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\training-maintenance\training-maintenance-search\training-maintenance-search.html"*/
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('mainTabs'),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["u" /* Tabs */])
+    ], TabsPage.prototype, "tabs", void 0);
+    TabsPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\tabs\tabs.html"*/`<ion-tabs #mainTabs [selectedIndex]="mySelectedIndex">\n    <ion-tab [root]="tab1Root" tabTitle="首页" tabIcon="ios-home"></ion-tab>\n    <ion-tab [root]="tab2Root" tabTitle="消息" tabIcon="ios-mail"></ion-tab>\n    <ion-tab [root]="tab3Root" tabTitle="公告" tabIcon="ios-notifications"></ion-tab>\n    <ion-tab [root]="tab4Root" tabTitle="设置" tabIcon="ios-settings"></ion-tab>\n</ion-tabs>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\tabs\tabs.html"*/,
+            selector: 'page-tabs',
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
-    ], TrainingMaintenanceSearch);
-    return TrainingMaintenanceSearch;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__services_backButtonService__["a" /* BackButtonService */]])
+    ], TabsPage);
+    return TabsPage;
 }());
 
-//# sourceMappingURL=training-maintenance-search.js.map
+// WEBPACK FOOTER //
+// ./src/pages/tabs/tabs.ts
+//# sourceMappingURL=tabs.js.map
 
 /***/ })
 

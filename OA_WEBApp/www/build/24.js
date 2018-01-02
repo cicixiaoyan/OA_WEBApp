@@ -1,14 +1,15 @@
 webpackJsonp([24],{
 
-/***/ 738:
+/***/ 751:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StaffFileMaintenanceEducationAddPageModule", function() { return StaffFileMaintenanceEducationAddPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrainingMaintenanceSetPageModule", function() { return TrainingMaintenanceSetPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_education_add__ = __webpack_require__(819);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__training_maintenance_set__ = __webpack_require__(842);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__training_maintenance_service__ = __webpack_require__(789);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,239 +19,85 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var StaffFileMaintenanceEducationAddPageModule = (function () {
-    function StaffFileMaintenanceEducationAddPageModule() {
+
+var TrainingMaintenanceSetPageModule = (function () {
+    function TrainingMaintenanceSetPageModule() {
     }
-    StaffFileMaintenanceEducationAddPageModule = __decorate([
+    TrainingMaintenanceSetPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_education_add__["a" /* StaffFileMaintenanceEducationAddPage */],
+                __WEBPACK_IMPORTED_MODULE_2__training_maintenance_set__["a" /* TrainingMaintenanceSetPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_education_add__["a" /* StaffFileMaintenanceEducationAddPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__training_maintenance_set__["a" /* TrainingMaintenanceSetPage */]),
             ],
+            exports: [__WEBPACK_IMPORTED_MODULE_2__training_maintenance_set__["a" /* TrainingMaintenanceSetPage */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_3__training_maintenance_service__["a" /* TrainingMaintenanceService */]]
         })
-    ], StaffFileMaintenanceEducationAddPageModule);
-    return StaffFileMaintenanceEducationAddPageModule;
+    ], TrainingMaintenanceSetPageModule);
+    return TrainingMaintenanceSetPageModule;
 }());
 
-//# sourceMappingURL=staff-file-maintenance-education-add.module.js.map
+//# sourceMappingURL=training-maintenance-set.module.js.map
 
 /***/ }),
 
-/***/ 781:
+/***/ 789:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Validators; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrainingMaintenanceService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(26);
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 
 
-var Validators = (function (_super) {
-    __extends(Validators, _super);
-    function Validators() {
-        return _super !== null && _super.apply(this, arguments) || this;
+
+var TrainingMaintenanceService = (function () {
+    function TrainingMaintenanceService(httpService) {
+        this.httpService = httpService;
     }
-    Validators_1 = Validators;
-    /*E-mail*/
-    Validators.email = function (control) {
-        return Validators_1.validatorsByPattern('email', control, '[a-z]([a-z0-9]*[-_]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?');
+    TrainingMaintenanceService.prototype.getList = function (param) {
+        return this.httpService.postFormData("ashx/MeetLs.ashx", param).map(function (res) { return res.json(); });
     };
-    /*手机号码*/
-    Validators.phone = function (control) {
-        return Validators_1.validatorsByPattern('phone', control, '1[0-9]{10,10}');
+    TrainingMaintenanceService.prototype.write = function (param) {
+        return this.httpService.postFormData("ashx/MeetLs.ashx", param).map(function (res) { return res.json(); });
     };
-    /*中文*/
-    Validators.chinese = function (control) {
-        return Validators_1.validatorsByPattern('chinese', control, '[(\u4e00-\u9fa5)]+');
+    TrainingMaintenanceService.prototype.read = function (param) {
+        return this.httpService.postFormData("ashx/MeetLs.ashx", param).map(function (res) { return res.json(); });
     };
-    /*英文、数字包括下划线*/
-    Validators.legallyNamed = function (control) {
-        return Validators_1.validatorsByPattern('legallyNamed', control, '[A-Za-z0-9_]+');
-    };
-    Validators.validatorsByPattern = function (name, control, pattern) {
-        var validatorFn = Validators_1.pattern(pattern)(control);
-        if (validatorFn != null) {
-            validatorFn[name] = validatorFn['pattern'];
-        }
-        return validatorFn;
-    };
-    /*身份证验证*/
-    Validators.idcValid = function (control) {
-        var vcity = {
-            11: "北京",
-            12: "天津",
-            13: "河北",
-            14: "山西",
-            15: "内蒙古",
-            21: "辽宁",
-            22: "吉林",
-            23: "黑龙江",
-            31: "上海",
-            32: "江苏",
-            33: "浙江",
-            34: "安徽",
-            35: "福建",
-            36: "江西",
-            37: "山东",
-            41: "河南",
-            42: "湖北",
-            43: "湖南",
-            44: "广东",
-            45: "广西",
-            46: "海南",
-            50: "重庆",
-            51: "四川",
-            52: "贵州",
-            53: "云南",
-            54: "西藏",
-            61: "陕西",
-            62: "甘肃",
-            63: "青海",
-            64: "宁夏",
-            65: "新疆",
-            71: "台湾",
-            81: "香港",
-            82: "澳门",
-            91: "国外"
-        };
-        /* 检查号码是否符合规范，包括长度，类型 */
-        var isCardNo = function (card) {
-            // 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
-            var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;
-            if (reg.test(card) === false) {
-                return false;
-            }
-            return true;
-        };
-        /* 取身份证前两位,校验省份  */
-        var checkProvince = function (card) {
-            var province = card.substr(0, 2);
-            if (vcity[province] == undefined) {
-                return false;
-            }
-            return true;
-        };
-        /* 检查生日是否正确  */
-        var checkBirthday = function (card) {
-            var len = card.length;
-            // 身份证15位时，次序为省（3位）市（3位）年（2位）月（2位）日（2位）校验位（3位），皆为数字
-            if (len == '15') {
-                var re_fifteen = /^(\d{6})(\d{2})(\d{2})(\d{2})(\d{3})$/;
-                var arr_data = card.match(re_fifteen);
-                var year = arr_data[2];
-                var month = arr_data[3];
-                var day = arr_data[4];
-                var birthday = new Date('19' + year + '/' + month + '/' + day);
-                return verifyBirthday('19' + year, month, day, birthday);
-            }
-            // 身份证18位时，次序为省（3位）市（3位）年（4位）月（2位）日（2位）校验位（4位），校验位末尾可能为X
-            if (len == '18') {
-                var re_eighteen = /^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/;
-                var arr_data = card.match(re_eighteen);
-                var year = arr_data[2];
-                var month = arr_data[3];
-                var day = arr_data[4];
-                var birthday = new Date(year + '/' + month + '/' + day);
-                return verifyBirthday(year, month, day, birthday);
-            }
-            return false;
-        };
-        /* 校验日期 */
-        var verifyBirthday = function (year, month, day, birthday) {
-            var now = new Date();
-            var now_year = now.getFullYear();
-            // 年月日是否合理
-            if (birthday.getFullYear() == year && (birthday.getMonth() + 1) == month && birthday.getDate() == day) {
-                // 判断年份的范围（3岁到100岁之间)
-                var time = now_year - year;
-                if (time >= 3 && time <= 100) {
-                    return true;
-                }
-                return false;
-            }
-            return false;
-        };
-        /* 校验位的检测  */
-        var checkParity = function (card) {
-            // 15位转18位
-            card = changeFivteenToEighteen(card);
-            var len = card.length;
-            if (len == '18') {
-                var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
-                var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
-                var cardTemp = 0, i = void 0, valnum = void 0;
-                for (i = 0; i < 17; i++) {
-                    cardTemp += card.substr(i, 1) * arrInt[i];
-                }
-                valnum = arrCh[cardTemp % 11];
-                if (valnum == card.substr(17, 1)) {
-                    return true;
-                }
-                return false;
-            }
-            return false;
-        };
-        /* 15位转18位身份证号  */
-        var changeFivteenToEighteen = function (card) {
-            if (card.length == '15') {
-                var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
-                var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
-                var cardTemp = 0, i = void 0;
-                card = card.substr(0, 6) + '19' + card.substr(6, card.length - 6);
-                for (i = 0; i < 17; i++) {
-                    cardTemp += card.substr(i, 1) * arrInt[i];
-                }
-                card += arrCh[cardTemp % 11];
-                return card;
-            }
-            return card;
-        };
-        var card = control.value; // 表单值
-        if (card === '' || !isCardNo(card) || !checkProvince(card) ||
-            !checkBirthday(card) || !checkParity(card)) {
-            return { "idcinvalid": true };
-            // return control.setErrors({ idcinvalid: true, message: '请输入合法的身份证号码' });
-        }
-        return null;
-    };
-    Validators = Validators_1 = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])()
-    ], Validators);
-    return Validators;
-    var Validators_1;
-}(__WEBPACK_IMPORTED_MODULE_1__angular_forms__["f" /* Validators */]));
+    TrainingMaintenanceService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
+    ], TrainingMaintenanceService);
+    return TrainingMaintenanceService;
+}());
 
-//# sourceMappingURL=Validators.js.map
+//# sourceMappingURL=training-maintenance_service.js.map
 
 /***/ }),
 
-/***/ 819:
+/***/ 842:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StaffFileMaintenanceEducationAddPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrainingMaintenanceSetPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_Validators__ = __webpack_require__(781);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__training_maintenance_service__ = __webpack_require__(789);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -264,52 +111,69 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import 'rxjs/add/operator/map';
-// import { Observable } from 'rxjs/Observable';
-// import { HttpService } from "../../../providers/HttpService";
-var StaffFileMaintenanceEducationAddPage = (function () {
-    function StaffFileMaintenanceEducationAddPage(navCtrl, navParams, 
-        // private httpService: HttpService,
-        formBuilder, viewCtrl) {
+
+
+/**
+ * Generated class for the TrainingMaintenanceSetPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var TrainingMaintenanceSetPage = (function () {
+    function TrainingMaintenanceSetPage(navCtrl, navParams, formBuilder, globalData, nativeService, trainingMaintenanceService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.formBuilder = formBuilder;
-        this.viewCtrl = viewCtrl;
-        this.readOnly = false;
-        this.readOnly = this.navParams.get("readOnly") ? true : false;
-        this.addForm = this.formBuilder.group({
-            StartDate: ['', [__WEBPACK_IMPORTED_MODULE_3__providers_Validators__["a" /* Validators */].required]],
-            EndDate: ['', [__WEBPACK_IMPORTED_MODULE_3__providers_Validators__["a" /* Validators */].required]],
-            School: ['', [__WEBPACK_IMPORTED_MODULE_3__providers_Validators__["a" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__providers_Validators__["a" /* Validators */].maxLength(30)]],
-            Major: ['', [__WEBPACK_IMPORTED_MODULE_3__providers_Validators__["a" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__providers_Validators__["a" /* Validators */].maxLength(30)]],
-            Remarks: ["", [__WEBPACK_IMPORTED_MODULE_3__providers_Validators__["a" /* Validators */].maxLength(100)]],
+        this.globalData = globalData;
+        this.nativeService = nativeService;
+        this.trainingMaintenanceService = trainingMaintenanceService;
+        this.isWrite = false;
+        this.FileNewName = ""; // 附件名称
+        this.MeetPlaceLs = [];
+        this.MeetTypeLs = [];
+        this.DeptLs = [];
+        this.writeForm = this.formBuilder.group({
+            Title: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(30)]],
+            StartDate: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
+            EndDate: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
+            Object: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(180), __WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].required]],
+            Unit: ["", []],
+            Instructor: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(8)]],
+            Place: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(100)]],
+            Content: ["", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* Validators */].maxLength(180)]],
         });
-        this.formCtrls = this.addForm.controls;
     }
-    StaffFileMaintenanceEducationAddPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad StaffFileMaintenanceWorkExperienceAddPage');
+    TrainingMaintenanceSetPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad MeetingWritePage');
     };
-    StaffFileMaintenanceEducationAddPage.prototype.dismiss = function () {
-        this.viewCtrl.dismiss();
+    TrainingMaintenanceSetPage.prototype.sent = function (data) {
+        var _this = this;
+        data.Uid = this.globalData.Uid;
+        data.FileNewName = this.FileNewName;
+        this.trainingMaintenanceService.write(data).subscribe(function (resJson) {
+            if (resJson.Result) {
+                _this.nativeService.showToast("添加成功", 888);
+            }
+            else {
+                _this.nativeService.showToast(resJson.Data, 888);
+            }
+        });
     };
-    StaffFileMaintenanceEducationAddPage.prototype.save = function (value) {
-        // 提交
-        // this.httpService.postFormData("", value)
-        // .map((res: Response) => res.json())
-        // .subscribe((resJson) => {
-        // });
-    };
-    StaffFileMaintenanceEducationAddPage = __decorate([
+    TrainingMaintenanceSetPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-staff-file-maintenance-education-add',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-education\staff-file-maintenance-education-add\staff-file-maintenance-education-add.html"*/`<ion-header>\n\n      <ion-navbar>\n          <ion-buttons start>\n              <button ion-button  (click)="dismiss()">返回</button>\n          </ion-buttons>\n        <ion-title>教育经历</ion-title>\n        <ion-buttons end>\n            <button ion-button [disabled]=\'addForm.invalid\'  (click)="save(addForm.value)">保存</button>\n        </ion-buttons>\n      </ion-navbar>\n\n    </ion-header>\n\n\n    <ion-content>\n        <form [formGroup]="addForm" (ngSubmit)="save(addForm.value)" [ngClass]="{\'form-readonly\': readOnly}">\n            <ion-list style="position:relative;">\n                <ion-item>\n                    <ion-label>开始时间</ion-label>\n                    <ion-datetime formControlName="StartDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <div class="validation-failed" *ngIf="formCtrls.StartDate.invalid && formCtrls.StartDate.touched">\n                  开始时间必填\n                </div>\n                <ion-item>\n                    <ion-label>结束时间</ion-label>\n                    <ion-datetime formControlName="EndDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n                </ion-item>\n                <div class="validation-failed" *ngIf="formCtrls.EndDate.invalid && formCtrls.EndDate.touched">\n                    结束时间必填\n                </div>\n                <ion-item>\n                    <ion-label>学校/教育机构</ion-label>\n                    <ion-input text-right type="text" formControlName="School" placeholder="输入学校名称"></ion-input>\n                </ion-item>\n                <div class="validation-failed" *ngIf="formCtrls.School.invalid && (formCtrls.School.touched || formCtrls.School.dirty )">\n                  <div *ngIf="addForm.get(\'School\').errors.required">学校必填</div>\n                  <div *ngIf="addForm.get(\'School\').errors.maxlength">最多输入30个字</div>\n                </div>\n                <ion-item>\n                    <ion-label>专业</ion-label>\n                    <ion-input text-right type="text" formControlName="Major" placeholder="输入专业名称"></ion-input>\n                </ion-item>\n                <div class="validation-failed" *ngIf="formCtrls.Major.invalid && (formCtrls.Major.touched || formCtrls.Major.dirty )">\n                  <div *ngIf="addForm.get(\'Major\').errors.required">专业必填</div>\n                  <div *ngIf="addForm.get(\'Major\').errors.maxlength">最多输入30个字</div>\n                </div>\n                <ion-item>\n                    <ion-label>备注<span class="optional">（选填）</span></ion-label>\n                    <ion-textarea text-right formControlName="Remarks" placeholder="请输入备注"></ion-textarea>\n                </ion-item>\n                <div class="validation-failed" *ngIf="formCtrls.Remarks.invalid && (formCtrls.Remarks.touched || formCtrls.Remarks.dirty )">\n                  最多输入100个字\n                </div>\n            </ion-list>\n        </form>\n    </ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-education\staff-file-maintenance-education-add\staff-file-maintenance-education-add.html"*/,
+            selector: 'page-training-maintenance-set',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\training-maintenance\training-maintenance-set\training-maintenance-set.html"*/`<!--\n  Generated template for the TrainingMaintenanceSetPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>{{isWrite ? "添加培训维护" : "培训维护详情"}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">\n        <div>\n            <ion-list>\n                <ion-item>\n                    <ion-label stacked>课程主题</ion-label>\n                    <ion-input min-rows="1" formControlName="Title" placeholder="请输入" ></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>开始时间</ion-label>\n                    <ion-datetime placeholder="点击设置" formControlName="StartDate"  cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>结束时间</ion-label>\n                    <ion-datetime placeholder="点击设置" formControlName="EndDate" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>培训对象</ion-label>\n                    <ion-input type="text" formControlName="Object" placeholder="培训对象"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>培训单位</ion-label>\n                    <ion-input type="text" formControlName="Unit" placeholder="培训单位"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>培训讲师</ion-label>\n                    <ion-input type="text" formControlName="Instructor" placeholder="培训讲师"></ion-input>\n                </ion-item>\n                <ion-item>\n                    <ion-label stacked>培训地点</ion-label>\n                    <ion-input type="text" formControlName="Place" placeholder="培训地点"></ion-input>\n                </ion-item>\n\n                <ion-item>\n                    <ion-label stacked>课程内容</ion-label>\n                    <ion-input type="text" formControlName="Content" placeholder="请输入"></ion-input>\n                </ion-item>\n            </ion-list>\n            <div padding text-center>\n                <button ion-button type="submit" color="danger" [disabled]="!writeForm.valid">保存</button>\n                <button ion-button clear small navPop>返回</button>\n            </div>\n        </div>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\training-maintenance\training-maintenance-set\training-maintenance-set.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */]) === "function" && _d || Object])
-    ], StaffFileMaintenanceEducationAddPage);
-    return StaffFileMaintenanceEducationAddPage;
-    var _a, _b, _c, _d;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__["a" /* NativeService */],
+            __WEBPACK_IMPORTED_MODULE_5__training_maintenance_service__["a" /* TrainingMaintenanceService */]])
+    ], TrainingMaintenanceSetPage);
+    return TrainingMaintenanceSetPage;
 }());
 
-//# sourceMappingURL=staff-file-maintenance-education-add.js.map
+//# sourceMappingURL=training-maintenance-set.js.map
 
 /***/ })
 

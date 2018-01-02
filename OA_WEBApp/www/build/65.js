@@ -1,14 +1,14 @@
 webpackJsonp([65],{
 
-/***/ 719:
+/***/ 727:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GetmobilePopoverPageModule", function() { return GetmobilePopoverPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContractChoosePageModule", function() { return ContractChoosePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__getmobile_popover__ = __webpack_require__(800);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_choose__ = __webpack_require__(816);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,32 +18,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var GetmobilePopoverPageModule = (function () {
-    function GetmobilePopoverPageModule() {
+var ContractChoosePageModule = (function () {
+    function ContractChoosePageModule() {
     }
-    GetmobilePopoverPageModule = __decorate([
+    ContractChoosePageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__getmobile_popover__["a" /* GetmobilePopoverPage */],
+                __WEBPACK_IMPORTED_MODULE_2__contract_choose__["a" /* ContractChoosePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__getmobile_popover__["a" /* GetmobilePopoverPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contract_choose__["a" /* ContractChoosePage */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__getmobile_popover__["a" /* GetmobilePopoverPage */]]
         })
-    ], GetmobilePopoverPageModule);
-    return GetmobilePopoverPageModule;
+    ], ContractChoosePageModule);
+    return ContractChoosePageModule;
 }());
 
-//# sourceMappingURL=getmobile-popover.module.js.map
+//# sourceMappingURL=contract-choose.module.js.map
 
 /***/ }),
 
-/***/ 800:
+/***/ 816:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GetmobilePopoverPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractChoosePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(90);
@@ -64,27 +63,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the GetmobilePopoverPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var GetmobilePopoverPage = (function () {
-    function GetmobilePopoverPage(navParams, viewCtrl, storage, httpService) {
+var ContractChoosePage = (function () {
+    function ContractChoosePage(navParams, viewCtrl, storage, httpService) {
         this.navParams = navParams;
         this.viewCtrl = viewCtrl;
         this.storage = storage;
         this.httpService = httpService;
+        this.deptItems = [];
         this.items = [];
-        this.addressee = this.navParams.get("addressee") ? this.navParams.get("addressee") : '';
-        this.addresseeIds = this.navParams.get("addresseeIds") ? this.navParams.get("addresseeIds") : "";
+        this.haveAffix = false;
+        this.Result = {}; // 最终返回结果
+        this.ContactId = this.navParams.get("ContactId");
         this.initializeItems();
     }
-    GetmobilePopoverPage.prototype.initializeItems = function () {
+    ContractChoosePage.prototype.initializeItems = function () {
+        var _this = this;
+        this.httpService.postFormData("ashx/BmLs.ashx", {})
+            .map(function (res) { return res.json(); })
+            .subscribe(function (resJson) {
+            if (resJson.Result) {
+                _this.deptItems = resJson.Data;
+            }
+        });
         this.search();
     };
-    GetmobilePopoverPage.prototype.getItems = function (ev) {
+    ContractChoosePage.prototype.getItems = function (ev) {
         // Reset items back to all of the items
         this.initializeItems();
         // set val to the value of the ev target
@@ -97,98 +100,128 @@ var GetmobilePopoverPage = (function () {
         //   });
         // }
     };
-    GetmobilePopoverPage.prototype.getRecipientsByDept = function (id) {
-        var _this = this;
+    ContractChoosePage.prototype.getRecipientsByDept = function (id) {
         var data = !!id ? { DeptId: id } : {};
-        data["ISPhone"] = 1;
         this.httpService.postFormData("ashx/UserSheet.ashx", data)
             .map(function (res) { return res.json(); })
             .subscribe(function (result) {
             console.log(result);
-            if (result.Result && (result.Data instanceof Array) && result.Data.length !== 0) {
-                if (_this.addresseeIds !== "") {
-                    var idArr_1 = _this.addresseeIds.split(",");
-                    _this.items = result.Data.map(function (value, index) {
-                        for (var i in idArr_1) {
-                            if (idArr_1[i] !== value.Uid) {
-                                Object.assign(value, { checked: false });
-                            }
-                            else {
-                                return Object.assign(value, { checked: true });
-                            }
-                        }
-                        return value;
-                    });
-                }
-                else {
-                    _this.items = result.Data;
-                }
-            }
-            else {
-            }
+            // if (result.Result){
+            //     const idArr = this.addresseeIds.split(",");
+            //
+            //     this.items = result.Data.map(function (value, index) {
+            //         for (let i in idArr) {
+            //             if (idArr[i] !== value.ContactId) {
+            //                 Object.assign(value, { checked: false });
+            //             } else {
+            //                 return Object.assign(value, { checked: true });
+            //
+            //             }
+            //         }
+            //         return value;
+            //
+            //     });
+            // }
         });
     };
-    GetmobilePopoverPage.prototype.search = function () {
-        var _this = this;
-        //   let data = (this.name !== "") ? {name: name} : {};
-        var data = {};
-        if (this.name && this.name.trim() != '')
-            data["name"] = this.name;
-        data["ISPhone"] = 1;
-        this.httpService.postFormData("ashx/UserSheet.ashx", data)
-            .map(function (res) { return res.json(); })
-            .subscribe(function (result) {
-            if (result.Result && (result.Data instanceof Array) && result.Data.length !== 0) {
-                if (_this.addresseeIds !== "") {
-                    var idArr_2 = _this.addresseeIds.split(",");
-                    _this.items = result.Data.map(function (value, index) {
-                        for (var i in idArr_2) {
-                            if (idArr_2[i] !== value.Uid) {
-                                Object.assign(value, { checked: false });
-                            }
-                            else {
-                                return Object.assign(value, { checked: true });
-                            }
-                        }
-                        return value;
-                    });
-                }
-                else {
-                    _this.items = result.Data;
-                }
-            }
-            else {
-            }
+    ContractChoosePage.prototype.search = function () {
+        console.log('change');
+        var that = this;
+        var data = [
+            {
+                "ContactId": '1',
+                "ContractNumber": '1',
+                "ContractName": '',
+                "LastValidDate": '2017-12-12',
+                "LastExpirationDate": '2017-12-12',
+                "SigningDate": '12345',
+                'StaffId': '1',
+                "StaffNumber": '123456',
+                'Name': '张三',
+                'Sex': '男',
+                'IDC': '511324198910121111',
+                'Dept': '部门名称1',
+                'DeptId': '部门名称1',
+                'Duty': '职务1',
+            },
+            {
+                "ContactId": '2',
+                "ContractNumber": '1',
+                "ContractName": '',
+                "LastValidDate": '2017-12-12',
+                "LastExpirationDate": '2017-12-12',
+                "SigningDate": '12345',
+                'StaffId': '1',
+                "StaffNumber": '123456',
+                'Name': '张三',
+                'Sex': '男',
+                'IDC': '511324198910121111',
+                'Dept': '部门名称1',
+                'DeptId': '部门名称1',
+                'Duty': '职务1',
+            },
+        ];
+        this.items = data.map(function (value, index) {
+            if (value.ContactId == that.ContactId)
+                Object.assign(value, { checked: true });
+            else
+                Object.assign(value, { checked: false });
+            return value;
+        });
+        // let data = (this.name !== "") ? {name: name} : {};
+        // this.httpService.postFormData("ashx/UserSheet.ashx", data)
+        // .map((res: Response) => res.json())
+        // .subscribe((result) => {
+        //     console.log(result);
+        //     if (result.Result){
+        //         const idArr = this.addresseeIds.split(",");
+        //
+        //         this.items = result.Data.map(function (value, index) {
+        //             for (let i in idArr) {
+        //                 if (idArr[i] !== value.Uid) {
+        //                     Object.assign(value, { checked: false });
+        //                 } else {
+        //                     return Object.assign(value, { checked: true });
+        //
+        //                 }
+        //             }
+        //             return value;
+        //
+        //         });
+        //     }
+        // });
+    };
+    ContractChoosePage.prototype.checkContract = function (Index) {
+        this.items.forEach(function (value, index) {
+            if (Index === index)
+                value.checked = true;
+            else
+                value.checked = false;
         });
     };
-    GetmobilePopoverPage.prototype.checkPeople = function (index) {
-        this.items[index].checked = !this.items[index].checked;
-    };
-    GetmobilePopoverPage.prototype.confirm = function () {
-        this.addressee = "";
-        this.addresseeIds = "";
+    ContractChoosePage.prototype.confirm = function () {
+        console.log(confirm);
         for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
             var value = _a[_i];
             if (value.checked) {
-                this.addressee += value.Name + ",";
-                this.addresseeIds += value.Uid + ",";
+                this.Result = value;
             }
         }
-        this.viewCtrl.dismiss({ addressee: this.addressee, addresseeIds: this.addresseeIds });
+        this.viewCtrl.dismiss(this.Result);
     };
-    GetmobilePopoverPage = __decorate([
+    ContractChoosePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-getmobile-popover',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\getmobile-popover\getmobile-popover.html"*/`<!--\n  Generated template for the GetmobilePopoverPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    \n      <ion-navbar>\n        <ion-title>联系人选择</ion-title>\n      </ion-navbar>\n    \n    </ion-header>\n    \n    \n    <ion-content>\n      <ion-list class="checkpeople-popover">\n        <ion-searchbar color="danger" [(ngModel)]="name"  placeholder="请输入编码或姓名">\n        </ion-searchbar>\n      \n        <div text-center>\n            <button (click)="search()" icon-left ion-button small color="calm">\n            <ion-icon name="search"></ion-icon>查询</button>\n      \n            <button (click)="confirm()" icon-left ion-button small color="calm">\n            <ion-icon name="checkmark"></ion-icon>确定</button>\n        </div>\n      \n        <ion-list-header>\n            通讯录\n        </ion-list-header>\n      \n        <ion-item *ngFor="let item of items;let i = index">\n            <ion-label>\n            {{item.Name}}({{item.Uid}})<br>\n            <span>{{item.Mobile}}</span>\n            </ion-label>\n            <ion-checkbox [checked]="item.checked" (ionChange)="checkPeople(i)"></ion-checkbox>\n        </ion-item>\n      </ion-list>\n    </ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\getmobile-popover\getmobile-popover.html"*/,
+            selector: 'page-contract-choose',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-choose\contract-choose.html"*/`<!-- <ion-content> -->\n<ion-list class="checkpeople-popover">\n    <ion-item>\n        <ion-label>部门选择</ion-label>\n        <ion-select [(ngModel)]="dept" submitText="确定" (ngModelChange)="getRecipientsByDept(dept)" cancelText="取消" okText="确定">\n            <ion-option *ngFor="let item of deptItems;let i = index" [value]="item.Id">\n                {{item.BmName}}\n            </ion-option>\n        </ion-select>\n    </ion-item>\n    <ion-searchbar color="danger" cancelButtonText=\'搜索\' showCancelButton="true" (ionCancel)="search()" [(ngModel)]="name" placeholder="请输入编码或姓名">\n    </ion-searchbar>\n\n    <ion-list-header >员工列表</ion-list-header>\n    <div class="">\n        <ion-scroll scrollY="true">\n          <ion-item *ngFor="let item of items;let i = index">\n            <ion-label>\n              {{item.ContractNumber}}{{item.ContractName == \'\' ? \'\' : \'(\'+item.ContractName+\')\' }}<br>\n              <span>{{item.Name}}</span>\n            </ion-label>\n            <ion-checkbox [checked]="item.checked" (click)="checkContract(i)"></ion-checkbox>\n          </ion-item>\n        </ion-scroll>\n    </div>\n</ion-list>\n<!-- </ion-content> -->\n<ion-footer>\n    <button (click)="confirm()" icon-left ion-button full color="calm">\n  <ion-icon name="checkmark"></ion-icon>确定</button>\n</ion-footer>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-choose\contract-choose.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
             __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
             __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__["a" /* HttpService */]])
-    ], GetmobilePopoverPage);
-    return GetmobilePopoverPage;
+    ], ContractChoosePage);
+    return ContractChoosePage;
 }());
 
-//# sourceMappingURL=getmobile-popover.js.map
+//# sourceMappingURL=contract-choose.js.map
 
 /***/ })
 

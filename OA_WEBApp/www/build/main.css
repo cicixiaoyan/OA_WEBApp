@@ -51758,6 +51758,48 @@ page-announcement-detail .notice-affix a {
   font-size: 2rem;
 }
 
+page-holiday-group-settings ion-avatar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background: #488aff;
+  border-radius: 50%;
+  color: #fff;
+}
+
+page-holiday-group-settings ion-avatar span {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  text-align: center;
+}
+
+page-staff-attendance-settings ion-avatar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background: #488aff;
+  border-radius: 50%;
+  color: #fff;
+}
+
+page-staff-attendance-settings ion-avatar span {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  text-align: center;
+}
+
 page-home .index-row ion-col {
   padding: 5px 12px;
   font-size: 12px;
@@ -52356,24 +52398,6 @@ page-message-write .mail-content {
   right: 0;
 }
 
-page-sms .subbox {
-  padding: 5px;
-  border-bottom: 1px solid #ddd;
-}
-
-page-sms-read .sms-content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  top: 110px;
-  right: 0;
-}
-
-page-sms-read .sms-content div.mydiv {
-  width: 100%;
-  padding: 10px;
-}
-
 page-staff-popover .button-ios {
   margin: 0;
 }
@@ -52395,6 +52419,24 @@ page-staff-popover .button-ios {
 
 .popoverW88 .popover-content .popover-viewport .searchbar-ios-cancel {
   color: #fff;
+}
+
+page-sms .subbox {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+page-sms-read .sms-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 110px;
+  right: 0;
+}
+
+page-sms-read .sms-content div.mydiv {
+  width: 100%;
+  padding: 10px;
 }
 
 page-welcome ion-slide {

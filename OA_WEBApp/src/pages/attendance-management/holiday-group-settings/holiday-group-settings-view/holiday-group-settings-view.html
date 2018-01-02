@@ -1,0 +1,73 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>假期分组信息</ion-title>
+    <ion-buttons end>
+       <button ion-button end (click)="doWrite()">保存</button>
+   </ion-buttons>
+ </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)"   [ngClass]="{'form-readonly': readOnly}">
+        <ion-list>
+            <ion-item>
+                <ion-label>分组年份</ion-label>
+                <ion-input text-right *ngIf="readonly" type="text" formControlName="Years" placeholder="未设置" disabled></ion-input>
+                <ion-datetime *ngIf="!readonly" placeholder="点击设置" min='2018' cancelText="取消" doneText="确定" formControlName="Years" displayFormat="YYYY" pickerFormat="YYYY"></ion-datetime>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>分组名称</ion-label>
+                <ion-input text-right  type="text" formControlName="GroupName" placeholder="未设置"></ion-input>
+            </ion-item>
+            <div *ngIf="!writeForm.controls.GroupName.valid && (writeForm.controls.GroupName.touched || writeForm.controls.GroupName.dirty )" class="validation-failed">
+                <div *ngIf="writeForm.get('GroupName').errors.required">会议主题必填</div>
+                <div *ngIf="writeForm.get('GroupName').errors.maxlength">最多输入12个字</div>
+            </div>
+            <ion-item>
+                <ion-label>事假天数(天)</ion-label>
+                <ion-input text-right  type="number" formControlName="LeaveDays" placeholder="未设置"></ion-input>
+            </ion-item>
+            <div *ngIf="!writeForm.controls.LeaveDays.valid && (writeForm.controls.LeaveDays.touched || writeForm.controls.SickLeaveDays.dirty )" class="validation-failed">
+                <div *ngIf="writeForm.get('LeaveDays').errors.required">事假天数必填</div>
+                <div *ngIf="writeForm.get('LeaveDays').errors.maxlength">最大请假天数365</div>
+            </div>
+            <ion-item>
+                <ion-label>调休天数(天)</ion-label>
+                <ion-input text-right  type="number" formControlName="TuneOffDays" placeholder="未设置"></ion-input>
+            </ion-item>
+            <div *ngIf="!writeForm.controls.TuneOffDays.valid && (writeForm.controls.TuneOffDays.touched || writeForm.controls.TuneOffDays.dirty )" class="validation-failed">
+                <div *ngIf="writeForm.get('TuneOffDays').errors.required">调休天数必填</div>
+                <div *ngIf="writeForm.get('TuneOffDays').errors.maxlength">最大请假天数365</div>
+            </div>
+            <ion-item>
+                <ion-label>病假天数(天)</ion-label>
+                <ion-input text-right  type="number" formControlName="SickLeaveDays" placeholder="未设置"></ion-input>
+            </ion-item>
+            <div *ngIf="!writeForm.controls.SickLeaveDays.valid && (writeForm.controls.SickLeaveDays.touched || writeForm.controls.SickLeaveDays.dirty )" class="validation-failed">
+                <div *ngIf="writeForm.get('SickLeaveDays').errors.required">病假天数必填</div>
+                <div *ngIf="writeForm.get('SickLeaveDays').errors.maxlength">最大请假天数365</div>
+            </div>
+            <ion-item #popoverContent (click)="checkPeople($event)">
+                <ion-label col-1 stacked>参加人员</ion-label>
+                <ion-note item-end>{{writeForm.value.Person || '点击选择员工'}}</ion-note>
+                <!-- <p text-right>{{writeForm.value.Person || '点击选择'}}</p> -->
+                <!-- <ion-textarea autotextarea type="text"  formControlName="Person" readonly="true" placeholder="点击添加"></ion-textarea> -->
+            </ion-item>
+            <div *ngIf="!writeForm.controls.Person.valid && (writeForm.controls.Person.touched || writeForm.controls.Person.dirty )" class="validation-failed">
+                <div *ngIf="writeForm.get('Person').errors.required">参加人员必填</div>
+                <div *ngIf="writeForm.get('Person').errors.maxlength">最多输入180个字</div>
+            </div>
+            <ion-item>
+                <ion-label stacked style="flex: 1">分组说明</ion-label>
+                <ion-textarea   autotextarea type="text"  formControlName="Description"placeholder="请输入"></ion-textarea>
+            </ion-item>
+            <div *ngIf="!writeForm.controls.Description.valid && (writeForm.controls.Description.touched || writeForm.controls.Description.dirty )" class="validation-failed">
+                最多输入180个字
+            </div>
+        </ion-list>
+    </form>
+</ion-content>

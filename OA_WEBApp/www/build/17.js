@@ -1,15 +1,15 @@
 webpackJsonp([17],{
 
-/***/ 753:
+/***/ 760:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MeetingMinutesPageModule", function() { return MeetingMinutesPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MeetingRoomPageModule", function() { return MeetingRoomPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_minutes__ = __webpack_require__(838);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__meeting_service__ = __webpack_require__(772);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_room__ = __webpack_require__(851);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__meeting_service__ = __webpack_require__(776);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,29 +20,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MeetingMinutesPageModule = (function () {
-    function MeetingMinutesPageModule() {
+var MeetingRoomPageModule = (function () {
+    function MeetingRoomPageModule() {
     }
-    MeetingMinutesPageModule = __decorate([
+    MeetingRoomPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__meeting_minutes__["a" /* MeetingMinutesPage */],
+                __WEBPACK_IMPORTED_MODULE_2__meeting_room__["a" /* MeetingRoomPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__meeting_minutes__["a" /* MeetingMinutesPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__meeting_room__["a" /* MeetingRoomPage */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__meeting_minutes__["a" /* MeetingMinutesPage */]],
+            exports: [__WEBPACK_IMPORTED_MODULE_2__meeting_room__["a" /* MeetingRoomPage */]],
             providers: [__WEBPACK_IMPORTED_MODULE_3__meeting_service__["a" /* MeetingService */]]
         })
-    ], MeetingMinutesPageModule);
-    return MeetingMinutesPageModule;
+    ], MeetingRoomPageModule);
+    return MeetingRoomPageModule;
 }());
 
-//# sourceMappingURL=meeting-minutes.module.js.map
+//# sourceMappingURL=meeting-room.module.js.map
 
 /***/ }),
 
-/***/ 772:
+/***/ 776:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -114,14 +114,14 @@ var MeetingService = (function () {
 
 /***/ }),
 
-/***/ 838:
+/***/ 851:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingMinutesPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingRoomPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_service__ = __webpack_require__(772);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_service__ = __webpack_require__(776);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -135,80 +135,83 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the MeetingMinutesPage page.
+ * Generated class for the MeetingRoomPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var MeetingMinutesPage = (function () {
-    function MeetingMinutesPage(navCtrl, navParams, modalCtrl, meetingService) {
+var MeetingRoomPage = (function () {
+    function MeetingRoomPage(navCtrl, navParams, modalCtrl, meetingService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.modalCtrl = modalCtrl;
         this.meetingService = meetingService;
         this.list = [];
-        this.moredata = true;
         this.isEmpty = false;
-        this.data = {
-            "status": this.meetingService.meetingStatus["completed"],
-            "uid": this.meetingService.httpService.globalData.Uid,
-            "PageIndex": 0,
-            "PageSize": 8
-        };
-        this.getList(this.data);
+        this.getList();
     }
-    MeetingMinutesPage.prototype.ionViewDidLoad = function () {
+    MeetingRoomPage.prototype.ionViewDidLoad = function () {
     };
-    MeetingMinutesPage.prototype.doRead = function (Params) {
-        this.navCtrl.push("MeetingEditPage", { "Id": Params, "readOnly": true });
+    MeetingRoomPage.prototype.doRead = function (Params) {
+        this.navCtrl.push("MeetingRoomSetPage", { "isAdd": false, "Id": Params });
     };
-    MeetingMinutesPage.prototype.doRefresh = function (refresher) {
+    MeetingRoomPage.prototype.doWrite = function () {
+        this.navCtrl.push("MeetingRoomSetPage", { "isAdd": true });
+    };
+    MeetingRoomPage.prototype.doRefresh = function (refresher) {
         this.list = [];
-        this.data.PageIndex = 0;
-        this.getList(this.data);
+        this.getList();
         setTimeout(function () {
             refresher.complete();
         }, 1000);
     };
-    MeetingMinutesPage.prototype.doInfinite = function () {
-        if (this.moredata) {
-            this.data.PageIndex++;
-            this.getList(this.data);
-        }
-        return new Promise(function (resolve) {
-            setTimeout(function () {
-                resolve();
-            }, 500);
-        });
-    };
-    MeetingMinutesPage.prototype.getList = function (data) {
-        var _this = this;
-        this.meetingService.getList(data).subscribe(function (resJson) {
-            if (resJson.Result && resJson.Data.length !== 0 && (resJson.Data instanceof Array)) {
-                _this.moredata = true;
-                _this.isEmpty = false;
-                var list = resJson.Data;
-                _this.list = _this.list.concat(list);
+    MeetingRoomPage.prototype.getList = function () {
+        this.list = [
+            {
+                "Id": '1',
+                "Name": '会议室1',
+                "Number": '200',
+                "Manager": '张三',
+                "Mobile": "13111111111"
+            },
+            {
+                "Id": '2',
+                "Name": '会议室2',
+                "Number": '200',
+                "Manager": '张三',
+                "Mobile": "13111111111"
+            },
+            {
+                "Id": '3',
+                "Name": '会议室3',
+                "Number": '200',
+                "Manager": '张三',
+                "Mobile": "13111111111"
             }
-            else {
-                _this.moredata = false;
-                _this.isEmpty = (_this.data.PageIndex == 0) ? true : false;
-            }
-        });
+        ];
+        // this.meetingService.MeetPlaceLs().subscribe((resJson) => {
+        //   if (resJson.Result  && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
+        //     this.isEmpty = false;
+        //     let list = resJson.Data;
+        //     this.list = [...this.list, ...list];
+        //   }else{
+        //     this.isEmpty =  true;
+        //   }
+        // });
     };
-    MeetingMinutesPage = __decorate([
+    MeetingRoomPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-meeting-minutes',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-minutes\meeting-minutes.html"*/`<!--\n  Generated template for the MeetingMinutesPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>会议记录</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let meeting of list"  (click)="doRead(meeting.Id)">\n          <ion-item>\n              <span class="status-new-dot" *ngIf="meeting.Status==\'1\'">●&nbsp;</span><span>{{meeting.Title}}</span>\n              <p class="font-12">地点:{{meeting.Place}}&emsp;{{meeting.StartDate}}</p>\n          </ion-item>\n      </ion-item-sliding>\n    </ion-list>\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n        <div padding>暂无消息数据！！！</div>\n        <img src="assets/img/face/face2.png" height="100">\n    </div>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-minutes\meeting-minutes.html"*/,
+            selector: 'page-meeting-room',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-room\meeting-room.html"*/`<!--\n  Generated template for the MeetingRoomPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>会议室管理</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let room of list"  (click)="doRead(room.Id)">\n          <ion-item>\n              <ion-row>\n                  <ion-col> {{room.Name}}</ion-col>\n                  <ion-col *ngIf="room.Number" style="font-size: small;color: #488aff;text-align: right;"> 容纳人数:{{room.Number}}</ion-col>\n              </ion-row>\n              <p class="font-12">管理员:{{room.Manager}}&emsp;{{room.Mobile}}</p>\n          </ion-item>\n      </ion-item-sliding>\n    </ion-list>\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n        <div padding>暂无消息数据！！！</div>\n        <img src="assets/img/face/face2.png" height="100">\n    </div>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab></ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-room\meeting-room.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_2__meeting_service__["a" /* MeetingService */]])
-    ], MeetingMinutesPage);
-    return MeetingMinutesPage;
+    ], MeetingRoomPage);
+    return MeetingRoomPage;
 }());
 
-//# sourceMappingURL=meeting-minutes.js.map
+//# sourceMappingURL=meeting-room.js.map
 
 /***/ })
 

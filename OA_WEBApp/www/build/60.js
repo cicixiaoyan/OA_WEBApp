@@ -1,14 +1,14 @@
 webpackJsonp([60],{
 
-/***/ 724:
+/***/ 744:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContractChoosePageModule", function() { return ContractChoosePageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StaffFileMaintenanceSearchPageModule", function() { return StaffFileMaintenanceSearchPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_choose__ = __webpack_require__(805);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_search__ = __webpack_require__(835);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,37 +18,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ContractChoosePageModule = (function () {
-    function ContractChoosePageModule() {
+var StaffFileMaintenanceSearchPageModule = (function () {
+    function StaffFileMaintenanceSearchPageModule() {
     }
-    ContractChoosePageModule = __decorate([
+    StaffFileMaintenanceSearchPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__contract_choose__["a" /* ContractChoosePage */],
+                __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_search__["a" /* StaffFileMaintenanceSearchPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contract_choose__["a" /* ContractChoosePage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_search__["a" /* StaffFileMaintenanceSearchPage */]),
             ],
         })
-    ], ContractChoosePageModule);
-    return ContractChoosePageModule;
+    ], StaffFileMaintenanceSearchPageModule);
+    return StaffFileMaintenanceSearchPageModule;
 }());
 
-//# sourceMappingURL=contract-choose.module.js.map
+//# sourceMappingURL=staff-file-maintenance-search.module.js.map
 
 /***/ }),
 
-/***/ 805:
+/***/ 835:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractChoosePage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StaffFileMaintenanceSearchPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(160);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_PublicService__ = __webpack_require__(366);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62,166 +60,67 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-var ContractChoosePage = (function () {
-    function ContractChoosePage(navParams, viewCtrl, storage, httpService) {
+/**
+ * Generated class for the StaffFileMaintenanceSearchPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var StaffFileMaintenanceSearchPage = (function () {
+    function StaffFileMaintenanceSearchPage(navCtrl, navParams, viewCtrl, publicService, formBuilder) {
+        var _this = this;
+        this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.viewCtrl = viewCtrl;
-        this.storage = storage;
-        this.httpService = httpService;
-        this.deptItems = [];
-        this.items = [];
-        this.haveAffix = false;
-        this.Result = {}; // 最终返回结果
-        this.ContactId = this.navParams.get("ContactId");
-        this.initializeItems();
-    }
-    ContractChoosePage.prototype.initializeItems = function () {
-        var _this = this;
-        this.httpService.postFormData("ashx/BmLs.ashx", {})
-            .map(function (res) { return res.json(); })
-            .subscribe(function (resJson) {
-            if (resJson.Result) {
-                _this.deptItems = resJson.Data;
-            }
+        this.publicService = publicService;
+        this.formBuilder = formBuilder;
+        this.DeptLs = [];
+        this.search = this.navParams.get("search");
+        this.searchForm = this.formBuilder.group({
+            "StaffNumber": ["", []],
+            "Name": ["", []],
+            "IDC": ["", []],
+            "DeptId": ["", []],
+            "FirstEdu": ["", []],
+            "StaffStatus": ["", []],
+            "Indate": ["", []] // 入职时间
         });
-        this.search();
-    };
-    ContractChoosePage.prototype.getItems = function (ev) {
-        // Reset items back to all of the items
-        this.initializeItems();
-        // set val to the value of the ev target
-        var val = ev.target.value;
-        this.name = val;
-        // if the value is an empty string don't filter the items
-        // if (val && val.trim() != '') {
-        //   this.items = this.items.filter((item) => {
-        //     return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-        //   });
-        // }
-    };
-    ContractChoosePage.prototype.getRecipientsByDept = function (id) {
-        var data = !!id ? { DeptId: id } : {};
-        this.httpService.postFormData("ashx/UserSheet.ashx", data)
-            .map(function (res) { return res.json(); })
-            .subscribe(function (result) {
-            console.log(result);
-            // if (result.Result){
-            //     const idArr = this.addresseeIds.split(",");
-            //
-            //     this.items = result.Data.map(function (value, index) {
-            //         for (let i in idArr) {
-            //             if (idArr[i] !== value.ContactId) {
-            //                 Object.assign(value, { checked: false });
-            //             } else {
-            //                 return Object.assign(value, { checked: true });
-            //
-            //             }
-            //         }
-            //         return value;
-            //
-            //     });
-            // }
+        this.publicService.GetDeptLs().subscribe(function (resJson) {
+            if (resJson.Result)
+                _this.DeptLs = resJson.Data;
         });
-    };
-    ContractChoosePage.prototype.search = function () {
-        console.log('change');
-        var that = this;
-        var data = [
-            {
-                "ContactId": '1',
-                "ContractNumber": '1',
-                "ContractName": '',
-                "LastValidDate": '2017-12-12',
-                "LastExpirationDate": '2017-12-12',
-                "SigningDate": '12345',
-                'StaffId': '1',
-                "StaffNumber": '123456',
-                'Name': '张三',
-                'Sex': '男',
-                'IDC': '511324198910121111',
-                'Dept': '部门名称1',
-                'DeptId': '部门名称1',
-                'Duty': '职务1',
-            },
-            {
-                "ContactId": '2',
-                "ContractNumber": '1',
-                "ContractName": '',
-                "LastValidDate": '2017-12-12',
-                "LastExpirationDate": '2017-12-12',
-                "SigningDate": '12345',
-                'StaffId': '1',
-                "StaffNumber": '123456',
-                'Name': '张三',
-                'Sex': '男',
-                'IDC': '511324198910121111',
-                'Dept': '部门名称1',
-                'DeptId': '部门名称1',
-                'Duty': '职务1',
-            },
-        ];
-        this.items = data.map(function (value, index) {
-            if (value.ContactId == that.ContactId)
-                Object.assign(value, { checked: true });
-            else
-                Object.assign(value, { checked: false });
-            return value;
-        });
-        // let data = (this.name !== "") ? {name: name} : {};
-        // this.httpService.postFormData("ashx/UserSheet.ashx", data)
-        // .map((res: Response) => res.json())
-        // .subscribe((result) => {
-        //     console.log(result);
-        //     if (result.Result){
-        //         const idArr = this.addresseeIds.split(",");
-        //
-        //         this.items = result.Data.map(function (value, index) {
-        //             for (let i in idArr) {
-        //                 if (idArr[i] !== value.Uid) {
-        //                     Object.assign(value, { checked: false });
-        //                 } else {
-        //                     return Object.assign(value, { checked: true });
-        //
-        //                 }
-        //             }
-        //             return value;
-        //
-        //         });
-        //     }
-        // });
-    };
-    ContractChoosePage.prototype.checkContract = function (Index) {
-        this.items.forEach(function (value, index) {
-            if (Index === index)
-                value.checked = true;
-            else
-                value.checked = false;
-        });
-    };
-    ContractChoosePage.prototype.confirm = function () {
-        console.log(confirm);
-        for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
-            var value = _a[_i];
-            if (value.checked) {
-                this.Result = value;
-            }
+        if (this.search) {
+            this.searchForm.setValue({
+                "DeptId": this.search.DeptId,
+                "StartDate": this.search.StartDate,
+                "EndDate": this.search.EndDate,
+                "ContractYear": this.search.ContractYear,
+                "ContractType": this.search.ContractType
+            });
         }
-        this.viewCtrl.dismiss(this.Result);
+    }
+    StaffFileMaintenanceSearchPage.prototype.sent = function (value) {
+        this.viewCtrl.dismiss({ "search": value });
     };
-    ContractChoosePage = __decorate([
+    StaffFileMaintenanceSearchPage.prototype.reset = function () {
+        this.searchForm.reset();
+        this.searchForm.setValidators(null);
+        this.searchForm.updateValueAndValidity();
+    };
+    StaffFileMaintenanceSearchPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contract-choose',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-choose\contract-choose.html"*/`<!-- <ion-content> -->\n<ion-list class="checkpeople-popover">\n    <ion-item>\n        <ion-label>部门选择</ion-label>\n        <ion-select [(ngModel)]="dept" submitText="确定" (ngModelChange)="getRecipientsByDept(dept)" cancelText="取消" okText="确定">\n            <ion-option *ngFor="let item of deptItems;let i = index" [value]="item.Id">\n                {{item.BmName}}\n            </ion-option>\n        </ion-select>\n    </ion-item>\n    <ion-searchbar color="danger" cancelButtonText=\'搜索\' showCancelButton="true" (ionCancel)="search()" [(ngModel)]="name" placeholder="请输入编码或姓名">\n    </ion-searchbar>\n\n    <ion-list-header >员工列表</ion-list-header>\n    <div class="">\n        <ion-scroll scrollY="true">\n          <ion-item *ngFor="let item of items;let i = index">\n            <ion-label>\n              {{item.ContractNumber}}{{item.ContractName == \'\' ? \'\' : \'(\'+item.ContractName+\')\' }}<br>\n              <span>{{item.Name}}</span>\n            </ion-label>\n            <ion-checkbox [checked]="item.checked" (click)="checkContract(i)"></ion-checkbox>\n          </ion-item>\n        </ion-scroll>\n    </div>\n</ion-list>\n<!-- </ion-content> -->\n<ion-footer>\n    <button (click)="confirm()" icon-left ion-button full color="calm">\n  <ion-icon name="checkmark"></ion-icon>确定</button>\n</ion-footer>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-choose\contract-choose.html"*/,
+            selector: 'page-staff-file-maintenance-search',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-search\staff-file-maintenance-search.html"*/`<ion-header>\n    <ion-navbar>\n        <ion-title>筛选</ion-title>\n    </ion-navbar>\n</ion-header>\n<ion-content>\n    <form [formGroup]="searchForm" (ngSubmit)="sent(searchForm.value)">\n        <ion-list>\n            <ion-item>\n                <ion-label>工号</ion-label>\n                <ion-input text-right formControlName="StaffNumber" placeholder="输入工号"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>姓名</ion-label>\n                <ion-input text-right formControlName="Name" placeholder="输入姓名"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>证件号</ion-label>\n                <ion-select text-right formControlName="IDC" cancelText="取消" okText="确定" placeholder="请选择">\n                    <ion-option *ngFor="let Dept of DeptLs;let i = index" [value]="Dept.Id">{{Dept.BmName}}</ion-option>\n                </ion-select>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>员工部门</ion-label>\n                <ion-select text-right formControlName="DeptId" cancelText="取消" okText="确定" placeholder="请选择">\n                    <ion-option *ngFor="let Dept of DeptLs;let i = index" [value]="Dept.Id">{{Dept.BmName}}</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item>\n                <ion-label>学历</ion-label>\n                <ion-select text-right formControlName="FirstEdu" cancelText="取消" okText="确定" placeholder="请选择">\n                  <ion-option value="高中">高中</ion-option>\n                  <ion-option value="大学">大学</ion-option>\n                </ion-select>\n              </ion-item>\n            <ion-item>\n                <ion-label>是否在职</ion-label>\n                <ion-toggle formControlName="StaffStatus"></ion-toggle>\n            </ion-item>\n            <ion-item>\n                <ion-label>入职时间</ion-label>\n                <ion-datetime formControlName="StartDate" cancelText="取消" [max]="searchForm.value.EndDate==\'\'?null:searchForm.value.EndDate"  placeholder="开始时间" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n\n        </ion-list>\n        <div text-center>\n            <button ion-button color="energized" (click)="reset()" small outline>重置</button>\n            <button ion-button color="assertive" type="submit" small>搜索</button>\n        </div>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-search\staff-file-maintenance-search.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
-            __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__["a" /* HttpService */]])
-    ], ContractChoosePage);
-    return ContractChoosePage;
+            __WEBPACK_IMPORTED_MODULE_3__providers_PublicService__["a" /* PublicService */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
+    ], StaffFileMaintenanceSearchPage);
+    return StaffFileMaintenanceSearchPage;
 }());
 
-//# sourceMappingURL=contract-choose.js.map
+//# sourceMappingURL=staff-file-maintenance-search.js.map
 
 /***/ })
 

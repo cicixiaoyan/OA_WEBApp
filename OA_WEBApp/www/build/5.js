@@ -1,15 +1,15 @@
-webpackJsonp([5],{
+webpackJsonp([5,54],{
 
-/***/ 765:
+/***/ 708:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SmsPageModule", function() { return SmsPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FindPasswordModule", function() { return FindPasswordModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sms__ = __webpack_require__(850);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smsService__ = __webpack_require__(779);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__find_password__ = __webpack_require__(796);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LoginService__ = __webpack_require__(162);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,85 +20,85 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var SmsPageModule = (function () {
-    function SmsPageModule() {
+var FindPasswordModule = (function () {
+    function FindPasswordModule() {
     }
-    SmsPageModule = __decorate([
+    FindPasswordModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__sms__["a" /* SmsPage */],
+                __WEBPACK_IMPORTED_MODULE_2__find_password__["a" /* FindPassword */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__sms__["a" /* SmsPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__find_password__["a" /* FindPassword */]),
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__sms__["a" /* SmsPage */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_3__smsService__["a" /* SmsService */]]
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__find_password__["a" /* FindPassword */]
+            ],
+            providers: [__WEBPACK_IMPORTED_MODULE_3__LoginService__["a" /* LoginService */]]
         })
-    ], SmsPageModule);
-    return SmsPageModule;
+    ], FindPasswordModule);
+    return FindPasswordModule;
 }());
 
-//# sourceMappingURL=sms.module.js.map
+//# sourceMappingURL=find-password.module.js.map
 
 /***/ }),
 
-/***/ 779:
+/***/ 753:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SmsService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var SmsService = (function () {
-    function SmsService(httpService) {
-        this.httpService = httpService;
-        this.smsStatus = {
-            "sent": 1,
-            "toBeSent": 0,
-        };
-    }
-    SmsService.prototype.getList = function (param) {
-        // PageIndex, PageSize, UserId, Status
-        return this.httpService.postFormData("ashx/Smsls.ashx", param).map(function (res) { return res.json(); });
-    };
-    SmsService.prototype.write = function (param) {
-        // IsTimer, SendDate, UserId, Content, CellPhone
-        return this.httpService.postFormData("ashx/SmsAdd.ashx", param).map(function (res) { return res.json(); });
-    };
-    SmsService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], SmsService);
-    return SmsService;
-}());
-
-//# sourceMappingURL=smsService.js.map
-
-/***/ }),
-
-/***/ 850:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SmsPage; });
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginModule", function() { return LoginModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smsService__ = __webpack_require__(779);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(844);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__find_password_find_password_module__ = __webpack_require__(708);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__LoginService__ = __webpack_require__(162);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+var LoginModule = (function () {
+    function LoginModule() {
+    }
+    LoginModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]),
+                __WEBPACK_IMPORTED_MODULE_3__find_password_find_password_module__["FindPasswordModule"]
+            ],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]
+            ],
+            providers: [__WEBPACK_IMPORTED_MODULE_4__LoginService__["a" /* LoginService */]]
+        })
+    ], LoginModule);
+    return LoginModule;
+}());
+
+//# sourceMappingURL=login.module.js.map
+
+/***/ }),
+
+/***/ 796:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FindPassword; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -111,141 +111,170 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import { SmsReadPage } from '../sms/sms-read/sms-read';
-// import { SmsWritePage } from '../sms/sms-write/sms-write';
-
-/**
- * Generated class for the SmsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var SmsPage = (function () {
-    function SmsPage(navCtrl, navParams, globalData, modalCtrl, smsService) {
+// import { LoginPage } from '../login';
+var FindPassword = (function () {
+    function FindPassword(navCtrl, viewCtrl, formBuilder) {
         this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.globalData = globalData;
-        this.modalCtrl = modalCtrl;
-        this.smsService = smsService;
-        this.box = "inbox";
-        this.isSent = true; // 默认为已发送
-        this.isEmpty = false;
-        this.list = [];
-        this.moredata = true;
-        this.list = [];
-        this.data = {
-            "PageSize": 5,
-            "PageIndex": 0,
-            "Uid": this.globalData.Uid,
-            "Status": this.smsService.smsStatus["sent"],
-        };
-        this.initializeItems();
+        this.viewCtrl = viewCtrl;
+        this.formBuilder = formBuilder;
+        this.findPasswordForm = this.formBuilder.group({
+            phone: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(11), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].pattern('1[0-9]{10}')]],
+            verificationCode: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(6), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].pattern('[0-9]{6}')]],
+            newPassword: [, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(6)]]
+        });
     }
-    SmsPage.prototype.initializeItems = function () {
-        var _this = this;
-        this._getList(this.data);
-        setInterval(function () {
-            _this.getNewList(_this.data);
-        }, 50000);
+    FindPassword.prototype.confirm = function () {
+        this.navCtrl.setRoot("LoginPage");
     };
-    SmsPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad Mail');
+    FindPassword.prototype.dismiss = function () {
+        this.viewCtrl.dismiss();
     };
-    SmsPage.prototype.checkRead = function (bol) {
-        if (bol === void 0) { bol = false; }
-        this.data.PageIndex = 0;
-        this.list = [];
-        if (bol) {
-            this.isSent = true;
-            this.data.Status = this.smsService.smsStatus["sent"];
-        }
-        else {
-            this.isSent = false;
-            this.data.Status = this.smsService.smsStatus["toBeSent"];
-        }
-        this._getList(this.data);
-    };
-    SmsPage.prototype.doRead = function (parma) {
-        this.navCtrl.push("SmsReadPage", { "Params": parma });
-    };
-    SmsPage.prototype.doWrite = function () {
-        var _this = this;
-        var modal = this.modalCtrl.create("SmsWritePage");
-        modal.present();
-        modal.onDidDismiss(function (data) {
-            if (data.isRefresh) {
-                _this.doRefresh();
-            }
-        });
-        // this.navCtrl.push(MailWrite);
-    };
-    SmsPage.prototype.doRefresh = function (refresher) {
-        console.log("加载更多");
-        // this.initializeItems();
-        this.moredata = true;
-        this.list = [];
-        this.data.PageIndex = 0;
-        this._getList(this.data);
-        setTimeout(function () {
-            console.log('数据加载完成');
-            refresher.complete();
-        }, 1000);
-    };
-    SmsPage.prototype.doInfinite = function () {
-        if (this.moredata) {
-            this.data.PageIndex++;
-            this._getList(this.data);
-        }
-        return new Promise(function (resolve) {
-            setTimeout(function () {
-                resolve();
-            }, 500);
-        });
-    };
-    SmsPage.prototype.getNewList = function (data) {
-        var _this = this;
-        data.PageIndex = 0;
-        this.smsService.getList(data).subscribe(function (list) {
-            if (list.Result == true) {
-                var arr = list.Data.filter(function (item) {
-                    return item.Id !== _this.list[0].Id;
-                });
-                if (arr !== []) {
-                    _this.list = _this.list.concat(arr);
-                }
-            }
-        });
-    };
-    SmsPage.prototype._getList = function (inboxData) {
-        var _this = this;
-        this.smsService.getList(inboxData).subscribe(function (resJson) {
-            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
-                var list = resJson.Data;
-                _this.list = _this.list.concat(list);
-            }
-            else {
-                _this.moredata = false;
-                if (_this.data.PageIndex === 0) {
-                    _this.smsService.httpService.nativeService.showToast(resJson.Data);
-                    _this.list = [];
-                }
-            }
-        });
-    };
-    SmsPage = __decorate([
+    FindPassword = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-sms',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\sms\sms.html"*/`<!--\n  Generated template for the SmsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>短信</ion-title>\n  </ion-navbar>\n    <div class="subbox">\n        <div>\n            <button ion-button small (click)="checkRead(true)" class="button-ios-light" [ngClass]="{\'button-ios-calm\':isSent}">已发送</button>\n            <button ion-button small (click)="checkRead()" class="button-ios-light" [ngClass]="{\'button-ios-calm\':!isSent}">待发送</button>\n        </div>\n    </div>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n        <ion-item-sliding *ngFor="let sms of list" (click)="doRead(sms)">\n            <ion-item>\n                <!-- <ion-avatar item-left>\n                    <img src="assets/img/mike.png">\n                </ion-avatar> -->\n                <span style="color:#2196F3;" *ngIf="sms.Status==0">●&nbsp;</span><span>{{sms.SmsMsg}}</span>\n                <p class="font-12">发至:{{sms.AccessNumber}}&emsp;{{sms.SendDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>\n            </ion-item>\n            <ion-item-options side="right">\n                <button ion-button color="primary">\n                    <ion-icon name="md-trash"></ion-icon>删除\n                </button>\n            </ion-item-options>\n        </ion-item-sliding>\n    </ion-list>\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n        <div padding>暂无消息数据！！！</div>\n        <img src="assets/img/face/face2.png" height="100">\n    </div>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\sms\sms.html"*/,
+            selector: 'page-find-password',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\find-password\find-password.html"*/`<!--\n  Generated template for the FindPassword page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            找回密码\n        </ion-title>\n        <ion-buttons>\n            <button ion-button (click)="dismiss()">关闭</button>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <form [formGroup]="findPasswordForm" (ngSubmit)="confirm()">\n        <ion-list>\n            <ion-item>\n                <ion-label>手机号</ion-label>\n                <ion-input type="number" formControlName="phone"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.phone.valid&& findPasswordForm.controls.phone.touched" color="danger">请输入手机号码</span>\n            <ion-item>\n                <ion-label>验证码</ion-label>\n                <ion-input type="number" formControlName="verificationCode"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.verificationCode.valid&& findPasswordForm.controls.verificationCode.touched" color="danger">请输入验证码</span>\n            <ion-item>\n                <ion-label>新密码</ion-label>\n                <ion-input type="password" formControlName="newPassword"></ion-input>\n            </ion-item>\n            <span padding-left *ngIf="!findPasswordForm.controls.newPassword.valid&& findPasswordForm.controls.newPassword.touched" color="danger">请输入新密码</span>\n        </ion-list>\n        <div padding-horizontal>\n            <button ion-button block type="submit" [disabled]="!findPasswordForm.valid">确　认</button>\n        </div>\n        <button class="verification" ion-button small color="secondary" *ngIf="findPasswordForm.controls.phone.valid">获取验证码</button>\n    </form>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\find-password\find-password.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__["a" /* GlobalData */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_3__smsService__["a" /* SmsService */]])
-    ], SmsPage);
-    return SmsPage;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
+    ], FindPassword);
+    return FindPassword;
 }());
 
-//# sourceMappingURL=sms.js.map
+//# sourceMappingURL=find-password.js.map
+
+/***/ }),
+
+/***/ 844:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__LoginService__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_GlobalData__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_HttpService__ = __webpack_require__(61);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+// import { FindPassword } from './find-password/find-password';
+// import {UserInfo} from "../../model/UserInfo";
+
+// import { TabsPage } from '../tabs/tabs';
+
+var LoginPage = (function () {
+    function LoginPage(viewCtrl, events, formBuilder, storage, modalCtrl, platform, alertCtrl, globalData, loginService, httpService) {
+        this.viewCtrl = viewCtrl;
+        this.events = events;
+        this.formBuilder = formBuilder;
+        this.storage = storage;
+        this.modalCtrl = modalCtrl;
+        this.platform = platform;
+        this.alertCtrl = alertCtrl;
+        this.globalData = globalData;
+        this.loginService = loginService;
+        this.httpService = httpService;
+        this.submitted = false;
+        this.canLeave = false;
+        this.loginForm = this.formBuilder.group({
+            UserName: ['admin', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(4)]],
+            UserPass: ['123', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(2)]]
+        });
+    }
+    LoginPage.prototype.ionViewWillEnter = function () {
+        var _this = this;
+        this.canLeave = false;
+        this.storage.get('UserInfo').then(function (userInfo) {
+            _this.userInfo = userInfo && userInfo.user ? userInfo.user : null;
+        });
+    };
+    LoginPage.prototype.ionViewCanLeave = function () {
+        var _this = this;
+        var bool = !!this.userInfo;
+        if (this.canLeave || bool) {
+            return true;
+        }
+        else {
+            this.alertCtrl.create({
+                title: '确认退出软件？',
+                buttons: [{ text: '取消' },
+                    {
+                        text: '确定',
+                        handler: function () {
+                            _this.platform.exitApp();
+                        }
+                    }
+                ]
+            }).present();
+            return false;
+        }
+    };
+    LoginPage.prototype.login = function (user) {
+        var _this = this;
+        this.submitted = true;
+        // this.httpService.postFormData("ashx/Login.ashx/LoginInfo",user)
+        //  .map(responce => responce.json())
+        this.loginService.login(user).subscribe(function (userInfo) {
+            console.log(userInfo);
+            _this.submitted = false;
+            // userInfo.token = 'xx122a9Wf';//从后台获取token,暂时写死
+            _this.userInfo = userInfo.Data;
+            _this.globalData.Uid = userInfo.Data.Uid;
+            _this.globalData.Name = userInfo.Data.Name;
+            _this.globalData.token = userInfo.Data.Token;
+            // alert(this.globalData.token);
+            _this.storage.set('UserInfo', userInfo.Data);
+            _this.storage.set('LoginInfo', user);
+            // alert(this.storage.get('UserInfo'));
+            _this.events.publish('user:login', userInfo);
+            _this.viewCtrl.dismiss(userInfo.Data);
+        });
+    };
+    LoginPage.prototype.findPassword = function () {
+        var _this = this;
+        this.canLeave = true;
+        var modal = this.modalCtrl.create("FindPassword");
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            _this.canLeave = false;
+        });
+    };
+    LoginPage.prototype.dismiss = function () {
+        this.viewCtrl.dismiss();
+    };
+    LoginPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-login',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\login.html"*/`<!--\n  Generated template for the Login page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<!--.nav-decor隐藏头部-->\n<ion-header class="nav-decor">\n\n    <ion-navbar>\n        <ion-title>登录</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <div class="login-header">登录</div>\n    <div class="login-top">\n        <img src="assets/img/logo.png" alt="公司logo" />\n    </div>\n    <form padding [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">\n        <ion-list>\n            <ion-item>\n                <ion-label color="primary">用户名</ion-label>\n                <ion-input type="text" formControlName="UserName" clearInput></ion-input>\n            </ion-item>\n            <div *ngIf="!loginForm.controls.UserName.valid && loginForm.controls.UserName.touched" class="validation-failed"> 请输入正确用户名</div>\n\n            <ion-item>\n                <ion-label color="primary">密　码</ion-label>\n                <ion-input type="password" formControlName="UserPass" clearInput></ion-input>\n            </ion-item>\n            <div *ngIf="!loginForm.controls.UserPass.valid" class="validation-failed">请输入密码</div>\n\n        </ion-list>\n        <div padding-horizontal>\n            <button ion-button block type="submit" [disabled]="!loginForm.valid||submitted">登　录</button>\n        </div>\n    </form>\n    <!-- <ion-grid>\n        <ion-row>\n            <ion-col text-center (click)="findPassword()">\n                <button ion-button small clear color="primary">找回密码</button>\n            </ion-col>\n        </ion-row>\n    </ion-grid> -->\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\login\login.html"*/,
+            providers: [__WEBPACK_IMPORTED_MODULE_4__LoginService__["a" /* LoginService */]]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Events */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* Platform */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_5__providers_GlobalData__["a" /* GlobalData */],
+            __WEBPACK_IMPORTED_MODULE_4__LoginService__["a" /* LoginService */],
+            __WEBPACK_IMPORTED_MODULE_6__providers_HttpService__["a" /* HttpService */]])
+    ], LoginPage);
+    return LoginPage;
+}());
+
+//# sourceMappingURL=login.js.map
 
 /***/ })
 

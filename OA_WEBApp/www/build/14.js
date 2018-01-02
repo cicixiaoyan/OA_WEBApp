@@ -1,15 +1,16 @@
 webpackJsonp([14],{
 
-/***/ 762:
+/***/ 763:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MeetingSearchPageModule", function() { return MeetingSearchPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MeetingPageModule", function() { return MeetingPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_search__ = __webpack_require__(847);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__meeting_service__ = __webpack_require__(772);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting__ = __webpack_require__(854);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__meeting_service__ = __webpack_require__(776);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_components_module__ = __webpack_require__(365);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,31 +21,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MeetingSearchPageModule = (function () {
-    function MeetingSearchPageModule() {
+
+var MeetingPageModule = (function () {
+    function MeetingPageModule() {
     }
-    MeetingSearchPageModule = __decorate([
+    MeetingPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__meeting_search__["a" /* MeetingSearchPage */],
+                __WEBPACK_IMPORTED_MODULE_2__meeting__["a" /* MeetingPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__meeting_search__["a" /* MeetingSearchPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__meeting__["a" /* MeetingPage */]),
+                __WEBPACK_IMPORTED_MODULE_4__components_components_module__["a" /* ComponentsModule */]
             ],
             exports: [
-                __WEBPACK_IMPORTED_MODULE_2__meeting_search__["a" /* MeetingSearchPage */]
+                __WEBPACK_IMPORTED_MODULE_2__meeting__["a" /* MeetingPage */]
             ],
             providers: [__WEBPACK_IMPORTED_MODULE_3__meeting_service__["a" /* MeetingService */]]
         })
-    ], MeetingSearchPageModule);
-    return MeetingSearchPageModule;
+    ], MeetingPageModule);
+    return MeetingPageModule;
 }());
 
-//# sourceMappingURL=meeting-search.module.js.map
+//# sourceMappingURL=meeting.module.js.map
 
 /***/ }),
 
-/***/ 772:
+/***/ 776:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116,14 +119,14 @@ var MeetingService = (function () {
 
 /***/ }),
 
-/***/ 847:
+/***/ 854:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingSearchPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeetingPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_service__ = __webpack_require__(772);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__meeting_service__ = __webpack_require__(776);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -137,17 +140,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the MeetingSearchPage page.
+ * Generated class for the MeetingPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var MeetingSearchPage = (function () {
-    function MeetingSearchPage(navCtrl, navParams, modalCtrl, meetingService) {
+var MeetingPage = (function () {
+    function MeetingPage(navCtrl, navParams, modalCtrl, meetingService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.modalCtrl = modalCtrl;
         this.meetingService = meetingService;
+        this.list = [];
         this.checkBtn = {
             Drafting: false,
             Delivered: true,
@@ -157,22 +161,18 @@ var MeetingSearchPage = (function () {
         };
         this.moredata = true;
         this.isEmpty = false;
-        this.searchKey = "";
         this.data = {
             "status": this.meetingService.meetingStatus["Delivered"],
             "uid": this.meetingService.httpService.globalData.Uid,
             "PageIndex": 0,
             "PageSize": 8
         };
-        this.list = [
-            {}
-        ];
-        // this.getList(this.data);
+        this.getList(this.data);
     }
-    MeetingSearchPage.prototype.ionViewDidLoad = function () {
+    MeetingPage.prototype.ionViewDidLoad = function () {
     };
     // 选择状态
-    MeetingSearchPage.prototype.checkRead = function (name) {
+    MeetingPage.prototype.checkRead = function (name) {
         if (name === void 0) { name = "Delivered"; }
         this.data.PageIndex = 0;
         this.list = [];
@@ -184,12 +184,23 @@ var MeetingSearchPage = (function () {
         console.log(this.data);
         this.getList(this.data);
     };
-    MeetingSearchPage.prototype.doRead = function (Params) {
+    MeetingPage.prototype.doRead = function (Params) {
         this.navCtrl.push("MeetingEditPage", { "Id": Params });
+        // let modal = this.modalCtrl.create("MeetingEditPage");
+        // modal.present();
+        // modal.onDidDismiss(data => {
+        //     data && console.log(data);
+        // });
     };
-    MeetingSearchPage.prototype.search = function (e) {
+    MeetingPage.prototype.doWrite = function () {
+        var modal = this.modalCtrl.create("MeetingWritePage");
+        modal.present();
+        modal.onDidDismiss(function (data) {
+            data && console.log(data);
+        });
+        // this.navCtrl.push(MailWrite);
     };
-    MeetingSearchPage.prototype.doRefresh = function (refresher) {
+    MeetingPage.prototype.doRefresh = function (refresher) {
         this.list = [];
         this.data.PageIndex = 0;
         this.getList(this.data);
@@ -197,7 +208,7 @@ var MeetingSearchPage = (function () {
             refresher.complete();
         }, 1000);
     };
-    MeetingSearchPage.prototype.doInfinite = function () {
+    MeetingPage.prototype.doInfinite = function () {
         if (this.moredata) {
             this.data.PageIndex++;
             this.getList(this.data);
@@ -208,7 +219,7 @@ var MeetingSearchPage = (function () {
             }, 500);
         });
     };
-    MeetingSearchPage.prototype.getList = function (data) {
+    MeetingPage.prototype.getList = function (data) {
         var _this = this;
         this.meetingService.getList(data).subscribe(function (resJson) {
             if (resJson.Result && resJson.Data.length !== 0 && (resJson.Data instanceof Array)) {
@@ -216,7 +227,6 @@ var MeetingSearchPage = (function () {
                 _this.isEmpty = false;
                 var list = resJson.Data;
                 _this.list = _this.list.concat(list);
-                console.log(_this.list);
             }
             else {
                 _this.moredata = false;
@@ -224,19 +234,19 @@ var MeetingSearchPage = (function () {
             }
         });
     };
-    MeetingSearchPage = __decorate([
+    MeetingPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-meeting-search',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-search\meeting-search.html"*/`<!--\n  Generated template for the MeetingSearchPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>会议查询</ion-title>\n  </ion-navbar>\n  <ion-searchbar color="dark" type="text" placeholder="请输入会议主题" [(ngModel)]="searchKey"\n  [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event)"></ion-searchbar>\n  <div  class="subbox">\n      <div >\n          <button ion-button small (click)="checkRead(\'Drafting\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.Drafting}">起草中</button>\n          <button ion-button small (click)="checkRead(\'Delivered\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.Delivered}">送审中</button>\n          <button ion-button small (click)="checkRead(\'Approved\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.Approved}">已审批</button>\n          <button ion-button small (click)="checkRead(\'HasBeenReturned\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.HasBeenReturned}">已退回</button>\n          <button ion-button small (click)="checkRead(\'completed\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.completed}">已完成</button>\n      </div>\n    </div>\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let meeting of list"  (click)="doRead(meeting.Id)">\n          <ion-item>\n              <span>{{meeting.Title}}</span>\n              <p class="font-12">地点:{{meeting.Place}}&emsp;{{meeting.StartDate}}</p>\n          </ion-item>\n      </ion-item-sliding>\n    </ion-list>\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n        <div padding>暂无消息数据！！！</div>\n        <img src="assets/img/face/face2.png" height="100">\n    </div>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting-search\meeting-search.html"*/,
+            selector: 'page-meeting',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting.html"*/`<!--\n  Generated template for the MeetingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>会议</ion-title>\n  </ion-navbar>\n\n  <div  class="subbox">\n    <div >\n        <button ion-button small (click)="checkRead(\'Drafting\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.Drafting}">起草中</button>\n        <button ion-button small (click)="checkRead(\'Delivered\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.Delivered}">送审中</button>\n        <button ion-button small (click)="checkRead(\'Approved\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.Approved}">已审批</button>\n        <button ion-button small (click)="checkRead(\'HasBeenReturned\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.HasBeenReturned}">已退回</button>\n        <button ion-button small (click)="checkRead(\'completed\')" class="button-ios-light" [ngClass]="{\'button-ios-calm\':checkBtn.completed}">已完成</button>\n    </div>\n  </div>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n      </ion-refresher-content>\n  </ion-refresher>\n  <ion-list>\n    <ion-item-sliding *ngFor="let meeting of list"  (click)="doRead(meeting.Id)">\n        <ion-item>\n            <span class="status-new-dot" *ngIf="meeting.Status==\'1\'">●&nbsp;</span><span>{{meeting.Title}}</span>\n            <p class="font-12">地点:{{meeting.Place}}&emsp;{{meeting.StartDate}}</p>\n        </ion-item>\n    </ion-item-sliding>\n  </ion-list>\n  <empty *ngIf="isEmpty"></empty>\n  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n  <ion-fab bottom right>\n      <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n  </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\meeting\meeting.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_2__meeting_service__["a" /* MeetingService */]])
-    ], MeetingSearchPage);
-    return MeetingSearchPage;
+    ], MeetingPage);
+    return MeetingPage;
 }());
 
-//# sourceMappingURL=meeting-search.js.map
+//# sourceMappingURL=meeting.js.map
 
 /***/ })
 

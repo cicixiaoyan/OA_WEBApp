@@ -1,14 +1,14 @@
 webpackJsonp([63],{
 
-/***/ 705:
+/***/ 739:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactsModule", function() { return ContactsModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "JobTypesSetAddPageModule", function() { return JobTypesSetAddPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contacts__ = __webpack_require__(786);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__job_types_set_add__ = __webpack_require__(830);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,37 +18,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ContactsModule = (function () {
-    function ContactsModule() {
+var JobTypesSetAddPageModule = (function () {
+    function JobTypesSetAddPageModule() {
     }
-    ContactsModule = __decorate([
+    JobTypesSetAddPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */],
+                __WEBPACK_IMPORTED_MODULE_2__job_types_set_add__["a" /* JobTypesSetAddPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__job_types_set_add__["a" /* JobTypesSetAddPage */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__contacts__["a" /* Contacts */]
-            ]
+            exports: [__WEBPACK_IMPORTED_MODULE_2__job_types_set_add__["a" /* JobTypesSetAddPage */]]
         })
-    ], ContactsModule);
-    return ContactsModule;
+    ], JobTypesSetAddPageModule);
+    return JobTypesSetAddPageModule;
 }());
 
-//# sourceMappingURL=contacts.module.js.map
+//# sourceMappingURL=job-types-set-add.module.js.map
 
 /***/ }),
 
-/***/ 786:
+/***/ 830:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Contacts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JobTypesSetAddPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(26);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -61,80 +59,55 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import { ContactsDetail } from './contacts-detail/contacts-detail';
+// import 'rxjs/add/operator/map';
+// import { Observable } from 'rxjs/Observable';
+// import { HttpService } from "../../../providers/HttpService";
 /**
- * Generated class for the Contacts page.
+ * Generated class for the JobTypesSetAddPage page.
  *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
  */
-var Contacts = (function () {
-    function Contacts(navCtrl, navParams, httpService) {
+var JobTypesSetAddPage = (function () {
+    function JobTypesSetAddPage(navCtrl, navParams, 
+        // private httpService: HttpService,
+        formBuilder, viewCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.httpService = httpService;
-        this.searchKey = "";
-        this.nxPage = "ContactsDetail";
-        this.moredata = true;
-        this.isEmpty = false;
-        this.initializeItems();
+        this.formBuilder = formBuilder;
+        this.viewCtrl = viewCtrl;
+        this.typeForm = this.formBuilder.group({
+            Category: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            Name: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]],
+            Remarks: ["", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(180)]],
+        });
     }
-    Contacts.prototype.doRefresh = function (refresher) {
-        this.initializeItems();
-        setTimeout(function () {
-            console.log('数据加载完成');
-            refresher.complete();
-        }, 2000);
+    JobTypesSetAddPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad JobTypesSetAddPage');
     };
-    Contacts.prototype.initializeItems = function () {
-        var _this = this;
-        this.httpService.postFormData("ashx/UserSheet.ashx", { "Name": this.searchKey })
-            .map(function (Response) { return Response.json(); })
-            .subscribe(function (resJson) {
-            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
-                _this.items = resJson.Data;
-                _this.isEmpty = false;
-            }
-            else {
-                _this.isEmpty = true;
-                _this.moredata = false;
-                _this.httpService.nativeService.showToast(resJson.Data || "无数据");
-            }
-        });
+    JobTypesSetAddPage.prototype.dismiss = function () {
+        this.viewCtrl.dismiss();
     };
-    Contacts.prototype.search = function (refresher, key) {
-        var _this = this;
-        this.initializeItems();
-        return this.httpService.postFormData("ashx/UserSheet.ashx", { "Name": key })
-            .map(function (Response) { return Response.json(); })
-            .subscribe(function (resJson) {
-            if (resJson.Result && resJson.Data.length !== 0 && typeof (resJson.Data) !== "string") {
-                _this.items = resJson.Data;
-                _this.isEmpty = false;
-            }
-            else {
-                _this.items = [];
-                _this.isEmpty = true;
-                _this.moredata = false;
-            }
-        });
-        // setTimeout(() => {
-        //   console.log('数据加载完成');
-        //   refresher.complete();
-        // }, 2000);
+    JobTypesSetAddPage.prototype.sent = function (value) {
+        // 提交
+        // this.httpService.postFormData("", value)
+        // .map((res: Response) => res.json())
+        // .subscribe((resJson) => {
+        // });
     };
-    Contacts = __decorate([
+    JobTypesSetAddPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contacts',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts.html"*/`<!--\n\n  Generated template for the Contacts page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>通讯录</ion-title>\n\n    </ion-navbar>\n\n    <ion-searchbar color="dark" type="text" placeholder="请输入姓名" [(ngModel)]="searchKey" [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event, searchKey)">\n\n    </ion-searchbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n\n        </ion-refresher-content>\n\n    </ion-refresher>\n\n    <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->\n\n    <ion-list inset style="margin:16px 0;">\n\n        <button ion-item *ngFor="let contact of items" [navPush]="nxPage" [navParams]="{id:contact.Uid}">\n\n            <span>{{contact.Name}}({{contact.Uid}})</span>\n\n            <p>{{contact.Dept}}&emsp;{{contact.Duty}}</p>\n\n        </button>\n\n    </ion-list>\n\n    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n\n        <div padding>未搜索到信息！！！</div>\n\n        <img src="assets/img/face/face2.png" height="100">\n\n    </div>\n\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\contacts\contacts.html"*/,
+            selector: 'page-job-types-set-add',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\job-types-set\job-types-set-add\job-types-set-add.html"*/`<!--\n  Generated template for the JobTypesSetAddPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-buttons start>\n            <button ion-button  (click)="dismiss()">返回</button>\n        </ion-buttons>\n        <ion-title>工种设置添加</ion-title>\n        <ion-buttons end>\n            <button ion-button  (click)="sent(typeForm.value)">保存</button>\n        </ion-buttons>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="typeForm" (ngSubmit)="sent(typeForm.value)">\n        <ion-list style="position:relative;">\n            <ion-item>\n                <ion-label>所属分类</ion-label>\n                <ion-select formControlName="Category" cancelText="取消" okText="确定" placeholder="请选择">\n                    <ion-option value="管理人员">管理人员</ion-option>\n                    <ion-option value="服务人员">服务人员</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item>\n                <ion-label>工种名称</ion-label>\n                <ion-input text-right type="text" formControlName="Name" placeholder="请输入工种名称"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>备注</ion-label>\n                <ion-textarea text-right formControlName="Remarks" placeholder="请输入备注"></ion-textarea>\n            </ion-item>\n        </ion-list>\n    </form>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\job-types-set\job-types-set-add\job-types-set-add.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__["a" /* HttpService */]])
-    ], Contacts);
-    return Contacts;
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */]])
+    ], JobTypesSetAddPage);
+    return JobTypesSetAddPage;
 }());
 
-//# sourceMappingURL=contacts.js.map
+//# sourceMappingURL=job-types-set-add.js.map
 
 /***/ })
 

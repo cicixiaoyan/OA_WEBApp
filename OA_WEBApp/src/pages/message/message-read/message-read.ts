@@ -18,9 +18,9 @@ import { NativeService } from '../../../providers/NativeService';
 export class MessageReadPage {
     messageContent: string; // 消息内容
     messageDetail: any = [];
-    constructor(public navCtrl: NavController, 
+    constructor(public navCtrl: NavController,
                 private nativeService: NativeService,
-                public navParams: NavParams, 
+                public navParams: NavParams,
                 private messageService: MessageService) {
         this.initializeItems();
 
@@ -33,7 +33,7 @@ export class MessageReadPage {
         };
         this.messageService.markup(data).subscribe((resJson) => {
             console.log(resJson.Data);
-            if (resJson.Result)  this.nativeService.showToast(resJson.Data, 800);
+            if (!resJson.Result)  this.nativeService.showToast(resJson.Data, 800);
         });
         // this.messageDetail.Name = this.messageDetail.Name.split(":")[1];
     }

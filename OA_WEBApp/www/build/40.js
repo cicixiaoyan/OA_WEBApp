@@ -20,7 +20,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var CarPageModule = (function () {
+var CarPageModule = /** @class */ (function () {
     function CarPageModule() {
     }
     CarPageModule = __decorate([
@@ -50,7 +50,7 @@ var CarPageModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63,7 +63,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var CarService = (function () {
+var CarService = /** @class */ (function () {
     function CarService(httpService) {
         this.httpService = httpService;
     }
@@ -119,7 +119,7 @@ var CarService = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CarPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__car_service__ = __webpack_require__(778);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -140,7 +140,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var CarPage = (function () {
+var CarPage = /** @class */ (function () {
     function CarPage(navCtrl, navParams, globalData, modalCtrl, CarService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -216,7 +216,7 @@ var CarPage = (function () {
     };
     CarPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-car',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\car.html"*/`<!--\n  Generated template for the CarPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>车辆</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n      </ion-refresher-content>\n  </ion-refresher>\n  <ion-list>\n    <ion-item (click)="doRead(bus.Id)" *ngFor="let bus of list">\n      <h2 >{{bus.BusName}}</h2><ion-note item-end>{{BusStatus}}</ion-note>\n      <h3>管理员：{{bus.BusManger}}&emsp;核载：{{bus.BusPassenger}}人</h3>\n      <p>启动日期：{{bus.StartDate}}</p>\n    </ion-item>\n    <!-- <ion-item (click)="doRead()">\n      <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>\n      <h3>管理员：何小凤&emsp;核载：4人</h3>\n      <p>启动日期：2005-11-12</p>\n    </ion-item>\n    <ion-item (click)="doRead()">\n      <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>\n      <h3>管理员：何小凤&emsp;核载：4人</h3>\n      <p>启动日期：2005-11-12</p>\n    </ion-item> -->\n  </ion-list>\n  <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n      <div padding>暂无消息数据！！！</div>\n      <img src="assets/img/face/face2.png" height="100">\n  </div>\n  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n  <ion-fab bottom right>\n      <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n  </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\car\car.html"*/,
+            selector: 'page-car',template:/*ion-inline-start:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/car/car.html"*/'<!--\n  Generated template for the CarPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>车辆</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n      </ion-refresher-content>\n  </ion-refresher>\n  <ion-list>\n    <ion-item (click)="doRead(bus.Id)" *ngFor="let bus of list">\n      <h2 >{{bus.BusName}}</h2><ion-note item-end>{{BusStatus}}</ion-note>\n      <h3>管理员：{{bus.BusManger}}&emsp;核载：{{bus.BusPassenger}}人</h3>\n      <p>启动日期：{{bus.StartDate}}</p>\n    </ion-item>\n    <!-- <ion-item (click)="doRead()">\n      <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>\n      <h3>管理员：何小凤&emsp;核载：4人</h3>\n      <p>启动日期：2005-11-12</p>\n    </ion-item>\n    <ion-item (click)="doRead()">\n      <h2 >川AML796 北斗星牌</h2><ion-note item-end>已借出</ion-note>\n      <h3>管理员：何小凤&emsp;核载：4人</h3>\n      <p>启动日期：2005-11-12</p>\n    </ion-item> -->\n  </ion-list>\n  <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">\n      <div padding>暂无消息数据！！！</div>\n      <img src="assets/img/face/face2.png" height="100">\n  </div>\n  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n  <ion-fab bottom right>\n      <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n  </ion-fab>\n</ion-content>\n'/*ion-inline-end:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/car/car.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],

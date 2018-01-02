@@ -20,7 +20,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MailReadModule = (function () {
+var MailReadModule = /** @class */ (function () {
     function MailReadModule() {
     }
     MailReadModule = __decorate([
@@ -52,7 +52,7 @@ var MailReadModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -65,7 +65,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var MailService = (function () {
+var MailService = /** @class */ (function () {
     function MailService(httpService) {
         this.httpService = httpService;
         this.mailStatus = {
@@ -154,7 +154,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-var MailRead = (function () {
+var MailRead = /** @class */ (function () {
     function MailRead(navCtrl, navParams, nativeService, modalCtrl, mailService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -204,7 +204,7 @@ var MailRead = (function () {
     ], MailRead.prototype, "content", void 0);
     MailRead = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-mail-read',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-read\mail-read.html"*/`<!--\n  Generated template for the MailRead page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>信息详情</ion-title>\n        <!-- <ion-buttons end>\n            <button ion-button (click)="read()">转发</button>\n        </ion-buttons> -->\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n    <div>\n        <ion-list>\n\n            <ion-item *ngIf="isInbox">\n                <ion-label>接收人&emsp;</ion-label>\n                <ion-input type="text" readonly="disabled" [value]="mailDetail.AccessPerson" placeholder="系统管理员"></ion-input>\n            </ion-item>\n\n            <ion-item *ngIf="!inbox">\n                <ion-label>发送人&emsp;</ion-label>\n                <ion-input type="text" readonly="disabled" [value]="mailDetail.AccessPerson" placeholder="系统管理员"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>主题&emsp;&emsp;</ion-label>\n                <ion-input type="test" readonly="disabled" [value]="mailDetail.Title" placeholder="主题1"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>发送时间</ion-label>\n                <ion-input type="test" readonly="disabled" [value]="mailDetail.MailDate" placeholder="发送时间未知"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-textarea  placeholder="内容: " rows="3">{{mailContent}}</ion-textarea>\n            </ion-item>\n        </ion-list>\n    </div>\n\n\n    <div>\n        <ion-scroll scrollY="true" class="mail-content">\n            <!--<div padding-horizontal [innerHTML]="mailContent"></div>-->\n            <div class="mydiv">\n                {{mailDetail.MailDate}}\n            </div>\n            <div class="affix" *ngIf="mailDetail.attName">\n                <ion-grid>\n                    <ion-row align-items-center>\n                        <ion-col col-6 col-lg-4>\n                            <div (click)="download(mailDetail.attNewName, mailDetail.attName)">\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                <p>{{mailDetail.attName}}</p>\n                                <p color="gray">大小未知</p>\n                                <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n                            </div>\n                        </ion-col>\n                    </ion-row>\n                </ion-grid>\n            </div>\n        </ion-scroll>\n    </div>\n</ion-content>\n<!--<div class="list message-reply">\n\n    <div class="item">\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n        <button ion-button small color="positive">发送</button>\n    </div>\n\n</div>-->`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-read\mail-read.html"*/
+            selector: 'page-mail-read',template:/*ion-inline-start:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/mail/mail-read/mail-read.html"*/'<!--\n  Generated template for the MailRead page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>信息详情</ion-title>\n        <!-- <ion-buttons end>\n            <button ion-button (click)="read()">转发</button>\n        </ion-buttons> -->\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n    <div>\n        <ion-list>\n\n            <ion-item *ngIf="isInbox">\n                <ion-label>接收人&emsp;</ion-label>\n                <ion-input type="text" readonly="disabled" [value]="mailDetail.AccessPerson" placeholder="系统管理员"></ion-input>\n            </ion-item>\n\n            <ion-item *ngIf="!inbox">\n                <ion-label>发送人&emsp;</ion-label>\n                <ion-input type="text" readonly="disabled" [value]="mailDetail.AccessPerson" placeholder="系统管理员"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>主题&emsp;&emsp;</ion-label>\n                <ion-input type="test" readonly="disabled" [value]="mailDetail.Title" placeholder="主题1"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label>发送时间</ion-label>\n                <ion-input type="test" readonly="disabled" [value]="mailDetail.MailDate" placeholder="发送时间未知"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-textarea  placeholder="内容: " rows="3">{{mailContent}}</ion-textarea>\n            </ion-item>\n        </ion-list>\n    </div>\n\n\n    <div>\n        <ion-scroll scrollY="true" class="mail-content">\n            <!--<div padding-horizontal [innerHTML]="mailContent"></div>-->\n            <div class="mydiv">\n                {{mailDetail.MailDate}}\n            </div>\n            <div class="affix" *ngIf="mailDetail.attName">\n                <ion-grid>\n                    <ion-row align-items-center>\n                        <ion-col col-6 col-lg-4>\n                            <div (click)="download(mailDetail.attNewName, mailDetail.attName)">\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                <p>{{mailDetail.attName}}</p>\n                                <p color="gray">大小未知</p>\n                                <ion-icon class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n                            </div>\n                        </ion-col>\n                    </ion-row>\n                </ion-grid>\n            </div>\n        </ion-scroll>\n    </div>\n</ion-content>\n<!--<div class="list message-reply">\n\n    <div class="item">\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n        <button ion-button small color="positive">发送</button>\n    </div>\n\n</div>-->'/*ion-inline-end:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/mail/mail-read/mail-read.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],

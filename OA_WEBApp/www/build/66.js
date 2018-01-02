@@ -18,7 +18,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var NewworkModule = (function () {
+var NewworkModule = /** @class */ (function () {
     function NewworkModule() {
     }
     NewworkModule = __decorate([
@@ -66,7 +66,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-var Newwork = (function () {
+var Newwork = /** @class */ (function () {
     function Newwork(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -95,7 +95,7 @@ var Newwork = (function () {
     };
     Newwork = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-newwork',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\newwork\newwork.html"*/`<!--\n  Generated template for the Newwork page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>新建事项</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-list inset style="margin:16px 0;">\n        <button ion-item *ngFor="let item of items" (click)="addNew(item.FK_fid)">\n    {{item.wfName}}\n  </button>\n    </ion-list>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\home\newwork\newwork.html"*/,
+            selector: 'page-newwork',template:/*ion-inline-start:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/home/newwork/newwork.html"*/'<!--\n  Generated template for the Newwork page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>新建事项</ion-title>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-list inset style="margin:16px 0;">\n        <button ion-item *ngFor="let item of items" (click)="addNew(item.FK_fid)">\n    {{item.wfName}}\n  </button>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/home/newwork/newwork.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
     ], Newwork);

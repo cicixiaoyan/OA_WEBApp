@@ -20,7 +20,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var FileApplicationReviewViewPageModule = (function () {
+var FileApplicationReviewViewPageModule = /** @class */ (function () {
     function FileApplicationReviewViewPageModule() {
     }
     FileApplicationReviewViewPageModule = __decorate([
@@ -49,7 +49,7 @@ var FileApplicationReviewViewPageModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62,7 +62,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var FileApplicationService = (function () {
+var FileApplicationService = /** @class */ (function () {
     function FileApplicationService(httpService) {
         this.httpService = httpService;
         this.status = {
@@ -100,7 +100,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var FileApplicationReviewViewPage = (function () {
+var FileApplicationReviewViewPage = /** @class */ (function () {
     function FileApplicationReviewViewPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -122,7 +122,7 @@ var FileApplicationReviewViewPage = (function () {
     };
     FileApplicationReviewViewPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-file-application-review-view',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\file-application\file-application-review\file-application-review-view\file-application-review-view.html"*/`<ion-header>\n\n  <ion-navbar>\n    <ion-title>档案申请基本信息</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-card>\n    <ion-card-content>\n      <ion-grid>\n        <ion-row>\n          <ion-col col-auto>&emsp;申请人：</ion-col>\n          <ion-col class=\'right-info\'>张三</ion-col>\n        </ion-row>\n        <ion-row>\n          <ion-col col-auto>申请日期：</ion-col>\n          <ion-col class=\'right-info\'>2017-12-12</ion-col>\n        </ion-row>\n        <ion-row>\n          <ion-col col-auto>申请理由：</ion-col>\n          <ion-col class=\'right-info\'>我是申请理由我是申请理由我是申请理由我是申请理由我是申请理由我是申请理由</ion-col>\n        </ion-row>\n        <ion-row padding-top margin-top class=\'idivider\'>\n          <ion-col col-auto>审批意见：</ion-col>\n          <ion-col  class=\'right-info\' *ngIf="!readOnly">\n            <ion-textarea rows=\'5\'  [(ngModel)]="ApprovalComments"></ion-textarea>\n          </ion-col>\n          <ion-col  class=\'right-info\' *ngIf="readOnly">{{ApprovalComments}}</ion-col>\n        </ion-row>\n\n\n      </ion-grid>\n      <div padding-top text-center>\n        <button (click)=\'agree()\' ion-button small icon-left color="secondary"><ion-icon name="md-checkmark"></ion-icon>同意使用</button>\n        <button (click)=\'oppose()\' ion-button small icon-left color="danger" outline><ion-icon name="md-close"></ion-icon>拒绝使用</button>\n      </div>\n    </ion-card-content>\n\n</ion-card>\n\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\file-application\file-application-review\file-application-review-view\file-application-review-view.html"*/,
+            selector: 'page-file-application-review-view',template:/*ion-inline-start:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/hr-management/file-application/file-application-review/file-application-review-view/file-application-review-view.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>档案申请基本信息</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-card>\n    <ion-card-content>\n      <ion-grid>\n        <ion-row>\n          <ion-col col-auto>&emsp;申请人：</ion-col>\n          <ion-col class=\'right-info\'>张三</ion-col>\n        </ion-row>\n        <ion-row>\n          <ion-col col-auto>申请日期：</ion-col>\n          <ion-col class=\'right-info\'>2017-12-12</ion-col>\n        </ion-row>\n        <ion-row>\n          <ion-col col-auto>申请理由：</ion-col>\n          <ion-col class=\'right-info\'>我是申请理由我是申请理由我是申请理由我是申请理由我是申请理由我是申请理由</ion-col>\n        </ion-row>\n        <ion-row padding-top margin-top class=\'idivider\'>\n          <ion-col col-auto>审批意见：</ion-col>\n          <ion-col  class=\'right-info\' *ngIf="!readOnly">\n            <ion-textarea rows=\'5\'  [(ngModel)]="ApprovalComments"></ion-textarea>\n          </ion-col>\n          <ion-col  class=\'right-info\' *ngIf="readOnly">{{ApprovalComments}}</ion-col>\n        </ion-row>\n\n\n      </ion-grid>\n      <div padding-top text-center>\n        <button (click)=\'agree()\' ion-button small icon-left color="secondary"><ion-icon name="md-checkmark"></ion-icon>同意使用</button>\n        <button (click)=\'oppose()\' ion-button small icon-left color="danger" outline><ion-icon name="md-close"></ion-icon>拒绝使用</button>\n      </div>\n    </ion-card-content>\n\n</ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/hr-management/file-application/file-application-review/file-application-review-view/file-application-review-view.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
     ], FileApplicationReviewViewPage);

@@ -20,7 +20,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MessageReadOutPageModule = (function () {
+var MessageReadOutPageModule = /** @class */ (function () {
     function MessageReadOutPageModule() {
     }
     MessageReadOutPageModule = __decorate([
@@ -50,7 +50,7 @@ var MessageReadOutPageModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63,7 +63,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var MessageService = (function () {
+var MessageService = /** @class */ (function () {
     function MessageService(httpService) {
         this.httpService = httpService;
         this.Message = {
@@ -133,7 +133,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var MessageReadOutPage = (function () {
+var MessageReadOutPage = /** @class */ (function () {
     function MessageReadOutPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -153,7 +153,7 @@ var MessageReadOutPage = (function () {
     ], MessageReadOutPage.prototype, "content", void 0);
     MessageReadOutPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-message-read-out',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-read-out\message-read-out.html"*/`<!--\n\n  Generated template for the MessageReadOutPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  \n\n      <ion-navbar>\n\n          <ion-title>消息详情</ion-title>\n\n      </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n      <div>\n\n          <ion-list>\n\n  \n\n              <ion-item>\n\n                  <ion-label>发送人&emsp;</ion-label>\n\n                  <ion-input type="text" disabled="disabled" [value]="messageDetail.AccessPerson" placeholder="系统管理员"></ion-input>\n\n              </ion-item>\n\n  \n\n              <ion-item>\n\n                  <ion-label>发送时间</ion-label>\n\n                  <ion-input type="test" disabled="disabled" [value]="messageDetail.MailDate" placeholder="发送时间未知"></ion-input>\n\n              </ion-item>\n\n  \n\n          </ion-list>\n\n      </div>\n\n  \n\n      <div>\n\n          <ion-scroll scrollY="true" class="message-content">\n\n              <div padding-horizontal [innerHTML]="messageContent"></div>\n\n              <!-- <ion-textarea [(ngModule)]="messageDetail.Title"  placeholder="回复: "></ion-textarea> -->\n\n              <!-- <div class="mydiv">\n\n                {{messageDetail.Title}}\n\n              </div> -->\n\n          </ion-scroll>\n\n      </div>\n\n  </ion-content>\n\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\message\message-read-out\message-read-out.html"*/,
+            selector: 'page-message-read-out',template:/*ion-inline-start:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/message/message-read-out/message-read-out.html"*/'<!--\n  Generated template for the MessageReadOutPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  \n      <ion-navbar>\n          <ion-title>消息详情</ion-title>\n      </ion-navbar>\n  \n  </ion-header>\n  \n  \n  <ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n      <div>\n          <ion-list>\n  \n              <ion-item>\n                  <ion-label>发送人&emsp;</ion-label>\n                  <ion-input type="text" disabled="disabled" [value]="messageDetail.AccessPerson" placeholder="系统管理员"></ion-input>\n              </ion-item>\n  \n              <ion-item>\n                  <ion-label>发送时间</ion-label>\n                  <ion-input type="test" disabled="disabled" [value]="messageDetail.MailDate" placeholder="发送时间未知"></ion-input>\n              </ion-item>\n  \n          </ion-list>\n      </div>\n  \n      <div>\n          <ion-scroll scrollY="true" class="message-content">\n              <div padding-horizontal [innerHTML]="messageContent"></div>\n              <!-- <ion-textarea [(ngModule)]="messageDetail.Title"  placeholder="回复: "></ion-textarea> -->\n              <!-- <div class="mydiv">\n                {{messageDetail.Title}}\n              </div> -->\n          </ion-scroll>\n      </div>\n  </ion-content>\n'/*ion-inline-end:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/message/message-read-out/message-read-out.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
     ], MessageReadOutPage);

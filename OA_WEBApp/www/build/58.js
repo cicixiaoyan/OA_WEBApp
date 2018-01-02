@@ -18,7 +18,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var StaffFileMaintenanceSocialRelationshipPageModule = (function () {
+var StaffFileMaintenanceSocialRelationshipPageModule = /** @class */ (function () {
     function StaffFileMaintenanceSocialRelationshipPageModule() {
     }
     StaffFileMaintenanceSocialRelationshipPageModule = __decorate([
@@ -63,7 +63,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var StaffFileMaintenanceSocialRelationship = (function () {
+var StaffFileMaintenanceSocialRelationship = /** @class */ (function () {
     function StaffFileMaintenanceSocialRelationship(navCtrl, modalCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.modalCtrl = modalCtrl;
@@ -109,7 +109,7 @@ var StaffFileMaintenanceSocialRelationship = (function () {
     };
     StaffFileMaintenanceSocialRelationship = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-staff-file-maintenance-social-relationship',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-social-relationship\staff-file-maintenance-social-relationship.html"*/`<!--\n  Generated template for the StaffFileMaintenanceSocialRelationshipPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>社会关系</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let item of list"  (click)="doRead(item.Id)">\n        <ion-item  >\n          <h2>{{item.Name}}<span float-right color="royal">{{item.Relationship}}</span></h2>\n          <p>{{item.Mobile}}</p>\n        </ion-item>\n        <ion-item-options side="right">\n          <button ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>\n        </ion-item-options>\n      </ion-item-sliding>\n    </ion-list>\n    <div text-center>\n        <button (click)="add()" icon-left ion-button color="secondary" small outline round><ion-icon name="add"></ion-icon>添加</button>\n    </div>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-social-relationship\staff-file-maintenance-social-relationship.html"*/,
+            selector: 'page-staff-file-maintenance-social-relationship',template:/*ion-inline-start:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/hr-management/staff-file-maintenance/staff-file-maintenance-social-relationship/staff-file-maintenance-social-relationship.html"*/'<!--\n  Generated template for the StaffFileMaintenanceSocialRelationshipPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>社会关系</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n      <ion-item-sliding *ngFor="let item of list"  (click)="doRead(item.Id)">\n        <ion-item  >\n          <h2>{{item.Name}}<span float-right color="royal">{{item.Relationship}}</span></h2>\n          <p>{{item.Mobile}}</p>\n        </ion-item>\n        <ion-item-options side="right">\n          <button ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>\n        </ion-item-options>\n      </ion-item-sliding>\n    </ion-list>\n    <div text-center>\n        <button (click)="add()" icon-left ion-button color="secondary" small outline round><ion-icon name="add"></ion-icon>添加</button>\n    </div>\n</ion-content>\n'/*ion-inline-end:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/hr-management/staff-file-maintenance/staff-file-maintenance-social-relationship/staff-file-maintenance-social-relationship.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */],

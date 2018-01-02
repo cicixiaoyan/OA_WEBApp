@@ -18,7 +18,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var StaffFileMaintenanceSetPageModule = (function () {
+var StaffFileMaintenanceSetPageModule = /** @class */ (function () {
     function StaffFileMaintenanceSetPageModule() {
     }
     StaffFileMaintenanceSetPageModule = __decorate([
@@ -63,7 +63,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var StaffFileMaintenanceSet = (function () {
+var StaffFileMaintenanceSet = /** @class */ (function () {
     function StaffFileMaintenanceSet(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -82,7 +82,7 @@ var StaffFileMaintenanceSet = (function () {
     };
     StaffFileMaintenanceSet = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-staff-file-maintenance-set',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-set\staff-file-maintenance-set.html"*/`<ion-header>\n    <ion-navbar>\n        <ion-title>员工档案维护</ion-title>\n    </ion-navbar>\n</ion-header>\n<ion-tabs  #myTabs tabsPlacement="top" name="staff-file-maintemance-tab">\n    <ion-tab [root]="tab1Root" [rootParams]="rootParams" tabTitle="基本资料" tabIcon="ios-cafe"></ion-tab>\n    <ion-tab [root]="tab2Root" [rootParams]="rootParams" tabTitle="工作经历" tabIcon="ios-code-working"></ion-tab>\n    <ion-tab [root]="tab3Root" [rootParams]="rootParams" tabTitle="社会关系" tabIcon="ios-contacts"></ion-tab>\n    <ion-tab [root]="tab4Root" [rootParams]="rootParams" tabTitle="教育经历" tabIcon="ios-book"></ion-tab>\n</ion-tabs>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-set\staff-file-maintenance-set.html"*/,
+            selector: 'page-staff-file-maintenance-set',template:/*ion-inline-start:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/hr-management/staff-file-maintenance/staff-file-maintenance-set/staff-file-maintenance-set.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>员工档案维护</ion-title>\n    </ion-navbar>\n</ion-header>\n<ion-tabs  #myTabs tabsPlacement="top" name="staff-file-maintemance-tab">\n    <ion-tab [root]="tab1Root" [rootParams]="rootParams" tabTitle="基本资料" tabIcon="ios-cafe"></ion-tab>\n    <ion-tab [root]="tab2Root" [rootParams]="rootParams" tabTitle="工作经历" tabIcon="ios-code-working"></ion-tab>\n    <ion-tab [root]="tab3Root" [rootParams]="rootParams" tabTitle="社会关系" tabIcon="ios-contacts"></ion-tab>\n    <ion-tab [root]="tab4Root" [rootParams]="rootParams" tabTitle="教育经历" tabIcon="ios-book"></ion-tab>\n</ion-tabs>\n'/*ion-inline-end:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/hr-management/staff-file-maintenance/staff-file-maintenance-set/staff-file-maintenance-set.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */]])
     ], StaffFileMaintenanceSet);

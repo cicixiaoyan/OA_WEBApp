@@ -10,7 +10,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contract_renew__ = __webpack_require__(820);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contract_service__ = __webpack_require__(777);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_components_module__ = __webpack_require__(365);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_components_module__ = __webpack_require__(364);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ContractRenewPageModule = (function () {
+var ContractRenewPageModule = /** @class */ (function () {
     function ContractRenewPageModule() {
     }
     ContractRenewPageModule = __decorate([
@@ -51,7 +51,7 @@ var ContractRenewPageModule = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_HttpService__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -64,7 +64,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 // import { UserInfo } from "../../model/UserInfo";
-var ContractService = (function () {
+var ContractService = /** @class */ (function () {
     function ContractService(httpService) {
         this.httpService = httpService;
     }
@@ -99,7 +99,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ContractRenewPage = (function () {
+var ContractRenewPage = /** @class */ (function () {
     function ContractRenewPage(navCtrl, navParams, popoverCtrl, contractService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -202,7 +202,7 @@ var ContractRenewPage = (function () {
     };
     ContractRenewPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contract-renew',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-renew\contract-renew.html"*/`<ion-header>\n\n    <ion-navbar>\n        <ion-title>合同续签</ion-title>\n        <ion-buttons end (click)="presentPopover($event)">\n            <button ion-button icon-only>\n            <ion-icon name="search"></ion-icon>\n          </button>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n        <ion-item-sliding *ngFor="let item of list; index as i" (click)="doRead(item.Id)">\n            <ion-item>\n                <h2>{{item.Name}}<span class="text-ios-royal">[{{item.Code}}]</span></h2>\n                <div class="small">部门：{{item.Dept}}&emsp; <span float-right color=\'energized\'>{{item.RenewType}}</span></div>\n                <p class="small">续签时间：{{item.RenewDate}}</p>\n            </ion-item>\n            <ion-item-options side="right">\n                <button ion-button color="primary" (click)=\'delete(index)\'>\n                    <ion-icon name="md-trash"></ion-icon>删除\n                </button>\n            </ion-item-options>\n        </ion-item-sliding>\n    </ion-list>\n    <empty *ngIf="isEmpty"></empty>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-renew\contract-renew.html"*/,
+            selector: 'page-contract-renew',template:/*ion-inline-start:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/hr-management/contract/contract-renew/contract-renew.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-title>合同续签</ion-title>\n        <ion-buttons end (click)="presentPopover($event)">\n            <button ion-button icon-only>\n            <ion-icon name="search"></ion-icon>\n          </button>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">\n        </ion-refresher-content>\n    </ion-refresher>\n    <ion-list>\n        <ion-item-sliding *ngFor="let item of list; index as i" (click)="doRead(item.Id)">\n            <ion-item>\n                <h2>{{item.Name}}<span class="text-ios-royal">[{{item.Code}}]</span></h2>\n                <div class="small">部门：{{item.Dept}}&emsp; <span float-right color=\'energized\'>{{item.RenewType}}</span></div>\n                <p class="small">续签时间：{{item.RenewDate}}</p>\n            </ion-item>\n            <ion-item-options side="right">\n                <button ion-button color="primary" (click)=\'delete(index)\'>\n                    <ion-icon name="md-trash"></ion-icon>删除\n                </button>\n            </ion-item-options>\n        </ion-item-sliding>\n    </ion-list>\n    <empty *ngIf="isEmpty"></empty>\n    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">\n        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n    <ion-fab bottom right>\n        <button ion-fab color="danger" (click)="doWrite()"><ion-icon name="add"></ion-icon></button>\n    </ion-fab>\n</ion-content>\n'/*ion-inline-end:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/hr-management/contract/contract-renew/contract-renew.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],

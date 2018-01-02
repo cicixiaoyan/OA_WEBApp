@@ -20,7 +20,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AnnouncementDetailPageModule = (function () {
+var AnnouncementDetailPageModule = /** @class */ (function () {
     function AnnouncementDetailPageModule() {
     }
     AnnouncementDetailPageModule = __decorate([
@@ -50,7 +50,7 @@ var AnnouncementDetailPageModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -69,7 +69,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var AnnouncementService = (function () {
+var AnnouncementService = /** @class */ (function () {
     function AnnouncementService(httpService) {
         this.httpService = httpService;
         this.announcementStatus = {
@@ -130,7 +130,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var AnnouncementDetailPage = (function () {
+var AnnouncementDetailPage = /** @class */ (function () {
     function AnnouncementDetailPage(navCtrl, navParams, announcementService, fileService, nativeService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -171,7 +171,7 @@ var AnnouncementDetailPage = (function () {
     };
     AnnouncementDetailPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-announcement-detail',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/`<!--\n  Generated template for the AnnouncementDetailPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  \n      <ion-navbar>\n          <ion-title>公告详情</ion-title>\n      </ion-navbar>\n  </ion-header>\n  \n  \n  <ion-content>\n      <div class="detail-header">\n          <div class="detail-title"><span color="calm">[{{item.AnnouncementType}}]</span>{{item.AnnouncementTitle}}</div>\n          <p>\n              {{item.AnnouncementPublishPerson}}\n              <span class="right">{{item.AnnouncementPublishDate|date : "yyyy年MM月dd日 hh时mm分"}}</span>\n          </p>\n      </div>\n      <div class="content">\n          <ion-scroll class="detail-content" scrollY="true" id="noticeContent">\n              <div padding>开始时间：{{item.AnnouncementStarDate|date : "yyyy年MM月dd日 hh时mm分"}}\n                  <br/>结束时间：{{item.AnnouncementEndDate|date : "yyyy年MM月dd日 hh时mm分"}}</div>\n              <div padding-horizontal [innerHTML]="myDiv"></div>\n              <div class="affix" *ngIf="hasAtt">\n                  <ion-grid>\n                      <ion-row align-items-center>\n                          <ion-col col-6 col-lg-4>\n                              <div (click)="download(attObj.AttNewName, attObj.AttName)">\n                                  <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                  <p>{{attObj.AttName}}</p>\n                                  <!-- <p color="gray">大小未知</p> -->\n                                  <ion-icon *ngIf="!downloaded" class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n                                  <ion-icon *ngIf="downloaded" class="affix-open" name="ios-folder-open-outline"></ion-icon>\n                              </div>\n                          </ion-col>\n                      </ion-row>\n                  </ion-grid>\n              </div>\n          </ion-scroll>\n      </div>\n  \n  \n  </ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\announcement\announcement-detail\announcement-detail.html"*/,
+            selector: 'page-announcement-detail',template:/*ion-inline-start:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/announcement/announcement-detail/announcement-detail.html"*/'<!--\n  Generated template for the AnnouncementDetailPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  \n      <ion-navbar>\n          <ion-title>公告详情</ion-title>\n      </ion-navbar>\n  </ion-header>\n  \n  \n  <ion-content>\n      <div class="detail-header">\n          <div class="detail-title"><span color="calm">[{{item.AnnouncementType}}]</span>{{item.AnnouncementTitle}}</div>\n          <p>\n              {{item.AnnouncementPublishPerson}}\n              <span class="right">{{item.AnnouncementPublishDate|date : "yyyy年MM月dd日 hh时mm分"}}</span>\n          </p>\n      </div>\n      <div class="content">\n          <ion-scroll class="detail-content" scrollY="true" id="noticeContent">\n              <div padding>开始时间：{{item.AnnouncementStarDate|date : "yyyy年MM月dd日 hh时mm分"}}\n                  <br/>结束时间：{{item.AnnouncementEndDate|date : "yyyy年MM月dd日 hh时mm分"}}</div>\n              <div padding-horizontal [innerHTML]="myDiv"></div>\n              <div class="affix" *ngIf="hasAtt">\n                  <ion-grid>\n                      <ion-row align-items-center>\n                          <ion-col col-6 col-lg-4>\n                              <div (click)="download(attObj.AttNewName, attObj.AttName)">\n                                  <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                  <p>{{attObj.AttName}}</p>\n                                  <!-- <p color="gray">大小未知</p> -->\n                                  <ion-icon *ngIf="!downloaded" class="affix-dismiss" name="ios-cloud-download-outline"></ion-icon>\n                                  <ion-icon *ngIf="downloaded" class="affix-open" name="ios-folder-open-outline"></ion-icon>\n                              </div>\n                          </ion-col>\n                      </ion-row>\n                  </ion-grid>\n              </div>\n          </ion-scroll>\n      </div>\n  \n  \n  </ion-content>\n'/*ion-inline-end:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/announcement/announcement-detail/announcement-detail.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],

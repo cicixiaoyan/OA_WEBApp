@@ -18,7 +18,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var StaffFileMaintenanceWorkExperienceAddModule = (function () {
+var StaffFileMaintenanceWorkExperienceAddModule = /** @class */ (function () {
     function StaffFileMaintenanceWorkExperienceAddModule() {
     }
     StaffFileMaintenanceWorkExperienceAddModule = __decorate([
@@ -41,7 +41,7 @@ var StaffFileMaintenanceWorkExperienceAddModule = (function () {
 
 /***/ }),
 
-/***/ 748:
+/***/ 749:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49,7 +49,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StaffFileMaintenanceWorkExperiencePageModule", function() { return StaffFileMaintenanceWorkExperiencePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience__ = __webpack_require__(839);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__staff_file_maintenance_work_experience__ = __webpack_require__(840);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__staff_file_maintenance_work_experience_add_staff_file_maintenance_work_experience_add_module__ = __webpack_require__(707);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -61,7 +61,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var StaffFileMaintenanceWorkExperiencePageModule = (function () {
+var StaffFileMaintenanceWorkExperiencePageModule = /** @class */ (function () {
     function StaffFileMaintenanceWorkExperiencePageModule() {
     }
     StaffFileMaintenanceWorkExperiencePageModule = __decorate([
@@ -106,7 +106,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 // import 'rxjs/add/operator/map';
 // import { Observable } from 'rxjs/Observable';
 // import { HttpService } from "../../../providers/HttpService";
-var StaffFileMaintenanceWorkExperienceAdd = (function () {
+var StaffFileMaintenanceWorkExperienceAdd = /** @class */ (function () {
     function StaffFileMaintenanceWorkExperienceAdd(navCtrl, navParams, 
         // private httpService: HttpService,
         formBuilder, viewCtrl) {
@@ -146,7 +146,7 @@ var StaffFileMaintenanceWorkExperienceAdd = (function () {
     ], StaffFileMaintenanceWorkExperienceAdd.prototype, "isShow", void 0);
     StaffFileMaintenanceWorkExperienceAdd = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-staff-file-maintenance-work-experience-add',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience-add\staff-file-maintenance-work-experience-add.html"*/`<ion-header>\n\n  <ion-navbar>\n      <ion-buttons start>\n          <button ion-button  (click)="dismiss()">返回</button>\n      </ion-buttons>\n    <ion-title>工作经历</ion-title>\n    <ion-buttons end>\n        <button ion-button [disabled]=\'addForm.invalid\'  (click)="save(addForm.value)">保存</button>\n    </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="addForm" (ngSubmit)="save(addForm.value)"   [ngClass]="{\'form-readonly\': readOnly}">\n        <ion-list style="position:relative;">\n            <ion-item>\n                <ion-label>开始时间</ion-label>\n                <ion-datetime formControlName="StartDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.StartDate.invalid && formCtrls.StartDate.touched">\n              开始时间必填\n            </div>\n            <ion-item>\n                <ion-label>结束时间</ion-label>\n                <ion-datetime formControlName="EndDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.EndDate.invalid && formCtrls.EndDate.touched">\n              结束时间必填\n            </div>\n            <ion-item>\n                <ion-label>部门</ion-label>\n                <ion-input text-right type="text" formControlName="Dept" placeholder="输入部门名称"></ion-input>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.Dept.invalid && (formCtrls.Dept.touched || formCtrls.Dept.dirty )">\n              <div *ngIf="addForm.get(\'Dept\').errors.required">部门必填</div>\n              <div *ngIf="addForm.get(\'Dept\').errors.maxlength">最多输入20个字</div>\n            </div>\n            <ion-item>\n                <ion-label>职务</ion-label>\n                <ion-input text-right type="text" formControlName="Duty" placeholder="输入职务名称"></ion-input>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.Duty.invalid && (formCtrls.Duty.touched || formCtrls.Duty.dirty )">\n              <div *ngIf="addForm.get(\'Duty\').errors.required">职务必填</div>\n              <div *ngIf="addForm.get(\'Duty\').errors.maxlength">最多输入30个字</div>\n            </div>\n            <ion-item>\n                <ion-label>工作单位</ion-label>\n                <ion-input text-right type="text" formControlName="Company" placeholder="输入工作单位"></ion-input>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.Company.invalid && (formCtrls.Company.touched || formCtrls.Company.dirty )">\n              <div *ngIf="addForm.get(\'Company\').errors.required">工作单位必填</div>\n              <div *ngIf="addForm.get(\'Company\').errors.maxlength">最多输入20个字</div>\n            </div>\n            <ion-item>\n                <ion-label stacked>备注<span class="optional">（选填）</span></ion-label>\n                <ion-textarea  formControlName="Remarks" placeholder="请输入备注"></ion-textarea>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.Remarks.invalid && (formCtrls.Remarks.touched || formCtrls.Remarks.dirty )">\n              最多输入180个字\n            </div>\n        </ion-list>\n    </form>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience-add\staff-file-maintenance-work-experience-add.html"*/,
+            selector: 'page-staff-file-maintenance-work-experience-add',template:/*ion-inline-start:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/hr-management/staff-file-maintenance/staff-file-maintenance-work-experience/staff-file-maintenance-work-experience-add/staff-file-maintenance-work-experience-add.html"*/'<ion-header>\n\n  <ion-navbar>\n      <ion-buttons start>\n          <button ion-button  (click)="dismiss()">返回</button>\n      </ion-buttons>\n    <ion-title>工作经历</ion-title>\n    <ion-buttons end>\n        <button ion-button [disabled]=\'addForm.invalid\'  (click)="save(addForm.value)">保存</button>\n    </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="addForm" (ngSubmit)="save(addForm.value)"   [ngClass]="{\'form-readonly\': readOnly}">\n        <ion-list style="position:relative;">\n            <ion-item>\n                <ion-label>开始时间</ion-label>\n                <ion-datetime formControlName="StartDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.StartDate.invalid && formCtrls.StartDate.touched">\n              开始时间必填\n            </div>\n            <ion-item>\n                <ion-label>结束时间</ion-label>\n                <ion-datetime formControlName="EndDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.EndDate.invalid && formCtrls.EndDate.touched">\n              结束时间必填\n            </div>\n            <ion-item>\n                <ion-label>部门</ion-label>\n                <ion-input text-right type="text" formControlName="Dept" placeholder="输入部门名称"></ion-input>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.Dept.invalid && (formCtrls.Dept.touched || formCtrls.Dept.dirty )">\n              <div *ngIf="addForm.get(\'Dept\').errors.required">部门必填</div>\n              <div *ngIf="addForm.get(\'Dept\').errors.maxlength">最多输入20个字</div>\n            </div>\n            <ion-item>\n                <ion-label>职务</ion-label>\n                <ion-input text-right type="text" formControlName="Duty" placeholder="输入职务名称"></ion-input>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.Duty.invalid && (formCtrls.Duty.touched || formCtrls.Duty.dirty )">\n              <div *ngIf="addForm.get(\'Duty\').errors.required">职务必填</div>\n              <div *ngIf="addForm.get(\'Duty\').errors.maxlength">最多输入30个字</div>\n            </div>\n            <ion-item>\n                <ion-label>工作单位</ion-label>\n                <ion-input text-right type="text" formControlName="Company" placeholder="输入工作单位"></ion-input>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.Company.invalid && (formCtrls.Company.touched || formCtrls.Company.dirty )">\n              <div *ngIf="addForm.get(\'Company\').errors.required">工作单位必填</div>\n              <div *ngIf="addForm.get(\'Company\').errors.maxlength">最多输入20个字</div>\n            </div>\n            <ion-item>\n                <ion-label stacked>备注<span class="optional">（选填）</span></ion-label>\n                <ion-textarea  formControlName="Remarks" placeholder="请输入备注"></ion-textarea>\n            </ion-item>\n            <div class="validation-failed" *ngIf="formCtrls.Remarks.invalid && (formCtrls.Remarks.touched || formCtrls.Remarks.dirty )">\n              最多输入180个字\n            </div>\n        </ion-list>\n    </form>\n</ion-content>\n'/*ion-inline-end:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/hr-management/staff-file-maintenance/staff-file-maintenance-work-experience/staff-file-maintenance-work-experience-add/staff-file-maintenance-work-experience-add.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
@@ -160,7 +160,7 @@ var StaffFileMaintenanceWorkExperienceAdd = (function () {
 
 /***/ }),
 
-/***/ 839:
+/***/ 840:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -184,7 +184,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var StaffFileMaintenanceWorkExperience = (function () {
+var StaffFileMaintenanceWorkExperience = /** @class */ (function () {
     function StaffFileMaintenanceWorkExperience(navCtrl, navParams, modalCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -256,7 +256,7 @@ var StaffFileMaintenanceWorkExperience = (function () {
     };
     StaffFileMaintenanceWorkExperience = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-staff-file-maintenance-work-experience',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience.html"*/`<!--\n  Generated template for the StaffFileMaintenanceWorkExperiencePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>工作经历</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-list>\n        <ion-item-sliding   *ngFor="let item of list"  (click)="doRead(item.Id)">\n          <ion-item>\n            <h3>{{item.StartDate}}~{{item.EndDate}}</h3>\n            <h2>{{item.Duty}}</h2>\n            <p>{{item.Dept}}<span *ngIf="item.Company !== \'\'">|{{item.Company}}</span></p>\n            <p *ngIf="item.Remarks !== \'\'">备注：{{item.Remarks}}</p>\n            <ion-icon name="arrow-forward" item-end color="stable"></ion-icon>\n          </ion-item>\n          <ion-item-options side="right">\n            <button ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>\n          </ion-item-options>\n        </ion-item-sliding>\n      </ion-list>\n      <div text-center>\n          <button (click)="add()" icon-left ion-button color="secondary" small outline round><ion-icon name="add"></ion-icon>添加</button>\n      </div>\n</ion-content>\n\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\staff-file-maintenance\staff-file-maintenance-work-experience\staff-file-maintenance-work-experience.html"*/,
+            selector: 'page-staff-file-maintenance-work-experience',template:/*ion-inline-start:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/hr-management/staff-file-maintenance/staff-file-maintenance-work-experience/staff-file-maintenance-work-experience.html"*/'<!--\n  Generated template for the StaffFileMaintenanceWorkExperiencePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>工作经历</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-list>\n        <ion-item-sliding   *ngFor="let item of list"  (click)="doRead(item.Id)">\n          <ion-item>\n            <h3>{{item.StartDate}}~{{item.EndDate}}</h3>\n            <h2>{{item.Duty}}</h2>\n            <p>{{item.Dept}}<span *ngIf="item.Company !== \'\'">|{{item.Company}}</span></p>\n            <p *ngIf="item.Remarks !== \'\'">备注：{{item.Remarks}}</p>\n            <ion-icon name="arrow-forward" item-end color="stable"></ion-icon>\n          </ion-item>\n          <ion-item-options side="right">\n            <button ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>\n          </ion-item-options>\n        </ion-item-sliding>\n      </ion-list>\n      <div text-center>\n          <button (click)="add()" icon-left ion-button color="secondary" small outline round><ion-icon name="add"></ion-icon>添加</button>\n      </div>\n</ion-content>\n\n'/*ion-inline-end:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/hr-management/staff-file-maintenance/staff-file-maintenance-work-experience/staff-file-maintenance-work-experience.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ModalController */]])
     ], StaffFileMaintenanceWorkExperience);

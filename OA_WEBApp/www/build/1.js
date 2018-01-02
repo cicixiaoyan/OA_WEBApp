@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MailWriteModule = (function () {
+var MailWriteModule = /** @class */ (function () {
     function MailWriteModule() {
     }
     MailWriteModule = __decorate([
@@ -55,7 +55,7 @@ var MailWriteModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_HttpService__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -68,7 +68,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var MailService = (function () {
+var MailService = /** @class */ (function () {
     function MailService(httpService) {
         this.httpService = httpService;
         this.mailStatus = {
@@ -143,7 +143,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 
 
-var DirectivesModule = (function () {
+var DirectivesModule = /** @class */ (function () {
     function DirectivesModule() {
     }
     DirectivesModule = __decorate([
@@ -176,7 +176,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var AutotextareaDirective = (function () {
+var AutotextareaDirective = /** @class */ (function () {
     function AutotextareaDirective(element) {
         this.element = element;
         console.log('Hello AutosizeDirective Directive');
@@ -228,15 +228,15 @@ var AutotextareaDirective = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MailWrite; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_GlobalData__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_NativeService__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_FileService__ = __webpack_require__(161);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_Constants__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file_chooser__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_transfer__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_Constants__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file_chooser__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_transfer__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_forms__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__mailService__ = __webpack_require__(782);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_Utils__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_Utils__ = __webpack_require__(65);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -263,7 +263,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-var MailWrite = (function () {
+var MailWrite = /** @class */ (function () {
     function MailWrite(navCtrl, navParams, actionSheetCtrl, popoverCtrl, fileService, nativeService, fileChooser, alertCtrl, fileTransfer, viewCtrl, globalData, mailService, formBuilder) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -444,7 +444,7 @@ var MailWrite = (function () {
     ], MailWrite.prototype, "content", void 0);
     MailWrite = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-mail-write',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-write\mail-write.html"*/`<!--\n\n  Generated template for the MailRead page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n\n\n        <button ion-button (click)="dismiss()">取消</button>\n\n\n\n        <ion-title>写信</ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-left (click)="sent(writeForm.value)">\n\n                <ion-icon name="ios-send"></ion-icon> 发送\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n\n    <div>\n\n        <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">\n\n            <ion-list style="position:relative;">\n\n\n\n                <ion-item>\n\n                    <ion-label style="align-self:center;">收件人&emsp;</ion-label>\n\n                    <ion-textarea min-rows="1" readonly="true" formControlName="addressee" #popoverContent placeholder="双击选择收件人" (click)="checkPeople($event)"></ion-textarea>\n\n                </ion-item>\n\n\n\n                <ion-item>\n\n                    <ion-label>主&emsp;题&emsp;</ion-label>\n\n                    <ion-input type="test" formControlName="Title" placeholder="主题1"></ion-input>\n\n                </ion-item>\n\n                <button ion-button clear class="share-btn" type="button" (click)="addAffix()">\n\n                    <ion-icon name="share"></ion-icon>0\n\n                </button>\n\n                <ion-item>\n\n                    <ion-label>密&emsp;送&emsp;</ion-label>\n\n                    <ion-toggle formControlName="Bcc"></ion-toggle>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-label>紧急程度</ion-label>\n\n                    <ion-select formControlName="Level" cancelText="取消" okText="确定" placeholder="请选择">\n\n                        <ion-option value="普通">普通邮件</ion-option>\n\n                        <ion-option value="重要">重要邮件</ion-option>\n\n                    </ion-select>\n\n                </ion-item>\n\n                <ion-item>\n\n                    <ion-textarea autotextarea formControlName="Content" rows="3" class="write-textarea" placeholder="输入信息"></ion-textarea>\n\n                </ion-item>\n\n\n\n                <div class="affix" *ngIf="haveAffix">\n\n                    <ion-grid>\n\n                        <ion-row align-items-center>\n\n                            <ion-col col-6>\n\n                                <div>\n\n                                    <ion-icon class="affix-icon" name="md-image"></ion-icon>\n\n                                    <p>{{attName}}</p>\n\n                                    <p color="gray">5.00MB</p>\n\n                                    <ion-icon class="affix-dismiss" name="ios-close-circle-outline"></ion-icon>\n\n                                </div>\n\n                            </ion-col>\n\n                            <ion-col col-6 text-center>\n\n                                <div>\n\n                                    <ion-icon name="add" class="affix-add"></ion-icon>\n\n                                </div>\n\n                            </ion-col>\n\n                        </ion-row>\n\n                    </ion-grid>\n\n                </div>\n\n\n\n            </ion-list>\n\n        </form>\n\n    </div>\n\n\n\n\n\n    <!-- <div>\n\n        <ion-scroll scrollY="true" class="mail-content">\n\n            <div class="message-textarea" contenteditable="true" data-text="输入信息"></div>\n\n            <div class="affix" *ngIf="haveAffix">\n\n                <ion-grid>\n\n                    <ion-row align-items-center>\n\n                        <ion-col col-6>\n\n                            <div>\n\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n\n                                <p>{{attName}}</p>\n\n                                <p color="gray">5.00MB</p>\n\n                                <ion-icon class="affix-dismiss" name="ios-close-circle-outline"></ion-icon>\n\n                            </div>\n\n                        </ion-col>\n\n                        <ion-col col-6 text-center>\n\n                            <div>\n\n                                <ion-icon name="add" class="affix-add"></ion-icon>\n\n                            </div>\n\n                        </ion-col>\n\n                    </ion-row>\n\n                </ion-grid>\n\n            </div>\n\n        </ion-scroll>\n\n    </div> -->\n\n</ion-content>\n\n<!-- <div class="list message-reply">\n\n\n\n    <div class="item">\n\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n\n        <button ion-button small color="positive">发送</button>\n\n    </div>\n\n\n\n</div> -->\n\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\mail\mail-write\mail-write.html"*/,
+            selector: 'page-mail-write',template:/*ion-inline-start:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/mail/mail-write/mail-write.html"*/'<!--\n  Generated template for the MailRead page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button (click)="dismiss()">取消</button>\n\n        <ion-title>写信</ion-title>\n        <ion-buttons end>\n            <button ion-button icon-left (click)="sent(writeForm.value)">\n                <ion-icon name="ios-send"></ion-icon> 发送\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n    <div>\n        <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">\n            <ion-list style="position:relative;">\n\n                <ion-item>\n                    <ion-label style="align-self:center;">收件人&emsp;</ion-label>\n                    <ion-textarea min-rows="1" readonly="true" formControlName="addressee" #popoverContent placeholder="双击选择收件人" (click)="checkPeople($event)"></ion-textarea>\n                </ion-item>\n\n                <ion-item>\n                    <ion-label>主&emsp;题&emsp;</ion-label>\n                    <ion-input type="test" formControlName="Title" placeholder="主题1"></ion-input>\n                </ion-item>\n                <button ion-button clear class="share-btn" type="button" (click)="addAffix()">\n                    <ion-icon name="share"></ion-icon>0\n                </button>\n                <ion-item>\n                    <ion-label>密&emsp;送&emsp;</ion-label>\n                    <ion-toggle formControlName="Bcc"></ion-toggle>\n                </ion-item>\n                <ion-item>\n                    <ion-label>紧急程度</ion-label>\n                    <ion-select formControlName="Level" cancelText="取消" okText="确定" placeholder="请选择">\n                        <ion-option value="普通">普通邮件</ion-option>\n                        <ion-option value="重要">重要邮件</ion-option>\n                    </ion-select>\n                </ion-item>\n                <ion-item>\n                    <ion-textarea autotextarea formControlName="Content" rows="3" class="write-textarea" placeholder="输入信息"></ion-textarea>\n                </ion-item>\n\n                <div class="affix" *ngIf="haveAffix">\n                    <ion-grid>\n                        <ion-row align-items-center>\n                            <ion-col col-6>\n                                <div>\n                                    <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                    <p>{{attName}}</p>\n                                    <p color="gray">5.00MB</p>\n                                    <ion-icon class="affix-dismiss" name="ios-close-circle-outline"></ion-icon>\n                                </div>\n                            </ion-col>\n                            <ion-col col-6 text-center>\n                                <div>\n                                    <ion-icon name="add" class="affix-add"></ion-icon>\n                                </div>\n                            </ion-col>\n                        </ion-row>\n                    </ion-grid>\n                </div>\n\n            </ion-list>\n        </form>\n    </div>\n\n\n    <!-- <div>\n        <ion-scroll scrollY="true" class="mail-content">\n            <div class="message-textarea" contenteditable="true" data-text="输入信息"></div>\n            <div class="affix" *ngIf="haveAffix">\n                <ion-grid>\n                    <ion-row align-items-center>\n                        <ion-col col-6>\n                            <div>\n                                <ion-icon class="affix-icon" name="md-image"></ion-icon>\n                                <p>{{attName}}</p>\n                                <p color="gray">5.00MB</p>\n                                <ion-icon class="affix-dismiss" name="ios-close-circle-outline"></ion-icon>\n                            </div>\n                        </ion-col>\n                        <ion-col col-6 text-center>\n                            <div>\n                                <ion-icon name="add" class="affix-add"></ion-icon>\n                            </div>\n                        </ion-col>\n                    </ion-row>\n                </ion-grid>\n            </div>\n        </ion-scroll>\n    </div> -->\n</ion-content>\n<!-- <div class="list message-reply">\n\n    <div class="item">\n        <textarea name="" rows="" cols="" placeholder="回复: "></textarea>\n        <button ion-button small color="positive">发送</button>\n    </div>\n\n</div> -->\n'/*ion-inline-end:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/mail/mail-write/mail-write.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],

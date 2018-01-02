@@ -18,7 +18,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AccountModule = (function () {
+var AccountModule = /** @class */ (function () {
     function AccountModule() {
     }
     AccountModule = __decorate([
@@ -46,7 +46,7 @@ var AccountModule = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserInfo; });
-var UserInfo = (function () {
+var UserInfo = /** @class */ (function () {
     function UserInfo() {
     }
     return UserInfo;
@@ -63,13 +63,13 @@ var UserInfo = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Account; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__model_UserInfo__ = __webpack_require__(790);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_GlobalData__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_GlobalData__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_NativeService__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_FileService__ = __webpack_require__(161);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_Constants__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_Utils__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_Constants__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_Utils__ = __webpack_require__(65);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -98,7 +98,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-var Account = (function () {
+var Account = /** @class */ (function () {
     function Account(navCtrl, navParams, storage, globalData, events, modalCtrl, actionSheetCtrl, fileService, nativeService) {
         var _this = this;
         this.navCtrl = navCtrl;
@@ -215,7 +215,7 @@ var Account = (function () {
     };
     Account = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-account',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account.html"*/`<!--\n  Generated template for the Account page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>个人中心</ion-title>\n        <ion-buttons end *ngIf="isChange">\n            <button ion-button icon-only (click)="save()">\n                保存\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n    <div class="top">\n        <div class="top-bg"></div>\n        <div>\n            <img (click)="changePhoto()" [src]="userInfo.photo" alt="photo" height="60" />\n            <h5><span class="positive">♂</span>&nbsp;<span class="positive">{{userInfo.Name}}</span></h5>\n            <div class="row row-no-padding">\n                <div class="col col-50" style="border-right: 1px solid;">\n                    职位：{{userInfo.Duty || "无"}}\n                </div>\n                <div class="col col-50">\n                    入职时间：{{(userInfo.InDate|date:"yyyy-MM-dd") || "未设置"}}\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class="imformation">\n        <ion-scroll scrollY="true" class="tab-content">\n            <ion-list>\n                <ion-item>\n                    <ion-icon name=\'md-map\' color="positive" item-left></ion-icon>\n                    公司\n                    <ion-note item-right>{{userInfo.Company}}</ion-note>\n                </ion-item>\n                <ion-item>\n                    <ion-icon name=\'ios-analytics\' color="energized" item-left></ion-icon>\n                    部门\n                    <ion-note item-right>{{userInfo.Dept || "无"}}</ion-note>\n                </ion-item>\n                <ion-item>\n                    <ion-icon name=\'ios-phone-portrait\' color="calm" item-left></ion-icon>\n                    手机号\n                    <ion-note item-right>{{userInfo.Mobile || "无"}}</ion-note>\n                </ion-item>\n                <!-- <ion-item>\n                    <ion-icon name=\'md-mail\' color="calm" item-left></ion-icon>\n                    邮箱\n                    <ion-note item-right>{{userInfo.ui_mail}}</ion-note>\n                </ion-item> -->\n            </ion-list>\n\n            <ion-list>\n                <ion-item (click)="getAboutus()">\n                    <ion-icon name=\'ios-at-outline\' color="assertive" item-left></ion-icon>\n                    关于我们\n                    <ion-icon name=\'ios-arrow-forward\' item-right></ion-icon>\n                </ion-item>\n            </ion-list>\n\n            <ion-list>\n                <ion-item (click)="pwdEdit()">\n                    <ion-icon name=\'ios-unlock\' color="assertive" item-left></ion-icon>\n                    修改密码\n                    <ion-icon name=\'ios-arrow-forward\' item-right></ion-icon>\n                </ion-item>\n                <ion-item (click)="edit()">\n                    <ion-icon name=\'md-create\' color="balanced" item-left></ion-icon>\n                    修改资料\n                    <ion-icon name=\'ios-arrow-forward\' item-right></ion-icon>\n                </ion-item>\n            </ion-list>\n\n\n\n            <div class="padding">\n                <button ion-button block color="assertive" (click)="signOut()">退出登录</button>\n            </div>\n\n        </ion-scroll>\n    </div>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\account\account.html"*/,
+            selector: 'page-account',template:/*ion-inline-start:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/account/account.html"*/'<!--\n  Generated template for the Account page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-title>个人中心</ion-title>\n        <ion-buttons end *ngIf="isChange">\n            <button ion-button icon-only (click)="save()">\n                保存\n            </button>\n        </ion-buttons>\n    </ion-navbar>\n</ion-header>\n\n\n<ion-content overflow-scroll="true" style="background: #f4f4f4;overflow: hidden;">\n    <div class="top">\n        <div class="top-bg"></div>\n        <div>\n            <img (click)="changePhoto()" [src]="userInfo.photo" alt="photo" height="60" />\n            <h5><span class="positive">♂</span>&nbsp;<span class="positive">{{userInfo.Name}}</span></h5>\n            <div class="row row-no-padding">\n                <div class="col col-50" style="border-right: 1px solid;">\n                    职位：{{userInfo.Duty || "无"}}\n                </div>\n                <div class="col col-50">\n                    入职时间：{{(userInfo.InDate|date:"yyyy-MM-dd") || "未设置"}}\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class="imformation">\n        <ion-scroll scrollY="true" class="tab-content">\n            <ion-list>\n                <ion-item>\n                    <ion-icon name=\'md-map\' color="positive" item-left></ion-icon>\n                    公司\n                    <ion-note item-right>{{userInfo.Company}}</ion-note>\n                </ion-item>\n                <ion-item>\n                    <ion-icon name=\'ios-analytics\' color="energized" item-left></ion-icon>\n                    部门\n                    <ion-note item-right>{{userInfo.Dept || "无"}}</ion-note>\n                </ion-item>\n                <ion-item>\n                    <ion-icon name=\'ios-phone-portrait\' color="calm" item-left></ion-icon>\n                    手机号\n                    <ion-note item-right>{{userInfo.Mobile || "无"}}</ion-note>\n                </ion-item>\n                <!-- <ion-item>\n                    <ion-icon name=\'md-mail\' color="calm" item-left></ion-icon>\n                    邮箱\n                    <ion-note item-right>{{userInfo.ui_mail}}</ion-note>\n                </ion-item> -->\n            </ion-list>\n\n            <ion-list>\n                <ion-item (click)="getAboutus()">\n                    <ion-icon name=\'ios-at-outline\' color="assertive" item-left></ion-icon>\n                    关于我们\n                    <ion-icon name=\'ios-arrow-forward\' item-right></ion-icon>\n                </ion-item>\n            </ion-list>\n\n            <ion-list>\n                <ion-item (click)="pwdEdit()">\n                    <ion-icon name=\'ios-unlock\' color="assertive" item-left></ion-icon>\n                    修改密码\n                    <ion-icon name=\'ios-arrow-forward\' item-right></ion-icon>\n                </ion-item>\n                <ion-item (click)="edit()">\n                    <ion-icon name=\'md-create\' color="balanced" item-left></ion-icon>\n                    修改资料\n                    <ion-icon name=\'ios-arrow-forward\' item-right></ion-icon>\n                </ion-item>\n            </ion-list>\n\n\n\n            <div class="padding">\n                <button ion-button block color="assertive" (click)="signOut()">退出登录</button>\n            </div>\n\n        </ion-scroll>\n    </div>\n</ion-content>'/*ion-inline-end:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/account/account.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],

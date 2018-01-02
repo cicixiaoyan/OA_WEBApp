@@ -18,7 +18,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var JobTypesSetAddPageModule = (function () {
+var JobTypesSetAddPageModule = /** @class */ (function () {
     function JobTypesSetAddPageModule() {
     }
     JobTypesSetAddPageModule = __decorate([
@@ -68,7 +68,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var JobTypesSetAddPage = (function () {
+var JobTypesSetAddPage = /** @class */ (function () {
     function JobTypesSetAddPage(navCtrl, navParams, 
         // private httpService: HttpService,
         formBuilder, viewCtrl) {
@@ -97,7 +97,7 @@ var JobTypesSetAddPage = (function () {
     };
     JobTypesSetAddPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-job-types-set-add',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\job-types-set\job-types-set-add\job-types-set-add.html"*/`<!--\n  Generated template for the JobTypesSetAddPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-buttons start>\n            <button ion-button  (click)="dismiss()">返回</button>\n        </ion-buttons>\n        <ion-title>工种设置添加</ion-title>\n        <ion-buttons end>\n            <button ion-button  (click)="sent(typeForm.value)">保存</button>\n        </ion-buttons>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="typeForm" (ngSubmit)="sent(typeForm.value)">\n        <ion-list style="position:relative;">\n            <ion-item>\n                <ion-label>所属分类</ion-label>\n                <ion-select formControlName="Category" cancelText="取消" okText="确定" placeholder="请选择">\n                    <ion-option value="管理人员">管理人员</ion-option>\n                    <ion-option value="服务人员">服务人员</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item>\n                <ion-label>工种名称</ion-label>\n                <ion-input text-right type="text" formControlName="Name" placeholder="请输入工种名称"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>备注</ion-label>\n                <ion-textarea text-right formControlName="Remarks" placeholder="请输入备注"></ion-textarea>\n            </ion-item>\n        </ion-list>\n    </form>\n</ion-content>`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\job-types-set\job-types-set-add\job-types-set-add.html"*/,
+            selector: 'page-job-types-set-add',template:/*ion-inline-start:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/hr-management/job-types-set/job-types-set-add/job-types-set-add.html"*/'<!--\n  Generated template for the JobTypesSetAddPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n    <ion-navbar>\n        <ion-buttons start>\n            <button ion-button  (click)="dismiss()">返回</button>\n        </ion-buttons>\n        <ion-title>工种设置添加</ion-title>\n        <ion-buttons end>\n            <button ion-button  (click)="sent(typeForm.value)">保存</button>\n        </ion-buttons>\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <form [formGroup]="typeForm" (ngSubmit)="sent(typeForm.value)">\n        <ion-list style="position:relative;">\n            <ion-item>\n                <ion-label>所属分类</ion-label>\n                <ion-select formControlName="Category" cancelText="取消" okText="确定" placeholder="请选择">\n                    <ion-option value="管理人员">管理人员</ion-option>\n                    <ion-option value="服务人员">服务人员</ion-option>\n                </ion-select>\n            </ion-item>\n            <ion-item>\n                <ion-label>工种名称</ion-label>\n                <ion-input text-right type="text" formControlName="Name" placeholder="请输入工种名称"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label>备注</ion-label>\n                <ion-textarea text-right formControlName="Remarks" placeholder="请输入备注"></ion-textarea>\n            </ion-item>\n        </ion-list>\n    </form>\n</ion-content>'/*ion-inline-end:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/hr-management/job-types-set/job-types-set-add/job-types-set-add.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],

@@ -18,7 +18,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ContractChoosePageModule = (function () {
+var ContractChoosePageModule = /** @class */ (function () {
     function ContractChoosePageModule() {
     }
     ContractChoosePageModule = __decorate([
@@ -45,10 +45,10 @@ var ContractChoosePageModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContractChoosePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63,7 +63,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ContractChoosePage = (function () {
+var ContractChoosePage = /** @class */ (function () {
     function ContractChoosePage(navParams, viewCtrl, storage, httpService) {
         this.navParams = navParams;
         this.viewCtrl = viewCtrl;
@@ -211,7 +211,7 @@ var ContractChoosePage = (function () {
     };
     ContractChoosePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contract-choose',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-choose\contract-choose.html"*/`<!-- <ion-content> -->\n<ion-list class="checkpeople-popover">\n    <ion-item>\n        <ion-label>部门选择</ion-label>\n        <ion-select [(ngModel)]="dept" submitText="确定" (ngModelChange)="getRecipientsByDept(dept)" cancelText="取消" okText="确定">\n            <ion-option *ngFor="let item of deptItems;let i = index" [value]="item.Id">\n                {{item.BmName}}\n            </ion-option>\n        </ion-select>\n    </ion-item>\n    <ion-searchbar color="danger" cancelButtonText=\'搜索\' showCancelButton="true" (ionCancel)="search()" [(ngModel)]="name" placeholder="请输入编码或姓名">\n    </ion-searchbar>\n\n    <ion-list-header >员工列表</ion-list-header>\n    <div class="">\n        <ion-scroll scrollY="true">\n          <ion-item *ngFor="let item of items;let i = index">\n            <ion-label>\n              {{item.ContractNumber}}{{item.ContractName == \'\' ? \'\' : \'(\'+item.ContractName+\')\' }}<br>\n              <span>{{item.Name}}</span>\n            </ion-label>\n            <ion-checkbox [checked]="item.checked" (click)="checkContract(i)"></ion-checkbox>\n          </ion-item>\n        </ion-scroll>\n    </div>\n</ion-list>\n<!-- </ion-content> -->\n<ion-footer>\n    <button (click)="confirm()" icon-left ion-button full color="calm">\n  <ion-icon name="checkmark"></ion-icon>确定</button>\n</ion-footer>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\hr-management\contract\contract-choose\contract-choose.html"*/,
+            selector: 'page-contract-choose',template:/*ion-inline-start:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/hr-management/contract/contract-choose/contract-choose.html"*/'<!-- <ion-content> -->\n<ion-list class="checkpeople-popover">\n    <ion-item>\n        <ion-label>部门选择</ion-label>\n        <ion-select [(ngModel)]="dept" submitText="确定" (ngModelChange)="getRecipientsByDept(dept)" cancelText="取消" okText="确定">\n            <ion-option *ngFor="let item of deptItems;let i = index" [value]="item.Id">\n                {{item.BmName}}\n            </ion-option>\n        </ion-select>\n    </ion-item>\n    <ion-searchbar color="danger" cancelButtonText=\'搜索\' showCancelButton="true" (ionCancel)="search()" [(ngModel)]="name" placeholder="请输入编码或姓名">\n    </ion-searchbar>\n\n    <ion-list-header >员工列表</ion-list-header>\n    <div class="">\n        <ion-scroll scrollY="true">\n          <ion-item *ngFor="let item of items;let i = index">\n            <ion-label>\n              {{item.ContractNumber}}{{item.ContractName == \'\' ? \'\' : \'(\'+item.ContractName+\')\' }}<br>\n              <span>{{item.Name}}</span>\n            </ion-label>\n            <ion-checkbox [checked]="item.checked" (click)="checkContract(i)"></ion-checkbox>\n          </ion-item>\n        </ion-scroll>\n    </div>\n</ion-list>\n<!-- </ion-content> -->\n<ion-footer>\n    <button (click)="confirm()" icon-left ion-button full color="calm">\n  <ion-icon name="checkmark"></ion-icon>确定</button>\n</ion-footer>\n'/*ion-inline-end:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/hr-management/contract/contract-choose/contract-choose.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],

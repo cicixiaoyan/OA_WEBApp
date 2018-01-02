@@ -18,7 +18,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ContactsPopoverPageModule = (function () {
+var ContactsPopoverPageModule = /** @class */ (function () {
     function ContactsPopoverPageModule() {
     }
     ContactsPopoverPageModule = __decorate([
@@ -46,10 +46,10 @@ var ContactsPopoverPageModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactsPopoverPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_HttpService__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -70,7 +70,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var ContactsPopoverPage = (function () {
+var ContactsPopoverPage = /** @class */ (function () {
     function ContactsPopoverPage(navParams, viewCtrl, storage, httpService) {
         this.navParams = navParams;
         this.viewCtrl = viewCtrl;
@@ -172,7 +172,7 @@ var ContactsPopoverPage = (function () {
     };
     ContactsPopoverPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contacts-popover',template:/*ion-inline-start:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\popover\contacts-popover\contacts-popover.html"*/`<!--\n  Generated template for the ContactsPopoverPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>联系人选择</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-list class="checkpeople-popover">\n    <ion-item>\n        <ion-label>部门选择</ion-label>\n        <ion-select [(ngModel)]="dept" submitText="确定" (ngModelChange)="getRecipientsByDept(dept)"\n            cancelText="取消" okText="确定">\n            <ion-option  *ngFor="let item of deptItems;let i = index" [value]="item.Id">\n                {{item.BmName}}\n            </ion-option>\n        </ion-select>\n    </ion-item>\n    <ion-searchbar color="danger" [(ngModel)]="name"  placeholder="请输入编码或姓名">\n    </ion-searchbar>\n  \n    <div text-center>\n        <button (click)="search()" icon-left ion-button small color="calm">\n        <ion-icon name="search"></ion-icon>查询</button>\n  \n        <button (click)="confirm()" icon-left ion-button small color="calm">\n        <ion-icon name="checkmark"></ion-icon>确定</button>\n    </div>\n  \n    <ion-list-header>\n        通讯录\n    </ion-list-header>\n  \n    <ion-item *ngFor="let item of items;let i = index">\n        <ion-label>\n        {{item.Name}}({{item.Uid}})<br>\n        <span>{{item.Dept}}&emsp;{{item.Duty}}</span>\n        </ion-label>\n        <ion-checkbox [checked]="item.checked" (ionChange)="checkPeople(i)"></ion-checkbox>\n    </ion-item>\n  </ion-list>\n</ion-content>\n`/*ion-inline-end:"D:\svn\mine\gitSource\OA_WEBApp\src\pages\popover\contacts-popover\contacts-popover.html"*/,
+            selector: 'page-contacts-popover',template:/*ion-inline-start:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/popover/contacts-popover/contacts-popover.html"*/'<!--\n  Generated template for the ContactsPopoverPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>联系人选择</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-list class="checkpeople-popover">\n    <ion-item>\n        <ion-label>部门选择</ion-label>\n        <ion-select [(ngModel)]="dept" submitText="确定" (ngModelChange)="getRecipientsByDept(dept)"\n            cancelText="取消" okText="确定">\n            <ion-option  *ngFor="let item of deptItems;let i = index" [value]="item.Id">\n                {{item.BmName}}\n            </ion-option>\n        </ion-select>\n    </ion-item>\n    <ion-searchbar color="danger" [(ngModel)]="name"  placeholder="请输入编码或姓名">\n    </ion-searchbar>\n  \n    <div text-center>\n        <button (click)="search()" icon-left ion-button small color="calm">\n        <ion-icon name="search"></ion-icon>查询</button>\n  \n        <button (click)="confirm()" icon-left ion-button small color="calm">\n        <ion-icon name="checkmark"></ion-icon>确定</button>\n    </div>\n  \n    <ion-list-header>\n        通讯录\n    </ion-list-header>\n  \n    <ion-item *ngFor="let item of items;let i = index">\n        <ion-label>\n        {{item.Name}}({{item.Uid}})<br>\n        <span>{{item.Dept}}&emsp;{{item.Duty}}</span>\n        </ion-label>\n        <ion-checkbox [checked]="item.checked" (ionChange)="checkPeople(i)"></ion-checkbox>\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/src/pages/popover/contacts-popover/contacts-popover.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["w" /* ViewController */],

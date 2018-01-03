@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>批量设置工作日</ion-title>
+    <ion-buttons end>
+        <button ion-button end (click)="sent(writeForm.value)">保存</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">
+        <ion-list>
+            <ion-item>
+                <ion-label>基准员工</ion-label>
+                <ion-input text-right  type="text" formControlName="BaseStaff" placeholder="未设置"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>需更新员工</ion-label>
+                <ion-input text-right  type="text" formControlName="UpdateStaff" placeholder="未设置"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>开始时间</ion-label>
+                <ion-input text-right *ngIf="readOnly" type="text" formControlName="StartTime" placeholder="未设置" disabled></ion-input>
+                <ion-datetime *ngIf="!readonly" placeholder="点击设置" min='2018' cancelText="取消" doneText="确定" formControlName="Years" displayFormat="YYYY" pickerFormat="YYYY"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label>结束时间</ion-label>
+                <ion-input text-right *ngIf="readOnly" type="text" formControlName="EndTime" placeholder="未设置" disabled></ion-input>
+                <ion-datetime *ngIf="!readonly" placeholder="点击设置" min='2018' cancelText="取消" doneText="确定" formControlName="Years" displayFormat="YYYY" pickerFormat="YYYY"></ion-datetime>
+            </ion-item>
+       
+        </ion-list>
+    </form>
+</ion-content>

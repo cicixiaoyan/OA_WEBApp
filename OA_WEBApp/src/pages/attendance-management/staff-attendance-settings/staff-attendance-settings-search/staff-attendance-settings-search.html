@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>筛选</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <form [formGroup]="searchForm" (ngSubmit)="sent(searchForm.value)">
+        <ion-list>
+            <ion-item>
+                <ion-label>员工部门</ion-label>
+                <ion-select text-right formControlName="DeptId" cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-option *ngFor="let Dept of DeptLs;let i = index" [value]="Dept.Id">{{Dept.BmName}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item-divider>快速筛选</ion-item-divider>
+
+            <ion-item>
+                <ion-label>搜索选项</ion-label>
+                <ion-select text-right formControlName="fastSelect" cancelText="取消" okText="确定" placeholder="请选择">
+                  <ion-option value="Code">用户编码</ion-option>
+                  <ion-option value="Name">姓名</ion-option>
+                  <ion-option value="Status">状态</ion-option>
+                  <ion-option value="Duty">职位</ion-option>
+                  <ion-option value="Company">所属公司</ion-option>
+                  <ion-option value="Id">对应考勤ID</ion-option>
+                  <ion-option value="IsDepartmentAttendanceApprovalStaff">部门考勤审批人员(是/否)</ion-option>
+                  <ion-option value="IsAttendanceApprovalLeadership">考勤审批分管领导(是/否)</ion-option>
+                  <ion-option value="IsAttendanceApprovalCenterLeadership">考勤审批中心领导(是/否)</ion-option>
+                  <ion-option value="IsAttendanceManagementStaff">考勤管理人员(是/否)</ion-option>
+                  <ion-option value="IsSpecialAttendanceStaff">特殊考勤人员(是/否)</ion-option>
+                  <ion-option value="IsParticipateAnnualleaveStatistics">参与部门年假统计(是/否)</ion-option>
+                </ion-select>
+              </ion-item>
+            <ion-item>
+                <ion-label>关键字</ion-label>
+                <ion-input type="text" text-right formControlName="iValue" placeholder="请输入对应关键字"></ion-input>
+            </ion-item>
+
+
+        </ion-list>
+        <div text-center>
+            <button ion-button color="energized" (click)="reset()" small outline>重置</button>
+            <button ion-button color="assertive" type="submit" small>搜索</button>
+        </div>
+    </form>
+</ion-content>

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component,  Inject } from '@angular/core';
 import { IonicPage, NavParams, NavController, PopoverController, ViewController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HolidayGroupSettingsService } from '../holiday-group-settings-service';
@@ -9,19 +9,20 @@ import { HolidayGroupSettingsService } from '../holiday-group-settings-service';
   templateUrl: 'holiday-group-settings-view.html',
 })
 export class HolidayGroupSettingsViewPage {
-
   writeForm: FormGroup;
+  
   FileNewName: string = ""; // 附件名称
   PersonId: string = "";
   readOnly: boolean = false;
+  formCtrls: any;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private formBuilder: FormBuilder,
+              @Inject(FormBuilder) fb: FormBuilder,
               private popoverCtrl: PopoverController,
               private holidayGroupSettingsService: HolidayGroupSettingsService) {
     this.readOnly = this.navParams.get("readOnly") ? true : false;
-    this.writeForm = this.formBuilder.group({
+    this.writeForm = fb.group({
         "Years": ['', []], // 年份
         "GroupName": ["", [Validators.required, Validators.maxLength(12)]], // 分组名称
         "LeaveDays": ["", [ Validators.required, Validators.max(365)]], // 事假天数
@@ -30,6 +31,8 @@ export class HolidayGroupSettingsViewPage {
         "Person": ["", [Validators.maxLength(180), Validators.required]], // 参加人员
         "Description": ["", [Validators.maxLength(180)]], // 分组说明
     });
+
+    this.formCtrls = this.writeForm.controls;
 
 
   }

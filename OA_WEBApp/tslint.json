@@ -1,7 +1,7 @@
 {
     "rules": {
         "no-duplicate-variable": true,
-        "no-unused-variable": [true],
+        "no-unused-variable": [true, {"ignore-pattern": "^_"}],
         "no-unused-expression": [false],
         "class-name": true,
         "comment-format": [true,
@@ -32,26 +32,18 @@
                 "variable-declaration": "onespace"
             }
         ],
-        // "next-line": [true,
-        //     "check-catch",
-        //     "check-else"
-        // ],
-        "indent": [ 4, "spaces"
+        "indent": [ true, "spaces"
         ],
         "align": [true, "parameters", "statements"],
         "no-switch-case-fall-through": true,
         "jsdoc-format": true,
         "use-isnan": true,
-        //"linebreak-style": [true, "LF"],
-        // "quotemark": [true,
-        //     "double",
-        //     "avoid-escape"
-        // ],
         "semicolon": [true, "always", "ignore-bound-class-methods"],
         "no-var-keyword": true,
-        // "no-trailing-whitespace": [true, "ignore-comments"],
         "no-namespace": [true, "allow-declarations"],
         "max-line-length": [ true, 120 ]
     },
-    "extends": "tslint-ionic-rules"
+    "rulesDirectory": [
+        "node_modules/tslint-eslint-rules/dist/rules"
+    ]
 }

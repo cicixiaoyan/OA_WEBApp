@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Refresher } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Refresher, PopoverController } from 'ionic-angular';
 import { HolidayGroupSettingsService } from './holiday-group-settings-service';
 
 @IonicPage()
@@ -12,8 +12,10 @@ export class HolidayGroupSettingsPage {
   list: any = [];
   isEmpty: boolean = false;
   data: any = {};
+  search: any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              private popoverCtrl: PopoverController,
               private holidayGroupSettingsService: HolidayGroupSettingsService) {
       this.data = {
         "PageIndex": 0,
@@ -24,6 +26,23 @@ export class HolidayGroupSettingsPage {
 
   initializeItems() {
     this.getList(this.data);
+  }
+  presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create("HolidayGroupSettingsSearchPage", {"search": this.search});
+    popover.present({
+      ev: myEvent
+    });
+    popover.onDidDismiss(search => {
+      console.log(search);
+      if (search){
+        this.search = search.search;
+        let data = search.search;
+        data.uid =  this.holidayGroupSettingsService.httpService.globalData.Uid;
+        data.PageIndex = 0;
+        data.PageSize = 8;
+        this.getList(data);
+      }
+    });
   }
 
   doRead(id?) {

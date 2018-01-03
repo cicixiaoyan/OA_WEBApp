@@ -1,0 +1,63 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>基础设置</ion-title>
+        <ion-buttons end>
+            <button ion-button end [disabled]="writeForm.invalid" (click)="sent(writeForm.value)">保存</button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)" class="form-readonly" [ngClass]="{'form-readonly': readOnly}">
+
+        <ion-card>
+
+            <ion-card-header text-center>{{writeForm.value.Name}}-{{writeForm.value.Code}}</ion-card-header>
+
+            <ion-card-content text-center>
+                <p>{{writeForm.value.Company}}</p>
+            </ion-card-content>
+            <div class='dividing-line'>
+                <ion-row justify-content-center>
+                    <ion-col padding-right>部门： {{writeForm.value.Dept}}</ion-col>
+                    <ion-col>职位： {{writeForm.value.Duty}}</ion-col>
+                </ion-row>
+
+                <ion-row justify-content-center>
+                    <ion-col padding-right>角色： {{writeForm.value.Role}}</ion-col>
+                    <ion-col>状态： {{writeForm.value.Status}}</ion-col>
+                </ion-row>
+            </div>
+            <ion-item>
+                <ion-label>对应考勤ID</ion-label>
+                <ion-input text-right type="text" formControlName="Id" placeholder="未设置"></ion-input>
+            </ion-item>
+            <div *ngIf="!formCtrls.Id.valid && (formCtrls.Id.touched || formCtrls.Id.dirty )" class="validation-failed">
+                <div *ngIf="writeForm.hasError('required','Id')">考勤ID必填</div>
+                <div *ngIf="writeForm.hasError('maxlength','Id')">最多输入12个字</div>
+            </div>
+
+            <ion-item>
+                <ion-label>入职日期</ion-label>
+                <ion-datetime formControlName="InDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>            
+            </ion-item>
+            <div *ngIf="!formCtrls.InDate.valid && (formCtrls.InDate.touched || formCtrls.InDate.dirty )" class="validation-failed">
+                入职日期必填
+            </div>
+            <ion-item>
+                <ion-label stacked>员工身份<span class="optional">（可多选）</span></ion-label>
+                <ion-select  [(ngModel)]="Identity"  [ngModelOptions]="{standalone: true}"  multiple="true" placeholder='请选择' cancelText="取消" okText="确定">
+                    <ion-option value="0">部门考勤人员</ion-option>
+                    <ion-option value="1">考勤分管领导</ion-option>
+                    <ion-option value="2">考勤审批中心领导</ion-option>
+                    <ion-option value="3">考勤管理人员</ion-option>
+                    <ion-option value="4">特殊考勤人员</ion-option>
+                    <ion-option value="5">参与部门年假统计</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-card>
+    </form>
+</ion-content>

@@ -1,0 +1,75 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>车辆申请</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background: #f4f4f4;">
+
+    <form [formGroup]="baseForm" (ngSubmit)="submit(baseForm.value)" [ngClass]="{'form-readonly': readOnly}">
+        <ion-list>
+            <div>
+                <ion-item>
+                    <ion-label>选用车辆</ion-label>
+                    <ion-select formControlName="BusId" cancelText="取消" okText="确定" placeholder="请选择">
+                        <ion-option value="1">车辆1</ion-option>
+                        <ion-option value="2">车辆2</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label>乘坐人数(人)</ion-label>
+                    <ion-input type="number" text-right formControlName="PersonNum" placeholder="请输入"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>出发地点</ion-label>
+                    <ion-input type="text" text-right formControlName="StartPlace" placeholder="请输入"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>到达地点</ion-label>
+                    <ion-input type="number" text-right formControlName="EndPlace" placeholder="请输入"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>申请部门<span class="DeptId">（选填）</span></ion-label>
+                    <ion-select formControlName="VechcleId" cancelText="取消" okText="确定" placeholder="请选择">
+                        <ion-option value="1">车辆1</ion-option>
+                        <ion-option value="2">车辆2</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label>行驶日期（自）</ion-label>
+                    <ion-datetime formControlName="StartDate" placeholder="点击添加" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-label>行驶日期（至）</ion-label>
+                    <ion-datetime formControlName="EndDate" placeholder="点击添加" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-label stacked text-left>出发是由<span class="optional">（选填）</span></ion-label>
+                    <ion-textarea formControlName="Reson" placeholder="输入备注信息"></ion-textarea>
+                </ion-item>
+                <ion-item>
+                    <ion-label stacked text-left>备注<span class="optional">（选填）</span></ion-label>
+                    <ion-textarea formControlName="Memo" placeholder="输入备注信息"></ion-textarea>
+                </ion-item>
+                <ion-item *ngIf="baseForm.value.">
+                    <ion-label>审批人员</ion-label>
+                    <ion-select formControlName="SPId" cancelText="取消" okText="确定" placeholder="请选择">
+                        <ion-option value="1">车辆1</ion-option>
+                        <ion-option value="2">车辆2</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label>站内消息通知下一步审批人</ion-label>
+                    <ion-toggle formControlName="IsStationNotice"></ion-toggle>
+                </ion-item>
+            </div>
+        </ion-list>
+    </form>
+
+</ion-content>
+<ion-footer *ngIf="!readOnly">
+    <button ion-button full color="danger" [disabled]="!baseForm.valid" (click)=submit(baseForm.value)>保存</button>
+</ion-footer>

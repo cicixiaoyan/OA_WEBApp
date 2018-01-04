@@ -7,14 +7,13 @@ import { HttpService } from "../../providers/HttpService";
 @Injectable()
 export class MessageService {
     Message: object = {
-        inbox: 0, // 收件箱
-        outbox: 1 // 发件箱
+        inbox: 1, // 收件箱
+        outbox: 0 // 发件箱
     };
 
     messageStatus: object = {
-        read: 0, // 已读
-        unread: 1, // 未读
-        all: 3 // 全部
+        read: 1, // 已读
+        unread: 0 // 未读
     };
 
     constructor(public httpService: HttpService) {

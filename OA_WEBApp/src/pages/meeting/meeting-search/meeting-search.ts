@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Refresher, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController, Refresher, ModalController } from 'ionic-angular';
 import { MeetingService } from '../meeting_service';
 
 /**
@@ -16,7 +16,7 @@ import { MeetingService } from '../meeting_service';
 })
 export class MeetingSearchPage {
 
-  list: Array<any>;
+  list: Array<any> = [];
   checkBtn: any = {
     Drafting: false, // 起草中
     Delivered: true, // 送审中(默认)
@@ -27,10 +27,11 @@ export class MeetingSearchPage {
   data: any;
   moredata: boolean = true;
   isEmpty: boolean = false;
-  searchKey: string = "";
+  search: any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private modalCtrl: ModalController,
+              private popoverCtrl: PopoverController,
               private meetingService: MeetingService) {
       this.data = {
         "status": this.meetingService.meetingStatus["Delivered"],
@@ -38,10 +39,7 @@ export class MeetingSearchPage {
         "PageIndex": 0,
         "PageSize": 8
       };
-      this.list = [
-        {}
-      ];
-      // this.getList(this.data);
+      this.getList(this.data);
   }
 
 
@@ -64,11 +62,25 @@ export class MeetingSearchPage {
   }
 
   doRead(Params) {
-    this.navCtrl.push("MeetingEditPage", { "Id": Params });
+    this.navCtrl.push("MeetingEditPage", { "Id": Params, "readOnly": true });
   }
 
-  search(e){
-
+  presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create("HolidayGroupSettingsSearchPage", {"search": this.search});
+    popover.present({
+      ev: myEvent
+    });
+    popover.onDidDismiss(search => {
+      console.log(search);
+      if (search){
+        this.search = search.search;
+        let data = search.search;
+        data.uid =  this.meetingService.httpService.globalData.Uid;
+        data.PageIndex = 0;
+        data.PageSize = 8;
+        this.getList(data);
+      }
+    });
   }
 
 

@@ -51,7 +51,7 @@
                         <img src="assets/img/mike.png">
                     </ion-avatar>
                     <span style="color:#2196F3;" *ngIf="message.Status=='0'">●&nbsp;</span><span>{{message.Content}}</span>
-                    <p class="font-12">来至:{{message.Name}}&emsp;{{message.SendDate}}</p>
+                    <p class="font-12">{{message.Name}}&emsp;{{message.SendDate}}</p>
                 </ion-item>
                 <ion-item-options side="right">
                     <button ion-button color="primary">
@@ -67,7 +67,7 @@
                         <img src="assets/img/mike.png">
                     </ion-avatar>
                     <span>{{message.Content}}</span>
-                    <p class="font-12">发至:{{message.Name}}&emsp;{{message.SendDate}}</p>
+                    <p class="font-12">{{message.Name}}&emsp;{{message.SendDate}}</p>
                 </ion-item>
                 <ion-item-options side="right">
                     <button ion-button color="primary">

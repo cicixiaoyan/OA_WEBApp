@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavParams, NavController, PopoverController, ViewController } from 'ionic-angular';
+import { IonicPage, NavParams, NavController, PopoverController,  ViewController } from 'ionic-angular';
 
 import { GlobalData } from '../../../providers/GlobalData';
 import { NativeService } from '../../../providers/NativeService';
@@ -30,26 +30,31 @@ export class MeetingEditPage {
   DeptLs = [];
   detail = {};
   readOnly: boolean = false;
+  HostId: string = "";
+  PersonId: string = "";
+  formCtrl: any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private fileService: FileService,
               private formBuilder: FormBuilder,
               private globalData: GlobalData,
               private nativeService: NativeService,
+              private popoverCtrl: PopoverController,
               private meetingService: MeetingService) {
     this.writeForm = this.formBuilder.group({
-        Title: ['', [Validators.required, Validators.maxLength(30), Validators.maxLength(2)]], // 第一个参数是默认值
+        Title: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(2)]], // 第一个参数是默认值
         TypeId: ["", [Validators.required]],
         PlaceId: ["", [ Validators.required]],
         StartDate: ["", [ Validators.required]],
         EndDate: ["", [Validators.required]],
-        PersonId: ["", [Validators.maxLength(180), Validators.required]],
+        Person: ["", [Validators.maxLength(180), Validators.required]],
         DeptId: ["", []],
         HostName: ["", [Validators.maxLength(20)]],
         Range: ["", [Validators.maxLength(180)]],
         Detail: ["", [Validators.maxLength(180)]],
         FileOldName: ["", [Validators.maxLength(180)]],
     });
+    this.formCtrl = this.writeForm.controls;
     let id = {"id": this.navParams.get("Id")};
     this.readOnly = this.navParams.get("readOnly") ? true : false;
 
@@ -69,13 +74,13 @@ export class MeetingEditPage {
       if (resJson.Result){
         this.detail = resJson.Data;
         this.FileNewName = resJson.Data.FileNewName;
-        this.writeForm.setValue({
+        this.writeForm.patchValue({
           Title: this.detail["Title"],
           TypeId: this.detail["TypeId"],
           PlaceId: this.detail["PlaceId"],
           StartDate: Utils.dateFormat(new Date(this.detail["StartDate"]), 'yyyy-MM-ddTHH:mm+08:00'),
           EndDate: Utils.dateFormat(new Date(this.detail["EndDate"]), 'yyyy-MM-ddTHH:mm+08:00'),
-          PersonId: this.detail["PersonId"],
+          Person: this.detail["PersonId"],
           DeptId: this.detail["DeptId"],
           HostName: this.detail["HostName"],
           Range: this.detail["Range"],
@@ -100,11 +105,13 @@ export class MeetingEditPage {
     console.log('ionViewDidLoad MeetingWritePage');
   }
   save(data){
+    data.Person = null;
     data.Uid = this.globalData.Uid;
     data.FileNewName = this.FileNewName;
     data.Id = this.detail["Id"];
     data.StartDate = Utils.dateFormat(new Date(data.StartDate), 'yyyy-MM-dd HH:mm:ss');
     data.EndDate = Utils.dateFormat(new Date(data.EndDate), 'yyyy-MM-dd HH:mm:ss');
+    data.PersonId = this.PersonId;
     this.meetingService.write(data).subscribe((resJson) => {
       if (resJson.Result){
         this.nativeService.showToast("添加成功", 888);
@@ -122,6 +129,43 @@ export class MeetingEditPage {
         this.FileNewName = resJson.Data[0].NewName;
       }else{
         this.nativeService.showToast(resJson.Data, 800);
+      }
+
+    });
+  }
+
+  aprove(){
+
+  }
+
+  delete(){
+
+  }
+
+  checkPeople(myEvent) {
+    let popover = this.popoverCtrl.create("ContactsPopoverPage",
+      { addressee: this.writeForm.get("Person").value, addresseeIds: this.PersonId });
+    popover.present({
+      ev: myEvent
+    });
+    popover.onDidDismiss(data => {
+      if (!!data) {
+        this.PersonId = data.addresseeIds;
+        this.writeForm.patchValue({ 'Person': data.addressee });
+      }
+
+    });
+  }
+  checkHostName(myEvent) {
+    let popover = this.popoverCtrl.create("ContactsPopoverPage",
+      { addressee: this.writeForm.get("HostName").value, addresseeIds: this.HostId });
+    popover.present({
+      ev: myEvent
+    });
+    popover.onDidDismiss(data => {
+      if (!!data) {
+        this.HostId = data.addresseeIds;
+        this.writeForm.patchValue({ 'HostName': data.addressee });
       }
 
     });

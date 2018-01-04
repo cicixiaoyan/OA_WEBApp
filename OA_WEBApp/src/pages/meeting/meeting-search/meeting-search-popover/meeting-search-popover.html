@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>筛选</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <form [formGroup]="searchForm" (ngSubmit)="sent(searchForm.value)">
+        <ion-list>
+            <ion-item>
+                <ion-label>会议编码</ion-label>
+                <ion-input text-right type="text" formControlName="MeetRecod" placeholder="请输入"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>会议主题</ion-label>
+                <ion-input text-right type="text" formControlName="Title" placeholder="请输入"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>会议类型</ion-label>
+                <ion-select  text-right formControlName="TypeId" cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-option *ngFor="let type of MeetTypeLs;let i = index" [value]="type.Id">{{type.Name}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>状态</ion-label>
+                <ion-input text-right type="text" formControlName="Status" placeholder="请输入"></ion-input>
+            </ion-item>
+
+
+        </ion-list>
+        <div text-center>
+            <button ion-button color="energized" (click)="reset()" small outline>重置</button>
+            <button ion-button color="assertive" type="submit" small>搜索</button>
+        </div>
+    </form>
+</ion-content>

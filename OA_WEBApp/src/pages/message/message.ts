@@ -22,7 +22,7 @@ export class MessagePage {
   inbox: boolean = true; // 默认为收件箱
   isDraft: boolean = false; // 默认为发件箱
   isEmpty: boolean = false;
-  checkBtn: object = { "read": false, "unread": true, "all": false };
+  checkBtn: object = { "read": false, "unread": true };
   inboxList: any = [];
   outboxList: any = [];
   moredata: boolean = true;
@@ -45,9 +45,9 @@ export class MessagePage {
       this.outboxData = {
           "PageSize": 5,
           "PageIndex": 0,
-          "NewsStatus": this.messageService.Message["outbox"],
+          "NewsStatus": this.messageService.Message["outbox"], // 收件、发件
           "Uid": this.globalData.Uid,
-          "Status": this.messageService.messageStatus["all"]
+          "Status": this.messageService.messageStatus["unread"] // 已读、未读
       };
       this.initializeItems();
   }
@@ -67,11 +67,11 @@ export class MessagePage {
       console.log('ionViewDidLoad Message');
   }
 
-  // 选择已读、未读、全部
+  // 选择已读
   checkRead(name: string = "read") {
       this.inboxData.PageIndex = 0;
       this.inboxList = [];
-      this.checkBtn = { "read": false, "unread": false, "all": false };
+      this.checkBtn = { "read": false, "unread": false };
       this.checkBtn[name] = true;
       if (name === "unread") {
           // 参数设置
@@ -80,10 +80,6 @@ export class MessagePage {
       else if (name === "read") {
           // 参数设置
           this.inboxData.Status = this.messageService.messageStatus["read"];
-      }
-      else {
-          // 参数设置
-          this.inboxData.Status = this.messageService.messageStatus["all"];
       }
       this._getInboxList(this.inboxData);
   }

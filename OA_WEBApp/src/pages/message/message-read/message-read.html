@@ -15,10 +15,7 @@
         
 <ion-content>
         <ion-list>
-            <ion-item>
-                <ion-label>发送人&emsp;</ion-label>
-                <ion-input type="text" readonly="true"  [(ngModel)]="messageDetail.Name" [ngModelOptions]="{standalone: true}" placeholder="发送人"></ion-input>
-            </ion-item>
+            <ion-item-divider style="background: #fff;" text-center>{{messageDetail.Name}}</ion-item-divider>
 
             <ion-item>
                 <ion-label>发送时间</ion-label>

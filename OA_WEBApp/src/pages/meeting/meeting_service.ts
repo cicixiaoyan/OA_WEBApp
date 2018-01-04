@@ -52,6 +52,12 @@ export class MeetingService {
     }
 
 
+    MeetFindLs(param): Observable<any>{
+        return this.httpService.postFormData("ashx/MeetFindLs.ashx", param).map((res: Response) => res.json());
+    }
+
+
+
 
 
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CarService } from '../../car_service';
@@ -23,13 +23,13 @@ export class DriverSetPage {
               public navParams: NavParams,
               private carService: CarService,
               private nativeService: NativeService,
-              private formBuilder: FormBuilder) {
+              @Inject(FormBuilder) formBuilder: FormBuilder) {
     this.isWrite = this.navParams.get("isWrite");
     let today = new Date();
-    this.addForm = this.formBuilder.group({
+    this.addForm = formBuilder.group({
       Name: ["", [Validators.maxLength(10), Validators.required]],
-      Sex: ["", []],
-      Age: [today, [Validators.maxLength(3)]],
+      Sex: "",
+      Age: [0, [Validators.maxLength(3)]],
       InDate: ["", [Validators.maxLength(5), Validators.required]],
       Memo: ["", [Validators.maxLength(180)]]
       // Archives: ["2017/10/9 系统管理员", [Validators.maxLength(180)]],
@@ -59,6 +59,7 @@ export class DriverSetPage {
 
   save(value){
     if (this.isWrite){
+      value.Uid = this.carService.httpService.globalData.Uid;
       this.carService.driverAdd(value).subscribe((resJson) => {
         if (resJson.Resule){
           this.nativeService.showToast("添加成功", 500);

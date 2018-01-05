@@ -41,6 +41,13 @@ import { ComponentsModule } from '../components/components.module';
 import { Logger } from "../providers/Logger";
 import { ModalFromRightEnter, ModalFromRightLeave, ModalScaleEnter, ModalScaleLeave } from "./itransitions";
 
+
+// Import Froala Editor.
+import "froala-editor/js/froala_editor.pkgd.min.js";
+// Import Angular2 plugin.
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+
+
 // 安装依赖:cnpm i fundebug-javascript --save
 // https://docs.fundebug.com/notifier/javascript/framework/ionic2.html
 import { ENABLE_FUNDEBUG, IS_DEBUG, FUNDEBUG_API_KEY } from "../providers/Constants";
@@ -72,7 +79,9 @@ export class FunDebugErrorHandler implements ErrorHandler {
             tabsHideOnSubPages: true
         }),
         IonicStorageModule.forRoot(),
-        ComponentsModule
+        ComponentsModule,
+        FroalaEditorModule.forRoot(),
+        FroalaViewModule.forRoot()
     ],
     bootstrap: [IonicApp],
     entryComponents: [

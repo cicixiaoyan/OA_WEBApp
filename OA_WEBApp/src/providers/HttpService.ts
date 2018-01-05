@@ -70,13 +70,14 @@ export class HttpService {
   }
 
   public postFormData(url: string, paramMap: any = {}): Observable<Response> {
-    paramMap.Token = this.globalData.token;
+    // paramMap.Token = this.globalData.token;
     return this.request(url, new RequestOptions({
       method: RequestMethod.Post,
       // search: HttpService.buildURLSearchParams(paramMap).toString(),
       body: HttpService.buildURLSearchParams(paramMap).toString(),
       headers: new Headers({
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'Token': this.globalData.token
       })
     }));
   }

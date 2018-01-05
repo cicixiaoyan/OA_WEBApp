@@ -33,7 +33,7 @@
                 </ion-item>
                 <ion-item>
                     <ion-label>申请部门<span class="DeptId">（选填）</span></ion-label>
-                    <ion-select formControlName="VechcleId" cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-select formControlName="DeptId" cancelText="取消" okText="确定" placeholder="请选择">
                         <ion-option value="1">车辆1</ion-option>
                         <ion-option value="2">车辆2</ion-option>
                     </ion-select>
@@ -54,7 +54,7 @@
                     <ion-label stacked text-left>备注<span class="optional">（选填）</span></ion-label>
                     <ion-textarea formControlName="Memo" placeholder="输入备注信息"></ion-textarea>
                 </ion-item>
-                <ion-item *ngIf="baseForm.value.">
+                <ion-item *ngIf="baseForm.value.BusId">
                     <ion-label>审批人员</ion-label>
                     <ion-select formControlName="SPId" cancelText="取消" okText="确定" placeholder="请选择">
                         <ion-option value="1">车辆1</ion-option>
@@ -71,5 +71,8 @@
 
 </ion-content>
 <ion-footer *ngIf="!readOnly">
-    <button ion-button full color="danger" [disabled]="!baseForm.valid" (click)=submit(baseForm.value)>保存</button>
+    <div text-center>
+        <button (click)="submit(baseForm.value)" [disabled]="baseForm.invalid" outline small round ion-button type="submit" color="primary">保存</button>
+        <button (click)="delete()" outline small round ion-button type="submit" color="danger">删除</button>
+    </div>
 </ion-footer>

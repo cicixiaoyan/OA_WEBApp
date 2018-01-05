@@ -8,6 +8,7 @@ import { ContactsModule } from './contacts/contacts.module';
 import { ContactsDetailModule } from './contacts/contacts-detail/contacts-detail.module';
 // import { NewworkModule } from './newwork/newwork.module';
 // import { NewworkDetailModule } from './newwork/newwork-detail/newwork-detail.module';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 
 @NgModule({
@@ -16,10 +17,12 @@ import { ContactsDetailModule } from './contacts/contacts-detail/contacts-detail
     ],
     imports: [
         IonicPageModule.forChild(Home),
-        BacklogModule,
-        BacklogDetailModule,
-        ContactsModule,
-        ContactsDetailModule,
+        // BacklogModule,
+        // BacklogDetailModule,
+        // ContactsModule,
+        // ContactsDetailModule,
+        FroalaEditorModule.forRoot(),
+        FroalaViewModule.forRoot()
         // NewworkModule,
         // NewworkDetailModule
     ],

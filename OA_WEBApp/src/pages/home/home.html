@@ -36,6 +36,7 @@
             <ion-row>
                 <ion-col col-3 col-xl-2 (click)="open('CarPage')">车辆档案</ion-col>
                 <ion-col col-3 col-xl-2 (click)="open('DriverPage')">司机档案</ion-col>
+                <ion-col col-3 col-xl-2 (click)="open('VehicleApplicationPage')">车辆申请</ion-col>
             </ion-row>
         </ion-grid>
 
@@ -60,10 +61,11 @@
             <ion-row>
                 <ion-col  col-3 col-xl-2   (click)="open('HolidayGroupSettingsPage')">假期分组设定</ion-col>
                 <ion-col  (click)="open('StaffAttendanceSettingsPage')">员工考勤设定</ion-col>
+                <ion-col  (click)="open('AttendanceAuditInstructionsPage')">考勤审批说明</ion-col>
             </ion-row>
         </ion-grid>
 
     </ion-list>
 
-
+    <div [froalaEditor]="config"  [(froalaModel)]="model">Hello, Froala!</div>
 </ion-content>

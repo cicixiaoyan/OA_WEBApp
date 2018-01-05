@@ -86,7 +86,7 @@
                     <ion-label>参加部门
                         <span class="optional">（选填）</span>
                     </ion-label>
-                    <ion-input *ngIf="readOnly" readonly ></ion-input>
+                    <ion-input *ngIf="readOnly" readonly></ion-input>
                     <ion-select formControlName="DeptId" multiple="true" cancelText="取消" okText="确定" placeholder="请选择">
                         <ion-option *ngFor="let dept of DeptLs;let i = index" [value]="dept.Id">{{dept.BmName}}</ion-option>
                     </ion-select>
@@ -126,17 +126,9 @@
 </ion-content>
 
 <ion-footer *ngIf="!readOnly">
-    <ion-grid no-padding>
-        <ion-row>
-            <ion-col>
-                <button (click)="save(writeForm.value)" full ion-button type="submit" color="primary" [disabled]="writeForm.invalid">保存</button>
-            </ion-col>
-            <ion-col>
-                <button (click)="aprove(writeForm.value)" full ion-button type="submit" color="secondary" [disabled]="writeForm.invalid">送审</button>
-            </ion-col>
-            <ion-col>
-                <button (click)="delete()" full ion-button type="submit" color="danger" [disabled]="writeForm.invalid">删除</button>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+    <div text-center>
+        <button (click)="save(writeForm.value)" outline small round ion-button type="submit" color="primary" [disabled]="writeForm.invalid">保存</button>
+        <button (click)="aprove(writeForm.value)" outline small round ion-button type="submit" color="secondary" [disabled]="writeForm.invalid">送审</button>
+        <button (click)="delete()" outline small round ion-button type="submit" color="danger" [disabled]="writeForm.invalid">删除</button>
+    </div>
 </ion-footer>

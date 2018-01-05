@@ -1,0 +1,48 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>审核说明</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)"   [ngClass]="{'form-readonly': readOnly}">
+    <ion-list>
+
+
+        <ion-item>
+            <ion-label>名称</ion-label>
+            <ion-input text-right  type="text" formControlName="Name" placeholder="未设置"></ion-input>
+        </ion-item>
+        <div *ngIf="!formCtrls.Name.valid && (formCtrls.Name.touched || formCtrls.Name.dirty )" class="validation-failed">
+            <div *ngIf="writeForm.hasError('required','Name')">分组名称必填</div>
+            <div *ngIf="writeForm.hasError('maxlength','Name')">最多输入12个字</div>
+        </div>
+        <ion-item>
+          <ion-label >类型</ion-label>
+          <ion-select formControlName="Type" cancelText="取消" okText="确定" placeholder="请选择">
+              <ion-option  value="请假单">请假单</ion-option>
+              <ion-option  value="考勤说明单">考勤说明单</ion-option>
+          </ion-select>
+      </ion-item>
+        <ion-item>
+          <ion-label>适用人员</ion-label>
+          <ion-select formControlName="ApplicablePersonnel" cancelText="取消" okText="确定" placeholder="请选择">
+              <ion-option  value="申请人员">申请人员</ion-option>
+              <ion-option  value="部门考勤人员">部门考勤人员</ion-option>
+          </ion-select>
+      </ion-item>
+
+        <ion-item>
+            <ion-label stacked>内容</ion-label>
+            <ion-textarea   autotextarea type="text"  formControlName="Description"placeholder="请输入"></ion-textarea>
+        </ion-item>
+        <div *ngIf="!formCtrls.Description.valid && (formCtrls.Description.touched || formCtrls.Description.dirty )" class="validation-failed">
+            最多输入180个字
+        </div>
+    </ion-list>
+    
+</form>
+</ion-content>

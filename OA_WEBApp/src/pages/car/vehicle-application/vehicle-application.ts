@@ -56,5 +56,7 @@ export class VehicleApplicationPage {
     console.log(value);
   }
 
+  delete(){}
+
 
 }

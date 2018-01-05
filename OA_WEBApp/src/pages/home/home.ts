@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, Nav, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+
 /**
  * Generated class for the Home page.
  *
@@ -26,7 +27,6 @@ export interface HomePageInterface {
 export class Home {
 
     @ViewChild(Nav) nav: Nav;
-
     // set our app's pages
     appPages: HomePageInterface[] = [
         { title: '消息', component: "MessagePage", index: 1, icon: 'ios-mail', color: "positive" },
@@ -40,6 +40,12 @@ export class Home {
         // { title: '会议', component: "MeetingPage",  icon: 'ios-cog', color: "calm"},
         // { title: '车辆', component: "CarPage",  icon: 'ios-cog', color: "calm"}
     ];
+
+    config: Object = {
+        charCounterCount: false
+    };
+
+    model: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
 

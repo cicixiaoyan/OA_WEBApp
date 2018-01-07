@@ -1,0 +1,74 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>查看车辆申请</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <form [formGroup]="baseForm" (ngSubmit)="submit(baseForm.value)" [ngClass]="{'form-readonly': readOnly}">
+        <ion-list>
+            <div>
+                <ion-item>
+                    <ion-label>出发地点</ion-label>
+                    <ion-input type="text" text-right [value]="busApplication.StartPlace" readonly></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>到达地点</ion-label>
+                    <ion-input type="text" text-right [value]="busApplication.EndPlace" readonly></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>申请部门</ion-label>
+                    <ion-input type="text" text-right [value]="busApplication.Dept" readonly></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>乘坐人数(人)</ion-label>
+                    <ion-input type="number" text-right [value]="busApplication.PersonNum" readonly></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>行驶日期（自）</ion-label>
+                    <ion-input type="text" text-right [value]="busApplication.StartDate" readonly></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>行驶日期（至）</ion-label>
+                    <ion-input type="text" text-right [value]="busApplication.EndDate" readonly></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label stacked text-left>出发是由</ion-label>
+                    <ion-textarea [value]="busApplication.Reson" placeholder="无" readonly></ion-textarea>
+                </ion-item>
+                <ion-item>
+                    <ion-label stacked text-left>备注</ion-label>
+                    <ion-textarea [value]="busApplication.Memo" placeholder="无" readonly></ion-textarea>
+                </ion-item>
+                <ion-item>
+                    <ion-label>选用车辆</ion-label>
+                    <ion-input type="text" text-right [value]="busApplication.BusName" readonly></ion-input>
+                </ion-item>
+                <ion-item-divider></ion-item-divider>
+
+                <ion-item>
+                    <ion-label>分配车辆</ion-label>
+                    <ion-select formControlName="RealBusId" cancelText="取消" okText="确定" placeholder="请选择">
+                        <ion-option *ngFor="let type of driverList;let i = index" [value]="type.Id">{{type.Name}}</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label>分配驾驶员</ion-label>
+                    <ion-select formControlName="RealDriverId" cancelText="取消" okText="确定" placeholder="请选择">
+                        <ion-option *ngFor="let type of driverList;let i = index" [value]="type.Id">{{type.Name}}</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label>站内消息通知申请人</ion-label>
+                    <ion-toggle formControlName="IsStationNotice"></ion-toggle>
+                </ion-item>
+            </div>
+        </ion-list>
+    </form>
+
+
+</ion-content>

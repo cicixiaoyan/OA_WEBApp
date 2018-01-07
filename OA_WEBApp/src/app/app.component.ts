@@ -6,16 +6,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { NativeService } from "../providers/NativeService";
-// import { Welcome } from '../pages/welcome/welcome';
-// import { TabsPage } from "../pages/tabs/tabs";
 import { GlobalData } from "../providers/GlobalData";
 import { UserInfo } from "../model/UserInfo";
 import { LoginService } from '../pages/login/LoginService';
-// import { LoginPage } from "../pages/login/login";
-// import { Backlog } from "../pages/home/backlog/backlog";
-// import { Contacts } from "../pages/home/contacts/contacts";
 import { Utils } from "../providers/Utils";
-// import { Newwork } from '../pages/home/newwork/newwork';
 
 
 declare var AppMinimize;
@@ -70,37 +64,38 @@ export class MyApp {
             this.storage.get('firstIn').then((result) => {
                 // this.nativeService.showToast("不是第一次进入");
                 if (result) {
+                    this.nav.setRoot("TabsPage", { tabIndex: 0 });
                     // this.rootPage = TabsPage;
-                    this.storage.get('loginInfo').then((loginInfo) => {
-                        this.nav.setRoot("TabsPage", { tabIndex: 0 });
-                        if (loginInfo) {
-                            this.loginService.login(loginInfo).subscribe((resJson) => {
-                                if (resJson.result){
-                                    this.globalData.Uid = resJson.Data.Uid;
-                                    this.globalData.Name = resJson.Data.Name;
-                                    this.globalData.token = resJson.Data.Token;
-                                    this.events.publish('user:login', result.Data);
-                                }else{
+                    // this.storage.get('loginInfo').then((loginInfo) => {
+                    //     this.nav.setRoot("TabsPage", { tabIndex: 0 });
+                    //     if (loginInfo) {
+                    //         this.loginService.login(loginInfo).subscribe((resJson) => {
+                    //             if (resJson.result){
+                    //                 this.globalData.Uid = resJson.Data.Uid;
+                    //                 this.globalData.Name = resJson.Data.Name;
+                    //                 this.globalData.token = resJson.Data.Token;
+                    //                 this.events.publish('user:login', result.Data);
+                    //             }else{
 
-                                    // this.NavCtrl.push("LoginPage");
-                                    let modal = this.modalCtrl.create("LoginPage");
-                                    modal.present();
-                                    modal.onDidDismiss(data => {
-                                        data && console.log(data);
-                                        this.nav.setRoot("TabsPage", { tabIndex: 0 });
-                                    });
-                                }
-                            });
+                    //                 // this.NavCtrl.push("LoginPage");
+                    //                 let modal = this.modalCtrl.create("LoginPage");
+                    //                 modal.present();
+                    //                 modal.onDidDismiss(data => {
+                    //                     data && console.log(data);
+                    //                     this.nav.setRoot("TabsPage", { tabIndex: 0 });
+                    //                 });
+                    //             }
+                    //         });
 
-                        } else {
-                            let modal = this.modalCtrl.create("LoginPage");
-                            modal.present();
-                            modal.onDidDismiss(data => {
-                                data && console.log(data);
-                                this.nav.setRoot("TabsPage", { tabIndex: 0 });
-                            });
-                        }
-                    });
+                    //     } else {
+                    //         let modal = this.modalCtrl.create("LoginPage");
+                    //         modal.present();
+                    //         modal.onDidDismiss(data => {
+                    //             data && console.log(data);
+                    //             this.nav.setRoot("TabsPage", { tabIndex: 0 });
+                    //         });
+                    //     }
+                    // });
                 }
                 else {
 

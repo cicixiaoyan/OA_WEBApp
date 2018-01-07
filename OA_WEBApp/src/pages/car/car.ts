@@ -4,13 +4,6 @@ import { IonicPage, NavController, NavParams, ModalController, Refresher } from 
 import { GlobalData } from "../../providers/GlobalData";
 import { CarService } from './car_service';
 
-/**
- * Generated class for the CarPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-car',

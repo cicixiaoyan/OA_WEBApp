@@ -1,14 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { IonicPage, NavController, Nav, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
-/**
- * Generated class for the Home page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-
+import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';           
 export interface HomePageInterface {
     title: string;
     component: any;
@@ -17,15 +10,36 @@ export interface HomePageInterface {
     color: string;
 }
 
+import Quill from 'quill';
+
+// override p with div tag
+const Parchment = Quill.import('parchment');
+let Block = Parchment.query('block');
+
+Block.tagName = 'DIV';
+// or class NewBlock extends Block {}; NewBlock.tagName = 'DIV';
+Quill.register(Block /* or NewBlock */, true);
+
+import Counter from '../../directives/counter';
+Quill.register('modules/counter', Counter);
+
+// Add fonts to whitelist
+let Font = Quill.import('formats/font');
+// We do not add Aref Ruqaa since it is the default
+Font.whitelist = ['mirza', 'aref', 'sans-serif', 'monospace', 'serif'];
+Quill.register(Font, true);
+
+
 @IonicPage()
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html',
+    encapsulation: ViewEncapsulation.None
 })
 
 
 export class Home {
-
+    @ViewChild('editor') editor: QuillEditorComponent;
     @ViewChild(Nav) nav: Nav;
     // set our app's pages
     appPages: HomePageInterface[] = [
@@ -40,16 +54,22 @@ export class Home {
         // { title: '会议', component: "MeetingPage",  icon: 'ios-cog', color: "calm"},
         // { title: '车辆', component: "CarPage",  icon: 'ios-cog', color: "calm"}
     ];
+   
+    richText: string = "1";
 
-    config: Object = {
-        charCounterCount: false
-    };
-
-    model: any;
-
-    constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, 
+                public storage: Storage) {
 
     }
+
+
+
+    setFocus($event) {
+        console.log($event);
+        $event.focus();
+      }
+
+
 
     ionViewDidLoad() {
         console.log(this.storage.get("UserInfo"));

@@ -46,23 +46,33 @@ page-home {
             }
         }
     }
-
-    .list-header-ios{
+    .list-header-ios {
         min-height: 2rem;
         background: #fff;
         margin-top: 10px;
     }
-
-    .content-ios{
+    .content-ios {
         background: #eee;
     }
-
-    ion-grid{
+    ion-grid {
         background: #fff;
     }
-
-    .col{
+    .col {
         white-space: nowrap;
     }
+}
 
+quill-editor {
+    display: block;
+}
+
+.ng-invalid {
+    border: 1px dashed red;
+}
+
+
+/* Set default font-family */
+
+[quill-editor-element] {
+    font-family: "Roboto";
 }

@@ -21,7 +21,9 @@
         </ion-row>
     </ion-grid>
     <ion-list>
-        <ion-list-header><ion-icon name="ios-car" color="primary">会议管理</ion-icon></ion-list-header>
+        <ion-list-header>
+            <ion-icon name="ios-car" color="primary">会议管理</ion-icon>
+        </ion-list-header>
         <ion-grid>
             <ion-row>
                 <ion-col col-3 col-xl-2 (click)="open('MeetingPage')">我的会议</ion-col>
@@ -31,41 +33,47 @@
             </ion-row>
         </ion-grid>
 
-        <ion-list-header><ion-icon name="ios-car" color="primary">车辆管理</ion-icon></ion-list-header>
+        <ion-list-header>
+            <ion-icon name="ios-car" color="primary">车辆管理</ion-icon>
+        </ion-list-header>
         <ion-grid>
             <ion-row>
                 <ion-col col-3 col-xl-2 (click)="open('CarPage')">车辆档案</ion-col>
                 <ion-col col-3 col-xl-2 (click)="open('DriverPage')">司机档案</ion-col>
                 <ion-col col-3 col-xl-2 (click)="open('VehicleApplicationPage')">车辆申请</ion-col>
+                <ion-col col-3 col-xl-2 (click)="open('VehicleSchedulingPage')">车辆调度</ion-col>
             </ion-row>
         </ion-grid>
 
-        <ion-list-header><ion-icon name="ios-car" color="primary">人事管理</ion-icon></ion-list-header>
+        <ion-list-header>
+            <ion-icon name="ios-car" color="primary">人事管理</ion-icon>
+        </ion-list-header>
         <ion-grid>
             <ion-row>
-                <ion-col  col-3 col-xl-2   (click)="open('TrainingMaintenancePage')">培训维护</ion-col>
-                <ion-col  (click)="open('StaffFileMaintenance')">员工档案维护</ion-col>
-                <ion-col  (click)="open('StaffFileMaintenanceSet')">员工档案维护添加</ion-col>
-                <ion-col  col-3 col-xl-2  (click)="open('JobTypesSetPage')">工种设置</ion-col>
-                <ion-col  col-3 col-xl-2  (click)="open('ContractListPage')">合同查询</ion-col>
-                <ion-col  col-3 col-xl-2  (click)="open('ContractMaintenancePage')">合同维护</ion-col>
-                <ion-col  col-3 col-xl-2  (click)="open('ContractRenewPage')">合同续签</ion-col>
-                <ion-col  col-3 col-xl-2  (click)="open('ContractSettingPage')">合同详情</ion-col>
-                <ion-col  (click)="open('FileApplicationListPage')">申请档案查看</ion-col>
-                <ion-col  (click)="open('FileApplicationReviewPage')">申请档案审批</ion-col>
+                <ion-col col-3 col-xl-2 (click)="open('TrainingMaintenancePage')">培训维护</ion-col>
+                <ion-col (click)="open('StaffFileMaintenance')">员工档案维护</ion-col>
+                <ion-col (click)="open('StaffFileMaintenanceSet')">员工档案维护添加</ion-col>
+                <ion-col col-3 col-xl-2 (click)="open('JobTypesSetPage')">工种设置</ion-col>
+                <ion-col col-3 col-xl-2 (click)="open('ContractListPage')">合同查询</ion-col>
+                <ion-col col-3 col-xl-2 (click)="open('ContractMaintenancePage')">合同维护</ion-col>
+                <ion-col col-3 col-xl-2 (click)="open('ContractRenewPage')">合同续签</ion-col>
+                <ion-col col-3 col-xl-2 (click)="open('ContractSettingPage')">合同详情</ion-col>
+                <ion-col (click)="open('FileApplicationListPage')">申请档案查看</ion-col>
+                <ion-col (click)="open('FileApplicationReviewPage')">申请档案审批</ion-col>
             </ion-row>
         </ion-grid>
 
-        <ion-list-header><ion-icon name="ios-car" color="primary">考勤管理</ion-icon></ion-list-header>
+        <ion-list-header>
+            <ion-icon name="ios-car" color="primary">考勤管理</ion-icon>
+        </ion-list-header>
         <ion-grid>
             <ion-row>
-                <ion-col  col-3 col-xl-2   (click)="open('HolidayGroupSettingsPage')">假期分组设定</ion-col>
-                <ion-col  (click)="open('StaffAttendanceSettingsPage')">员工考勤设定</ion-col>
-                <ion-col  (click)="open('AttendanceAuditInstructionsPage')">考勤审批说明</ion-col>
+                <ion-col col-3 col-xl-2 (click)="open('HolidayGroupSettingsPage')">假期分组设定</ion-col>
+                <ion-col (click)="open('StaffAttendanceSettingsPage')">员工考勤设定</ion-col>
+                <ion-col (click)="open('AttendanceAuditInstructionsPage')">考勤审批说明</ion-col>
             </ion-row>
         </ion-grid>
 
     </ion-list>
-
-    <div [froalaEditor]="config"  [(froalaModel)]="model">Hello, Froala!</div>
+    <quill-editor [style]="{height: '200px'}" [(ngModel)]="richText" (onEditorCreated)="setFocus($event)"></quill-editor>
 </ion-content>

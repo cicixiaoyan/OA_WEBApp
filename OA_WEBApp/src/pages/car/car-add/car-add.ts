@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CarService } from '../car_service';
@@ -17,14 +17,19 @@ import { NativeService } from '../../../providers/NativeService';
 })
 export class CarAddPage {
   addForm: FormGroup;
-  BusStatusLs: Array<any>;
+  BusMangerLs: Array<any> = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private formBuilder: FormBuilder,
+              @Inject(FormBuilder) fb: FormBuilder,
               private nativeService: NativeService,
               private carService: CarService) {
+    this.carService.ClsqAddSpry({}).subscribe(resJson => {
+      if (resJson.Result && resJson.Data.length != 0){
+        this.BusMangerLs = resJson.Data;
+      }
+    });
     let today = new Date();
-    this.addForm = this.formBuilder.group({
+    this.addForm = fb.group({
       BusNumber: ['', [Validators.required]], // 第一个参数是默认值
       BusName: ["", [Validators.maxLength(180), Validators.required]],
       BusPassenger: ["", [Validators.maxLength(180), Validators.required]],
@@ -36,7 +41,7 @@ export class CarAddPage {
       BusFrameNumber: ["", [Validators.maxLength(180)]],
       BusDrivingLicenseNumber: ["", [Validators.maxLength(20)]],
       BusManger: ["", [Validators.maxLength(20), Validators.required, Validators.minLength(4)]],
-      BusStatus: ["", []],
+      BusStatus: ["未借出", []],
       BusAnnualInspection: ["", ],
       BusMaintenanceDate: ["", []],
       BusDated: ["", []],
@@ -45,11 +50,6 @@ export class CarAddPage {
   }
 
   ionViewDidLoad() {
-    this.carService.geStatus().subscribe(resJson => {
-      if (resJson.Result){
-        this.BusStatusLs = resJson.Data;
-      }
-    });
     console.log('ionViewDidLoad CarAddPage');
   }
 

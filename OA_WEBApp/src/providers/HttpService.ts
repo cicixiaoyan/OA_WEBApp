@@ -23,10 +23,10 @@ export class HttpService {
     url = Utils.formatUrl(url.startsWith('http') ? url : APP_SERVE_URL + url);
     return Observable.create(observer => {
       this.nativeService.showLoading();
-      IS_DEBUG && console.log('%c 请求前 %c', 'color:blue', '', 'url', url, 'options', options);
+      // IS_DEBUG && console.log('%c 请求前 %c', 'color:blue', '', 'url', url, 'options', options);
       this.http.request(url, options).timeout(REQUEST_TIMEOUT).subscribe(res => {
         this.nativeService.hideLoading();
-        IS_DEBUG && console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
+        // IS_DEBUG && console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
         if (res['_body'] == '') {
           res['_body'] = null;
         }

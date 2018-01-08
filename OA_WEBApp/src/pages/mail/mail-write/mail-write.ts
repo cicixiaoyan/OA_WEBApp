@@ -33,8 +33,10 @@ export class MailWrite {
     addressee: string = "";
     addresseeIds: string = "";
     attName: string = "";
+    attNo: string = "";
     fsbt: "主题";
     haveAffix: boolean = false;
+    attLength: string = "0";
 
     writeForm: FormGroup;
     @ViewChild("popoverContent", { read: ElementRef }) content: ElementRef;
@@ -81,7 +83,7 @@ export class MailWrite {
             "Content": data.Content,
             "Level": data.Level,
             "Bcc": data.Bcc,
-            "AttNo": this.attName,
+            "AttNo": this.attNo,
             "UserId": this.globalData.Uid,
             "UserName": this.globalData.Name
         };
@@ -126,11 +128,12 @@ export class MailWrite {
                                 "fileName": fileURL.substr(fileURL.lastIndexOf('/') + 1),
                                 "mimeType": Utils.getFileMimeType( mimeType ),
                                 "headers" : {
-                                    "Connection": "close"
+                                    "Connection": "close",
+                                    "Token": this.globalData.token
                                 },
                                 "chunkedMode": false,
                                 "httpMethod" : "POST",
-                                "params": {"token": this.globalData.token, "type": 1}
+                                "params": {"type": 1}
                             };
                             let url = encodeURI(FILE_SERVE_URL + "ashx/AttachUpload.ashx");
                             console.log(fileURL, url, pathOption, true);
@@ -196,6 +199,7 @@ export class MailWrite {
         const fileTransfer: FileTransferObject = this.fileTransfer.create();
 
         fileTransfer.onProgress((event: ProgressEvent) => {
+            this.attLength = (event.total / 1024).toFixed(2) + 'Kb';
             let num = Math.floor(event.loaded / event.total * 100);
             if (num === 100) {
                 alert.dismiss();
@@ -205,9 +209,12 @@ export class MailWrite {
             }
         });
         return fileTransfer.upload(fileUrl, url, options, trustAllHosts).then((data) => {
-            console.log(data);
+            console.log(data, "上传成功");
             this.haveAffix = true;
-
+            let Data = JSON.parse(data.response).Data;
+            this.attName = Data[0].OldName;
+            this.attNo = Data[0].AttNo;
+            
           }, (err) => {
             // error
             console.log(err);
@@ -220,6 +227,13 @@ export class MailWrite {
 
     dismiss() {
         this.viewCtrl.dismiss();
+    }
+
+    deleteAffix(){
+        this.haveAffix = false;
+        this.attName = "";
+        this.attNo = "";
+        this.attLength = "0";
     }
 
 

@@ -27,7 +27,7 @@ export class SmsPage {
   list: any = [];
   moredata: boolean = true;
   data: any;
-
+  Timer: any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public globalData: GlobalData,
@@ -46,7 +46,7 @@ export class SmsPage {
   initializeItems() {
       this._getList(this.data);
 
-      setInterval(() => {
+      this.Timer = setInterval(() => {
           this.getNewList(this.data);
      }, 50000);
   }
@@ -124,8 +124,10 @@ export class SmsPage {
               if (arr !== []) {
                   this.list = [...this.list, ...arr];
               }
+          }else{
+            clearInterval(this.Timer);
           }
-      });
+      }, err => {clearInterval(this.Timer); });
   }
 
 

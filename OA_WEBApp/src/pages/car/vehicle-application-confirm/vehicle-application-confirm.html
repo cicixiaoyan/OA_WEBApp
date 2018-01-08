@@ -1,0 +1,30 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>车辆申请确认</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
+      </ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+      <ion-item-sliding *ngFor="let item of list">
+          <ion-item (click)="doRead(item.Id)" >
+              <h2>{{item.StartPlace}}-{{item.EndPlace}}</h2>
+              <ion-icon name='ios-arrow-forward' item-right></ion-icon>
+              <h3>申请人：{{item.Applicant}}&emsp;{{item.Dept !== "" ? "申请部门：" + item.Dept : ""}}</h3>
+              <p>乘坐{{item.PersonNum}}人&emsp;状态：{{item.applicationStatus}}</p>
+          </ion-item>
+
+      </ion-item-sliding>
+  </ion-list>
+  <empty *ngIf="isEmpty"></empty>
+  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

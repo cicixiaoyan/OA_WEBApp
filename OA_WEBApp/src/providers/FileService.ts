@@ -196,11 +196,12 @@ export class FileService {
           "fileName": fileURL.substr(fileURL.lastIndexOf('/') + 1),
           "mimeType": Utils.getFileMimeType(mimeType),
           "headers": {
-            "Connection": "close"
+            "Connection": "close",
+            "Token": this.httpService.globalData.token,
           },
           "chunkedMode": false,
           "httpMethod": "POST",
-          "params": { "token": this.httpService.globalData.token, "type": type }
+          "params": {  "type": type }
         };
         let url = encodeURI(FILE_SERVE_URL + "ashx/AttachUpload.ashx");
         let alert = this.alertCtrl.create({

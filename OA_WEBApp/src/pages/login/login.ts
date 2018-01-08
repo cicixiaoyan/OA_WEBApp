@@ -38,7 +38,7 @@ export class LoginPage {
     ) {
 
         this.loginForm = this.formBuilder.group({
-            UserName: ['admin', [Validators.required, Validators.minLength(4)]], // 第一个参数是默认值
+            UserName: ['admin', [Validators.required, Validators.minLength(3)]], // 第一个参数是默认值
             UserPass: ['123', [Validators.required, Validators.minLength(2)]]
         });
     }
@@ -82,6 +82,10 @@ export class LoginPage {
             this.globalData.Uid = userInfo.Data.Uid;
             this.globalData.Name = userInfo.Data.Name;
             this.globalData.token = userInfo.Data.Token;
+            this.loginService.Menuls().subscribe(resJson => {
+                if (resJson.Result)
+                this.storage.set("menus", resJson.Data);
+            }); 
             // alert(this.globalData.token);
             this.storage.set('UserInfo', userInfo.Data);
             this.storage.set('LoginInfo', user);

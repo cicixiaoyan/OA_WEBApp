@@ -60,15 +60,19 @@ page-home {
     .col {
         white-space: nowrap;
     }
+
+    .imenu [col-3]{
+        min-width: 25%;
+    }
 }
 
 quill-editor {
     display: block;
 }
 
-.ng-invalid {
-    border: 1px dashed red;
-}
+// .ng-invalid {
+//     border: 1px dashed red;
+// }
 
 
 /* Set default font-family */

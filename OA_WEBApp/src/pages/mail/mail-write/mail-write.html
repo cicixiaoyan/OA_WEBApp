@@ -35,7 +35,7 @@
                     <ion-input type="test" formControlName="Title" placeholder="主题1"></ion-input>
                 </ion-item>
                 <button ion-button clear class="share-btn" type="button" (click)="addAffix()">
-                    <ion-icon name="share"></ion-icon>0
+                    <ion-icon name="share"></ion-icon>{{haveAffix ? '1' : 0}}
                 </button>
                 <ion-item>
                     <ion-label>密&emsp;送&emsp;</ion-label>
@@ -57,15 +57,10 @@
                         <ion-row align-items-center>
                             <ion-col col-6>
                                 <div>
-                                    <ion-icon class="affix-icon" name="md-image"></ion-icon>
+                                    <ion-icon class="affix-icon" (click)="deleteAffix()" name="md-image"></ion-icon>
                                     <p>{{attName}}</p>
-                                    <p color="gray">5.00MB</p>
+                                    <p color="gray">{{attLength}}</p>
                                     <ion-icon class="affix-dismiss" name="ios-close-circle-outline"></ion-icon>
-                                </div>
-                            </ion-col>
-                            <ion-col col-6 text-center>
-                                <div>
-                                    <ion-icon name="add" class="affix-add"></ion-icon>
                                 </div>
                             </ion-col>
                         </ion-row>

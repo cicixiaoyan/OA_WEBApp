@@ -1,7 +1,8 @@
+import { LoginService } from './../login/LoginService';
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { IonicPage, NavController, Nav, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, Nav, NavParams, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';           
+// import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';           
 export interface HomePageInterface {
     title: string;
     component: any;
@@ -10,24 +11,24 @@ export interface HomePageInterface {
     color: string;
 }
 
-import Quill from 'quill';
+// import Quill from 'quill';
 
-// override p with div tag
-const Parchment = Quill.import('parchment');
-let Block = Parchment.query('block');
+// // override p with div tag
+// const Parchment = Quill.import('parchment');
+// let Block = Parchment.query('block');
 
-Block.tagName = 'DIV';
-// or class NewBlock extends Block {}; NewBlock.tagName = 'DIV';
-Quill.register(Block /* or NewBlock */, true);
+// Block.tagName = 'DIV';
+// // or class NewBlock extends Block {}; NewBlock.tagName = 'DIV';
+// Quill.register(Block /* or NewBlock */, true);
 
-import Counter from '../../directives/counter';
-Quill.register('modules/counter', Counter);
+// import Counter from '../../directives/counter';
+// Quill.register('modules/counter', Counter);
 
-// Add fonts to whitelist
-let Font = Quill.import('formats/font');
-// We do not add Aref Ruqaa since it is the default
-Font.whitelist = ['mirza', 'aref', 'sans-serif', 'monospace', 'serif'];
-Quill.register(Font, true);
+// // Add fonts to whitelist
+// let Font = Quill.import('formats/font');
+// // We do not add Aref Ruqaa since it is the default
+// Font.whitelist = ['mirza', 'aref', 'sans-serif', 'monospace', 'serif'];
+// Quill.register(Font, true);
 
 
 @IonicPage()
@@ -39,7 +40,7 @@ Quill.register(Font, true);
 
 
 export class Home {
-    @ViewChild('editor') editor: QuillEditorComponent;
+    // @ViewChild('editor') editor: QuillEditorComponent;
     @ViewChild(Nav) nav: Nav;
     // set our app's pages
     appPages: HomePageInterface[] = [
@@ -56,19 +57,66 @@ export class Home {
     ];
    
     richText: string = "1";
+    totalMenu = {
+        "我的会议": false,
+        "会议记录": false,
+        "会议查询": false,
+        "会议室管理": false,
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, 
-                public storage: Storage) {
+        "车辆档案": false,
+        "司机档案": false,
+        "车辆申请": false,
+        "车辆调度": false,
+
+        "员工档案维护": false,
+        "工种设置": false,
+        "合同查询": false,
+        "合同续签": false,
+        "申请档案查看": false,
+        "申请档案审批": false,
+
+        "员工考勤设定": false,
+        "考勤审批说明": false,
+    };
+
+    constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController,
+                public storage: Storage, private loginService: LoginService) {
+        this.storage.get("menus").then(Menu => {
+            if (!!Menu){
+                this.setMenu(Menu);
+            }else{
+                let modal = this.modalCtrl.create("LoginPage");
+                modal.present();
+                modal.onDidDismiss(data => {
+                    this.storage.get("menus").then(Menu1 => {
+                        this.setMenu(Menu1);
+                    });
+                    
+                });
+                   
+            }
+        });
 
     }
 
 
 
-    setFocus($event) {
-        console.log($event);
-        $event.focus();
-      }
-
+    // setFocus($event) {
+    //     console.log($event);
+    //     $event.focus();
+    //   }
+    
+    private setMenu(menu){
+        // console.log(menu, typeof(menu));
+        for (let value of menu){
+            for (let i in this.totalMenu){
+                
+                if (value == i) {
+                    this.totalMenu[i] = true;
+                }
+            }
+        }
+    }
 
 
     ionViewDidLoad() {

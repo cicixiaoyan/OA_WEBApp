@@ -10,12 +10,12 @@ export class HttpInterceptHandle {
     constructor(public events: Events, public nativeService: NativeService) {
         events.subscribe('request:before', (url, options) => {
             nativeService.showLoading();
-            console.log('%c 请求前 %c', 'color:blue', '', 'url', url, 'options', options);
+            // console.log('%c 请求前 %c', 'color:blue', '', 'url', url, 'options', options);
         });
 
         events.subscribe('request:success', (url, options, res) => {
             nativeService.hideLoading();
-            console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
+            // console.log('%c 请求成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
         });
 
         events.subscribe('request:error', (url, options, error) => {

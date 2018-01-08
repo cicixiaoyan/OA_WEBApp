@@ -19,5 +19,10 @@ export class LoginService {
         //   observer.next(userInfo);
         // });
     }
+    Menuls(): Observable<any> {
+        return this.httpService.postFormData("ashx/Menuls.ashx", {"uid": this.httpService.globalData.Uid })
+        .map(responce => responce.json());
+
+    }
 
 }

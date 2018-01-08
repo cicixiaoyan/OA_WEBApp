@@ -159,7 +159,7 @@ export class MessagePage {
           }else{
             clearInterval(this.timer);
           }
-      });
+      }, err => {clearInterval(this.timer); });
   }
 
 

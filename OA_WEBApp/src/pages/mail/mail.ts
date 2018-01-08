@@ -29,7 +29,7 @@ export class Mail {
     moredata: boolean = true;
     inboxData: any;
     outboxData: any;
-
+    Timer: any;
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 public globalData: GlobalData,
@@ -58,7 +58,7 @@ export class Mail {
         this._getOutboxList(this.outboxData);
         console.log(this);
 
-        setInterval(() => {
+        this.Timer = setInterval(() => {
             console.log(this);
             this.getNewInboxList(this.inboxData);
        }, 50000);
@@ -172,8 +172,10 @@ export class Mail {
                 if (arr !== []) {
                     this.inboxList = [...this.inboxList, ...arr];
                 }
+            }else{
+                clearInterval(this.Timer);
             }
-        });
+        }, err => {clearInterval(this.Timer); });
     }
 
 
@@ -206,7 +208,7 @@ export class Mail {
                     this.outboxList = [];
                 }
             }
-        });
+        }, err => {clearInterval(this.Timer); });
     }
 
 }

@@ -100,7 +100,7 @@
 
                 <ion-item>
                     <ion-label stacked>会议资料<span class="optional">（选填）</span></ion-label>
-                    <ion-input type="text" readonly formControlName="FileOldName"  (click)="addAffix()" placeholder="点击添加"></ion-input>
+                    <ion-note item-end (click)="addAffix()">{{writeForm.value.FileOldName ? writeForm.value.FileOldName : '点击添加'}}</ion-note>
                 </ion-item>
             </ion-list>
             <div padding text-center>

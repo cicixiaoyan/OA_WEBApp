@@ -37,7 +37,7 @@
                 <ion-item>
                     <ion-label >管理人员</ion-label>
                     <ion-select formControlName="BusManger" cancelText="取消" okText="确定" placeholder="请选择">
-                        <ion-option *ngFor="let type of MeetTypeLs;let i = index" [value]="type.Id">{{type.Name}}</ion-option>
+                        <ion-option *ngFor="let type of BusMangerLs;let i = index" [value]="type.Id">{{type.Name}}</ion-option>
                         <!-- <ion-option value="2">类型2</ion-option> -->
                     </ion-select>
                 </ion-item>
@@ -66,10 +66,8 @@
                     <ion-input text-right type="text" formControlName="BusDrivingLicenseNumber" placeholder="请输入"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label >车辆状况<span class="optional">（选填）</span></ion-label>
-                    <ion-select formControlName="BusStatus" cancelText="取消" okText="确定" placeholder="请选择">
-                        <ion-option *ngFor="let status of BusStatusLs;let i = index" [value]="status.Status">{{status.Status}}</ion-option>
-                    </ion-select>
+                    <ion-label >车辆状况</ion-label>
+                    <ion-input text-right type="text" readonly formControlName="BusStatus" placeholder="请输入"></ion-input>
                 </ion-item>
 
                 <ion-item>

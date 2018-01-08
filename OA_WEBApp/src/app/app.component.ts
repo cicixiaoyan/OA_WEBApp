@@ -64,38 +64,37 @@ export class MyApp {
             this.storage.get('firstIn').then((result) => {
                 // this.nativeService.showToast("不是第一次进入");
                 if (result) {
-                    this.nav.setRoot("TabsPage", { tabIndex: 0 });
-                    // this.rootPage = TabsPage;
-                    // this.storage.get('loginInfo').then((loginInfo) => {
-                    //     this.nav.setRoot("TabsPage", { tabIndex: 0 });
-                    //     if (loginInfo) {
-                    //         this.loginService.login(loginInfo).subscribe((resJson) => {
-                    //             if (resJson.result){
-                    //                 this.globalData.Uid = resJson.Data.Uid;
-                    //                 this.globalData.Name = resJson.Data.Name;
-                    //                 this.globalData.token = resJson.Data.Token;
-                    //                 this.events.publish('user:login', result.Data);
-                    //             }else{
+                    // this.nav.setRoot("TabsPage", { tabIndex: 0 });
+                    this.storage.get('loginInfo').then((loginInfo) => {
+                        // this.nav.setRoot("TabsPage", { tabIndex: 0 });
+                        if (loginInfo) {
+                            this.loginService.login(loginInfo).subscribe((resJson) => {
+                                if (resJson.result){
+                                    this.globalData.Uid = resJson.Data.Uid;
+                                    this.globalData.Name = resJson.Data.Name;
+                                    this.globalData.token = resJson.Data.Token;
+                                    this.events.publish('user:login', result.Data);
+                                    this.nav.setRoot("TabsPage", { tabIndex: 0 });
+                                }else{
+                                    // this.NavCtrl.push("LoginPage");
+                                    let modal = this.modalCtrl.create("LoginPage");
+                                    modal.present();
+                                    modal.onDidDismiss(data => {
+                                        data && console.log(data);
+                                        this.nav.setRoot("TabsPage", { tabIndex: 0 });
+                                    });
+                                }
+                            });
 
-                    //                 // this.NavCtrl.push("LoginPage");
-                    //                 let modal = this.modalCtrl.create("LoginPage");
-                    //                 modal.present();
-                    //                 modal.onDidDismiss(data => {
-                    //                     data && console.log(data);
-                    //                     this.nav.setRoot("TabsPage", { tabIndex: 0 });
-                    //                 });
-                    //             }
-                    //         });
-
-                    //     } else {
-                    //         let modal = this.modalCtrl.create("LoginPage");
-                    //         modal.present();
-                    //         modal.onDidDismiss(data => {
-                    //             data && console.log(data);
-                    //             this.nav.setRoot("TabsPage", { tabIndex: 0 });
-                    //         });
-                    //     }
-                    // });
+                        } else {
+                            let modal = this.modalCtrl.create("LoginPage");
+                            modal.present();
+                            modal.onDidDismiss(data => {
+                                data && console.log(data);
+                                this.nav.setRoot("TabsPage", { tabIndex: 0 });
+                            });
+                        }
+                    });
                 }
                 else {
 

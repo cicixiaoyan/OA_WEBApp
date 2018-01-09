@@ -1,3 +1,4 @@
+import { PipesModule } from './../../../../pipes/pipes.module';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { BacklogDetail } from './backlog-detail';
@@ -8,6 +9,7 @@ import { BacklogService } from "../backlogService";
     ],
     imports: [
         IonicPageModule.forChild(BacklogDetail),
+        PipesModule
     ],
     exports: [
         BacklogDetail

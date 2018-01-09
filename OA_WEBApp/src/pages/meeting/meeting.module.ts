@@ -1,8 +1,8 @@
+import { EmptyModule } from './../../components/empty/empty.module';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { MeetingPage } from './meeting';
 import { MeetingService } from './meeting_service';
-import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +10,7 @@ import { ComponentsModule } from '../../components/components.module';
   ],
   imports: [
     IonicPageModule.forChild(MeetingPage),
-    ComponentsModule
+    EmptyModule
   ],
   exports: [
     MeetingPage

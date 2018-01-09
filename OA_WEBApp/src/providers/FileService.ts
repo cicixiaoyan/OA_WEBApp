@@ -237,7 +237,7 @@ export class FileService {
   download(url, name): Observable<any>{
     const fileTransfer: FileTransferObject = this.fileTransfer.create();
     return Observable.create((observer) => {
-      fileTransfer.download(url, this.file.dataDirectory + name).then((entry) => {
+      fileTransfer.download(FILE_SERVE_URL + url, this.file.dataDirectory + name).then((entry) => {
         if (entry.Response == "200")
         observer.next(entry);
       }, (error) => {

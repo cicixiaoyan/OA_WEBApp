@@ -1,7 +1,7 @@
+import { EmptyModule } from './../../../components/empty/empty.module';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { VehicleSchedulingPage } from './vehicle-scheduling';
-import { ComponentsModule } from '../../../components/components.module';
 import { CarService } from '../car_service';
 
 @NgModule({
@@ -10,7 +10,7 @@ import { CarService } from '../car_service';
   ],
   imports: [
     IonicPageModule.forChild(VehicleSchedulingPage),
-    ComponentsModule
+    EmptyModule
   ],
   providers: [CarService]
 })

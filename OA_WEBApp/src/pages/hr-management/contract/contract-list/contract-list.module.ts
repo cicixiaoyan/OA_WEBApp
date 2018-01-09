@@ -1,15 +1,15 @@
+import { EmptyModule } from './../../../../components/empty/empty.module';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ContractListPage } from './contract-list';
 import { ContractService } from '../contract-service';
-import { ComponentsModule } from '../../../../components/components.module';
 @NgModule({
   declarations: [
     ContractListPage,
   ],
   imports: [
     IonicPageModule.forChild(ContractListPage),
-    ComponentsModule
+    EmptyModule
   ],
   providers: [ContractService],
   exports: [ContractListPage]

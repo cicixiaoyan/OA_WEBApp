@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
-import { EmptyComponent } from './empty/empty';
+import { EmptyComponent } from './empty';
 @NgModule({
 	declarations: [EmptyComponent],
 	imports: [IonicModule],
 	exports: [EmptyComponent]
 })
-export class ComponentsModule {}
+export class EmptyModule {}

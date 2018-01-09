@@ -1,7 +1,7 @@
+import { EmptyModule } from './../../../components/empty/empty.module';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { StaffAttendanceSettingsPage } from './staff-attendance-settings';
-import { ComponentsModule } from '../../../components/components.module';
 import { StaffAttendanceSettingsService } from './staff-attendance-settings-service';
 @NgModule({
   declarations: [
@@ -9,7 +9,7 @@ import { StaffAttendanceSettingsService } from './staff-attendance-settings-serv
   ],
   imports: [
     IonicPageModule.forChild(StaffAttendanceSettingsPage),
-    ComponentsModule
+    EmptyModule
   ],
   providers: [StaffAttendanceSettingsService]
 })

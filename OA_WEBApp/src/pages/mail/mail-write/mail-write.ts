@@ -82,7 +82,7 @@ export class MailWrite {
             "Title": data.Title,
             "Content": data.Content,
             "Level": data.Level,
-            "Bcc": data.Bcc,
+            "Bcc": data.Bcc ? '是' : "否",
             "AttNo": this.attNo,
             "UserId": this.globalData.Uid,
             "UserName": this.globalData.Name

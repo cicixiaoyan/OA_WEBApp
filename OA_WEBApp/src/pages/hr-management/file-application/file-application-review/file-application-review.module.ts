@@ -1,8 +1,8 @@
+import { EmptyModule } from './../../../../components/empty/empty.module';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { FileApplicationReviewPage } from './file-application-review';
 import { FileApplicationService } from '../fileApplicationService';
-import { ComponentsModule } from '../../../../components/components.module';
 import { TabSlideModule } from '../../../../components/tab-slide/tab-slide.module';
 @NgModule({
   declarations: [
@@ -10,7 +10,7 @@ import { TabSlideModule } from '../../../../components/tab-slide/tab-slide.modul
   ],
   imports: [
     IonicPageModule.forChild(FileApplicationReviewPage),
-    ComponentsModule,
+    EmptyModule,
     TabSlideModule
   ],
   providers: [FileApplicationService]

@@ -36,8 +36,6 @@ import { GlobalData } from "../providers/GlobalData";
 import { PublicService } from '../providers/PublicService';
 import { BackButtonService } from '../services/backButtonService';
 
-import { ComponentsModule } from '../components/components.module';
-
 import { Logger } from "../providers/Logger";
 import { ModalFromRightEnter, ModalFromRightLeave, ModalScaleEnter, ModalScaleLeave } from "./itransitions";
 import { QuillModule } from 'ngx-quill';
@@ -45,6 +43,7 @@ import { QuillModule } from 'ngx-quill';
 // 安装依赖:cnpm i fundebug-javascript --save
 // https://docs.fundebug.com/notifier/javascript/framework/ionic2.html
 import { ENABLE_FUNDEBUG, IS_DEBUG, FUNDEBUG_API_KEY } from "../providers/Constants";
+import { EmptyModule } from '../components/empty/empty.module';
 declare var require: any;
 let fundebug: any = require("fundebug-javascript");
 fundebug.apikey = FUNDEBUG_API_KEY;
@@ -73,7 +72,7 @@ export class FunDebugErrorHandler implements ErrorHandler {
             tabsHideOnSubPages: true
         }),
         IonicStorageModule.forRoot(),
-        ComponentsModule,
+        EmptyModule,
         QuillModule
     ],
     bootstrap: [IonicApp],

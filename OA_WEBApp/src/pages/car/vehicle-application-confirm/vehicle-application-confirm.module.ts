@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { VehicleApplicationConfirmPage } from './vehicle-application-confirm';
 import { CarService } from '../car_service';
-import { ComponentsModule } from '../../../components/components.module';
+import { EmptyModule } from '../../../components/empty/empty.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +10,7 @@ import { ComponentsModule } from '../../../components/components.module';
   ],
   imports: [
     IonicPageModule.forChild(VehicleApplicationConfirmPage),
-    ComponentsModule
+    EmptyModule
   ],
   providers: [CarService]
 })

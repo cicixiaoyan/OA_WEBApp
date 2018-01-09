@@ -1,3 +1,4 @@
+import { NativeService } from './../../providers/NativeService';
 import { Component } from '@angular/core';
 import { IonicPage, ModalController, ViewController, Platform, AlertController, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -75,23 +76,30 @@ export class LoginPage {
         // this.httpService.postFormData("ashx/Login.ashx/LoginInfo",user)
         //  .map(responce => responce.json())
         this.loginService.login(user).subscribe((userInfo) => {
-            console.log(userInfo);
-            this.submitted = false;
-            // userInfo.token = 'xx122a9Wf';//从后台获取token,暂时写死
-            this.userInfo = userInfo.Data;
-            this.globalData.Uid = userInfo.Data.Uid;
-            this.globalData.Name = userInfo.Data.Name;
-            this.globalData.token = userInfo.Data.Token;
-            this.loginService.Menuls().subscribe(resJson => {
-                if (resJson.Result)
-                this.storage.set("menus", resJson.Data);
-            }); 
-            // alert(this.globalData.token);
-            this.storage.set('UserInfo', userInfo.Data);
-            this.storage.set('LoginInfo', user);
-            // alert(this.storage.get('UserInfo'));
-            this.events.publish('user:login', userInfo);
-            this.viewCtrl.dismiss(userInfo.Data);
+            if (userInfo.Result){
+                console.log(userInfo);
+                this.submitted = false;
+                // userInfo.token = 'xx122a9Wf';//从后台获取token,暂时写死
+                this.userInfo = userInfo.Data;
+                this.globalData.Uid = userInfo.Data.Uid;
+                this.globalData.Name = userInfo.Data.Name;
+                this.globalData.token = userInfo.Data.Token;
+                this.loginService.Menuls().subscribe(resJson => {
+                    if (resJson.Result)
+                    this.storage.set("menus", resJson.Data);
+                }); 
+                // alert(this.globalData.token);
+                this.storage.set('UserInfo', userInfo.Data);
+                this.storage.set('LoginInfo', user);
+                // alert(this.storage.get('UserInfo'));
+                this.events.publish('user:login', userInfo);
+                this.viewCtrl.dismiss(userInfo.Data);
+            }else{
+                this.alertCtrl.create({
+                    title: this.userInfo.Data,
+                    buttons: [{ text: '取消' }]
+                }).present();
+            }
         });
     }
 

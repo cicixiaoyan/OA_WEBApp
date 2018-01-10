@@ -143,5 +143,23 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "jpush-phonegap-plugin": {
+    "source": {
+      "type": "local",
+      "path": "D:\\svn\\mine\\gitSource\\OA_WEBApp\\node_modules\\jpush-phonegap-plugin"
+    },
+    "is_top_level": true,
+    "variables": {
+      "APP_KEY": "23d6d38fe4495ced9e446bef"
+    }
+  },
+  "cordova-plugin-jcore": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-jcore"
+    },
+    "is_top_level": false,
+    "variables": {}
   }
 }

@@ -1,3 +1,5 @@
+import { NativeService } from './../../../../../providers/NativeService';
+import { FileApplicationService } from './../../fileApplicationService';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -8,24 +10,50 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FileApplicationReviewViewPage {
   Id: string = '';
-  ApprovalComments: string = '我是审核意见';
+  ApprovalComments: string = '';
   readOnly: boolean = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  data = {
+    UserName: '',
+    ApplicationDate: '',
+    Reason: '',
+    Id: ''
+  };
+  constructor(public navCtrl: NavController,
+              private fileApplicationService: FileApplicationService,
+              private nativeService: NativeService,
+              public navParams: NavParams) {
     this.Id = this.navParams.get('Id');
+    this.fileApplicationService.getApprove({"id": this.Id}).subscribe(resJson => {
+      if (resJson.Result && resJson.Data.length != 0){
+        this.data = resJson.Data[0];
+      }else{
+        this.nativeService.showToast(resJson.Data, 800);
+        this.navCtrl.pop();
+      }
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FileApplicationReviewViewPage');
   }
 
-  agree(){
-    // 审核通过
-    console.log(this.Id, this.ApprovalComments);
+  approve(status){
+    let data = {
+      "id": this.Id,
+      "memo": this.ApprovalComments,
+      "status": status,
+    };
+    this.fileApplicationService.approve(data).subscribe(resJson => {
+      
+      if (resJson.Result){
+        this.nativeService.showToast("审核成功", 800);
+        this.navCtrl.pop();
+      }else{
+        this.nativeService.showToast(resJson.Data, 800);
+      }
+    });
   }
 
-  oppose(){
-    // 审核不通过
-    console.log(this.Id, this.ApprovalComments);
-  }
+
 
 }

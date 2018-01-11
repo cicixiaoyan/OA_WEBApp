@@ -10,7 +10,7 @@ import { Component, Input  } from '@angular/core';
   selector: 'empty',
   template: `
     <div  text-center padding style="font-size:.9em;">
-      <div padding>暂无消息数据！！！</div>
+      <div padding>{{message}}</div>
       <img src="assets/img/face/face2.png" height="100">
     </div>
   `
@@ -18,6 +18,7 @@ import { Component, Input  } from '@angular/core';
 export class EmptyComponent {
 
   @Input() isEmpty: boolean = false;
+  @Input() message: string = "暂无数据！！！";
 
   constructor() {
 

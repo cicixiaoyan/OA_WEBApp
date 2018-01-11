@@ -24,13 +24,19 @@
         </ion-refresher-content>
     </ion-refresher>
     <ion-list>
-      <ion-item-sliding *ngFor="let train of list"  (click)="doRead(train.Id)">
-          <ion-item>
-              <span>{{train.Title}}</span>
-              <div class="small">讲师：{{train.Instructor}}</div>
+      <ion-item-sliding *ngFor="let train of list">
+          <ion-item (click)="doRead(train.Id)">
+              <span>{{train.Topic}}</span>
+              <div class="small">讲师：{{train.Teacher}}</div>
               <p class="small" *ngIf="train.Place !== ''">地点：{{train.Place}}</p>
               <p class="small">时间：{{train.StartDate}}&nbsp;~&nbsp;{{train.EndDate}}</p>
+              <p class="small" *ngIf="train.PXObject != ''">培训对象：{{train.PXObject}}</p>
           </ion-item>
+          <ion-item-options side="right">
+                <button ion-button color="primary" (click)="delete(train.Id)">
+                    <ion-icon name="md-trash"></ion-icon>删除
+                </button>
+            </ion-item-options>
       </ion-item-sliding>
     </ion-list>
     <empty *ngIf="isEmpty"></empty>

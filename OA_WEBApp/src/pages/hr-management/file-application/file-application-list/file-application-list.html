@@ -21,12 +21,13 @@
     <ion-list>
         <ion-item-sliding *ngFor="let item of list">
             <ion-item>
-                <ion-avatar item-start [ngClass]="{'success': (item.ApplicationStatus == '已同意'), 'danger': (item.ApplicationStatus == '已拒绝')}"><span>{{item.ApplicationStatus}}</span></ion-avatar>
-                <h2>{{item.Name}}
-                  <small float-end	 class="text-ios-primary" *ngIf="item.ApplicationStatus != '审批中'"><em>{{item.AuditDate}}审</em></small>
+                <ion-avatar item-start [ngClass]="{'success': (item.Status == '已同意'), 'danger': (item.Status == '已拒绝')}"><span>{{item.Status}}</span></ion-avatar>
+                <h2>{{item.UserName}}
+                  <small float-end	 class="text-ios-primary" *ngIf="item.ApprovalDate != ''"><em>{{item.ApprovalDate}}审</em></small>
                 </h2>
                 <h3 class="small">申请日期：{{item.ApplicationDate}}</h3>
-                <p class='small'>理由：{{item.ApplicationReason}}</p>
+                <h3 class="small">查看日期: {{item.SelectDate || "未填写"}}</h3>
+                <p class='small'>理由：{{item.Reason}}</p>
             </ion-item>
         </ion-item-sliding>
     </ion-list>

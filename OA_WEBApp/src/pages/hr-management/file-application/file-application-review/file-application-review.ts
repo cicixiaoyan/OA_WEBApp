@@ -23,7 +23,7 @@ export class FileApplicationReviewPage {
               private fileApplicationService: FileApplicationService) {
       this.data = {
           "uid": this.fileApplicationService.httpService.globalData.Uid,
-          "Status": this.fileApplicationService.status['审批中'],
+          "status": this.fileApplicationService.status['审批中'],
           "PageIndex": 0,
           "PageSize": 8
       };
@@ -32,19 +32,19 @@ export class FileApplicationReviewPage {
   }
 
   onSlideClick(i: number){
-    this.data.PageIndex = 0;
+    this.data.PageIndex = 1;
     this.list = [];
     if (i === 0) {
         // 参数设置
-        this.data.Status = this.fileApplicationService.status["审批中"];
+        this.data.status = this.fileApplicationService.status["审批中"];
     }
     else if (i === 1) {
         // 参数设置
-        this.data.Status = this.fileApplicationService.status["已同意"];
+        this.data.status = this.fileApplicationService.status["已同意"];
     }
     else {
         // 参数设置
-        this.data.Status = this.fileApplicationService.status["all"];
+        this.data.status = this.fileApplicationService.status["已拒绝"];
     }
     this.getList(this.data);
   }
@@ -76,45 +76,17 @@ export class FileApplicationReviewPage {
   }
 
   private getList(data) {
-      this.list = [
-          {
-              "Id": "1",
-              "Name": '张三', // 申请人
-              "ApplicationDate": '2017-10-12', // 申请日期
-              "ApplicationReason": '我是申请理由', // 申请理由
-              "ApplicationStatus": '审批中', // 审批状态
-              "AuditDate": "2017-12-12", // 审核日期
-          },
-          {
-              "Id": "2",
-              "Name": '李四', // 申请人
-              "ApplicationDate": '2017-10-12', // 申请日期
-              "ApplicationReason": '我是申请理由', // 申请理由
-              "ApplicationStatus": '已同意', // 审批状态
-              "AuditDate": "2017-12-12", // 审核日期
-          },
-          {
-              "Id": "3",
-              "Name": '李四', // 申请人
-              "ApplicationDate": '2017-10-12', // 申请日期
-              "ApplicationReason": '我是申请理由', // 申请理由
-              "ApplicationStatus": '已拒绝', // 审批状态
-              "AuditDate": "2017-12-12", // 审核日期
-          }
-      ];
-      // this.fileApplicationService.getList(data).subscribe((resJson) => {
-      //   if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
-      //     this.moredata = true;
-      //     this.isEmpty = false;
-      //     let list = resJson.Data;
-      //     this.list = [...this.list, ...list];
-      //   }else{
-      //     this.moredata = false;
-      //     this.isEmpty = (this.data.PageIndex == 1) ? true : false;
-      //   }
-      // });
-
-
+      this.fileApplicationService.getList(data).subscribe((resJson) => {
+        if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
+          this.moredata = true;
+          this.isEmpty = false;
+          let list = resJson.Data;
+          this.list = [...this.list, ...list];
+        }else{
+          this.moredata = false;
+          this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+        }
+      });
   }
 
 

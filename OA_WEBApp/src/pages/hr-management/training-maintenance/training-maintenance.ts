@@ -1,3 +1,4 @@
+import { NativeService } from './../../../providers/NativeService';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController ,
   Refresher, ViewController } from 'ionic-angular';
@@ -23,9 +24,10 @@ export class TrainingMaintenancePage  {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private popoverCtrl: PopoverController,
+              private nativeService: NativeService,
               private trainingMaintenanceService: TrainingMaintenanceService) {
       this.data = {
-        "uid": this.trainingMaintenanceService.httpService.globalData.Uid,
+        // "uid": this.trainingMaintenanceService.httpService.globalData.Uid,
         "PageIndex": 0,
         "PageSize": 8
       };
@@ -69,6 +71,13 @@ export class TrainingMaintenancePage  {
       // });
   }
 
+  delete(id: string) {
+    this.trainingMaintenanceService.del({"id": id}).subscribe(resJson => {
+      this.nativeService.showToast(resJson.Data, 800);
+      if (resJson.Result) this.doRefresh(null);
+    });
+  }
+
   doRefresh(refresher: Refresher) {
     this.list = [];
     this.data.PageIndex = 1;
@@ -93,37 +102,18 @@ export class TrainingMaintenancePage  {
   }
 
   private getList(data){
-    this.list = [
-      {
-        Id: "1",
-        Title: "dfwsef",
-        StartDate: '2017-12-05',
-        EndDate: '2017-12-05',
-        Object: '',
-        Instructor: '李老师',
-        Place: '222'
-      },
-      {
-        Id: "2",
-        Title: "dfwsef",
-        StartDate: '2017-12-05',
-        EndDate: '2017-12-05',
-        Object: '',
-        Instructor: '李老师',
-        Place: ''
-      },
-    ];
-    // this.trainingMaintenanceService.getList(data).subscribe((resJson) => {
-    //   if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
-    //     this.moredata = true;
-    //     this.isEmpty = false;
-    //     let list = resJson.Data;
-    //     this.list = [...this.list, ...list];
-    //   }else{
-    //     this.moredata = false;
-    //     this.isEmpty = (this.data.PageIndex == 1) ? true : false;
-    //   }
-    // });
+
+    this.trainingMaintenanceService.view(data).subscribe((resJson) => {
+      if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
+        this.moredata = true;
+        this.isEmpty = false;
+        let list = resJson.Data;
+        this.list = [...this.list, ...list];
+      }else{
+        this.moredata = false;
+        this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+      }
+    });
     
 
   }

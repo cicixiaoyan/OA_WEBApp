@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Response } from "@angular/http";
+import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
 import { HttpService } from "../../../providers/HttpService";
-import { Observable } from "rxjs";
-// import { UserInfo } from "../../model/UserInfo";
 
 @Injectable()
 export class ContractService {
@@ -9,8 +10,9 @@ export class ContractService {
     }
 
 
-    // login(user): Observable<any> {
-    //     return this.httpService.noTokenPostFormData("ashx/Login.ashx", user).map(responce => responce.json());
-    // }
+    getList(param): Observable<any> {
+        param.verb = 3;
+        return this.httpService.postFormData("ashx/hrcontractSel.ashx", param).map((res: Response) => res.json());
+    }
 
 }

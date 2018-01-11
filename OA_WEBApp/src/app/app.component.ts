@@ -10,6 +10,7 @@ import { GlobalData } from "../providers/GlobalData";
 import { UserInfo } from "../model/UserInfo";
 import { LoginService } from '../pages/login/LoginService';
 import { Utils } from "../providers/Utils";
+import { Helper } from '../providers/Helper';
 
 
 declare var AppMinimize;
@@ -54,11 +55,15 @@ export class MyApp {
                 private toastCtrl: ToastController,
                 private modalCtrl: ModalController,
                 private events: Events,
+                private helper: Helper,
                 private loginService: LoginService,
                 private nativeService: NativeService) {
 
-
+                    
         platform.ready().then(() => {
+            this.helper.initJpush(); // JPush初始化 
+            this.jpushOpenNotification(); // 
+            this.helper.setTags();
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             this.storage.get('firstIn').then((result) => {
@@ -73,6 +78,7 @@ export class MyApp {
                                     this.globalData.Uid = resJson.Data.Uid;
                                     this.globalData.Name = resJson.Data.Name;
                                     this.globalData.token = resJson.Data.Token;
+                                    this.helper.setAlias();
                                     this.events.publish('user:login', result.Data);
                                     this.nav.setRoot("TabsPage", { tabIndex: 0 });
                                 }else{
@@ -81,6 +87,7 @@ export class MyApp {
                                     modal.present();
                                     modal.onDidDismiss(data => {
                                         data && console.log(data);
+                                        this.helper.setAlias();
                                         this.nav.setRoot("TabsPage", { tabIndex: 0 });
                                     });
                                 }
@@ -108,9 +115,12 @@ export class MyApp {
                     // this.rootPage = Welcome;
                 }
             });
-
+            
             statusBar.styleDefault();
             splashScreen.hide();
+
+
+
             this.registerBackButtonAction(); // 注册返回按键事件
             this.assertNetwork(); // 检测网络
             // this.nativeService.detectionUpgrade(); // 检测app是否升级
@@ -209,5 +219,25 @@ export class MyApp {
             }, 2000);
         }
     }
+
+    jpushOpenNotification() {
+        //当点击极光推送消息跳转到指定页面
+        this.events.subscribe('jpush.openNotification', content => {
+          let tabs = this.nav.getActiveChildNav();
+          let tab = tabs.getSelected();
+          let activeVC = tab.getActive();
+          // if (activeVC.component == AboutPage) {//如果当前所在页面就是将要跳转到的页面则不处理
+          //   return;
+          // }
+          let activeNav = activeVC.getNav();
+          activeNav.popToRoot({}).then(() => {//导航跳到最顶层
+            tabs.select(3);//选中第一个tab
+            let tab = tabs.getSelected();//获取选中的tab
+            let activeVC = tab.getActive();//通过当前选中的tab获取ViewController
+            let activeNav = activeVC.getNav();//通过当前视图的ViewController获取的NavController
+            activeNav.push("");//跳转到指定页面
+          });
+        });
+      }
 
 }

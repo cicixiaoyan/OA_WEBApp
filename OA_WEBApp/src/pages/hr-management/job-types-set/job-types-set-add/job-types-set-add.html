@@ -10,7 +10,7 @@
         <ion-buttons start>
             <button ion-button  (click)="dismiss()">返回</button>
         </ion-buttons>
-        <ion-title>工种设置添加</ion-title>
+        <ion-title>工种设置{{id==""? "添加": "详情"}}</ion-title>
         <ion-buttons end>
             <button ion-button  (click)="sent(typeForm.value)">保存</button>
         </ion-buttons>
@@ -24,18 +24,17 @@
         <ion-list style="position:relative;">
             <ion-item>
                 <ion-label>所属分类</ion-label>
-                <ion-select formControlName="Category" cancelText="取消" okText="确定" placeholder="请选择">
-                    <ion-option value="管理人员">管理人员</ion-option>
-                    <ion-option value="服务人员">服务人员</ion-option>
+                <ion-select formControlName="ssfl"  cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-option *ngFor="let type of typeLs" [value]="type.id">{{type.mc}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
                 <ion-label>工种名称</ion-label>
-                <ion-input text-right type="text" formControlName="Name" placeholder="请输入工种名称"></ion-input>
+                <ion-input text-right type="text" formControlName="gzmc" placeholder="请输入工种名称"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label>备注</ion-label>
-                <ion-textarea text-right formControlName="Remarks" placeholder="请输入备注"></ion-textarea>
+                <ion-textarea text-right formControlName="memo" placeholder="请输入备注"></ion-textarea>
             </ion-item>
         </ion-list>
     </form>

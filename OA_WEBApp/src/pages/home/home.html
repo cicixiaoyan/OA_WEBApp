@@ -46,7 +46,7 @@
                 </ion-row>
             </ion-grid>
         </div>
-        <div  *ngIf="totalMenu['培训维护'] || totalMenu['员工档案维护'] || totalMenu['员工档案维护添加'] || totalMenu['工种设置'] || totalMenu['合同查询'] || totalMenu['合同维护'] || totalMenu['合同续签'] || totalMenu['合同详情'] || totalMenu['申请档案查看'] || totalMenu['申请档案审批']">
+        <div  *ngIf="totalMenu['培训维护'] || totalMenu['员工档案维护'] || totalMenu['员工档案维护添加'] || totalMenu['工种设置'] || totalMenu['合同查询'] || totalMenu['合同维护'] || totalMenu['合同续签'] || totalMenu['合同详情'] || totalMenu['申请档案查看'] || totalMenu['档案申请审批']">
             <ion-list-header>
                 <ion-icon name="ios-car" color="primary">人事管理</ion-icon>
             </ion-list-header>
@@ -61,7 +61,7 @@
                     <ion-col  *ngIf="totalMenu['合同续签']" col-3 col-xl-2 (click)="open('ContractRenewPage')">合同续签</ion-col>
                     <ion-col *ngIf="totalMenu['合同详情']" col-3 col-xl-2 (click)="open('ContractSettingPage')">合同详情</ion-col>
                     <ion-col  *ngIf="totalMenu['申请档案查看']" (click)="open('FileApplicationListPage')">申请档案查看</ion-col>
-                    <ion-col *ngIf="totalMenu['申请档案审批']" (click)="open('FileApplicationReviewPage')">申请档案审批</ion-col>
+                    <ion-col *ngIf="totalMenu['档案申请审批']" (click)="open('FileApplicationReviewPage')">档案申请审批</ion-col>
                 </ion-row>
             </ion-grid>
         </div>

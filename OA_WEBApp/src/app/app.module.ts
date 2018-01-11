@@ -40,6 +40,8 @@ import { Logger } from "../providers/Logger";
 import { ModalFromRightEnter, ModalFromRightLeave, ModalScaleEnter, ModalScaleLeave } from "./itransitions";
 import { QuillModule } from 'ngx-quill';
 
+import { JPush } from 'ionic3-jpush';
+
 // 安装依赖:cnpm i fundebug-javascript --save
 // https://docs.fundebug.com/notifier/javascript/framework/ionic2.html
 import { ENABLE_FUNDEBUG, IS_DEBUG, FUNDEBUG_API_KEY } from "../providers/Constants";
@@ -73,7 +75,7 @@ export class FunDebugErrorHandler implements ErrorHandler {
         }),
         IonicStorageModule.forRoot(),
         EmptyModule,
-        QuillModule
+        QuillModule,
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -108,8 +110,8 @@ export class FunDebugErrorHandler implements ErrorHandler {
         GlobalData,
         PublicService,
         Logger,
-        BackButtonService
-
+        BackButtonService,
+        JPush
         // ,HTTP
     ]
 })

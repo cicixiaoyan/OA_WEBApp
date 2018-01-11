@@ -7,16 +7,42 @@ import { HttpService } from "../../../providers/HttpService";
 @Injectable()
 export class FileApplicationService {
 
-    status: object = {
-      "审批中": '审批中',
-      "已同意": '已同意',
-      "已拒绝": '已拒绝',
-    };
-    constructor(public httpService: HttpService) {
-    }
+  status: object = {
+    "已同意": 0,
+    "已拒绝": 1,
+    "审批中": 2,
+  };
+  constructor(public httpService: HttpService) {
+  }
 
-    // getList(param?): Observable<any>{
-    //     return this.httpService.postFormData("ashx/MeetLs.ashx", param).map((res: Response) => res.json());
-    // }
+
+  add(param = {}): Observable<any> {
+    param["verb"] = 0;
+    return this.httpService.postFormData("ashx/hrfileapplication.ashx", param).map((res: Response) => res.json());
+  }
+
+  getList(param = {}): Observable<any> {
+    param["verb"] = 3;
+    return this.httpService.postFormData("ashx/hrfileapplication.ashx", param).map((res: Response) => res.json());
+  }
+
+  GetSP(param = {}): Observable<any> {
+    param["verb"] = 9;
+    return this.httpService.postFormData("ashx/hrfileapplication.ashx", param).map((res: Response) => res.json());
+  }
+
+  getApprove(param = {}): Observable<any> {
+    param["verb"] = 3;
+    return this.httpService.postFormData("ashx/hrapproval.ashx", param).map((res: Response) => res.json());
+  }
+  approve(param = {}): Observable<any> {
+    param["verb"] = 2;
+    return this.httpService.postFormData("ashx/hrapproval.ashx", param).map((res: Response) => res.json());
+  }
+
+  
+
+
+
 
 }

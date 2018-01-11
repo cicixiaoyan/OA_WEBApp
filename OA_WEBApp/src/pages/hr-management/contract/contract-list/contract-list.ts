@@ -20,7 +20,7 @@ export class ContractListPage {
               private popoverCtrl: PopoverController,
               private contractService: ContractService) {
       this.data = {
-        "uid": this.contractService.httpService.globalData.Uid,
+        // "uid": this.contractService.httpService.globalData.Uid,
         "PageIndex": 0,
         "PageSize": 8
       };
@@ -79,38 +79,18 @@ export class ContractListPage {
   }
 
   private getList(data){
-    this.list = [
-      {
-        "Id": "1",
-        "Name": '张三', // 员工姓名
-        "Dept": '检验科', // 员工部门
-        "Type": '劳动合同', // 合同类型
-        "ContractNumber": "A012345677", // 合同编号
-        "TurnPositive": '已转正', // 是否转正
-        "Status": '生效中' // 合同状态
-      },
-      {
-        "Id": "2",
-        "Name": '李四', // 员工姓名
-        "Dept": '其他', // 员工部门
-        "Type": '劳动合同', // 合同类型
-        "ContractNumber": "A012345688", // 合同编号
-        "TurnPositive": '未转正', // 是否转正
-        "Status": '试用中' // 合同状态
-      },
 
-    ];
-    // this.contractService.getList(data).subscribe((resJson) => {
-    //   if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
-    //     this.moredata = true;
-    //     this.isEmpty = false;
-    //     let list = resJson.Data;
-    //     this.list = [...this.list, ...list];
-    //   }else{
-    //     this.moredata = false;
-    //     this.isEmpty = (this.data.PageIndex == 1) ? true : false;
-    //   }
-    // });
+    this.contractService.getList(data).subscribe((resJson) => {
+      if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
+        this.moredata = true;
+        this.isEmpty = false;
+        let list = resJson.Data;
+        this.list = [...this.list, ...list];
+      }else{
+        this.moredata = false;
+        this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+      }
+    });
 
 
   }

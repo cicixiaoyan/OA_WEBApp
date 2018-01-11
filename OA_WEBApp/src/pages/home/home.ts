@@ -73,7 +73,7 @@ export class Home {
         "合同查询": false,
         "合同续签": false,
         "申请档案查看": false,
-        "申请档案审批": false,
+        "档案申请审批": false,
 
         "员工考勤设定": false,
         "考勤审批说明": false,
@@ -90,6 +90,7 @@ export class Home {
                 modal.onDidDismiss(data => {
                     this.storage.get("menus").then(Menu1 => {
                         this.setMenu(Menu1);
+                        this.storage.set("changeMenu", true);
                     });
                     
                 });

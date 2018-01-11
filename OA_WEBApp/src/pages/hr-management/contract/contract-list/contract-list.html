@@ -20,11 +20,11 @@
     <ion-list>
       <ion-item-sliding *ngFor="let item of list"  (click)="doRead(item.Id)">
           <ion-item>
-              <h2>{{item.Name}}[{{item.ContractNumber}}]</h2>
-              <div class="small">类型：{{item.Type}}&emsp;{{item.Status}}
-                <span float-right [ngClass]="{'text-ios-secondary':(item.TurnPositive == '已转正'),'text-ios-energized':(item.TurnPositive != '已转正')}">{{item.TurnPositive}}</span>
+              <h2>{{item.UserName}}[{{item.ContractNum}}]</h2>
+              <div class="small">签约时间：{{item.SignDate | date:"yyyy年MM月dd日"}}
+                <span float-right [ngClass]="{'text-ios-secondary':(item.ContractStatus == '生效中'),'text-ios-energized':(item.ContractStatus != '生效中')}">{{item.ContractStatus}}</span>
               </div>
-              <p class="small">部门：{{item.Dept}}&emsp;</p>
+              <p class="small">部门：{{item.DeptName}}&emsp;</p>
           </ion-item>
       </ion-item-sliding>
     </ion-list>

@@ -1,8 +1,9 @@
+import { Utils } from './../../../../../providers/Utils';
+import { NativeService } from './../../../../../providers/NativeService';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FileApplicationService } from '../../fileApplicationService';
-
 /**
  * Generated class for the FileApplicationAddPage page.
  *
@@ -17,18 +18,26 @@ import { FileApplicationService } from '../../fileApplicationService';
 })
 export class FileApplicationAddPage {
   baseForm: FormGroup;
+  approveLs: string[] = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private popoverCtrl: PopoverController,
               private FormBuilder: FormBuilder,
+              private nativeService: NativeService,
               private fileApplicationService: FileApplicationService
             ) {
 
       this.baseForm = this.FormBuilder.group({
-        "ApplicationDate": ['', [Validators.required]], // 员工工号
-        "Approver": ['', [Validators.required, Validators.maxLength(180)]], // 审核
-        "Remarks": ['', [Validators.required]], // 备注，即申请理由
-        "InforMemethod": ['1', [Validators.required]] // 消息通知方式
+        "applicationdate": ['', [Validators.required]], // 员工工号
+        "spid": ['', [Validators.required, Validators.maxLength(180)]], // 审核
+        "memo": ['', [Validators.required]], // 备注，即申请理由
+      });
+      this.fileApplicationService.GetSP().subscribe(resJson => {
+        if (resJson.Result){
+          this.approveLs = resJson.Data;
+        }else{
+          this.nativeService.showToast(resJson.Data, 800);
+        }
       });
   }
 
@@ -38,7 +47,16 @@ export class FileApplicationAddPage {
 
   submit(value){
     value.Uid = this.fileApplicationService.httpService.globalData.Uid;
-    console.log(value);
+    value.applicationdate = Utils.dateFormat(new Date(value.applicationdate), "yyyy-MM-dd HH:mm:ss") ;
+    // console.log(value.applicationdate);
+    this.fileApplicationService.add(value).subscribe(resJson => {
+      if (resJson.Result){
+        this.nativeService.showToast("档案申请提交成功，请等待审核", 500);
+        this.navCtrl.pop();
+      }else{
+        this.nativeService.showToast(resJson.Data, 800);
+      }
+    });
   }
 
 }

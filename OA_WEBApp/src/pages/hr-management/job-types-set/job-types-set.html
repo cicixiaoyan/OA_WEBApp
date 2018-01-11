@@ -3,7 +3,8 @@
     <ion-navbar>
         <ion-title>工种设置</ion-title>
     </ion-navbar>
-
+    <ion-searchbar color="dark" type="text" placeholder="请输入工种名称" [(ngModel)]="searchKey" [showCancelButton]="true" cancelButtonText="搜索" (ionCancel)="search($event, searchKey)">
+    </ion-searchbar>
 </ion-header>
 
 
@@ -13,11 +14,18 @@
         </ion-refresher-content>
     </ion-refresher>
     <ion-list>
-        <ion-item *ngFor="let item of list " (click)="doRead(item.Id)">
-            <span>{{item.Name}}</span>
-            <p class="font-12">所属分类：{{item.Category}}	</p>
-            <p class="font-12" *ngIf="item.Remarks !== ''">{{item.Remarks}}</p>
-        </ion-item>
+        <ion-item-sliding *ngFor="let item of list">
+            <ion-item  (click)="doRead(item.Id, item.GZNmae)">
+                <span>{{item.GZNmae}}</span>
+                <p class="font-12">所属分类：{{item.GZTypeName}} </p>
+                <p class="font-12" *ngIf="item.Remarks !== ''">{{item.GZMemo}}</p>
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button color="primary" (click)="delete(item.Id)">
+                    <ion-icon name="md-trash"></ion-icon>删除
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
     </ion-list>
     <empty *ngIf="isEmpty"></empty>
     <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">

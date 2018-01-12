@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ContractService } from '../contract-service';
+import { NativeService } from '../../../../providers/NativeService';
 @IonicPage()
 @Component({
   selector: 'page-contract-setting',
@@ -24,35 +25,68 @@ export class ContractSettingPage {
               public navParams: NavParams,
               private popoverCtrl: PopoverController,
               private FormBuilder: FormBuilder,
-              private contractService: ContractService
+              private contractService: ContractService,
+              private nativeService: NativeService
             ) {
       this.readOnly = this.navParams.get("readOnly") ? true : false;
       this.Id = this.navParams.get("Id") || '';
 
       this.baseForm = this.FormBuilder.group({
-        "StaffNumber": ['', [Validators.maxLength(20), Validators.required]], // 员工工号
-        "Name": ['', []], // 姓名
+        "UserNum": ['', [Validators.maxLength(20), Validators.required]], // 员工工号
+        "UserName": ['', []], // 姓名
         "Sex": ['', []], // 性别
-        "IDC": ['', []], // 身份证号
-        "Dept": ['', []], // 所在部门
+        "IDNumber": ['', []], // 身份证号
+        "DeptName": ['', []], // 所在部门
         "Duty": ['', []], // 职务
 
-        "ContractNumber": ['', []], // 合同编号
+        "ContractNum": ['', []], // 合同编号
         "ContractName": ['', []], // 合同名称
         "ContractType": ['', []], // 合同类型
-        "HavePeriod": ['有', []], // 有无期限
-        "IsPositive": ['已转正', []], // 是否转正
-        "SigningDate": ['', []], // 签约时间
+        "TimeLimit": ['有', []], // 有无期限
+        "IsCorrect": ['已转正', []], // 是否转正
+        "SignDate": ['', []], // 签约时间
         "ContractYear": ['', []], // 签约年份
         "ContractStatus": ['', []], // 合同状态
 
-        "TrialPeriod": ['', []], // 试用期限
-        "TrialBasicSalary": ['', []], // 试用基本工资
-        "TrialEffectiveDate": ['', []], // 试用生效日期
-        "TrialExpirationDate": ['', []], // 试用到期日期
+        "ProbationPeriod": ['', []], // 试用期限
+        "BasicWage": ['', []], // 试用基本工资
+        "ContractStartDate": ['', []], // 试用生效日期
+        "ContractEndDate": ['', []], // 试用到期日期
 
-        "Remarks": ['', []] // 备注
+        "Memo": ['', []] // 备注
       });
+      if (this.Id != ""){
+        this.contractService.getList({"id": this.Id}).subscribe(resJson => {
+          if (resJson.Result){
+            this.baseForm.patchValue(resJson.Data);
+          }else{
+            this.nativeService.showToast(resJson.Data, 800);
+          }
+        });
+      }
+
+      // <!-- model.ContractNum = dt.Rows[i]["HtBianHao"].ToString();
+      // model.ContractName = dt.Rows[i]["HtMc"].ToString();
+      // model.StratDate = dt.Rows[i]["HeTongSj"].ToString();
+      // model.EndDate = dt.Rows[i]["HeTongqxsj"].ToString();
+      // model.UserNum = dt.Rows[i]["StaffNumer"].ToString();
+      // model.UserName = dt.Rows[i]["XingMing"].ToString();
+      // model.Sex = dt.Rows[i]["XingBie"].ToString();
+      // model.IDNumber = dt.Rows[i]["ShenFen"].ToString();
+      // model.DeptName = dt.Rows[i]["BuMen"].ToString();
+      // model.Duty = dt.Rows[i]["ZhiWu"].ToString();
+      // model.SignDate = dt.Rows[i]["QinYue"].ToString();
+      // model.ContractStartDate = dt.Rows[i]["ShiYongSj"].ToString();
+      // model.ContractEndDate = dt.Rows[i]["ShiYongDq"].ToString();
+      // model.TimeLimit = dt.Rows[i]["QiXian"].ToString();
+      // model.ContractYear = dt.Rows[i]["Nianfen_MC"].ToString();
+      // model.ContractStatus = dt.Rows[i]["HtZt"].ToString();
+      // model.IsCorrect = dt.Rows[i]["ZhuanZheng"].ToString();
+      // model.ProbationPeriod = dt.Rows[i]["ShiYongQx"].ToString();
+      // model.BasicWage = dt.Rows[i]["ShiYongGz"].ToString();
+      // model.Memo = dt.Rows[i]["HtBeiZhu"].ToString();
+      // model.ContractDate = dt.Rows[i]["HeTongQx"].ToString();
+      // model.RegularBasicWage = dt.Rows[i]["HeTongGz"].ToString(); -->
   }
 
   ionViewDidLoad() {

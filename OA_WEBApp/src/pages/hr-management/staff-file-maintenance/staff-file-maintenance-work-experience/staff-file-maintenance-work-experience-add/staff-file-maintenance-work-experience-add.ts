@@ -1,9 +1,8 @@
 import { Component,  Input } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-// import 'rxjs/add/operator/map';
-// import { Observable } from 'rxjs/Observable';
-// import { HttpService } from "../../../providers/HttpService";
+import { StaffFileMaintenanceService } from '../../staff-file-maintenance-service';
+import { NativeService } from '../../../../../providers/NativeService';
 
 @IonicPage()
 @Component({
@@ -14,22 +13,27 @@ export class StaffFileMaintenanceWorkExperienceAdd {
   @Input() isShow: boolean = true;
   addForm: FormGroup;
   readOnly: boolean = false;
+  Id: string = "";
   formCtrls: any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              // private httpService: HttpService,
+              private staffFileMaintenanceService: StaffFileMaintenanceService,
               private formBuilder: FormBuilder,
+              private nativeService: NativeService,
               private viewCtrl: ViewController) {
       this.readOnly = this.navParams.get("readOnly") ? true : false;
+      this.Id = this.navParams.get("Id") || "";
+
       this.addForm = this.formBuilder.group({
-        StartDate: ['', [Validators.required]], // 第一个参数是默认值
-        EndDate: ['', [Validators.required]],
-        Dept: ['', [Validators.required, Validators.maxLength(20)]],
-        Duty: ['', [Validators.required, Validators.maxLength(30)]],
-        Company: ['', [Validators.required, Validators.maxLength(20)]],
-        Remarks: ["", [Validators.maxLength(180)]],
+        ExpStartDate: ['', [Validators.required]], // 第一个参数是默认值
+        ExpEndDate: ['', [Validators.required]],
+        ExpDeptName: ['', [Validators.required, Validators.maxLength(20)]],
+        ExpDuty: ['', [Validators.required, Validators.maxLength(30)]],
+        ExpUnit: ['', [Validators.required, Validators.maxLength(20)]],
+        ExpMemo: ["", [Validators.maxLength(180)]],
       });
       this.formCtrls = this.addForm.controls;
+
   }
 
   ionViewDidLoad() {
@@ -42,10 +46,14 @@ export class StaffFileMaintenanceWorkExperienceAdd {
 
   save(value){
     // 提交
-    // this.httpService.postFormData("", value)
-    // .map((res: Response) => res.json())
-    // .subscribe((resJson) => {
-
-    // });
+    this.staffFileMaintenanceService.addWorkExp(value).subscribe(resJson => {
+      if (resJson.Result){
+        this.nativeService.showToast("保存工作经验成功", 800);
+        this.viewCtrl.dismiss({"change": true});
+      }else{
+        this.nativeService.showToast(resJson.Data, 800);        
+      }
+    });
   }
+  
 }

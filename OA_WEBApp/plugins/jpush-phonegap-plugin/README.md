@@ -13,8 +13,6 @@
 
 ## Install
 
-注意应用的包名一定要和 APP_KEY 对应应用的包名一致，否则极光推送服务无法注册成功。
-
 - 通过 Cordova Plugins 安装，要求 Cordova CLI 5.0+：
 
   ```shell
@@ -55,7 +53,7 @@ import { JPush } from '@jiguang-ionic/jpush';
 
 具体可参考 ./ionic/example 中的文件。
 
-> 在使用 Xcode 8 或以上调试 iOS 项目时，需要先在项目配置界面的 Capabilities 中打开 Push Notifications 开关。
+> 在使用 Xcode 8 调试 iOS 项目时，需要先在项目配置界面的 Capabilities 中打开 Push Notifications 开关。
 
 ## Usage
 
@@ -120,6 +118,10 @@ Android 的推送通过长连接的方式实现，只有在保持连接的情况
 ```shell
 cordova platform update ios
 ```
+
+#### ionic 2 如何调用 API？
+
+[issue 179](https://github.com/jpush/jpush-phonegap-plugin/issues/179)
 
 #### PushConfig.plist 文件中的字段都是什么意思？
 

@@ -16,8 +16,12 @@ import { Tabs } from "ionic-angular";
 })
 export class StaffFileMaintenanceSet {
   rootParams = {
-    "readOnly": false
+    "readOnly": false,
+    "Id": ""
   };
+
+  @ViewChild("myTabs") tab: Tabs;
+
   
   tab1Root = "StaffFileMaintenanceBasicImfornation";
   tab2Root = "StaffFileMaintenanceWorkExperience";
@@ -26,6 +30,8 @@ export class StaffFileMaintenanceSet {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.rootParams.readOnly = this.navParams.get("readOnly") ? true : false;
+    this.rootParams.Id = !!this.navParams.get("Id") ? this.navParams.get("Id") : "false";
+
     console.log(this.rootParams.readOnly, this.navParams.get("readOnly"));
   }
 

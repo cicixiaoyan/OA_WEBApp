@@ -41,7 +41,7 @@ export class MeetingMinutesPage {
   }
 
   doRead(Params) {
-    this.navCtrl.push("MeetingEditPage", { "Id": Params, "readOnly": true });
+    this.navCtrl.push("MeetingEditPage", { "Id": Params });
   }
 
 

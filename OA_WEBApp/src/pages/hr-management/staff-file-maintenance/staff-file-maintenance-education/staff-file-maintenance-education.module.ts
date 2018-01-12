@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { StaffFileMaintenanceEducation } from './staff-file-maintenance-education';
+import { StaffFileMaintenanceService } from '../staff-file-maintenance-service';
 
 @NgModule({
   declarations: [
@@ -9,6 +10,7 @@ import { StaffFileMaintenanceEducation } from './staff-file-maintenance-educatio
   imports: [
     IonicPageModule.forChild(StaffFileMaintenanceEducation),
   ],
-  exports: [StaffFileMaintenanceEducation]
+  exports: [StaffFileMaintenanceEducation],
+  providers: [StaffFileMaintenanceService]
 })
 export class StaffFileMaintenanceEducationPageModule {}

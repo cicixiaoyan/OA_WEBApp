@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Refresher } from 'ionic-angular';
+import { StaffFileMaintenanceService } from '../staff-file-maintenance-service';
+import { NativeService } from '../../../../providers/NativeService';
 
 /**
  * Generated class for the StaffFileMaintenanceSocialRelationshipPage page.
@@ -14,10 +16,18 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
   templateUrl: 'staff-file-maintenance-social-relationship.html',
 })
 export class StaffFileMaintenanceSocialRelationship {
+  readOnly: boolean = false;
+  Id: string = "";
+
   list: Array<any>;
   constructor(public navCtrl: NavController, 
               private modalCtrl: ModalController,
+              private nativeService: NativeService,
+              private staffFileMaintenanceService: StaffFileMaintenanceService,
               public navParams: NavParams) {
+    this.readOnly = this.navParams.get("readOnly") ? true : false;
+    this.Id = this.navParams.get("Id") || "";
+            
     this.getList();
   }
 
@@ -29,37 +39,44 @@ export class StaffFileMaintenanceSocialRelationship {
     let modal = this.modalCtrl.create("StaffFileMaintenanceSocialRelationshipAddPage");
     modal.present();
     modal.onDidDismiss(data => {
-        data && console.log(data);
+        if (!!data && data.change == "true"){
+          this.doRefresh(null);
+        }
     });
   }
 
-  doRead(id){
-    let parma = {
-      "Id": id,
-      "readOnly": (this.navParams.get("readOnly") ? true : null)
-    };
-    let modal = this.modalCtrl.create("StaffFileMaintenanceSocialRelationshipAddPage", parma);
+  doRefresh(refresher: Refresher) {
+    this.list = [];
+    this.getList();
+    setTimeout(() => {
+      refresher && refresher.complete();
+    }, 1000);
+  }
+
+  doRead(item){
+    let modal = this.modalCtrl.create("StaffFileMaintenanceSocialRelationshipAddPage", {"item": item});
     modal.present();
-    modal.onDidDismiss(data => {
-        data && console.log(data);
+  }
+
+  delete(i){
+    this.staffFileMaintenanceService.sociologyDel({"id": this.list[i].SociologyID}).subscribe(resJson => {
+      if (resJson.Result){
+        this.nativeService.showToast("删除成功", 800);
+        this.list.splice(i, 1);
+      }else{
+        this.nativeService.showToast(resJson.Data, 800);
+      }
     });
   }
 
-  getList(){
-    this.list = [
-      {
-        'Id': '1',
-        'Name': '父亲',
-        'Relationship': '父子',
-        'Mobile': '1311111111',
-      },
-      {
-        'Id': '2',
-        'Name': '母亲',
-        'Relationship': '母子',
-        'Mobile': '1311111111'
-      },
-    ];
+  private getList(){
+    this.staffFileMaintenanceService.getList({"id": this.Id}).subscribe(resJson => {
+      if (resJson.Result){
+        this.list = [...resJson.Data[0].SociologyLs];
+      }else{
+        this.nativeService.showToast(resJson.Data, 800);
+      }
+    });
   }
 
 }

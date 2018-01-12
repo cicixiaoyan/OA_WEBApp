@@ -16,7 +16,8 @@ export class FileApplicationReviewViewPage {
     UserName: '',
     ApplicationDate: '',
     Reason: '',
-    Id: ''
+    Id: '',
+    ApprovalDate: ''
   };
   constructor(public navCtrl: NavController,
               private fileApplicationService: FileApplicationService,

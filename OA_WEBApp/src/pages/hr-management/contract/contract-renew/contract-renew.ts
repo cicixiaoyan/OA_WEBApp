@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController ,
   Refresher, ViewController } from 'ionic-angular';
 import { ContractService } from '../contract-service';
+import { NativeService } from '../../../../providers/NativeService';
 
 @IonicPage()
 @Component({
@@ -17,6 +18,7 @@ export class ContractRenewPage {
   search: any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              private nativeService: NativeService,
               private popoverCtrl: PopoverController,
               private contractService: ContractService) {
       this.data = {
@@ -65,7 +67,15 @@ export class ContractRenewPage {
 
   delete(index: number){
     const id = this.list[index].Id;
-    this.list.splice(index, 1);
+    // this.list.splice(index, 1);
+    this.contractService.delRenew({id: id}).subscribe(resJson => {
+      if (resJson.Result){
+        this.nativeService.showToast("合同删除成功", 500);
+        this.doRefresh(null);
+      }else{
+        this.nativeService.showToast(resJson.Data, 800);
+      }
+    });
   }
 
   doRefresh(refresher: Refresher) {
@@ -73,7 +83,7 @@ export class ContractRenewPage {
     this.data.PageIndex = 1;
     this.getList(this.data);
     setTimeout(() => {
-        refresher.complete();
+      refresher && refresher.complete();
     }, 1000);
   }
 
@@ -91,36 +101,18 @@ export class ContractRenewPage {
   }
 
   private getList(data){
-    this.list = [
-      {
-        "Id": "1",
-        "Name": '张三',
-        "Code": "A012345677",
-        "Dept": '检验科',
-        "RenewType": '合同延期',
-        "RenewDate": '2017-12-27'
-      },
-      {
-        "Id": "2",
-        "Name": '李四',
-        "Code": "A012345688",
-        "Dept": '其他科',
-        "RenewType": '其他原因',
-        "RenewDate": '2017-12-27'
+    
+    this.contractService.getRenew(data).subscribe((resJson) => {
+      if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
+        this.moredata = true;
+        this.isEmpty = false;
+        let list = resJson.Data;
+        this.list = [...this.list, ...list];
+      }else{
+        this.moredata = false;
+        this.isEmpty = (this.data.PageIndex == 1) ? true : false;
       }
-
-    ];
-    // this.contractService.getList(data).subscribe((resJson) => {
-    //   if (resJson.Result  &&  resJson.Data.length !== 0 && (resJson.Data instanceof Array)){
-    //     this.moredata = true;
-    //     this.isEmpty = false;
-    //     let list = resJson.Data;
-    //     this.list = [...this.list, ...list];
-    //   }else{
-    //     this.moredata = false;
-    //     this.isEmpty = (this.data.PageIndex == 1) ? true : false;
-    //   }
-    // });
+    });
 
 
   }

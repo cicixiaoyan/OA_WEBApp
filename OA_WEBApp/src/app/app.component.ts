@@ -61,9 +61,14 @@ export class MyApp {
 
                     
         platform.ready().then(() => {
+            this.helper.jPush.getRegistrationID().then(regid => {
+                console.log("registrtion" + regid);
+            });
             this.helper.initJpush(); // JPush初始化 
             this.jpushOpenNotification(); // 
             this.helper.setTags();
+            // this.globalData.Uid = "admin";
+            // this.helper.setAlias();
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             this.storage.get('firstIn').then((result) => {
@@ -98,6 +103,7 @@ export class MyApp {
                             modal.present();
                             modal.onDidDismiss(data => {
                                 data && console.log(data);
+                                this.helper.setAlias();
                                 this.nav.setRoot("TabsPage", { tabIndex: 0 });
                             });
                         }
@@ -221,7 +227,7 @@ export class MyApp {
     }
 
     jpushOpenNotification() {
-        //当点击极光推送消息跳转到指定页面
+        // 当点击极光推送消息跳转到指定页面
         this.events.subscribe('jpush.openNotification', content => {
           let tabs = this.nav.getActiveChildNav();
           let tab = tabs.getSelected();
@@ -230,12 +236,12 @@ export class MyApp {
           //   return;
           // }
           let activeNav = activeVC.getNav();
-          activeNav.popToRoot({}).then(() => {//导航跳到最顶层
-            tabs.select(3);//选中第一个tab
-            let tab = tabs.getSelected();//获取选中的tab
-            let activeVC = tab.getActive();//通过当前选中的tab获取ViewController
-            let activeNav = activeVC.getNav();//通过当前视图的ViewController获取的NavController
-            activeNav.push("");//跳转到指定页面
+          activeNav.popToRoot({}).then(() => { // 导航跳到最顶层
+            tabs.select(3); // 选中第一个tab
+            let tab = tabs.getSelected(); // 获取选中的tab
+            let activeVC = tab.getActive(); // 通过当前选中的tab获取ViewController
+            let activeNav = activeVC.getNav(); // 通过当前视图的ViewController获取的NavController
+            activeNav.push(""); // 跳转到指定页面
           });
         });
       }

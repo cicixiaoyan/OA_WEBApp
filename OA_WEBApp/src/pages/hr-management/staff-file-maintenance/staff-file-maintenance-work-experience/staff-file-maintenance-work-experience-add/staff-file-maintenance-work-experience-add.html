@@ -1,65 +1,65 @@
 <ion-header>
 
-  <ion-navbar>
-      <ion-buttons start>
-          <button ion-button  (click)="dismiss()">返回</button>
-      </ion-buttons>
-    <ion-title>工作经历</ion-title>
-    <ion-buttons end>
-        <button ion-button [disabled]='addForm.invalid'  (click)="save(addForm.value)">保存</button>
-    </ion-buttons>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">返回</button>
+        </ion-buttons>
+        <ion-title>工作经历</ion-title>
+        <ion-buttons end>
+            <button ion-button [disabled]='addForm.invalid' (click)="save(addForm.value)">保存</button>
+        </ion-buttons>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-    <form [formGroup]="addForm" (ngSubmit)="save(addForm.value)"   [ngClass]="{'form-readonly': readOnly}">
+    <form [formGroup]="addForm" (ngSubmit)="save(addForm.value)" [ngClass]="{'form-readonly': readOnly}">
         <ion-list style="position:relative;">
             <ion-item>
                 <ion-label>开始时间</ion-label>
-                <ion-datetime formControlName="StartDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+                <ion-datetime formControlName="ExpStartDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
             </ion-item>
-            <div class="validation-failed" *ngIf="formCtrls.StartDate.invalid && formCtrls.StartDate.touched">
-              开始时间必填
+            <div class="validation-failed" *ngIf="formCtrls.ExpStartDate.invalid && formCtrls.ExpStartDate.touched">
+                开始时间必填
             </div>
             <ion-item>
                 <ion-label>结束时间</ion-label>
-                <ion-datetime formControlName="EndDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+                <ion-datetime formControlName="ExpEndDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
             </ion-item>
-            <div class="validation-failed" *ngIf="formCtrls.EndDate.invalid && formCtrls.EndDate.touched">
-              结束时间必填
+            <div class="validation-failed" *ngIf="formCtrls.ExpEndDate.invalid && formCtrls.ExpEndDate.touched">
+                结束时间必填
             </div>
             <ion-item>
                 <ion-label>部门</ion-label>
-                <ion-input text-right type="text" formControlName="Dept" placeholder="输入部门名称"></ion-input>
+                <ion-input text-right type="text" formControlName="ExpDeptName" placeholder="输入部门名称"></ion-input>
             </ion-item>
-            <div class="validation-failed" *ngIf="formCtrls.Dept.invalid && (formCtrls.Dept.touched || formCtrls.Dept.dirty )">
-              <div *ngIf="addForm.get('Dept').errors.required">部门必填</div>
-              <div *ngIf="addForm.get('Dept').errors.maxlength">最多输入20个字</div>
+            <div class="validation-failed" *ngIf="formCtrls.ExpDeptName.invalid && (formCtrls.ExpDeptName.touched || formCtrls.ExpDeptName.dirty )">
+                <div *ngIf="addForm.hasError('required', 'ExpDeptName')">部门必填</div>
+                <div *ngIf="addForm.hasError('maxlength', 'ExpDeptName')">最多输入20个字</div>
             </div>
             <ion-item>
                 <ion-label>职务</ion-label>
                 <ion-input text-right type="text" formControlName="Duty" placeholder="输入职务名称"></ion-input>
             </ion-item>
-            <div class="validation-failed" *ngIf="formCtrls.Duty.invalid && (formCtrls.Duty.touched || formCtrls.Duty.dirty )">
-              <div *ngIf="addForm.get('Duty').errors.required">职务必填</div>
-              <div *ngIf="addForm.get('Duty').errors.maxlength">最多输入30个字</div>
+            <div class="validation-failed" *ngIf="formCtrls.ExpDuty.invalid && (formCtrls.ExpDuty.touched || formCtrls.ExpDuty.dirty )">
+                <div *ngIf="addForm.hasError('required', 'ExpDuty')">职务必填</div>
+                <div *ngIf="addForm.hasError('maxlength', 'ExpDuty')">最多输入30个字</div>
             </div>
             <ion-item>
                 <ion-label>工作单位</ion-label>
-                <ion-input text-right type="text" formControlName="Company" placeholder="输入工作单位"></ion-input>
+                <ion-input text-right type="text" formControlName="ExpUnit" placeholder="输入工作单位"></ion-input>
             </ion-item>
-            <div class="validation-failed" *ngIf="formCtrls.Company.invalid && (formCtrls.Company.touched || formCtrls.Company.dirty )">
-              <div *ngIf="addForm.get('Company').errors.required">工作单位必填</div>
-              <div *ngIf="addForm.get('Company').errors.maxlength">最多输入20个字</div>
+            <div class="validation-failed" *ngIf="formCtrls.ExpUnit.invalid && (formCtrls.ExpUnit.touched || formCtrls.ExpUnit.dirty )">
+                <div *ngIf="addForm.hasError('required', 'ExpUnit')">工作单位必填</div>
+                <div *ngIf="addForm.hasError('maxlength', 'ExpUnit')">最多输入20个字</div>
             </div>
             <ion-item>
                 <ion-label stacked>备注<span class="optional">（选填）</span></ion-label>
-                <ion-textarea  formControlName="Remarks" placeholder="请输入备注"></ion-textarea>
+                <ion-textarea formControlName="ExpMemo" placeholder="请输入备注"></ion-textarea>
             </ion-item>
-            <div class="validation-failed" *ngIf="formCtrls.Remarks.invalid && (formCtrls.Remarks.touched || formCtrls.Remarks.dirty )">
-              最多输入180个字
+            <div class="validation-failed" *ngIf="formCtrls.ExpMemo.invalid && (formCtrls.ExpMemo.touched || formCtrls.ExpMemo.dirty )">
+                最多输入180个字
             </div>
         </ion-list>
     </form>

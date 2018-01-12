@@ -57,6 +57,22 @@ export class MeetingService {
     }
 
 
+    // 会议记录列表
+    MeetRecordLs(param): Observable<any>{
+        return this.httpService.postFormData("ashx/MeetRecordLs.ashx", param).map((res: Response) => res.json());
+    }
+    // 会议记录详情
+    MeetRecordDetail(param): Observable<any>{
+        return this.httpService.postFormData("ashx/MeetRecordDetail.ashx", param).map((res: Response) => res.json());
+    }
+    // 会议记录修改
+    MeetRecordMod(param): Observable<any>{
+        return this.httpService.postFormData("ashx/MeetRecordDetail.ashx", param).map((res: Response) => res.json());
+    }
+
+
+
+
 
 
 

@@ -1,44 +1,44 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>档案申请基本信息</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>档案申请基本信息</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <ion-card>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col col-auto>&emsp;申请人：</ion-col>
-          <ion-col class='right-info'>{{data.UserName}}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-auto>申请日期：</ion-col>
-          <ion-col class='right-info'>{{data.ApplicationDate}}</ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-auto>申请理由：</ion-col>
-          <ion-col class='right-info'>{{data.Reason}}</ion-col>
-        </ion-row>
-        <ion-row padding-top margin-top class='idivider'>
-          <ion-col col-auto>审批意见：</ion-col>
-          <ion-col  class='right-info' *ngIf="!readOnly">
-            <ion-textarea rows='5'  [(ngModel)]="ApprovalComments"></ion-textarea>
-          </ion-col>
-          <ion-col  class='right-info' *ngIf="readOnly">{{ApprovalComments}}</ion-col>
-        </ion-row>
+    <ion-card>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-auto>&emsp;申请人：</ion-col>
+                    <ion-col class='right-info'>{{data.UserName}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-auto>申请日期：</ion-col>
+                    <ion-col class='right-info'>{{data.ApplicationDate}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-auto>申请理由：</ion-col>
+                    <ion-col class='right-info'>{{data.Reason}}</ion-col>
+                </ion-row>
+                <ion-row padding-top margin-top class='idivider'>
+                    <ion-col col-auto>审批意见：</ion-col>
+                    <ion-col class='right-info' *ngIf="!readOnly">
+                        <ion-textarea rows='5' [disabled]="data.ApprovalDate != ''" [(ngModel)]="ApprovalComments"></ion-textarea>
+                    </ion-col>
+                    <ion-col class='right-info' *ngIf="readOnly">{{ApprovalComments}}</ion-col>
+                </ion-row>
 
 
-      </ion-grid>
-      <div padding-top text-center>
-        <button (click)='approve("已同意")' ion-button small icon-left color="secondary"><ion-icon name="md-checkmark"></ion-icon>同意使用</button>
-        <button (click)='approve("已拒绝")' ion-button small icon-left color="danger" outline><ion-icon name="md-close"></ion-icon>拒绝使用</button>
-      </div>
-    </ion-card-content>
+            </ion-grid>
+            <div padding-top text-center *ngIf="data.ApprovalDate != ''">
+                <button (click)='approve("已同意")' ion-button small icon-left color="secondary"><ion-icon name="md-checkmark"></ion-icon>同意使用</button>
+                <button (click)='approve("已拒绝")' ion-button small icon-left color="danger" outline><ion-icon name="md-close"></ion-icon>拒绝使用</button>
+            </div>
+        </ion-card-content>
 
-</ion-card>
+    </ion-card>
 
 </ion-content>

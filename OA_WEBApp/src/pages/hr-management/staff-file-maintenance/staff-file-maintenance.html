@@ -6,9 +6,9 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>员工档案维护</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>员工档案维护</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
@@ -19,17 +19,17 @@
         </ion-refresher-content>
     </ion-refresher>
     <ion-list>
-      <ion-item-sliding  *ngFor="let item of list"  (click)="doRead(item.Id)">
-        <ion-item >
-          <ion-avatar item-start><span>{{item.StaffNumber}}</span></ion-avatar>
-          <h2>{{item.Name}}•{{item.Sex}}&emsp;<span float-right>{{item.FirstEdu}}</span></h2>
-          <h3>部门：{{item.Dept}}</h3>
-          <p>{{item.Indate}}入职</p>
-        </ion-item>
-        <ion-item-options side="right">
-          <button ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>
-        </ion-item-options>
-      </ion-item-sliding>
+        <ion-item-sliding *ngFor="let item of list" (click)="doRead(item.Id)">
+            <ion-item>
+                <ion-avatar item-start><span>{{item.BasicNum}}</span></ion-avatar>
+                <h2>{{item.BasicName}}•{{item.BasicSex}}&emsp;<span float-right>{{item.BasicFirstEduation}}</span></h2>
+                <h3>职务：{{item.BasicDuty}}</h3>
+                <p>{{item.BasicStatus}}</p>
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>
+            </ion-item-options>
+        </ion-item-sliding>
     </ion-list>
     <empty *ngIf="isEmpty"></empty>
     <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">

@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-
-/**
- * Generated class for the StaffFileMaintenanceWorkExperiencePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { StaffFileMaintenanceService } from '../staff-file-maintenance-service';
+import { NativeService } from '../../../../providers/NativeService';
 
 @IonicPage()
 @Component({
@@ -14,9 +9,19 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
   templateUrl: 'staff-file-maintenance-work-experience.html',
 })
 export class StaffFileMaintenanceWorkExperience {
+  readOnly: boolean = false;
+  Id: string = "";
+
   list: Array<any> = [];
   isShowAdd: boolean = true;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private nativeService: NativeService,
+              private staffFileMaintenanceService: StaffFileMaintenanceService,
+              private modalCtrl: ModalController) {
+    this.readOnly = this.navParams.get("readOnly") ? true : false;
+    this.Id = this.navParams.get("Id") || "";
+          
     this.getList();
   }
 
@@ -32,57 +37,37 @@ export class StaffFileMaintenanceWorkExperience {
       });
   }
 
-  doRead(id){
-    let parma = {
-      "Id": id,
-      "readOnly": (this.navParams.get("readOnly") ? true : null)
-    };
-    let modal = this.modalCtrl.create("StaffFileMaintenanceWorkExperienceAdd", parma);
+  doRead(item){
+    // let parma = {
+    //   "Id": id,
+    //   "readOnly": (this.navParams.get("readOnly") ? true : null)
+    // };
+    let modal = this.modalCtrl.create("StaffFileMaintenanceWorkExperienceAdd", {item: item});
     modal.present();
     modal.onDidDismiss(data => {
         data && console.log(data);
     });
   }
 
+  delete(i){
+    this.staffFileMaintenanceService.workExpDel({"id": this.list[i].ExpID}).subscribe(resJson => {
+      if (resJson.Result){
+        this.nativeService.showToast("删除成功", 800);
+        this.list.splice(i, 1);
+      }else{
+        this.nativeService.showToast(resJson.Data, 800);
+      }
+    });
+  }
+
   private getList(){
-    this.list = [
-      {
-        "Id": '1',
-        'StartDate': '2017-08-08', // 开始时间
-        'EndDate': '2017-08-08', // 结束时间
-        'Company': '青白江疾控预防', // 公司
-        'Dept': '部门1', // 部门
-        'Duty': '我是职务', // 职务
-        'Remarks': '我是备注' // 备注
-      },
-      {
-        "Id": '2',
-        'StartDate': '2017-08-08',
-        'EndDate': '2017-08-08',
-        'Company': '青白江疾控预防',
-        'Dept': '部门1',
-        'Duty': '我是职务',
-        'Remarks': ''
-      },
-      {
-        "Id": '9',
-        'StartDate': '2017-08-08',
-        'EndDate': '2017-08-08',
-        'Company': '青白江疾控预防',
-        'Dept': '部门2',
-        'Duty': '我是职务',
-        'Remarks': ''
-      },
-      {
-        "Id": '12',
-        'StartDate': '2017-08-08',
-        'EndDate': '2017-08-08',
-        'Company': '青白江疾控预防',
-        'Dept': '部门1',
-        'Duty': '我是职务',
-        'Remarks': '我是备注'
-      },
-    ];
+    this.staffFileMaintenanceService.getList({"id": this.Id}).subscribe(resJson => {
+      if (resJson.Result){
+        this.list = [...resJson.Data[0].ExpLs];
+      }else{
+        this.nativeService.showToast(resJson.Data, 800);
+      }
+    });
   }
 
 }

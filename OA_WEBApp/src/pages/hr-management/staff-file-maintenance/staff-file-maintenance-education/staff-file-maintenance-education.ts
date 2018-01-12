@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-
-/**
- * Generated class for the StaffFileMaintenanceEducationPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, ModalController, Refresher } from 'ionic-angular';
+import { StaffFileMaintenanceService } from '../staff-file-maintenance-service';
+import { NativeService } from '../../../../providers/NativeService';
 
 @IonicPage()
 @Component({
@@ -14,10 +9,19 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
   templateUrl: 'staff-file-maintenance-education.html',
 })
 export class StaffFileMaintenanceEducation {
+  Id: string = '';
+  readOnly: boolean = false;
 
   list: Array<any> = [];
   isShowAdd: boolean = true;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams, 
+              private staffFileMaintenanceService: StaffFileMaintenanceService,
+              private nativeService: NativeService,
+              private modalCtrl: ModalController) {
+    this.readOnly = this.navParams.get("readOnly") ? true : false;
+    this.Id = this.navParams.get("Id");
+
     this.getList();
   }
 
@@ -29,41 +33,42 @@ export class StaffFileMaintenanceEducation {
       let modal = this.modalCtrl.create("StaffFileMaintenanceEducationAddPage");
       modal.present();
       modal.onDidDismiss(data => {
-          data && console.log(data);
+        data && this.doRefresh(null);
       });
   }
 
-  doRead(id){
-    let parma = {
-      "Id": id,
-      "readOnly": (this.navParams.get("readOnly") ? true : null)
-    };
-    let modal = this.modalCtrl.create("StaffFileMaintenanceEducationAddPage", parma);
+  doRead(item){
+    let modal = this.modalCtrl.create("StaffFileMaintenanceEducationAddPage", {"item": item});
     modal.present();
-    modal.onDidDismiss(data => {
-        data && console.log(data);
+  }
+
+  delete(i){
+    this.staffFileMaintenanceService.sociologyDel({"id": this.list[i].EduID}).subscribe(resJson => {
+      if (resJson.Result){
+        this.nativeService.showToast("删除成功", 800);
+        this.list.splice(i, 1);
+      }else{
+        this.nativeService.showToast(resJson.Data, 800);
+      }
     });
   }
 
+  doRefresh(refresher: Refresher) {
+    this.list = [];
+    this.getList();
+    setTimeout(() => {
+      refresher && refresher.complete();
+    }, 1000);
+  }
+
   private getList(){
-    this.list = [
-      {
-        "Id": '1',
-        'StartDate': '2017-08-08', // 开始时间
-        'EndDate': '2017-08-08', // 结束时间
-        'School': '我是学校1', // 学校
-        'Major': '专业1', // 专业
-        'Remarks': '我是备注' // 备注
-      },
-      {
-        "Id": '2',
-        'StartDate': '2017-08-08',
-        'EndDate': '2017-08-08',
-        'School': '我是学校2',
-        'Major': '专业1',
-        'Remarks': ''
-      },
-    ];
+    this.staffFileMaintenanceService.getList({"id": this.Id}).subscribe(resJson => {
+      if (resJson.Result){
+        this.list = [...resJson.Data[0].EduLs];
+      }else{
+        this.nativeService.showToast(resJson.Data, 800);
+      }
+    });
   }
 
 }

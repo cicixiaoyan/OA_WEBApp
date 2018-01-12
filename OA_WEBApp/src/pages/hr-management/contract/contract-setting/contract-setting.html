@@ -5,11 +5,13 @@
 </ion-header>
 <ion-content style="background: #f4f4f4;">
 
-    <form [formGroup]="baseForm" (ngSubmit)="submit(baseForm.value)"  [ngClass]="{'form-readonly': readOnly}">
-        <ion-list  [ngClass]="{'collapsed': hideOne, 'expanded': !hideOne}">
-            <ion-list-header (click)="shrink('one')">员工信息<ion-icon  float-right name="arrow-forward"></ion-icon></ion-list-header>
+    <form [formGroup]="baseForm" (ngSubmit)="submit(baseForm.value)" [ngClass]="{'form-readonly': readOnly}">
+        <ion-list [ngClass]="{'collapsed': hideOne, 'expanded': !hideOne}">
+            <ion-list-header (click)="shrink('one')">员工信息
+                <ion-icon float-right name="arrow-forward"></ion-icon>
+            </ion-list-header>
             <div>
-                <ion-item #popoverContent  (click)="checkPeople($event)">
+                <ion-item #popoverContent (click)="checkPeople($event)">
                     <ion-label>工号</ion-label>
                     <ion-note item-end>{{baseForm.value.StaffNumber || '点击选择员工'}}</ion-note>
                     <!-- <ion-input styel='display:none' text-right readonly='true' formControlName="StaffNumber" ></ion-input> -->
@@ -19,7 +21,7 @@
 
                     <ion-item>
                         <ion-label>姓名</ion-label>
-                        <ion-input text-right formControlName="Name" readonly="true"></ion-input>
+                        <ion-input text-right formControlName="UserName" readonly="true"></ion-input>
                     </ion-item>
                     <ion-item>
                         <ion-label>性别</ion-label>
@@ -27,11 +29,11 @@
                     </ion-item>
                     <ion-item>
                         <ion-label>身份证号</ion-label>
-                        <ion-input text-right formControlName="IDC" readonly="true"></ion-input>
+                        <ion-input text-right formControlName="IDNumber" readonly="true"></ion-input>
                     </ion-item>
                     <ion-item>
                         <ion-label>所在部门</ion-label>
-                        <ion-input text-right formControlName="Dept" readonly="true"></ion-input>
+                        <ion-input text-right formControlName="DeptName" readonly="true"></ion-input>
                     </ion-item>
                     <ion-item>
                         <ion-label>职务</ion-label>
@@ -41,95 +43,103 @@
             </div>
         </ion-list>
 
-        <ion-list  [ngClass]="{'collapsed': hideTwo, 'expanded': !hideTwo}">
-            <ion-list-header (click)="shrink('two')">合同信息<ion-icon float-right name="arrow-forward"></ion-icon></ion-list-header>
+        <ion-list [ngClass]="{'collapsed': hideTwo, 'expanded': !hideTwo}">
+            <ion-list-header (click)="shrink('two')">合同信息
+                <ion-icon float-right name="arrow-forward"></ion-icon>
+            </ion-list-header>
             <div>
-              <ion-item>
-                  <ion-label>合同编号</ion-label>
-                  <ion-input text-right formControlName="ContractNumber" placeholder="请输入合同编号"></ion-input>
-              </ion-item>
-              <ion-item>
-                  <ion-label>合同名称<span class="optional">（选填）</span></ion-label>
-                  <ion-input text-right formControlName="ContractName" placeholder="请输入合同名称"></ion-input>
-              </ion-item>
-              <ion-item>
-                  <ion-label>合同类型</ion-label>
-                  <ion-select formControlName="ContractType" cancelText="取消" okText="确定" placeholder="请选择">
-                      <ion-option value="1">类型1</ion-option>
-                      <ion-option value="2">类型2</ion-option>
-                      <ion-option value="3">类型3</ion-option>
-                  </ion-select>
-              </ion-item>
-              <ion-item>
-                  <ion-label>有无期限</ion-label>
-                  <ion-select formControlName="HavePeriod" cancelText="取消" okText="确定" placeholder="请选择">
-                      <ion-option value="有">有</ion-option>
-                      <ion-option value="无">无</ion-option>
-                  </ion-select>
-              </ion-item>
-              <ion-item>
-                  <ion-label>是否转正</ion-label>
-                  <ion-select formControlName="IsPositive" cancelText="取消" okText="确定" placeholder="请选择">
-                      <ion-option value="已转正">已转正</ion-option>
-                      <ion-option value="未转正">未转正</ion-option>
-                  </ion-select>
-              </ion-item>
+                <ion-item>
+                    <ion-label>合同编号</ion-label>
+                    <ion-input text-right formControlName="ContractNum" placeholder="请输入合同编号"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>合同名称<span class="optional">（选填）</span></ion-label>
+                    <ion-input text-right formControlName="ContractName" placeholder="请输入合同名称"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>合同类型</ion-label>
+                    <ion-select formControlName="ContractType" cancelText="取消" okText="确定" placeholder="请选择">
+                        <ion-option value="1">类型1</ion-option>
+                        <ion-option value="2">类型2</ion-option>
+                        <ion-option value="3">类型3</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label>有无期限</ion-label>
+                    <ion-select formControlName="TimeLimit" cancelText="取消" okText="确定" placeholder="请选择">
+                        <ion-option value="有">有</ion-option>
+                        <ion-option value="无">无</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label>是否转正</ion-label>
+                    <ion-select formControlName="IsCorrect" cancelText="取消" okText="确定" placeholder="请选择">
+                        <ion-option value="已转正">已转正</ion-option>
+                        <ion-option value="未转正">未转正</ion-option>
+                    </ion-select>
+                </ion-item>
 
-              <ion-item>
-                  <ion-label>签约时间</ion-label>
-                  <ion-datetime formControlName="SigningDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
-              </ion-item>
-              <ion-item>
-                  <ion-label>合同年份<span class="optional">（选填）</span></ion-label>
-                  <ion-select formControlName="ContractYear" cancelText="取消" okText="确定" placeholder="请选择">
-                      <ion-option value="2013">2013</ion-option>
-                      <ion-option value="2014">2014</ion-option>
-                  </ion-select>
-              </ion-item>
-              <ion-item>
-                  <ion-label>合同状态</ion-label>
-                  <ion-select formControlName="ContractStatus" cancelText="取消" okText="确定" placeholder="请选择">
-                      <ion-option value="试用中">试用中</ion-option>
-                      <ion-option value="试用到期">试用到期</ion-option>
-                      <ion-option value="生效中">生效中</ion-option>
-                      <ion-option value="已到期">已到期</ion-option>
-                      <ion-option value="已解除">已解除</ion-option>
-                  </ion-select>
-              </ion-item>
+                <ion-item>
+                    <ion-label>签约时间</ion-label>
+                    <ion-datetime formControlName="SignDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-label>合同年份<span class="optional">（选填）</span></ion-label>
+                    <ion-select formControlName="ContractYear" cancelText="取消" okText="确定" placeholder="请选择">
+                        <ion-option value="2013">2013</ion-option>
+                        <ion-option value="2014">2014</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label>合同状态</ion-label>
+                    <ion-select formControlName="ContractStatus" cancelText="取消" okText="确定" placeholder="请选择">
+                        <ion-option value="试用中">试用中</ion-option>
+                        <ion-option value="试用到期">试用到期</ion-option>
+                        <ion-option value="生效中">生效中</ion-option>
+                        <ion-option value="已到期">已到期</ion-option>
+                        <ion-option value="已解除">已解除</ion-option>
+                    </ion-select>
+                </ion-item>
             </div>
         </ion-list>
 
         <ion-list [ngClass]="{'collapsed': hideThree, 'expanded': !hideThree}">
-            <ion-list-header (click)="shrink('three')">试用期信息<ion-icon float-right name="arrow-forward"></ion-icon></ion-list-header>
-            <div >
+            <ion-list-header (click)="shrink('three')">试用期信息
+                <ion-icon float-right name="arrow-forward"></ion-icon>
+            </ion-list-header>
+            <div>
                 <ion-item>
                     <ion-label>试用期限<span class="optional">（选填）</span></ion-label>
-                    <ion-input text-right formControlName="TrialPeriod" placeholder="请输入试用期限"></ion-input>
+                    <ion-input text-right formControlName="ProbationPeriod" placeholder="请输入试用期限"></ion-input>
                 </ion-item>
                 <ion-item>
-                  <ion-label>试用基本工资<span class="optional">（选填）</span></ion-label>
-                  <ion-input text-right formControlName="TrialBasicSalary" placeholder="请输入试用期限"></ion-input>
+                    <ion-label>试用基本工资<span class="optional">（选填）</span></ion-label>
+                    <ion-input text-right formControlName="BasicWage" placeholder="请输入试用期限"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label>试用生效日期</ion-label>
-                    <ion-datetime formControlName="TrialEffectiveDate" placeholder="点击添加" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+                    <ion-datetime formControlName="ContractStartDate" placeholder="点击添加" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
                 </ion-item>
                 <ion-item>
                     <ion-label>试用到期日期</ion-label>
-                    <ion-datetime formControlName="TrialExpirationDate" placeholder="点击添加" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+                    <ion-datetime formControlName="ContractEndDate" placeholder="点击添加" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
                 </ion-item>
             </div>
         </ion-list>
 
-        <ion-list  [ngClass]="{'collapsed': hideFour, 'expanded': !hideFour}">
-            <ion-list-header (click)="shrink('four')">{{Id !='' ?'合同内容及':''}}附件<ion-icon float-right name="arrow-forward"></ion-icon></ion-list-header>
+        <ion-list [ngClass]="{'collapsed': hideFour, 'expanded': !hideFour}">
+            <ion-list-header (click)="shrink('four')">{{Id !='' ?'合同内容及':''}}附件
+                <ion-icon float-right name="arrow-forward"></ion-icon>
+            </ion-list-header>
             <div>
                 <div *ngIf="Id !=''">
-                  <div *ngIf="ContactContent != '';else elseBlock">
-                    <iframe   [srcdoc]='ContactContent' id="iframe" class="iframe" onload="this.height='100%'" style="width:100%;overflow-x:auto" sandbox="allow-scripts allow-top-navigation allow-pointer-lock allow-same-origin allow-popups allow-forms">
+                    <div *ngIf="ContactContent != '';else elseBlock">
+                        <iframe [srcdoc]='ContactContent' id="iframe" class="iframe" onload="this.height='100%'" style="width:100%;overflow-x:auto" sandbox="allow-scripts allow-top-navigation allow-pointer-lock allow-same-origin allow-popups allow-forms">
                     </iframe>
-                  </div>
-                  <ng-template #elseBlock><div style='background: #fff;color: red;padding: 1em;}'>合同内容未添加</div></ng-template>
+                    </div>
+                    <ng-template #elseBlock>
+                        <div style='background: #fff;color: red;padding: 1em;'>合同内容未添加</div>
+                    </ng-template>
                 </div>
 
                 <ion-item>
@@ -143,10 +153,10 @@
             </div>
         </ion-list>
         <ion-list>
-          <ion-item>
-              <ion-label stacked text-left>备注<span class="optional">（选填）</span></ion-label>
-              <ion-textarea  formControlName="Remarks" placeholder="输入备注信息"></ion-textarea>
-          </ion-item>
+            <ion-item>
+                <ion-label stacked text-left>备注<span class="optional">（选填）</span></ion-label>
+                <ion-textarea formControlName="Remarks" placeholder="输入备注信息"></ion-textarea>
+            </ion-item>
         </ion-list>
         <div class='text-ios-danger' *ngIf="!readOnly">&emsp;注：合同内容请到PC端进行添加或修改</div>
     </form>

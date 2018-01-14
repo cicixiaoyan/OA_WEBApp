@@ -1,14 +1,10 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController,
-    AlertController, ActionSheetController, PopoverController } from 'ionic-angular';
+    AlertController, PopoverController } from 'ionic-angular';
 
 import { GlobalData } from '../../../providers/GlobalData';
 import { NativeService } from '../../../providers/NativeService';
 import { FileService } from "../../../providers/FileService";
-import { FileObj } from "../../../model/FileObj";
-import { FILE_SERVE_URL } from "../../../providers/Constants";
-import { FileChooser } from '@ionic-native/file-chooser';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MailService } from "../mailService";
 import { Utils } from '../../../providers/Utils';
@@ -42,13 +38,10 @@ export class MailWrite {
     @ViewChild("popoverContent", { read: ElementRef }) content: ElementRef;
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
-                public actionSheetCtrl: ActionSheetController,
                 private popoverCtrl: PopoverController,
                 private fileService: FileService,
                 public nativeService: NativeService,
-                private fileChooser: FileChooser,
                 private alertCtrl: AlertController,
-                private fileTransfer: FileTransfer,
                 private viewCtrl: ViewController,
                 private globalData: GlobalData,
                 private mailService: MailService,
@@ -96,62 +89,13 @@ export class MailWrite {
     }
 
     addAffix() {
-        let options = {
-            targetWidth: 400,
-            targetHeight: 400
-        };
-        let actionSheet = this.actionSheetCtrl.create({
-            title: '添加附件选择',
-            buttons: [
-                {
-                    text: '相册',
-                    handler: () => {
-                        this.nativeService.getPictureByPhotoLibrary(options).subscribe(imageBase64 => {
-                            this.getPictureSuccess(imageBase64);
-                        });
-
-                    }
-                }, {
-                    text: '拍照',
-                    handler: () => {
-                        this.nativeService.getPictureByCamera(options).subscribe(imageBase64 => {
-                            this.getPictureSuccess(imageBase64);
-                        });
-                    }
-                }, {
-                    text: '文件',
-                    handler: () => {
-                        this.fileChooser.open().then(fileURL => {
-                            let mimeType = fileURL.toLowerCase().split(".").splice(-1)[0];
-                            let pathOption: FileUploadOptions = {
-                                "fileKey": "file",
-                                "fileName": fileURL.substr(fileURL.lastIndexOf('/') + 1),
-                                "mimeType": Utils.getFileMimeType( mimeType ),
-                                "headers" : {
-                                    "Connection": "close",
-                                    "Token": this.globalData.token
-                                },
-                                "chunkedMode": false,
-                                "httpMethod" : "POST",
-                                "params": {"type": 1}
-                            };
-                            let url = encodeURI(FILE_SERVE_URL + "ashx/AttachUpload.ashx");
-                            console.log(fileURL, url, pathOption, true);
-                            return this.upload(fileURL, url, pathOption, true);
-                        }).catch(err => {
-                            console.log(err);
-                        });
-                    }
-                }, {
-                    text: '取消',
-                    role: 'cancel',
-                    handler: () => {
-                        console.log('Cancel clicked');
-                    }
-                }
-            ]
+        this.fileService.uploadAffix(1).subscribe(data => {
+            console.log(data, "上传成功");
+            this.haveAffix = true;
+            let Data = JSON.parse(data.response).Data;
+            this.attName = Data[0].OldName;
+            this.attNo = Data[0].AttNo;
         });
-        actionSheet.present();
     }
 
     checkPeople(myEvent) {
@@ -169,60 +113,6 @@ export class MailWrite {
             }
 
         });
-    }
-
-    private getPictureSuccess(imageBase64) {
-        this.imageBase64 = <string>imageBase64;
-        this.affixPath = "data:image/jpg;base64," + imageBase64;
-        let fileObj = <FileObj>{ "base64": this.imageBase64 };
-        this.fileService.uploadByBase64(fileObj).subscribe(result => {// 上传图片到文件服务器
-            if (result) {
-                let origPath = FILE_SERVE_URL + result.origPath;
-                console.log(origPath);
-            }
-        });
-    }
-
-
-
-    /**
-     * 上传
-     */
-    upload(fileUrl, url, options, trustAllHosts?: boolean) {
-        let alert = this.alertCtrl.create({
-            title: '上传进度：0%',
-            enableBackdropDismiss: false,
-            buttons: ['后台上传']
-        });
-        alert.present();
-
-        const fileTransfer: FileTransferObject = this.fileTransfer.create();
-
-        fileTransfer.onProgress((event: ProgressEvent) => {
-            this.attLength = (event.total / 1024).toFixed(2) + 'Kb';
-            let num = Math.floor(event.loaded / event.total * 100);
-            if (num === 100) {
-                alert.dismiss();
-            } else {
-                let title = document.getElementsByClassName('alert-title')[0];
-                title && (title.innerHTML = '上传进度：' + url + event.loaded + " " + event.total + '%');
-            }
-        });
-        return fileTransfer.upload(fileUrl, url, options, trustAllHosts).then((data) => {
-            console.log(data, "上传成功");
-            this.haveAffix = true;
-            let Data = JSON.parse(data.response).Data;
-            this.attName = Data[0].OldName;
-            this.attNo = Data[0].AttNo;
-            
-          }, (err) => {
-            // error
-            console.log(err);
-          }).catch((err) => {
-            console.log(err);
-            alert.dismiss();
-            this.nativeService.showToast(err);
-          });
     }
 
     dismiss() {

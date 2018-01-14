@@ -14,25 +14,21 @@ export class BacklogService {
     constructor(public httpService: HttpService) {
     }
 
-    getNotDoneList(param?) { // uid, PageIndex, PageSize, Status
+    TodoApproveLs(param?) {// 待办列表
+        param.verb = "3";
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
+    }
+    approveStep1(param?) {// 审批通过或驳回,返回id
+        param.verb = "21";
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
+    }
+    approveste2(param?) {// 审批通过或驳回
+        param.verb = "22";
         return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
     }
 
-    getDoneList(param?) {
-        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
-    }
 
-    getDone(param?) {// id
-        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map((res: Response) => res.json());
-    }
 
-    getNotDone(param?) {// id
-        return this.httpService.postFormData('/ashx/TodoDetail.ashx', param).map((res: Response) => res.json());
-    }
-
-    TodoApprove(param?) {// ISPass
-        return this.httpService.postFormData('/ashx/TodoApprove.ashx', param).map((res: Response) => res.json());
-    }
 
     //   getInboxList(param?):Observable<any>{
     //       return this.httpService.postFormData("url",param).map((res: Response) => res.json());

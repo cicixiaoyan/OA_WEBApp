@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-an
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ContractService } from '../contract-service';
 import { NativeService } from '../../../../providers/NativeService';
+import { FileService } from '../../../../providers/FileService';
+import { FILE_SERVE_URL } from '../../../../providers/Constants';
 @IonicPage()
 @Component({
   selector: 'page-contract-setting',
@@ -26,7 +28,8 @@ export class ContractSettingPage {
               private popoverCtrl: PopoverController,
               private FormBuilder: FormBuilder,
               private contractService: ContractService,
-              private nativeService: NativeService
+              private nativeService: NativeService,
+              private fileService: FileService
             ) {
       this.readOnly = this.navParams.get("readOnly") ? true : false;
       this.Id = this.navParams.get("Id") || '';
@@ -53,12 +56,13 @@ export class ContractSettingPage {
         "ContractStartDate": ['', []], // 试用生效日期
         "ContractEndDate": ['', []], // 试用到期日期
 
-        "Memo": ['', []] // 备注
+        "Memo": ['', []], // 备注
+        "Attch": [{}, []]
       });
       if (this.Id != ""){
         this.contractService.getList({"id": this.Id}).subscribe(resJson => {
           if (resJson.Result){
-            this.baseForm.patchValue(resJson.Data);
+            this.baseForm.patchValue(resJson.Data[0]);
           }else{
             this.nativeService.showToast(resJson.Data, 800);
           }
@@ -129,6 +133,16 @@ export class ContractSettingPage {
           }
       });
   }
+
+  downloadAffix(path, name) {
+    const target = path.split("/").pop();
+    // let url = "http://192.168.0.49:789/Attach/flow/Work/201111302315473908417.pdf";
+    this.fileService.download1(FILE_SERVE_URL + path, target).subscribe((path) => {
+      this.fileService.openFile(path).subscribe(() => {
+        
+      });
+    });
+}
 
 
 }

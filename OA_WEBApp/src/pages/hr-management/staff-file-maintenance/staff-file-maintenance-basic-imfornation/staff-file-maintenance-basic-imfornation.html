@@ -11,9 +11,9 @@
 
     <form [formGroup]="baseForm" (ngSubmit)="sent(baseForm.value)" [ngClass]="{'form-readonly': readOnly}">
         <div padding text-center class="light-bg">
-            <img class="photo" src="./assets/img/logo.png" alt="" round>
+            <img (click)="addPhoto()" class="photo" [src]="photoSrc" alt="" round>
             <div>
-                <button ion-button color="energized" small outline>修改</button>
+                <button ion-button color="energized" (click)="addPhoto()" small outline>修改</button>
                 <button ion-button color="danger" small outline>删除</button>
             </div>
         </div>
@@ -60,11 +60,7 @@
                 <ion-item>
                     <ion-label>民族</ion-label>
                     <ion-select formControlName="BasicNation" cancelText="取消" okText="确定" placeholder="请选择">
-                        <ion-option value="汉族">汉族</ion-option>
-                        <ion-option value="傣族">傣族</ion-option>
-                        <ion-option value="土家">土家</ion-option>
-                        <ion-option value="苗族">苗族</ion-option>
-                        <ion-option value="其他">其他</ion-option>
+                        <ion-option *ngFor="let option of nationLs" [value]="option.id">{{option.name}}</ion-option>
                     </ion-select>
                 </ion-item>
                 <div class="validation-failed" *ngIf="formCtrls.BasicNation.invalid && formCtrls.BasicNation.touched">民族必选</div>
@@ -133,9 +129,7 @@
                 <ion-item>
                     <ion-label>专业<span class="optional">（选填）</span></ion-label>
                     <ion-select formControlName="BasicFirstMajor" cancelText="取消" okText="确定" placeholder="请选择">
-                        <ion-option value="专业1">专业1</ion-option>
-                        <ion-option value="专业2">专业2</ion-option>
-                        <ion-option value="专业3">专业3</ion-option>
+                        <ion-option *ngFor="let option of majorLs" [value]="option.id">{{option.name}}</ion-option>
                     </ion-select>
                 </ion-item>
                 <ion-item>
@@ -217,9 +211,7 @@
                 <ion-item>
                     <ion-label>所属部门</ion-label>
                     <ion-select formControlName="BasicDeptId" cancelText="取消" okText="确定" placeholder="请选择">
-                        <ion-option value="1">青白江疾病预防控制中心</ion-option>
-                        <ion-option value="2">部门2</ion-option>
-                        <ion-option value="3">部门3</ion-option>
+                        <ion-option *ngFor="let option of deptLs" [value]="option.id">{{option.name}}</ion-option>
                     </ion-select>
                 </ion-item>
                 <div class="validation-failed" *ngIf="formCtrls.BasicDeptId.invalid && (formCtrls.BasicDeptId.touched || formCtrls.BasicDeptId.dirty )">
@@ -228,9 +220,7 @@
                 <ion-item>
                     <ion-label>职务</ion-label>
                     <ion-select formControlName="BasicDuty" cancelText="取消" okText="确定" placeholder="请选择">
-                        <ion-option value="1">职务1</ion-option>
-                        <ion-option value="2">职务2</ion-option>
-                        <ion-option value="3">职务3</ion-option>
+                        <ion-option *ngFor="let option of dutyLs" [value]="option.id">{{option.name}}</ion-option>
                     </ion-select>
                 </ion-item>
                 <div class="validation-failed" *ngIf="formCtrls.BasicDuty.invalid && (formCtrls.BasicDuty.touched || formCtrls.BasicDuty.dirty )">
@@ -239,9 +229,7 @@
                 <ion-item>
                     <ion-label>职称<span class="optional">（选填）</span></ion-label>
                     <ion-select formControlName="BasicTitle" cancelText="取消" okText="确定" placeholder="请选择">
-                        <ion-option value="1">职务1</ion-option>
-                        <ion-option value="2">职务2</ion-option>
-                        <ion-option value="3">职务3</ion-option>
+                        <ion-option *ngFor="let option of titleLs" [value]="option.id">{{option.name}}</ion-option>
                     </ion-select>
                 </ion-item>
                 <ion-item>
@@ -269,8 +257,7 @@
                 <ion-item>
                     <ion-label>员工性质</ion-label>
                     <ion-select formControlName="BasicNature" cancelText="取消" okText="确定" placeholder="请选择">
-                        <ion-option value="在编">在编</ion-option>
-                        <ion-option value="非在编">非在编</ion-option>
+                        <ion-option *ngFor="let option of natureLs" [value]="option.id">{{option.name}}</ion-option>
                     </ion-select>
                 </ion-item>
                 <ion-item>
@@ -326,6 +313,6 @@
     </form>
 
 </ion-content>
-<ion-footer>
+<ion-footer *ngIf="!readOnly">
     <button ion-button full color="danger" [disabled]="baseForm.invalid" (click)=sent(baseForm.value)>保存</button>
 </ion-footer>

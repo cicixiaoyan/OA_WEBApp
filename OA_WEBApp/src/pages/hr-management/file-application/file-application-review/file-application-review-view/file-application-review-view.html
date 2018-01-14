@@ -33,7 +33,7 @@
 
 
             </ion-grid>
-            <div padding-top text-center *ngIf="data.ApprovalDate != ''">
+            <div padding-top text-center *ngIf="data.ApprovalDate == ''">
                 <button (click)='approve("已同意")' ion-button small icon-left color="secondary"><ion-icon name="md-checkmark"></ion-icon>同意使用</button>
                 <button (click)='approve("已拒绝")' ion-button small icon-left color="danger" outline><ion-icon name="md-close"></ion-icon>拒绝使用</button>
             </div>

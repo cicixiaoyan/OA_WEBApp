@@ -13,6 +13,7 @@ import { GlobalData } from "../../providers/GlobalData";
 
 // import { TabsPage } from '../tabs/tabs';
 import { HttpService } from "../../providers/HttpService";
+import { NavController } from 'ionic-angular/navigation/nav-controller';
 @IonicPage()
 
 @Component({
@@ -35,7 +36,8 @@ export class LoginPage {
                 private alertCtrl: AlertController,
                 private globalData: GlobalData,
                 private loginService: LoginService,
-                private httpService: HttpService
+                private httpService: HttpService,
+                private NavCtrl: NavController
     ) {
 
         this.loginForm = this.formBuilder.group({
@@ -45,7 +47,7 @@ export class LoginPage {
     }
 
     ionViewWillEnter() {
-        this.canLeave = false;
+        this.canLeave = true;
         this.storage.get('UserInfo').then(userInfo => {
             this.userInfo = userInfo && userInfo.user ? userInfo.user : null;
         });

@@ -57,23 +57,11 @@ export class MeetingMinutesDetaiilPage {
     let id = {"id": this.navParams.get("Id")};
     this.readOnly = this.navParams.get("readOnly") ? true : false;
 
-    this.meetingService.MeetPlaceLs().subscribe((resJson) => {
-      if (resJson.Result)  this.MeetPlaceLs = resJson.Data;
-    });
-
-    this.meetingService.MeetTypeLs().subscribe((resJson) => {
-      if (resJson.Result)  this.MeetTypeLs = resJson.Data;
-    });
-
-    this.meetingService.GetDeptLs().subscribe((resJson) => {
-      if (resJson.Result)  this.DeptLs = resJson.Data;
-    });
-
     this.meetingService.MeetRecordDetail(id).subscribe((resJson) => {
       if (resJson.Result){
         this.detail = resJson.Data;
         this.FileNewName = resJson.Data.FileNewName;
-        this.writeForm.patchValue(resJson.Data[0]);
+        this.writeForm.patchValue(resJson.Data);
 
       }else{
         this.nativeService.showToast(resJson.Data, 800);
@@ -92,6 +80,7 @@ export class MeetingMinutesDetaiilPage {
     console.log('ionViewDidLoad MeetingWritePage');
   }
   save(data){
+    data.Uid = this.meetingService.httpService.globalData.Uid;
     this.meetingService.MeetRecordMod(data).subscribe((resJson) => {
       if (resJson.Result){
         this.nativeService.showToast("保存成功", 888);
@@ -105,9 +94,6 @@ export class MeetingMinutesDetaiilPage {
     this.fileService.download(this.writeForm.value.AttathUrl, this.writeForm.value.Attath).subscribe();
   }
 
-  aprove(){
-
-  }
 
   close(){
     this.navCtrl.pop();

@@ -20,23 +20,34 @@ export class MeetingService {
     getList(param?): Observable<any>{
         return this.httpService.postFormData("ashx/MeetLs.ashx", param).map((res: Response) => res.json());
     }
-
+    // 添加会议
     write(param): Observable<any>{
         return this.httpService.postFormData("ashx/MeetAdd.ashx", param).map((res: Response) => res.json());
     }
-
+    // 会议详情
     read(param): Observable<any> {
         return this.httpService.postFormData("ashx/MeetDetail.ashx", param).map((res: Response) => res.json());
     }
-
+    // 修改会议
     mod(param): Observable<any>  {
+        param.verb = "2";
         return this.httpService.postFormData("ashx/MeetMod.ashx", param).map((res: Response) => res.json());
     }
-
+    // 删除会议
+    del(param): Observable<any>  {
+        param.verb = "1";
+        return this.httpService.postFormData("ashx/MeetMod.ashx", param).map((res: Response) => res.json());
+    }
+    // 会议送审
+    goSp(param): Observable<any>  {
+        param.verb = "4";
+        return this.httpService.postFormData("ashx/MeetMod.ashx", param).map((res: Response) => res.json());
+    }
+    // 会议室列表
     MeetPlaceLs(): Observable<any>{
         return this.httpService.postFormData("ashx/MeetPlaceLs.ashx", {}).map((res: Response) => res.json());
     }
-
+    // 会议类型
     MeetTypeLs(): Observable<any>{
         return this.httpService.postFormData("ashx/MeetTypeLs.ashx", {}).map((res: Response) => res.json());
     }
@@ -46,12 +57,12 @@ export class MeetingService {
         let MeetTypeLs = this.httpService.postFormData("ashx/MeetTypeLs.ashx", {}).map((res: Response) => res.json());
         return Observable.forkJoin([MeetPlaceLs, MeetTypeLs]);
     }
-
+    // 部门列表
     GetDeptLs(): Observable<any>{
         return this.httpService.postFormData("ashx/BmLs.ashx", {}).map((res: Response) => res.json());
     }
 
-
+    // 会议查询
     MeetFindLs(param): Observable<any>{
         return this.httpService.postFormData("ashx/MeetFindLs.ashx", param).map((res: Response) => res.json());
     }
@@ -67,7 +78,20 @@ export class MeetingService {
     }
     // 会议记录修改
     MeetRecordMod(param): Observable<any>{
-        return this.httpService.postFormData("ashx/MeetRecordDetail.ashx", param).map((res: Response) => res.json());
+        return this.httpService.postFormData("ashx/MeetRecordMod.ashx", param).map((res: Response) => res.json());
+    }
+    // 会议审批
+    MeetSp(param): Observable<any>{
+        return this.httpService.postFormData("ashx/MeetSp.ashx", param).map((res: Response) => res.json());
+    }
+
+    // 会议室列表
+    MeetRoomLs(param): Observable<any>{
+        return this.httpService.postFormData("ashx/MeetMagerLs.ashx", param).map((res: Response) => res.json());
+    }
+    // 会议室详情
+    MeetRoomView(param): Observable<any>{
+        return this.httpService.postFormData("ashx/MeetMagerDetail.ashx", param).map((res: Response) => res.json());
     }
 
 

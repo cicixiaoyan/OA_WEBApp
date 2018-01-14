@@ -78,7 +78,7 @@
                     <ion-label>附件
                         <span class="optional">（选填）</span>
                     </ion-label>
-                    <ion-input type="text" formControlName="FileOldName" (click)="viewAffix()" placeholder="点击添加"></ion-input>
+                    <ion-input type="text" formControlName="Attath" [disabled]="writeForm.value.Attath == ''" (click)="viewAffix()" placeholder="无"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label>实际情况</ion-label>

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { BacklogService } from '../backlogService';
 import { NativeService } from '../../../../providers/NativeService';
 import { FileService } from '../../../../providers/FileService';
+import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 /**
  * Generated class for the BacklogDetail page.
  *
@@ -18,14 +19,20 @@ export class BacklogDetail {
 
     isComplete: boolean = false;
     item = {
-        Attachment: '',
-        Id: '',
-        Status: '',
-        Step: '',
-        Template: '',
-        Title: '',
-        TemplateType: '',
-        WorkNumber: '',
+        "Id": '',
+        "WorkNextNodeID": '',
+        "WNo": '',
+        "Title": '',
+        "WID": '',
+        "WorkNumber": '',
+        "UrgencyLevel": '',
+        "Originator": '',
+        "Step": '',
+        "FromTp": '',
+        "TemplateType": '',
+        "Template": '',
+        "Attachment": '',
+        "Status": '',
     };
     opinion: '';
     downloaded: boolean = false;
@@ -35,7 +42,8 @@ export class BacklogDetail {
                 public navParams: NavParams,
                 private backlogService: BacklogService,
                 private nativeService: NativeService,
-                private fileService: FileService
+                private fileService: FileService,
+                private modalCtrl: ModalController
             ) {
         console.log(this.navParams.get("id"));
         this.initializeItems();
@@ -43,10 +51,10 @@ export class BacklogDetail {
 
     initializeItems() {
         let data = {
-            "Id": this.navParams.get("id"),
+            "id": this.navParams.get("id"),
             "Uid": this.backlogService.httpService.globalData.Uid
         };
-        this.backlogService.getDone(data).subscribe((resJson) => {
+        this.backlogService.TodoApproveLs(data).subscribe((resJson) => {
             if (resJson.Result){
                 this.item = resJson.Data;
             }
@@ -62,32 +70,32 @@ export class BacklogDetail {
     }
 
     approved(bol: boolean) {
-        console.log("审批通过");
         let data = {
             'Id': this.item.Id,
             'Template': this.item.Template,
-            // 'TemplateType': this.item.TemplateType,
+            'TemplateType': this.item.TemplateType,
             'Title': this.item.Title,
-            'ISPass': bol ? 0 : 1,
-            'Uid': this.backlogService.httpService.globalData.Uid,
-            'Name': this.backlogService.httpService.globalData.Name,
-            'affName': this.affName,
+            // 'ISPass': bol ? 0 : 1,
+            'Userid': this.backlogService.httpService.globalData.Uid,
+            'UserName': this.backlogService.httpService.globalData.Name,
+            'FileName': this.affName,
             'FileNewName': this.FileNewName,
             'Opinion': this.opinion,
-            // 'Step': this.item.Step,
+            'Step': this.item.Step,
         };
-        this.backlogService.TodoApprove(data).subscribe(resJson => {
-            if (resJson.Result){
-                this.nativeService.showToast("审核成功");
-                this.navCtrl.pop();
-            }else{
-                this.nativeService.showToast(resJson.Data);
-            }
-        });
-    }
+      
+        this.backlogService.approveStep1(data).subscribe(resJson => {
+            if (!resJson.Result) return this.nativeService.showToast(resJson.Data);
 
-    cancel() {
-        this.navCtrl.pop();
+            this.nativeService.showToast("提交审核意见成功");
+            let modal = bol ? 
+                this.modalCtrl.create("BacklogApproveSuccussPage", {"content": this.item, "id": resJson.Data}) :
+                this.modalCtrl.create("BacklogApproveFailPage", {"content": this.item, "id": resJson.Data});
+            modal.present();
+            modal.onDidDismiss(data => {
+                data && this.navCtrl.pop();   
+            });
+        });
     }
 
     upload(){

@@ -1,17 +1,10 @@
-<!--
-  Generated template for the MeetingRoomSetPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{isWrite ? "添加会议室" : "会议室详情"}}</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>{{isWrite ? "添加会议室" : "会议室详情"}}</ion-title>
+    </ion-navbar>
 
 </ion-header>
-
 
 <ion-content>
     <form [formGroup]="setForm" (ngSubmit)="save(setForm.value)">
@@ -19,45 +12,45 @@
             <ion-list>
                 <ion-item>
                     <ion-label>名称</ion-label>
-                    <ion-input text-right formControlName="Name" placeholder="请输入" ></ion-input>
+                    <ion-input text-right formControlName="MeetName" placeholder="请输入"></ion-input>
                 </ion-item>
-                <div *ngIf="!setForm.controls.Name.valid && (setForm.controls.Name.touched || setForm.controls.Name.dirty )" class="validation-failed">
-                    <div *ngIf="setForm.get('Name').errors.required">名称必填</div>
-                    <div *ngIf="setForm.get('Name').errors.minlength">最少输入2个字</div>
-                    <div *ngIf="setForm.get('Name').errors.maxlength">最多输入20个字</div>
-                </div> 
+                <div *ngIf="formCtrls.MeetName.invalid && (formCtrls.MeetName.touched || formCtrls.MeetName.dirty )" class="validation-failed">
+                    <div *ngIf="setForm.hasError('required', 'MeetName')">名称必填</div>
+                    <div *ngIf="setForm.hasError('minlength', 'MeetName')">最少输入2个字</div>
+                    <div *ngIf="setForm.hasError('maxlength', 'MeetName')">最多输入20个字</div>
+                </div>
 
                 <ion-item>
                     <ion-label>管理人员</ion-label>
-                    <ion-input text-right  formControlName="Manager" placeholder="请输入" ></ion-input>
+                    <ion-input text-right formControlName="Manager" placeholder="请输入"></ion-input>
                 </ion-item>
-                <div *ngIf="!setForm.controls.Manager.valid && (setForm.controls.Manager.touched || setForm.controls.Manager.dirty )" class="validation-failed">
-                    <div *ngIf="setForm.get('Manager').errors.required">管理人员必填</div>
-                    <div *ngIf="setForm.get('Manager').errors.minlength">最少输入2个字</div>
-                    <div *ngIf="setForm.get('Manager').errors.maxlength">最多输入20个字</div>
-                </div> 
+                <div *ngIf="formCtrls.Manager.invalid && (formCtrls.MangerPerson.touched || formCtrls.MangerPerson.dirty )" class="validation-failed">
+                    <div *ngIf="setForm.hasError('required', 'MangerPerson')">管理人员必填</div>
+                    <div *ngIf="setForm.hasError('required', 'MangerPerson')">最少输入2个字</div>
+                    <div *ngIf="setForm.hasError('required', 'MangerPerson')">最多输入20个字</div>
+                </div>
 
 
                 <ion-item>
                     <ion-label>规模容量</ion-label>
-                    <ion-input text-right type="number" formControlName="Number" placeholder="请输入" ></ion-input>
+                    <ion-input text-right type="number" formControlName="Number" placeholder="请输入"></ion-input>
                 </ion-item>
-                <div *ngIf="!setForm.controls.Number.valid && (setForm.controls.Number.touched || setForm.controls.Number.dirty)" class="validation-failed">
-                    <div *ngIf="setForm.get('Number').errors.required">必填项</div>
-                    <div *ngIf="setForm.get('Number').errors.max">最大容量10000</div>
-                </div> 
+                <div *ngIf="formCtrls.Scale.invalid && (formCtrls.Scale.touched || formCtrls.Scale.dirty)" class="validation-failed">
+                    <div *ngIf="setForm.hasError('required', 'Scale')">必填项</div>
+                    <div *ngIf="setForm.hasError('required', 'Scale')">最大容量10000</div>
+                </div>
 
                 <ion-item>
                     <ion-label>联系电话<span class="optional">（选填）</span></ion-label>
-                    <ion-input text-right type="number"  formControlName="Mobile" placeholder="请输入" ></ion-input>
+                    <ion-input text-right type="number" formControlName="Phone" placeholder="请输入"></ion-input>
                 </ion-item>
-                <div *ngIf="!setForm.controls.Mobile.valid && (setForm.controls.Mobile.touched || setForm.controls.Mobile.dirty)" class="validation-failed">
+                <div *ngIf="formCtrls.Phone.invalid && (formCtrls.Phone.touched || formCtrls.Phone.dirty)" class="validation-failed">
                     请输入合法的联系电话
-                </div> 
+                </div>
 
                 <ion-item>
                     <ion-label>是否有服务人员<span class="optional">（选填）</span></ion-label>
-                    <ion-toggle formControlName="HaveAttendant"></ion-toggle>
+                    <ion-toggle formControlName="Flag"></ion-toggle>
                 </ion-item>
                 <ion-item>
                     <ion-label>所属部门<span class="optional">（选填）</span></ion-label>
@@ -67,16 +60,16 @@
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>简介<span class="optional">（选填）</span></ion-label>
-                    <ion-textarea  formControlName="Introduction"  placeholder="请输入"></ion-textarea>
+                    <ion-textarea formControlName="Detail" placeholder="请输入"></ion-textarea>
                 </ion-item>
-                <div *ngIf="!setForm.controls.Introduction.valid && (setForm.controls.Introduction.touched || setForm.controls.Introduction.dirty)" class="validation-failed">
+                <div *ngIf="formCtrls.Detail.invalid && (formCtrls.Detail.touched || formCtrls.Detail.dirty)" class="validation-failed">
                     最多可输入180个字
-                </div> 
-              
+                </div>
+
             </ion-list>
             <div padding text-center>
-                <button ion-button type="submit" color="danger" [disabled]="!setForm.valid">保存</button>
-                <button ion-button clear small navPop>取消修改</button>
+                <button ion-button type="submit" color="danger" (click)="save(setForm.value)" [disabled]="setForm.invalid">保存</button>
+                <button ion-button clear small navPop (click)="navCtrl.pop()">关闭</button>
             </div>
         </div>
     </form>

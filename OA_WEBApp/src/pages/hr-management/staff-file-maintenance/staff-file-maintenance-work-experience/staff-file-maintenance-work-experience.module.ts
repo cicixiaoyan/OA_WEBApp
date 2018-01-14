@@ -3,6 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { StaffFileMaintenanceWorkExperience } from './staff-file-maintenance-work-experience';
 import { StaffFileMaintenanceWorkExperienceAddModule } 
 from './staff-file-maintenance-work-experience-add/staff-file-maintenance-work-experience-add.module';
+import { StaffFileMaintenanceService } from '../staff-file-maintenance-service';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ from './staff-file-maintenance-work-experience-add/staff-file-maintenance-work-e
     IonicPageModule.forChild(StaffFileMaintenanceWorkExperience),
     StaffFileMaintenanceWorkExperienceAddModule
   ],
-  exports: [StaffFileMaintenanceWorkExperience]
+  exports: [StaffFileMaintenanceWorkExperience],
+  providers: [StaffFileMaintenanceService]
 })
 export class StaffFileMaintenanceWorkExperiencePageModule {}

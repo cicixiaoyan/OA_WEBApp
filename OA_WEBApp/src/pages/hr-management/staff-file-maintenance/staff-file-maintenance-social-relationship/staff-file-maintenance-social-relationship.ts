@@ -26,7 +26,7 @@ export class StaffFileMaintenanceSocialRelationship {
               private staffFileMaintenanceService: StaffFileMaintenanceService,
               public navParams: NavParams) {
     this.readOnly = this.navParams.get("readOnly") ? true : false;
-    this.Id = this.navParams.get("Id") || "";
+    this.Id = this.navParams.get("Id");
             
     this.getList();
   }
@@ -36,7 +36,7 @@ export class StaffFileMaintenanceSocialRelationship {
   }
 
   add(){
-    let modal = this.modalCtrl.create("StaffFileMaintenanceSocialRelationshipAddPage");
+    let modal = this.modalCtrl.create("StaffFileMaintenanceSocialRelationshipAddPage", {"id": this.Id});
     modal.present();
     modal.onDidDismiss(data => {
         if (!!data && data.change == "true"){
@@ -54,7 +54,7 @@ export class StaffFileMaintenanceSocialRelationship {
   }
 
   doRead(item){
-    let modal = this.modalCtrl.create("StaffFileMaintenanceSocialRelationshipAddPage", {"item": item});
+    let modal = this.modalCtrl.create("StaffFileMaintenanceSocialRelationshipAddPage", {"item": item, "id": this.Id});
     modal.present();
   }
 

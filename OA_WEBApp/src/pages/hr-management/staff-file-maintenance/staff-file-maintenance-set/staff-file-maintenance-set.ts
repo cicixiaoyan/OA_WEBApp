@@ -1,13 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavParams, Platform, NavController } from 'ionic-angular';
+import { IonicPage, NavParams, Platform, NavController, Events } from 'ionic-angular';
 import { Tabs } from "ionic-angular";
 
-/**
- * Generated class for the StaffFileMaintenanceSetPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -19,6 +13,7 @@ export class StaffFileMaintenanceSet {
     "readOnly": false,
     "Id": ""
   };
+  enable = false;
 
   @ViewChild("myTabs") tab: Tabs;
 
@@ -28,10 +23,14 @@ export class StaffFileMaintenanceSet {
   tab3Root = "StaffFileMaintenanceSocialRelationship";
   tab4Root = "StaffFileMaintenanceEducation";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events) {
     this.rootParams.readOnly = this.navParams.get("readOnly") ? true : false;
-    this.rootParams.Id = !!this.navParams.get("Id") ? this.navParams.get("Id") : "false";
-
+    this.rootParams.Id = this.navParams.get("Id") || "";
+    this.enable = this.rootParams.Id == "" ? false : true;
+    events.subscribe('staff:created', (id, time) => {
+      this.rootParams.Id = id || "";
+      this.enable = !!id ? true : false;
+    });
     console.log(this.rootParams.readOnly, this.navParams.get("readOnly"));
   }
 

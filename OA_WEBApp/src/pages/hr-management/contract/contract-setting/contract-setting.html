@@ -11,9 +11,10 @@
                 <ion-icon float-right name="arrow-forward"></ion-icon>
             </ion-list-header>
             <div>
-                <ion-item #popoverContent (click)="checkPeople($event)">
+                <ion-item #popoverContent (click)="!readOnly && checkPeople($event)">
                     <ion-label>工号</ion-label>
-                    <ion-note item-end>{{baseForm.value.StaffNumber || '点击选择员工'}}</ion-note>
+                    <ion-note *ngIf="readOnly" item-end>{{baseForm.value.StaffNumber || '无'}}</ion-note>
+                    <ion-note *ngIf="!readOnly" item-end>{{baseForm.value.StaffNumber || '点击选择员工'}}</ion-note>
                     <!-- <ion-input styel='display:none' text-right readonly='true' formControlName="StaffNumber" ></ion-input> -->
                 </ion-item>
 
@@ -141,21 +142,23 @@
                         <div style='background: #fff;color: red;padding: 1em;'>合同内容未添加</div>
                     </ng-template>
                 </div>
+                <div>
+                    <ion-item *ngIf="baseForm.value.Attch != {}">
+                        <h2>{{!!baseForm.value.Attch["attName"] ? baseForm.value.Attch["attName"] :''}}</h2>
+                        <!-- <button ion-button clear item-end *ngIf="!readOnly">删除</button> -->
+                        <button ion-button clear item-end (click)="downloadAffix()">查看</button>
+                    </ion-item>
+                    <ion-item text-center *ngIf="!readOnly">
+                        <button icon-left ion-button color="secondary" small outline round><ion-icon name="home"></ion-icon>添加附件</button>
+                    </ion-item>
+                </div>
 
-                <ion-item>
-                    <h2>毕业证.jpg</h2>
-                    <button ion-button clear item-end *ngIf="!readOnly">删除</button>
-                    <button ion-button clear item-end>下载</button>
-                </ion-item>
-                <ion-item text-center *ngIf="!readOnly">
-                    <button icon-left ion-button color="secondary" small outline round><ion-icon name="home"></ion-icon>添加附件</button>
-                </ion-item>
             </div>
         </ion-list>
         <ion-list>
             <ion-item>
                 <ion-label stacked text-left>备注<span class="optional">（选填）</span></ion-label>
-                <ion-textarea formControlName="Remarks" placeholder="输入备注信息"></ion-textarea>
+                <ion-textarea formControlName="Memo" placeholder="输入备注信息"></ion-textarea>
             </ion-item>
         </ion-list>
         <div class='text-ios-danger' *ngIf="!readOnly">&emsp;注：合同内容请到PC端进行添加或修改</div>

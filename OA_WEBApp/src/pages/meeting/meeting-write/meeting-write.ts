@@ -37,17 +37,17 @@ export class MeetingWritePage {
               private popoverCtrl: PopoverController,
               private nativeService: NativeService,
               private meetingService: MeetingService) {
-    this.meetingService.MeetPlaceLs().subscribe((resJson) => {
-      if (resJson.Result)  this.MeetPlaceLs = resJson.Data;
-    });
+    // this.meetingService.MeetPlaceLs().subscribe((resJson) => {
+    //   if (resJson.Result)  this.MeetPlaceLs = resJson.Data;
+    // });
 
-    this.meetingService.MeetTypeLs().subscribe((resJson) => {
-      if (resJson.Result)  this.MeetTypeLs = resJson.Data;
-    });
+    // this.meetingService.MeetTypeLs().subscribe((resJson) => {
+    //   if (resJson.Result)  this.MeetTypeLs = resJson.Data;
+    // });
 
-    this.meetingService.GetDeptLs().subscribe((resJson) => {
-      if (resJson.Result)  this.DeptLs = resJson.Data;
-    });
+    // this.meetingService.GetDeptLs().subscribe((resJson) => {
+    //   if (resJson.Result)  this.DeptLs = resJson.Data;
+    // });
 
     this.writeForm = formBuilder.group({
         Title: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(2)]], // 第一个参数是默认值

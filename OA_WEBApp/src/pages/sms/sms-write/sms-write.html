@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-        
+
         <button ion-button (click)="dismiss()">取消</button>
 
         <ion-title>写短信</ion-title>
@@ -23,27 +23,32 @@
 
 <ion-content>
     <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">
-      <ion-list>
-        <ion-item>
-          <ion-label>接收号码&emsp;</ion-label>
-          <ion-input type="text"  formControlName="CellPhone"  placeholder="手机号" #popoverContent placeholder="请选择收件人" (click)="checkPeople($event)"></ion-input>
-        </ion-item>
+        <ion-list>
+            <ion-item>
+                <ion-label style="flex:none;">接收号码&emsp;</ion-label>
+                <div item-content text-right style="flex: 1;" #popoverContent (click)="checkPeople($event)">
+                    <span>{{writeForm.value.CellPhone}}</span>
+                    <span *ngIf="writeForm.value.CellPhone == ''" class='text-ios-gray'>点击选择收件人</span>
+                </div>
 
-        <div *ngIf="!writeForm.controls.CellPhone.valid && writeForm.controls.CellPhone.touched" class="validation-failed">请添加收件人</div>
+                <!-- <ion-input type="text"  formControlName="CellPhone"  placeholder="手机号" #popoverContent placeholder="请选择收件人" (click)="checkPeople($event)"></ion-input> -->
+            </ion-item>
 
-        <ion-item>
-            <ion-label>是否定时</ion-label>
-            <ion-toggle  formControlName="IsTimer"></ion-toggle>
-        </ion-item>
+            <div *ngIf="!writeForm.controls.CellPhone.valid && writeForm.controls.CellPhone.touched" class="validation-failed">请添加收件人</div>
 
-        <ion-item *ngIf="writeForm.get('IsTimer').value">
-            <ion-label>发送时间</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DD HH:mm" minuteValues="0,15,30,45" [min]="min" [max]="max" formControlName="SendDate" placeholder="点击选择时间"  pickerFormat="YYYY-MM-DD HH:mm" cancelText="取消" doneText="确定" ></ion-datetime>
-        </ion-item>
-        <ion-item >
-            <ion-textarea formControlName="Content" rows="6" class="write-textarea" placeholder="输入信息"></ion-textarea>
-        </ion-item>
+            <ion-item>
+                <ion-label>是否定时</ion-label>
+                <ion-toggle formControlName="IsTimer"></ion-toggle>
+            </ion-item>
 
-      </ion-list>
-    </form> 
+            <ion-item *ngIf="writeForm.get('IsTimer').value">
+                <ion-label>发送时间</ion-label>
+                <ion-datetime displayFormat="YYYY-MM-DD HH:mm" minuteValues="0,15,30,45" [min]="min" [max]="max" formControlName="SendDate" placeholder="点击选择时间" pickerFormat="YYYY-MM-DD HH:mm" cancelText="取消" doneText="确定"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-textarea formControlName="Content" rows="6" class="write-textarea" placeholder="输入信息"></ion-textarea>
+            </ion-item>
+
+        </ion-list>
+    </form>
 </ion-content>

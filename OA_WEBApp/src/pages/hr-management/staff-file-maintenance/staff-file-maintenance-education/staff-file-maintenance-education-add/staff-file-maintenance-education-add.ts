@@ -15,6 +15,7 @@ import { NativeService } from '../../../../../providers/NativeService';
   templateUrl: 'staff-file-maintenance-education-add.html',
 })
 export class StaffFileMaintenanceEducationAddPage {
+  id: string = "";
   readOnly: boolean = false;
   addForm: FormGroup;
   formCtrls: any;
@@ -25,6 +26,7 @@ export class StaffFileMaintenanceEducationAddPage {
               private formBuilder: FormBuilder,
               private viewCtrl: ViewController) {
       this.readOnly = this.navParams.get("readOnly") ? true : false;
+      this.id = this.navParams.get("id");
       this.addForm = this.formBuilder.group({
         "EduStartDate": ['', [Validators.required]], // 第一个参数是默认值
         "EduEndDate": ['', [Validators.required]],
@@ -50,6 +52,7 @@ export class StaffFileMaintenanceEducationAddPage {
 
   save(value){
     // 提交
+    value.id = this.id;
     this.staffFileMaintenanceService.addEdu(value).subscribe(resJson => {
       if (resJson.Data){
         this.nativeService.showToast("添加教育经历成功", 500);

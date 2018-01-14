@@ -13,7 +13,7 @@ export class StaffFileMaintenanceWorkExperienceAdd {
   @Input() isShow: boolean = true;
   addForm: FormGroup;
   readOnly: boolean = false;
-  Id: string = "";
+  id: string = "";
   formCtrls: any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -22,15 +22,15 @@ export class StaffFileMaintenanceWorkExperienceAdd {
               private nativeService: NativeService,
               private viewCtrl: ViewController) {
       this.readOnly = this.navParams.get("readOnly") ? true : false;
-      this.Id = this.navParams.get("Id") || "";
+      this.id = this.navParams.get("id");
 
       this.addForm = this.formBuilder.group({
-        ExpStartDate: ['', [Validators.required]], // 第一个参数是默认值
-        ExpEndDate: ['', [Validators.required]],
-        ExpDeptName: ['', [Validators.required, Validators.maxLength(20)]],
-        ExpDuty: ['', [Validators.required, Validators.maxLength(30)]],
-        ExpUnit: ['', [Validators.required, Validators.maxLength(20)]],
-        ExpMemo: ["", [Validators.maxLength(180)]],
+        "ExpStartDate": ['', [Validators.required]], // 第一个参数是默认值
+        "ExpEndDate": ['', [Validators.required]],
+        "ExpDeptName": ['', [Validators.required, Validators.maxLength(20)]],
+        "ExpDuty": ['', [Validators.required, Validators.maxLength(30)]],
+        "ExpUnit": ['', [Validators.required, Validators.maxLength(20)]],
+        "ExpMemo": ["", [Validators.maxLength(180)]],
       });
       this.formCtrls = this.addForm.controls;
 
@@ -46,6 +46,7 @@ export class StaffFileMaintenanceWorkExperienceAdd {
 
   save(value){
     // 提交
+    value.id = this.id;
     this.staffFileMaintenanceService.addWorkExp(value).subscribe(resJson => {
       if (resJson.Result){
         this.nativeService.showToast("保存工作经验成功", 800);

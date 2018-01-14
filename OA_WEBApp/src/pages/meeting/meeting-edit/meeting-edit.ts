@@ -33,6 +33,7 @@ export class MeetingEditPage {
   HostId: string = "";
   PersonId: string = "";
   formCtrl: any;
+  id: string = "";
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private fileService: FileService,
@@ -42,20 +43,21 @@ export class MeetingEditPage {
               private popoverCtrl: PopoverController,
               private meetingService: MeetingService) {
     this.writeForm = this.formBuilder.group({
-        Title: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(2)]], // 第一个参数是默认值
-        TypeId: ["", [Validators.required]],
-        PlaceId: ["", [ Validators.required]],
-        StartDate: ["", [ Validators.required]],
-        EndDate: ["", [Validators.required]],
-        Person: ["", [Validators.maxLength(180), Validators.required]],
-        DeptId: ["", []],
-        HostName: ["", [Validators.maxLength(20)]],
-        Range: ["", [Validators.maxLength(180)]],
-        Detail: ["", [Validators.maxLength(180)]],
-        FileOldName: ["", [Validators.maxLength(180)]],
+        "Title": ['', [Validators.required, Validators.maxLength(30), Validators.minLength(2)]], // 第一个参数是默认值
+        "TypeId": ["", [Validators.required]],
+        "PlaceId": ["", [ Validators.required]],
+        "StartDate": ["", [ Validators.required]],
+        'EndDate': ["", [Validators.required]],
+        "Person": ["", [Validators.maxLength(180), Validators.required]],
+        "DeptId": ["", []],
+        "HostName": ["", [Validators.maxLength(20)]],
+        "Range": ["", [Validators.maxLength(180)]],
+        "Detail": ["", [Validators.maxLength(180)]],
+        "FileOldName": ["", [Validators.maxLength(180)]],
+        "Stutus": []
     });
     this.formCtrl = this.writeForm.controls;
-    let id = {"id": this.navParams.get("Id")};
+    this.id = this.navParams.get("Id");
     this.readOnly = this.navParams.get("readOnly") ? true : false;
 
     this.meetingService.MeetPlaceLs().subscribe((resJson) => {
@@ -70,22 +72,23 @@ export class MeetingEditPage {
       if (resJson.Result)  this.DeptLs = resJson.Data;
     });
 
-    this.meetingService.read(id).subscribe((resJson) => {
+    this.meetingService.read({"id": this.id}).subscribe((resJson) => {
       if (resJson.Result){
         this.detail = resJson.Data;
         this.FileNewName = resJson.Data.FileNewName;
         this.writeForm.patchValue({
-          Title: this.detail["Title"],
-          TypeId: this.detail["TypeId"],
-          PlaceId: this.detail["PlaceId"],
-          StartDate: Utils.dateFormat(new Date(this.detail["StartDate"]), 'yyyy-MM-ddTHH:mm+08:00'),
-          EndDate: Utils.dateFormat(new Date(this.detail["EndDate"]), 'yyyy-MM-ddTHH:mm+08:00'),
-          Person: this.detail["PersonId"],
-          DeptId: this.detail["DeptId"],
-          HostName: this.detail["HostName"],
-          Range: this.detail["Range"],
-          Detail: this.detail["Detail"],
-          FileOldName: this.detail["FileOldName"],
+          "Title": this.detail["Title"],
+          "TypeId": this.detail["TypeId"],
+          "PlaceId": this.detail["PlaceId"],
+          "StartDate": Utils.dateFormat(new Date(this.detail["StartDate"]), 'yyyy-MM-ddTHH:mm+08:00'),
+          "EndDate": Utils.dateFormat(new Date(this.detail["EndDate"]), 'yyyy-MM-ddTHH:mm+08:00'),
+          "Person": this.detail["PersonId"],
+          "DeptId": this.detail["DeptId"],
+          "HostName": this.detail["HostName"],
+          "Range": this.detail["Range"],
+          "Detail": this.detail["Detail"],
+          "FileOldName": this.detail["FileOldName"],
+          "Stutus": this.detail["Stutus"]
         });
 
       }else{
@@ -134,12 +137,32 @@ export class MeetingEditPage {
     });
   }
 
-  aprove(){
+  aprove(data){
+    data.Person = null;
+    data.Uid = this.globalData.Uid;
+    data.FileNewName = this.FileNewName;
+    data.Id = this.detail["Id"];
+    data.StartDate = Utils.dateFormat(new Date(data.StartDate), 'yyyy-MM-dd HH:mm:ss');
+    data.EndDate = Utils.dateFormat(new Date(data.EndDate), 'yyyy-MM-dd HH:mm:ss');
+    data.PersonId = this.PersonId;
 
+    this.meetingService.goSp(data).subscribe((resJson) => {
+      if (resJson.Result){
+        this.nativeService.showToast("已提交审核", 888);
+        this.navCtrl.pop();
+      }else{
+        this.nativeService.showToast(resJson.Data, 888);
+      }
+    });
   }
 
   delete(){
-
+    this.meetingService.del({id: this.id}).subscribe(resJson => {
+      if (resJson.Result){
+        this.nativeService.showToast("删除成功", 800);
+        this.navCtrl.pop();
+      }else this.nativeService.showToast(resJson.Data, 800);
+    });
   }
 
   checkPeople(myEvent) {

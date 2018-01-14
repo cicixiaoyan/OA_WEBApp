@@ -29,157 +29,37 @@ export class FileService {
             ) {
   }
 
-  /**
-   * 根据文件id获取文件信息
-   * @param id
-   * @returns {FileObj}
-   */
-  getFileInfoById(id: string): Observable<FileObj> {
-    if (!id) {
-      return Observable.never();
-    }
-    return this.httpService.get(FILE_SERVE_URL + '/getById', {id: id}).map((res: Response) => {
-      let result = res.json();
-      if (!result.success) {
-        this.nativeService.showToast(result.msg, 800);
-        return {};
-      } else {
-        let fileObj = result.data;
-        fileObj.origPath = FILE_SERVE_URL + fileObj.origPath;
-        fileObj.thumbPath = FILE_SERVE_URL + fileObj.thumbPath;
-        return fileObj;
-      }
-    });
-  }
-
-  /**
-   * 根据文件id数组获取文件信息
-   * @param ids
-   * @returns {FileObj[]}
-   */
-  getFileInfoByIds(ids: string[]): Observable<FileObj[]> {
-    if (!ids || ids.length == 0) {
-      return Observable.of([]);
-    }
-    return this.httpService.get(FILE_SERVE_URL + '/getByIds', {ids: ids}).map((res: Response) => {
-      let result = res.json();
-      if (!result.success) {
-        this.nativeService.showToast(result.msg, 800);
-        return [];
-      } else {
-        for (let fileObj of result.data) {
-          fileObj.origPath = FILE_SERVE_URL + fileObj.origPath;
-          fileObj.thumbPath = FILE_SERVE_URL + fileObj.thumbPath;
-        }
-        return result.data;
-      }
-    });
-  }
-
-  /**
-   * 批量上传图片,只支持上传base64字符串
-   * @param fileObjList 数组中的对象必须包含bse64属性
-   * @returns {FileObj[]}
-   */
-  uploadMultiByBase64(fileObjList: FileObj[]): Observable<FileObj[]> {
-    if (!fileObjList || fileObjList.length == 0) {
-      return Observable.of([]);
-    }
-    return this.httpService.post(FILE_SERVE_URL + '/ashx/appUpload.aspx', fileObjList).map((res: Response) => {
-      let result = res.json();
-      if (!result.success) {
-        this.nativeService.showToast(result.msg, 800);
-        return [];
-      } else {
-        for (let fileObj of result.data) {
-          fileObj.origPath = FILE_SERVE_URL + fileObj.origPath;
-          fileObj.thumbPath = FILE_SERVE_URL + fileObj.thumbPath;
-        }
-        return result.data;
-      }
-    });
-  }
-
-  /**
-   * 上传单张图片,只支持上传base64字符串
-   * @param fileObj 对象必须包含origPath属性
-   * @returns {FileObj}
-   */
-  uploadByBase64(fileObj: FileObj): Observable<FileObj> {
-    if (!fileObj.base64) {
-      return Observable.never();
-    }
-    return this.httpService.post(FILE_SERVE_URL + '/ashx/appUpload.aspx', [fileObj]).map((res: Response) => {
-      let result = res.json();
-      if (!result.success) {
-        this.nativeService.showToast(result.msg, 800);
-        return [];
-      } else {
-        let fileObj = result.data[0];
-        fileObj.origPath = FILE_SERVE_URL + fileObj.origPath;
-        fileObj.thumbPath = FILE_SERVE_URL + fileObj.thumbPath;
-        return fileObj;
-      }
-    });
-  }
-
-  /**
-   * 批量上传图片
-   * @param fileObjList 数组中的对象必须包含origPath属性
-   * @returns {FileObj[]}
-   */
-  uploadMultiByFilePath(fileObjList: FileObj[]): Observable<FileObj[]> {
-    if (fileObjList.length == 0) {
-      return Observable.of([]);
-    }
-    return Observable.create((observer) => {
-      this.nativeService.showLoading();
-      let fileObjs = [];
-      for (let fileObj of fileObjList) {
-        this.nativeService.convertImgToBase64(fileObj.origPath).subscribe(base64 => {
-          fileObjs.push({
-            'base64': base64,
-            'type': FileService.getFileType(fileObj.origPath),
-            'parameter': fileObj.parameter
-          });
-          if (fileObjs.length === fileObjList.length) {
-            this.uploadMultiByBase64(fileObjs).subscribe(res => {
-              observer.next(res);
-              this.nativeService.hideLoading();
-            });
-          }
-        });
-      }
-    });
-  }
-
-  /**
-   * app上传单张图片
-   * @param fileObj 对象必须包含origPath属性
-   * @returns {FileObj}
-   */
-  uploadByFilePath(fileObj: FileObj): Observable<FileObj> {
-    if (!fileObj.origPath) {
-      return Observable.never();
-    }
-    return Observable.create((observer) => {
-      this.nativeService.showLoading();
-      this.nativeService.convertImgToBase64(fileObj.origPath).subscribe(base64 => {
-        let file = <FileObj>({
-          'base64': base64,
-          'type': FileService.getFileType(fileObj.origPath),
-          'parameter': fileObj.parameter
-        });
-        this.uploadByBase64(file).subscribe(res => {
-          observer.next(res);
-          this.nativeService.hideLoading();
-        });
-      });
-    });
-  }
 
   private static getFileType(path: string): string {
     return path.substring(path.lastIndexOf('.') + 1);
+  }
+
+  upload(fileURL, url, pathOption, observer){
+    let alert = this.alertCtrl.create({
+      title: '上传进度：0%',
+      enableBackdropDismiss: false,
+      buttons: ['后台上传']
+    });
+    alert.present();
+    const fileTransfer: FileTransferObject = this.fileTransfer.create();
+    fileTransfer.onProgress((event: ProgressEvent) => {
+      let num = Math.floor(event.loaded / event.total * 100);
+      if (num === 100) {
+        alert.dismiss();
+      } else {
+        let title = document.getElementsByClassName('alert-title')[0];
+        title && (title.innerHTML = '上传进度：' + url + event.loaded + " " + event.total + '%');
+      }
+    });
+    fileTransfer.upload(fileURL, url, pathOption, true).then((data) => {
+      alert.dismiss();
+      observer.next(data);
+    }, (err) => {
+      console.log(err);
+      alert.dismiss();
+      this.nativeService.showToast(err);
+      observer.next(err);
+    });
   }
 
   /**
@@ -204,34 +84,35 @@ export class FileService {
           "params": {  "type": type }
         };
         let url = encodeURI(FILE_SERVE_URL + "ashx/AttachUpload.ashx");
-        let alert = this.alertCtrl.create({
-          title: '上传进度：0%',
-          enableBackdropDismiss: false,
-          buttons: ['后台上传']
-        });
-        alert.present();
-        const fileTransfer: FileTransferObject = this.fileTransfer.create();
-        fileTransfer.onProgress((event: ProgressEvent) => {
-          let num = Math.floor(event.loaded / event.total * 100);
-          if (num === 100) {
-            alert.dismiss();
-          } else {
-            let title = document.getElementsByClassName('alert-title')[0];
-            title && (title.innerHTML = '上传进度：' + url + event.loaded + " " + event.total + '%');
-          }
-        });
-        fileTransfer.upload(fileURL, url, pathOption, true).then((data) => {
-          alert.dismiss();
-          observer.next(data);
-        }, (err) => {
-          console.log(err);
-          alert.dismiss();
-          this.nativeService.showToast(err);
-          observer.next(err);
-        });
-        });
+        this.upload(fileURL, url, pathOption, observer);
       });
+    });
 
+  }
+
+  /**
+   * app上传图片
+   * 
+   */
+
+  uploadPicture(filepath): Observable<any>{
+    return Observable.create(observer => {
+      let pathOption: FileUploadOptions = {
+        "fileKey": "file",
+        "fileName": "img",
+        "mimeType": "image/jpeg",
+        "headers": {
+          "Connection": "close",
+          "Token": this.httpService.globalData.token,
+        },
+        "chunkedMode": false,
+        "httpMethod": "POST",
+        "params": {  "type": 2 }
+      };
+      let url = encodeURI(FILE_SERVE_URL + "ashx/AttachUpload.ashx");
+      this.upload(filepath, url, pathOption, observer);
+
+    });
   }
 
   download(url, name): Observable<any>{

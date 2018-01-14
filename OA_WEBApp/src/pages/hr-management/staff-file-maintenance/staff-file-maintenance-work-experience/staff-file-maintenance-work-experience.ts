@@ -30,7 +30,7 @@ export class StaffFileMaintenanceWorkExperience {
   }
 
   add(){
-      let modal = this.modalCtrl.create("StaffFileMaintenanceWorkExperienceAdd");
+      let modal = this.modalCtrl.create("StaffFileMaintenanceWorkExperienceAdd", {"id": this.Id});
       modal.present();
       modal.onDidDismiss(data => {
           data && console.log(data);
@@ -42,7 +42,7 @@ export class StaffFileMaintenanceWorkExperience {
     //   "Id": id,
     //   "readOnly": (this.navParams.get("readOnly") ? true : null)
     // };
-    let modal = this.modalCtrl.create("StaffFileMaintenanceWorkExperienceAdd", {item: item});
+    let modal = this.modalCtrl.create("StaffFileMaintenanceWorkExperienceAdd", {"item": item, "id": this.Id});
     modal.present();
     modal.onDidDismiss(data => {
         data && console.log(data);

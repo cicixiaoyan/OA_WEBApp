@@ -31,13 +31,13 @@
                     </ion-item>
                     <ion-item>
                         <ion-label>审批状态：</ion-label>
-                        <ion-input type="text" [value]="item.Status" placeholder="无" readonly></ion-input>
+                        <ion-input type="text" [value]="item.UrgencyLevel" placeholder="无" readonly></ion-input>
                     </ion-item>
                 </div>
                 <div [innerHTML]="item.Template | safeHTML" class="ihtml"></div>
 
             </ion-list>
-            <ion-row style="align-items:center;">
+            <ion-row style="align-items:center;margin-bottom: 10px;">
                 <ion-col col-auto style="padding-left: 14px;">
                     &nbsp;相关附件：
                 </ion-col>
@@ -53,34 +53,36 @@
                     <ion-label>审批记录：</ion-label>
                     <ion-textarea type="text" placeholder="无"></ion-textarea>
                 </ion-item> -->
-                <ion-item  *ngIf="item.Status != '正常结束'">
-                    <ion-label>审批意见：</ion-label>
-                    <ion-textarea placeholder="请输入本次审批意见" [(ngModel)]="opinion"  rows="2"></ion-textarea>
+                <ion-item *ngIf="item.Status != '正常结束'">
+                    <ion-label>审批意见：(必填)</ion-label>
+                    <ion-textarea placeholder="请输入本次审批意见" [(ngModel)]="opinion" rows="2"></ion-textarea>
                 </ion-item>
-                <ion-item  *ngIf="item.Status != '正常结束'">
-                    <ion-label>审批附件：</ion-label>
-                    <ion-note (click)="upload()">{{affName==''?  "点击添加" : affName}}</ion-note>
+                <ion-item *ngIf="item.Status != '正常结束'">
+                    <ion-label style="flex:none;">审批附件：</ion-label>
+                    <div item-content (click)="upload()" style="flex: auto;color:cornflowerblue;">
+                        {{affName != "" ? affName: '点击添加'}}
+                    </div>
                 </ion-item>
             </ion-list>
 
 
         </ion-card-content>
         <div *ngIf="item.Status != '正常结束'">
-            <ion-row text-center >
+            <ion-row text-center>
                 <ion-col col-4>
-                    <button (click)="approved(true)" ion-button icon-left clear small full>
+                    <button [disabled]="opinion == ''" (click)="approved(true)" ion-button icon-left clear small full>
                         <ion-icon name="md-checkmark"></ion-icon>
                         <div>审批通过</div>
                     </button>
                 </ion-col>
                 <ion-col col-4>
-                    <button (click)="approved(false)" ion-button icon-left clear small full>
+                    <button [disabled]="opinion == ''" (click)="approved(false)" ion-button icon-left clear small full>
                         <ion-icon name="md-close"></ion-icon>
                         <div>审批驳回</div>
                     </button>
                 </ion-col>
                 <ion-col col-4>
-                    <button (click)="cancel()" ion-button icon-left clear small full>
+                    <button (click)="navCtrl.pop()" ion-button icon-left clear small full>
                         <ion-icon name="md-return-left"></ion-icon>
                         <div>返回</div>
                     </button>

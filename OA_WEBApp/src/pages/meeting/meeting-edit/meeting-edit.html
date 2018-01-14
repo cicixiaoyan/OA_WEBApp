@@ -14,7 +14,7 @@
 
 
 <ion-content>
-    <form [formGroup]="writeForm" (ngSubmit)="save(writeForm.value)" [ngClass]="{'form-readonly': readOnly}">
+    <form [formGroup]="writeForm" (ngSubmit)="save(writeForm.value)" [ngClass]="{'form-readonly': writeForm.value.Stutus != '起草中'}">
         <div>
             <ion-list>
                 <ion-item>
@@ -65,18 +65,26 @@
                 </div>
 
                 <ion-item>
-                    <ion-label>参加人员</ion-label>
-                    <ion-input text-right type="text" readonly formControlName="Person" #popoverContent (click)="checkPeople($event)" placeholder="点击添加"></ion-input>
+                    <ion-label class="click-label">参加人员</ion-label>
+                    <div item-content text-right style="flex: 1;" #popoverContent (click)="checkPeople($event)">
+                        <span>{{writeForm.value.Person}}</span>
+                        <span *ngIf="writeForm.value.Person == ''" class='text-ios-gray'>点击选择</span>
+                    </div>
+                    <!-- <ion-input text-right type="text" readonly formControlName="Person" #popoverContent (click)="checkPeople($event)" placeholder="点击添加"></ion-input> -->
                 </ion-item>
                 <div *ngIf="!formCtrl.Person.valid && (formCtrl.Person.touched || formCtrl.Person.dirty )" class="validation-failed">
                     <div *ngIf="writeForm.hasError('Person','required')">参加人员必填</div>
                     <div *ngIf="writeForm.hasError('Person','maxlength')">最多输入180个字</div>
                 </div>
                 <ion-item>
-                    <ion-label>主持人
+                    <ion-label class="click-label">主持人
                         <span class="optional">（选填）</span>
                     </ion-label>
-                    <ion-input #popoverContent1 (click)="checkHostName($event)" readonly text-right type="text" formControlName="HostName" placeholder="请输入"></ion-input>
+                    <div item-content text-right style="flex: 1;" #popoverContent1 (click)="checkHostName($event)">
+                        <span>{{writeForm.value.HostName}}</span>
+                        <span *ngIf="writeForm.value.HostName == ''" class='text-ios-gray'>点击选择</span>
+                    </div>
+                    <!-- <ion-input #popoverContent1 (click)="checkHostName($event)" readonly text-right type="text" formControlName="HostName" placeholder="请输入"></ion-input> -->
                 </ion-item>
                 <div *ngIf="!formCtrl.HostName.valid && (formCtrl.HostName.touched || formCtrl.HostName.dirty )" class="validation-failed">
                     最多输入20个字
@@ -118,8 +126,16 @@
                     <ion-label>附件
                         <span class="optional">（选填）</span>
                     </ion-label>
-                    <ion-input type="text" formControlName="FileOldName" (click)="addAffix()" placeholder="点击添加"></ion-input>
+                    <ion-input text-right type="text" formControlName="FileOldName" (click)="addAffix()" placeholder="点击添加"></ion-input>
                 </ion-item>
+
+                <ion-item>
+                    <ion-label>审批人选择</ion-label>
+                    <ion-select formControlName="DeptId" multiple="true" cancelText="取消" okText="确定" placeholder="请选择">
+                        <ion-option *ngFor="let dept of DeptLs;let i = index" [value]="dept.Id">{{dept.BmName}}</ion-option>
+                    </ion-select>
+                </ion-item>
+
             </ion-list>
         </div>
     </form>
@@ -127,8 +143,8 @@
 
 <ion-footer *ngIf="!readOnly">
     <div text-center>
-        <button (click)="save(writeForm.value)" outline small round ion-button type="submit" color="primary" [disabled]="writeForm.invalid">保存</button>
-        <button (click)="aprove(writeForm.value)" outline small round ion-button type="submit" color="secondary" [disabled]="writeForm.invalid">送审</button>
-        <button (click)="delete()" outline small round ion-button type="submit" color="danger" [disabled]="writeForm.invalid">删除</button>
+        <!-- <button *ngIf="writeForm.value.Stutus == '起草中'" (click)="save(writeForm.value)" outline small round ion-button type="submit" color="primary" [disabled]="writeForm.invalid">保存</button> -->
+        <button *ngIf="writeForm.value.Stutus == '起草中'" (click)="aprove(writeForm.value)" outline small round ion-button type="submit" color="secondary" [disabled]="writeForm.invalid">送审</button>
+        <button *ngIf="writeForm.value.Stutus == '起草中'" (click)="delete()" outline small round ion-button type="submit" color="danger" [disabled]="writeForm.invalid">删除</button>
     </div>
 </ion-footer>

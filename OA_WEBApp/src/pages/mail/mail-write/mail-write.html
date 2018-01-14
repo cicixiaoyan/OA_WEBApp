@@ -26,8 +26,12 @@
             <ion-list style="position:relative;">
 
                 <ion-item>
-                    <ion-label style="align-self:center;">收件人&emsp;</ion-label>
-                    <ion-textarea min-rows="1" readonly="true" formControlName="addressee" #popoverContent placeholder="双击选择收件人" (click)="checkPeople($event)"></ion-textarea>
+                    <ion-label class="click-label">收件人&emsp;</ion-label>
+                    <div item-content text-right style="flex: 1;" #popoverContent (click)="checkPeople($event)">
+                        <span>{{writeForm.value.addressee}}</span>
+                        <span *ngIf="writeForm.value.addressee == ''" class='text-ios-gray'>点击选择收件人</span>
+                    </div>
+                    <!-- <ion-textarea min-rows="1" readonly="true" formControlName="addressee" #popoverContent placeholder="双击选择收件人" (click)="checkPeople($event)"></ion-textarea> -->
                 </ion-item>
 
                 <ion-item>

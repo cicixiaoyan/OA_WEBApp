@@ -2,6 +2,9 @@
 
     <ion-navbar>
         <ion-title>添加会议</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="sent(writeForm.value)" color="danger" [disabled]="writeForm.invalid">保存</button>
+        </ion-buttons>
     </ion-navbar>
 
 </ion-header>
@@ -13,78 +16,86 @@
             <ion-list>
                 <ion-item>
                     <ion-label>会议主题</ion-label>
-                    <ion-input text-right min-rows="1" formControlName="Title" placeholder="请输入" ></ion-input>
+                    <ion-input text-right min-rows="1" formControlName="Title" placeholder="请输入"></ion-input>
                 </ion-item>
                 <div *ngIf="formCtrl.Title.invalid && (formCtrl.Title.touched || formCtrl.Title.dirty )" class="validation-failed">
                     <div *ngIf="writeForm.hasError('Title','required')">会议主题必填</div>
                     <div *ngIf="writeForm.hasError('Title','minlength')">最少输入2个字</div>
                     <div *ngIf="writeForm.hasError('Title','maxlength')">最多输入30个字</div>
-                </div> 
+                </div>
 
                 <ion-item>
                     <ion-label>会议类型</ion-label>
-                    <ion-select  text-right formControlName="TypeId" cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-select text-right formControlName="TypeId" cancelText="取消" okText="确定" placeholder="请选择">
                         <ion-option *ngFor="let type of MeetTypeLs;let i = index" [value]="type.Id">{{type.Name}}</ion-option>
                         <!-- <ion-option value="2">类型2</ion-option> -->
                     </ion-select>
                 </ion-item>
                 <div *ngIf="!formCtrl.TypeId.valid && (formCtrl.TypeId.touched || formCtrl.TypeId.dirty )" class="validation-failed">
                     会议类型必选
-                </div> 
+                </div>
 
                 <ion-item>
                     <ion-label>召开地点</ion-label>
-                    <ion-select  text-right formControlName="PlaceId" cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-select text-right formControlName="PlaceId" cancelText="取消" okText="确定" placeholder="请选择">
                         <ion-option *ngFor="let place of MeetPlaceLs;let i = index" [value]="place.Id">{{place.Name}}</ion-option>
                         <!-- <ion-option value="2">类型2</ion-option> -->
                     </ion-select>
                 </ion-item>
                 <div *ngIf="!formCtrl.PlaceId.valid && (formCtrl.PlaceId.touched || formCtrl.PlaceId.dirty )" class="validation-failed">
                     召开地点必选
-                </div> 
+                </div>
 
                 <ion-item>
                     <ion-label>开始时间</ion-label>
-                    <ion-datetime  text-right placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="StartDate" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>
+                    <ion-datetime text-right placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="StartDate" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>
                 </ion-item>
                 <div *ngIf="!formCtrl.StartDate.valid && (formCtrl.StartDate.touched || formCtrl.StartDate.dirty )" class="validation-failed">
                     开始时间必填
-                </div> 
+                </div>
 
                 <ion-item>
                     <ion-label>结束时间</ion-label>
-                    <ion-datetime  text-right placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="EndDate" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>
+                    <ion-datetime text-right placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="EndDate" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>
                 </ion-item>
                 <div *ngIf="!formCtrl.EndDate.valid && (formCtrl.EndDate.touched || formCtrl.EndDate.dirty )" class="validation-failed">
                     结束时间必填
-                </div> 
-                 
+                </div>
+
                 <ion-item>
-                    <ion-label>参加人员</ion-label>
-                    <ion-textarea  text-right type="text" #popoverContent (click)="checkPeople($event)" formControlName="Person" readonly="true" placeholder="双击点击"></ion-textarea>
+                    <ion-label style="flex: none;">参加人员</ion-label>
+                    <div item-content text-right style="flex: 1;" #popoverContent (click)="checkPeople($event)">
+                        <span>{{writeForm.value.Person}}</span>
+                        <span *ngIf="writeForm.value.Person == ''" class='text-ios-gray'>点击选择</span>
+                    </div>
+                    <!-- <ion-textarea text-right type="text" #popoverContent (click)="checkPeople($event)" formControlName="Person" readonly="true" placeholder="双击点击"></ion-textarea> -->
                 </ion-item>
                 <div *ngIf="!formCtrl.Person.valid && (formCtrl.Person.touched || formCtrl.Person.dirty )" class="validation-failed">
                     <div *ngIf="writeForm.hasError('Person','required')">参加人员必填</div>
                     <div *ngIf="writeForm.hasError('Person','maxlength')">最多输入180个字</div>
-                </div> 
-                
+                </div>
+
                 <ion-item>
                     <ion-label>参加部门<span class="optional">（选填）</span></ion-label>
-                    <ion-select  text-right formControlName="DeptId" multiple="true" cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-select text-right formControlName="DeptId" multiple="true" cancelText="取消" okText="确定" placeholder="请选择">
                         <ion-option *ngFor="let dept of DeptLs;let i = index" [value]="dept.Id">{{dept.BmName}}</ion-option>
                     </ion-select>
                 </ion-item>
                 <ion-item>
-                    <ion-label>主持人<span class="optional">（选填）</span></ion-label>
-                    <ion-input #popoverContent1 (click)="checkHostName($event)"  text-right type="text" formControlName="HostName" placeholder="请输入"></ion-input>
+                    <ion-label class="click-label">主持人<span class="optional">（选填）</span></ion-label>
+                    <div item-content text-right style="flex: 1;" #popoverContent1 (click)="checkHostName($event)">
+                        <span>{{writeForm.value.HostName}}</span>
+                        <span *ngIf="writeForm.value.HostName == ''" class='text-ios-gray'>点击选择</span>
+                    </div>
+                    <!-- <ion-input #popoverContent1 (click)="checkHostName($event)" text-right type="text" formControlName="HostName" placeholder="请输入"></ion-input> -->
                 </ion-item>
                 <div *ngIf="!formCtrl.HostName.valid && (formCtrl.HostName.touched || formCtrl.HostName.dirty )" class="validation-failed">
                     最多输入20个字
                 </div>
-                
+
                 <ion-item>
                     <ion-label>出席范围<span class="optional">（选填）</span></ion-label>
-                    <ion-input  text-right type="text" formControlName="Range" placeholder="请输入"></ion-input>
+                    <ion-input text-right type="text" formControlName="Range" placeholder="请输入"></ion-input>
                 </ion-item>
                 <div *ngIf="!formCtrl.Range.valid && (formCtrl.Range.touched || formCtrl.Range.dirty )" class="validation-failed">
                     最多输入180个字
@@ -103,10 +114,6 @@
                     <ion-note item-end (click)="addAffix()">{{writeForm.value.FileOldName ? writeForm.value.FileOldName : '点击添加'}}</ion-note>
                 </ion-item>
             </ion-list>
-            <div padding text-center>
-                <button ion-button type="submit" color="danger" [disabled]="writeForm.invalid">保存</button>
-                <button ion-button clear small navPop>取消修改</button>
-            </div>
-        </div>
+            </di>
     </form>
 </ion-content>

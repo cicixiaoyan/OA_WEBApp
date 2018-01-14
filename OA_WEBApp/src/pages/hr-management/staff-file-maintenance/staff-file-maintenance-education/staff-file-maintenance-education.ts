@@ -30,7 +30,7 @@ export class StaffFileMaintenanceEducation {
   }
 
   add(){
-      let modal = this.modalCtrl.create("StaffFileMaintenanceEducationAddPage");
+      let modal = this.modalCtrl.create("StaffFileMaintenanceEducationAddPage", {"id": this.Id});
       modal.present();
       modal.onDidDismiss(data => {
         data && this.doRefresh(null);
@@ -38,7 +38,7 @@ export class StaffFileMaintenanceEducation {
   }
 
   doRead(item){
-    let modal = this.modalCtrl.create("StaffFileMaintenanceEducationAddPage", {"item": item});
+    let modal = this.modalCtrl.create("StaffFileMaintenanceEducationAddPage", {"item": item, "id": this.Id});
     modal.present();
   }
 

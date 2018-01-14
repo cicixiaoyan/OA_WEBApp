@@ -1,13 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MeetingService } from '../../meeting_service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-/**
- * Generated class for the MeetingRoomSetPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -18,20 +12,31 @@ export class MeetingRoomSetPage {
   isWrite: boolean = false;
   DeptLs: any = [];
   setForm: FormGroup;
+  id: string = "";
+  formCtrls: any;
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              private formBuilder: FormBuilder,
+              @Inject(FormBuilder) fb: FormBuilder,
               private meetingService: MeetingService) {
     this.isWrite = !!this.navParams.get("Id") ? false : true; 
-    this.setForm = this.formBuilder.group({
-      Name: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)]], // 第一个参数是默认值
-      Manager: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)]],
-      Number: ["", [Validators.required, Validators.max(10000)]],
-      Mobile: [null, [Validators.minLength(7), Validators.maxLength(11)]],
-      HaveAttendant: [false, [] ],
-      DeptId: ["", [Validators.maxLength(180)]],
-      Introduction: ["", [Validators.maxLength(180)]]
+    this.id = this.navParams.get("id") || "";
+    this.setForm = fb.group({
+      "MeetName": ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)]], // 第一个参数是默认值
+      "MangerPerson": ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)]],
+      "Scale": ["", [Validators.required, Validators.max(10000)]],
+      "Phone": [null, [Validators.minLength(7), Validators.maxLength(11)]],
+      "Flag": [false, [] ],
+      "DeptId": ["", [Validators.maxLength(180)]],
+      "Detail": ["", [Validators.maxLength(180)]]
     });
+    this.formCtrls = this.setForm.controls;
+
+    if (this.isWrite){
+      this.meetingService.MeetRoomView({"id": this}).subscribe(resJson => {
+        if (resJson.Result)
+          this.setForm.patchValue(resJson.Data);
+      });
+    }
 
     this.meetingService.GetDeptLs().subscribe((resJson) => {
       if (resJson.Result)  this.DeptLs = resJson.Data;
@@ -40,6 +45,15 @@ export class MeetingRoomSetPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MeetingRoomSetPage');
+  }
+
+  save(value){
+    if (this.isWrite){
+      value.id = this.id;
+    
+    }else{
+
+    }
   }
 
 }

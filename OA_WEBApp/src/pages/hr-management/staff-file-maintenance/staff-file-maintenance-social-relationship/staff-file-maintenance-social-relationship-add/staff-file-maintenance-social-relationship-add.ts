@@ -26,7 +26,7 @@ export class StaffFileMaintenanceSocialRelationshipAddPage {
               private formBuilder: FormBuilder,
               private viewCtrl: ViewController) {
       this.readOnly = this.navParams.get("readOnly") ? true : false;
-      // this.id = this.navParams.get("item") || {};
+      this.id = this.navParams.get("id");
   
 
       this.addForm = this.formBuilder.group({
@@ -57,6 +57,7 @@ export class StaffFileMaintenanceSocialRelationshipAddPage {
 
   save(value){
     // 提交
+    value.id = this.id;
     this.staffFileMaintenanceService.addSociology(value).subscribe(resJson => {
       if (resJson.Data){
         this.nativeService.showToast("添加社会关系成功", 500);

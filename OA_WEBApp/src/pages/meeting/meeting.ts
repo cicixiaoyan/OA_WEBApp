@@ -69,12 +69,12 @@ export class MeetingPage {
   }
 
   doWrite() {
-      let modal = this.modalCtrl.create("MeetingWritePage");
-      modal.present();
-      modal.onDidDismiss(data => {
-          data && console.log(data);
-      });
-      // this.navCtrl.push(MailWrite);
+      // let modal = this.modalCtrl.create("MeetingWritePage");
+      // modal.present();
+      // modal.onDidDismiss(data => {
+      //     data && console.log(data);
+      // });
+      this.navCtrl.push("MeetingWritePage");
   }
 
   doRefresh(refresher: Refresher) {

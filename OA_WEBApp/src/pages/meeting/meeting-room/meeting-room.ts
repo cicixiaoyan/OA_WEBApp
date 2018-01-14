@@ -17,12 +17,18 @@ export class MeetingRoomPage {
 
   list = [];
   isEmpty: boolean = false;
+  data: object = {};
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private modalCtrl: ModalController,
               private meetingService: MeetingService) {
+      this.data = {
+        "PageIndex": 1,
+        "PageSize": 8
+      };
       this.getList();
+
   }
 
 
@@ -47,38 +53,16 @@ export class MeetingRoomPage {
   }
 
   private getList(){
-    this.list = [
-      {
-        "Id": '1',
-        "Name": '会议室1',
-        "Number": '200',
-        "Manager": '张三',
-        "Mobile": "13111111111"
-      },
-      {
-        "Id": '2',
-        "Name": '会议室2',
-        "Number": '200',
-        "Manager": '张三',
-        "Mobile": "13111111111"
-      },
-      {
-        "Id": '3',
-        "Name": '会议室3',
-        "Number": '200',
-        "Manager": '张三',
-        "Mobile": "13111111111"
+
+    this.meetingService.MeetRoomLs(this.data).subscribe((resJson) => {
+      if (resJson.Result  && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
+        this.isEmpty = false;
+        let list = resJson.Data;
+        this.list = [...this.list, ...list];
+      }else{
+        this.isEmpty =  true;
       }
-    ];
-    // this.meetingService.MeetPlaceLs().subscribe((resJson) => {
-    //   if (resJson.Result  && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
-    //     this.isEmpty = false;
-    //     let list = resJson.Data;
-    //     this.list = [...this.list, ...list];
-    //   }else{
-    //     this.isEmpty =  true;
-    //   }
-    // });
+    });
   }
 
 }

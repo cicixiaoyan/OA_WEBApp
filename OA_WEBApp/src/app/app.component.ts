@@ -67,8 +67,7 @@ export class MyApp {
             this.helper.initJpush(); // JPush初始化 
             this.jpushOpenNotification(); // 
             this.helper.setTags();
-            // this.globalData.Uid = "admin";
-            // this.helper.setAlias();
+            this.helper.setAlias("admin");
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             this.storage.get('firstIn').then((result) => {

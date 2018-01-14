@@ -46,6 +46,7 @@ export class NewworkDetail {
         }
 
     };
+    submit(){}
 
 
 }

@@ -1,0 +1,64 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>审核拒绝</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+
+        <ion-item>
+            <ion-label stacked>选择下一步骤：</ion-label>
+            <ion-select [(ngModel)]="nextStep" placeholder="选择下一步" cancelText="取消" okText="确定">
+                <ion-option value="1">系统管理员1</ion-option>
+                <ion-option value="2">系统管理员2</ion-option>
+                <ion-option value="3">系统管理员3</ion-option>
+            </ion-select>
+        </ion-item>
+        <div>
+            <ion-item>
+                <ion-label stacked>选择审批人员：</ion-label>
+                <ion-select [(ngModel)]="review" multiple="true" placeholder="还未审批" cancelText="取消" okText="确定">
+                    <ion-option value="1">系统管理员2</ion-option>
+                    <ion-option value="1">系统管理员3</ion-option>
+                </ion-select>
+            </ion-item>
+
+
+        </div>
+        <div></div>
+
+    </ion-list>
+
+</ion-content>
+<ion-footer>
+    <button (click)="sent()" color="danger" ion-button icon-left full>提交</button>
+</ion-footer>
+<!-- <ion-item>
+              <ion-label stacked>经办人员：</ion-label>
+              <ion-select [(ngModel)]="manager" multiple="true" placeholder="请选择经办人员" cancelText="取消" okText="确定">
+                  <ion-option value="1">系统管理员1</ion-option>
+                  <ion-option value="2">系统管理员2</ion-option>
+                  <ion-option value="3">系统管理员3</ion-option>
+              </ion-select>
+          </ion-item>
+          <ion-item>
+              <ion-label stacked>经办部门：</ion-label>
+              <ion-select [(ngModel)]="department" multiple="true" placeholder="请选择经办部门" cancelText="取消" okText="确定">
+                  <ion-option value="1">总部</ion-option>
+                  <ion-option value="2">研究部</ion-option>
+                  <ion-option value="3">设计部</ion-option>
+                  <ion-option value="4">测试部部</ion-option>
+              </ion-select>
+          </ion-item>
+          <ion-item>
+              <ion-label stacked>经办角色：</ion-label>
+              <ion-select [(ngModel)]="role" multiple="true" placeholder="请选择经办人员" cancelText="取消" okText="确定">
+                  <ion-option value="1">管理员</ion-option>
+                  <ion-option value="2">总经理助理</ion-option>
+
+              </ion-select>
+          </ion-item> -->

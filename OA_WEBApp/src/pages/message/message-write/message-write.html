@@ -5,33 +5,38 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    
-        <ion-navbar>
-    
-            <button ion-button (click)="dismiss()">取消</button>
-    
-            <ion-title>写信</ion-title>
-            <ion-buttons end>
-                <button ion-button icon-left [disabled]="!writeForm.valid" (click)="sent(writeForm.value)">
+
+    <ion-navbar>
+
+        <button ion-button (click)="dismiss()">取消</button>
+
+        <ion-title>写信</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-left [disabled]="!writeForm.valid" (click)="sent(writeForm.value)">
                     <ion-icon name="ios-send"></ion-icon> 发送
                 </button>
-            </ion-buttons>
-        </ion-navbar>
-    </ion-header>
-    
-    
-    <ion-content>
-        <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">
-            <div>
-                <ion-list style="position:relative;">
-                    <ion-item>
-                        <ion-label style="align-self:center;">收件人&emsp;</ion-label>
-                        <ion-input min-rows="1" formControlName="addressee"  #popoverContent placeholder="请选择收件人" (click)="checkPeople($event)"></ion-input>
-                    </ion-item>
-                    <ion-item >
-                        <ion-textarea formControlName="Content" rows="6" class="write-textarea" placeholder="输入消息..."></ion-textarea>
-                    </ion-item>
-                </ion-list>
-            </div>
-        </form>
-    </ion-content>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">
+        <div>
+            <ion-list style="position:relative;">
+                <ion-item>
+                    <ion-label class="click-label">收件人&emsp;</ion-label>
+                    <div item-content text-right style="flex: 1;" #popoverContent (click)="checkPeople($event)">
+                        <span>{{writeForm.value.addressee}}</span>
+                        <span *ngIf="writeForm.value.addressee == ''" class='text-ios-gray'>点击选择收件人</span>
+                    </div>
+
+                    <!-- <ion-input min-rows="1" formControlName="addressee" #popoverContent placeholder="请选择收件人" (click)="$event.blur();checkPeople($event)"></ion-input> -->
+                </ion-item>
+                <ion-item>
+                    <ion-textarea formControlName="Content" rows="6" class="write-textarea" placeholder="输入消息..."></ion-textarea>
+                </ion-item>
+            </ion-list>
+        </div>
+    </form>
+</ion-content>

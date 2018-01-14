@@ -229,7 +229,7 @@ export class NativeService {
   getPicture(options: CameraOptions = {}): Observable<string> {
     let ops: CameraOptions = Object.assign({
       sourceType: this.camera.PictureSourceType.CAMERA, // 图片来源,CAMERA:拍照,PHOTOLIBRARY:相册
-      destinationType: this.camera.DestinationType.DATA_URL, // 默认返回base64字符串,DATA_URL:base64   FILE_URI:图片路径
+      destinationType: this.camera.DestinationType.FILE_URI, // 默认返回图片路径,  DATA_URL:base64   FILE_URI:图片路径
       quality: QUALITY_SIZE, // 图像质量，范围为0 - 100
       allowEdit: false, // 选择图片前是否允许编辑
       encodingType: this.camera.EncodingType.JPEG,
@@ -266,7 +266,7 @@ export class NativeService {
   getPictureByCamera(options: CameraOptions = {}): Observable<string> {
     let ops: CameraOptions = Object.assign({
       sourceType: this.camera.PictureSourceType.CAMERA,
-      destinationType: this.camera.DestinationType.DATA_URL // DATA_URL: 0 base64字符串, FILE_URI: 1图片路径
+      destinationType: this.camera.DestinationType.FILE_URI // DATA_URL: 0 base64字符串, FILE_URI: 1图片路径
     }, options);
     return this.getPicture(ops);
   }
@@ -278,7 +278,7 @@ export class NativeService {
   getPictureByPhotoLibrary(options: CameraOptions = {}): Observable<string> {
     let ops: CameraOptions = Object.assign({
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: this.camera.DestinationType.DATA_URL // DATA_URL: 0 base64字符串, FILE_URI: 1图片路径
+      destinationType: this.camera.DestinationType.FILE_URI // DATA_URL: 0 base64字符串, FILE_URI: 1图片路径
     }, options);
     return this.getPicture(ops);
   }

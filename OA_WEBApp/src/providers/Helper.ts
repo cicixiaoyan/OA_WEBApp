@@ -61,14 +61,14 @@ export class Helper {
     document.addEventListener("jpush.receiveNotification", event => {
       let content = this.nativeService.isIos() ? event['aps'].alert : event['alert'];
       console.log("jpush.receiveNotification" + content);
-      this.nativeService.showToast("收到通知" + content, 800);
+      console.log("收到通知" + content);
     }, false);
 
     // 收到自定义消息时触发这个事件
     document.addEventListener("jpush.receiveMessage", event => {
       let message = this.nativeService.isIos() ? event['content'] : event['message'];
       console.log("jpush.receiveMessage" + message);
-      this.nativeService.showToast("收到自定义通知" + message, 800);
+      console.log("收到自定义通知" + message);
     }, false);
 
 
@@ -96,10 +96,10 @@ export class Helper {
     if (this.nativeService.isIos()) {
       tags.push('ios');
     }
-    alert('设置setTags:' + tags);
+    // alert('设置setTags:' + tags);
     return this.jPush.setTags({ "sequence": 2, "tags": tags }).then(res => {
-      this.nativeService.showToast("设置标签" + tags, 800);
-    }).catch(err => this.nativeService.showToast(err, 800) );
+      console.log("设置标签" + tags, 800);
+    }).catch(err => console.log("err" + err) );
   }
 
   // 设置别名,一个用户只有一个别名
@@ -109,9 +109,10 @@ export class Helper {
     }
     // console.log('设置setAlias:' + this.globalData.Uid);
     // this.jPush.setAlias('' + this.globalData.Uid);//ios设置setAlias有bug,值必须为string类型,
-    return this.jPush.setAlias({ "sequence": 1, "alias": ['' + id || this.globalData.Uid] }).then(res => {
-      this.nativeService.showToast("设置别名" + id || this.globalData.Uid, 800);
-    }).catch(err => this.nativeService.showToast(err, 800));
+    let alia = id || "" + this.globalData.Uid;
+    return this.jPush.setAlias({ "sequence": 1, "alias": alia }).then(res => {
+      console.log("设置别名" + id || this.globalData.Uid);
+    }).catch(err => console.log("err", err));
   }
 
 //   setTagsWithAlias(userId) {

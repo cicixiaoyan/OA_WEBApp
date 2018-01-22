@@ -21,7 +21,7 @@
     <ion-list>
         <ion-item-sliding *ngFor="let item of list;index as i">
             <ion-item (click)="doRead(item)">
-                <h3>{{item.EduStartDate}}~{{item.EduEndDate}}</h3>
+                <h3>{{item.EduStartDate | date: "yyyy-MM-dd"}}~{{item.EduEndDate | date: "yyyy-MM-dd"}}</h3>
                 <h2>{{item.EduMajor}}|{{item.EduMechanism}}</h2>
                 <p *ngIf="item.EduMmeo !== ''">{{item.EduMmeo}}</p>
                 <ion-icon name="arrow-forward" item-end color="stable"></ion-icon>

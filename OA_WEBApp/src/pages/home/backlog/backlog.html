@@ -5,11 +5,11 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <ion-navbar>
+    <!-- <ion-navbar>
         <ion-title>待办事项</ion-title>
-    </ion-navbar>
-    <ion-toolbar no-border-top>
-        <ion-segment class="content-ios" [(ngModel)]="work" (ngModelChange)="doRefresh()">
+    </ion-navbar> -->
+    <ion-toolbar>
+        <ion-segment [(ngModel)]="work" (ngModelChange)="doRefresh()">
             <ion-segment-button value="notDone">
                 未办理
             </ion-segment-button>
@@ -29,9 +29,10 @@
     </ion-refresher>
 
     <ion-list>
-        <button ion-item *ngFor="let work of items" [navPush]="nxPage" [navParams]="{id:work.Id}">
-                <span>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</span>
-                <p>发起人：{{work.Originator}}&emsp;当前步骤：{{work.Step}}</p>
+        <button ion-item *ngFor="let work of items" (click)="view(work)">
+                <h3>&nbsp;[{{work.Title}}]{{work.WorkNumber}}</h3>
+                <span>当前步骤：{{work.Step}}</span>
+                <p>发起人：{{work.Originator}}</p>
             </button>
     </ion-list>
 

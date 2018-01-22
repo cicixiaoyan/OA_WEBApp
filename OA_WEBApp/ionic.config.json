@@ -1,14 +1,12 @@
 {
-  "name": "OA_WEBApp",
-  "app_id": "",
-  "proxies": [
-    {
-      "path": "/ashx",
-      "proxyUrl": "http://192.168.0.49:789/ashx"
+    "name": "OA_WEBApp",
+    "app_id": "",
+    "proxies": [{
+        "path": "/ashx",
+        "proxyUrl": "http://192.168.0.49:789/ashx"
+    }],
+    "type": "ionic-angular",
+    "integrations": {
+        "cordova": {}
     }
-  ],
-  "type": "ionic-angular",
-  "integrations": {
-    "cordova": {}
-  }
 }

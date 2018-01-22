@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Refresher } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Refresher, Events } from 'ionic-angular';
 
 import { GlobalData } from "../../providers/GlobalData";
 import { MessageService } from "./messageService";
+import { NativeService } from '../../providers/NativeService';
 
 /**
  * Generated class for the MessagePage page.
@@ -33,6 +34,8 @@ export class MessagePage {
               public navParams: NavParams,
               public globalData: GlobalData,
               private modalCtrl: ModalController,
+              private nativeService: NativeService,
+              public events: Events,
               private messageService: MessageService) {
       this.inboxData = {
           "PageSize": 5,
@@ -54,13 +57,13 @@ export class MessagePage {
 
   initializeItems() {
       this._getInboxList(this.inboxData);
-      this._getOutboxList(this.outboxData);
+    //   this._getOutboxList(this.outboxData);
       console.log(this);
 
-      this.timer = setInterval(() => {
-          console.log(this);
-          this.getNewInboxList(this.inboxData);
-     }, 50000);
+    //   this.timer = setInterval(() => {
+    //       console.log(this);
+    //       this.getNewInboxList(this.inboxData);
+    //  }, 50000);
   }
 
   ionViewDidLoad() {
@@ -89,7 +92,6 @@ export class MessagePage {
   }
 
   doReadOutBox(Params) {
-      console.log(Params);
       this.navCtrl.push("MessageReadOutPage", { Params: Params });
   }
 
@@ -100,6 +102,22 @@ export class MessagePage {
           data && console.log(data);
       });
       // this.navCtrl.push(MailWrite);
+  }
+
+  markup(index){
+    let data = {
+        "uid": this.messageService.httpService.globalData.Uid,
+        "id": this.inboxList[index].Id
+    };
+    this.messageService.markup(data).subscribe(resJson => {
+        if (resJson.Result){
+            this.inboxList[index].Status = this.messageService.messageStatus["read"];
+            
+            this.events.publish("message: badgechange", 0);
+        }else{
+            this.nativeService.showToast(resJson.Data);
+        }
+    });
   }
 
   doRefresh(refresher: Refresher) {

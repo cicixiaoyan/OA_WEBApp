@@ -14,11 +14,15 @@
 
 
 <ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
+        </ion-refresher-content>
+    </ion-refresher>
     <ion-list>
         <ion-item-sliding *ngFor="let item of list; index as i">
             <ion-item (click)="doRead(item)">
-                <h3>{{item.ExpStartDate}}~{{item.ExpEndDate}}</h3>
-                <h2>{{item.xpDuty}}</h2>
+                <h3>{{item.ExpStartDate}}~{{item.ExpEndDate | date: "yyyy-MM-dd"}}</h3>
+                <h2>{{item.ExpDuty}}</h2>
                 <p>{{item.ExpDeptName}}<span *ngIf="item.ExpUnit !== ''">|{{item.ExpUnit}}</span></p>
                 <p *ngIf="item.Remarks !== ''">备注：{{item.ExpMemo}}</p>
                 <ion-icon name="arrow-forward" item-end color="stable"></ion-icon>

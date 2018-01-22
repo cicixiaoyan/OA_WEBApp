@@ -25,7 +25,8 @@ export class MeetingRoomPage {
               private meetingService: MeetingService) {
       this.data = {
         "PageIndex": 1,
-        "PageSize": 8
+        "PageSize": 20,
+        "Uid": this.meetingService.httpService.globalData.Uid
       };
       this.getList();
 
@@ -36,12 +37,12 @@ export class MeetingRoomPage {
 
   }
 
-  doRead(Params) {
-    this.navCtrl.push("MeetingRoomSetPage", { "isAdd": false, "Id": Params });
+  doRead(id) {
+    this.navCtrl.push("MeetingRoomSetPage", { "Id": id });
   }
 
   doWrite() {
-    this.navCtrl.push("MeetingRoomSetPage", { "isAdd": true });
+    this.navCtrl.push("MeetingRoomSetPage");
   }
 
   doRefresh(refresher: Refresher) {

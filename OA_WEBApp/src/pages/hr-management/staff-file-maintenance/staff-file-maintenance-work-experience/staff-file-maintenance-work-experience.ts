@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Refresher } from 'ionic-angular';
 import { StaffFileMaintenanceService } from '../staff-file-maintenance-service';
 import { NativeService } from '../../../../providers/NativeService';
 
@@ -33,8 +33,16 @@ export class StaffFileMaintenanceWorkExperience {
       let modal = this.modalCtrl.create("StaffFileMaintenanceWorkExperienceAdd", {"id": this.Id});
       modal.present();
       modal.onDidDismiss(data => {
-          data && console.log(data);
+          data && this.doRefresh(null);
       });
+  }
+
+  doRefresh(refresher: Refresher) {
+    this.list = [];
+    this.getList();
+    setTimeout(() => {
+      refresher && refresher.complete();
+    }, 1000);
   }
 
   doRead(item){

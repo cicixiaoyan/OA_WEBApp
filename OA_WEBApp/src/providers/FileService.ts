@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AlertController } from 'ionic-angular';
 import { HttpService } from "./HttpService";
-import { FILE_SERVE_URL } from "./Constants";
+import { GlobalData } from "./GlobalData";
 import { FileObj, AffixObj } from "../model/FileObj";
 import { Response  } from "@angular/http";
 import { Observable } from "rxjs";
@@ -13,19 +13,20 @@ import { Utils } from './Utils';
 import { File } from '@ionic-native/file';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { FileOpener } from '@ionic-native/file-opener';
-/**
- * 上传图片到文件服务器
- */
+import { FilePath } from '@ionic-native/file-path';
+
 @Injectable()
 export class FileService {
   constructor(private httpService: HttpService,
               private nativeService: NativeService,
               private alertCtrl: AlertController,
               // private transfer: Transfer,
+              private filePath: FilePath,
               private fileChooser: FileChooser,
               private file: File,
               private fileTransfer: FileTransfer,
-              private fileOpener: FileOpener
+              private fileOpener: FileOpener,
+              public globalData: GlobalData
             ) {
   }
 
@@ -35,6 +36,7 @@ export class FileService {
   }
 
   upload(fileURL, url, pathOption, observer){
+    console.log(fileURL, url, pathOption);
     let alert = this.alertCtrl.create({
       title: '上传进度：0%',
       enableBackdropDismiss: false,
@@ -48,7 +50,7 @@ export class FileService {
         alert.dismiss();
       } else {
         let title = document.getElementsByClassName('alert-title')[0];
-        title && (title.innerHTML = '上传进度：' + url + event.loaded + " " + event.total + '%');
+        title && (title.innerHTML = '上传进度：' + num + '%');
       }
     });
     fileTransfer.upload(fileURL, url, pathOption, true).then((data) => {
@@ -67,28 +69,32 @@ export class FileService {
    * 
    */
 
-  uploadAffix(type: number): Observable<any>{
+  uploadAffix(type: number): Observable<any> {
     return Observable.create((observer) => {
       this.fileChooser.open().then(fileURL => {
-        let mimeType = fileURL.toLowerCase().split(".").splice(-1)[0];
-        let pathOption: FileUploadOptions = {
-          "fileKey": "file",
-          "fileName": fileURL.substr(fileURL.lastIndexOf('/') + 1),
-          "mimeType": Utils.getFileMimeType(mimeType),
-          "headers": {
-            "Connection": "close",
-            "Token": this.httpService.globalData.token,
-          },
-          "chunkedMode": false,
-          "httpMethod": "POST",
-          "params": {  "type": type }
-        };
-        let url = encodeURI(FILE_SERVE_URL + "ashx/AttachUpload.ashx");
-        this.upload(fileURL, url, pathOption, observer);
-      });
-    });
+        this.filePath.resolveNativePath(fileURL).then(path => {
+          let mimeType = path.toLowerCase().split(".").splice(-1)[0];
+          console.log(path, path.substr(path.lastIndexOf('/') + 1), mimeType);
+          let pathOption: FileUploadOptions = {
+            "fileKey": "file",
+            "fileName": path.substr(path.lastIndexOf('/') + 1),
+            "mimeType": mimeType,
+            "headers": {
+              "Connection": "close",
+              "Token": this.httpService.globalData.token,
+            },
+            "chunkedMode": false,
+            "httpMethod": "POST",
+            "params": { "type": type }
+          };
+          let url = encodeURI(this.globalData.FILE_SERVE_URL + "ashx/AttachUpload.ashx");
+          return this.upload(fileURL, url, pathOption, observer);
 
-  }
+        });
+      });
+
+    });
+}
 
   /**
    * app上传图片
@@ -99,7 +105,7 @@ export class FileService {
     return Observable.create(observer => {
       let pathOption: FileUploadOptions = {
         "fileKey": "file",
-        "fileName": "img",
+        "fileName": "img.jpg",
         "mimeType": "image/jpeg",
         "headers": {
           "Connection": "close",
@@ -109,7 +115,7 @@ export class FileService {
         "httpMethod": "POST",
         "params": {  "type": 2 }
       };
-      let url = encodeURI(FILE_SERVE_URL + "ashx/AttachUpload.ashx");
+      let url = encodeURI(this.globalData.FILE_SERVE_URL + "ashx/AttachUpload.ashx");
       this.upload(filepath, url, pathOption, observer);
 
     });
@@ -118,10 +124,13 @@ export class FileService {
   download(url, name): Observable<any>{
     const fileTransfer: FileTransferObject = this.fileTransfer.create();
     return Observable.create((observer) => {
-      fileTransfer.download(FILE_SERVE_URL + url, this.file.dataDirectory + name).then((entry) => {
+      fileTransfer.download(this.globalData.FILE_SERVE_URL + url, this.file.dataDirectory + name).then((entry) => {
         if (entry.Response == "200")
         observer.next(entry);
       }, (error) => {
+        if (error.http_status == "404") {
+          this.nativeService.showToast("文件不存在");
+        }
         observer.next(error);
         // handle error
       });
@@ -135,9 +144,9 @@ export class FileService {
 
 download1(source: string, target: string, trustAllHosts?, Optional?): Observable<any> {
   let alert = this.alertCtrl.create({
-      title: '下载进度：0%',
+      title: '加载进度：0%',
       enableBackdropDismiss: false,
-      buttons: ['后台下载']
+      buttons: ['后台加载']
   });
   alert.present();
 
@@ -147,9 +156,14 @@ download1(source: string, target: string, trustAllHosts?, Optional?): Observable
   console.log(target);
   return Observable.create((observer) => {
     fileTransfer.download(encodeURI(source), target).then((entry) => {
+        alert && alert.dismiss();
         console.log('download complete: ' + entry.toURL());
         observer.next(entry.toURL());
       }, (error) => {
+        if (error.http_status == "404") {
+          alert && alert.dismiss();
+          this.nativeService.showToast("文件不存在", 800);
+        }
         console.log(error);
       });
 
@@ -159,7 +173,7 @@ download1(source: string, target: string, trustAllHosts?, Optional?): Observable
             alert.dismiss();
         } else {
             let title = document.getElementsByClassName('alert-title')[0];
-            title && (title.innerHTML = '下载进度：' + num + '%');
+            title && (title.innerHTML = '加载进度：' + num + '%');
         }
     });
   });

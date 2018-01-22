@@ -14,28 +14,51 @@ export class BacklogService {
     constructor(public httpService: HttpService) {
     }
 
-    TodoApproveLs(param?) {// 待办列表
-        param.verb = "3";
+    save(param?) {// 第一步提交审核意见
+        param.verb = "01";
         return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
     }
-    approveStep1(param?) {// 审批通过或驳回,返回id
-        param.verb = "21";
+    savePass(param?) {// 第一步保存并通过
+        param.verb = "02";
         return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
     }
-    approveste2(param?) {// 审批通过或驳回
-        param.verb = "22";
+    saveFail(param?) {// 第一步保存并驳回
+        param.verb = "03";
         return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
     }
 
+    passSteps2(param?) {// 第二步通过
+        param.verb = "04";
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
+    }
+    failSteps2(param?) {// 第二步驳回
+        param.verb = "05";
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
+    }
+    getList(param?) {// 待办列表
+        param.verb = "31";
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
+    }
+    getDetail(param?) {// 待办详情
+        param.verb = "32";
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
+    }
+    getAffix(param?) {// 第一步待办详情附件
+        param.verb = "33";
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
+    }
+    failData(param?) {// 第二步驳回数据
+        param.verb = "34";
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
+    }
+    passData(param?) {// 第二步通过数据
+        param.verb = "35";
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
+    }
+    reviewersLs(param?) {// 第二步审批人员
+        param.verb = "36";
+        return this.httpService.postFormData('/ashx/TodoLs.ashx', param).map((res: Response) => res.json());
+    }
 
-
-
-    //   getInboxList(param?):Observable<any>{
-    //       return this.httpService.postFormData("url",param).map((res: Response) => res.json());
-    //   }
-
-    //   getOutboxList(param?):Observable<any> {
-    //     return this.httpService.postFormData("url",param).map((res: Response) => res.json());
-    //   }
 
 }

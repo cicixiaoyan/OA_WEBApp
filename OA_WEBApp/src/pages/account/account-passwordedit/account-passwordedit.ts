@@ -24,6 +24,7 @@ export class AccountPasswordedit {
                 private modalCtrl: ModalController,
                 private httpService: HttpService,
                 private formBuilder: FormBuilder) {
+
         this.editPasswordForm = this.formBuilder.group({
             "oldPwd": [, [Validators.required, Validators.minLength(3)]],
             "newPwd": [, [Validators.required, Validators.minLength(3)]],
@@ -38,10 +39,14 @@ export class AccountPasswordedit {
             .subscribe((Resjson) => {
                 if (Resjson.Result){
                     this.httpService.nativeService.showToast("修改密码成功", 800);
+                    
                     let modal = this.modalCtrl.create("LoginPage");
                     modal.present();
                     modal.onDidDismiss(data => {
-                        data && console.log(data);
+                        if (!!data){
+                            this.navCtrl.pop();
+                            this.navCtrl.parent.goToRoot();
+                        }
                     });
                 }else{
                     this.httpService.nativeService.showToast("修改密码失败： " + Resjson.Data, 800);

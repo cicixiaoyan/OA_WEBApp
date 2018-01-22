@@ -37,10 +37,13 @@
                 <ion-item>
                     <ion-label>主&emsp;题&emsp;</ion-label>
                     <ion-input type="test" formControlName="Title" placeholder="主题1"></ion-input>
+                    <div item-content>
+                        <button ion-button clear class="share-btn" type="button" (click)="addAffix()">
+                            <ion-icon name="share"></ion-icon>{{haveAffix ? '1' : 0}}
+                        </button>
+                    </div>
                 </ion-item>
-                <button ion-button clear class="share-btn" type="button" (click)="addAffix()">
-                    <ion-icon name="share"></ion-icon>{{haveAffix ? '1' : 0}}
-                </button>
+
                 <ion-item>
                     <ion-label>密&emsp;送&emsp;</ion-label>
                     <ion-toggle formControlName="Bcc"></ion-toggle>

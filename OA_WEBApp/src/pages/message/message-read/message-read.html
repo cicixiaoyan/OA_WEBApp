@@ -12,22 +12,27 @@
 
 </ion-header>
 
-        
+
 <ion-content>
-        <ion-list>
-            <ion-item-divider style="background: #fff;" text-center>{{messageDetail.Name}}</ion-item-divider>
+    <ion-list>
+        <ion-item>
+            <!-- <ion-label>发送人&emsp;</ion-label> -->
+            <ion-input type="text" disabled="disabled" [value]="messageDetail.Name" placeholder="发送人：未知"></ion-input>
+        </ion-item>
 
-            <ion-item>
-                <ion-label>发送时间</ion-label>
-                <ion-input type="text" readonly="true" [(ngModel)]="messageDetail.SendDate" [ngModelOptions]="{standalone: true}"  placeholder="发送时间未知"></ion-input>
-            </ion-item>
-            
-            <ion-item>
-                <ion-textarea type="text" rows="4" readonly="true" [(ngModel)]="messageDetail.Content" [ngModelOptions]="{standalone: true}"  placeholder="信息内容"></ion-textarea>
-            </ion-item>
+        <ion-item>
+            <!-- <ion-label>发送时间</ion-label> -->
+            <ion-input type="test" disabled="disabled" [value]="'发送时间：' + messageDetail.SendDate" placeholder="发送时间未知"></ion-input>
+        </ion-item>
 
-        </ion-list>
-        <!-- <div class="message-reply">
+
+
+        <ion-item>
+            <ion-textarea type="text" rows="4" readonly="true" [(ngModel)]="messageDetail.Content" [ngModelOptions]="{standalone: true}" placeholder="信息内容"></ion-textarea>
+        </ion-item>
+
+    </ion-list>
+    <!-- <div class="message-reply">
             <ion-textarea  type="text" formControlName="writeContent"  placeholder="回复: "></ion-textarea>
             <button ion-button small color="positive" type="submit">发送</button>
         </div> -->

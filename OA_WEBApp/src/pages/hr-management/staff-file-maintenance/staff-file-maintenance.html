@@ -19,15 +19,15 @@
         </ion-refresher-content>
     </ion-refresher>
     <ion-list>
-        <ion-item-sliding *ngFor="let item of list" (click)="doRead(item.Id)">
-            <ion-item>
+        <ion-item-sliding *ngFor="let item of list;index as i">
+            <ion-item (click)="doRead(item.Id)">
                 <ion-avatar item-start><span>{{item.BasicNum}}</span></ion-avatar>
-                <h2>{{item.BasicName}}•{{item.BasicSex}}&emsp;<span float-right>{{item.BasicFirstEduation}}</span></h2>
-                <h3>职务：{{item.BasicDuty}}</h3>
+                <h2>{{item.BasicName}}•{{item.BasicSex}}&emsp;<span float-right class="text-ios-energized">{{item.BasicFirstEduation}}</span></h2>
+                <h3>部门：{{item.BasicDeptName}}</h3>
                 <p>{{item.BasicStatus}}</p>
             </ion-item>
             <ion-item-options side="right">
-                <button ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>
+                <button (click)="delete(i)" ion-button color="primary"><ion-icon name="md-trash"></ion-icon>删除</button>
             </ion-item-options>
         </ion-item-sliding>
     </ion-list>

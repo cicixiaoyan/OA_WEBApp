@@ -111,9 +111,12 @@
 
                 <ion-item>
                     <ion-label stacked>会议资料<span class="optional">（选填）</span></ion-label>
-                    <ion-note item-end (click)="addAffix()">{{writeForm.value.FileOldName ? writeForm.value.FileOldName : '点击添加'}}</ion-note>
+                    <div (click)="addAffix()" item-content>
+                        {{writeForm.value.FileOldName ? writeForm.value.FileOldName : '点击添加'}}
+                    </div>
+                    <!-- <ion-note item-end (click)="addAffix()">{{writeForm.value.FileOldName ? writeForm.value.FileOldName : '点击添加'}}</ion-note> -->
                 </ion-item>
             </ion-list>
-            </di>
+        </div>
     </form>
 </ion-content>

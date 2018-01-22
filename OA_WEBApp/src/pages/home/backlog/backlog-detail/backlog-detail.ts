@@ -4,12 +4,7 @@ import { BacklogService } from '../backlogService';
 import { NativeService } from '../../../../providers/NativeService';
 import { FileService } from '../../../../providers/FileService';
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
-/**
- * Generated class for the BacklogDetail page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+import { GlobalData } from '../../../../providers/GlobalData';
 @IonicPage()
 @Component({
     selector: 'page-backlog-detail',
@@ -19,44 +14,76 @@ export class BacklogDetail {
 
     isComplete: boolean = false;
     item = {
-        "Id": '',
-        "WorkNextNodeID": '',
-        "WNo": '',
-        "Title": '',
-        "WID": '',
-        "WorkNumber": '',
-        "UrgencyLevel": '',
-        "Originator": '',
-        "Step": '',
-        "FromTp": '',
-        "TemplateType": '',
-        "Template": '',
-        "Attachment": '',
-        "Status": '',
-    };
-    opinion: '';
+        "FlowNumber": "",
+            "strNextNodeNum": "",
+            "strbkNextNodeNum": "",
+            "fnName": "",
+            "fName": null,
+            "strfnid": "",
+            "strfnWriteID": "",
+            "wSerialNo": "",
+            "Number": "",
+            "whname": "",
+            "ReviewMode": "",
+            "strwUserIDs": "",
+            "lblstrhyUserIDs": "",
+            "lblstrhyUserNames": "",
+            "wContent": "",
+            "wTitle": "",
+            "yj": [],
+            "FormId": "",
+            "ls": [],
+            "UpNodeId": "",
+            "UrgencyLevel": "",
+        };
+    opinion: string = '';
     downloaded: boolean = false;
     affName: string = '';
     FileNewName: string = "";
+
+    data: any;
+
+    opinionSelect: string;
+    affixLs: Array<any>;
+
+    showSave: boolean = true;
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 private backlogService: BacklogService,
                 private nativeService: NativeService,
                 private fileService: FileService,
+                private globalData: GlobalData,
                 private modalCtrl: ModalController
             ) {
-        console.log(this.navParams.get("id"));
+
+        this.data = this.navParams.get("param");
         this.initializeItems();
     }
 
     initializeItems() {
         let data = {
-            "id": this.navParams.get("id"),
-            "Uid": this.backlogService.httpService.globalData.Uid
+            "id": this.data.Id,
+            "uid": this.globalData.Uid,
+            "username": this.globalData.Name,
+            "UpNodeId": this.data.UpNodeId,
+            "flowNumber": this.data.FlowNumber,
+            "FormId": this.data.FormId
         };
-        this.backlogService.TodoApproveLs(data).subscribe((resJson) => {
+        this.backlogService.getDetail(data).subscribe((resJson) => {
             if (resJson.Result){
                 this.item = resJson.Data;
+
+                if (this.item["strwUserIDs"].split(",").length == 2 
+                    || this.item["ReviewMode"] === "仅一人通过审批即可向下流转"){
+                    this.showSave = false;
+                }
+
+                if (this.item["Number"] != null){
+                    this.backlogService.getAffix({"Number": this.item["Number"]}).subscribe(resJson1 => {
+                        if (resJson1.Result) this.affixLs = resJson1.Data;
+                    
+                    });
+                }
             }
             else{
                 this.nativeService.showToast(resJson.Data);
@@ -69,33 +96,74 @@ export class BacklogDetail {
         console.log('ionViewDidLoad BacklogDetail');
     }
 
-    approved(bol: boolean) {
-        let data = {
-            'Id': this.item.Id,
-            'Template': this.item.Template,
-            'TemplateType': this.item.TemplateType,
-            'Title': this.item.Title,
-            // 'ISPass': bol ? 0 : 1,
-            'Userid': this.backlogService.httpService.globalData.Uid,
-            'UserName': this.backlogService.httpService.globalData.Name,
-            'FileName': this.affName,
-            'FileNewName': this.FileNewName,
-            'Opinion': this.opinion,
-            'Step': this.item.Step,
-        };
-      
-        this.backlogService.approveStep1(data).subscribe(resJson => {
-            if (!resJson.Result) return this.nativeService.showToast(resJson.Data);
+    getOpinion(value){
+        this.opinion = value;
+    }
 
-            this.nativeService.showToast("提交审核意见成功");
-            let modal = bol ? 
-                this.modalCtrl.create("BacklogApproveSuccussPage", {"content": this.item, "id": resJson.Data}) :
-                this.modalCtrl.create("BacklogApproveFailPage", {"content": this.item, "id": resJson.Data});
-            modal.present();
-            modal.onDidDismiss(data => {
-                data && this.navCtrl.pop();   
+    approved(number: Number) {
+        let data = {
+            "id": this.data.Id,
+            "uid": this.globalData.Uid,
+            "username": this.globalData.Name,
+            "whname": this.item.whname,
+            "wContent": this.item.wContent,
+            "fName": this.item.fName || "",
+            "attach": this.affName,
+            "attachnewname": this.FileNewName,
+            "fnName": this.item.fName,
+            "spyj": this.opinion,
+            "ReviewMode": this.item.ReviewMode,
+            "lblstrhyUserIDs": this.item.lblstrhyUserIDs,
+            "lblstrhyUserNames": this.item.lblstrhyUserNames
+        };
+        if (number == 0){
+
+            this.backlogService.save(data).subscribe(resJson => {
+                this.nativeService.showToast(resJson.Data, 800);
+                if (resJson.Result) {
+                    
+                } 
             });
-        });
+        }else if (number == 1) {
+            this.backlogService.savePass(data).subscribe(resJson => {
+                this.nativeService.showToast(resJson.Data, 800);
+                if (resJson.Result) {
+                    let modal =  this.modalCtrl.create("BacklogApproveSuccussPage", 
+                    {"content": this.item, "param": resJson.Data});
+                    modal.present();
+                    modal.onDidDismiss(data => {
+                        data && this.navCtrl.pop();   
+                    });
+                }
+            });
+        }else{
+            this.backlogService.saveFail(data).subscribe(resJson => {
+                this.nativeService.showToast(resJson.Data, 800);
+                if (resJson.Result) {
+                    let modal =  this.modalCtrl.create("BacklogApproveFailPage", 
+                    {"content": this.item, "param": resJson.Data});
+                    modal.present();
+                    modal.onDidDismiss(data => {
+                        data && this.navCtrl.pop();   
+                    });
+                }
+            });
+        }
+
+
+      
+        // this.backlogService.save(data).subscribe(resJson => {
+        //     if (!resJson.Result) return this.nativeService.showToast(resJson.Data);
+
+        //     this.nativeService.showToast("提交审核意见成功");
+        //     let modal = bol ? 
+        //         this.modalCtrl.create("BacklogApproveSuccussPage", {"content": this.item, "id": resJson.Data}) :
+        //         this.modalCtrl.create("BacklogApproveFailPage", {"content": this.item, "id": resJson.Data});
+        //     modal.present();
+        //     modal.onDidDismiss(data => {
+        //         data && this.navCtrl.pop();   
+        //     });
+        // });
     }
 
     upload(){
@@ -111,10 +179,9 @@ export class BacklogDetail {
     }
 
     download(path, name){
-        const target = path.split("/").pop();
-        let url = path.slice(3, -1);
-        // let url = "http://192.168.0.49:789/Attach/flow/Work/201111302315473908417.pdf";
-        this.fileService.download1(url, target).subscribe((path) => {
+        // const target = name;
+        let url = this.globalData.FILE_SERVE_URL + "Attach/flow/Work/" + path;
+        this.fileService.download1(url, name).subscribe((path) => {
             this.downloaded = true;
             this.fileService.openFile(path).subscribe(() => {
 

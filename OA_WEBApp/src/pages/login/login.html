@@ -1,42 +1,44 @@
-<!--
-  Generated template for the Login page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <!--.nav-decor隐藏头部-->
 <ion-header class="nav-decor">
 
-    <ion-navbar>
+    <!-- <ion-navbar>
         <ion-title>登录</ion-title>
-    </ion-navbar>
+    </ion-navbar> -->
 
 </ion-header>
 
 
 <ion-content>
-    <div class="login-header">登录</div>
     <div class="login-top">
         <img src="assets/img/logo.png" alt="公司logo" />
+        <div class="subtitle">天天OA在线,办公精彩无限</div>
     </div>
     <form padding [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+
         <ion-list>
             <ion-item>
-                <ion-label color="primary">用户名</ion-label>
-                <ion-input type="text" formControlName="UserName" clearInput></ion-input>
+                <ion-label color="light">
+                    <ion-icon name="ios-person-outline"></ion-icon>
+                </ion-label>
+                <ion-input type="text" placeholder="用户名" formControlName="UserName" clearInput></ion-input>
             </ion-item>
             <div *ngIf="!loginForm.controls.UserName.valid && loginForm.controls.UserName.touched" class="validation-failed"> 请输入正确用户名</div>
 
             <ion-item>
-                <ion-label color="primary">密　码</ion-label>
-                <ion-input type="password" formControlName="UserPass" clearInput></ion-input>
+                <ion-label color="light">
+                    <ion-icon name="ios-unlock-outline"></ion-icon>
+                </ion-label>
+                <ion-input type="password" placeholder="密码" formControlName="UserPass" clearInput></ion-input>
             </ion-item>
-            <div *ngIf="!loginForm.controls.UserPass.valid" class="validation-failed">请输入密码</div>
+            <div *ngIf="!loginForm.controls.UserPass.valid && loginForm.controls.UserPass.touched" class="validation-failed">请输入密码</div>
 
         </ion-list>
-        <div padding-horizontal>
-            <button ion-button block type="submit" [disabled]="!loginForm.valid||submitted">登　录</button>
+
+        <button ion-button full round type="submit" class="login-btn" [disabled]="!loginForm.valid||submitted">登　录</button>
+        <div class="">
+            <button type="button" color="light" ion-button clear (click)="changeIP()">更换Ip</button>
         </div>
+
     </form>
     <!-- <ion-grid>
         <ion-row>

@@ -38,7 +38,7 @@ export class StaffFileMaintenanceSocialRelationshipAddPage {
         "SociologyByRelation": ['', [Validators.required, Validators.maxLength(10)]],  // 与本人关系
         "SociologyUnit": ['', [Validators.maxLength(30)]],  // 工作单位
         "SociologyContacNum": ['', [Validators.required, Validators.phone]],  // 联系电话
-        "SociologyEmergency": [false, []],  // 是否为紧急联系人
+        "SociologyEmergency": ["否", []],  // 是否为紧急联系人
         "SociologyMemo": ["", [Validators.maxLength(100)]], // 备注
       });
       this.formCtrls = this.addForm.controls;

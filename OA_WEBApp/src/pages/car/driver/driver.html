@@ -6,9 +6,9 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>驾驶员档案</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>驾驶员档案</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
@@ -19,8 +19,8 @@
         </ion-refresher-content>
     </ion-refresher>
     <ion-list>
-        <ion-item-sliding *ngFor="let item of list;let i = index" (click)="doRead(item.Id)">
-            <ion-item>
+        <ion-item-sliding *ngFor="let item of list;let i = index">
+            <ion-item (click)="doRead(item.Id)">
                 <span>{{item.Name}}&emsp;{{item.Sex}}</span>
                 <p class="font-12"><span *ngIf="item.Age">{{item.Age}}岁&emsp;</span>入职日期：{{item.InDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>
             </ion-item>

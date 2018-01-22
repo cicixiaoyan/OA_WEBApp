@@ -7,8 +7,9 @@ import { Observable, TimeoutError } from "rxjs";
 import { Utils } from "./Utils";
 import { GlobalData } from "./GlobalData";
 import { NativeService } from "./NativeService";
-import { APP_SERVE_URL, REQUEST_TIMEOUT, IS_DEBUG } from "./Constants";
+import { IS_DEBUG, REQUEST_TIMEOUT } from "./Constants";
 import { Logger } from "./Logger";
+import { ModalController } from 'ionic-angular';
 
 @Injectable()
 export class HttpService {
@@ -16,11 +17,12 @@ export class HttpService {
   constructor(public http: Http,
               public globalData: GlobalData,
               public logger: Logger,
+              private modalCtrl: ModalController,
               public nativeService: NativeService) {
   }
 
   public request(url: string, options: RequestOptionsArgs): Observable<Response> {
-    url = Utils.formatUrl(url.startsWith('http') ? url : APP_SERVE_URL + url);
+    url = Utils.formatUrl(url.startsWith('http') ? url : this.globalData.APP_SERVE_URL + url);
     return Observable.create(observer => {
       this.nativeService.showLoading();
       // IS_DEBUG && console.log('%c 请求前 %c', 'color:blue', '', 'url', url, 'options', options);
@@ -168,6 +170,12 @@ export class HttpService {
       msg = '请求失败，未找到请求地址';
     } else if (status === 500) {
       msg = '请求失败，服务器出错，请稍后再试';
+    } else if (status === 405){
+      msg = '登录已失效';
+      this.nativeService.showToast(msg);
+      let modal = this.modalCtrl.create("LoginPage");
+      modal.present();
+  
     }
     this.nativeService.showToast(msg);
     this.logger.httpLog(err, msg, {

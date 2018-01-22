@@ -49,26 +49,39 @@ export class Helper {
       }
     });
 
-    // 点击通知进入应用程序时会触发的事件
-    document.addEventListener("jpush.openNotification", event => {
-      this.setIosIconBadgeNumber(0);
-      let content = this.nativeService.isIos() ? event['aps'].alert : event['alert'];
-      console.log("jpush.openNotification" + content);
-      this.events.publish('jpush.openNotification', content);
-    }, false);
-
     // 收到通知时会触发该事件
     document.addEventListener("jpush.receiveNotification", event => {
-      let content = this.nativeService.isIos() ? event['aps'].alert : event['alert'];
-      console.log("jpush.receiveNotification" + content);
-      console.log("收到通知" + content);
+      let data = this.setEvent(event);
+      console.log("收到通知" + data.content);
+      this.events.publish('jpush.receiveNotification', data);
+    }, false);
+
+    // 点击通知进入应用程序时会触发的事件
+    document.addEventListener("jpush.openNotification", event => {
+      let data = this.setEvent(event);
+      console.log("打开通知" + data.content);
+      this.events.publish('jpush.openNotification', data);
     }, false);
 
     // 收到自定义消息时触发这个事件
     document.addEventListener("jpush.receiveMessage", event => {
-      let message = this.nativeService.isIos() ? event['content'] : event['message'];
-      console.log("jpush.receiveMessage" + message);
-      console.log("收到自定义通知" + message);
+      let content = "",
+      param = {};
+
+      if (this.nativeService.isIos()) {
+        content = event["content"];
+        for (let i in event["extras"]) {
+            param[i] = event["extras"][i];
+        }
+      } else {
+        content = event['message'];
+        param = event["extras"]["cn.jpush.android.EXTRA"];
+      }
+
+      let data = {"content": content, "param": param};
+      console.log("收到自定义通知" + data.content);
+
+      this.events.publish('jpush.receiveMessage', data);
     }, false);
 
 
@@ -82,6 +95,25 @@ export class Helper {
       console.log(result);
     }, false);
 
+  }
+
+  private setEvent(event){
+    let content = "",
+      param = {};
+
+    if (this.nativeService.isIos()) {
+      content = event['aps'].alert;
+      for (let i in event) {
+        if (i != "aps" && i != "_j_msgid") {
+          param[i] = event[i];
+        }
+      }
+    } else {
+      content = event['alert'];
+      param = event["extras"]["cn.jpush.android.EXTRA"];
+    }
+
+    return {"content": content, "param": param};
   }
 
   // 设置标签

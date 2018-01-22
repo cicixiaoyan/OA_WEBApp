@@ -7,7 +7,7 @@ export class Validators extends angularValidators {
     /*E-mail*/
     static email = function (control: AbstractControl) {
         return Validators.validatorsByPattern('email', control,
-         '[a-z]([a-z0-9]*[-_]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?');
+         '^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$');
     };
 
     /*手机号码*/
@@ -175,7 +175,8 @@ export class Validators extends angularValidators {
       };
 
       let card = control.value; // 表单值
-      if (card === '' || !isCardNo(card)  || !checkProvince(card)  ||
+      if (card === "") return ;
+      if (!isCardNo(card)  || !checkProvince(card)  ||
        !checkBirthday(card)  || !checkParity(card)  ) {
          return { "idcinvalid": true};
           // return control.setErrors({ idcinvalid: true, message: '请输入合法的身份证号码' });

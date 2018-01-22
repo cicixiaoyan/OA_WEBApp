@@ -27,7 +27,8 @@ export class MessageReadOutPage {
   }
   initializeItems() {
       this.messageDetail = this.navParams.get("Params");
-      this.messageContent = this.messageDetail.Title;
+      console.log(this.messageDetail);
+      this.messageContent = this.messageDetail.Content;
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MessageReadOutPage');

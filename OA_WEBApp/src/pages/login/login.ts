@@ -14,6 +14,8 @@ import { GlobalData } from "../../providers/GlobalData";
 // import { TabsPage } from '../tabs/tabs';
 import { HttpService } from "../../providers/HttpService";
 import { NavController } from 'ionic-angular/navigation/nav-controller';
+import { BackButtonService } from '../../services/backButtonService';
+import { JPush } from 'ionic3-jpush';
 @IonicPage()
 
 @Component({
@@ -27,22 +29,28 @@ export class LoginPage {
     canLeave: boolean = false;
     loginForm: any;
 
-    constructor(private viewCtrl: ViewController,
+    constructor(public globalData: GlobalData,
+                public jPush: JPush,
+                public storage: Storage,
+                private viewCtrl: ViewController,
                 private events: Events,
                 private formBuilder: FormBuilder,
-                private storage: Storage,
                 private modalCtrl: ModalController,
                 private platform: Platform,
                 private alertCtrl: AlertController,
-                private globalData: GlobalData,
                 private loginService: LoginService,
                 private httpService: HttpService,
-                private NavCtrl: NavController
+                private NavCtrl: NavController,
+                private backButtonService: BackButtonService,
     ) {
+        platform.ready().then(() => {
+            
+            this.backButtonService.registerBackButtonAction(null);
+        });
 
         this.loginForm = this.formBuilder.group({
-            UserName: ['admin', [Validators.required, Validators.minLength(3)]], // 第一个参数是默认值
-            UserPass: ['123', [Validators.required, Validators.minLength(2)]]
+            UserName: ['004', [Validators.required, Validators.minLength(3)]], // 第一个参数是默认值
+            UserPass: ['123456', [Validators.required, Validators.minLength(2)]]
         });
     }
 
@@ -80,29 +88,47 @@ export class LoginPage {
         this.loginService.login(user).subscribe((userInfo) => {
             if (userInfo.Result){
                 console.log(userInfo);
+                this.storage.remove("menus");
                 this.submitted = false;
-                // userInfo.token = 'xx122a9Wf';//从后台获取token,暂时写死
                 this.userInfo = userInfo.Data;
                 this.globalData.Uid = userInfo.Data.Uid;
                 this.globalData.Name = userInfo.Data.Name;
                 this.globalData.token = userInfo.Data.Token;
+
                 this.loginService.Menuls().subscribe(resJson => {
-                    if (resJson.Result)
-                    this.storage.set("menus", resJson.Data);
+                    if (resJson.Result){
+                        this.storage.set("menus", resJson.Data);
+                        this.events.publish('menu:open', resJson.Data);
+                    }
+                    else alert(resJson.Data);
                 }); 
-                // alert(this.globalData.token);
+
+                console.log("userinfo", this.userInfo);
+                // 添加jpush标签
+                this.jPush.setTags({ "sequence": 3, "tags": [this.userInfo.Uid, this.userInfo.CompanyEn] })
+                .then(res => {
+                
+                    console.log("设置标签" + this.userInfo.Uid, this.userInfo.CompanyEn, 800);
+                  }).catch(err => console.log("err", err) );
+
+
                 this.storage.set('UserInfo', userInfo.Data);
                 this.storage.set('LoginInfo', user);
-                // alert(this.storage.get('UserInfo'));
                 this.events.publish('user:login', userInfo);
                 this.viewCtrl.dismiss(userInfo.Data);
             }else{
                 this.alertCtrl.create({
-                    title: this.userInfo.Data,
+                    title: userInfo.Data,
                     buttons: [{ text: '取消' }]
                 }).present();
+
+                this.submitted = false;
             }
-        });
+        },
+        err => {
+            this.submitted = false;
+        }
+        );
     }
 
     findPassword() {
@@ -117,6 +143,43 @@ export class LoginPage {
 
     dismiss() {
         this.viewCtrl.dismiss();
+    }
+
+    changeIP(){
+        let alert = this.alertCtrl.create({
+            title: 'IP设置',
+            inputs: [
+              {
+                name: 'ip',
+                placeholder: '请输入ip地址',
+                value: this.globalData.APP_SERVE_URL
+              }
+            ],
+            buttons: [
+              {
+                text: '取消',
+                role: 'cancel',
+                handler: data => {
+                  console.log('Cancel clicked');
+                }
+              },
+              {
+                text: '确认',
+                handler: data => {
+                    this.globalData.APP_SERVE_URL = data.ip;
+                    this.globalData.APP_VERSION_SERVE_URL = data.ip;
+                    this.globalData.FILE_SERVE_URL = data.ip;
+                //   if (User.isValid(data.username)) {
+                //     // logged in!
+                //   } else {
+                //     // invalid login
+                //     return false;
+                //   }
+                }
+              }
+            ]
+          });
+        alert.present();
     }
 
 }

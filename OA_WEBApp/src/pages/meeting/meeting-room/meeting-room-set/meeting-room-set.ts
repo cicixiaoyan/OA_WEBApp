@@ -18,8 +18,8 @@ export class MeetingRoomSetPage {
               public navParams: NavParams,
               @Inject(FormBuilder) fb: FormBuilder,
               private meetingService: MeetingService) {
-    this.isWrite = !!this.navParams.get("Id") ? false : true; 
-    this.id = this.navParams.get("id") || "";
+    this.isWrite = !!this.navParams.get("Id") ? true : false; 
+    this.id = this.navParams.get("Id") || "";
     this.setForm = fb.group({
       "MeetName": ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)]], // 第一个参数是默认值
       "MangerPerson": ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)]],
@@ -32,7 +32,7 @@ export class MeetingRoomSetPage {
     this.formCtrls = this.setForm.controls;
 
     if (this.isWrite){
-      this.meetingService.MeetRoomView({"id": this}).subscribe(resJson => {
+      this.meetingService.MeetRoomView({"id": this.id}).subscribe(resJson => {
         if (resJson.Result)
           this.setForm.patchValue(resJson.Data);
       });

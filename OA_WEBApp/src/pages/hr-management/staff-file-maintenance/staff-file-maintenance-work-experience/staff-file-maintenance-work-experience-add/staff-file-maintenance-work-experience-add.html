@@ -40,7 +40,7 @@
             </div>
             <ion-item>
                 <ion-label>职务</ion-label>
-                <ion-input text-right type="text" formControlName="Duty" placeholder="输入职务名称"></ion-input>
+                <ion-input text-right type="text" formControlName="ExpDuty" placeholder="输入职务名称"></ion-input>
             </ion-item>
             <div class="validation-failed" *ngIf="formCtrls.ExpDuty.invalid && (formCtrls.ExpDuty.touched || formCtrls.ExpDuty.dirty )">
                 <div *ngIf="addForm.hasError('required', 'ExpDuty')">职务必填</div>

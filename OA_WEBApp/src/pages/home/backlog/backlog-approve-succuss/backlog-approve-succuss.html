@@ -1,6 +1,9 @@
 <ion-header>
 
     <ion-navbar>
+        <ion-buttons start>
+            <button ion-button (click)="viewCtrl.dismiss()">返回</button>
+        </ion-buttons>
         <ion-title>审核通过</ion-title>
     </ion-navbar>
 
@@ -12,18 +15,15 @@
 
         <ion-item>
             <ion-label stacked>选择下一步骤：</ion-label>
-            <ion-select [(ngModel)]="nextStep" placeholder="选择下一步" cancelText="取消" okText="确定">
-                <ion-option value="1">系统管理员1</ion-option>
-                <ion-option value="2">系统管理员2</ion-option>
-                <ion-option value="3">系统管理员3</ion-option>
+            <ion-select [(ngModel)]="selected" (ngModelChange)="getuser(selected)" placeholder="选择下一步" cancelText="取消" okText="确定">
+                <ion-option *ngFor="let step of stepLs" [value]="step.ID">{{step.Name}}</ion-option>
             </ion-select>
         </ion-item>
-        <div>
+        <div *ngIf="personLs.length > 0">
             <ion-item>
                 <ion-label stacked>选择审批人员：</ion-label>
-                <ion-select [(ngModel)]="review" multiple="true" placeholder="还未审批" cancelText="取消" okText="确定">
-                    <ion-option value="1">系统管理员2</ion-option>
-                    <ion-option value="1">系统管理员3</ion-option>
+                <ion-select [(ngModel)]="UserIDs" multiple="true" placeholder="还未审批" cancelText="取消" okText="确定">
+                    <ion-option *ngFor="let person of personLs" [value]="person.ID">{{person.Name}}</ion-option>
                 </ion-select>
             </ion-item>
 

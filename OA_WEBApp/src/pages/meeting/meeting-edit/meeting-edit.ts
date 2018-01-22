@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, Inject } from '@angular/core';
 import { IonicPage, NavParams, NavController, PopoverController,  ViewController } from 'ionic-angular';
 
 import { GlobalData } from '../../../providers/GlobalData';
@@ -8,6 +8,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FileService } from '../../../providers/FileService';
 import { Utils } from '../../../providers/Utils';
 import { MeetingService } from '../meeting_service';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 /**
  * Generated class for the MeetingEditPage page.
@@ -37,12 +38,14 @@ export class MeetingEditPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private fileService: FileService,
-              private formBuilder: FormBuilder,
+              @Inject(FormBuilder) formBuilder: FormBuilder,
               private globalData: GlobalData,
               private nativeService: NativeService,
               private popoverCtrl: PopoverController,
-              private meetingService: MeetingService) {
-    this.writeForm = this.formBuilder.group({
+              private meetingService: MeetingService,
+              private alertCtrl: AlertController
+            ) {
+    this.writeForm = formBuilder.group({
         "Title": ['', [Validators.required, Validators.maxLength(30), Validators.minLength(2)]], // 第一个参数是默认值
         "TypeId": ["", [Validators.required]],
         "PlaceId": ["", [ Validators.required]],
@@ -128,7 +131,7 @@ export class MeetingEditPage {
     this.fileService.uploadAffix(1).subscribe((data) => {
       let resJson = JSON.parse(data.response);
       if (data.responseCode === 200){
-        this.writeForm.patchValue({'Affix': resJson.Data[0].OldName});
+        this.writeForm.patchValue({'FileOldName': resJson.Data[0].OldName});
         this.FileNewName = resJson.Data[0].NewName;
       }else{
         this.nativeService.showToast(resJson.Data, 800);
@@ -156,13 +159,32 @@ export class MeetingEditPage {
     });
   }
 
-  delete(){
-    this.meetingService.del({id: this.id}).subscribe(resJson => {
-      if (resJson.Result){
-        this.nativeService.showToast("删除成功", 800);
-        this.navCtrl.pop();
-      }else this.nativeService.showToast(resJson.Data, 800);
+  delete() {
+    let prompt = this.alertCtrl.create({
+      title: '删除提心',
+      message: "您确定删除这条会议吗？",
+      buttons: [
+        {
+          text: '取消',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: '删除',
+          handler: data => {
+            this.meetingService.del({ id: this.id }).subscribe(resJson => {
+              if (resJson.Result) {
+                this.nativeService.showToast("删除成功", 800);
+                this.navCtrl.pop();
+              } else this.nativeService.showToast(resJson.Data, 800);
+            });
+          }
+        }
+      ]
     });
+    prompt.present();
+
   }
 
   checkPeople(myEvent) {

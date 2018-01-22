@@ -4,7 +4,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ContractService } from '../contract-service';
 import { NativeService } from '../../../../providers/NativeService';
 import { FileService } from '../../../../providers/FileService';
-import { FILE_SERVE_URL } from '../../../../providers/Constants';
+import { GlobalData } from '../../../../providers/GlobalData';
 @IonicPage()
 @Component({
   selector: 'page-contract-setting',
@@ -29,7 +29,8 @@ export class ContractSettingPage {
               private FormBuilder: FormBuilder,
               private contractService: ContractService,
               private nativeService: NativeService,
-              private fileService: FileService
+              private fileService: FileService,
+              public globalData: GlobalData
             ) {
       this.readOnly = this.navParams.get("readOnly") ? true : false;
       this.Id = this.navParams.get("Id") || '';
@@ -137,7 +138,7 @@ export class ContractSettingPage {
   downloadAffix(path, name) {
     const target = path.split("/").pop();
     // let url = "http://192.168.0.49:789/Attach/flow/Work/201111302315473908417.pdf";
-    this.fileService.download1(FILE_SERVE_URL + path, target).subscribe((path) => {
+    this.fileService.download1(this.globalData.FILE_SERVE_URL + path, target).subscribe((path) => {
       this.fileService.openFile(path).subscribe(() => {
         
       });

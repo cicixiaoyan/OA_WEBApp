@@ -26,6 +26,7 @@ export class AnnouncementPage {
   moredata: boolean = true; // 是否能加载更多
   isEmpty: boolean = false; // 是否无数据
   data: any;
+  pageSlides: Array<string> = ["录入", "已发布", "全部"];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private announcementService: AnnouncementService) {
@@ -66,26 +67,25 @@ export class AnnouncementPage {
       });
   }
 
-// 选择录入、已发布、全部
-checkRead(name: string = "enter") {
-    this.data.PageIndex = 0;
-    this.items = [];
-    this.checkBtn = { "enter": false, "published": false, "all": false };
-    this.checkBtn[name] = true;
-    if (name === "enter") {
-        // 参数设置
-        this.data.Status = this.announcementService.announcementStatus["enter"];
+  
+    // 选择录入、已发布、全部
+    onSlideClick(i: number) {
+        this.data.PageIndex = 0;
+        this.items = [];
+        if (i === 0) {
+            // 参数设置
+            this.data.Status = this.announcementService.announcementStatus["enter"];
+        }
+        else if (i === 1) {
+            // 参数设置
+            this.data.Status = this.announcementService.announcementStatus["published"];
+        }
+        else {
+            // 参数设置
+            this.data.Status = this.announcementService.announcementStatus["all"];
+        }
+        this.getList();
     }
-    else if (name === "published") {
-        // 参数设置
-        this.data.Status = this.announcementService.announcementStatus["published"];
-    }
-    else {
-        // 参数设置
-        this.data.Status = this.announcementService.announcementStatus["all"];
-    }
-    this.getList();
-}
 
   private getList() {
       this.announcementService.getList(this.data).subscribe((resJson) => {

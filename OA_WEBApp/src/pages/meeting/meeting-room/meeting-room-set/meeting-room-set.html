@@ -22,22 +22,22 @@
 
                 <ion-item>
                     <ion-label>管理人员</ion-label>
-                    <ion-input text-right formControlName="Manager" placeholder="请输入"></ion-input>
+                    <ion-input text-right formControlName="MangerPerson" placeholder="请输入"></ion-input>
                 </ion-item>
-                <div *ngIf="formCtrls.Manager.invalid && (formCtrls.MangerPerson.touched || formCtrls.MangerPerson.dirty )" class="validation-failed">
+                <div *ngIf="formCtrls.MangerPerson.invalid && (formCtrls.MangerPerson.touched || formCtrls.MangerPerson.dirty )" class="validation-failed">
                     <div *ngIf="setForm.hasError('required', 'MangerPerson')">管理人员必填</div>
-                    <div *ngIf="setForm.hasError('required', 'MangerPerson')">最少输入2个字</div>
-                    <div *ngIf="setForm.hasError('required', 'MangerPerson')">最多输入20个字</div>
+                    <div *ngIf="setForm.hasError('minlength', 'MangerPerson')">最少输入2个字</div>
+                    <div *ngIf="setForm.hasError('maxlength', 'MangerPerson')">最多输入20个字</div>
                 </div>
 
 
                 <ion-item>
                     <ion-label>规模容量</ion-label>
-                    <ion-input text-right type="number" formControlName="Number" placeholder="请输入"></ion-input>
+                    <ion-input text-right type="number" formControlName="Scale" placeholder="请输入"></ion-input>
                 </ion-item>
                 <div *ngIf="formCtrls.Scale.invalid && (formCtrls.Scale.touched || formCtrls.Scale.dirty)" class="validation-failed">
                     <div *ngIf="setForm.hasError('required', 'Scale')">必填项</div>
-                    <div *ngIf="setForm.hasError('required', 'Scale')">最大容量10000</div>
+                    <div *ngIf="setForm.hasError('maxlength', 'Scale')">最大容量10000</div>
                 </div>
 
                 <ion-item>

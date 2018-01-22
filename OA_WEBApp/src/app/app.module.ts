@@ -14,6 +14,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AppVersion } from '@ionic-native/app-version';
 import { Toast } from '@ionic-native/toast';
 import { File } from '@ionic-native/file';
+import { FilePath } from '@ionic-native/file-path';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FileOpener } from '@ionic-native/file-opener';
 import { FileTransfer } from '@ionic-native/file-transfer';
@@ -46,6 +47,7 @@ import { JPush } from 'ionic3-jpush';
 // https://docs.fundebug.com/notifier/javascript/framework/ionic2.html
 import { ENABLE_FUNDEBUG, IS_DEBUG, FUNDEBUG_API_KEY } from "../providers/Constants";
 import { EmptyModule } from '../components/empty/empty.module';
+import { FileChooseModule } from "../components/file-choose/file-choose.module";
 declare var require: any;
 let fundebug: any = require("fundebug-javascript");
 fundebug.apikey = FUNDEBUG_API_KEY;
@@ -76,6 +78,7 @@ export class FunDebugErrorHandler implements ErrorHandler {
         IonicStorageModule.forRoot(),
         EmptyModule,
         QuillModule,
+        FileChooseModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -91,6 +94,7 @@ export class FunDebugErrorHandler implements ErrorHandler {
         Toast,
         File,
         FileChooser,
+        FilePath,
         FileOpener,
         FileTransfer,
         InAppBrowser,

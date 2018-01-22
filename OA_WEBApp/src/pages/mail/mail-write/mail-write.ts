@@ -82,8 +82,11 @@ export class MailWrite {
         };
 
         this.mailService.write(data1).subscribe((resJson) => {
-            resJson.Result ? this.nativeService.showToast("信息已发送") :
-            this.nativeService.showToast(resJson.Data);
+            if (!resJson.Result) return this.nativeService.showToast(resJson.Data);
+
+            this.nativeService.showToast("信息已发送") ;
+            this.navCtrl.pop();
+            
         });
 
     }

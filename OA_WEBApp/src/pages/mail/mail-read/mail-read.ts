@@ -18,12 +18,13 @@ export class MailRead {
     @ViewChild(Content) content: Content;
     mailContent: string = ""; // 消息内容
     mailDetail: any = {};
-    IsInbox: boolean = true; // 默认为收件箱详情
+    isInbox: boolean = true; // 默认为收件箱详情
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 private nativeService: NativeService,
                 private modalCtrl: ModalController,
                 private mailService: MailService) {
+        this.isInbox = this.navParams.get("MailStatus") == this.mailService.status["inbox"];
         this.initializeItems();
     }
 
@@ -32,11 +33,10 @@ export class MailRead {
             "id": this.navParams.get('id'),
             "MailStatus": this.navParams.get("MailStatus")
         };
-        if (data.MailStatus == this.mailService.mailStatus["outbox"]) this.IsInbox = false;
+        // if (data.MailStatus == this.mailService.mailStatus["outbox"]) this.isInbox = false;
         this.mailService.read(data).subscribe((resJson) => {
-            if (resJson.Result){
-                this.mailDetail = resJson.Data;
-                console.log(resJson);
+            if (resJson.Result && resJson.Data.length != 0){
+                this.mailDetail = resJson.Data[0];
                 this.mailDetail.Name = this.mailDetail.Name.split(":")[1];
             }
         });

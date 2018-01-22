@@ -25,7 +25,7 @@ export class AccountEdit {
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 private actionSheetCtrl: ActionSheetController,
-                private storage: Storage,
+                public storage: Storage,
                 private httpService: HttpService,
                 private modalCtrl: ModalController,
                 private formBuilder: FormBuilder) {
@@ -51,14 +51,10 @@ export class AccountEdit {
                 let modal = this.modalCtrl.create("LoginPage");
                 modal.present();
                 modal.onDidDismiss(data => {
-                    data && console.log(data);
+                    if (!!data) this.userInfo = data;
                 });
             }
         });
-
-
-        // this.userInfo.BirthDate = "1990-02-19";
-        // this.userInfo.InDate = "1990-02-19";
     }
 
     ionViewDidLoad() {
@@ -102,13 +98,8 @@ export class AccountEdit {
         .subscribe((Resjson) => {
             if (Resjson.Result){
                 this.httpService.nativeService.showToast("修改资料成功", 800);
-                this.httpService.postFormData("ashx/UserInfo.ashx", {id: this.httpService.globalData.Uid})
-                .map(responce => responce.json()).subscribe((res) => {
-                    if (res.Result){
-                        this.storage.set("UserInfo", res.Date);
-                        this.userInfo = res.Data;
-                    }
-                });
+                this.storage.set("UserInfo", this.userInfo);
+                this.navCtrl.pop();
             }else{
                 this.httpService.nativeService.showToast("修改资料失败： " + Resjson.Data, 800);
             }

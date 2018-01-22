@@ -1,6 +1,6 @@
 import { LoginService } from './../login/LoginService';
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { IonicPage, NavController, Nav, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, Nav, NavParams, ModalController, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 // import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';           
 export interface HomePageInterface {
@@ -45,9 +45,9 @@ export class Home {
     // set our app's pages
     appPages: HomePageInterface[] = [
         { title: '消息', component: "MessagePage", index: 1, icon: 'ios-mail', color: "positive" },
-        { title: '公告管理', component: "TabsPage", index: 2, icon: 'ios-notifications', color: "royal" },
+        { title: '公告管理', component: "AnnouncementPage", icon: 'ios-notifications', color: "royal" },
         { title: '通讯录', component: "Contacts", icon: 'md-call', color: "energized" },
-        { title: '待办事项', component: "Backlog", icon: 'ios-calendar', color: "assertive" },
+        { title: '待办事项', component: "Backlog", index: 2, icon: 'ios-calendar', color: "assertive" },
         // { title: '新建工作', component: Newwork, icon: 'md-exit', color: "balanced" },
         // { title: '设置', component: "TabsPage", index: 3, icon: 'ios-cog', color: "calm" },
         { title: '短信', component: "SmsPage", icon: 'ios-cog', color: "calm" },
@@ -80,32 +80,19 @@ export class Home {
     };
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController,
-                public storage: Storage, private loginService: LoginService) {
+                public storage: Storage, private loginService: LoginService, public events: Events) {
         this.storage.get("menus").then(Menu => {
-            if (!!Menu){
-                this.setMenu(Menu);
-            }else{
-                let modal = this.modalCtrl.create("LoginPage");
-                modal.present();
-                modal.onDidDismiss(data => {
-                    this.storage.get("menus").then(Menu1 => {
-                        this.setMenu(Menu1);
-                        this.storage.set("changeMenu", true);
-                    });
-                    
-                });
-                   
-            }
+            if (!!Menu)  this.setMenu(Menu);
+        });
+        this.events.subscribe('menu:open', Menu => {
+            this.setMenu(Menu);
         });
 
     }
 
-
-
-    // setFocus($event) {
-    //     console.log($event);
-    //     $event.focus();
-    //   }
+    ionViewDidEnter(){
+        // this.navCtrl.parent.select(3);
+    }
     
     private setMenu(menu){
         // console.log(menu, typeof(menu));

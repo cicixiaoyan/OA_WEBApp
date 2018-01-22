@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Refresher } from 'ionic-angular';
 import { BacklogService } from "./backlogService";
+import { GlobalData } from '../../../providers/GlobalData';
 
 @IonicPage()
 @Component({
@@ -10,7 +11,7 @@ import { BacklogService } from "./backlogService";
 })
 export class Backlog {
     work: string = "notDone";
-    nxPage: any = "BacklogDetail";
+    // nxPage: any = "BacklogDetail";
     params: any;
     items: any = [];
     moredata: boolean = true;
@@ -19,18 +20,27 @@ export class Backlog {
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
+                public globalData: GlobalData,
                 private backlogService: BacklogService) {
         this.data = {
             "PageIndex": 0,
             "PageSize": 10,
             "Status": this.backlogService.Status["notdone"],
-            "Uid": this.backlogService.httpService.globalData.Uid
+            "uid": this.globalData.Uid
          };
         this.getList(this.data);
     }
 
+    ionViewDidEnter(){
+        
+    }
+
     ionViewDidLoad() {
         console.log('ionViewDidLoad Backlog');
+    }
+
+    view(work){
+        this.navCtrl.push("BacklogDetail", {"param": work});
     }
 
     doRefresh(refresher?: Refresher) {
@@ -65,7 +75,7 @@ export class Backlog {
     }
 
     private getList(data) {
-        this.backlogService.TodoApproveLs(data).subscribe((resJson) => {
+        this.backlogService.getList(data).subscribe((resJson) => {
             if (resJson.Result  && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string" ){
                 this.isEmpty = false;
                 this.items = this.items.concat(resJson.Data);

@@ -11,6 +11,7 @@ import { UserInfo } from "../model/UserInfo";
 import { LoginService } from '../pages/login/LoginService';
 import { Utils } from "../providers/Utils";
 import { Helper } from '../providers/Helper';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 
 declare var AppMinimize;
@@ -33,11 +34,12 @@ export class MyApp {
     // set our app's pages
     appPages: PageInterface[] = [
         { title: '首页', component: "TabsPage", index: 0, icon: 'calendar' },
-        { title: '邮件', component: "TabsPage", index: 1, icon: 'ios-mail' },
+        { title: '消息', component: "TabsPage", index: 1, icon: 'ios-mail' },
         { title: '通讯录', component: "TabsPage", index: 4, icon: 'md-call', tab1Component: "Contacts" },
-        { title: '公告管理', component: "TabsPage", index: 2, icon: 'ios-notifications' },
+        { title: '公告管理', component: "TabsPage", index: 6, icon: 'ios-notifications', 
+        tab1Component: "AnnouncementPage" },
         // { title: '新建工作', component: TabsPage, index: 5, icon: 'md-exit', tab1Component: Newwork },
-        { title: '待办事项', component: "TabsPage", index: 6, icon: 'ios-calendar', tab1Component: "Backlog" }
+        { title: '待办事项', component: "TabsPage", index: 2, icon: 'ios-calendar' }
         // ,{ title: '设置', component: TabsPage, index: 3, icon: 'ios-cog'},
         // { title: '登陆', component: LoginPage, index: 7, icon: 'contacts' }
     ];
@@ -51,12 +53,13 @@ export class MyApp {
                 private keyboard: Keyboard,
                 private ionicApp: IonicApp,
                 private storage: Storage,
-                private globalData: GlobalData,
+                public globalData: GlobalData,
                 private toastCtrl: ToastController,
                 private modalCtrl: ModalController,
                 private events: Events,
                 private helper: Helper,
                 private loginService: LoginService,
+                private alertCtrl: AlertController,
                 private nativeService: NativeService) {
 
                     
@@ -67,59 +70,55 @@ export class MyApp {
             this.helper.initJpush(); // JPush初始化 
             this.jpushOpenNotification(); // 
             this.helper.setTags();
-            this.helper.setAlias("admin");
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
-            this.storage.get('firstIn').then((result) => {
-                // this.nativeService.showToast("不是第一次进入");
-                if (result) {
-                    // this.nav.setRoot("TabsPage", { tabIndex: 0 });
-                    this.storage.get('loginInfo').then((loginInfo) => {
-                        // this.nav.setRoot("TabsPage", { tabIndex: 0 });
-                        if (loginInfo) {
-                            this.loginService.login(loginInfo).subscribe((resJson) => {
-                                if (resJson.result){
-                                    this.globalData.Uid = resJson.Data.Uid;
-                                    this.globalData.Name = resJson.Data.Name;
-                                    this.globalData.token = resJson.Data.Token;
-                                    this.helper.setAlias();
-                                    this.events.publish('user:login', result.Data);
-                                    this.nav.setRoot("TabsPage", { tabIndex: 0 });
-                                }else{
-                                    // this.NavCtrl.push("LoginPage");
-                                    let modal = this.modalCtrl.create("LoginPage");
-                                    modal.present();
-                                    modal.onDidDismiss(data => {
-                                        data && console.log(data);
-                                        this.helper.setAlias();
-                                        this.nav.setRoot("TabsPage", { tabIndex: 0 });
-                                    });
-                                }
-                            });
-
-                        } else {
+            // this.helper.setAlias("admin");
+            // this.storage.get('firstIn').then((result) => {
+            //     // this.nativeService.showToast("不是第一次进入");
+            //     if (result) {
+            this.storage.get('loginInfo').then((loginInfo) => {                
+                if (loginInfo) {
+                    this.loginService.login(loginInfo).subscribe((resJson) => {
+                        if (resJson.result){
+                            this.globalData.Uid = resJson.Data.Uid;
+                            this.globalData.Name = resJson.Data.Name;
+                            this.globalData.token = resJson.Data.Token;
+                            // this.helper.setAlias();
+                            this.events.publish('user:login', resJson.Data);
+                            this.nav.setRoot("TabsPage", { tabIndex: 0 });
+                        }else{
+                            this.storage.remove("Menu");
                             let modal = this.modalCtrl.create("LoginPage");
                             modal.present();
                             modal.onDidDismiss(data => {
                                 data && console.log(data);
-                                this.helper.setAlias();
+                                // this.helper.setAlias();
                                 this.nav.setRoot("TabsPage", { tabIndex: 0 });
                             });
                         }
                     });
-                }
-                else {
 
-                    this.storage.set('firstIn', true);
-                    let modal = this.modalCtrl.create("Welcome");
+                } else {
+                    this.storage.remove("Menu");
+                    let modal = this.modalCtrl.create("LoginPage");
                     modal.present();
                     modal.onDidDismiss(data => {
                         data && console.log(data);
+                        // this.helper.setAlias();
                         this.nav.setRoot("TabsPage", { tabIndex: 0 });
                     });
-                    // this.rootPage = Welcome;
                 }
             });
+            //    }
+            //     else {
+            //         this.storage.set('firstIn', true);
+            //         let modal = this.modalCtrl.create("Welcome");
+            //         modal.present();
+            //         modal.onDidDismiss(data => {
+            //             data && console.log(data);
+            //             this.nav.setRoot("TabsPage", { tabIndex: 0 });
+            //         });
+            //         // this.rootPage = Welcome;
+            //     }
+            // });
             
             statusBar.styleDefault();
             splashScreen.hide();
@@ -134,14 +133,14 @@ export class MyApp {
     }
 
     openPage(page: PageInterface) {
-        // the nav component was found using @ViewChild(Nav)
-        // reset the nav to remove previous pages and only have this page
-        // we wouldn't want the back button to show in this scenario
-
         this.menu.close();
 
         if (page.index) {
             if (page.tab1Component) {
+                // let tabs = this.nav.getActiveChildNav();
+                // let tab = tabs.getSelected();
+                // console.log(tab);
+                
                 this.nav.setRoot(page.component, { tab1Component: page.tab1Component, tabIndex: page.index });
             } else {
                 this.nav.setRoot(page.component, { tabIndex: page.index });
@@ -149,6 +148,8 @@ export class MyApp {
 
 
         } else {
+
+           
             this.nav.setRoot(page.component).catch(() => {
                 console.log("Didn't set nav root");
             });
@@ -226,15 +227,47 @@ export class MyApp {
     }
 
     jpushOpenNotification() {
+
+
+
+
         // 当点击极光推送消息跳转到指定页面
-        this.events.subscribe('jpush.openNotification', content => {
-            if (this.nav.)
-            this.nav.setRoot("TabsPage", { tabIndex: 1 });
+        this.events.subscribe('jpush.openNotification', obj => {
+            this.noticeRes(obj);
         });
 
-        this.events.subscribe('jpush.receiveNotification', content => {
+        this.events.subscribe('jpush.receiveNotification', obj => {
+            console.log(obj);
+            // 通知消息刷新
+            this.events.publish('message.receiveNotification', true);
+            let prompt = this.alertCtrl.create({
+                title: '收到消息提醒',
+                message: "您收到一条消息：" + obj.content,
+                buttons: [
+                  {
+                    text: '关闭',
+                    handler: data => {
+                      console.log('Cancel clicked');
+                    }
+                  },
+                  {
+                    text: '查看',
+                    handler: data => {
+                      this.noticeRes(obj);
+                    }
+                  }
+                ]
+              });
+            prompt.present();
+            // console.log("首页tongzhi ", content);
+        });
+
+        this.events.subscribe('jpush.receiveMessage', obj => {
+            // 通知消息刷新
+            this.events.publish('message.receiveNotification', true);
+
             let toast = this.toastCtrl.create({
-                message: '收到一条消息：' + content,
+                message: obj.content,
                 showCloseButton: true,
                 closeButtonText: '确定'
             });
@@ -242,10 +275,35 @@ export class MyApp {
                 
             });
 
-            toast.present();  
-            // console.log("首页tongzhi ", content);
-          });
+            toast.present(); 
         });
-      }
+    }
+
+    private noticeRes (obj){
+        let pageType = {
+            "0": "MessagePage",
+            "1": "Backlog",
+            "2": "Mail",
+            "3": "SmsPage",
+        };
+
+        let tabs = this.nav.getActiveChildNav();
+        let tab = tabs.getSelected();
+        let activeVC = tab.getActive();
+        console.log(activeVC);
+
+        // if (obj.param.length != 0){
+        if (activeVC.name == pageType[obj.param.type]) return;
+        if (obj.param.type == "0") {
+            this.nav.setRoot("TabsPage", { tabIndex: 1 });
+        }else if (obj.param.type == "1"){
+            this.nav.setRoot("TabsPage", { tabIndex: 2 });
+        }else{
+            tabs.select(1);
+            // this.tab.public(pageType[obj.param.type]);
+        }
+        // }
+        if (activeVC.comments == "MessagePage") return;
+    }
 
 }

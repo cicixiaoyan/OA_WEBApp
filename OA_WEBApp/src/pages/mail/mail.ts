@@ -55,13 +55,13 @@ export class Mail {
 
     initializeItems() {
         this._getInboxList(this.inboxData);
-        this._getOutboxList(this.outboxData);
+        // this._getOutboxList(this.outboxData);
         console.log(this);
 
-        this.Timer = setInterval(() => {
-            console.log(this);
-            this.getNewInboxList(this.inboxData);
-       }, 50000);
+    //     this.Timer = setInterval(() => {
+    //         console.log(this);
+    //         this.getNewInboxList(this.inboxData);
+    //    }, 50000);
     }
 
     ionViewDidLoad() {

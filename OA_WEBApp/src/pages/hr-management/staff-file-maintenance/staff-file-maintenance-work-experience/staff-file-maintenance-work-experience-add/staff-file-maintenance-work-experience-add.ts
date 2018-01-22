@@ -50,7 +50,7 @@ export class StaffFileMaintenanceWorkExperienceAdd {
     this.staffFileMaintenanceService.addWorkExp(value).subscribe(resJson => {
       if (resJson.Result){
         this.nativeService.showToast("保存工作经验成功", 800);
-        this.viewCtrl.dismiss({"change": true});
+        this.viewCtrl.dismiss(true);
       }else{
         this.nativeService.showToast(resJson.Data, 800);        
       }

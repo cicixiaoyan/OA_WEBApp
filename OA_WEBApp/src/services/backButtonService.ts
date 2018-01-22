@@ -19,6 +19,7 @@ export class BackButtonService {
     this.platform.registerBackButtonAction(() => {
       // 获取NavController
       let activeNav: NavController = this.appCtrl.getActiveNav();
+      console.log("activeNav", activeNav);
       // 如果可以返回上一页，则执行pop
       if (activeNav.canGoBack()) {
         activeNav.pop();
@@ -40,12 +41,12 @@ export class BackButtonService {
     if (this.backButtonPressed) {
       this.platform.exitApp();
     } else {
-        // 第一次按，弹出Toast
-        this.toastCtrl.create({
-            message: '再按一次退出应用',
-            duration: 2000,
-            position: 'top'
-        }).present();
+      // 第一次按，弹出Toast
+      this.toastCtrl.create({
+        message: '再按一次退出应用',
+        duration: 2000,
+        position: 'top'
+      }).present();
       // 标记为true
       this.backButtonPressed = true;
       // 两秒后标记为false，如果退出的话，就不会执行了

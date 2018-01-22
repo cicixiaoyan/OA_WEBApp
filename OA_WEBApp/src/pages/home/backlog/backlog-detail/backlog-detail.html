@@ -10,31 +10,31 @@
 <ion-content>
     <ion-card>
         <ion-card-header>
-            {{item.Title}}
+            {{item.wTitle}}
         </ion-card-header>
         <ion-card-content>
             <ion-list>
                 <ion-item>
                     <ion-label>当前步骤：</ion-label>
-                    <ion-input type="text" readonly [value]="item.Step" placeholder="当前步骤1"></ion-input>
+                    <ion-input type="text" readonly [value]="item.fnName" placeholder="当前步骤1"></ion-input>
                 </ion-item>
 
                 <ion-item *ngIf="isComplete">
                     <ion-label>审批模式：</ion-label>
-                    <ion-input type="text" [value]="item.TemplateType" readonly placeholder="无"></ion-input>
+                    <ion-input type="text" [value]="item.ReviewMode" readonly placeholder="无"></ion-input>
                 </ion-item>
 
                 <div *ngIf="!isComplete">
                     <ion-item>
                         <ion-label>&emsp;流水号：</ion-label>
-                        <ion-input type="text" [value]="item.WorkNumber" readonly placeholder="请输入流水号"></ion-input>
+                        <ion-input type="text" [value]="item.wSerialNo" readonly placeholder="请输入流水号"></ion-input>
                     </ion-item>
-                    <ion-item>
+                    <!-- <ion-item>
                         <ion-label>审批状态：</ion-label>
                         <ion-input type="text" [value]="item.UrgencyLevel" placeholder="无" readonly></ion-input>
-                    </ion-item>
+                    </ion-item> -->
                 </div>
-                <div [innerHTML]="item.Template | safeHTML" class="ihtml"></div>
+                <div [innerHTML]="item.wContent | safeHTML" class="ihtml"></div>
 
             </ion-list>
             <ion-row style="align-items:center;margin-bottom: 10px;">
@@ -42,8 +42,8 @@
                     &nbsp;相关附件：
                 </ion-col>
                 <ion-col col-lg-8 col-xl-6>
-                    <div *ngFor="let affix of item.Attachment">
-                        <button no-padding ion-button clear small (click)="download(affix.Option,affix.Text)">{{affix.Text}}</button>
+                    <div *ngFor="let affix of affixLs">
+                        <button no-padding ion-button clear small (click)="download(affix.ID,affix.Name)">{{affix.Name}}</button>
                     </div>
                 </ion-col>
             </ion-row>
@@ -53,11 +53,17 @@
                     <ion-label>审批记录：</ion-label>
                     <ion-textarea type="text" placeholder="无"></ion-textarea>
                 </ion-item> -->
-                <ion-item *ngIf="item.Status != '正常结束'">
-                    <ion-label>审批意见：(必填)</ion-label>
-                    <ion-textarea placeholder="请输入本次审批意见" [(ngModel)]="opinion" rows="2"></ion-textarea>
+                <ion-item *ngIf="data.UrgencyLevel != '正常结束'">
+                    <ion-label>常用审批意见：</ion-label>
+                    <ion-select [(ngModel)]="opinionSelect" (ngModelChange)="opinion=opinionSelect" cancelText="取消" okText="确定" placeholder="请选择">
+                        <ion-option *ngFor="let type of item.ls;let i = index" [value]="type.Id">{{type.Name}}</ion-option>
+                    </ion-select>
                 </ion-item>
-                <ion-item *ngIf="item.Status != '正常结束'">
+                <ion-item *ngIf="data.UrgencyLevel != '正常结束'">
+                    <ion-label>审批意见：</ion-label>
+                    <ion-textarea placeholder="必填项-请输入本次审批意见" [(ngModel)]="opinion" rows="3"></ion-textarea>
+                </ion-item>
+                <ion-item *ngIf="data.UrgencyLevel != '正常结束'">
                     <ion-label style="flex:none;">审批附件：</ion-label>
                     <div item-content (click)="upload()" style="flex: auto;color:cornflowerblue;">
                         {{affName != "" ? affName: '点击添加'}}
@@ -67,26 +73,33 @@
 
 
         </ion-card-content>
-        <div *ngIf="item.Status != '正常结束'">
+        <div *ngIf="data.UrgencyLevel != '正常结束'">
             <ion-row text-center>
-                <ion-col col-4>
-                    <button [disabled]="opinion == ''" (click)="approved(true)" ion-button icon-left clear small full>
+
+                <ion-col col-4 *ngIf="">
+                    <button [disabled]="opinion == ''" (click)="approved(0)" ion-button icon-left clear small full>
                         <ion-icon name="md-checkmark"></ion-icon>
-                        <div>审批通过</div>
+                        <div>保存</div>
                     </button>
                 </ion-col>
                 <ion-col col-4>
-                    <button [disabled]="opinion == ''" (click)="approved(false)" ion-button icon-left clear small full>
+                    <button [disabled]="opinion == ''" (click)="approved(1)" ion-button icon-left clear small full>
+                        <ion-icon name="md-checkmark"></ion-icon>
+                        <div>保存并通过</div>
+                    </button>
+                </ion-col>
+                <ion-col col-4>
+                    <button [disabled]="opinion == ''" (click)="approved(2)" ion-button icon-left clear small full>
                         <ion-icon name="md-close"></ion-icon>
-                        <div>审批驳回</div>
+                        <div>保存并驳回</div>
                     </button>
                 </ion-col>
-                <ion-col col-4>
+                <!-- <ion-col col-4>
                     <button (click)="navCtrl.pop()" ion-button icon-left clear small full>
                         <ion-icon name="md-return-left"></ion-icon>
                         <div>返回</div>
                     </button>
-                </ion-col>
+                </ion-col> -->
             </ion-row>
         </div>
     </ion-card>

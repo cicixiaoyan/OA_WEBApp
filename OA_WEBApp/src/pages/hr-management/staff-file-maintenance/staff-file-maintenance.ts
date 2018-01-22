@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Refresher, ModalController } from 'ionic-angular';
 import { StaffFileMaintenanceService } from './staff-file-maintenance-service';
+import { NativeService } from '../../../providers/NativeService';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 
 @IonicPage()
@@ -27,7 +29,9 @@ export class StaffFileMaintenance {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              private alertCtrl: AlertController,
               private staffFileMaintenanceService: StaffFileMaintenanceService,
+              private nativeService: NativeService,
               private modalCtrl: ModalController) {
 
       this.getList(this.data);
@@ -39,12 +43,8 @@ export class StaffFileMaintenance {
   }
 
   doRead(Params) {
-    this.navCtrl.push("StaffFileMaintenanceSet", { "Id": Params, "readOnly": true });
-    // let modal = this.modalCtrl.create("MeetingEditPage");
-    // modal.present();
-    // modal.onDidDismiss(data => {
-    //     data && console.log(data);
-    // });
+    // this.navCtrl.push("StaffFileMaintenanceSet", { "Id": Params, "readOnly": true });
+    this.navCtrl.push("StaffFileMaintenanceSet", { "Id": Params });
   }
 
   doWrite() {
@@ -72,6 +72,37 @@ export class StaffFileMaintenance {
               resolve();
           }, 500);
       });
+  }
+
+  delete(i){
+    let item = this.list[i];
+
+    let prompt = this.alertCtrl.create({
+      title: '删除档案',
+      message: "你确定删除员工 <span class='text-ios-danger'>" + item.BasicName + "</span> 的档案吗？",
+      buttons: [
+        {
+          text: '取消',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: '删除',
+          handler: data => {
+            this.staffFileMaintenanceService.basicDel({ id: item.Id }).subscribe(resJson => {
+              if (resJson.Result) {
+                this.nativeService.showToast("档案删除成功");
+                this.list.splice(i, 1);
+              } else {
+                this.nativeService.showToast(resJson.Data, 800);
+              }
+            });
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   private getList(data){

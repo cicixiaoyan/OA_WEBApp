@@ -22,12 +22,12 @@
 
             <ion-item *ngIf="isInbox">
                 <ion-label>接收人&emsp;</ion-label>
-                <ion-input type="text" readonly="disabled" [value]="mailDetail.AccessPerson" placeholder="系统管理员"></ion-input>
+                <ion-input type="text" readonly="disabled" [value]="mailDetail.AccessPerson" placeholder="未知"></ion-input>
             </ion-item>
 
-            <ion-item *ngIf="!inbox">
+            <ion-item *ngIf="!isInbox">
                 <ion-label>发送人&emsp;</ion-label>
-                <ion-input type="text" readonly="disabled" [value]="mailDetail.AccessPerson" placeholder="系统管理员"></ion-input>
+                <ion-input type="text" readonly="disabled" [value]="mailDetail.AccessPerson" placeholder="未知"></ion-input>
             </ion-item>
 
             <ion-item>
@@ -40,7 +40,7 @@
                 <ion-input type="test" readonly="disabled" [value]="mailDetail.MailDate" placeholder="发送时间未知"></ion-input>
             </ion-item>
             <ion-item>
-                <ion-textarea  placeholder="内容: " rows="3">{{mailContent}}</ion-textarea>
+                <ion-textarea placeholder="内容: " [value]="mailContent" rows="5"></ion-textarea>
             </ion-item>
         </ion-list>
     </div>

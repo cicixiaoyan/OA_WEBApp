@@ -22,7 +22,7 @@
   "_resolved": "https://registry.npmjs.org/cordova-plugin-jcore/-/cordova-plugin-jcore-1.1.11.tgz",
   "_shasum": "20445494c3dd42cffef83ab32a78b5bc87a1f41e",
   "_spec": "cordova-plugin-jcore",
-  "_where": "D:\\svn\\mine\\gitSource\\OA_WEBApp",
+  "_where": "/Users/lieon/Desktop/OA_WEBApp/OA_WEBApp/node_modules",
   "author": {
     "name": "wilhantian, jiguang"
   },

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Refresher, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Refresher, ModalController, Events } from 'ionic-angular';
 import { MeetingService } from './meeting_service';
 
 /**
@@ -30,7 +30,8 @@ export class MeetingPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private modalCtrl: ModalController,
-              private meetingService: MeetingService) {
+              private meetingService: MeetingService,
+              public events: Events) {
       this.data = {
         "status": this.meetingService.meetingStatus["Delivered"],
         "uid": this.meetingService.httpService.globalData.Uid,
@@ -38,6 +39,9 @@ export class MeetingPage {
         "PageSize": 8
       };
       this.getList(this.data);
+      this.events.subscribe('message.receiveNotification', bol => {
+        if (bol) this.getList(this.data);
+      });
   }
 
 

@@ -45,8 +45,8 @@
     </ion-refresher>
     <div [ngSwitch]="box">
         <ion-list *ngSwitchCase="'inbox'">
-            <ion-item-sliding *ngFor="let message of inboxList;let i = index; trackBy: index" (click)="doRead(message)">
-                <ion-item>
+            <ion-item-sliding *ngFor="let message of inboxList;index as i; trackBy: i">
+                <ion-item (click)="doRead(message)">
                     <ion-avatar item-left>
                         <img src="assets/img/mike.png">
                     </ion-avatar>
@@ -54,26 +54,26 @@
                     <p class="font-12">{{message.Name}}&emsp;{{message.SendDate}}</p>
                 </ion-item>
                 <ion-item-options side="right">
-                    <button ion-button color="primary">
-                          <ion-icon name="md-trash"></ion-icon>删除
+                    <button ion-button color="primary" click="markup(i)">
+                          <ion-icon name="ios-glasses"></ion-icon>标为已读
                       </button>
                 </ion-item-options>
             </ion-item-sliding>
         </ion-list>
         <ion-list *ngSwitchCase="'outbox'">
-            <ion-item-sliding *ngFor="let message of outboxList " (click)="doReadOutBox(message)">
-                <ion-item>
+            <ion-item-sliding *ngFor="let message of outboxList;index as i; trackBy: i">
+                <ion-item (click)="doReadOutBox(message)">
                     <ion-avatar item-left>
                         <img src="assets/img/mike.png">
                     </ion-avatar>
                     <span>{{message.Content}}</span>
                     <p class="font-12">{{message.Name}}&emsp;{{message.SendDate}}</p>
                 </ion-item>
-                <ion-item-options side="right">
+                <!-- <ion-item-options side="right">
                     <button ion-button color="primary">
                           <ion-icon name="md-trash"></ion-icon>删除
                       </button>
-                </ion-item-options>
+                </ion-item-options> -->
             </ion-item-sliding>
         </ion-list>
     </div>

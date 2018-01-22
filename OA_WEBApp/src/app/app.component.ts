@@ -228,19 +228,22 @@ export class MyApp {
     jpushOpenNotification() {
         // 当点击极光推送消息跳转到指定页面
         this.events.subscribe('jpush.openNotification', content => {
-          let tabs = this.nav.getActiveChildNav();
-          let tab = tabs.getSelected();
-          let activeVC = tab.getActive();
-          // if (activeVC.component == AboutPage) {//如果当前所在页面就是将要跳转到的页面则不处理
-          //   return;
-          // }
-          let activeNav = activeVC.getNav();
-          activeNav.popToRoot({}).then(() => { // 导航跳到最顶层
-            tabs.select(3); // 选中第一个tab
-            let tab = tabs.getSelected(); // 获取选中的tab
-            let activeVC = tab.getActive(); // 通过当前选中的tab获取ViewController
-            let activeNav = activeVC.getNav(); // 通过当前视图的ViewController获取的NavController
-            activeNav.push(""); // 跳转到指定页面
+            if (this.nav.)
+            this.nav.setRoot("TabsPage", { tabIndex: 1 });
+        });
+
+        this.events.subscribe('jpush.receiveNotification', content => {
+            let toast = this.toastCtrl.create({
+                message: '收到一条消息：' + content,
+                showCloseButton: true,
+                closeButtonText: '确定'
+            });
+            toast.onDidDismiss(() => {
+                
+            });
+
+            toast.present();  
+            // console.log("首页tongzhi ", content);
           });
         });
       }

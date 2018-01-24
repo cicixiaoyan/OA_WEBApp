@@ -11,7 +11,7 @@
                 <ion-icon name="menu"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-segment [(ngModel)]="box" (ngModelChange)="change()">
+        <ion-segment [(ngModel)]="box" (ngModelChange)="doRefresh(null)">
             <ion-segment-button value="inbox">
                 收件箱
             </ion-segment-button>
@@ -30,13 +30,13 @@
         <div *ngSwitchCase="'inbox'">
             <button ion-button small (click)="checkRead('unread')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.unread}">未读</button>
             <button ion-button small (click)="checkRead('read')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.read}">已读</button>
-            <button ion-button small (click)="checkRead('all')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.all}">全部</button>
+            <!-- <button ion-button small (click)="checkRead('all')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.all}">全部</button> -->
         </div>
 
-        <div *ngSwitchCase="'outbox'">
+        <!-- <div *ngSwitchCase="'outbox'">
             <button ion-button small (click)="checkDraft()" class="button-ios-light" [ngClass]="{'button-ios-calm':!isDraft}">已发送</button>
             <button ion-button small (click)="checkDraft(true)" class="button-ios-light" [ngClass]="{'button-ios-calm':isDraft}">草稿箱</button>
-        </div>
+        </div> -->
     </div>
 
 </ion-header>
@@ -50,12 +50,12 @@
     </ion-refresher>
     <div [ngSwitch]="box">
         <ion-list *ngSwitchCase="'inbox'">
-            <ion-item-sliding *ngFor="let mail of inboxList ">
+            <ion-item-sliding *ngFor="let mail of list ">
                 <ion-item (click)="doRead(mail.Id)">
                     <ion-avatar item-left>
                         <img src="assets/img/mike.png">
                     </ion-avatar>
-                    <span>{{mail.Id}}</span>
+                    <span>{{mail.Title}}</span>
                     <p class="font-12">来至:{{mail.SendPerson}}&emsp;{{mail.MailDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>
                 </ion-item>
                 <ion-item-options side="right">
@@ -66,7 +66,7 @@
             </ion-item-sliding>
         </ion-list>
         <ion-list *ngSwitchCase="'outbox'">
-            <ion-item-sliding *ngFor="let mail of outboxList ">
+            <ion-item-sliding *ngFor="let mail of list ">
                 <ion-item (click)="doReadOutBox(mail.Id)">
                     <ion-avatar item-left>
                         <img src="assets/img/mike.png">
@@ -82,10 +82,7 @@
             </ion-item-sliding>
         </ion-list>
     </div>
-    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">
-        <div padding>暂无消息数据！！！</div>
-        <img src="assets/img/face/face2.png" height="100">
-    </div>
+    <empty *ngIf="isEmpty"></empty>
     <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->
     <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">
         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>

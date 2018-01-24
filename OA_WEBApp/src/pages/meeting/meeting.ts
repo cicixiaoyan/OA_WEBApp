@@ -17,11 +17,11 @@ import { MeetingService } from './meeting_service';
 export class MeetingPage {
   list = [];
   checkBtn: any = {
-    Drafting: false, // 起草中
-    Delivered: true, // 送审中(默认)
-    Approved: false, // 已审批
-    HasBeenReturned: false, // 已退回
-    completed: false, // 已完成
+    "Drafting": false, // 起草中
+    "Delivered": true, // 送审中(默认)
+    "Approved": false, // 已审批
+    "HasBeenReturned": false, // 已退回
+    "completed": false, // 已完成
   };
   data: any;
   moredata: boolean = true;
@@ -38,23 +38,24 @@ export class MeetingPage {
         "PageIndex": 0,
         "PageSize": 8
       };
-      this.getList(this.data);
+      
       this.events.subscribe('message.receiveNotification', bol => {
         if (bol) this.getList(this.data);
       });
   }
 
 
-  ionViewDidLoad() {
-
+  ionViewWillEnter() {
+    this.list = [];
+    this.getList(this.data);
   }
 
   // 选择状态
   checkRead(name: string = "Delivered") {
     this.data.PageIndex = 0;
     this.list = [];
-    this.checkBtn = { Drafting: false, Delivered: false, Approved: false,
-      HasBeenReturned: false, completed: false, 
+    this.checkBtn = { "Drafting": false, 'Delivered': false, "Approved": false,
+      "HasBeenReturned": false, "completed": false, 
     };
 
     this.checkBtn[name] = true;
@@ -64,7 +65,8 @@ export class MeetingPage {
   }
 
   doRead(Params) {
-    this.navCtrl.push("MeetingEditPage", { "Id": Params });
+    let parma = this.checkBtn.Drafting ? { "Id": Params } : { "Id": Params, "readOnly": true };
+    this.navCtrl.push("MeetingEditPage", parma);
     // let modal = this.modalCtrl.create("MeetingEditPage");
     // modal.present();
     // modal.onDidDismiss(data => {

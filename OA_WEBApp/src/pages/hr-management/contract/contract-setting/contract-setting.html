@@ -60,9 +60,7 @@
                 <ion-item>
                     <ion-label>合同类型</ion-label>
                     <ion-select formControlName="ContractType" cancelText="取消" okText="确定" placeholder="请选择">
-                        <ion-option value="1">类型1</ion-option>
-                        <ion-option value="2">类型2</ion-option>
-                        <ion-option value="3">类型3</ion-option>
+                        <ion-option *ngFor="let type of typeLs" [value]="type.id">{{type.name}}</ion-option>
                     </ion-select>
                 </ion-item>
                 <ion-item>
@@ -87,8 +85,7 @@
                 <ion-item>
                     <ion-label>合同年份<span class="optional">（选填）</span></ion-label>
                     <ion-select formControlName="ContractYear" cancelText="取消" okText="确定" placeholder="请选择">
-                        <ion-option value="2013">2013</ion-option>
-                        <ion-option value="2014">2014</ion-option>
+                        <ion-option *ngFor="let type of yearLs" [value]="type.id">{{type.name}}</ion-option>
                     </ion-select>
                 </ion-item>
                 <ion-item>

@@ -5,7 +5,7 @@ import { Response } from "@angular/http";
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { HttpService } from '../../../providers/HttpService';
-
+import { NativeService } from '../../../providers/NativeService';
 /**
  * Generated class for the GetmobilePopoverPage page.
  *
@@ -28,6 +28,7 @@ export class GetmobilePopoverPage {
   constructor(private navParams: NavParams,
               public viewCtrl: ViewController,
               public storage: Storage,
+              private nativeService: NativeService,
               public httpService: HttpService) {
         this.addressee = this.navParams.get("addressee") ? this.navParams.get("addressee") : '';
         this.addresseeIds = this.navParams.get("addresseeIds") ? this.navParams.get("addresseeIds") : "";
@@ -79,7 +80,8 @@ export class GetmobilePopoverPage {
                 this.items = result.Data;
             }
           }else{
-
+            this.items = [];
+            this.nativeService.showToast(result.Data);
           }
       });
   }
@@ -111,7 +113,8 @@ export class GetmobilePopoverPage {
                 this.items = result.Data;
             }
           }else{
-
+            this.items = [];
+            this.nativeService.showToast(result.Data);
           }
       });
   }

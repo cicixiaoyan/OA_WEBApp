@@ -6,9 +6,9 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>短信</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>短信</ion-title>
+    </ion-navbar>
     <div class="subbox">
         <div>
             <button ion-button small (click)="checkRead(true)" class="button-ios-light" [ngClass]="{'button-ios-calm':isSent}">已发送</button>
@@ -42,7 +42,7 @@
     </ion-list>
     <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">
         <div padding>暂无消息数据！！！</div>
-        <img src="assets/img/face/face2.png" height="100">
+        <img src="assets/img/face/face3.png" height="100">
     </div>
     <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">
         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>

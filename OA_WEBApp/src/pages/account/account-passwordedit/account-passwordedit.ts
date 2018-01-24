@@ -38,7 +38,7 @@ export class AccountPasswordedit {
             .map(responce => responce.json())
             .subscribe((Resjson) => {
                 if (Resjson.Result){
-                    this.httpService.nativeService.showToast("修改密码成功", 800);
+                    this.httpService.nativeService.showToast("修改密码成功，请重新登录", 800);
                     
                     let modal = this.modalCtrl.create("LoginPage");
                     modal.present();

@@ -8,6 +8,14 @@ export const APP_SERVE_URL = 'http://192.168.0.225:55555/'; // 'http://192.168.0
 export const FILE_SERVE_URL = APP_SERVE_URL; // 文件服务:测试环境
 /*----------------------------------------app版本升级服务地址----------------------------------------*/
 export const APP_VERSION_SERVE_URL = APP_SERVE_URL; // app版本升级服务;测试环境,查询app最新版本号,更新日志等信息.
+
+export const UPLOAD_PATH = {
+  "hrImg": "images/hr/",
+  "hr": "Attach/hr/",
+  "work": "Attach/flow/work/",
+  "mail": "Attach/portal/yj/",
+};
+
 export const IS_DEBUG = true; // 是否开发(调试)模式
 
 export const DEFAULT_AVATAR = './assets/img/avatar.png'; // 用户默认头像

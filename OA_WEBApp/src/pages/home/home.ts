@@ -49,9 +49,9 @@ export class Home {
         { title: '通讯录', component: "Contacts", icon: 'md-call', color: "energized" },
         { title: '待办事项', component: "Backlog", index: 2, icon: 'ios-calendar', color: "assertive" },
         // { title: '新建工作', component: Newwork, icon: 'md-exit', color: "balanced" },
-        // { title: '设置', component: "TabsPage", index: 3, icon: 'ios-cog', color: "calm" },
-        { title: '短信', component: "SmsPage", icon: 'ios-cog', color: "calm" },
+        // { title: '短信', component: "SmsPage", icon: 'ios-cog', color: "calm" },
         { title: '邮件', component: "Mail",  icon: 'ios-cog', color: "calm" },
+        { title: '设置', component: "TabsPage", index: 3, icon: 'ios-cog', color: "calm" },
         // { title: '会议', component: "MeetingPage",  icon: 'ios-cog', color: "calm"},
         // { title: '车辆', component: "CarPage",  icon: 'ios-cog', color: "calm"}
     ];
@@ -64,16 +64,17 @@ export class Home {
         "会议室管理": false,
 
         "车辆档案": false,
+        "车辆查看": false,
         "司机档案": false,
         "车辆申请": false,
         "车辆调度": false,
 
         "员工档案维护": false,
+        "培训维护": false,
         "工种设置": false,
         "合同查询": false,
         "合同续签": false,
         "申请档案查看": false,
-        "档案申请审批": false,
 
         "员工考勤设定": false,
         "考勤审批说明": false,
@@ -85,6 +86,28 @@ export class Home {
             if (!!Menu)  this.setMenu(Menu);
         });
         this.events.subscribe('menu:open', Menu => {
+            this.totalMenu = {
+                "我的会议": false,
+                "会议记录": false,
+                "会议查询": false,
+                "会议室管理": false,
+        
+                "车辆档案": false,
+                "车辆查看": false,
+                "司机档案": false,
+                "车辆申请": false,
+                "车辆调度": false,
+        
+                "员工档案维护": false,
+                "培训维护": false,
+                "工种设置": false,
+                "合同查询": false,
+                "合同续签": false,
+                "申请档案查看": false,
+        
+                "员工考勤设定": false,
+                "考勤审批说明": false,
+            };
             this.setMenu(Menu);
         });
 
@@ -98,7 +121,6 @@ export class Home {
         // console.log(menu, typeof(menu));
         for (let value of menu){
             for (let i in this.totalMenu){
-                
                 if (value == i) {
                     this.totalMenu[i] = true;
                 }

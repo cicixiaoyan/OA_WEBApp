@@ -19,18 +19,22 @@ export class ContractListPage {
               public navParams: NavParams,
               private popoverCtrl: PopoverController,
               private contractService: ContractService) {
-      this.data = {
-        // "uid": this.contractService.httpService.globalData.Uid,
-        "PageIndex": 0,
-        "PageSize": 8
-      };
-      this.getList(this.data);
 
   }
 
 
-  ionViewDidLoad() {
-
+  ionViewWillEnter() {
+    this.list = [];
+    this.data = {
+      "PageIndex": 0,
+      "PageSize": 8,
+      "bmid": "",
+      "nf": "",
+      "tp": "",
+      "startdate": "",
+      "enddate": "",
+    };
+    this.getList(this.data);
   }
 
   presentPopover(myEvent) {
@@ -43,9 +47,10 @@ export class ContractListPage {
       if (search){
         this.search = search.search;
         let data = search.search;
-        data.uid =  this.contractService.httpService.globalData.Uid;
         data.PageIndex = 0;
         data.PageSize = 8;
+        this.list = [];
+        console.log(data);
         this.getList(data);
       }
     });
@@ -57,7 +62,7 @@ export class ContractListPage {
 
   doRefresh(refresher: Refresher) {
     this.list = [];
-    this.data.PageIndex = 1;
+    this.data.PageIndex = 0;
     this.getList(this.data);
     setTimeout(() => {
         refresher.complete();
@@ -88,7 +93,7 @@ export class ContractListPage {
         this.list = [...this.list, ...list];
       }else{
         this.moredata = false;
-        this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+        this.isEmpty = (this.data.PageIndex == 0) ? true : false;
       }
     });
 

@@ -49,10 +49,10 @@ export class StaffFileMaintenanceWorkExperienceAdd {
     value.id = this.id;
     this.staffFileMaintenanceService.addWorkExp(value).subscribe(resJson => {
       if (resJson.Result){
-        this.nativeService.showToast("保存工作经验成功", 800);
+        this.nativeService.showToast("保存工作经验成功", 1000);
         this.viewCtrl.dismiss(true);
       }else{
-        this.nativeService.showToast(resJson.Data, 800);        
+        this.nativeService.showToast(resJson.Data, 1000);        
       }
     });
   }

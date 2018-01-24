@@ -26,7 +26,7 @@ export class AnnouncementPage {
   moredata: boolean = true; // 是否能加载更多
   isEmpty: boolean = false; // 是否无数据
   data: any;
-  pageSlides: Array<string> = ["录入", "已发布", "全部"];
+  pageSlides: Array<string> = ["待发布", "已发布", "全部"];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private announcementService: AnnouncementService) {

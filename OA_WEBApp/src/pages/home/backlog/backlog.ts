@@ -22,25 +22,21 @@ export class Backlog {
                 public navParams: NavParams,
                 public globalData: GlobalData,
                 private backlogService: BacklogService) {
+    }
+
+    ionViewWillEnter(){
         this.data = {
             "PageIndex": 0,
             "PageSize": 10,
             "Status": this.backlogService.Status["notdone"],
             "uid": this.globalData.Uid
          };
-        this.getList(this.data);
-    }
-
-    ionViewDidEnter(){
-        
-    }
-
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad Backlog');
+        this.doRefresh(null);
     }
 
     view(work){
-        this.navCtrl.push("BacklogDetail", {"param": work});
+        let parma = this.work === "notDone" ? { "param": work} : {"param": work, "read": true};
+        this.navCtrl.push("BacklogDetail", parma);
     }
 
     doRefresh(refresher?: Refresher) {
@@ -54,11 +50,11 @@ export class Backlog {
             this.backlogService.Status["done"];
 
         this.getList(this.data);
-        if (!!refresher) {
-            setTimeout(() => {
-                refresher && refresher.complete();
-            }, 1000);
-        }
+
+        setTimeout(() => {
+            refresher && refresher.complete();
+        }, 1000);
+        
 
     }
 

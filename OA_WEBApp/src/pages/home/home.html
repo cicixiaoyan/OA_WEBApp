@@ -21,11 +21,11 @@
         </ion-row>
     </ion-grid>
     <ion-list class="imenu">
-        <ion-col col-3 col-xl-2 (click)="open('MeetingWritePage')">添加会议</ion-col>
+        <!-- <ion-col col-3 col-xl-2 (click)="open('MeetingWritePage')">添加会议</ion-col> -->
 
         <div *ngIf="totalMenu['我的会议'] || totalMenu['会议记录'] || totalMenu['会议查询'] || totalMenu['会议室管理']">
             <ion-list-header>
-                <ion-icon name="ios-car" color="primary">会议管理</ion-icon>
+                <ion-icon name="ios-alarm" color="primary">会议管理</ion-icon>
             </ion-list-header>
             <ion-grid>
                 <ion-row>
@@ -36,21 +36,22 @@
                 </ion-row>
             </ion-grid>
         </div>
-        <div *ngIf="totalMenu['司机档案'] || totalMenu['车辆申请'] || totalMenu['车辆调度']">
+        <div *ngIf="totalMenu['司机档案'] || totalMenu['车辆申请'] || totalMenu['车辆查看']">
             <ion-list-header>
                 <ion-icon name="ios-car" color="primary">车辆管理</ion-icon>
             </ion-list-header>
             <ion-grid>
                 <ion-row>
                     <ion-col *ngIf="totalMenu['司机档案']" col-3 col-xl-2 (click)="open('DriverPage')">司机档案</ion-col>
+                    <ion-col *ngIf="totalMenu['车辆查看']" col-3 col-xl-2 (click)="open('CarPage')">车辆查看</ion-col>
                     <ion-col *ngIf="totalMenu['车辆申请']" col-3 col-xl-2 (click)="open('VehicleApplicationPage')">车辆申请</ion-col>
-                    <ion-col *ngIf="totalMenu['车辆调度']" col-3 col-xl-2 (click)="open('VehicleSchedulingPage')">车辆调度</ion-col>
+                    <!-- <ion-col *ngIf="totalMenu['车辆调度']" col-3 col-xl-2 (click)="open('VehicleSchedulingPage')">车辆调度</ion-col> -->
                 </ion-row>
             </ion-grid>
         </div>
-        <div *ngIf="totalMenu['培训维护'] || totalMenu['员工档案维护'] || totalMenu['员工档案维护添加'] || totalMenu['工种设置'] || totalMenu['合同查询'] || totalMenu['合同维护'] || totalMenu['合同续签'] || totalMenu['合同详情'] || totalMenu['申请档案查看'] || totalMenu['档案申请审批']">
+        <div *ngIf="totalMenu['培训维护'] || totalMenu['员工档案维护'] || totalMenu['员工档案维护添加'] || totalMenu['工种设置'] || totalMenu['合同查询'] || totalMenu['合同维护'] || totalMenu['合同续签'] || totalMenu['合同详情'] || totalMenu['申请档案查看'] || totalMenu['培训维护']">
             <ion-list-header>
-                <ion-icon name="ios-car" color="primary">人事管理</ion-icon>
+                <ion-icon name="ios-people" color="primary">人事管理</ion-icon>
             </ion-list-header>
             <ion-grid>
                 <ion-row>
@@ -63,11 +64,11 @@
                     <ion-col *ngIf="totalMenu['合同续签']" col-3 col-xl-2 (click)="open('ContractRenewPage')">合同续签</ion-col>
                     <ion-col *ngIf="totalMenu['合同详情']" col-3 col-xl-2 (click)="open('ContractSettingPage')">合同详情</ion-col>
                     <ion-col *ngIf="totalMenu['申请档案查看']" (click)="open('FileApplicationListPage')">申请档案查看</ion-col>
-                    <ion-col *ngIf="totalMenu['档案申请审批']" (click)="open('FileApplicationReviewPage')">档案申请审批</ion-col>
+                    <!-- <ion-col *ngIf="totalMenu['档案申请审批']" (click)="open('FileApplicationReviewPage')">档案申请审批</ion-col> -->
                 </ion-row>
             </ion-grid>
         </div>
-        <div *ngIf="totalMenu['假期分组设定'] || totalMenu['员工考勤设定'] || totalMenu['考勤审批说明']">
+        <!-- <div *ngIf="totalMenu['假期分组设定'] || totalMenu['员工考勤设定'] || totalMenu['考勤审批说明']">
             <ion-list-header>
                 <ion-icon name="ios-car" color="primary">考勤管理</ion-icon>
             </ion-list-header>
@@ -78,7 +79,7 @@
                     <ion-col *ngIf="totalMenu['考勤审批说明']" (click)="open('AttendanceAuditInstructionsPage')">考勤审批说明</ion-col>
                 </ion-row>
             </ion-grid>
-        </div>
+        </div> -->
 
     </ion-list>
     <!-- <quill-editor [style]="{height: '200px'}" [(ngModel)]="richText" (onEditorCreated)="setFocus($event)"></quill-editor> -->

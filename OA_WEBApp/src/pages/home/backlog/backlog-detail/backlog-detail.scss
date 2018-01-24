@@ -20,31 +20,32 @@ page-backlog-detail {
         padding: 8px 0;
         margin: 10px 0;
     }
-
-
-.affix-box {
-    .affix-label {
-        padding-left: 12px;
-        padding-top: 5px;
-        text-align: right;
+    .iselect {
+        flex: 1;
+        max-width: none;
+        padding-left: 0;
     }
-    .affix-list {
-        position: relative;
-        padding-left: 40px;
-        background-color: #d7eaf9;
-        .affix-icon {
-            position: absolute;
-            left: .4rem;
-            display: inline-block;
-            font-size: 3.6rem;
-            .icon-download {
+    .affix-box {
+        .affix-label {
+            padding-left: 12px;
+            padding-top: 5px;
+            text-align: right;
+        }
+        .affix-list {
+            position: relative;
+            padding-left: 40px;
+            background-color: #d7eaf9;
+            .affix-icon {
                 position: absolute;
-                right: 10px;
-                font-size: 1.2rem
+                left: .4rem;
+                display: inline-block;
+                font-size: 3.6rem;
+                .icon-download {
+                    position: absolute;
+                    right: 10px;
+                    font-size: 1.2rem
+                }
             }
         }
     }
-}
-
-
 }

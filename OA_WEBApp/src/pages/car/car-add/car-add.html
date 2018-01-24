@@ -22,25 +22,44 @@
                     <ion-label>车牌号</ion-label>
                     <ion-input text-right type="text" formControlName="BusNumber" placeholder="请输入"></ion-input>
                 </ion-item>
+                <div *ngIf="formCtrl.BusNumber.invalid && (formCtrl.BusNumber.touched || formCtrl.BusNumber.dirty )" class="validation-failed">
+                    <div *ngIf="addForm.hasError('BusNumber','required')">车牌号必填</div>
+                    <div *ngIf="addForm.hasError('BusNumber','maxlength')">最多输入20个字</div>
+                </div>
                 <ion-item>
                     <ion-label>车辆名称</ion-label>
                     <ion-input text-right type="text" formControlName="BusName" placeholder="请输入"></ion-input>
                 </ion-item>
+                <div *ngIf="formCtrl.BusName.invalid && (formCtrl.BusName.touched || formCtrl.BusName.dirty )" class="validation-failed">
+                    <div *ngIf="addForm.hasError('BusName','required')">车辆名称必填</div>
+                    <div *ngIf="addForm.hasError('BusName','maxlength')">最多输入180个字</div>
+                </div>
                 <ion-item>
                     <ion-label>核载人数</ion-label>
                     <ion-input text-right type="number" formControlName="BusPassenger" placeholder="请输入"></ion-input>
                 </ion-item>
+                <div *ngIf="formCtrl.BusName.invalid && (formCtrl.BusName.touched || formCtrl.BusName.dirty )" class="validation-failed">
+                    <div *ngIf="addForm.hasError('BusName','required')">核载人数必填</div>
+                    <div *ngIf="addForm.hasError('BusName','maxlength')">最大可输入100</div>
+                </div>
                 <ion-item>
                     <ion-label>启用时间</ion-label>
                     <ion-datetime text-right formControlName="StartDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
                 </ion-item>
+                <div *ngIf="formCtrl.StartDate.invalid && (formCtrl.StartDate.touched || formCtrl.StartDate.dirty )" class="validation-failed">
+                    <div *ngIf="addForm.hasError('StartDate','required')">核启用时间必填</div>
+                </div>
                 <ion-item>
-                    <ion-label >管理人员</ion-label>
+                    <ion-label>管理人员</ion-label>
                     <ion-select formControlName="BusManger" cancelText="取消" okText="确定" placeholder="请选择">
                         <ion-option *ngFor="let type of BusMangerLs;let i = index" [value]="type.Id">{{type.Name}}</ion-option>
                         <!-- <ion-option value="2">类型2</ion-option> -->
                     </ion-select>
                 </ion-item>
+                <div *ngIf="formCtrl.BusManger.invalid && (formCtrl.BusManger.touched || formCtrl.BusManger.dirty )" class="validation-failed">
+                    <div *ngIf="addForm.hasError('BusManger','required')">管理人员必填</div>
+                    <div *ngIf="addForm.hasError('BusManger','maxlength')">最多输入180个字</div>
+                </div>
                 <ion-item>
                     <ion-label>购买价(万)<span class="optional">（选填）</span></ion-label>
                     <ion-input text-right type="number" formControlName="BusBuyPrice" placeholder="请输入"></ion-input>
@@ -50,36 +69,36 @@
                     <ion-input text-right type="number" formControlName="Salvage" placeholder="请输入"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label >厂牌型号<span class="optional">（选填）</span></ion-label>
+                    <ion-label>厂牌型号<span class="optional">（选填）</span></ion-label>
                     <ion-input text-right type="text" formControlName="BusLicensePlate" placeholder="请输入"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label >发动机号<span class="optional">（选填）</span></ion-label>
+                    <ion-label>发动机号<span class="optional">（选填）</span></ion-label>
                     <ion-input text-right type="text" formControlName="BusEngineNumber" placeholder="请输入"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label >车架号<span class="optional">（选填）</span></ion-label>
+                    <ion-label>车架号<span class="optional">（选填）</span></ion-label>
                     <ion-input text-right type="text" formControlName="BusFrameNumber" placeholder="请输入"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label >行驶证号<span class="optional">（选填）</span></ion-label>
+                    <ion-label>行驶证号<span class="optional">（选填）</span></ion-label>
                     <ion-input text-right type="text" formControlName="BusDrivingLicenseNumber" placeholder="请输入"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label >车辆状况</ion-label>
+                    <ion-label>车辆状况</ion-label>
                     <ion-input text-right type="text" readonly formControlName="BusStatus" placeholder="请输入"></ion-input>
                 </ion-item>
 
                 <ion-item>
-                    <ion-label >年检日期<span class="optional">（选填）</span></ion-label>
+                    <ion-label>年检日期<span class="optional">（选填）</span></ion-label>
                     <ion-datetime formControlName="BusAnnualInspection" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
                 </ion-item>
                 <ion-item>
-                    <ion-label >维保日期<span class="optional">（选填）</span></ion-label>
+                    <ion-label>维保日期<span class="optional">（选填）</span></ion-label>
                     <ion-datetime formControlName="BusMaintenanceDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
                 </ion-item>
                 <ion-item>
-                    <ion-label >保险日期<span class="optional">（选填）</span></ion-label>
+                    <ion-label>保险日期<span class="optional">（选填）</span></ion-label>
                     <ion-datetime formControlName="BusDated" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
                 </ion-item>
 
@@ -87,6 +106,9 @@
                     <ion-label stacked>备注<span class="optional">（选填）</span></ion-label>
                     <ion-textarea formControlName="BusMemo" type="text" placeholder="请输入"></ion-textarea>
                 </ion-item>
+                <div *ngIf="formCtrl.BusMemo.invalid && (formCtrl.BusMemo.touched || formCtrl.BusManger.dirty )" class="validation-failed">
+                    <div *ngIf="addForm.hasError('BusMemo','maxlength')">最多输入180个字</div>
+                </div>
 
             </ion-list>
             <div padding text-center>

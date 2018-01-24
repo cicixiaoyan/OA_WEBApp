@@ -29,7 +29,7 @@ export interface PageInterface {
 })
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
-    photo: any = "assets/img/ben.png";
+    photo: any = "assets/img/boy.png";
 
     // set our app's pages
     appPages: PageInterface[] = [
@@ -70,6 +70,11 @@ export class MyApp {
             this.helper.initJpush(); // JPush初始化 
             this.jpushOpenNotification(); // 
             this.helper.setTags();
+            this.storage.get("ip").then(data => {
+                this.globalData.APP_SERVE_URL = data;
+                this.globalData.APP_VERSION_SERVE_URL = data;
+                this.globalData.FILE_SERVE_URL = data;
+            });
             // this.helper.setAlias("admin");
             // this.storage.get('firstIn').then((result) => {
             //     // this.nativeService.showToast("不是第一次进入");
@@ -128,6 +133,7 @@ export class MyApp {
             this.registerBackButtonAction(); // 注册返回按键事件
             this.assertNetwork(); // 检测网络
             // this.nativeService.detectionUpgrade(); // 检测app是否升级
+
         });
 
     }
@@ -227,10 +233,6 @@ export class MyApp {
     }
 
     jpushOpenNotification() {
-
-
-
-
         // 当点击极光推送消息跳转到指定页面
         this.events.subscribe('jpush.openNotification', obj => {
             this.noticeRes(obj);
@@ -286,24 +288,29 @@ export class MyApp {
             "2": "Mail",
             "3": "SmsPage",
         };
+        try{
 
-        let tabs = this.nav.getActiveChildNav();
-        let tab = tabs.getSelected();
-        let activeVC = tab.getActive();
-        console.log(activeVC);
-
-        // if (obj.param.length != 0){
-        if (activeVC.name == pageType[obj.param.type]) return;
-        if (obj.param.type == "0") {
-            this.nav.setRoot("TabsPage", { tabIndex: 1 });
-        }else if (obj.param.type == "1"){
-            this.nav.setRoot("TabsPage", { tabIndex: 2 });
-        }else{
-            tabs.select(1);
-            // this.tab.public(pageType[obj.param.type]);
+            let tabs = this.nav.getActiveChildNav();
+            let tab = tabs.getSelected();
+            let activeVC = tab.getActive();
+            console.log(activeVC);
+    
+            // if (obj.param.length != 0){
+            if (activeVC.name == pageType[obj.param.type]) return;
+            if (obj.param.type == "0") {
+                this.nav.setRoot("TabsPage", { tabIndex: 1 });
+            }else if (obj.param.type == "1"){
+                this.nav.setRoot("TabsPage", { tabIndex: 2 });
+            }else{
+                tabs.select(1);
+                // this.tab.public(pageType[obj.param.type]);
+            }
+            // }
+            if (activeVC.comments == "MessagePage") return;
+    
+        }catch (err){
+            console.log("jpusherr", err);
         }
-        // }
-        if (activeVC.comments == "MessagePage") return;
     }
 
 }

@@ -9,7 +9,7 @@ import { FileService } from '../../../providers/FileService';
 import { Utils } from '../../../providers/Utils';
 import { MeetingService } from '../meeting_service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
-
+import { UPLOAD_PATH } from "../../../providers/Constants";
 /**
  * Generated class for the MeetingEditPage page.
  *
@@ -85,7 +85,7 @@ export class MeetingEditPage {
           "PlaceId": this.detail["PlaceId"],
           "StartDate": Utils.dateFormat(new Date(this.detail["StartDate"]), 'yyyy-MM-ddTHH:mm+08:00'),
           "EndDate": Utils.dateFormat(new Date(this.detail["EndDate"]), 'yyyy-MM-ddTHH:mm+08:00'),
-          "Person": this.detail["PersonId"],
+          "Person": this.detail["PersonName"],
           "DeptId": this.detail["DeptId"],
           "HostName": this.detail["HostName"],
           "Range": this.detail["Range"],
@@ -131,7 +131,7 @@ export class MeetingEditPage {
     this.fileService.uploadAffix(1).subscribe((data) => {
       let resJson = JSON.parse(data.response);
       if (data.responseCode === 200){
-        this.writeForm.patchValue({'FileOldName': resJson.Data[0].OldName});
+        this.writeForm.patchValue({'FileOldName': decodeURIComponent(resJson.Data[0].OldName)});
         this.FileNewName = resJson.Data[0].NewName;
       }else{
         this.nativeService.showToast(resJson.Data, 800);
@@ -139,6 +139,19 @@ export class MeetingEditPage {
 
     });
   }
+
+  download(path, name){
+    console.log(path);
+    // const target = name;
+    let url = this.globalData.FILE_SERVE_URL + UPLOAD_PATH.work + path;
+
+    this.fileService.download1(url, path).subscribe((path1) => {
+        console.log(path1);
+        this.fileService.openFile(path1).subscribe(() => {
+
+        });
+    });
+} 
 
   aprove(data){
     data.Person = null;
@@ -161,7 +174,7 @@ export class MeetingEditPage {
 
   delete() {
     let prompt = this.alertCtrl.create({
-      title: '删除提心',
+      title: '删除提醒',
       message: "您确定删除这条会议吗？",
       buttons: [
         {

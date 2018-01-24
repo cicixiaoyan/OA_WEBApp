@@ -21,7 +21,7 @@ export class StaffFileMaintenance {
     completed: false, // 已完成
   };
   data = {
-    "PageIndex": 1,
+    "PageIndex": 0,
     "PageSize": 8
   };
   moredata: boolean = true;
@@ -34,12 +34,13 @@ export class StaffFileMaintenance {
               private nativeService: NativeService,
               private modalCtrl: ModalController) {
 
-      this.getList(this.data);
+      
   }
 
 
-  ionViewDidLoad() {
-
+  ionViewWillEnter() {
+    this.list = [];
+    this.getList(this.data);
   }
 
   doRead(Params) {
@@ -78,8 +79,9 @@ export class StaffFileMaintenance {
     let item = this.list[i];
 
     let prompt = this.alertCtrl.create({
-      title: '删除档案',
-      message: "你确定删除员工 <span class='text-ios-danger'>" + item.BasicName + "</span> 的档案吗？",
+      title: '删除提示',
+      message: "你确定删除员工 <span class='text-ios-danger'>" + item.BasicName + 
+      "</span> 的档案吗？<br/><span class='text-ios-danger'>删除后不能恢复</span>",
       buttons: [
         {
           text: '取消',

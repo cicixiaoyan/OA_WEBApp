@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, PopoverController ,
   Refresher, ViewController } from 'ionic-angular';
 import { ContractService } from '../contract-service';
 import { NativeService } from '../../../../providers/NativeService';
-
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 @IonicPage()
 @Component({
   selector: 'page-contract-renew',
@@ -20,18 +20,19 @@ export class ContractRenewPage {
               public navParams: NavParams,
               private nativeService: NativeService,
               private popoverCtrl: PopoverController,
+              private alertCtrl: AlertController,
               private contractService: ContractService) {
       this.data = {
         "uid": this.contractService.httpService.globalData.Uid,
         "PageIndex": 0,
         "PageSize": 8
       };
-      this.getList(this.data);
+      
 
   }
 
-  ionViewDidLoad() {
-
+  ionViewWillEnter() {
+    this.doRefresh(null);
   }
 
   presentPopover(myEvent) {
@@ -66,21 +67,42 @@ export class ContractRenewPage {
   }
 
   delete(index: number){
-    const id = this.list[index].Id;
-    // this.list.splice(index, 1);
-    this.contractService.delRenew({id: id}).subscribe(resJson => {
-      if (resJson.Result){
-        this.nativeService.showToast("合同删除成功", 500);
-        this.doRefresh(null);
-      }else{
-        this.nativeService.showToast(resJson.Data, 800);
-      }
+    let prompt = this.alertCtrl.create({
+      title: '温馨提示',
+      message: "您确定删除此条续签合同吗？<br />删除后不能回复！！！",
+      buttons: [
+        {
+          text: '取消',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: '删除',
+          cssClass: 'text-ios-danger',
+          handler: data => {
+            const id = this.list[index].Id;
+
+            // this.list.splice(index, 1);
+            this.contractService.delRenew({ id: id }).subscribe(resJson => {
+              if (resJson.Result) {
+                this.nativeService.showToast("合同删除成功", 500);
+                this.doRefresh(null);
+              } else {
+                this.nativeService.showToast(resJson.Data, 800);
+              }
+            });
+          }
+        }
+      ]
     });
+    prompt.present();
+
   }
 
   doRefresh(refresher: Refresher) {
     this.list = [];
-    this.data.PageIndex = 1;
+    this.data.PageIndex = 0;
     this.getList(this.data);
     setTimeout(() => {
       refresher && refresher.complete();
@@ -110,7 +132,7 @@ export class ContractRenewPage {
         this.list = [...this.list, ...list];
       }else{
         this.moredata = false;
-        this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+        this.isEmpty = (this.data.PageIndex == 0) ? true : false;
       }
     });
 

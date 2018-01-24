@@ -126,15 +126,18 @@
                     <ion-label>附件
                         <span class="optional">（选填）</span>
                     </ion-label>
-                    <ion-input text-right type="text" formControlName="FileOldName" (click)="addAffix()" placeholder="点击添加"></ion-input>
+                    <div (click)="download(FileNewName, writeForm.value.FileOldName)" item-content *ngIf="readOnly && writeForm.value.FileOldName != ''">
+                        {{writeForm.value.FileOldName}}
+                    </div>
+                    <ion-input *ngIf="!readOnly" text-right type="text" formControlName="FileOldName" (click)="addAffix()" placeholder="点击添加"></ion-input>
                 </ion-item>
 
-                <ion-item>
-                    <ion-label>审批人选择</ion-label>
+                <!-- <ion-item>
+                    <ion-label>审批人</ion-label>
                     <ion-select formControlName="DeptId" multiple="true" cancelText="取消" okText="确定" placeholder="请选择">
                         <ion-option *ngFor="let dept of DeptLs;let i = index" [value]="dept.Id">{{dept.BmName}}</ion-option>
                     </ion-select>
-                </ion-item>
+                </ion-item> -->
 
             </ion-list>
         </div>

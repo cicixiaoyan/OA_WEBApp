@@ -23,7 +23,7 @@
             <h2>{{bus.BusName}}</h2>
             <ion-note item-end>{{bus.BusStatus}}</ion-note>
             <h3>管理员：{{bus.BusManger}}&emsp;核载：{{bus.BusPassenger}}人</h3>
-            <p>启动日期：{{bus.StartDate}}</p>
+            <p>启动日期：{{bus.StartDate | date: "yyyy-MM-dd"}}</p>
         </ion-item>
     </ion-list>
     <empty *ngIf="isEmpty"></empty>

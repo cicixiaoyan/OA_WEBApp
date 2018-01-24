@@ -1,17 +1,11 @@
 import { Component, Input  } from '@angular/core';
 
-/**
- * Generated class for the EmptyComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'empty',
   template: `
-    <div  text-center padding style="font-size:.9em;">
-      <div padding>{{message}}</div>
-      <img src="assets/img/face/face2.png" height="100">
+    <div  text-center padding>
+      <img src="assets/img/face/face3.png" style="max-width: 471px;width: 80%;">
+      <h4 class="text-ios-gray" padding>{{message}}</h4>
     </div>
   `
 })
@@ -21,7 +15,7 @@ export class EmptyComponent {
   @Input() message: string = "暂无数据！！！";
 
   constructor() {
-
+    
   }
 
 }

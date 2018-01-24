@@ -25,13 +25,14 @@ export class ContractMaintenancePage {
         "PageIndex": 0,
         "PageSize": 8
       };
-      this.getList(this.data);
+      
 
   }
 
 
-  ionViewDidLoad() {
-
+  ionViewWillEnter() {
+    this.list = [];
+    this.getList(this.data);
   }
 
   presentPopover(myEvent) {

@@ -24,7 +24,14 @@ export class BacklogApproveFailPage {
   stepLs = [];
   personLs = [];
 
-  item: any;
+  item = {
+    wTitle: "",
+    wSerialNo: "",
+    ls: [],
+    acid: "",
+    Number: "",
+    PromoterID: ""   
+  };
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private nativeService: NativeService,
@@ -45,6 +52,10 @@ export class BacklogApproveFailPage {
         // this.stepLs = [...resJson.Data];
         // if (this.item.ls instanceof Array){
         this.stepLs = [...this.item.ls];
+        if (this.stepLs.length == 1) {
+          this.selected = this.stepLs[0].ID;
+          this.getuser(this.selected);
+        }
         console.log(this.stepLs);
         // }else{
           
@@ -61,6 +72,9 @@ export class BacklogApproveFailPage {
     this.backlogService.reviewersLs({"selected": value, "status": 1}).subscribe(resJson => {
       if (resJson.Result){
         this.personLs = resJson.Data;
+        if (this.personLs.length == 1) {
+          this.userIDs = this.personLs[0].ID;
+        }
       }
     });
   }

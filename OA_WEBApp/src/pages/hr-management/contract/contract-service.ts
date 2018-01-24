@@ -14,6 +14,14 @@ export class ContractService {
         param.verb = 3;
         return this.httpService.postFormData("ashx/hrcontractSel.ashx", param).map((res: Response) => res.json());
     }
+    // 合同查询
+    getType(): Observable<any> {
+        return this.httpService.postFormData("ashx/hrcontractSel.ashx", {"verb": 4}).map((res: Response) => res.json());
+    }
+    // 合同查询
+    getYear(): Observable<any> {
+        return this.httpService.postFormData("ashx/hrcontractSel.ashx", {"verb": 5}).map((res: Response) => res.json());
+    }
     // 合同续签
     getRenew(param): Observable<any> {
         param.verb = 3;
@@ -34,7 +42,7 @@ export class ContractService {
         param.verb = 2;
         return this.httpService.postFormData("ashx/hrcontract.ashx", param).map((res: Response) => res.json());
     }
-    // 获取合同类型
+    // 获取续签类型
     getContractType(): Observable<any> {
         return this.httpService.postFormData("ashx/hrcontract.ashx", {"verb": 4}).map((res: Response) => res.json());
     }

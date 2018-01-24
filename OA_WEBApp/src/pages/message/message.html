@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-toolbar>
-        <ion-segment [(ngModel)]="box" (ngModelChange)="change()">
+        <ion-segment [(ngModel)]="box" (ngModelChange)="doRefresh(null)">
             <ion-segment-button value="inbox">
                 收消息
             </ion-segment-button>
@@ -45,13 +45,13 @@
     </ion-refresher>
     <div [ngSwitch]="box">
         <ion-list *ngSwitchCase="'inbox'">
-            <ion-item-sliding *ngFor="let message of inboxList;index as i; trackBy: i">
+            <ion-item-sliding *ngFor="let message of list;index as i; trackBy: i">
                 <ion-item (click)="doRead(message)">
                     <ion-avatar item-left>
                         <img src="assets/img/mike.png">
                     </ion-avatar>
                     <span style="color:#2196F3;" *ngIf="message.Status=='0'">●&nbsp;</span><span>{{message.Content}}</span>
-                    <p class="font-12">{{message.Name}}&emsp;{{message.SendDate}}</p>
+                    <p class="font-12">发件人：{{message.Name}}&emsp;{{message.SendDate}}</p>
                 </ion-item>
                 <ion-item-options side="right">
                     <button ion-button color="primary" click="markup(i)">
@@ -61,13 +61,13 @@
             </ion-item-sliding>
         </ion-list>
         <ion-list *ngSwitchCase="'outbox'">
-            <ion-item-sliding *ngFor="let message of outboxList;index as i; trackBy: i">
+            <ion-item-sliding *ngFor="let message of list;index as i; trackBy: i">
                 <ion-item (click)="doReadOutBox(message)">
                     <ion-avatar item-left>
                         <img src="assets/img/mike.png">
                     </ion-avatar>
                     <span>{{message.Content}}</span>
-                    <p class="font-12">{{message.Name}}&emsp;{{message.SendDate}}</p>
+                    <p class="font-12">收件人：{{message.Name}}&emsp;{{message.SendDate}}</p>
                 </ion-item>
                 <!-- <ion-item-options side="right">
                     <button ion-button color="primary">
@@ -77,10 +77,7 @@
             </ion-item-sliding>
         </ion-list>
     </div>
-    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">
-        <div padding>暂无消息数据！！！</div>
-        <img src="assets/img/face/face2.png" height="100">
-    </div>
+    <empty *ngIf="isEmpty"></empty>
     <!--<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->
     <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">
         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>

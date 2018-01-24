@@ -29,15 +29,13 @@ export class TrainingMaintenancePage  {
       this.data = {
         // "uid": this.trainingMaintenanceService.httpService.globalData.Uid,
         "PageIndex": 0,
-        "PageSize": 8
+        "PageSize": 10
       };
-      this.getList(this.data);
-
   }
 
 
-  ionViewDidLoad() {
-
+  ionViewWillEnter() {
+    this.doRefresh(null);
   }
 
   presentPopover(myEvent) {
@@ -59,7 +57,7 @@ export class TrainingMaintenancePage  {
   }
 
   doRead(Params) {
-    this.navCtrl.push("TrainingMaintenanceSetPage", { "Id": Params });
+    this.navCtrl.push("TrainingMaintenanceSetPage", { "Id": Params, "readOnly": true });
   }
 
   doWrite() {
@@ -80,10 +78,10 @@ export class TrainingMaintenancePage  {
 
   doRefresh(refresher: Refresher) {
     this.list = [];
-    this.data.PageIndex = 1;
+    this.data.PageIndex = 0;
     this.getList(this.data);
     setTimeout(() => {
-        refresher.complete();
+      refresher && refresher.complete();
     }, 1000);
   }
 
@@ -108,10 +106,12 @@ export class TrainingMaintenancePage  {
         this.moredata = true;
         this.isEmpty = false;
         let list = resJson.Data;
+        if (list.length < data["pageSize"]) this.moredata = false;
         this.list = [...this.list, ...list];
+        
       }else{
         this.moredata = false;
-        this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+        this.isEmpty = (this.data.PageIndex == 0) ? true : false;
       }
     });
     

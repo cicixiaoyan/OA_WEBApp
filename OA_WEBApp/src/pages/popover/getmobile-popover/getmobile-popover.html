@@ -5,37 +5,40 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    
-      <ion-navbar>
+
+    <ion-navbar>
         <ion-title>联系人选择</ion-title>
-      </ion-navbar>
-    
-    </ion-header>
-    
-    
-    <ion-content>
-      <ion-list class="checkpeople-popover">
-        <ion-searchbar color="danger" [(ngModel)]="name"  placeholder="请输入编码或姓名">
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-list class="checkpeople-popover">
+        <ion-searchbar color="danger" [(ngModel)]="name" placeholder="请输入编码或姓名">
         </ion-searchbar>
-      
+
         <div text-center>
             <button (click)="search()" icon-left ion-button small color="calm">
             <ion-icon name="search"></ion-icon>查询</button>
-      
+
             <button (click)="confirm()" icon-left ion-button small color="calm">
             <ion-icon name="checkmark"></ion-icon>确定</button>
         </div>
-      
+
         <ion-list-header>
             通讯录
         </ion-list-header>
-      
+
         <ion-item *ngFor="let item of items;let i = index">
             <ion-label>
-            {{item.Name}}({{item.Uid}})<br>
-            <span>{{item.Mobile}}</span>
+                {{item.Name}}({{item.Uid}})<br>
+                <span>{{item.Mobile}}</span>
             </ion-label>
             <ion-checkbox [checked]="item.checked" (ionChange)="checkPeople(i)"></ion-checkbox>
         </ion-item>
-      </ion-list>
-    </ion-content>
+        <ion-item *ngIf="items.length == 0">
+            <h3 text-center>无</h3>
+        </ion-item>
+    </ion-list>
+</ion-content>

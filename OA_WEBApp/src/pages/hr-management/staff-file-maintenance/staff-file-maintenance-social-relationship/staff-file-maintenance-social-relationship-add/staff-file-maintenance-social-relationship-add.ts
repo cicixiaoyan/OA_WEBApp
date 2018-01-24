@@ -19,13 +19,15 @@ export class StaffFileMaintenanceSocialRelationshipAddPage {
 
   addForm: FormGroup;
   formCtrls: any;
+  item: any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private nativeService: NativeService,
               private staffFileMaintenanceService: StaffFileMaintenanceService,
               private formBuilder: FormBuilder,
               private viewCtrl: ViewController) {
-      this.readOnly = this.navParams.get("readOnly") ? true : false;
+      this.item = this.navParams.get("item") || {};
+      this.readOnly = this.item == {} ? false : true;
       this.id = this.navParams.get("id");
   
 
@@ -42,8 +44,19 @@ export class StaffFileMaintenanceSocialRelationshipAddPage {
         "SociologyMemo": ["", [Validators.maxLength(100)]], // 备注
       });
       this.formCtrls = this.addForm.controls;
-      if (!!this.navParams.get("item")){
-        this.addForm.patchValue(this.navParams.get("item"));
+      if (this.readOnly){
+        this.addForm.patchValue({
+          "SociologyName": this.item.SociologyName, // 姓名
+          "SociologyAge": this.item.SociologyAge, // 年龄
+          "SociologyDeptName": this.item.SociologyDeptName, // 部门
+          "SociologyDuty": this.item.SociologyDuty,  // 职务
+          "SociologyOutlook": this.item.SociologyOutlook,  // 政治面貌
+          "SociologyByRelation": this.item.SociologyByRelation,  // 与本人关系
+          "SociologyUnit": this.item.SociologyUnit,  // 工作单位
+          "SociologyContacNum": this.item.SociologyContacNum,  // 联系电话
+          "SociologyEmergency": this.item.SociologyEmergency,  // 是否为紧急联系人
+          "SociologyMemo": this.item.SociologyMemo, // 备注
+        });
       }
   }
 
@@ -61,7 +74,7 @@ export class StaffFileMaintenanceSocialRelationshipAddPage {
     this.staffFileMaintenanceService.addSociology(value).subscribe(resJson => {
       if (resJson.Data){
         this.nativeService.showToast("添加社会关系成功", 500);
-        this.viewCtrl.dismiss({"change": true});
+        this.viewCtrl.dismiss(true);
       }
     });
   }

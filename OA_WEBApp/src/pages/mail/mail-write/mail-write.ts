@@ -96,7 +96,7 @@ export class MailWrite {
             console.log(data, "上传成功");
             this.haveAffix = true;
             let Data = JSON.parse(data.response).Data;
-            this.attName = Data[0].OldName;
+            this.attName = decodeURIComponent(Data[0].OldName);
             this.attNo = Data[0].AttNo;
         });
     }

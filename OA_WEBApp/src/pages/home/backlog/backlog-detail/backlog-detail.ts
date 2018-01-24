@@ -5,6 +5,7 @@ import { NativeService } from '../../../../providers/NativeService';
 import { FileService } from '../../../../providers/FileService';
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 import { GlobalData } from '../../../../providers/GlobalData';
+import { UPLOAD_PATH } from "../../../../providers/Constants";
 @IonicPage()
 @Component({
     selector: 'page-backlog-detail',
@@ -42,11 +43,13 @@ export class BacklogDetail {
     FileNewName: string = "";
 
     data: any;
+    read: boolean = false;
 
     opinionSelect: string;
     affixLs: Array<any>;
 
     showSave: boolean = true;
+    opinionLs: Array<any> = [];
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 private backlogService: BacklogService,
@@ -57,6 +60,7 @@ export class BacklogDetail {
             ) {
 
         this.data = this.navParams.get("param");
+        this.read = this.navParams.get("read") || false;
         this.initializeItems();
     }
 
@@ -84,6 +88,8 @@ export class BacklogDetail {
                     
                     });
                 }
+
+                this.opinionLs = this.item["yj"];
             }
             else{
                 this.nativeService.showToast(resJson.Data);
@@ -119,33 +125,41 @@ export class BacklogDetail {
         if (number == 0){
 
             this.backlogService.save(data).subscribe(resJson => {
-                this.nativeService.showToast(resJson.Data, 800);
+                
                 if (resJson.Result) {
-                    
+                    this.nativeService.showToast("保存成功", 800);
+                }else{
+                    this.nativeService.showToast(resJson.Data, 800);
                 } 
             });
         }else if (number == 1) {
             this.backlogService.savePass(data).subscribe(resJson => {
-                this.nativeService.showToast(resJson.Data, 800);
+                
                 if (resJson.Result) {
+                    this.nativeService.showToast("审核成功，将选择下一步", 800);
                     let modal =  this.modalCtrl.create("BacklogApproveSuccussPage", 
                     {"content": this.item, "param": resJson.Data});
                     modal.present();
                     modal.onDidDismiss(data => {
                         data && this.navCtrl.pop();   
                     });
+                }else{
+                    this.nativeService.showToast(resJson.Data, 800);
                 }
             });
         }else{
             this.backlogService.saveFail(data).subscribe(resJson => {
-                this.nativeService.showToast(resJson.Data, 800);
+                
                 if (resJson.Result) {
+                    this.nativeService.showToast("审核成功，将选择下一步", 800);
                     let modal =  this.modalCtrl.create("BacklogApproveFailPage", 
                     {"content": this.item, "param": resJson.Data});
                     modal.present();
                     modal.onDidDismiss(data => {
                         data && this.navCtrl.pop();   
                     });
+                }else{
+                    this.nativeService.showToast(resJson.Data, 800);
                 }
             });
         }
@@ -170,7 +184,7 @@ export class BacklogDetail {
         this.fileService.uploadAffix(0).subscribe(data => {
             let resJson = JSON.parse(data.response);
             if (data.responseCode === 200){
-                this.affName = resJson.Data[0].OldName;
+                this.affName = decodeURIComponent(resJson.Data[0].OldName);
                 this.FileNewName = resJson.Data[0].NewName;
             }else{
                 this.nativeService.showToast(resJson.Data, 800);
@@ -180,10 +194,12 @@ export class BacklogDetail {
 
     download(path, name){
         // const target = name;
-        let url = this.globalData.FILE_SERVE_URL + "Attach/flow/Work/" + path;
-        this.fileService.download1(url, name).subscribe((path) => {
+        let url = this.globalData.FILE_SERVE_URL + UPLOAD_PATH.work + path;
+
+        this.fileService.download1(url, path).subscribe((path1) => {
             this.downloaded = true;
-            this.fileService.openFile(path).subscribe(() => {
+            console.log(path1);
+            this.fileService.openFile(path1).subscribe(() => {
 
             });
         });

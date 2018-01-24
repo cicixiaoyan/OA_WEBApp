@@ -10,6 +10,14 @@ page-mail-read {
             padding: 10px;
         }
     }
+    .ihtml {
+        min-height: 100px;
+        overflow-x: auto;
+        border-top: 5px solid #ddd;
+        border-bottom: 5px solid #ddd;
+        padding: 8px 0;
+        margin: 10px 0;
+    }
     .message-reply {
         width: 100%;
         border-top: 1px solid lighten(color($colors, positive), 10%);

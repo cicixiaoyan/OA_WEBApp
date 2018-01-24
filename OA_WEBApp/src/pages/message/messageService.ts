@@ -19,8 +19,11 @@ export class MessageService {
     constructor(public httpService: HttpService) {
     }
 
+    getList(param?): Observable<any>{
+        return this.httpService.postFormData("ashx/NewsLs.ashx", param).map((res: Response) => res.json());
+    }
+
     getInboxList(param?): Observable<any>{
-        console.log(12, param);
         return this.httpService.postFormData("ashx/NewsLs.ashx", param).map((res: Response) => res.json());
     }
 

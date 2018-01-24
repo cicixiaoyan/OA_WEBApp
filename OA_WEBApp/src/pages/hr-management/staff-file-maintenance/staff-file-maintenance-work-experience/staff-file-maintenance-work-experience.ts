@@ -53,7 +53,7 @@ export class StaffFileMaintenanceWorkExperience {
     let modal = this.modalCtrl.create("StaffFileMaintenanceWorkExperienceAdd", {"item": item, "id": this.Id});
     modal.present();
     modal.onDidDismiss(data => {
-        data && console.log(data);
+        data && this.doRefresh(null);
     });
   }
 

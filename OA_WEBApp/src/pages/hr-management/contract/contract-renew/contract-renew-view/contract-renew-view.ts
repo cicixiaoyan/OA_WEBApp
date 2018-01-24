@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ContractService } from '../../contract-service';
 import { NativeService } from '../../../../../providers/NativeService';
 import { Utils } from '../../../../../providers/Utils';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 @IonicPage()
 @Component({
@@ -26,6 +27,7 @@ export class ContractRenewViewPage {
               public navParams: NavParams,
               private popoverCtrl: PopoverController,
               private nativeService: NativeService,
+              private alertCtrl: AlertController,
               @Inject(FormBuilder) fb: FormBuilder,
               private contractService: ContractService
             ) {
@@ -63,9 +65,6 @@ export class ContractRenewViewPage {
         this.contractService.getRenew({"id": this.Id}).subscribe(resJson => {
           if (resJson.Result){
             let data = resJson.Data[0];
-            data.UpStratDate = Utils.dateFormat(new Date(data.UpStratDate), 'yyyy-MM-ddTHH:mm+08:00');
-            data.UpEndDate = Utils.dateFormat(new Date(data.UpEndDate), 'yyyy-MM-ddTHH:mm+08:00');
-            data.SignDate = Utils.dateFormat(new Date(data.SignDate), 'yyyy-MM-ddTHH:mm+08:00');
             data.ContractDate = Utils.dateFormat(new Date(data.ContractDate), 'yyyy-MM-ddTHH:mm+08:00');
             data.ContractStartDate = Utils.dateFormat(new Date(data.ContractStartDate), 'yyyy-MM-ddTHH:mm+08:00');
             data.ContractEndDate = Utils.dateFormat(new Date(data.ContractEndDate), 'yyyy-MM-ddTHH:mm+08:00');
@@ -104,11 +103,6 @@ export class ContractRenewViewPage {
 
   submit(value){
     console.log(value);
-
-    value.UpStratDate = Utils.dateFormat(new Date(value.UpStratDate), 'yyyy-MM-dd HH:mm:ss');
-    value.UpEndDate = Utils.dateFormat(new Date(value.UpEndDate), 'yyyy-MM-dd HH:mm:ss');
-    value.UpEndDate = Utils.dateFormat(new Date(value.UpEndDate), 'yyyy-MM-dd HH:mm:ss');
-    value.SignDate = Utils.dateFormat(new Date(value.SignDate), 'yyyy-MM-dd HH:mm:ss');
     value.ContractDate = Utils.dateFormat(new Date(value.ContractDate), 'yyyy-MM-dd HH:mm:ss');
     value.ContractStartDate = Utils.dateFormat(new Date(value.ContractStartDate), 'yyyy-MM-dd HH:mm:ss');
     value.ContractEndDate = Utils.dateFormat(new Date(value.ContractEndDate), 'yyyy-MM-dd HH:mm:ss');
@@ -117,14 +111,33 @@ export class ContractRenewViewPage {
     }
 
     if (this.Id != ""){
-      this.contractService.modRenew(value).subscribe(resJson => {
-        if (resJson.Data){
-          this.nativeService.showToast("修改合同续签成功", 800);
-          this.navCtrl.pop();
-        }else{
-          this.nativeService.showToast(resJson.Data, 800);          
-        }
+      let prompt = this.alertCtrl.create({
+        title: '温馨提示',
+        message: "你确定修改此条合同信息吗？<br/><span class='text-ios-danger'>修改后不能恢复</span>",
+        buttons: [
+          {
+            text: '取消',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: '修改',
+            handler: data => {
+              this.contractService.modRenew(value).subscribe(resJson => {
+                if (resJson.Data){
+                  this.nativeService.showToast("修改合同续签成功", 800);
+                  this.navCtrl.pop();
+                }else{
+                  this.nativeService.showToast(resJson.Data, 800);          
+                }
+              });
+            }
+          }
+        ]
       });
+      prompt.present();
+
     }else{
       value.Id = null;
       this.contractService.addRenew(value).subscribe(resJson => {
@@ -147,21 +160,29 @@ export class ContractRenewViewPage {
       popover.onDidDismiss(data => {
           if (!!data) {
               console.log(data);
-              this.baseForm.patchValue(data);
-              // this.baseForm.patchValue({
-              //   "ContractNum": data.ContractNum, // 合同编号
-              //   "ContractName": data.ContractName, // 合同名称
-              //   "UpStratDate": data.UpStratDate, // 上次生效时间
-              //   "UpEndDate": data.UpEndDate, // 上次到期时间
-              //   "SignDate": data.SignDate, // 签约时间
+              // this.baseForm.patchValue(data);
+              this.contractService.getList({id: data.id}).subscribe(resJson => {
+                if (resJson.Result){
+                  let Data = resJson.Data[0];
+                  this.baseForm.patchValue({
+                    "HtID": Data.Id,
+                    "ContractNum": Data.ContractNum, // 合同编号
+                    "ContractName": Data.ContractName, // 合同名称
+                    "UpStratDate": Data.StratDate, // 上次生效时间
+                    "UpEndDate": Data.EndDate, // 上次到期时间
+                    "SignDate": Data.SignDate, // 签约时间
 
-              //   "UserNum": data.UserNum, // 员工工号
-              //   "UserName": data.UserName, // 姓名
-              //   "Sex": data.Sex, // 性别
-              //   "IDNumber": data.IDNumber, // 身份证号
-              //   "DeptName": data.DeptName, // 所在部门
-              //   "Duty": data.Duty, // 职务
-              // });
+                    "UserNum": Data.UserNum, // 员工工号
+                    "UserName": Data.UserName, // 姓名
+                    "Sex": Data.Sex, // 性别
+                    "IDNumber": Data.IDNumber, // 身份证号
+                    "DeptName": Data.DeptName, // 所在部门
+                    "Duty": Data.Duty, // 职务
+                  });
+                }else{
+                  this.nativeService.showToast(resJson.Data, 800); 
+                }
+              });
           }
       });
   }

@@ -19,12 +19,18 @@ export class CarReadPage {
   id: string;  
   editForm: FormGroup;
   BusStatusLs: Array<any>;
+  BusMangerLs: Array<any> = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private formBuilder: FormBuilder,
               private nativeService: NativeService,
               private carService: CarService) {
     let today = new Date();
+    this.carService.ClsqAddSpry({}).subscribe(resJson => {
+      if (resJson.Result && resJson.Data.length != 0){
+        this.BusMangerLs = resJson.Data;
+      }
+    });
     this.editForm = this.formBuilder.group({
       BusNumber: ['', [Validators.required]], // 第一个参数是默认值
       BusName: ["", [Validators.maxLength(180), Validators.required]],

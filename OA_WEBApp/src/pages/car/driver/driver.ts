@@ -2,12 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Refresher } from 'ionic-angular';
 import { CarService } from '../car_service';
 import { NativeService } from '../../../providers/NativeService';
-/**
- * Generated class for the DriverPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+
 
 @IonicPage()
 @Component({
@@ -20,17 +16,17 @@ export class DriverPage {
   data: any = {};
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              private alertCtrl: AlertController,
               private nativeService: NativeService,
               private carService: CarService) {
       this.data = {
         "PageIndex": 0,
         "PageSize": 100
       };
-      this.initializeItems();
   }
 
-  initializeItems() {
-    this.getList(this.data);
+  ionViewWillEnter() {
+    this.doRefresh(null);
   }
 
   doRead(id?) {
@@ -47,7 +43,7 @@ export class DriverPage {
       this.getList(this.data);
 
       setTimeout(() => {
-          refresher.complete();
+        refresher && refresher.complete();
       }, 1000);
   }
 
@@ -66,14 +62,34 @@ export class DriverPage {
   }
 
   delete(id, index){
-    this.carService.driverDel(id).subscribe((resJson) => {
-      if (resJson.Result){
-        this.list.splice(index, 1);    
-        this.nativeService.showToast("删除成功", 300);    
-      }else{
-        this.nativeService.showToast(resJson.Data, 800);
-      }
+
+    let prompt = this.alertCtrl.create({
+      title: '温馨提示',
+      message: "你确定删除此司机的档案吗？<br/><span class='text-ios-danger'>删除后不能恢复</span>",
+      buttons: [
+        {
+          text: '取消',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: '删除',
+          handler: data => {
+            this.carService.driverDel(id).subscribe((resJson) => {
+              if (resJson.Result){
+                this.list.splice(index, 1);    
+                this.nativeService.showToast("删除成功", 300);    
+              }else{
+                this.nativeService.showToast(resJson.Data, 800);
+              }
+            });
+          }
+        }
+      ]
     });
+    prompt.present();
+    
   }
 
 }

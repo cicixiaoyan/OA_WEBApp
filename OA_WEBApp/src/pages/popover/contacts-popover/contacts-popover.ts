@@ -5,6 +5,7 @@ import { Response } from "@angular/http";
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { HttpService } from '../../../providers/HttpService';
+import { NativeService } from '../../../providers/NativeService';
 /**
  * Generated class for the ContactsPopoverPage page.
  *
@@ -30,6 +31,7 @@ export class ContactsPopoverPage {
   constructor(private navParams: NavParams,
               public viewCtrl: ViewController,
               public storage: Storage,
+              private nativeService: NativeService,
               public httpService: HttpService) {
         this.addressee = this.navParams.get("addressee");
         this.addresseeIds = this.navParams.get("addresseeIds");
@@ -84,12 +86,15 @@ export class ContactsPopoverPage {
                   return value;
 
               });
-          }
+          }else{
+                this.items = [];
+                this.nativeService.showToast(result.Data);
+            }
       });
   }
 
   search() {
-      let data = (this.name !== "") ? {name: name} : {};
+      let data = (this.name !== "") ? {name: this.name} : {};
       this.httpService.postFormData("ashx/UserSheet.ashx", data)
       .map((res: Response) => res.json())
       .subscribe((result) => {
@@ -109,6 +114,9 @@ export class ContactsPopoverPage {
                   return value;
 
               });
+          }else{
+              this.items = [];
+              this.nativeService.showToast(result.Data);
           }
       });
   }

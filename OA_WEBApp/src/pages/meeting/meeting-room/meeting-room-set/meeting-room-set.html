@@ -2,12 +2,17 @@
 
     <ion-navbar>
         <ion-title>{{isWrite ? "添加会议室" : "会议室详情"}}</ion-title>
+        <ion-buttons end *ngIf="isWrite">
+            <button ion-button icon-left (click)="save(setForm.value)" [disabled]="setForm.invalid">
+                    <ion-icon name="ios-send"></ion-icon> 发送
+                </button>
+        </ion-buttons>
     </ion-navbar>
 
 </ion-header>
 
 <ion-content>
-    <form [formGroup]="setForm" (ngSubmit)="save(setForm.value)">
+    <form [formGroup]="setForm" (ngSubmit)="save(setForm.value)" [ngClass]="{'form-readonly': !isWrite}">
         <div>
             <ion-list>
                 <ion-item>
@@ -67,10 +72,6 @@
                 </div>
 
             </ion-list>
-            <div padding text-center>
-                <button ion-button type="submit" color="danger" (click)="save(setForm.value)" [disabled]="setForm.invalid">保存</button>
-                <button ion-button clear small navPop (click)="navCtrl.pop()">关闭</button>
-            </div>
         </div>
     </form>
 </ion-content>

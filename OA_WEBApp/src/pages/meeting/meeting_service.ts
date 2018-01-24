@@ -40,7 +40,7 @@ export class MeetingService {
     }
     // 会议送审
     goSp(param): Observable<any>  {
-        param.verb = "4";
+        param.verb = "3";
         return this.httpService.postFormData("ashx/MeetMod.ashx", param).map((res: Response) => res.json());
     }
     // 会议室列表

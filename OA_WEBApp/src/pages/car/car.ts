@@ -24,14 +24,10 @@ export class CarPage {
         "PageIndex": 0,
         "PageSize": 8
         };
-    this.initializeItems();
   }
-initializeItems() {
-    this.getList(this.data);
-}
 
-ionViewDidLoad() {
-    console.log('ionViewDidLoad Message');
+  ionViewWillEnter() {
+    this.doRefresh(null);
 }
 
 
@@ -57,7 +53,7 @@ doRefresh(refresher: Refresher) {
 
 
     setTimeout(() => {
-        refresher.complete();
+        refresher && refresher.complete();
     }, 1000);
 }
 

@@ -27,12 +27,17 @@ export class FileApplicationReviewPage {
           "PageIndex": 0,
           "PageSize": 8
       };
-      this.getList(this.data);
+      
 
   }
 
+  ionViewWillEnter() {
+    this.list = [];
+    this.getList(this.data);
+  }
+
   onSlideClick(i: number){
-    this.data.PageIndex = 1;
+    this.data.PageIndex = 0;
     this.list = [];
     if (i === 0) {
         // 参数设置
@@ -55,7 +60,7 @@ export class FileApplicationReviewPage {
 
   doRefresh(refresher: Refresher) {
       this.list = [];
-      this.data.PageIndex = 1;
+      this.data.PageIndex = 0;
       this.getList(this.data);
       setTimeout(() => {
           refresher.complete();
@@ -84,7 +89,7 @@ export class FileApplicationReviewPage {
           this.list = [...this.list, ...list];
         }else{
           this.moredata = false;
-          this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+          this.isEmpty = (this.data.PageIndex == 0) ? true : false;
         }
       });
   }

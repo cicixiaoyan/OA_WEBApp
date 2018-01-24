@@ -39,9 +39,8 @@ export class StaffFileMaintenanceSocialRelationship {
     let modal = this.modalCtrl.create("StaffFileMaintenanceSocialRelationshipAddPage", {"id": this.Id});
     modal.present();
     modal.onDidDismiss(data => {
-        if (!!data && data.change == "true"){
-          this.doRefresh(null);
-        }
+      data && this.doRefresh(null);
+        
     });
   }
 

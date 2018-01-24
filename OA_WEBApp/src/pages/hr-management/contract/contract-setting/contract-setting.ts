@@ -23,6 +23,9 @@ export class ContractSettingPage {
   Uid: string = '';
   DeptId: string = '';
   ContactContent: string = '';
+
+  typeLs: Array<any>;
+  yearLs: Array<any>;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private popoverCtrl: PopoverController,
@@ -70,28 +73,24 @@ export class ContractSettingPage {
         });
       }
 
-      // <!-- model.ContractNum = dt.Rows[i]["HtBianHao"].ToString();
-      // model.ContractName = dt.Rows[i]["HtMc"].ToString();
-      // model.StratDate = dt.Rows[i]["HeTongSj"].ToString();
-      // model.EndDate = dt.Rows[i]["HeTongqxsj"].ToString();
-      // model.UserNum = dt.Rows[i]["StaffNumer"].ToString();
-      // model.UserName = dt.Rows[i]["XingMing"].ToString();
-      // model.Sex = dt.Rows[i]["XingBie"].ToString();
-      // model.IDNumber = dt.Rows[i]["ShenFen"].ToString();
-      // model.DeptName = dt.Rows[i]["BuMen"].ToString();
-      // model.Duty = dt.Rows[i]["ZhiWu"].ToString();
-      // model.SignDate = dt.Rows[i]["QinYue"].ToString();
-      // model.ContractStartDate = dt.Rows[i]["ShiYongSj"].ToString();
-      // model.ContractEndDate = dt.Rows[i]["ShiYongDq"].ToString();
-      // model.TimeLimit = dt.Rows[i]["QiXian"].ToString();
-      // model.ContractYear = dt.Rows[i]["Nianfen_MC"].ToString();
-      // model.ContractStatus = dt.Rows[i]["HtZt"].ToString();
-      // model.IsCorrect = dt.Rows[i]["ZhuanZheng"].ToString();
-      // model.ProbationPeriod = dt.Rows[i]["ShiYongQx"].ToString();
-      // model.BasicWage = dt.Rows[i]["ShiYongGz"].ToString();
-      // model.Memo = dt.Rows[i]["HtBeiZhu"].ToString();
-      // model.ContractDate = dt.Rows[i]["HeTongQx"].ToString();
-      // model.RegularBasicWage = dt.Rows[i]["HeTongGz"].ToString(); -->
+      this.contractService.getType().subscribe(resJson => {
+        if (resJson.Result){
+          let arr = [];
+          for (let i in resJson.Data){
+            arr.push({"id": i, "name": resJson.Data[i]});
+          }
+          this.typeLs = arr;
+        }    
+      });
+      this.contractService.getYear().subscribe(resJson => {
+        if (resJson.Result){
+          let arr = [];
+          for (let i in resJson.Data){
+            arr.push({"id": i, "name": resJson.Data[i]});
+          }
+          this.yearLs = arr;
+        }    
+      });
   }
 
   ionViewDidLoad() {
@@ -136,13 +135,15 @@ export class ContractSettingPage {
   }
 
   downloadAffix(path, name) {
-    const target = path.split("/").pop();
+    // const target = path.split("/").pop();
     // let url = "http://192.168.0.49:789/Attach/flow/Work/201111302315473908417.pdf";
-    this.fileService.download1(this.globalData.FILE_SERVE_URL + path, target).subscribe((path) => {
+    this.fileService.download1(this.globalData.FILE_SERVE_URL + path, path).subscribe((path) => {
       this.fileService.openFile(path).subscribe(() => {
         
       });
-    });
+    }, (err => {
+      console.log(err);
+    }));
 }
 
 

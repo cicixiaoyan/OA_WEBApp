@@ -11,16 +11,19 @@
     <ion-searchbar color="danger" cancelButtonText='搜索' showCancelButton="true" (ionCancel)="search()" [(ngModel)]="name" placeholder="请输入编码或姓名">
     </ion-searchbar>
 
-    <ion-list-header >员工列表</ion-list-header>
+    <ion-list-header>员工列表</ion-list-header>
     <div class="">
         <ion-scroll scrollY="true">
-          <ion-item *ngFor="let item of items;let i = index">
-            <ion-label>
-              {{item.Name}}({{item.Uid}})<br>
-              <span>{{item.Dept}}&emsp;{{item.Duty}}</span>
-            </ion-label>
-            <ion-checkbox [checked]="item.checked" (click)="checkPeople(i)"></ion-checkbox>
-          </ion-item>
+            <ion-item *ngFor="let item of items;let i = index">
+                <ion-label>
+                    {{item.Name}}({{item.Uid}})<br>
+                    <span>{{item.Dept}}&emsp;{{item.Duty}}</span>
+                </ion-label>
+                <ion-checkbox [checked]="item.checked" (click)="checkPeople(i)"></ion-checkbox>
+            </ion-item>
+            <ion-item *ngIf="items.length == 0">
+                <h3>无</h3>
+            </ion-item>
         </ion-scroll>
     </div>
 </ion-list>

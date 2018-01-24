@@ -2,17 +2,12 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, Refresher } from 'ionic-angular';
 
 import { GlobalData } from "../../providers/GlobalData";
+import { NativeService } from "../../providers/NativeService";
 
 // import { MailRead } from '../mail/mail-read/mail-read';
 // import { MailWrite } from '../mail/mail-write/mail-write';
 // import { MailReadOutbox } from '../mail/mail-read-outbox/mail-read-outbox';
 import { MailService } from "./mailService";
-/**
- * Generated class for the Mail page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
     selector: 'page-mail',
@@ -24,29 +19,21 @@ export class Mail {
     isDraft: boolean = false; // 默认为发件箱
     isEmpty: boolean = false;
     checkBtn: object = { "read": false, "unread": true, "all": false };
-    inboxList: any = [];
-    outboxList: any = [];
+    list: any = [];
     moredata: boolean = true;
-    inboxData: any;
-    outboxData: any;
-    Timer: any;
+    data: any;
+    
+    canclick: boolean = true;
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 public globalData: GlobalData,
+                private nativeService: NativeService,
                 private modalCtrl: ModalController,
                 private mailService: MailService) {
-        this.inboxData = {
-            "PageSize": 5,
+        this.data = {
+            "PageSize": 8,
             "PageIndex": 0,
             "MailStatus": this.mailService.mailStatus["inbox"],
-            "Uid": this.globalData.Uid,
-            "Status": this.mailService.status["unread"]
-        };
-
-        this.outboxData = {
-            "PageSize": 5,
-            "PageIndex": 0,
-            "MailStatus": this.mailService.mailStatus["outbox"],
             "Uid": this.globalData.Uid,
             "Status": this.mailService.status["unread"]
         };
@@ -54,14 +41,7 @@ export class Mail {
     }
 
     initializeItems() {
-        this._getInboxList(this.inboxData);
-        // this._getOutboxList(this.outboxData);
-        console.log(this);
-
-    //     this.Timer = setInterval(() => {
-    //         console.log(this);
-    //         this.getNewInboxList(this.inboxData);
-    //    }, 50000);
+        this.doRefresh(null);
     }
 
     ionViewDidLoad() {
@@ -70,29 +50,29 @@ export class Mail {
 
     // 选择已读、未读、全部
     checkRead(name: string = "read") {
-        this.inboxData.PageIndex = 0;
-        this.inboxList = [];
+        this.data.PageIndex = 0;
+        this.list = [];
         this.checkBtn = { "read": false, "unread": false, "all": false };
         this.checkBtn[name] = true;
         if (name === "unread") {
             // 参数设置
-            this.inboxData.Status = this.mailService.status["unread"];
+            this.data.Status = this.mailService.status["unread"];
         }
         else if (name === "read") {
             // 参数设置
-            this.inboxData.Status = this.mailService.status["read"];
+            this.data.Status = this.mailService.status["read"];
         }
         else {
             // 参数设置
-            this.inboxData.Status = this.mailService.status["all"];
+            this.data.Status = this.mailService.status["all"];
         }
-        this._getInboxList(this.inboxData);
+        this._getList(this.data);
     }
 
     // 选择草稿箱、发件箱
     checkDraft(bol: boolean = false) {
-        this.outboxData.PageIndex = 0;
-        this.outboxList = [];
+        this.data.PageIndex = 0;
+        this.list = [];
 
         if (bol) {
             this.isDraft = true;
@@ -101,7 +81,7 @@ export class Mail {
             this.isDraft = false;
             // 参数设置
         }
-        this._getOutboxList(this.outboxData);
+        this._getList(this.data);
     }
 
     doRead(id) {
@@ -113,46 +93,41 @@ export class Mail {
     }
 
     doWrite() {
-        // let modal = this.modalCtrl.create("MailWrite");
-        // modal.present();
-        // modal.onDidDismiss(data => {
-        //     data && console.log(data);
-        // });
         this.navCtrl.push("MailWrite");
     }
 
     doRefresh(refresher: Refresher) {
         console.log("加载更多");
-        // this.initializeItems();
-        this.change();
+        if (!this.canclick){
+            // this.box = this.box === "inbox" ? "outbox" : "intbox";
+            console.log("不能点击");
+            return this.nativeService.showToast("点击太快了，请稍后！！！", 800);
+        }else{
+            console.log("可以点击");
+        }
+
+        this.moredata = true;
+        this.canclick = false;
+        this.list = [];
+        this.data.PageIndex = 0;
+
+        if (this.box === "inbox") {
+            this.data.mailStatus = this.mailService.mailStatus["inbox"];
+        } else {
+            this.data.mailStatus = this.mailService.mailStatus["outbox"];
+        }
+        this._getList(this.data);
         setTimeout(() => {
             console.log('数据加载完成');
-            refresher.complete();
+            this.canclick = true;
+            refresher && refresher.complete();
         }, 1000);
-    }
-
-    change(){
-        this.moredata = true;
-        if (this.box === "inbox") {
-            this.inboxList = [];
-            this.inboxData.PageIndex = 0;
-            this._getInboxList(this.inboxData);
-        } else {
-            this.outboxList = [];
-            this.outboxData.PageIndex = 0;
-            this._getOutboxList(this.outboxData);
-        }
     }
 
     doInfinite(): Promise<any> {
         if (this.moredata) {
-            if (this.box === "inbox") {
-                this.inboxData.PageIndex++;
-                this._getInboxList(this.inboxData);
-            } else {
-                this.outboxData.PageIndex++;
-                this._getOutboxList(this.outboxData);
-            }
+            this.data.PageIndex++;
+            this._getList(this.data);
         }
 
         return new Promise((resolve) => {
@@ -161,54 +136,22 @@ export class Mail {
             }, 500);
         });
     }
-
-    getNewInboxList(inboxData){
-        inboxData.PageIndex = 0;
-        this.mailService.getInboxList(inboxData).subscribe(list => {
-            if (list.Result == true ) {
-                let arr = list.Data.filter(item => {
-                    return item.Id !== this.inboxList[0].Id;
-                });
-                if (arr !== []) {
-                    this.inboxList = [...this.inboxList, ...arr];
-                }
-            }else{
-                clearInterval(this.Timer);
-            }
-        }, err => {clearInterval(this.Timer); });
-    }
-
-
-    _getInboxList(inboxData) {
-        this.mailService.getInboxList(inboxData).subscribe(resJson => {
+    
+    _getList(data){
+        this.mailService.getList(data).subscribe(resJson => {
+            
             if (resJson.Result  && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
                 this.isEmpty = false;
                 let list = resJson.Data;
-                this.inboxList = [...this.inboxList, ...list];
+                this.list = [...this.list, ...list];
             }else{
                 this.moredata = false;
-                if (this.inboxData.PageIndex === 0) {
+                if (this.data.PageIndex === 0) {
                     this.isEmpty = true;
-                    this.inboxList = [];
+                    this.list = [];
                 }
             }
-        });
-    }
-
-    _getOutboxList(outboxData) {
-        this.mailService.getOutboxList(outboxData).subscribe(resJson => {
-            if (resJson.Result  && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){
-                this.isEmpty = false;
-                let list = resJson.Data;
-                this.outboxList = [...this.outboxList, ...list];
-            }else{
-                this.moredata = false;
-                if (this.outboxData.PageIndex === 0) {
-                    this.isEmpty = true;
-                    this.outboxList = [];
-                }
-            }
-        }, err => {clearInterval(this.Timer); });
+        }, err => {console.log(err); });
     }
 
 }

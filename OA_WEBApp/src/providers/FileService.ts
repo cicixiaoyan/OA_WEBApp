@@ -74,10 +74,11 @@ export class FileService {
       this.fileChooser.open().then(fileURL => {
         this.filePath.resolveNativePath(fileURL).then(path => {
           let mimeType = path.toLowerCase().split(".").splice(-1)[0];
+          let filename = encodeURI(path.substr(path.lastIndexOf('/') + 1));
           console.log(path, path.substr(path.lastIndexOf('/') + 1), mimeType);
           let pathOption: FileUploadOptions = {
             "fileKey": "file",
-            "fileName": path.substr(path.lastIndexOf('/') + 1),
+            "fileName": filename,
             "mimeType": mimeType,
             "headers": {
               "Connection": "close",
@@ -151,13 +152,14 @@ download1(source: string, target: string, trustAllHosts?, Optional?): Observable
   alert.present();
 
   const fileTransfer: FileTransferObject = this.fileTransfer.create();
+
   // target = this.file.dataDirectory + target; // 文件保存的目录
   target = this.file.dataDirectory + target;
-  console.log(target);
+  console.log("target: " + target);
   return Observable.create((observer) => {
-    fileTransfer.download(encodeURI(source), target).then((entry) => {
+    fileTransfer.download(encodeURI(source), target, true).then((entry) => {
         alert && alert.dismiss();
-        console.log('download complete: ' + entry.toURL());
+        console.log('download complete: ' + entry.toURL() + "  " , entry);
         observer.next(entry.toURL());
       }, (error) => {
         if (error.http_status == "404") {

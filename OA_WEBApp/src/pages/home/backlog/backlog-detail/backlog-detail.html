@@ -48,14 +48,19 @@
                 </ion-col>
             </ion-row>
 
-            <ion-list>
-                <!-- <ion-item  *ngIf="item.Status == '正常结束'">
-                    <ion-label>审批记录：</ion-label>
-                    <ion-textarea type="text" placeholder="无"></ion-textarea>
-                </ion-item> -->
+            <ion-list *ngIf="opinionLs.length > 0">
+                <ion-item-divider color="light">历史审批意见</ion-item-divider>
+                <ion-item *ngFor="let opinion of opinionLs">
+                    <h3>{{opinion.acContent}}</h3>
+                    <p>{{opinion.ui_desc}}&emsp;{{opinion.AddTime}}</p>
+                </ion-item>
+            </ion-list>
+
+            <ion-list *ngIf="!read">
+                <ion-item-divider color="light">待办事项审核</ion-item-divider>
                 <ion-item *ngIf="data.UrgencyLevel != '正常结束'">
-                    <ion-label>常用审批意见：</ion-label>
-                    <ion-select [(ngModel)]="opinionSelect" (ngModelChange)="opinion=opinionSelect" cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-label style="flex:none;">常用意见：</ion-label>
+                    <ion-select class="iselect" [(ngModel)]="opinionSelect" (ngModelChange)="opinion=opinionSelect" cancelText="取消" okText="确定" placeholder="请选择">
                         <ion-option *ngFor="let type of item.ls;let i = index" [value]="type.Id">{{type.Name}}</ion-option>
                     </ion-select>
                 </ion-item>
@@ -73,28 +78,28 @@
 
 
         </ion-card-content>
-        <div *ngIf="data.UrgencyLevel != '正常结束'">
+        <div *ngIf="!read">
             <ion-row text-center>
 
-                <ion-col col-4 *ngIf="">
+                <ion-col *ngIf="">
                     <button [disabled]="opinion == ''" (click)="approved(0)" ion-button icon-left clear small full>
                         <ion-icon name="md-checkmark"></ion-icon>
                         <div>保存</div>
                     </button>
                 </ion-col>
-                <ion-col col-4>
+                <ion-col>
                     <button [disabled]="opinion == ''" (click)="approved(1)" ion-button icon-left clear small full>
                         <ion-icon name="md-checkmark"></ion-icon>
                         <div>保存并通过</div>
                     </button>
                 </ion-col>
-                <ion-col col-4>
+                <ion-col>
                     <button [disabled]="opinion == ''" (click)="approved(2)" ion-button icon-left clear small full>
                         <ion-icon name="md-close"></ion-icon>
                         <div>保存并驳回</div>
                     </button>
                 </ion-col>
-                <!-- <ion-col col-4>
+                <!-- <ion-col >
                     <button (click)="navCtrl.pop()" ion-button icon-left clear small full>
                         <ion-icon name="md-return-left"></ion-icon>
                         <div>返回</div>

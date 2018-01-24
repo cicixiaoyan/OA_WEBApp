@@ -44,11 +44,8 @@ export class SmsPage {
   }
 
   initializeItems() {
+      this.list = [];
       this._getList(this.data);
-
-    //   this.Timer = setInterval(() => {
-    //       this.getNewList(this.data);
-    //  }, 50000);
   }
 
   ionViewDidLoad() {

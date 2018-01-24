@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavParams, PopoverController, ViewController } from 'ionic-angular';
+import { IonicPage, NavParams, NavController,  PopoverController, ViewController } from 'ionic-angular';
 
 import { GlobalData } from '../../../providers/GlobalData';
 import { NativeService } from '../../../providers/NativeService';
@@ -31,6 +31,7 @@ export class MessageWritePage {
     // mailObj : object = {};
     @ViewChild("popoverContent", { read: ElementRef }) content: ElementRef;
     constructor(public navParams: NavParams,
+                public navCtrl: NavController,
                 public nativeService: NativeService,
                 private popoverCtrl: PopoverController,
                 private viewCtrl: ViewController,
@@ -57,8 +58,13 @@ export class MessageWritePage {
         };
 
         this.messageService.write(data1).subscribe((resJson) => {
-            resJson.Result ? this.nativeService.showToast("信息已发送") :
-            this.nativeService.showToast(resJson.Data);
+            if (resJson.Result){
+                this.nativeService.showToast("信息已发送");
+                this.navCtrl.pop();
+            }else{
+                this.nativeService.showToast(resJson.Data);
+            }
+
         });
 
     }

@@ -20,6 +20,10 @@ export class MailService {
     constructor(public httpService: HttpService) {
     }
 
+    getList(param?): Observable<any>{
+        console.log(12, param);
+        return this.httpService.postFormData("ashx/MailList.ashx", param).map((res: Response) => res.json());
+    }
     getInboxList(param?): Observable<any>{
         console.log(12, param);
         return this.httpService.postFormData("ashx/MailList.ashx", param).map((res: Response) => res.json());

@@ -16,6 +16,8 @@ import { HttpService } from "../../providers/HttpService";
 import { NavController } from 'ionic-angular/navigation/nav-controller';
 import { BackButtonService } from '../../services/backButtonService';
 import { JPush } from 'ionic3-jpush';
+import { APP_SERVE_URL } from "../../providers/Constants";
+
 @IonicPage()
 
 @Component({
@@ -49,8 +51,8 @@ export class LoginPage {
         });
 
         this.loginForm = this.formBuilder.group({
-            UserName: ['004', [Validators.required, Validators.minLength(3)]], // 第一个参数是默认值
-            UserPass: ['123456', [Validators.required, Validators.minLength(2)]]
+            UserName: ['admin', [Validators.required, Validators.minLength(3)]], // 第一个参数是默认值
+            UserPass: ['1234', [Validators.required, Validators.minLength(2)]]
         });
     }
 
@@ -83,8 +85,8 @@ export class LoginPage {
 
     login(user) {
         this.submitted = true;
-        // this.httpService.postFormData("ashx/Login.ashx/LoginInfo",user)
-        //  .map(responce => responce.json())
+        user.UserName = user.UserName.trim();
+        user.UserPass = user.UserPass.trim();
         this.loginService.login(user).subscribe((userInfo) => {
             if (userInfo.Result){
                 console.log(userInfo);
@@ -164,17 +166,21 @@ export class LoginPage {
                 }
               },
               {
+                text: '恢复默认',
+                handler: data => {
+                    this.globalData.APP_SERVE_URL = APP_SERVE_URL;
+                    this.globalData.APP_VERSION_SERVE_URL = APP_SERVE_URL;
+                    this.globalData.FILE_SERVE_URL = APP_SERVE_URL;
+                    this.storage.set("ip", APP_SERVE_URL);
+                }
+              },
+              {
                 text: '确认',
                 handler: data => {
                     this.globalData.APP_SERVE_URL = data.ip;
                     this.globalData.APP_VERSION_SERVE_URL = data.ip;
                     this.globalData.FILE_SERVE_URL = data.ip;
-                //   if (User.isValid(data.username)) {
-                //     // logged in!
-                //   } else {
-                //     // invalid login
-                //     return false;
-                //   }
+                    this.storage.set("ip", data.ip);
                 }
               }
             ]

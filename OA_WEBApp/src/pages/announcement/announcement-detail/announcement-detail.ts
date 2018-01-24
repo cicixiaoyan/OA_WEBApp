@@ -56,10 +56,10 @@ export class AnnouncementDetailPage {
   }
 
   download(path, name) {
-      const target = path.split("/").pop();
+      // const target = path.split("/").pop();
       // let url = "http://192.168.0.49:789/Attach/flow/Work/201111302315473908417.pdf";
       let url = this.globalData.FILE_SERVE_URL + "Attach/flow/Work/" + path;
-      this.fileService.download1(url, target).subscribe((path) => {
+      this.fileService.download1(url, path).subscribe((path) => {
         this.downloaded = true;
         this.fileService.openFile(path).subscribe(() => {
           

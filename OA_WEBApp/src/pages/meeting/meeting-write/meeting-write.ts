@@ -50,17 +50,17 @@ export class MeetingWritePage {
     });
 
     this.writeForm = formBuilder.group({
-        Title: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(2)]], // 第一个参数是默认值
-        TypeId: ["", [Validators.required]],
-        PlaceId: ["", [ Validators.required]],
-        StartDate: ["", [ Validators.required]],
-        EndDate: ["", [Validators.required]],
-        Person: ["", [Validators.maxLength(180), Validators.required]],
-        DeptId: ["", []],
-        HostName: ["", [Validators.maxLength(20)]],
-        Range: ["", [Validators.maxLength(180)]],
-        Detail: ["", [Validators.maxLength(180)]],
-        FileOldName: ["", [Validators.maxLength(180)]],
+        "Title": ['', [Validators.required, Validators.maxLength(30), Validators.minLength(2)]], // 第一个参数是默认值
+        "TypeId": ["", [Validators.required]],
+        "PlaceId": ["", [ Validators.required]],
+        "StartDate": ["", [ Validators.required]],
+        "EndDate": ["", [Validators.required]],
+        "Person": ["", [Validators.maxLength(180), Validators.required]],
+        "DeptId": ["", []],
+        "HostName": ["", [Validators.maxLength(20)]],
+        "Range": ["", [Validators.maxLength(180)]],
+        "Detail": ["", [Validators.maxLength(180)]],
+        "FileOldName": ["", [Validators.maxLength(180)]],
     });
 
     this.formCtrl = this.writeForm.controls;
@@ -87,10 +87,10 @@ export class MeetingWritePage {
   }
 
   addAffix() {
-    this.fileService.uploadAffix(1).subscribe((data) => {
+    this.fileService.uploadAffix(0).subscribe((data) => {
       let resJson = JSON.parse(data.response);
       if (data.responseCode === 200){
-        this.writeForm.patchValue({'Affix': resJson.Data[0].OldName});
+        this.writeForm.patchValue({'FileOldName': decodeURIComponent(resJson.Data[0].OldName)});
         this.FileNewName = resJson.Data[0].NewName;
       }else{
         this.nativeService.showToast(resJson.Data, 800);

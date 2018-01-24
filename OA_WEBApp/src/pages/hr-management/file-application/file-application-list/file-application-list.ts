@@ -28,13 +28,16 @@ export class FileApplicationListPage {
             "PageIndex": 0,
             "PageSize": 8
         };
-        this.getList(this.data);
-
+        
     }
+    ionViewWillEnter() {
+        this.list = [];
+        this.getList(this.data);
+      }
 
     // 选择
     checkRead(name: string = "审批中") {
-        this.data.PageIndex = 1;
+        this.data.PageIndex = 0;
         this.list = [];
         this.checkBtn = { "审批中": false, "已同意": false, "已拒绝": false };
         this.checkBtn[name] = true;
@@ -59,7 +62,7 @@ export class FileApplicationListPage {
 
     doRefresh(refresher: Refresher) {
         this.list = [];
-        this.data.PageIndex = 1;
+        this.data.PageIndex = 0;
         this.getList(this.data);
         setTimeout(() => {
             refresher && refresher.complete();
@@ -89,7 +92,7 @@ export class FileApplicationListPage {
             this.list = [...this.list, ...list];
           }else{
             this.moredata = false;
-            this.isEmpty = (this.data.PageIndex == 1) ? true : false;
+            this.isEmpty = (this.data.PageIndex == 0) ? true : false;
           }
         });
 

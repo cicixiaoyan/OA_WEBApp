@@ -9,6 +9,8 @@ import { FileService } from '../../../../providers/FileService';
 import { ActionSheetController } from 'ionic-angular/components/action-sheet/action-sheet-controller';
 import { PublicService } from '../../../../providers/PublicService';
 import { GlobalData } from '../../../../providers/GlobalData';
+import { Utils } from '../../../../providers/Utils';
+import { UPLOAD_PATH } from '../../../../providers/Constants';
 
 @IonicPage()
 @Component({
@@ -26,7 +28,7 @@ export class StaffFileMaintenanceBasicImfornation {
   hideFour: boolean = true;
   formCtrls: any;
 
-  photoSrc = "./assets/img/logo.png";
+  photoSrc = "./assets/img/boy.png";
   attachLs = [];
 
   nationLs: Array<any>;
@@ -103,16 +105,18 @@ export class StaffFileMaintenanceBasicImfornation {
         this.staffFileMaintenanceService.getList({"id": this.Id}).subscribe(resJson => {
           if (resJson.Result){
             this.baseForm.patchValue(resJson.Data[0]);
-
-
-            if (resJson.Data[0].BasicPhoto != "images/hr") 
-              this.photoSrc = this.globalData.FILE_SERVE_URL + resJson.Data[0].BasicPhoto;
+            this.baseForm.patchValue({
+              "BasciBirth": Utils.dateFormat(new Date(resJson.Data[0].BasciBirth), 'yyyy-MM-ddTHH:mm+08:00'),
+              "BasicWordDate": Utils.dateFormat(new Date(resJson.Data[0].BasciBirth), 'yyyy-MM-ddTHH:mm+08:00'),
+            });
+            if (resJson.Data[0].BasicPhoto != "") 
+              this.photoSrc = this.globalData.FILE_SERVE_URL + UPLOAD_PATH.hrImg + resJson.Data[0].BasicPhoto;
 
             let AffixObj = resJson.Data[0].BasicAttach;
             if (AffixObj.length != 0){
               let arr = [];
               for (let i in AffixObj){
-                arr.push({"filename": i, "PathStr": AffixObj[i]});
+                arr.push({"filename": AffixObj[i], "PathStr": i});
               }
               this.attachLs = [...arr];
             }
@@ -165,6 +169,9 @@ export class StaffFileMaintenanceBasicImfornation {
       value.SociologyLs = null;
       value.EduLs = null;
       value.id = this.Id;
+
+      value.BasciBirth = Utils.dateFormat(new Date(value.BasciBirth), 'yyyy-MM-dd HH:mm:ss');
+      value.BasicWordDate = Utils.dateFormat(new Date(value.BasicWordDate), 'yyyy-MM-dd HH:mm:ss');
       // console.log(value);
       this.staffFileMaintenanceService.modBasic(value).subscribe(resJson => {
         if (resJson.Result){
@@ -230,19 +237,14 @@ export class StaffFileMaintenanceBasicImfornation {
   }
 
   deletePhoto() {
-    this.photoSrc = "./assets/img/logo.png";
+    this.photoSrc = this.baseForm.value.BasicSex == "女" ? "./assets/img/girl.png" : "./assets/img/boy.png";
     this.baseForm.patchValue({"BasicPhoto": ""});
   }
 
   readAffix(filepath, filename) {
-    const target = filepath.split("/").pop();
-    let url = "";
-    // let url = "http://192.168.0.49:789/Attach/flow/Work/201111302315473908417.pdf";
-    if (filepath.split("/").length > 1)
-      url = this.globalData.FILE_SERVE_URL + filepath;
-    else url = this.globalData.FILE_SERVE_URL + "Attach/hr/" + filepath;
+    let url = this.globalData.FILE_SERVE_URL + UPLOAD_PATH.hr + filepath;
 
-    this.fileService.download1(url, target).subscribe((path) => {
+    this.fileService.download1(url, filepath).subscribe((path) => {
       this.fileService.openFile(path).subscribe(() => {
         
       });
@@ -252,10 +254,8 @@ export class StaffFileMaintenanceBasicImfornation {
   addAffix() {
       this.fileService.uploadAffix(3).subscribe(data => {
         console.log(data, "上传成功");
-        let Data = JSON.parse(data.response).Data;
-        
-        this.attachLs.push({"filename": Data[0].OldName, "PathStr": Data[0].NewName});
-        // this.attName = Data[0].OldName;
+        let Data = JSON.parse(data.response).Data;        
+        this.attachLs.push({"filename": decodeURIComponent(Data[0].OldName), "PathStr": Data[0].NewName});
         // this.attNo = Data[0].AttNo;
     });
   }
@@ -263,10 +263,9 @@ export class StaffFileMaintenanceBasicImfornation {
   private photoAddSuc(data){
     let Data = JSON.parse(data.response).Data;
     this.baseForm.patchValue({"BasicPhoto": Data[0].NewName});
-    this.photoSrc = this.globalData.FILE_SERVE_URL + "images/hr/" + Data[0].NewName;
+    this.photoSrc = this.globalData.FILE_SERVE_URL + UPLOAD_PATH.hrImg + Data[0].NewName;
     console.log(Data[0].AttNo);
     // this.attName = Data[0].OldName;
-    // this.attNo = Data[0].AttNo;
   }
 
   private toArry(data){
@@ -274,7 +273,6 @@ export class StaffFileMaintenanceBasicImfornation {
     for (let i in data){
       arr.push({"id": i, "name": data[i]});
     }
-    console.log(arr);
     return arr;
   }
 

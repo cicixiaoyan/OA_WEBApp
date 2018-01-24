@@ -6,27 +6,30 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{isWrite ? "添加培训维护" : "培训维护详情"}}</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>{{isWrite ? "添加培训维护" : "培训维护详情"}}</ion-title>
+        <ion-buttons end *ngIf="!readOnly">
+            <button ion-button [disabled]="writeForm.invalid" (click)="sent(writeForm.value)">保存</button>
+        </ion-buttons>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-    <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)">
+    <form [formGroup]="writeForm" (ngSubmit)="sent(writeForm.value)" [ngClass]="{'form-readonly': readOnly}">
         <div>
             <ion-list>
                 <ion-item>
-                    <ion-label stacked>课程主题</ion-label>
-                    <ion-input min-rows="1" formControlName="Topic" placeholder="请输入" ></ion-input>
+                    <ion-label stacked>课程主题<span class="optional">（必填）</span></ion-label>
+                    <ion-input min-rows="1" formControlName="Topic" placeholder="请输入"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label stacked>开始时间</ion-label>
-                    <ion-datetime placeholder="点击设置" formControlName="StartDate"  cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>
+                    <ion-label stacked>开始时间<span class="optional">（必填）</span></ion-label>
+                    <ion-datetime placeholder="点击设置" formControlName="StartDate" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>
                 </ion-item>
                 <ion-item>
-                    <ion-label stacked>结束时间</ion-label>
+                    <ion-label stacked>结束时间<span class="optional">（必填）</span></ion-label>
                     <ion-datetime placeholder="点击设置" formControlName="EndDate" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD hh:mm" pickerFormat="YYYY MM DD hh mm"></ion-datetime>
                 </ion-item>
                 <ion-item>
@@ -38,7 +41,7 @@
                     <ion-input type="text" formControlName="Trainingunit" placeholder="培训单位"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label stacked>培训讲师</ion-label>
+                    <ion-label stacked>培训讲师<span class="optional">（必填）</span></ion-label>
                     <ion-input type="text" formControlName="Teacher" placeholder="培训讲师"></ion-input>
                 </ion-item>
                 <ion-item>
@@ -51,10 +54,6 @@
                     <ion-input type="text" formControlName="Content" placeholder="请输入"></ion-input>
                 </ion-item>
             </ion-list>
-            <div padding text-center>
-                <button ion-button type="submit" color="danger" [disabled]="!writeForm.valid">保存</button>
-                <button ion-button clear small navPop>返回</button>
-            </div>
         </div>
     </form>
 </ion-content>

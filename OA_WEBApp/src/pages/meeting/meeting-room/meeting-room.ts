@@ -24,7 +24,7 @@ export class MeetingRoomPage {
               private modalCtrl: ModalController,
               private meetingService: MeetingService) {
       this.data = {
-        "PageIndex": 1,
+        "PageIndex": 0,
         "PageSize": 20,
         "Uid": this.meetingService.httpService.globalData.Uid
       };

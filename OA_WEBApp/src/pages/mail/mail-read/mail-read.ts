@@ -16,7 +16,6 @@ import { MailService } from '../mailService';
 })
 export class MailRead {
     @ViewChild(Content) content: Content;
-    mailContent: string = ""; // 消息内容
     mailDetail: any = {};
     isInbox: boolean = true; // 默认为收件箱详情
     constructor(public navCtrl: NavController,

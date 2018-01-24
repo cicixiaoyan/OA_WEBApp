@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 import { Response } from "@angular/http";
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { HttpService } from '../../../../providers/HttpService';
-
+import { NativeService } from '../../../../providers/NativeService';
 @IonicPage()
 @Component({
     selector: 'page-contract-choose',
@@ -24,7 +23,7 @@ export class ContractChoosePage {
 
     constructor(private navParams: NavParams,
                 public viewCtrl: ViewController,
-                public storage: Storage,
+                private nativeService: NativeService,
                 public httpService: HttpService) {
         this.HtID = this.navParams.get("HtID");
         this.initializeItems();
@@ -36,55 +35,51 @@ export class ContractChoosePage {
             .subscribe((resJson) => {
                 if (resJson.Result) {
                     this.deptItems = resJson.Data;
+                }else{
+                    
+                    this.nativeService.showToast(resJson.Data);
                 }
             });
         this.search();
     }
 
-    getItems(ev) {
-        // Reset items back to all of the items
-        this.initializeItems();
-
-        // set val to the value of the ev target
-        let val = ev.target.value;
-        this.name = val;
-        // if the value is an empty string don't filter the items
-        // if (val && val.trim() != '') {
-        //   this.items = this.items.filter((item) => {
-        //     return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-        //   });
-        // }
-    }
-
     getRecipientsByDept(id?) {
-        let data = !!id ? { "deptId": id } : {};
+        let data = !!id ? { "deptid": id,  "verb": 5 } : { "verb": 5};
         let that = this;     
         this.httpService.postFormData("ashx/hrcontract.ashx", data)
             .map((res: Response) => res.json())
-            .subscribe((result) => {
-                console.log(result);
-                this.items = result.map(function(value, index) {
-                    if (value.HtID == that.HtID) Object.assign(value, { checked: true });
-                    else Object.assign(value, { checked: false });
-                    return value;
-                });
+            .subscribe((resJson) => {
+                if (resJson.Result) {
+                    console.log(resJson);
+                    this.items = resJson.Data.map(function (value, index) {
+                        if (value.HtID == that.HtID) Object.assign(value, { checked: true });
+                        else Object.assign(value, { checked: false });
+                        return value;
+                    });
+                }else{
+                    this.items = [];
+                    this.nativeService.showToast(resJson.Data);
+                }
             });
     }
 
     search() {
         console.log('change');
         let that = this;       
-        let data = (this.name !== "") ? {name: name} : {};
-        this.httpService.postFormData("ashx/UserSheet.ashx", data)
+        let data = (this.name != "") ? {"xm": name, "verb": 5} : {"verb": 5};
+        this.httpService.postFormData("ashx/hrcontract.ashx", data)
         .map((res: Response) => res.json())
-        .subscribe((result) => {
-            console.log(result);
-            if (result.Result){
-                this.items = result.map(function(value, index) {
+        .subscribe((resJson) => {
+            console.log(resJson);
+            if (resJson.Result){
+                this.items = resJson.Data.map(function(value, index) {
                     if (value.HtID == that.HtID) Object.assign(value, { checked: true });
                     else Object.assign(value, { checked: false });
                     return value;
                 });
+            }else{
+                this.items = [];
+                this.nativeService.showToast(resJson.Data);
             }
         });
     }

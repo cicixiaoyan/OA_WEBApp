@@ -43,7 +43,7 @@ export class StaffFileMaintenanceEducation {
   }
 
   delete(i){
-    this.staffFileMaintenanceService.sociologyDel({"id": this.list[i].EduID}).subscribe(resJson => {
+    this.staffFileMaintenanceService.EduDel({"id": this.list[i].EduID}).subscribe(resJson => {
       if (resJson.Result){
         this.nativeService.showToast("删除成功", 800);
         this.list.splice(i, 1);

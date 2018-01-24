@@ -1,8 +1,5 @@
-/**
- * Created by yanxiaojun on 2017/4/13.
- */
 import { Injectable } from '@angular/core';
-
+import { APP_SERVE_URL } from "./Constants";
 @Injectable()
 export class GlobalData {
 
@@ -10,7 +7,7 @@ export class GlobalData {
     private _Name: string;
     private _token: string;
 
-    private _APP_SERVE_URL: string = "http://192.168.0.225:55555/";
+    private _APP_SERVE_URL: string = APP_SERVE_URL;
     private _FILE_SERVE_URL: string = this._APP_SERVE_URL;
     private _APP_VERSION_SERVE_URL: string = this._APP_SERVE_URL;
 

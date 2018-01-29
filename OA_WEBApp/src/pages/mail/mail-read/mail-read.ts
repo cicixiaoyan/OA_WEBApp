@@ -3,6 +3,10 @@ import { IonicPage, NavController, ModalController, NavParams } from 'ionic-angu
 import { Content } from 'ionic-angular';
 import { NativeService } from "../../../providers/NativeService";
 import { MailService } from '../mailService';
+import { GlobalData } from '../../../providers/GlobalData';
+import { UPLOAD_PATH } from "../../../providers/Constants";
+import { FileService } from '../../../providers/FileService';
+
 /**
  * Generated class for the MailRead page.
  *
@@ -16,11 +20,15 @@ import { MailService } from '../mailService';
 })
 export class MailRead {
     @ViewChild(Content) content: Content;
-    mailDetail: any = {};
+    mailDetail: any = {
+        AttachLs: []
+    };
     isInbox: boolean = true; // 默认为收件箱详情
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
+                public globalData: GlobalData,
                 private nativeService: NativeService,
+                private fileService: FileService,
                 private modalCtrl: ModalController,
                 private mailService: MailService) {
         this.isInbox = this.navParams.get("MailStatus") == this.mailService.status["inbox"];
@@ -36,7 +44,7 @@ export class MailRead {
         this.mailService.read(data).subscribe((resJson) => {
             if (resJson.Result && resJson.Data.length != 0){
                 this.mailDetail = resJson.Data[0];
-                this.mailDetail.Name = this.mailDetail.Name.split(":")[1];
+                // this.mailDetail.Name = this.mailDetail.Name.split(":")[1];
             }
         });
     }
@@ -58,7 +66,14 @@ export class MailRead {
         });
     }
 
-    download(Path, name) {
-        this.nativeService.download(Path, name);
+    download(path, name) {
+        // const target = path.split("/").pop();
+        // let url = "http://192.168.0.49:789/Attach/flow/Work/201111302315473908417.pdf";
+        let url = this.globalData.FILE_SERVE_URL + UPLOAD_PATH.mail + path;
+        this.fileService.download1(url, path).subscribe((path) => {
+          this.fileService.openFile(path).subscribe(() => {
+            
+          });
+        });
     }
 }

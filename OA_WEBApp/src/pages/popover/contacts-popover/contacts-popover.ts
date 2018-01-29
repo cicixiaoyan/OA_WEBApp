@@ -26,7 +26,7 @@ export class ContactsPopoverPage {
   haveAffix: boolean = false;
   addressee: string;
   addresseeIds: string;
-  name: string;
+  name: string = "";
 
   constructor(private navParams: NavParams,
               public viewCtrl: ViewController,
@@ -94,7 +94,7 @@ export class ContactsPopoverPage {
   }
 
   search() {
-      let data = (this.name !== "") ? {name: this.name} : {};
+      let data = (this.name !== "") ? {name: this.name.trim()} : {};
       this.httpService.postFormData("ashx/UserSheet.ashx", data)
       .map((res: Response) => res.json())
       .subscribe((result) => {

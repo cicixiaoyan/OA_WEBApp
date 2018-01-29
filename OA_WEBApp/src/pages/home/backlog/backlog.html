@@ -9,7 +9,7 @@
         <ion-title>待办事项</ion-title>
     </ion-navbar> -->
     <ion-toolbar>
-        <ion-segment [(ngModel)]="work" (ngModelChange)="doRefresh()">
+        <ion-segment [(ngModel)]="work" (click)="doRefresh(null)">
             <ion-segment-button value="notDone">
                 未办理
             </ion-segment-button>

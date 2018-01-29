@@ -166,7 +166,9 @@ export class Account {
     // }
 
     signOut(){
-        this.storage.clear(); // 清除缓存
+        // this.storage.clear(); // 清除缓存
+        this.storage.remove("LoginInfo");
+        this.storage.remove("UserInfo");
         Utils.sessionStorageClear(); // 清除数据缓存
         let modal = this.modalCtrl.create("LoginPage");
         modal.present();

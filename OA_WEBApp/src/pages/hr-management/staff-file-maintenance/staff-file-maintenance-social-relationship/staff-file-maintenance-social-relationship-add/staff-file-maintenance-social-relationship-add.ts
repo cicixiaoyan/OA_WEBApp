@@ -26,8 +26,8 @@ export class StaffFileMaintenanceSocialRelationshipAddPage {
               private staffFileMaintenanceService: StaffFileMaintenanceService,
               private formBuilder: FormBuilder,
               private viewCtrl: ViewController) {
-      this.item = this.navParams.get("item") || {};
-      this.readOnly = this.item == {} ? false : true;
+      this.item = this.navParams.get("item");
+      this.readOnly = !!this.item ? true : false;
       this.id = this.navParams.get("id");
   
 
@@ -45,18 +45,7 @@ export class StaffFileMaintenanceSocialRelationshipAddPage {
       });
       this.formCtrls = this.addForm.controls;
       if (this.readOnly){
-        this.addForm.patchValue({
-          "SociologyName": this.item.SociologyName, // 姓名
-          "SociologyAge": this.item.SociologyAge, // 年龄
-          "SociologyDeptName": this.item.SociologyDeptName, // 部门
-          "SociologyDuty": this.item.SociologyDuty,  // 职务
-          "SociologyOutlook": this.item.SociologyOutlook,  // 政治面貌
-          "SociologyByRelation": this.item.SociologyByRelation,  // 与本人关系
-          "SociologyUnit": this.item.SociologyUnit,  // 工作单位
-          "SociologyContacNum": this.item.SociologyContacNum,  // 联系电话
-          "SociologyEmergency": this.item.SociologyEmergency,  // 是否为紧急联系人
-          "SociologyMemo": this.item.SociologyMemo, // 备注
-        });
+        this.addForm.patchValue(this.item);
       }
   }
 

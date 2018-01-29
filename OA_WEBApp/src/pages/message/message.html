@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-toolbar>
-        <ion-segment [(ngModel)]="box" (ngModelChange)="doRefresh(null)">
+        <ion-segment [(ngModel)]="box" (click)="doRefresh(null)">
             <ion-segment-button value="inbox">
                 收消息
             </ion-segment-button>

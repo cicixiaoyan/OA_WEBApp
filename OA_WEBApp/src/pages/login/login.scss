@@ -10,7 +10,7 @@ page-login {
             padding: 0 2rem;
         }
         .login-top {
-            padding: 5rem 0 7rem;
+            padding: 2em 0 4em;
             background: transparent;
             text-align: center;
             img {
@@ -58,4 +58,8 @@ page-login {
     // input[type=file] {
     //     opacity: 0;
     // }
+}
+
+.small-text {
+    font-size: 1.4rem!important;
 }

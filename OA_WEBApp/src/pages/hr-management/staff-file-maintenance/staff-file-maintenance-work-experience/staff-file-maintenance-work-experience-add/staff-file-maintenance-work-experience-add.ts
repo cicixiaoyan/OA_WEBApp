@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { StaffFileMaintenanceService } from '../../staff-file-maintenance-service';
 import { NativeService } from '../../../../../providers/NativeService';
-
+import { Utils } from '../../../../../providers/Utils';
 @IonicPage()
 @Component({
   selector: 'page-staff-file-maintenance-work-experience-add',
@@ -15,13 +15,15 @@ export class StaffFileMaintenanceWorkExperienceAdd {
   readOnly: boolean = false;
   id: string = "";
   formCtrls: any;
+  item: any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private staffFileMaintenanceService: StaffFileMaintenanceService,
               private formBuilder: FormBuilder,
               private nativeService: NativeService,
               private viewCtrl: ViewController) {
-      this.readOnly = this.navParams.get("readOnly") ? true : false;
+      this.item =  this.navParams.get("item"); 
+      this.readOnly = !!this.item ? true : false;
       this.id = this.navParams.get("id");
 
       this.addForm = this.formBuilder.group({
@@ -33,7 +35,16 @@ export class StaffFileMaintenanceWorkExperienceAdd {
         "ExpMemo": ["", [Validators.maxLength(180)]],
       });
       this.formCtrls = this.addForm.controls;
-
+      if (this.readOnly){
+        this.addForm.patchValue({
+          "ExpStartDate": Utils.dateFormat(new Date(this.item.ExpStartDate), 'yyyy-MM-dd'),
+          "ExpEndDate": Utils.dateFormat(new Date(this.item.ExpEndDate), 'yyyy-MM-dd'),
+          "ExpDeptName": this.item.ExpDeptName,
+          "ExpDuty": this.item.ExpDuty,
+          "ExpUnit": this.item.ExpUnit,
+          "ExpMemo": this.item.ExpMemo,
+        });
+      }
   }
 
   ionViewDidLoad() {

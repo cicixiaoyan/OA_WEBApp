@@ -2,7 +2,7 @@
 // export const FILE_SERVE_URL = 'http://88.128.18.144:3333/';
 
 /*----------------------------------------后台Api地址----------------------------------------*/
-export const APP_SERVE_URL = 'http://192.168.0.225:55555/'; // 'http://192.168.0.49:789/';
+export const APP_SERVE_URL = 'http://221.237.158.212:55555/'; // 'http://192.168.0.49:789/';
 
 /*----------------------------------------文件服务器地址----------------------------------------*/
 export const FILE_SERVE_URL = APP_SERVE_URL; // 文件服务:测试环境
@@ -14,6 +14,7 @@ export const UPLOAD_PATH = {
   "hr": "Attach/hr/",
   "work": "Attach/flow/work/",
   "mail": "Attach/portal/yj/",
+  "announcement": "Attach/portal/gg/",
 };
 
 export const IS_DEBUG = true; // 是否开发(调试)模式

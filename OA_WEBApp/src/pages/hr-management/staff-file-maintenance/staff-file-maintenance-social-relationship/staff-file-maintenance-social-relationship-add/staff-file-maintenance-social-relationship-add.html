@@ -17,7 +17,7 @@
     <form [formGroup]="addForm" (ngSubmit)="save(addForm.value)" [ngClass]="{'form-readonly': readOnly}">
         <ion-list style="position:relative;">
             <ion-item>
-                <ion-label>姓名</ion-label>
+                <ion-label>姓名<span class="optional">（必填）</span></ion-label>
                 <ion-input text-right type="text" formControlName="SociologyName" placeholder="输入姓名"></ion-input>
             </ion-item>
             <div class="validation-failed" *ngIf="formCtrls.SociologyName.invalid && (formCtrls.SociologyName.touched || formCtrls.SociologyName.dirty )">
@@ -25,28 +25,28 @@
                 <div *ngIf="addForm.hasError('maxlength', 'SociologyName')">最多输入14个字</div>
             </div>
             <ion-item>
-                <ion-label>年龄<span class="optional">（选填）</span></ion-label>
+                <ion-label>年龄</ion-label>
                 <ion-input text-right type="number" formControlName="SociologyAge" placeholder="输入年龄(单位：岁)"></ion-input>
             </ion-item>
             <div class="validation-failed" *ngIf="formCtrls.SociologyAge.invalid && (formCtrls.SociologyAge.touched || formCtrls.SociologyAge.dirty )">
                 最大可输入150
             </div>
             <ion-item>
-                <ion-label>部门<span class="optional">（选填）</span></ion-label>
+                <ion-label>部门</ion-label>
                 <ion-input text-right type="text" formControlName="SociologyDeptName" placeholder="输入部门名称"></ion-input>
             </ion-item>
             <div class="validation-failed" *ngIf="formCtrls.SociologyDeptName.invalid && (formCtrls.SociologyDeptName.touched || formCtrls.SociologyDeptName.dirty )">
                 最多输入20个字
             </div>
             <ion-item>
-                <ion-label>职务<span class="optional">（选填）</span></ion-label>
+                <ion-label>职务</ion-label>
                 <ion-input text-right type="text" formControlName="SociologyDuty" placeholder="输入职务名称"></ion-input>
             </ion-item>
             <div class="validation-failed" *ngIf="formCtrls.SociologyDuty.invalid && (formCtrls.SociologyDuty.touched || formCtrls.SociologyDuty.dirty )">
                 最多输入30个字
             </div>
             <ion-item>
-                <ion-label>政治面貌<span class="optional">（选填）</span></ion-label>
+                <ion-label>政治面貌</ion-label>
                 <ion-select formControlName="SociologyOutlook" cancelText="取消" okText="确定" placeholder="请选择">
                     <ion-option value="党员">党员</ion-option>
                     <ion-option value="中共党员">中共党员</ion-option>
@@ -59,7 +59,7 @@
                 </ion-select>
             </ion-item>
             <ion-item>
-                <ion-label>与本人关系</ion-label>
+                <ion-label>与本人关系<span class="optional">（必填）</span></ion-label>
                 <ion-input text-right type="text" formControlName="SociologyByRelation" placeholder="请输入关系"></ion-input>
             </ion-item>
             <div class="validation-failed" *ngIf="formCtrls.SociologyByRelation.invalid && (formCtrls.SociologyByRelation.touched || formCtrls.SociologyByRelation.dirty )">
@@ -67,28 +67,28 @@
                 <div *ngIf="addForm.hasError('maxlength', 'SociologyByRelation')">最多输入11个字</div>
             </div>
             <ion-item>
-                <ion-label>工作单位<span class="optional">（选填）</span></ion-label>
+                <ion-label>工作单位</ion-label>
                 <ion-input text-right type="text" formControlName="SociologyUnit" placeholder="输入工作单位"></ion-input>
             </ion-item>
             <div class="validation-failed" *ngIf="formCtrls.SociologyUnit.invalid && (formCtrls.SociologyUnit.touched || formCtrls.SociologyUnit.dirty )">
                 最多输入30个字
             </div>
             <ion-item>
-                <ion-label>联系电话</ion-label>
+                <ion-label>联系电话<span class="optional">（必填）</span></ion-label>
                 <ion-input text-right type="text" formControlName="SociologyContacNum" placeholder="输入联系电话"></ion-input>
             </ion-item>
             <div class="validation-failed" *ngIf="formCtrls.SociologyContacNum.invalid && (formCtrls.SociologyContacNum.touched || formCtrls.SociologyContacNum.dirty )">
                 请输入合法的电话号码
             </div>
             <ion-item>
-                <ion-label>紧急联系人</ion-label>
+                <ion-label>紧急联系人<span class="optional">（必填）</span></ion-label>
                 <ion-select formControlName="SociologyEmergency" cancelText="取消" okText="确定" placeholder="请选择">
                     <ion-option value="是">是</ion-option>
                     <ion-option value="否">否</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
-                <ion-label>备注<span class="optional">（选填）</span></ion-label>
+                <ion-label>备注</ion-label>
                 <ion-textarea text-right formControlName="SociologyMemo" placeholder="请输入备注"></ion-textarea>
             </ion-item>
             <div class="validation-failed" *ngIf="formCtrls.SociologyMemo.invalid && (formCtrls.SociologyMemo.touched || formCtrls.SociologyMemo.dirty )">

@@ -97,31 +97,33 @@ export class Mail {
     }
 
     doRefresh(refresher: Refresher) {
-        console.log("加载更多");
+        console.log("刷新页面", this.canclick);
         if (!this.canclick){
             // this.box = this.box === "inbox" ? "outbox" : "intbox";
             console.log("不能点击");
-            return this.nativeService.showToast("点击太快了，请稍后！！！", 800);
+            this.box = this.data.MailStatus == this.mailService.mailStatus["inbox"] ? "inbox" : "outbox";
+            this.nativeService.showToast("点击太快了，请稍后！！！", 800);
         }else{
             console.log("可以点击");
+            this.moredata = true;
+            this.canclick = false;
+            this.list = [];
+            this.data.PageIndex = 0;
+
+            if (this.box === "inbox") {
+                this.data.MailStatus = this.mailService.mailStatus["inbox"];
+            } else {
+                this.data.MailStatus = this.mailService.mailStatus["outbox"];
+            }
+            this._getList(this.data);
         }
 
-        this.moredata = true;
-        this.canclick = false;
-        this.list = [];
-        this.data.PageIndex = 0;
-
-        if (this.box === "inbox") {
-            this.data.mailStatus = this.mailService.mailStatus["inbox"];
-        } else {
-            this.data.mailStatus = this.mailService.mailStatus["outbox"];
-        }
-        this._getList(this.data);
+        
         setTimeout(() => {
             console.log('数据加载完成');
             this.canclick = true;
             refresher && refresher.complete();
-        }, 1000);
+        }, 2000);
     }
 
     doInfinite(): Promise<any> {

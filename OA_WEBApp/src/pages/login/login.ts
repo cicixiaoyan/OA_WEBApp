@@ -51,8 +51,8 @@ export class LoginPage {
         });
 
         this.loginForm = this.formBuilder.group({
-            UserName: ['admin', [Validators.required, Validators.minLength(3)]], // 第一个参数是默认值
-            UserPass: ['1234', [Validators.required, Validators.minLength(2)]]
+            UserName: ['', [Validators.required, Validators.minLength(3)]], // 第一个参数是默认值
+            UserPass: ['', [Validators.required, Validators.minLength(2)]]
         });
     }
 
@@ -161,12 +161,14 @@ export class LoginPage {
               {
                 text: '取消',
                 role: 'cancel',
+                cssClass: 'small-text',
                 handler: data => {
                   console.log('Cancel clicked');
                 }
               },
               {
                 text: '恢复默认',
+                cssClass: 'small-text',
                 handler: data => {
                     this.globalData.APP_SERVE_URL = APP_SERVE_URL;
                     this.globalData.APP_VERSION_SERVE_URL = APP_SERVE_URL;
@@ -176,6 +178,7 @@ export class LoginPage {
               },
               {
                 text: '确认',
+                cssClass: 'small-text',
                 handler: data => {
                     this.globalData.APP_SERVE_URL = data.ip;
                     this.globalData.APP_VERSION_SERVE_URL = data.ip;

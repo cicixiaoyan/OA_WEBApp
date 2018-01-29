@@ -16,13 +16,13 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 
 declare var AppMinimize;
 
-export interface PageInterface {
-    title: string;
-    component: any;
-    icon: string;
-    index?: number;
-    tab1Component?: any;
-}
+// export interface PageInterface {
+//     title: string;
+//     component: any;
+//     icon: string;
+//     index?: number;
+//     tab1Component?: any;
+// }
 
 @Component({
     templateUrl: 'app.html'
@@ -32,17 +32,17 @@ export class MyApp {
     photo: any = "assets/img/boy.png";
 
     // set our app's pages
-    appPages: PageInterface[] = [
-        { title: '首页', component: "TabsPage", index: 0, icon: 'calendar' },
-        { title: '消息', component: "TabsPage", index: 1, icon: 'ios-mail' },
-        { title: '通讯录', component: "TabsPage", index: 4, icon: 'md-call', tab1Component: "Contacts" },
-        { title: '公告管理', component: "TabsPage", index: 6, icon: 'ios-notifications', 
-        tab1Component: "AnnouncementPage" },
-        // { title: '新建工作', component: TabsPage, index: 5, icon: 'md-exit', tab1Component: Newwork },
-        { title: '待办事项', component: "TabsPage", index: 2, icon: 'ios-calendar' }
-        // ,{ title: '设置', component: TabsPage, index: 3, icon: 'ios-cog'},
-        // { title: '登陆', component: LoginPage, index: 7, icon: 'contacts' }
-    ];
+    // appPages: PageInterface[] = [
+    //     { title: '首页', component: "TabsPage", index: 0, icon: 'calendar' },
+    //     { title: '消息', component: "TabsPage", index: 1, icon: 'ios-mail' },
+    //     { title: '通讯录', component: "TabsPage", index: 4, icon: 'md-call', tab1Component: "Contacts" },
+    //     { title: '公告管理', component: "TabsPage", index: 6, icon: 'ios-notifications', 
+    //     tab1Component: "AnnouncementPage" },
+    //     // { title: '新建工作', component: TabsPage, index: 5, icon: 'md-exit', tab1Component: Newwork },
+    //     { title: '待办事项', component: "TabsPage", index: 2, icon: 'ios-calendar' }
+    //     // ,{ title: '设置', component: TabsPage, index: 3, icon: 'ios-cog'},
+    //     // { title: '登陆', component: LoginPage, index: 7, icon: 'contacts' }
+    // ];
 
     rootPage: string = "TabsPage";
     backButtonPressed: boolean = false;
@@ -71,9 +71,11 @@ export class MyApp {
             this.jpushOpenNotification(); // 
             this.helper.setTags();
             this.storage.get("ip").then(data => {
-                this.globalData.APP_SERVE_URL = data;
-                this.globalData.APP_VERSION_SERVE_URL = data;
-                this.globalData.FILE_SERVE_URL = data;
+                if (!!data){
+                    this.globalData.APP_SERVE_URL = data;
+                    this.globalData.APP_VERSION_SERVE_URL = data;
+                    this.globalData.FILE_SERVE_URL = data;
+                }
             });
             // this.helper.setAlias("admin");
             // this.storage.get('firstIn').then((result) => {
@@ -138,39 +140,42 @@ export class MyApp {
 
     }
 
-    openPage(page: PageInterface) {
-        this.menu.close();
+    // openPage(page: PageInterface) {
+    //     this.menu.close();
 
-        if (page.index) {
-            if (page.tab1Component) {
-                // let tabs = this.nav.getActiveChildNav();
-                // let tab = tabs.getSelected();
-                // console.log(tab);
+    //     if (page.index) {
+    //         if (page.tab1Component) {
+    //             // let tabs = this.nav.getActiveChildNav();
+    //             // let tab = tabs.getSelected();
+    //             // console.log(tab);
                 
-                this.nav.setRoot(page.component, { tab1Component: page.tab1Component, tabIndex: page.index });
-            } else {
-                this.nav.setRoot(page.component, { tabIndex: page.index });
-            }
+    //             this.nav.setRoot(page.component, { tab1Component: page.tab1Component, tabIndex: page.index });
+    //         } else {
+    //             this.nav.setRoot(page.component, { tabIndex: page.index });
+    //         }
 
 
-        } else {
+    //     } else {
 
            
-            this.nav.setRoot(page.component).catch(() => {
-                console.log("Didn't set nav root");
-            });
-        }
+    //         this.nav.setRoot(page.component).catch(() => {
+    //             console.log("Didn't set nav root");
+    //         });
+    //     }
 
 
-    }
+    // }
 
     goTo(name) {
         this.menu.close();
         if (name == "edit") {
             this.nav.setRoot("TabsPage", { tabIndex: 3 });
         } else {
-            this.storage.clear(); // 清除缓存
+            // this.storage.clear(); // 清除缓存
             Utils.sessionStorageClear(); // 清除数据缓存
+            this.storage.remove("LoginInfo");
+            this.storage.remove("UserInfo");
+
             let modal = this.modalCtrl.create("LoginPage");
             modal.present();
             modal.onDidDismiss(data => {

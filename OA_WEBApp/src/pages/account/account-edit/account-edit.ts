@@ -3,14 +3,9 @@ import { IonicPage, NavController, NavParams, ActionSheetController, ModalContro
 import { UserInfo } from "../../../model/UserInfo";
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Storage } from '@ionic/storage';
-// import { LoginPage } from "../../login/login";
 import { HttpService } from '../../../providers/HttpService';
-/**
- * Generated class for the AccountEdit page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+import { Utils } from "../../../providers/Utils";
+
 @IonicPage()
 @Component({
     selector: 'page-account-edit',
@@ -33,7 +28,7 @@ export class AccountEdit {
         this.editForm = this.formBuilder.group({
             InDate: ['', [Validators.required, Validators.minLength(4)]], // 第一个参数是默认值
             Sex: ['男', [Validators.required, Validators.minLength(2)]],
-            BirthDate: ['', []],
+            BirthDate: [null, []],
             Mobile: [null, [Validators.minLength(11), Validators.maxLength(11)]],
             Mail: [null, [Validators.email]],
             WorkPhone: [null, [Validators.maxLength(11)]],
@@ -47,6 +42,8 @@ export class AccountEdit {
         this.storage.get("UserInfo").then((UserInfo) => {
             if (UserInfo){
                 this.userInfo = UserInfo;
+                this.userInfo.BirthDate = UserInfo.BirthDate !== "" ?
+                Utils.dateFormat(new Date(UserInfo.BirthDate), 'yyyy-MM-dd') : "";
             }else{
                 let modal = this.modalCtrl.create("LoginPage");
                 modal.present();

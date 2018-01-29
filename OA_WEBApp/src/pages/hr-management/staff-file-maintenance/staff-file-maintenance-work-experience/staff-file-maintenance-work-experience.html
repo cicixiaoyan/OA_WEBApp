@@ -21,7 +21,7 @@
     <ion-list>
         <ion-item-sliding *ngFor="let item of list; index as i">
             <ion-item (click)="doRead(item)">
-                <h3>{{item.ExpStartDate}}~{{item.ExpEndDate | date: "yyyy-MM-dd"}}</h3>
+                <h3>{{item.ExpStartDate | date: "yyyy-MM-dd"}}&nbsp;~&nbsp;{{item.ExpEndDate | date: "yyyy-MM-dd"}}</h3>
                 <h2>{{item.ExpDuty}}</h2>
                 <p>{{item.ExpDeptName}}<span *ngIf="item.ExpUnit !== ''">&nbsp;|&nbsp;{{item.ExpUnit}}</span></p>
                 <p *ngIf="item.Remarks !== ''">备注：{{item.ExpMemo}}</p>

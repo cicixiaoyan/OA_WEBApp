@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Refresher } from 'ionic-angular';
 import { BacklogService } from "./backlogService";
 import { GlobalData } from '../../../providers/GlobalData';
+import { NativeService } from '../../../providers/NativeService';
 
 @IonicPage()
 @Component({
@@ -18,13 +19,16 @@ export class Backlog {
     data: any;
     isEmpty: boolean = false;
 
+    canclick: boolean = true;
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 public globalData: GlobalData,
+                private nativeService: NativeService,
                 private backlogService: BacklogService) {
     }
 
     ionViewWillEnter(){
+        this.work = "notDone";
         this.data = {
             "PageIndex": 0,
             "PageSize": 10,
@@ -40,18 +44,24 @@ export class Backlog {
     }
 
     doRefresh(refresher?: Refresher) {
-        // this.initializeItems();
-        this.moredata = true;
-        this.data.PageIndex = 0;
-        this.items = [];
-
-        this.data.Status = this.work === "notDone" ?
-            this.backlogService.Status["notdone"] :
-            this.backlogService.Status["done"];
-
-        this.getList(this.data);
+        if (!this.canclick){
+            this.work = this.data.Status == this.backlogService.Status["notdone"] ? "notDone" : "done";
+            this.nativeService.showToast("点击太快了，请稍后！！！", 800);
+        }else{
+            this.canclick = false;
+            this.moredata = true;
+            this.data.PageIndex = 0;
+            this.items = [];
+    
+            this.data.Status = this.work === "notDone" ?
+                this.backlogService.Status["notdone"] :
+                this.backlogService.Status["done"];
+    
+            this.getList(this.data);
+        }
 
         setTimeout(() => {
+            this.canclick = true;
             refresher && refresher.complete();
         }, 1000);
         

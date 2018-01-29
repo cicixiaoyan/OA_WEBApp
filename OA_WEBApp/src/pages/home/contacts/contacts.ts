@@ -53,7 +53,7 @@ export class Contacts {
 
     search(refresher: Refresher, key) {
         this.initializeItems();
-        return this.httpService.postFormData("ashx/UserSheet.ashx", {"Name": key})
+        return this.httpService.postFormData("ashx/UserSheet.ashx", {"Name": key.trim()})
         .map(Response => Response.json())
         .subscribe((resJson) => {
             if (resJson.Result && resJson.Data.length !== 0 && typeof(resJson.Data) !== "string"){

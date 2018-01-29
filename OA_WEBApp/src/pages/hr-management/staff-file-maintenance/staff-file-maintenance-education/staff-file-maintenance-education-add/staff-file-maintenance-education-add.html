@@ -5,7 +5,7 @@
             <button ion-button (click)="dismiss()">返回</button>
         </ion-buttons>
         <ion-title>教育经历</ion-title>
-        <ion-buttons end>
+        <ion-buttons end *ngIf="!readOnly">
             <button ion-button [disabled]='addForm.invalid' (click)="save(addForm.value)">保存</button>
         </ion-buttons>
     </ion-navbar>
@@ -17,21 +17,21 @@
     <form [formGroup]="addForm" (ngSubmit)="save(addForm.value)" [ngClass]="{'form-readonly': readOnly}">
         <ion-list style="position:relative;">
             <ion-item>
-                <ion-label>开始时间</ion-label>
+                <ion-label>开始时间<span class="optional">（必填）{{!readOnly}}</span></ion-label>
                 <ion-datetime formControlName="EduStartDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
             </ion-item>
             <div class="validation-failed" *ngIf="formCtrls.EduStartDate.invalid && formCtrls.EduStartDate.touched">
                 开始时间必填
             </div>
             <ion-item>
-                <ion-label>结束时间</ion-label>
+                <ion-label>结束时间<span class="optional">（必填）</span></ion-label>
                 <ion-datetime formControlName="EduEndDate" placeholder="点击设置" cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
             </ion-item>
             <div class="validation-failed" *ngIf="formCtrls.EduEndDate.invalid && formCtrls.EduEndDate.touched">
                 结束时间必填
             </div>
             <ion-item>
-                <ion-label>学校/教育机构</ion-label>
+                <ion-label>学校/教育机构<span class="optional">（必填）</span></ion-label>
                 <ion-input text-right type="text" formControlName="EduMechanism" placeholder="输入学校名称"></ion-input>
             </ion-item>
             <div class="validation-failed" *ngIf="formCtrls.EduMechanism.invalid && (formCtrls.EduMechanism.touched || formCtrls.EduMechanism.dirty )">
@@ -39,7 +39,7 @@
                 <div *ngIf="addForm.hasError('maxlength', 'EduMechanism')">最多输入30个字</div>
             </div>
             <ion-item>
-                <ion-label>专业</ion-label>
+                <ion-label>专业<span class="optional">（必填）</span></ion-label>
                 <ion-input text-right type="text" formControlName="EduMajor" placeholder="输入专业名称"></ion-input>
             </ion-item>
             <div class="validation-failed" *ngIf="formCtrls.EduMajor.invalid && (formCtrls.EduMajor.touched || formCtrls.EduMajor.dirty )">
@@ -47,7 +47,7 @@
                 <div *ngIf="addForm.hasError('maxlength', 'EduMajor')">最多输入30个字</div>
             </div>
             <ion-item>
-                <ion-label>备注<span class="optional">（选填）</span></ion-label>
+                <ion-label>备注</ion-label>
                 <ion-textarea text-right formControlName="EduMmeo" placeholder="请输入备注"></ion-textarea>
             </ion-item>
             <div class="validation-failed" *ngIf="formCtrls.EduMmeo.invalid && (formCtrls.EduMmeo.touched || formCtrls.EduMmeo.dirty )">

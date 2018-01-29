@@ -34,6 +34,8 @@ export class MessagePage {
     }
 
     ionViewWillEnter() {
+        this.box = "inbox";
+        this.checkBtn = { "read": false, "unread": true };
         this.data = {
             "PageSize": 5,
             "PageIndex": 0,
@@ -99,29 +101,28 @@ export class MessagePage {
 
         if (!this.canclick) {
             // this.box = this.box === "inbox" ? "outbox" : "intbox";
-            console.log("不能点击");
+            console.log("不能点击", this.box);
+            this.box = this.data.NewsStatus == this.messageService.Message["inbox"] ? "inbox" : "outbox";
             return this.nativeService.showToast("点击太快了，请稍后！！！", 800);
         } else {
-            console.log("可以点击");
-        }
-        console.log("加载更多");
-        this.moredata = true;
-        this.data.PageIndex = 0;
-        this.list = [];
-        if (this.box === "inbox")
-        {
-            this.data.Status = this.messageService.messageStatus["unread"];
-            this.data.NewsStatus = this.messageService.Message["outbox"]; // 收件
-        }
-        else this.data.NewsStatus = this.messageService.Message["outbox"]; // 发件
+            this.moredata = true;
+            this.data.PageIndex = 0;
+            this.canclick = false;
+            this.list = [];
+            if (this.box === "inbox") {
+                // this.data.Status = this.messageService.messageStatus["unread"];
+                this.data.NewsStatus = this.messageService.Message["inbox"]; // 收件
+            }
+            else this.data.NewsStatus = this.messageService.Message["outbox"]; // 发件
 
-        this._getList(this.data);
+            this._getList(this.data);
 
-        setTimeout(() => {
-            console.log('数据加载完成');
-            this.canclick = true;
-            refresher && refresher.complete();
-        }, 1000);
+            setTimeout(() => {
+                console.log('数据加载完成');
+                this.canclick = true;
+                refresher && refresher.complete();
+            }, 2000);
+        }        
     }
 
     doInfinite(): Promise<any> {
@@ -150,8 +151,8 @@ export class MessagePage {
                 this.list = [...this.list, ...list];
             } else {
                 this.moredata = false;
-                if (this.list.PageIndex === 0) {
-                    this.messageService.httpService.nativeService.showToast(resJson.Data);
+                if (this.data.PageIndex === 0) {
+                    // this.messageService.httpService.nativeService.showToast(resJson.Data);
                     this.isEmpty = true;
                     this.list = [];
                 }

@@ -5,7 +5,7 @@ import { Component, Input  } from '@angular/core';
   template: `
     <div  text-center padding>
       <img src="assets/img/face/face3.png" style="max-width: 471px;width: 80%;">
-      <h4 class="text-ios-gray" padding>{{message}}</h4>
+      <div class="text-ios-gray" style="font-size:1.5rem" padding>{{message}}</div>
     </div>
   `
 })

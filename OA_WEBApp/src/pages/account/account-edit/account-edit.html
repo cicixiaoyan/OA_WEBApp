@@ -1,9 +1,3 @@
-<!--
-  Generated template for the AccountEdit page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
     <ion-navbar>
@@ -17,57 +11,57 @@
     <form [formGroup]="editForm" (ngSubmit)="edit(editForm.value)">
         <ion-list>
             <ion-item>
-                <ion-label stacked>编码</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.Uid" [ngModelOptions]="{standalone: true}" placeholder="请输入编码" disabled></ion-input>
+                <ion-label>编码</ion-label>
+                <ion-input text-right type="text" [(ngModel)]="userInfo.Uid" [ngModelOptions]="{standalone: true}" placeholder="请输入编码" disabled></ion-input>
             </ion-item>
             <ion-item>
-                <ion-label stacked>姓名</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.Name" [ngModelOptions]="{standalone: true}" placeholder="请输入姓名" disabled></ion-input>
+                <ion-label>姓名</ion-label>
+                <ion-input text-right type="text" [(ngModel)]="userInfo.Name" [ngModelOptions]="{standalone: true}" placeholder="请输入姓名" disabled></ion-input>
             </ion-item>
             <ion-item>
-                <ion-label stacked>公司</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.Company" [ngModelOptions]="{standalone: true}" placeholder="公司名称" disabled></ion-input>
+                <ion-label>公司</ion-label>
+                <ion-input text-right type="text" [(ngModel)]="userInfo.Company" [ngModelOptions]="{standalone: true}" placeholder="公司名称" disabled></ion-input>
             </ion-item>
             <ion-item>
-                <ion-label stacked>部门</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.Dept" [ngModelOptions]="{standalone: true}" placeholder="部门名称" disabled></ion-input>
+                <ion-label>部门</ion-label>
+                <ion-input text-right type="text" [(ngModel)]="userInfo.Dept" [ngModelOptions]="{standalone: true}" placeholder="部门名称" disabled></ion-input>
             </ion-item>
             <ion-item>
-                <ion-label stacked>职位</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.Duty" [ngModelOptions]="{standalone: true}" placeholder="职位" disabled></ion-input>
+                <ion-label>职位</ion-label>
+                <ion-input text-right type="text" [(ngModel)]="userInfo.Duty" [ngModelOptions]="{standalone: true}" placeholder="职位" disabled></ion-input>
             </ion-item>
             <ion-item>
-                <ion-label stacked>入职时间</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.InDate" formControlName="InDate" placeholder="入职时间" disabled></ion-input>
+                <ion-label>入职时间</ion-label>
+                <ion-input text-right type="text" [(ngModel)]="userInfo.InDate" formControlName="InDate" placeholder="入职时间" disabled></ion-input>
             </ion-item>
             <ion-item (click)="checkSex()">
-                <ion-label stacked>性别</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.Sex" formControlName="Sex" placeholder="性别"></ion-input>
+                <ion-label>性别</ion-label>
+                <ion-input text-right type="text" [(ngModel)]="userInfo.Sex" formControlName="Sex" placeholder="性别"></ion-input>
             </ion-item>
             <ion-item>
-                <ion-label stacked>出生日期</ion-label>
+                <ion-label>出生日期</ion-label>
                 <ion-datetime [(ngModel)]="userInfo.BirthDate" placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="BirthDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label>移动电话</ion-label>
-                <ion-input type="number" [(ngModel)]="userInfo.Mobile" formControlName="Mobile" placeholder="移动电话"></ion-input>
+                <ion-input text-right type="number" [(ngModel)]="userInfo.Mobile" formControlName="Mobile" placeholder="移动电话"></ion-input>
             </ion-item>
             <div *ngIf="!editForm.controls.Mobile.valid && editForm.controls.Mobile.touched" class="validation-failed">请输入合法的电话号码</div>
 
             <ion-item>
                 <ion-label>电子邮箱</ion-label>
-                <ion-input type="text" [(ngModel)]="userInfo.Mail" formControlName="Mail" placeholder="电子邮箱"></ion-input>
+                <ion-input text-right type="text" [(ngModel)]="userInfo.Mail" formControlName="Mail" placeholder="电子邮箱"></ion-input>
             </ion-item>
             <div *ngIf="!editForm.controls.Mail.valid && editForm.controls.Mail.touched" class="validation-failed">请输入正确的电子邮箱</div>
 
             <ion-item>
                 <ion-label>办公电话</ion-label>
-                <ion-input type="number" [(ngModel)]="userInfo.WorkPhone" formControlName="WorkPhone" placeholder="办公电话"></ion-input>
+                <ion-input text-right type="number" [(ngModel)]="userInfo.WorkPhone" formControlName="WorkPhone" placeholder="办公电话"></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label>内线电话</ion-label>
-                <ion-input type="number" [(ngModel)]="userInfo.InlinePhone" formControlName="InlinePhone" placeholder="内线电话"></ion-input>
+                <ion-input text-right type="number" [(ngModel)]="userInfo.InlinePhone" formControlName="InlinePhone" placeholder="内线电话"></ion-input>
             </ion-item>
 
         </ion-list>

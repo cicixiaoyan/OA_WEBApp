@@ -13,8 +13,8 @@
             <div>
                 <ion-item #popoverContent (click)="!readOnly && checkPeople($event)">
                     <ion-label>工号</ion-label>
-                    <ion-note *ngIf="readOnly" item-end>{{baseForm.value.StaffNumber || '无'}}</ion-note>
-                    <ion-note *ngIf="!readOnly" item-end>{{baseForm.value.StaffNumber || '点击选择员工'}}</ion-note>
+                    <ion-note *ngIf="readOnly" item-end>{{baseForm.value.UserNum || '无'}}</ion-note>
+                    <ion-note *ngIf="!readOnly" item-end>{{baseForm.value.UserNum || '点击选择员工'}}</ion-note>
                     <!-- <ion-input styel='display:none' text-right readonly='true' formControlName="StaffNumber" ></ion-input> -->
                 </ion-item>
 

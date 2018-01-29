@@ -5,6 +5,7 @@ import { NativeService } from "../../../providers/NativeService";
 import { AnnouncementService } from '../announcementService';
 import { FileService } from "../../../providers/FileService";
 import { GlobalData } from "../../../providers/GlobalData";
+import { UPLOAD_PATH } from "../../../providers/Constants";
 
 /**
  * Generated class for the AnnouncementDetailPage page.
@@ -58,7 +59,7 @@ export class AnnouncementDetailPage {
   download(path, name) {
       // const target = path.split("/").pop();
       // let url = "http://192.168.0.49:789/Attach/flow/Work/201111302315473908417.pdf";
-      let url = this.globalData.FILE_SERVE_URL + "Attach/flow/Work/" + path;
+      let url = this.globalData.FILE_SERVE_URL + UPLOAD_PATH.announcement + path;
       this.fileService.download1(url, path).subscribe((path) => {
         this.downloaded = true;
         this.fileService.openFile(path).subscribe(() => {

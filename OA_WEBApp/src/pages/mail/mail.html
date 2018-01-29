@@ -11,7 +11,7 @@
                 <ion-icon name="menu"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-segment [(ngModel)]="box" (ngModelChange)="doRefresh(null)">
+        <ion-segment [(ngModel)]="box" (click)="doRefresh(null)">
             <ion-segment-button value="inbox">
                 收件箱
             </ion-segment-button>
@@ -33,10 +33,10 @@
             <!-- <button ion-button small (click)="checkRead('all')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn.all}">全部</button> -->
         </div>
 
-        <!-- <div *ngSwitchCase="'outbox'">
+        <div *ngSwitchCase="'outbox'">
             <button ion-button small (click)="checkDraft()" class="button-ios-light" [ngClass]="{'button-ios-calm':!isDraft}">已发送</button>
-            <button ion-button small (click)="checkDraft(true)" class="button-ios-light" [ngClass]="{'button-ios-calm':isDraft}">草稿箱</button>
-        </div> -->
+            <!-- <button ion-button small (click)="checkDraft(true)" class="button-ios-light" [ngClass]="{'button-ios-calm':isDraft}">草稿箱</button> -->
+        </div>
     </div>
 
 </ion-header>

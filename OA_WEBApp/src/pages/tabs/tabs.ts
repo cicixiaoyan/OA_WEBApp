@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavParams, Platform, Events } from 'ionic-angular';
 import { Tabs } from "ionic-angular";
-import { BackButtonService } from "../../services/backButtonService";
+// import { BackButtonService } from "../../services/backButtonService";
 @IonicPage()
 @Component({
     templateUrl: 'tabs.html',
@@ -22,7 +22,8 @@ export class TabsPage {
 
     constructor(navParams: NavParams, private platform: Platform, 
                 public events: Events,
-                public backButtonService: BackButtonService) {
+                // public backButtonService: BackButtonService
+            ) {
         this.mySelectedIndex = navParams.data.tabIndex || 0;
         this.tab1Root = navParams.data.tab1Component || "Home";
         this.events.subscribe("message: badgechange", badge => {
@@ -32,9 +33,9 @@ export class TabsPage {
             this.todoBadge = badge || "";
         });
 
-        platform.ready().then(() => {
-            this.backButtonService.registerBackButtonAction(this.tabs);
-        });
+        // platform.ready().then(() => {
+        //     this.backButtonService.registerBackButtonAction(this.tabs);
+        // });
     }
 
 

@@ -1,0 +1,51 @@
+page-home-new {
+    .content-ios {
+        background: #eee;
+        font-size: 1.2rem;
+        .main-tab {
+            background: #fff;
+            margin-bottom: 1rem;
+            .row {
+                ion-col {
+                    text-align: center;
+                    .iconfont {
+                        display: block;
+                        color: aquamarine;
+                        font-size: 2.7rem;
+                        margin-bottom: 0.2rem;
+                    }
+                }
+            }
+        }
+        .sub-tab {
+            background: #fff;
+            .row {
+                margin-right: -5px;
+                margin-bottom: -1px;
+                ion-col {
+                    border: 1px solid #e6e6e6;
+                    margin-left: -1px;
+                    margin-top: -1px;
+                    text-align: center;
+                    padding: 1rem 0!important;
+                    .iconfont {
+                        display: block;
+                        color: aquamarine;
+                        font-size: 2.7rem;
+                        margin-bottom: 0.2rem;
+                    }
+                }
+            }
+        }
+        .list-ios {
+            margin-bottom: 2rem;
+            .label-ios {
+                color: #505050;
+                font-size: 1.4rem;
+            }
+        }
+        .list-ios:not([inset])+.list-ios:not([inset]) ion-list-header {
+            margin-top: -1rem;
+        }
+    }
+}

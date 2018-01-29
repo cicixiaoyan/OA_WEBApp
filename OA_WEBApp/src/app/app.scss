@@ -225,3 +225,9 @@ ion-footer>.button-ios {
 .click-label {
     flex: none;
 }
+
+.segment-ios .segment-button:hover:not(.segment-activated) {
+    background-color: #fff;
+    -webkit-transition: 100ms all linear;
+    transition: 100ms all linear;
+}

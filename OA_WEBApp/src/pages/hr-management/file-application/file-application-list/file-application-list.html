@@ -3,12 +3,8 @@
     <ion-navbar>
         <ion-title>档案申请查看</ion-title>
     </ion-navbar>
-    <div class="subbox">
-        <div>
-            <button ion-button small (click)="checkRead('审批中')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn['审批中']}">审批中</button>
-            <button ion-button small (click)="checkRead('已同意')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn['已同意']}">已同意</button>
-            <button ion-button small (click)="checkRead('已拒绝')" class="button-ios-light" [ngClass]="{'button-ios-calm':checkBtn['已拒绝']}">已拒绝</button>
-        </div>
+    <div>
+        <tab-slide (slideClick)="onSlideClick($event)" [slides]="pageSlides" [pageNumber]="3"></tab-slide>
     </div>
 </ion-header>
 
@@ -23,10 +19,10 @@
             <ion-item>
                 <ion-avatar item-start [ngClass]="{'success': (item.Status == '已同意'), 'danger': (item.Status == '已拒绝')}"><span>{{item.Status}}</span></ion-avatar>
                 <h2>{{item.UserName}}
-                  <small float-end	 class="text-ios-primary" *ngIf="item.ApprovalDate != ''"><em>{{item.ApprovalDate}}审</em></small>
+                    <small float-end class="text-ios-primary" *ngIf="item.ApprovalDate != ''"><em>{{item.ApprovalDate | getdatediff: false}}审</em></small>
                 </h2>
-                <h3 class="small">申请日期：{{item.ApplicationDate}}</h3>
-                <h3 class="small">查看日期: {{item.SelectDate || "未填写"}}</h3>
+                <h3 class="small">申请日期：{{item.ApplicationDate | getdatediff: false}}</h3>
+                <h3 class="small" *ngIf="item.SelectDate">查看日期: {{item.SelectDate | getdatediff: true}}</h3>
                 <p class='small'>理由：{{item.Reason}}</p>
             </ion-item>
         </ion-item-sliding>

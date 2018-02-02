@@ -1,0 +1,21 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>设置</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-list>
+        <ion-item (click)="pwdEdit()">
+            <ion-icon name='ios-unlock' color="assertive" item-left></ion-icon>
+            修改密码
+            <ion-icon name='ios-arrow-forward' item-right></ion-icon>
+        </ion-item>
+    </ion-list>
+    <div class="padding">
+        <button ion-button block color="assertive" (click)="signOut()">退出登录</button>
+    </div>
+</ion-content>

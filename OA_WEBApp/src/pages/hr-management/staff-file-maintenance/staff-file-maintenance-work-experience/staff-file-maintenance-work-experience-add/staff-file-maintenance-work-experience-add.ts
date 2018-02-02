@@ -55,8 +55,12 @@ export class StaffFileMaintenanceWorkExperienceAdd {
     this.viewCtrl.dismiss();
   }
 
-  save(value){
+  save(value1){
     // 提交
+    let value = Object.assign({}, value1);
+    value.ExpStartDate = Utils.dateFormat_zh(new Date(value.ExpStartDate), 'yyyy-MM-dd HH:mm:ss');
+    value.ExpEndDate = Utils.dateFormat_zh(new Date(value.ExpEndDate), 'yyyy-MM-dd HH:mm:ss');
+
     value.id = this.id;
     this.staffFileMaintenanceService.addWorkExp(value).subscribe(resJson => {
       if (resJson.Result){

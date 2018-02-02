@@ -1,7 +1,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>首页（新）</ion-title>
+        <ion-title>首页</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -10,78 +10,41 @@
 <ion-content>
     <ion-grid class="main-tab">
         <ion-row>
-            <ion-col col-3 (click)="open('MeetingPage')">
-                <i class="iconfont icon-dot"></i>
-                <span>我的会议</span>
+            <ion-col col-3 (click)="seletcTab(1)">
+                <i class="iconfont icon-dot" style="color: #59a0f4"></i>
+                <span>消息</span>
             </ion-col>
-            <ion-col col-3 (click)="open('MeetingPage')">
-                <i class="iconfont icon-dot"></i>
-                <span>我的会议</span>
+            <ion-col col-3 (click)="open('AnnouncementPage')">
+                <i class="iconfont icon-dot" style="color: #fb942b"></i>
+                <span>公告</span>
             </ion-col>
-            <ion-col col-3 (click)="open('MeetingPage')">
-                <i class="iconfont icon-dot"></i>
-                <span>我的会议</span>
+            <ion-col col-3 (click)="seletcTab(2)">
+                <i class="iconfont icon-dot" style="color: #93c765"></i>
+                <span>待办事项</span>
             </ion-col>
-            <ion-col col-3 (click)="open('MeetingPage')">
-                <i class="iconfont icon-dot"></i>
-                <span>我的会议</span>
+            <ion-col col-3 (click)="open('Mail')">
+                <i class="iconfont icon-dot" style="color: #f4785c"></i>
+                <span>邮件</span>
             </ion-col>
         </ion-row>
     </ion-grid>
-    <ion-list class="sub-tab">
-        <ion-list-header>会议管理</ion-list-header>
-        <ion-grid no-padding>
-            <ion-row>
-                <ion-col col-sm-3 col-4 (click)="open('MeetingPage')">
-                    <i class="iconfont icon-dot"></i>
-                    <span>我的会议</span>
-                </ion-col>
-                <ion-col col-sm-3 col-4 (click)="open('MeetingPage')">
-                    <i class="iconfont icon-dot"></i>
-                    <span>我的会议</span>
-                </ion-col>
-                <ion-col col-sm-3 col-4 (click)="open('MeetingPage')">
-                    <i class="iconfont icon-dot"></i>
-                    <span>我的会议</span>
-                </ion-col>
-                <ion-col col-sm-3 col-4 (click)="open('MeetingPage')">
-                    <i class="iconfont icon-dot"></i>
-                    <span>我的会议</span>
-                </ion-col>
-                <ion-col col-sm-3 col-4 (click)="open('MeetingPage')">
-                    <i class="iconfont icon-dot"></i>
-                    <span>我的会议</span>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
+
+    <ion-list class="sub-tab" *ngFor="let item of list;index as index1">
+        <div *ngIf="item['show']">
+            <ion-list-header>{{item.name}}</ion-list-header>
+            <ion-grid no-padding>
+                <ion-row>
+                    <ng-template ngFor let-subitem [ngForOf]="item.children" let-i="index">
+                        <ion-col *ngIf="subitem['show']" col-sm-3 col-4 (click)="open(subitem.page)">
+                            <i class="iconfont" [ngClass]="subitem.icon" [ngStyle]="{'color': colorList[i]}"></i>
+                            <span>{{subitem.name}}</span>
+                        </ion-col>
+                    </ng-template>
+                </ion-row>
+            </ion-grid>
+        </div>
     </ion-list>
-    <ion-list class="sub-tab">
-        <ion-list-header>会议管理</ion-list-header>
-        <ion-grid no-padding>
-            <ion-row>
-                <ion-col col-sm-3 col-4 (click)="open('MeetingPage')">
-                    <i class="iconfont icon-dot"></i>
-                    <span>我的会议</span>
-                </ion-col>
-                <ion-col col-sm-3 col-4 (click)="open('MeetingPage')">
-                    <i class="iconfont icon-dot"></i>
-                    <span>我的会议</span>
-                </ion-col>
-                <ion-col col-sm-3 col-4 (click)="open('MeetingPage')">
-                    <i class="iconfont icon-dot"></i>
-                    <span>我的会议</span>
-                </ion-col>
-                <ion-col col-sm-3 col-4 (click)="open('MeetingPage')">
-                    <i class="iconfont icon-dot"></i>
-                    <span>我的会议</span>
-                </ion-col>
-                <ion-col col-sm-3 col-4 (click)="open('MeetingPage')">
-                    <i class="iconfont icon-dot"></i>
-                    <span>我的会议</span>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-list>
+
 
 
 </ion-content>

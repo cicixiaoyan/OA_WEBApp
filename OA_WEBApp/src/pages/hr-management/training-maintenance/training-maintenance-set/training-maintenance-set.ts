@@ -72,10 +72,11 @@ export class TrainingMaintenanceSetPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad MeetingWritePage');
   }
-  sent(data){
+  sent(data1){
     // data.Uid = this.globalData.Uid;
-    data.StartDate = Utils.dateFormat(new Date(data.StartDate), 'yyyy-MM-dd HH:mm:ss');
-    data.EndDate = Utils.dateFormat(new Date(data.EndDate), 'yyyy-MM-dd HH:mm:ss');
+    let data = Object.assign({}, data1);
+    data.StartDate = Utils.dateFormat_zh(new Date(data.StartDate), 'yyyy-MM-dd HH:mm:ss');
+    data.EndDate = Utils.dateFormat_zh(new Date(data.EndDate), 'yyyy-MM-dd HH:mm:ss');
 
     if (!this.isWrite){
       data.id = this.id;

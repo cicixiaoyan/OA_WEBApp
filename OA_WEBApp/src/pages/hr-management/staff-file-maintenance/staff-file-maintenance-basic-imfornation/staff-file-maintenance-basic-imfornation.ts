@@ -104,11 +104,20 @@ export class StaffFileMaintenanceBasicImfornation {
       if (this.Id != ""){
         this.staffFileMaintenanceService.getList({"id": this.Id}).subscribe(resJson => {
           if (resJson.Result){
-            this.baseForm.patchValue(resJson.Data[0]);
-            this.baseForm.patchValue({
-              "BasciBirth": Utils.dateFormat(new Date(resJson.Data[0].BasciBirth), 'yyyy-MM-ddTHH:mm+08:00'),
-              "BasicWordDate": Utils.dateFormat(new Date(resJson.Data[0].BasciBirth), 'yyyy-MM-ddTHH:mm+08:00'),
-            });
+            let data = resJson.Data[0];
+
+            data.BasciBirth = Utils.dateFormat(new Date(data.BasciBirth), 'yyyy-MM-dd');
+            data.BasicPartyDate = data.BasicPartyDate ? 
+              Utils.dateFormat(new Date(data.BasicPartyDate), 'yyyy-MM-dd') : "";
+            data.BasicFirstGraduaiton = data.BasicFirstGraduaiton ? 
+              Utils.dateFormat(new Date(data.BasicFirstGraduaiton), 'yyyy-MM-dd') : "";
+            data.BasicWordDate = data.BasicWordDate ? 
+              Utils.dateFormat(new Date(data.BasicWordDate), 'yyyy-MM-dd') : "";
+            data.BasicUnitDate = data.BasicUnitDate ? 
+              Utils.dateFormat(new Date(data.BasicUnitDate), 'yyyy-MM-dd') : "";
+
+            this.baseForm.patchValue(data);
+
             if (resJson.Data[0].BasicPhoto != "") 
               this.photoSrc = this.globalData.FILE_SERVE_URL + UPLOAD_PATH.hrImg + resJson.Data[0].BasicPhoto;
 
@@ -160,7 +169,17 @@ export class StaffFileMaintenanceBasicImfornation {
     if (parma === 'four') this.hideFour = !this.hideFour;
   }
 
-  sent(value){
+  sent(value1){
+    let value = Object.assign({}, value1);
+    value.BasciBirth = Utils.dateFormat_zh(new Date(value.BasciBirth), 'yyyy-MM-dd HH:mm:ss');
+    value.BasicPartyDate = value.BasicPartyDate ?
+      Utils.dateFormat_zh(new Date(value.BasicPartyDate), 'yyyy-MM-dd HH:mm:ss') : "";
+    value.BasicFirstGraduaiton = value.BasicFirstGraduaiton ?
+      Utils.dateFormat_zh(new Date(value.BasicFirstGraduaiton), 'yyyy-MM-dd HH:mm:ss') : "";
+    value.BasicWordDate = value.BasicWordDate ?
+      Utils.dateFormat_zh(new Date(value.BasicWordDate), 'yyyy-MM-dd HH:mm:ss') : "";
+    value.BasicUnitDate = value.BasicUnitDate ?
+      Utils.dateFormat_zh(new Date(value.BasicUnitDate), 'yyyy-MM-dd HH:mm:ss') : "";
     // console.log(this.baseForm.valid);
     value.BasicDeptName = this.deptObj[value.BasicDeptId];
     if (this.Id != ""){
@@ -170,8 +189,8 @@ export class StaffFileMaintenanceBasicImfornation {
       value.EduLs = null;
       value.id = this.Id;
 
-      value.BasciBirth = Utils.dateFormat(new Date(value.BasciBirth), 'yyyy-MM-dd HH:mm:ss');
-      value.BasicWordDate = Utils.dateFormat(new Date(value.BasicWordDate), 'yyyy-MM-dd HH:mm:ss');
+      // value.BasciBirth = Utils.dateFormat(new Date(value.BasciBirth), 'yyyy-MM-dd HH:mm:ss');
+      // value.BasicWordDate = Utils.dateFormat(new Date(value.BasicWordDate), 'yyyy-MM-dd HH:mm:ss');
       // console.log(value);
       this.staffFileMaintenanceService.modBasic(value).subscribe(resJson => {
         if (resJson.Result){

@@ -20,6 +20,7 @@ export class Backlog {
     isEmpty: boolean = false;
 
     canclick: boolean = true;
+    pageSlides: Array<string> = ["未办理", "已办理"];
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 public globalData: GlobalData,
@@ -38,30 +39,37 @@ export class Backlog {
         this.doRefresh(null);
     }
 
+    // 选择已读、未读
+    onSlideClick(i: number){
+        this.data.PageIndex = 0;
+        this.items = [];
+        if (i === 0) {
+            this.data.Status = this.backlogService.Status["notdone"];
+        }
+        else if (i === 1) {
+            this.data.Status = this.backlogService.Status["done"];
+        }
+        this.getList(this.data);
+    }
+
     view(work){
         let parma = this.work === "notDone" ? { "param": work} : {"param": work, "read": true};
         this.navCtrl.push("BacklogDetail", parma);
     }
 
     doRefresh(refresher?: Refresher) {
-        if (!this.canclick){
-            this.work = this.data.Status == this.backlogService.Status["notdone"] ? "notDone" : "done";
-            this.nativeService.showToast("点击太快了，请稍后！！！", 800);
-        }else{
-            this.canclick = false;
-            this.moredata = true;
-            this.data.PageIndex = 0;
-            this.items = [];
-    
-            this.data.Status = this.work === "notDone" ?
-                this.backlogService.Status["notdone"] :
-                this.backlogService.Status["done"];
-    
-            this.getList(this.data);
-        }
+        this.canclick = false;
+        this.moredata = true;
+        this.data.PageIndex = 0;
+        this.items = [];
+
+        this.data.Status = this.work === "notDone" ?
+            this.backlogService.Status["notdone"] :
+            this.backlogService.Status["done"];
+
+        this.getList(this.data);
 
         setTimeout(() => {
-            this.canclick = true;
             refresher && refresher.complete();
         }, 1000);
         

@@ -1,0 +1,40 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>公司资料</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-label>编码</ion-label>
+            <ion-input text-right type="text" [(ngModel)]="userInfo.Uid" placeholder="请输入编码" disabled></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>姓名</ion-label>
+            <ion-input text-right type="text" [(ngModel)]="userInfo.Name" placeholder="请输入姓名" disabled></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>公司</ion-label>
+            <ion-input text-right type="text" [(ngModel)]="userInfo.Company" placeholder="公司名称" disabled></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>部门</ion-label>
+            <ion-input text-right type="text" [(ngModel)]="userInfo.Dept" placeholder="部门名称" disabled></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>职位</ion-label>
+            <ion-input text-right type="text" [(ngModel)]="userInfo.Duty" placeholder="职位" disabled></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>入职时间</ion-label>
+            <ion-input text-right type="text" [(ngModel)]="userInfo.InDate" placeholder="入职时间" disabled></ion-input>
+        </ion-item>
+
+
+    </ion-list>
+
+</ion-content>

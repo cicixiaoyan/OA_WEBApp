@@ -5,6 +5,8 @@ import { ContractService } from '../contract-service';
 import { NativeService } from '../../../../providers/NativeService';
 import { FileService } from '../../../../providers/FileService';
 import { GlobalData } from '../../../../providers/GlobalData';
+import { Utils } from '../../../../providers/Utils';
+
 @IonicPage()
 @Component({
   selector: 'page-contract-setting',
@@ -66,7 +68,11 @@ export class ContractSettingPage {
       if (this.Id != ""){
         this.contractService.getList({"id": this.Id}).subscribe(resJson => {
           if (resJson.Result){
-            this.baseForm.patchValue(resJson.Data[0]);
+            let data = resJson.Data[0];
+            data.SignDate =  Utils.dateFormat(new Date(data.SignDate), "yyyy-MM-dd");
+            data.ContractStartDate = Utils.dateFormat(new Date(data.ContractStartDate), 'yyyy-MM-dd'); 
+            data.ContractEndDate = Utils.dateFormat(new Date(data.ContractEndDate), "yyyy-MM-dd");
+            this.baseForm.patchValue(data);
           }else{
             this.nativeService.showToast(resJson.Data, 800);
           }

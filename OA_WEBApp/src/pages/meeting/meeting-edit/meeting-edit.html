@@ -50,7 +50,7 @@
                 </div>
                 <ion-item>
                     <ion-label>开始时间</ion-label>
-                    <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="StartDate" displayFormat="YYYY年MM月DD日 HH:mm" pickerFormat="YYYY MM DD HH mm"></ion-datetime>
+                    <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="StartDate" displayFormat="YYYY年MM月DD日 HH时mm分" pickerFormat="YYYY MM DD HH mm"></ion-datetime>
                 </ion-item>
                 <div *ngIf="!formCtrl.StartDate.valid && (formCtrl.StartDate.touched || formCtrl.StartDate.dirty )" class="validation-failed">
                     开始时间必填
@@ -58,7 +58,7 @@
 
                 <ion-item>
                     <ion-label>结束时间</ion-label>
-                    <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="EndDate" displayFormat="YYYY年MM月DD日 HH:mm" pickerFormat="YYYY MM DD HH mm"></ion-datetime>
+                    <ion-datetime placeholder="点击设置" cancelText="取消" doneText="确定" formControlName="EndDate" displayFormat="YYYY年MM月DD日 HH时mm分" pickerFormat="YYYY MM DD HH mm"></ion-datetime>
                 </ion-item>
                 <div *ngIf="!formCtrl.EndDate.valid && (formCtrl.EndDate.touched || formCtrl.EndDate.dirty )" class="validation-failed">
                     结束时间必填

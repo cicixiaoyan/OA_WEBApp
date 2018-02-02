@@ -69,13 +69,14 @@ export class MeetingWritePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad MeetingWritePage');
   }
-  sent(data){
+  sent(data1){
+    let data = Object.assign({}, data1);
     data.Person = null;
     data.Uid = this.globalData.Uid;
     data.FileNewName = this.FileNewName;
     data.PersonId = this.PersonId;
-    data.StartDate = Utils.dateFormat(new Date(data.StartDate), 'yyyy-MM-dd HH:mm:ss');
-    data.EndDate = Utils.dateFormat(new Date(data.EndDate), 'yyyy-MM-dd HH:mm:ss');
+    data.StartDate = Utils.dateFormat_zh(new Date(data.StartDate), 'yyyy-MM-dd HH:mm:ss');
+    data.EndDate = Utils.dateFormat_zh(new Date(data.EndDate), 'yyyy-MM-dd HH:mm:ss');
     this.meetingService.write(data).subscribe((resJson) => {
       if (resJson.Result){
         this.nativeService.showToast("添加成功", 888);

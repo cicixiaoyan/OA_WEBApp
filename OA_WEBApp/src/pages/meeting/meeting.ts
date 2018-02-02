@@ -16,13 +16,7 @@ import { MeetingService } from './meeting_service';
 })
 export class MeetingPage {
   list = [];
-  checkBtn: any = {
-    "Drafting": false, // 起草中
-    "Delivered": true, // 送审中(默认)
-    "Approved": false, // 已审批
-    "HasBeenReturned": false, // 已退回
-    "completed": false, // 已完成
-  };
+  pageSlides: Array<string> = ["起草中", "送审中", "已审批", "已退回", "已完成" ];
   data: any;
   moredata: boolean = true;
   isEmpty: boolean = false;
@@ -51,21 +45,30 @@ export class MeetingPage {
   }
 
   // 选择状态
-  checkRead(name: string = "Delivered") {
+  onSlideClick(i: number) {
     this.data.PageIndex = 0;
     this.list = [];
-    this.checkBtn = { "Drafting": false, 'Delivered': false, "Approved": false,
-      "HasBeenReturned": false, "completed": false, 
-    };
-
-    this.checkBtn[name] = true;
-    this.data.status = this.meetingService.meetingStatus[name];
-    console.log(this.data);
+    if (i === 0) {
+      this.data.status = this.meetingService.meetingStatus["Drafting"];
+    }
+    else if (i === 1) {
+      this.data.status = this.meetingService.meetingStatus["Delivered"];
+    }
+    else if (i === 2) {
+      this.data.status = this.meetingService.meetingStatus["Approved"];
+    }
+    else if (i === 3) {
+      this.data.status = this.meetingService.meetingStatus["HasBeenReturned"];
+    }
+    else if (i === 4) {
+      this.data.status = this.meetingService.meetingStatus["completed"];
+    }
     this.getList(this.data);
   }
 
   doRead(Params) {
-    let parma = this.checkBtn.Drafting ? { "Id": Params } : { "Id": Params, "readOnly": true };
+    let parma = this.data.status == this.meetingService.meetingStatus["Drafting"]
+    ? { "Id": Params } : { "Id": Params, "readOnly": true };
     this.navCtrl.push("MeetingEditPage", parma);
     // let modal = this.modalCtrl.create("MeetingEditPage");
     // modal.present();

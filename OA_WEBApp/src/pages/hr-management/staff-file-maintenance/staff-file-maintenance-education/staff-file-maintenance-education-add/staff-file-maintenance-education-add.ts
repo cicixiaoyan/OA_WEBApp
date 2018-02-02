@@ -57,8 +57,11 @@ export class StaffFileMaintenanceEducationAddPage {
     this.viewCtrl.dismiss();
   }
 
-  save(value){
+  save(value1){
     // 提交
+    let value = Object.assign({}, value1);
+    value.EduStartDate = Utils.dateFormat_zh(new Date(value.EduStartDate), 'yyyy-MM-dd HH:mm:ss');
+    value.EduEndDate = Utils.dateFormat_zh(new Date(value.EduEndDate), 'yyyy-MM-dd HH:mm:ss');
     value.id = this.id;
     this.staffFileMaintenanceService.addEdu(value).subscribe(resJson => {
       if (resJson.Data){

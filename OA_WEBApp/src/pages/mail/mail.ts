@@ -1,12 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Refresher } from 'ionic-angular';
-
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Refresher, Content } from 'ionic-angular';
 import { GlobalData } from "../../providers/GlobalData";
 import { NativeService } from "../../providers/NativeService";
-
-// import { MailRead } from '../mail/mail-read/mail-read';
-// import { MailWrite } from '../mail/mail-write/mail-write';
-// import { MailReadOutbox } from '../mail/mail-read-outbox/mail-read-outbox';
 import { MailService } from "./mailService";
 @IonicPage()
 @Component({
@@ -14,22 +9,26 @@ import { MailService } from "./mailService";
     templateUrl: 'mail.html',
 })
 export class Mail {
+    @ViewChild(Content) content: Content;
+    pageSlides: Array<string> = ["未读", "已读"];
+
     box: string = "inbox";
-    inbox: boolean = true; // 默认为收件箱
-    isDraft: boolean = false; // 默认为发件箱
     isEmpty: boolean = false;
-    checkBtn: object = { "read": false, "unread": true, "all": false };
     list: any = [];
     moredata: boolean = true;
     data: any;
-    
+
     canclick: boolean = true;
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 public globalData: GlobalData,
                 private nativeService: NativeService,
-                private modalCtrl: ModalController,
                 private mailService: MailService) {
+        
+    }
+
+    ionViewWillEnter() {
+        this.box = "inbox";
         this.data = {
             "PageSize": 8,
             "PageIndex": 0,
@@ -37,49 +36,23 @@ export class Mail {
             "Uid": this.globalData.Uid,
             "Status": this.mailService.status["unread"]
         };
-        this.initializeItems();
-    }
-
-    initializeItems() {
-        this.doRefresh(null);
+        this.list = [];
+        this._getList(this.data);
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad Mail');
     }
 
-    // 选择已读、未读、全部
-    checkRead(name: string = "read") {
+    // 选择已读、未读
+    onSlideClick(i: number){
         this.data.PageIndex = 0;
         this.list = [];
-        this.checkBtn = { "read": false, "unread": false, "all": false };
-        this.checkBtn[name] = true;
-        if (name === "unread") {
-            // 参数设置
+        if (i === 0) {
             this.data.Status = this.mailService.status["unread"];
         }
-        else if (name === "read") {
-            // 参数设置
+        else if (i === 1) {
             this.data.Status = this.mailService.status["read"];
-        }
-        else {
-            // 参数设置
-            this.data.Status = this.mailService.status["all"];
-        }
-        this._getList(this.data);
-    }
-
-    // 选择草稿箱、发件箱
-    checkDraft(bol: boolean = false) {
-        this.data.PageIndex = 0;
-        this.list = [];
-
-        if (bol) {
-            this.isDraft = true;
-            // 参数设置
-        } else {
-            this.isDraft = false;
-            // 参数设置
         }
         this._getList(this.data);
     }
@@ -103,12 +76,16 @@ export class Mail {
             console.log("不能点击");
             this.box = this.data.MailStatus == this.mailService.mailStatus["inbox"] ? "inbox" : "outbox";
             this.nativeService.showToast("点击太快了，请稍后！！！", 800);
+            setTimeout(() => {
+                refresher && refresher.complete();
+            }, 300);
         }else{
             console.log("可以点击");
             this.moredata = true;
             this.canclick = false;
             this.list = [];
             this.data.PageIndex = 0;
+            this.content.resize();
 
             if (this.box === "inbox") {
                 this.data.MailStatus = this.mailService.mailStatus["inbox"];

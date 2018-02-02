@@ -2,24 +2,25 @@
     <div class="top">
         <div class="top-bg"></div>
         <div>
-            <img class="photo" (click)="changePhoto()" src="assets/img/login-logo.png" alt="photo" height="60" />
+            <img class="photo" (click)="changePhoto()" src="assets/img/photo.png" alt="photo" height="60" />
             <h5>{{userInfo.Name}}</h5>
         </div>
         <div class="subtitle">
-            <div class="blocking">&nbsp;</div>
+            <div class="blockingtop-bg">&nbsp;</div>
             <ion-grid>
                 <ion-row>
-                    <ion-col col-3 col-xl-2>
-                        <img src="assets/img/login-logo.png" srcset="128px.jpg 128w, 256px.jpg 256w, 512px.jpg 512w" sizes="(max-width: 360px) calc(100vw - 20px), 128px"> 司机档案
+                    <ion-col col-3 col-xl-2 (click)="tabto(1)">
+                        <div class="iconfont  icon-talk" style="color: #81db69"></div>待办工作
+                        <!-- <img src="assets/img/login-logo.png" srcset="128px.jpg 128w, 256px.jpg 256w, 512px.jpg 512w" sizes="(max-width: 360px) calc(100vw - 20px), 128px">  -->
                     </ion-col>
-                    <ion-col col-3 col-xl-2>
-                        <img src="assets/img/login-logo.png"> 司机档案
+                    <ion-col col-3 col-xl-2 (click)="tabto(2)">
+                        <div class="iconfont icon-gonggaoguanli" style="color: #fe6163"></div>最新公告
                     </ion-col>
-                    <ion-col col-3 col-xl-2>
-                        <img src="assets/img/login-logo.png"> 司机档案
+                    <ion-col col-3 col-xl-2 (click)="tabto(1)">
+                        <div class="iconfont icon-39" style="color: #2091f8"></div> 未读邮件
                     </ion-col>
-                    <ion-col col-3 col-xl-2>
-                        <img src="assets/img/login-logo.png"> 司机档案
+                    <ion-col col-3 col-xl-2 (click)="tabto(1)">
+                        <div class="iconfont icon-renwu" style="color: #ffb030"></div> 待办任务
                     </ion-col>
                 </ion-row>
             </ion-grid>
@@ -30,25 +31,25 @@
     <div class="imformation">
 
         <ion-list class="ilist">
-            <ion-item (click)="getAboutus()">
-                <ion-icon name='ios-at-outline' color="assertive" item-left></ion-icon>
+            <ion-item (click)="goto('MyCompanyPage')">
+                <ion-icon class="company-icon" item-left></ion-icon>
                 企业信息
-                <ion-icon name='ios-arrow-forward' item-right></ion-icon>
+                <ion-icon name='ios-arrow-forward' color="gray" item-right></ion-icon>
             </ion-item>
-            <ion-item (click)="getAboutus()">
-                <ion-icon name='ios-at-outline' color="assertive" item-left></ion-icon>
+            <ion-item (click)="goto('PersonalInfoPage')">
+                <ion-icon class="person-icon" item-left></ion-icon>
                 个人信息
-                <ion-icon name='ios-arrow-forward' item-right></ion-icon>
+                <ion-icon name='ios-arrow-forward' color="gray" item-right></ion-icon>
             </ion-item>
-            <ion-item (click)="getAboutus()">
-                <ion-icon name='ios-at-outline' color="assertive" item-left></ion-icon>
+            <ion-item (click)="goto('AboutusPage')">
+                <ion-icon class="users-icon" item-left></ion-icon>
                 关于我们
-                <ion-icon name='ios-arrow-forward' item-right></ion-icon>
+                <ion-icon name='ios-arrow-forward' color="gray" item-right></ion-icon>
             </ion-item>
-            <ion-item (click)="getAboutus()">
-                <ion-icon name='ios-at-outline' color="assertive" item-left></ion-icon>
+            <ion-item (click)="goto('SettingPage')">
+                <ion-icon class="setting-icon" item-left></ion-icon>
                 设置
-                <ion-icon name='ios-arrow-forward' item-right></ion-icon>
+                <ion-icon name='ios-arrow-forward' color="gray" item-right></ion-icon>
             </ion-item>
         </ion-list>
     </div>

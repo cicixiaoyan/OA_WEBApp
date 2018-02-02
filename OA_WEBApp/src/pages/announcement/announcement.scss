@@ -1,6 +1,9 @@
 page-announcement {
-
+    .list-ios[inset] {
+        margin: 1rem 0;
+    }
 }
+
 .searchbar-ios-dark .searchbar-ios-cancel {
     color: #fff;
 }

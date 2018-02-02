@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Refresher, Events } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController, Refresher, Events, Content } from 'ionic-angular';
 
 import { GlobalData } from "../../providers/GlobalData";
 import { MessageService } from "./messageService";
@@ -16,11 +16,13 @@ export class MessagePage {
     inbox: boolean = true; // 默认为收件箱
     isDraft: boolean = false; // 默认为发件箱
     isEmpty: boolean = false;
-    checkBtn: object = { "read": false, "unread": true };
     list: any = [];
     moredata: boolean = true;
     data: any;
     timer: any;
+
+    pageSlides: Array<string> = ["未读", "已读"];
+    @ViewChild(Content) content: Content;
 
     canclick: boolean = true;
     constructor(public navCtrl: NavController,
@@ -35,7 +37,6 @@ export class MessagePage {
 
     ionViewWillEnter() {
         this.box = "inbox";
-        this.checkBtn = { "read": false, "unread": true };
         this.data = {
             "PageSize": 5,
             "PageIndex": 0,
@@ -47,22 +48,19 @@ export class MessagePage {
         this._getList(this.data);
     }
 
-    // 选择已读
-    checkRead(name: string = "read") {
+    onSlideClick(i: number){
         this.data.PageIndex = 0;
         this.list = [];
-        this.checkBtn = { "read": false, "unread": false };
-        this.checkBtn[name] = true;
-        if (name === "unread") {
+        if (i === 0) {
             // 参数设置
             this.data.Status = this.messageService.messageStatus["unread"];
         }
-        else if (name === "read") {
+        else if (i === 1) {
             // 参数设置
             this.data.Status = this.messageService.messageStatus["read"];
         }
         this._getList(this.data);
-    }
+      }
 
     doRead(Params) {
         this.navCtrl.push("MessageReadPage", { Params: Params });
@@ -103,14 +101,18 @@ export class MessagePage {
             // this.box = this.box === "inbox" ? "outbox" : "intbox";
             console.log("不能点击", this.box);
             this.box = this.data.NewsStatus == this.messageService.Message["inbox"] ? "inbox" : "outbox";
-            return this.nativeService.showToast("点击太快了，请稍后！！！", 800);
+            this.nativeService.showToast("速度太快了，请稍后！！！", 800);
+            setTimeout(() => {
+                refresher && refresher.complete();
+            }, 300);
         } else {
             this.moredata = true;
             this.data.PageIndex = 0;
             this.canclick = false;
             this.list = [];
+            this.content.resize();
             if (this.box === "inbox") {
-                // this.data.Status = this.messageService.messageStatus["unread"];
+                this.data.Status = this.messageService.messageStatus["unread"];
                 this.data.NewsStatus = this.messageService.Message["inbox"]; // 收件
             }
             else this.data.NewsStatus = this.messageService.Message["outbox"]; // 发件
@@ -121,7 +123,7 @@ export class MessagePage {
                 console.log('数据加载完成');
                 this.canclick = true;
                 refresher && refresher.complete();
-            }, 2000);
+            }, 1500);
         }        
     }
 

@@ -27,16 +27,16 @@
 
                     <ion-item>
                         <ion-label>上次生效时间</ion-label>
-                        <ion-input text-right readonly='true' formControlName="UpStratDate"></ion-input>
+                        <ion-input text-right readonly='true' [value]="baseForm.value.UpStratDate | date : 'yyyy-MM-dd'" formControlName="UpStratDate"></ion-input>
                     </ion-item>
                     <ion-item>
                         <ion-label>上次到期时间</ion-label>
-                        <ion-input text-right readonly='true' formControlName="UpEndDate"></ion-input>
+                        <ion-input text-right readonly='true' [value]="baseForm.value.UpEndDate | date : 'yyyy-MM-dd'" formControlName="UpEndDate"></ion-input>
 
                     </ion-item>
                     <ion-item>
                         <ion-label>签约时间</ion-label>
-                        <ion-input text-right readonly='true' formControlName="SignDate"></ion-input>
+                        <ion-input text-right readonly='true' [value]="baseForm.value.SignDate | date : 'yyyy-MM-dd'" formControlName="SignDate"></ion-input>
                     </ion-item>
                 </div>
             </div>

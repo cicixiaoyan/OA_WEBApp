@@ -32,7 +32,7 @@
         <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正在刷新...">
         </ion-refresher-content>
     </ion-refresher>
-    <ion-list inset style="margin:16px 0;">
+    <ion-list inset>
         <button ion-item *ngFor="let item of items" [navPush]="nxPage" [navParams]="{item:item}">
           <span>[{{item.AnnouncementType}}]{{item.AnnouncementTitle}}</span>
           <p>{{item.AnnouncementPublishPerson}}&emsp;{{item.AnnouncementPublishDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>

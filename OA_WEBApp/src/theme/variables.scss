@@ -33,16 +33,18 @@ $grid-breakpoints: ( xs: 0, sm: 360px, md: 768px, lg: 992px);
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's
 // default are overridden.
-$toolbar-background: color($colors, primary);
-$tabs-ios-background: #f8f8f8;
-$tabs-md-background: #f8f8f8;
+$toolbar-background: #fff;
+$toolbar-ios-title-text-color: #222;
+$tabs-ios-background: #fff;
+$tabs-md-background: #fff;
 $searchbar-ios-input-height: 33px;
-$searchbar-ios-background-color: color($colors, primary);
+// $searchbar-ios-background-color: #fff;
 $hairlines-width: 1px;
 $list-border-color: #e0dfe4;
 $segment-button-ios-background-color: #fff;
-$toolbar-ios-active-color: color($colors, danger);
+$toolbar-ios-active-color: color($colors, primary);
 $segment-button-ios-toolbar-button-max-width: 90px;
+$content-margin: 1rem;
 @import "ionic.theme.default";
 // Ionicons
 // --------------------------------------------------

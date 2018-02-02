@@ -72,6 +72,10 @@ export class StaffFileMaintenanceSocialRelationship {
     this.staffFileMaintenanceService.getList({"id": this.Id}).subscribe(resJson => {
       if (resJson.Result){
         this.list = [...resJson.Data[0].SociologyLs];
+        this.list.sort((a, b) => {
+          if (a.SociologyEmergency == '是') return -1;
+          else return 1;
+        });
       }else{
         this.nativeService.showToast(resJson.Data, 800);
       }

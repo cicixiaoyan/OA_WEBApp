@@ -3,6 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { Mail } from './mail';
 import { MailService } from "./mailService";
 import { EmptyModule } from './../../components/empty/empty.module';
+import { TabSlideModule } from '../../components/tab-slide/tab-slide.module';
 
 @NgModule({
     declarations: [
@@ -10,7 +11,8 @@ import { EmptyModule } from './../../components/empty/empty.module';
     ],
     imports: [
         IonicPageModule.forChild(Mail),
-        EmptyModule
+        EmptyModule,
+        TabSlideModule
     ],
     exports: [
         Mail

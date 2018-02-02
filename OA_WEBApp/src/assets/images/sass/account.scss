@@ -1,0 +1,79 @@
+$icons: sprite-map("../account/*.png", $spacing: 8px, $layout: smart);
+$bigWidth: 248px;
+$bigHeight: 1016px;
+@function px2rem ($px) {
+    @if (type-of($px)=="number") {
+        @return $px / 20px * 1rem;
+    }
+    @if (type-of($px)=="list") {
+        @if (nth($px, 1)==0 and nth($px, 2) !=0) {
+            @return 0 nth($px, 2) / 20px * 1rem;
+        }
+        @else if (nth($px, 1)==0 and nth($px, 2)==0) {
+            @return 0 0;
+        }
+        @else if (nth($px, 1) !=0 and nth($px, 2)==0) {
+            @return nth($px, 1) / 20px * 1rem 0;
+        }
+        @else {
+            @return nth($px, 1) / 20px *1rem nth($px, 2) / 20px * 1rem;
+        }
+    }
+}
+
+@mixin sprite-info ($icons, $name) {
+    width: px2rem(image-width(sprite-file($icons, $name)));
+    height: px2rem(image-height(sprite-file($icons, $name)));
+    background-image: sprite-url($icons);
+    background-position: px2rem(sprite-position($icons, $name));
+    background-size: px2rem(($bigWidth, $bigHeight));
+    background-repeat: no-repeat;
+}
+
+.message-icon {
+    @include sprite-info($icons, message);
+}
+
+.notice-icon {
+    @include sprite-info($icons, notice);
+}
+
+.mail-icon {
+    @include sprite-info($icons, mail);
+}
+
+.task-icon {
+    @include sprite-info($icons, task);
+}
+
+.company-icon {
+    @include sprite-info($icons, company);
+}
+
+.person-icon {
+    @include sprite-info($icons, person);
+}
+
+.person-circle-hard-icon {
+    @include sprite-info($icons, person1);
+}
+
+.setting-icon {
+    @include sprite-info($icons, setting);
+}
+
+.photo-icon {
+    @include sprite-info($icons, photo);
+}
+
+.home-icon {
+    @include sprite-info($icons, home);
+}
+
+.contact-icon {
+    @include sprite-info($icons, contact);
+}
+
+.users-icon {
+    @include sprite-info($icons, users);
+}

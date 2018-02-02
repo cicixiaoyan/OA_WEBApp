@@ -2,12 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Refresher, ModalController } from 'ionic-angular';
 import { MeetingService } from '../meeting_service';
 
-/**
- * Generated class for the MeetingMinutesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({

@@ -17,7 +17,7 @@
                 </ion-row>
                 <ion-row>
                     <ion-col col-auto>申请日期：</ion-col>
-                    <ion-col class='right-info'>{{data.ApplicationDate}}</ion-col>
+                    <ion-col class='right-info'>{{data.ApplicationDate | date: "YYYY-MM-DD HH:mm"}}</ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col col-auto>申请理由：</ion-col>

@@ -65,17 +65,12 @@ export class AccountNewPage {
       console.log('ionViewDidLoad Account');
   }
 
-  edit() {
-      this.navCtrl.push("AccountEdit");
+  tabto(index){
+    this.navCtrl.parent.select(index);
   }
 
-  getAboutus() {
-      this.navCtrl.push("AboutusPage");
-  }
-
-  pwdEdit() {
-      this.navCtrl.push("AccountPasswordedit");
-     
+  goto(pageStr){
+    this.navCtrl.push(pageStr);
   }
 
   changePhoto() {

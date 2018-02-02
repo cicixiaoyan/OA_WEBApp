@@ -12,10 +12,15 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+// import "../images/account";
 // 用法
 //  <div class="message-textarea" contenteditable="true" data-text="输入信息"></div>
 [contentEditable=true]:empty:not(:focus):before {
     content: attr(data-text);
+}
+
+.content-ios {
+    background: #f4f4f4;
 }
 
 .message-textarea {
@@ -93,7 +98,7 @@
             padding: 10px 5px;
             text-align: center;
             background-color: #dee;
-            height: 130px;
+            // height: 130px;
             .affix-icon {
                 font-size: 34px;
                 color: gray;
@@ -230,4 +235,16 @@ ion-footer>.button-ios {
     background-color: #fff;
     -webkit-transition: 100ms all linear;
     transition: 100ms all linear;
+}
+
+// 返回图标修改
+.ion-ios-arrow-back {
+    font-family: "iconfont" !important;
+    &::before {
+        content: "\e609"
+    }
+}
+
+.header-ios .toolbar-background-ios {
+    border-color: #e0dfe4;
 }

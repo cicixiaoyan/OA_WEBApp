@@ -53,6 +53,8 @@ export class ContractService {
         return this.httpService.postFormData("ashx/hrcontract.ashx", param).map((res: Response) => res.json());
     }
 
+    
+
 
 
 

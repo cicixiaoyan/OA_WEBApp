@@ -21,7 +21,8 @@
         </ion-row>
     </ion-grid>
     <ion-list class="imenu">
-        <!-- <ion-col col-3 col-xl-2 (click)="open('HomeNewPage')">新首页</ion-col> -->
+        <ion-col col-3 col-xl-2 (click)="open('HomeNewPage')">新首页</ion-col>
+        <ion-col col-3 col-xl-2 (click)="open('AccountNewPage')">新个人中心</ion-col>
 
         <div *ngIf="totalMenu['我的会议'] || totalMenu['会议记录'] || totalMenu['会议查询'] || totalMenu['会议室管理']">
             <ion-list-header>

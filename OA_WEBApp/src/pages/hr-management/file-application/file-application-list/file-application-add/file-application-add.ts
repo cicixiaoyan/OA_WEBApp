@@ -4,12 +4,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FileApplicationService } from '../../fileApplicationService';
-/**
- * Generated class for the FileApplicationAddPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -45,10 +39,10 @@ export class FileApplicationAddPage {
 
   }
 
-  submit(value){
+  submit(value1){
+    let value = Object.assign({}, value1);
     value.Uid = this.fileApplicationService.httpService.globalData.Uid;
-    value.applicationdate = Utils.dateFormat(new Date(value.applicationdate), "yyyy-MM-dd HH:mm:ss") ;
-    // console.log(value.applicationdate);
+    value.applicationdate = Utils.dateFormat_zh(new Date(value.applicationdate), "yyyy-MM-dd HH:mm:ss") ;
     this.fileApplicationService.add(value).subscribe(resJson => {
       if (resJson.Result){
         this.nativeService.showToast("档案申请提交成功，请等待审核", 500);

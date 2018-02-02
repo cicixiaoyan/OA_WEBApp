@@ -96,6 +96,11 @@ export class Utils {
       .replace(/fff/ig, String(time.Millisecond));
   }
 
+  static dateFormat_zh(timestring: Date, sFormat: String = 'yyyy-MM-dd', range: number = 0){
+    let time = new Date(timestring).getTime() - 8 * 3600 * 1000;
+    return this.dateFormat(new Date(time), sFormat, range);
+  }
+
   /**
    * 每次调用sequence加1
    * @type {()=>number}

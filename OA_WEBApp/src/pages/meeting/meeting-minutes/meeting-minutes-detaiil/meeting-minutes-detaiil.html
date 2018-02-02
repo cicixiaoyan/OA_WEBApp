@@ -37,14 +37,14 @@
 
                 <ion-item>
                     <ion-label>开始时间</ion-label>
-                    <ion-input text-right formControlName="StartDate" readonly placeholder="未设置"></ion-input>
+                    <ion-input text-right formControlName="StartDate" [value]="writeForm.value.StartDate | date: 'yyyy年MM月dd日 HH时mm分'" readonly placeholder="未设置"></ion-input>
 
                 </ion-item>
 
 
                 <ion-item>
                     <ion-label>结束时间</ion-label>
-                    <ion-input text-right formControlName="EndDate" readonly placeholder="未设置"></ion-input>
+                    <ion-input text-right formControlName="EndDate" [value]="writeForm.value.EndDate | date: 'yyyy年MM月dd日 HH时mm分'" readonly placeholder="未设置"></ion-input>
                 </ion-item>
 
 

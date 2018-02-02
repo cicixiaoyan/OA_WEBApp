@@ -51,8 +51,8 @@ export class LoginPage {
         });
 
         this.loginForm = this.formBuilder.group({
-            UserName: ['', [Validators.required, Validators.minLength(3)]], // 第一个参数是默认值
-            UserPass: ['', [Validators.required, Validators.minLength(2)]]
+            UserName: ['admin', [Validators.required, Validators.minLength(3)]], // 第一个参数是默认值
+            UserPass: ['1234', [Validators.required, Validators.minLength(2)]]
         });
     }
 

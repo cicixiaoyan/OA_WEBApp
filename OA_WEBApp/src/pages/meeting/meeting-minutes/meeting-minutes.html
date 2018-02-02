@@ -21,15 +21,16 @@
     <ion-list>
         <ion-item-sliding *ngFor="let meeting of list" (click)="doRead(meeting.Id)">
             <ion-item>
-                <span class="status-new-dot" *ngIf="meeting.Status=='1'">●&nbsp;</span><span>{{meeting.Title}}</span>
-                <p class="font-12">地点:{{meeting.Place}}&emsp;{{meeting.OriginatorDate}}</p>
+                <h2>
+                    <span class="status-new-dot" *ngIf="meeting.Status=='1'">●&nbsp;</span>
+                    <span>{{meeting.Title}}</span>
+                    <small class="text-ios-gray" float-right>{{meeting.OriginatorDate | getdatediff: true}}</small>
+                </h2>
+                <span>地点:{{meeting.Place}}</span>
             </ion-item>
         </ion-item-sliding>
     </ion-list>
-    <div *ngIf="isEmpty" text-center padding style="font-size:.9em;">
-        <div padding>暂无消息数据！！！</div>
-        <img src="assets/img/face/face2.png" height="100">
-    </div>
+    <empty *ngIf="isEmpty"></empty>
     <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())" [enabled]="moredata" threshold="100px">
         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>
     </ion-infinite-scroll>

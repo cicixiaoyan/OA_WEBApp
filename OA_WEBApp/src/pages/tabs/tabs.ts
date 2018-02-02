@@ -10,10 +10,10 @@ import { Tabs } from "ionic-angular";
 export class TabsPage {
     @ViewChild('mainTabs') tabs: Tabs;
 
-    tab1Root = "Home";
+    tab1Root = "HomeNewPage";
     tab2Root = "MessagePage";
     tab3Root = "Backlog";
-    tab4Root = "Account";
+    tab4Root = "AccountNewPage";
     mySelectedIndex: number;
 
     messageBadge: string = "";
@@ -25,7 +25,7 @@ export class TabsPage {
                 // public backButtonService: BackButtonService
             ) {
         this.mySelectedIndex = navParams.data.tabIndex || 0;
-        this.tab1Root = navParams.data.tab1Component || "Home";
+        this.tab1Root = navParams.data.tab1Component || "HomeNewPage";
         this.events.subscribe("message: badgechange", badge => {
             this.messageBadge = badge || "";
         });

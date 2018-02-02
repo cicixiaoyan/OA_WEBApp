@@ -65,9 +65,9 @@ export class ContractRenewViewPage {
         this.contractService.getRenew({"id": this.Id}).subscribe(resJson => {
           if (resJson.Result){
             let data = resJson.Data[0];
-            data.ContractDate = Utils.dateFormat(new Date(data.ContractDate), 'yyyy-MM-ddTHH:mm+08:00');
-            data.ContractStartDate = Utils.dateFormat(new Date(data.ContractStartDate), 'yyyy-MM-ddTHH:mm+08:00');
-            data.ContractEndDate = Utils.dateFormat(new Date(data.ContractEndDate), 'yyyy-MM-ddTHH:mm+08:00');
+            data.ContractDate = Utils.dateFormat(new Date(data.ContractDate), 'yyyy-MM-dd');
+            data.ContractStartDate = Utils.dateFormat(new Date(data.ContractStartDate), 'yyyy-MM-dd');
+            data.ContractEndDate = Utils.dateFormat(new Date(data.ContractEndDate), 'yyyy-MM-dd');
             this.baseForm.patchValue(resJson.Data[0]); 
           }else{
             this.nativeService.showToast(resJson.Data, 800);
@@ -101,11 +101,13 @@ export class ContractRenewViewPage {
     console.log(e1, e2);
   }
 
-  submit(value){
-    console.log(value);
-    value.ContractDate = Utils.dateFormat(new Date(value.ContractDate), 'yyyy-MM-dd HH:mm:ss');
-    value.ContractStartDate = Utils.dateFormat(new Date(value.ContractStartDate), 'yyyy-MM-dd HH:mm:ss');
-    value.ContractEndDate = Utils.dateFormat(new Date(value.ContractEndDate), 'yyyy-MM-dd HH:mm:ss');
+  submit(value1){
+    let value = Object.assign({}, value1);
+    // console.log(value);
+
+    value.ContractDate = Utils.dateFormat_zh(new Date(value.ContractDate), 'yyyy-MM-dd HH:mm:ss');
+    value.ContractStartDate = Utils.dateFormat_zh(new Date(value.ContractStartDate), 'yyyy-MM-dd HH:mm:ss');
+    value.ContractEndDate = Utils.dateFormat_zh(new Date(value.ContractEndDate), 'yyyy-MM-dd HH:mm:ss');
     if (value.ContractTypeId != ""){
       value.ContractType = this.contractType[value.ContractTypeId];
     }

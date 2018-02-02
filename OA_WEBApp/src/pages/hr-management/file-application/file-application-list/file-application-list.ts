@@ -17,7 +17,7 @@ export class FileApplicationListPage {
     moredata: boolean = true;
     isEmpty: boolean = false;
     search: any;
-    checkBtn: object = { "审批中": true, "已同意": false, "已拒绝": false };
+    pageSlides: Array<string> = ["审批中", "已同意", "已拒绝"];
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 private popoverCtrl: PopoverController,
@@ -32,20 +32,18 @@ export class FileApplicationListPage {
     }
     ionViewWillEnter() {
         this.list = [];
+        this.data.PageIndex = 0;
         this.getList(this.data);
       }
 
-    // 选择
-    checkRead(name: string = "审批中") {
+    onSlideClick(i: number) {
         this.data.PageIndex = 0;
         this.list = [];
-        this.checkBtn = { "审批中": false, "已同意": false, "已拒绝": false };
-        this.checkBtn[name] = true;
-        if (name === "审批中") {
+        if (i === 0) {
             // 参数设置
             this.data.status = this.fileApplicationService.status["审批中"];
         }
-        else if (name === "已同意") {
+        else if (i === 1) {
             // 参数设置
             this.data.status = this.fileApplicationService.status["已同意"];
         }

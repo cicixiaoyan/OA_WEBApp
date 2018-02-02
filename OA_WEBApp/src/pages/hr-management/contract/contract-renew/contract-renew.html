@@ -19,10 +19,10 @@
     <ion-list>
         <ion-item-sliding *ngFor="let item of list; index as i">
             <ion-item (click)="doRead(item.Id)">
-                <h2>{{item.UserName}}<span class="text-ios-royal">[{{item.ContractNum}}]</span></h2>
-                <div class="small">{{item.DeptName}}&nbsp;{{item.Duty != '' ? '|&nbsp;'+ item.Duty : ''}}</div>
+                <h2><code>{{item.ContractNum}}</code><small class="text-ios-gray" float-end>{{item.ContractDate | date : "yyyy年MM月dd日"}}</small></h2>
+                <div class="small">{{item.UserName}}</div>
+                <p>{{item.DeptName}}&nbsp;{{item.Duty != '' ? '&bull;&nbsp;'+ item.Duty : ''}}</p>
                 <!-- <span float-right color='energized'>{{item.RenewType}}</span> -->
-                <p class="small">续签时间：{{item.ContractDate}}</p>
             </ion-item>
             <ion-item-options side="right">
                 <button ion-button color="primary" (click)="delete(i)">

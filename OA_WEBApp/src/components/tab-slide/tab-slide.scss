@@ -1,26 +1,24 @@
 tab-slide {
     $slide-height-small: 40px;
     $slide-height-large: 50px;
-
     .slide-title {
         width: 100%;
         height: $slide-height-small;
         color: #666666;
         padding: 0;
+        background: #fff;
     }
-
     .slide-title-unit {
         padding-bottom: 8px;
         font-size: 14px;
     }
-    .itab-item{
-      height: $slide-height-small;
-      line-height: $slide-height-small;
-      border-bottom: 1px solid #ddd;
-
-      &.slide-title-active {
-        color: map_get($colors, primary);
-        border-bottom: 1px solid map_get($colors, primary);
-      }
+    .itab-item {
+        height: $slide-height-small;
+        line-height: $slide-height-small;
+        border-bottom: .1rem solid #e6e6e6;
+        &.slide-title-active .slide-title-unit {
+            color: map_get($colors, primary);
+            border-bottom: .4rem solid map_get($colors, primary);
+        }
     }
 }

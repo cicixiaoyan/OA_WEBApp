@@ -41,7 +41,7 @@
             <ion-item-sliding *ngFor="let mail of list ">
                 <ion-item (click)="doRead(mail.Id)">
                     <ion-avatar item-left>
-                        <img src="assets/img/mike.png">
+                        <img src="assets/img/photo.png">
                     </ion-avatar>
                     <span>{{mail.Title}}</span>
                     <p class="font-12">来至:{{mail.SendPerson}}&emsp;{{mail.MailDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>
@@ -57,7 +57,7 @@
             <ion-item-sliding *ngFor="let mail of list ">
                 <ion-item (click)="doReadOutBox(mail.Id)">
                     <ion-avatar item-left>
-                        <img src="assets/img/mike.png">
+                        <img src="assets/img/photo.png">
                     </ion-avatar>
                     <span>{{mail.Title}}</span>
                     <p class="font-12">发至:{{mail.AccessPerson}}&emsp;{{mail.MailDate|date:"yyyy年MM月dd日 HH时mm分"}}</p>

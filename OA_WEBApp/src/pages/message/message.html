@@ -37,7 +37,7 @@
             <ion-item-sliding *ngFor="let message of list;index as i; trackBy: i">
                 <ion-item (click)="doRead(message)">
                     <ion-avatar item-left>
-                        <img src="assets/img/mike.png">
+                        <img src="assets/img/photo.png">
                     </ion-avatar>
                     <span style="color:#2196F3;" *ngIf="message.Status=='0'">●&nbsp;</span><span>{{message.Content}}</span>
                     <p class="font-12">发件人：{{message.Name}}&emsp;{{message.SendDate}}</p>
@@ -54,7 +54,7 @@
             <ion-item-sliding *ngFor="let message of list;index as i; trackBy: i">
                 <ion-item (click)="doReadOutBox(message)">
                     <ion-avatar item-left>
-                        <img src="assets/img/mike.png">
+                        <img src="assets/img/photo.png">
                     </ion-avatar>
                     <span>{{message.Content}}</span>
                     <p class="font-12">收件人：{{message.Name}}&emsp;{{message.SendDate}}</p>

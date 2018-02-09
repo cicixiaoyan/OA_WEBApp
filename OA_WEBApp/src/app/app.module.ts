@@ -23,7 +23,7 @@ import { Network } from '@ionic-native/network';
 import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
-
+import { OpenNativeSettings } from '@ionic-native/open-native-settings';
 
 import { NativeService } from "../providers/NativeService";
 import { HttpIntercept } from "../providers/HttpIntercept";
@@ -102,6 +102,7 @@ export class FunDebugErrorHandler implements ErrorHandler {
         Camera,
         ImagePicker,
         PhotoViewer,
+        OpenNativeSettings,
         Content,
         { provide: ErrorHandler, useClass: FunDebugErrorHandler },
         NativeService,

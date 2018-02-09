@@ -2,7 +2,7 @@
 // export const FILE_SERVE_URL = 'http://88.128.18.144:3333/';
 
 /*----------------------------------------后台Api地址----------------------------------------*/
-export const APP_SERVE_URL = 'http://119.7.14.131:8099/'; // 'http://192.168.0.49:789/';
+export const APP_SERVE_URL = 'http://192.168.0.225:55555/'; // 'http://119.7.14.131:8099/';
 
 /*----------------------------------------文件服务器地址----------------------------------------*/
 export const FILE_SERVE_URL = APP_SERVE_URL; // 文件服务:测试环境
@@ -25,7 +25,7 @@ export const IMAGE_SIZE = 1024; // 拍照/从相册选择照片压缩大小
 export const QUALITY_SIZE = 94; // 图像压缩质量，范围为0 - 100
 export const REQUEST_TIMEOUT = 20000; // 请求超时时间,单位为毫秒
 
-export const ENABLE_FUNDEBUG = false; // 是否启用fundebug日志监控
+export const ENABLE_FUNDEBUG = true; // 是否启用fundebug日志监控
 export const FUNDEBUG_API_KEY = 
 'ec3cba8712b00e9db075ee9debf73fdfb2233c748b737d71f69ed7fe04b9ead4'; // 去https://fundebug.com/申请key
 export const APK_DOWNLOAD = 'http://omzo595hi.bkt.clouddn.com/ionic2_tabs.apk'; // android apk下载完整地址,用于android本地升级
